@@ -1,0 +1,207 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+
+<template 
+	name="select"
+	description="%select.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.select">SELECT
+	 ${columnName} 
+	FROM
+	 ${tableName}</template>
+	 
+<template 
+	name="select"
+	description="%select2.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.select2">SELECT
+	 *
+	FROM
+	 ${tableName}</template>
+	 
+<template 
+	name="insert"
+	description="%insert.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.insert">INSERT INTO
+	${tableName}
+	( ${columnName} )
+	VALUES
+	( ${value} )</template>
+	
+<template 
+	name="insert"
+	description="%insert2.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.insert2">INSERT INTO
+	${tableName}
+	VALUES
+	( ${value} )</template>
+		
+<template 
+	name="update"
+	description="%update.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.update">UPDATE
+	 ${tableName}
+	 SET ${columnName} = ${value}</template>
+<template 
+	name="delete"
+	description="%delete.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.delete">DELETE FROM
+	 ${tableName}</template>
+	
+<template 
+	name="truncate"
+	description="%truncate.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.truncate">TRUNCATE TABLE
+	 ${tableName}</template>
+	 
+<template 
+	name="order"
+	description="%order.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.order">ORDER BY 
+	 ${columnName} </template>
+
+<template 
+	name="group"
+	description="%group.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.group">GROUP BY 
+	 ${columnName} </template>
+	 
+
+<template 
+	name="case"
+	description="%case.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.case">CASE ${columnName} 
+	WHEN ${value} THEN ${value} 
+	ELSE ${value} END</template>
+
+<template 
+	name="case"
+	description="%case2.desc)" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.case">CASE
+	WHEN ${columnName} = ${value} THEN ${value} 
+	ELSE ${value} END</template>
+	
+
+<template 
+	name="create"
+	description="%create.table.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.createtable">CREATE TABLE ${tableName}
+	(
+		${columnName} ${dataType} ${notNull}
+	)</template>
+
+<template 
+	name="drop"
+	description="%drop.table.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.droptable">DROP TABLE ${tableName}</template>
+
+
+<template 
+	name="alter"
+	description="%alter.add.column.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.addcolumn">ALTER TABLE ${tableName}
+	 ADD COLUMN ${columnName} ${dataType}</template>
+		
+<template 
+	name="alter"
+	description="%alter.add.column.oracle.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.addcolumn2">ALTER TABLE ${tableName}
+	 ADD ${columnName} ${dataType}</template>
+	 		 
+<template 
+	name="alter"
+	description="%alter.drop.column.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.delcolumn">ALTER TABLE ${tableName}
+     DROP COLUMN ${columnName}</template>
+     
+     
+<template 
+	name="alter"
+	description="%alter.add.constraint.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.addconstraint">ALTER TABLE ${tableName}
+     ADD CONSTRAINT ${constraintName} ${constraintType}(${columnName})</template>
+
+
+<template 
+	name="alter"
+	description="%alter.drop.constraint.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.delconstraint">ALTER TABLE ${tableName}
+     DROP CONSTRAINT ${constraintName}</template>
+ 
+<template 
+	name="describe"
+	description="%describe.desc" 
+	context="zigen.plugin.db.template.sql" 
+	id="zigen.plugin.db.template.sql.describe">DESCRIBE ${tableName}</template>
+  
+ <template 
+	name="count"
+	description="%count.desc" 
+	context="zigen.plugin.db.template.sql.function" 
+	id="zigen.plugin.db.template.sql.count">COUNT(${columnName}) </template>
+
+<template 
+	name="max"
+	description="%max.desc" 
+	context="zigen.plugin.db.template.sql.function" 
+	id="zigen.plugin.db.template.sql.max">MAX(${columnName})</template>
+
+<template 
+	name="min"
+	description="%min.desc" 
+	context="zigen.plugin.db.template.sql.function" 
+	id="zigen.plugin.db.template.sql.min">MIN(${columnName})</template>
+	
+<template 
+	name="avg"
+	description="%avg.desc" 
+	context="zigen.plugin.db.template.sql.function" 
+	id="zigen.plugin.db.template.sql.avg">AVG(${columnName})</template>
+
+<template 
+	name="sum"
+	description="%sum.desc" 
+	context="zigen.plugin.db.template.sql.function" 
+	id="zigen.plugin.db.template.sql.sum">SUM(${columnName})</template>
+	
+<template 
+	name="to_char"
+	description="%to_char.desc" 
+	context="zigen.plugin.db.template.sql.function" 
+	id="zigen.plugin.db.template.sql.tochar">TO_CHAR(${columnName})</template>
+
+<template 
+	name="to_number"
+	description="%to_number.desc" 
+	context="zigen.plugin.db.template.sql.function" 
+	id="zigen.plugin.db.template.sql.tonumber">TO_NUMBER(${columnName})</template>
+	
+<template 
+	name="to_date"
+	description="%to_date.desc" 
+	context="zigen.plugin.db.template.sql.function" 
+	id="zigen.plugin.db.template.sql.todate">TO_DATE(${columnName})</template>
+	
+<template 
+	name="decode"
+	description="%decode.desc" 
+	context="zigen.plugin.db.template.sql.function" 
+	id="zigen.plugin.db.template.sql.decode">DECODE(${columnName})</template>
+	
+</templates>
