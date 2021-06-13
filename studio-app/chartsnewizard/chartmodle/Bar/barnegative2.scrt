@@ -1,0 +1,5 @@
+var labelRight = {
+    normal: {
+        position: 'right'
+    }
+};

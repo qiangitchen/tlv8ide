@@ -1,0 +1,79 @@
+{
+
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross'
+        }
+    },
+    title: {
+        text: '18 companies net profit and main business income (million)',
+        subtext: 'By ecStat.regression',
+        sublink: 'https://github.com/ecomfe/echarts-stat',
+        left: 'center',
+        top: 16
+    },
+    xAxis: {
+        type: 'value',
+        splitLine: {
+            lineStyle: {
+                type: 'dashed'
+            }
+        },
+        splitNumber: 20
+    },
+    yAxis: {
+        type: 'value',
+        min: -40,
+        splitLine: {
+            lineStyle: {
+                type: 'dashed'
+            }
+        }
+    },
+    grid: {
+        top: 90
+    },
+    series: [{
+        name: 'scatter',
+        type: 'scatter',
+        label: {
+            emphasis: {
+                show: true,
+                position: 'right',
+                textStyle: {
+                    color: 'blue',
+                    fontSize: 16
+                }
+            }
+        },
+        data: data
+    }, {
+        name: 'line',
+        type: 'line',
+        smooth: true,
+        showSymbol: false,
+        data: myRegression.points,
+        markPoint: {
+            itemStyle: {
+                normal: {
+                    color: 'transparent'
+                }
+            },
+            label: {
+                normal: {
+                    show: true,
+                    position: 'left',
+                    formatter: myRegression.expression,
+                    textStyle: {
+                        color: '#333',
+                        fontSize: 14
+                    }
+                }
+            },
+            data: [{
+                coord: myRegression.points[myRegression.points.length - 1]
+            }]
+        }
+    }]
+}

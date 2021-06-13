@@ -1,0 +1,18 @@
+// Generate data
+var category = [];
+var dottedBase = +new Date();
+var lineData = [];
+var barData = [];
+
+for (var i = 0; i < 20; i++) {
+    var date = new Date(dottedBase += 3600 * 24 * 1000);
+    category.push([
+        date.getFullYear(),
+        date.getMonth() + 1,
+        date.getDate()
+    ].join('-'));
+    var b = Math.random() * 200;
+    var d = Math.random() * 200;
+    barData.push(b)
+    lineData.push(d + b);
+}

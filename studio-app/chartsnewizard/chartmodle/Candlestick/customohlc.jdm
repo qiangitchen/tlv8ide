@@ -1,0 +1,105 @@
+{
+    backgroundColor: '#eee',
+    animation: false,
+    legend: {
+        bottom: 10,
+        left: 'center',
+        data: ['Dow-Jones index']
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'cross'
+        },
+        backgroundColor: 'rgba(245, 245, 245, 0.8)',
+        borderWidth: 1,
+        borderColor: '#ccc',
+        padding: 10,
+        textStyle: {
+            color: '#000'
+        },
+        position: function (pos, params, el, elRect, size) {
+            var obj = {top: 10};
+            obj[['left', 'right'][+(pos[0] < size.viewSize[0] / 2)]] = 30;
+            return obj;
+        },
+        extraCssText: 'width: 170px'
+    },
+    axisPointer: {
+        link: {xAxisIndex: 'all'},
+        label: {
+            backgroundColor: '#777'
+        }
+    },
+    toolbox: {
+        feature: {
+            dataZoom: {
+                yAxisIndex: false
+            },
+            brush: {
+                type: ['lineX', 'clear']
+            }
+        }
+    },
+    grid: [
+        {
+            left: '10%',
+            right: '8%',
+            bottom: 150
+        }
+    ],
+    xAxis: [
+        {
+            type: 'category',
+            data: data.categoryData,
+            scale: true,
+            boundaryGap : false,
+            axisLine: {onZero: false},
+            splitLine: {show: false},
+            splitNumber: 20,
+            min: 'dataMin',
+            max: 'dataMax',
+            axisPointer: {
+                z: 100
+            }
+        }
+    ],
+    yAxis: [
+        {
+            scale: true,
+            splitArea: {
+                show: true
+            }
+        }
+    ],
+    dataZoom: [
+        {
+            type: 'inside',
+            start: 98,
+            end: 100,
+            minValueSpan: 10
+        },
+        {
+            show: true,
+            type: 'slider',
+            bottom: 60,
+            start: 98,
+            end: 100,
+            minValueSpan: 10
+        }
+    ],
+    series: [
+        {
+            name: 'Dow-Jones index',
+            type: 'custom',
+            renderItem: renderItem,
+            dimensions: [null, 'open', 'close', 'lowest', 'highest'],
+            encode: {
+                x: 0,
+                y: [1, 2, 3, 4],
+                tooltip: [1, 2, 3, 4]
+            },
+            data: data.values
+        }
+    ]
+}

@@ -1,0 +1,5 @@
+var weatherIcons = {
+    'Sunny': 'http://echarts.baidu.com/data/asset/img/weather/sunny_128.png',
+    'Cloudy': 'http://echarts.baidu.com/data/asset/img/weather/cloudy_128.png',
+    'Showers': 'http://echarts.baidu.com/data/asset/img/weather/showers_128.png'
+};

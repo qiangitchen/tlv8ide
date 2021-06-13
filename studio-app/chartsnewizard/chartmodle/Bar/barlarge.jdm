@@ -1,0 +1,53 @@
+{
+    title: {
+        text: echarts.format.addCommas(dataCount) + ' Data',
+        left: 10
+    },
+    toolbox: {
+        feature: {
+            dataZoom: {
+                yAxisIndex: false
+            },
+            saveAsImage: {
+                pixelRatio: 2
+            }
+        }
+    },
+    tooltip: {
+        trigger: 'axis',
+        axisPointer: {
+            type: 'shadow'
+        },
+        formatter: function (params) {
+            return params[2].name + '<br />' + params[2].value;
+        }
+    },
+    grid: {
+        bottom: 90
+    },
+    dataZoom: [{
+        type: 'inside'
+    }, {
+        type: 'slider'
+    }],
+    xAxis: {
+        data: data.categoryData,
+        silent: false,
+        splitLine: {
+            show: false
+        },
+        splitArea: {
+            show: false
+        }
+    },
+    yAxis: {
+        splitArea: {
+            show: false
+        }
+    },
+    series: [{
+        type: 'bar',
+        data: data.valueData,
+        large: true
+    }]
+}
