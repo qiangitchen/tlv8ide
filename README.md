@@ -25,10 +25,13 @@
 
 #### 参与贡献
 
-1.  Fork 本仓库
-2.  新建 Feat_xxx 分支
-3.  提交代码
-4.  新建 Pull Request
+1.  [www.tulinxian.com](https://www.tulinxian.com)
+2.  [软捷科技](https://www.yunagile.com/)
+3.  [起步科技](https://www.justep.com/)
+4.  [Eclipse](https://www.eclipse.org/)
+5.  [zigen](http://www.ne.jp/asahi/zigen/home/plugin/dbviewer/about_en.html)
+6.  Sysdeo Tomcat Launcher Plugin
+6.  [ureport](https://gitee.com/youseries/ureport)
 
 
 #### 特技
