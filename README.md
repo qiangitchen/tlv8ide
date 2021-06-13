@@ -15,3 +15,5 @@
 4、磁盘空间不小于10G  
 
 说明:eclipse4.17开始内置浏览器支持Edge浏览器，如果放弃此特性，eclipse版本最低可以支持到3.6.
+
+source：https://gitee.com/qianpou/tlv8ide
