@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<!--菜单-->
+	<extension
+         point="org.eclipse.ui.actionSets">
+      <actionSet
+            label="Tomcat"
+            visible="true"
+            id="com_sysdeo_eclipse_tomcat_actionSet">
+         <menu
+               label="%menu.label"
+               id="com.tulin.v8.tomcat.menu">
+            <separator
+                  name="group">
+            </separator>
+         </menu>
+         <action
+               label="%menu.restart.label"
+               icon="icons/restart.gif"
+               tooltip="%menu.restart.label"
+               class="com.tulin.v8.tomcat.actions.RestartActionDelegate"
+               menubarPath="com.tulin.v8.tomcat.menu/group"
+               toolbarPath="Normal/additions"
+               id="com.tulin.v8.tomcat.restart">
+         </action>
+         <action
+               label="%menu.stop.label"
+               icon="icons/stop.gif"
+               tooltip="%menu.stop.label"
+               class="com.tulin.v8.tomcat.actions.StopActionDelegate"
+               menubarPath="com.tulin.v8.tomcat.menu/group"
+               toolbarPath="Normal/additions"
+               id="com.tulin.v8.tomcat.stop">
+         </action>
+         <action
+               class="com.tulin.v8.tomcat.actions.StartActionDelegate"
+               icon="icons/start.gif"
+               id="com.tulin.v8.tomcat.start"
+               label="%menu.start.label"
+               menubarPath="com.tulin.v8.tomcat.menu/group"
+               toolbarPath="Normal/additions"
+               tooltip="%menu.start.label">
+         </action>
+      </actionSet>
+   </extension>
+	<!-- =========================================================================== -->
+	<!-- Tomcat Nature                                                                 -->
+	<!-- =========================================================================== -->
+    <extension
+         id="tomcatnature"
+         name="Tomcat Nature"
+         point="org.eclipse.core.resources.natures">
+      <runtime>
+         <run class="com.tulin.v8.tomcat.TomcatProject">
+         </run>
+      </runtime>
+   </extension>
+   <extension point="org.eclipse.core.runtime.preferences">
+      <initializer class="com.tulin.v8.tomcat.PreferenceInitializer"/>
+   </extension>
+   <!-- 首选项 -->
+   <extension
+         point="org.eclipse.ui.preferencePages">
+	   <page
+            name="Tomcat"
+            category="com.tulin.v8.ide.preferences.StudioPreferencePage"
+            class="com.tulin.v8.tomcat.TomcatPreferencePage"
+            id="com.tulin.v8.tomcat.TomcatPreferencePage">
+      </page>
+      <page
+            name="%pref.menu.jvmSettings.label"
+            category="com.tulin.v8.tomcat.TomcatPreferencePage"
+            class="com.tulin.v8.tomcat.TomcatJVMPreferencePage"
+            id="com.tulin.v8.tomcat.Page2">
+      </page>
+      <page
+            name="%pref.menu.sourcepath.label"
+            category="com.tulin.v8.tomcat.TomcatPreferencePage"
+            class="com.tulin.v8.tomcat.TomcatSourcePathPreferencePage"
+            id="com.tulin.v8.tomcat.Page3">
+      </page>
+      <page
+            name="%pref.menu.managerapp.label"
+            category="com.tulin.v8.tomcat.TomcatPreferencePage"
+            class="com.tulin.v8.tomcat.TomcatManagerAppPreferencePage"
+            id="com.tulin.v8.tomcat.Page4">
+      </page>
+      <page
+            name="%pref.menu.advanced.label"
+            category="com.tulin.v8.tomcat.TomcatPreferencePage"
+            class="com.tulin.v8.tomcat.AdvancedPreferencePage"
+            id="com.tulin.v8.tomcat.Page5">
+      </page>
+    </extension>
+    
+    <!-- shortcut keys -->
+	<extension point="org.eclipse.ui.commands">
+      <category
+            name="Tomcat keys"
+            id="pl.szpinda.plugin.tomcat.commands.category.key">
+      </category>
+      <command
+            name="Tomcat quick restart"
+            categoryId="pl.szpinda.plugin.tomcat.commands.category.key"
+            id="pl.szpinda.plugin.tomcat.commands.tomcatQuickRestart">
+      </command>
+      
+      <command
+            name="Tomcat start,stop"
+            categoryId="pl.szpinda.plugin.tomcat.commands.category.key"
+            id="pl.szpinda.plugin.tomcat.commands.tomcatStartStop">
+      </command>
+   </extension>
+
+   <extension point="org.eclipse.ui.handlers">
+      <handler
+            commandId="pl.szpinda.plugin.tomcat.commands.tomcatQuickRestart"
+            class="com.tulin.v8.tomcat.actions.TomcatKeyHandler">
+      </handler>
+      <handler
+            commandId="pl.szpinda.plugin.tomcat.commands.tomcatStartStop"
+            class="com.tulin.v8.tomcat.actions.TomcatKeyHandler">
+      </handler>
+   </extension>
+   <extension point="org.eclipse.ui.bindings">
+		<!-- M1 - CTRL, M2 - Shift, M3 - Alt-->
+      <key
+            commandId="pl.szpinda.plugin.tomcat.commands.tomcatQuickRestart"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M3+T"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+      <key
+            commandId="pl.szpinda.plugin.tomcat.commands.tomcatStartStop"
+            contextId="org.eclipse.ui.contexts.window"
+            sequence="M1+M3+T"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration">
+      </key>
+   </extension>
+</plugin>
