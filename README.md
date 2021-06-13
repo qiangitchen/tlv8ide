@@ -31,7 +31,7 @@
 4.  [Eclipse](https://www.eclipse.org/)
 5.  [zigen](http://www.ne.jp/asahi/zigen/home/plugin/dbviewer/about_en.html)
 6.  Sysdeo Tomcat Launcher Plugin
-6.  [ureport](https://gitee.com/youseries/ureport)
+7.  [ureport](https://gitee.com/youseries/ureport)
 
 
 #### 特技
