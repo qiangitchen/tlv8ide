@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+	<head> 
+		<meta id="viewport" name="viewport" content="initial-scale=1.0,maximum-scale=1.0,minimum-scale=1.0,user-scalable=0"/>
+    	<meta http-equiv="Content-Type" content="application/xhtml+xml; charset=utf-8"/> 
+    	<title>手机版本流程表单</title>
+    	<link rel="stylesheet" type="text/css" href="/tlv8/mobileUI/system/css/mui.min.css"/>
+    	<script type="text/javascript" charset="utf-8" src="/tlv8/mobileUI/system/js/jquery.js"></script>
+    	<script type="text/javascript" charset="utf-8" src="/tlv8/mobileUI/system/js/mui.min.js"></script>
+    	<script type="text/javascript" charset="utf-8" src="/tlv8/mobileUI/system/js/base.js"></script>
+    	<script type="text/javascript" charset="utf-8" src="/tlv8/mobileUI/system/js/dialog.js"></script>
+    	<script type="text/javascript" charset="utf-8" src="/tlv8/mobileUI/system/js/flow.main.js"></script>
+    	<script type="text/javascript" charset="utf-8" src="/tlv8/mobileUI/oa/common/js/oaUtils.js"></script>
+    	<script type="text/javascript" charset="utf-8" src="YJTemplet_page.js"></script>
+    </head>
+    <body>
+		<header class="mui-bar mui-bar-nav">
+			<button class="mui-action-back mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-left">
+				<span class="mui-icon mui-icon-left-nav"></span>
+				返回
+			</button>
+			<button id="task_execute" component="flowprocess" class="mui-btn mui-btn-blue mui-btn-link mui-btn-nav mui-pull-right">
+				<span class="mui-icon mui-icon-compose"></span>
+				处理
+			</button>
+		    <h1 class="mui-title" id="title_val">流程表单</h1>
+		</header>
+		<div class="mui-content">
+			<form class="mui-input-group" id="MAIN_DATA_FORM" afterRefresh="afRefresh">
+				<ul class="mui-table-view">
+					<li class="mui-table-view-divider mui-table-view-cell">
+						<label style="font-size:17px;">表单内容</label>
+					</li>
+					<li>
+						YJTemplet_dataItem
+					</li>
+				</ul>
+			</form>
+		</div>
+		<div id="opinion_list"></div>
+    </body>
+</html>

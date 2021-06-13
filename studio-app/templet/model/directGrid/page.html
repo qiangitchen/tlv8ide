@@ -1,0 +1,26 @@
+<html>
+  <head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+    <title>YJTemplet_page.html</title>
+	<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/default/easyui.css" />
+	<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/icon.css" />
+    <script type="text/javascript" src="/tlv8/comon/js/jquery/jquery.min.js"></script>
+	<script type="text/javascript" src="/tlv8/comon/js/comon.main.js"></script>
+	<script type="text/javascript" src="/tlv8/comon/js/grid.main.js"></script>
+	<script type="text/javascript" src="/tlv8/resources/jquery-easyui/jquery.easyui.min.js"></script>
+	<script type="text/javascript" src="/tlv8/resources/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="YJTemplet_page.js"></script>
+  </head>
+  
+  <body onload="getData();getData2()" style="overflow:hidden;">
+    <div class="easyui-layout" fit="true">
+		<div data-options="region:'north',title:'主表信息',split:true" style="height:260px;">
+			<form id="direct_form"></form>
+			<div component="dataGrid" id="direct_from_grid" style="width:100%;height:100%;" onselected="refresh_child_data()"></div>
+		</div> 
+		<div data-options="region:'center',title:'从表信息',onResize:bodyResize">
+			<div component="dataGrid" id="direct_from_subgrid" style="width:100%;height:100%;" dataValueChanged="cheng_stae_bar()"></div>
+		</div>
+	</div>
+  </body>
+</html>
