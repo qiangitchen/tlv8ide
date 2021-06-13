@@ -1,8 +1,9 @@
 # tlv8ide
 
 #### Description
-这是一款基于eclipse开发的快速开发工具
-集成了tomcat插件，数据库插件，报表设计（可视化），流程设计（可视化），网页设计（可视化）等多功能于一体的JAVA EE项目开发工具。 能够实现业务系统快速开发，报表系统快速开发（只需要会SQL），工作流快速定制。
+This is a rapid development tool based on eclipse, 
+which integrates Tomcat plug-in, database plug-in, report design (visualization), process design (visualization), web design (visualization) and other multi-functional Java EE project development tools. 
+It can realize the rapid development of business system, report system (only SQL) and workflow customization. 
 
 #### Software Architecture
 Software architecture description
