@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+    <extension
+         point="org.eclipse.ui.newWizards">
+         <wizard
+            category="TuLin"
+            class="com.tulin.v8.ureport.wizards.UReportFileNewWizard"
+            icon="icons/ureport.gif"
+            id="com.tulin.v8.ureport.wizards.UReportFileNewWizard"
+            name="%ureportfile">
+      </wizard>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.tulin.v8.ureport.ui.editors.designer.UReportEditor"
+            contributorClass="com.tulin.v8.ureport.ui.contributor.XMLEditorActionBarContributor"
+            extensions="ureport,ureport.xml,xml"
+            filenames="*.ureport.xml"
+            icon="icons/ureport.gif"
+            id="com.tulin.v8.ureport.ui.editors.designer.UReportEditor"
+            name="%editor.name">
+      </editor>
+   </extension>
+</plugin>

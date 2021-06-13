@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<!-- fevicon -->
+<link rel="icon" href="../tulin128.png" type="image/gif" />
+<link href="../ureport-asserts/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+<link href="../ureport-asserts/css/handsontable.min.css" rel="stylesheet" type="text/css" />
+<title>UReport2 Designer</title>
+ <script type="text/javascript" src="../ureport-asserts/venderjs/jquery.min.js"></script>
+ <script type="text/javascript" src="../ureport-asserts/venderjs/jquery.contextMenu.min.js"></script>
+ <script type="text/javascript" src="../ureport-asserts/venderjs/completer.min.js"></script>
+ <script type="text/javascript" src="../ureport-asserts/venderjs/bootstrap-colorpicker.min.js"></script>
+ <script type="text/javascript" src="../ureport-asserts/js/common.bundle.js"></script>
+</head>
+<body style="margin:0px">
+<div id='container'></div>
+<script type="text/javascript">
+	window._server="/ureport";
+	window._contextPath="";
+</script>
+<script type="text/javascript" src="../ureport-asserts/js/designer.bundle.js"></script>
+<script type="text/javascript">
+	var isEditor = true, isSaved = true;
+	var dsloader;
+	function changeTools(){
+		$('button[title="预览报表"]').unbind();
+		$('button[title="Report Preview"]').unbind();
+		$('button[title="预览报表"]').click(function(e){
+			callPreviewReport();
+			isSaved = true;
+			return false;
+		});
+		$('button[title="Report Preview"]').click(function(e){
+			callPreviewReport();
+			isSaved = true;
+			return false;
+		});
+		$('button[title="Open File..."]').hide();
+		$('button[title="打开报表文件"]').hide();
+		$('button[title="导入Excel模版文件"]').unbind();
+		$('button[title="Import Excel"]').unbind();
+		$('button[title="导入Excel模版文件"]').click(function(e){
+			var res = importExcelReportFile();
+			if(res){
+				dsloader(JSON.parse(res));
+				$("#__save_btn").click();
+				window.location.reload();
+			}
+			return false;
+		});
+		$('button[title="Import Excel"]').click(function(e){
+			var res = importExcelReportFile();
+			if(res){
+				dsloader(JSON.parse(res));
+				$("#__save_btn").click();
+				window.location.reload();
+			}
+			return false;
+		});
+		$('button[title="保存"]').hide();
+		$('button[title="Save"]').hide();
+		$(document).mouseup(function(){
+			if(isSaved){
+				isSaved = false;
+				$("#__save_btn").click();
+			}
+		});
+		$(document).keydown(function(event){
+			var e = event || window.event;
+			var k = e.keyCode || e.which;
+			if (e.ctrlKey && e.which == 13){
+				$("#__save_btn").click();
+			}
+		});
+	}
+	var ajax = $.ajax;
+	$.ajax = function(a,b,c){
+		if(a.url == "/ureport/designer/loadReport"){
+			try{
+				var ftext = callLoadReport();
+				dsloader = a.success;
+				dsloader(JSON.parse(ftext));
+				changeTools();
+			}catch(e){
+				isEditor = false;
+				ajax(a,b,c);
+			}
+		}else if(a.url == "/ureport/designer/saveReportFile"){
+			if(isEditor){
+				callSaveReportFile(a.data.content);
+				isSaved = true;
+			}else{
+				ajax(a,b,c);
+			}
+		}else{
+			ajax(a,b,c);
+		}
+	};
+</script>
+</body>
+</html>
