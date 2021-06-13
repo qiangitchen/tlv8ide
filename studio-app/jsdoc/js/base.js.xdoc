@@ -1,0 +1,504 @@
+/**
+ @name tlv8
+ @namespace
+ @description 名空间
+*/
+
+/**
+	@name tlv8
+	@namespace
+	@description 界面上下文
+*/
+
+/**
+	@name tlv8.showSate
+	@function
+	@description 操作状态
+	@param state
+	@returns {void}
+*/
+
+/**
+	@name tlv8.ajaxLoading
+	@function
+	@description loading状态提示信息
+	@param flag
+	@param msg
+	@returns {void}
+*/
+
+/**
+	@name tlv8.XMLHttpRequest
+	@function
+	@description 发送Action请求
+	@param actionName
+	@param param
+	@param post
+	@param ayn
+	@param callBack
+	@param unShowState
+	@returns {JSON}
+*/
+
+/**
+	@name tlv8.Queryaction
+	@function
+	@description 公用函数java调用动作针对查询
+	@param actionName
+	@param post
+	@param callBack
+	@param data
+	@param where
+	@param ays
+	@returns {JSON}
+*/
+
+/**
+	@name tlv8.Deleteaction
+	@function
+	@description 公用函数：java调用动作{针对带参数操作 删除}
+	@param actionName
+	@param post
+	@param callBack
+	@param rowid
+	@param data
+	@param ays
+	@returns {JSON}
+*/
+
+/**
+	@name tlv8.saveAction
+	@function
+	@description 公用函数：java调用动作{针对带参数操作 保存}
+	@param actionName
+	@param post
+	@param callBack
+	@param data
+	@param allreturn
+	@param ays
+	@returns {JSON}
+*/
+
+/**
+	@name tlv8.strToXML
+	@function
+	@description 将字符串转换成xml
+	@param str
+	@returns {XML}
+*/
+
+/**
+	@name tlv8.sqlQueryAction
+	@function
+	@description 执行sql查询动作
+	@param dbkey
+	@param sql
+	@param callBack
+	@param ayn
+	@returns {_justep_yn_sqlQueryAction}
+*/
+
+/**
+	@name tlv8.sqlQueryActionforJson
+	@function
+	@description 执行sql查询动作
+	@param dbkey
+	@param sql
+	@param callBack
+	@param ayn
+	@returns {JSON}
+*/
+
+/**
+	@name tlv8.sqlUpdateAction
+	@function
+	@description 执行sql更新动作
+	@param dbkey
+	@param sql
+	@param callBack
+	@param ayn
+	@returns {JSON}
+*/
+
+/**
+	@name tlv8.callProcedureAction
+	@function
+	@description 调用存储过程
+	@param dbkey
+	@param ProduceName
+	@param Param
+	@param callBack
+	@param ayn
+	@returns {JSON}
+*/
+
+/**
+	@name tlv8.callFunctionAction
+	@function
+	@description 调用数据库函数
+	@param dbkey
+	@param ProduceName
+	@param Param
+	@param callBack
+	@param ayn
+	@returns {JSON}
+*/
+
+/**
+	@name tlv8.numberL2U
+	@function
+	@description 数字转大写
+	@param number
+	@returns {String}
+*/
+
+/**
+	@name tlv8.numberFormat
+	@function
+	@description 数字格式化 如：0,000.00
+	@param number
+	@param format
+	@returns {String}
+*/
+
+/**
+	@name tlv8.CheckMail
+	@function
+	@description 邮箱地址验证
+	@param mail
+	@returns {Boolean}
+*/
+
+/**
+	@name tlv8.checkdate
+	@function
+	@description 日期格式验证
+	@param dateStr
+	@returns {Boolean}
+*/
+
+/**
+	@name tlv8.getIdCardInfo
+	@function
+	@description 根据身份证取 省份,生日，性别
+	@param id
+	@returns {String[]}
+*/
+
+/**
+	@name tlv8.checkId
+	@function
+	@description 检查身份证号码
+	@param pId
+	@returns {Boolean}
+*/
+
+/**
+	@name tlv8.Telephone
+	@function
+	@description 检查电话号码
+	@param phone
+	@returns {Boolean}
+*/
+
+/**
+	@name tlv8.getworkdays
+	@function
+	@description 计算工作日
+	@param starttime
+	@returns {Number}
+*/
+
+/**
+	@name tlv8.inputCaption
+	@function
+	@description 录入提示
+	@param input
+	@param dbkey
+	@param table
+	@param cell
+	@param where
+	@returns {void}
+*/
+
+/**
+	@name tlv8.Radio
+	@function
+	@description 单选组件
+	@param div
+	@param item
+	@param splithtmlarray
+	@returns {void}
+*/
+
+/**
+	@name tlv8.CheckBox
+	@function
+	@description 多选组件
+	@param div
+	@param item
+	@param splithtmlarray
+	@returns {void}
+*/
+
+/**
+	@name tlv8.showMessage
+	@function
+	@description 浅入浅出提示信息
+	@param message
+	@returns {void}
+*/
+
+/**
+	@name tlv8.fileupload
+	@function
+	@description 文件上传
+	@param dbkey
+	@param docPath
+	@param tablename
+	@param cellname
+	@param rowid
+	@param callback
+	@returns {void}
+*/
+
+/**
+	@name tlv8.dowloadfile
+	@function
+	@description 文件下载
+	@param fileID
+	@param filename
+	@returns {void}
+*/
+
+/**
+	@name tlv8.deletefile
+	@function
+	@description 删除文件
+	@param fileID
+	@param filename
+	@param dbkey
+	@param tablename
+	@param cellname
+	@param rowid
+	@param callback
+	@returns {void}
+*/
+
+/**
+	@name tlv8.ExcelImp
+	@function
+	@description Excel数据导入
+	@param dbkey
+	@param table
+	@param relations
+	@param confirmXmlName
+	@param callback
+	@returns {void}
+*/
+
+/**
+	@name tlv8.ExcelExp
+	@function
+	@description Excel数据导出
+	@param dbkey
+	@param table
+	@param relations
+	@param labels
+	@param where
+	@param orderby
+	@returns {void}
+*/
+
+/**
+	@name tlv8.encodeURIComponent
+	@function
+	@description 字符编码
+	@param str
+	@returns {void}
+*/
+
+/**
+	@name tlv8.decodeURIComponent
+	@function
+	@description 字符解码
+	@param str
+	@returns {void}
+*/
+
+/**
+	@name tlv8.standardPartition
+	@function
+	@description 垂直分割线可拖动宽度
+	@param div
+	@returns {void}
+*/
+
+/**
+	@name tlv8.sTab
+	@function
+	@description 公用tab组件
+	@param div
+	@returns {void}
+*/
+
+/**
+	@name tlv8.editfile
+	@function
+	@description 附件编辑
+	@param fileID
+	@param fileName
+	@param docPath
+	@returns {void}
+*/
+
+/**
+	@name tlv8.changeLog
+	@function
+	@description 修改日志
+	@returns {Object}
+*/
+
+/**
+	@name tlv8.createVersion
+	@function
+	@description 提交文档版本
+	@param docID
+	@param fileID 
+	@param docName 
+	@param docPath
+	@returns {String}
+*/
+
+/**
+	@name tlv8.getDocIdByFileId
+	@function
+	@description 根据fileID获取docID
+	@param fileID
+	@returns {Object}
+*/
+
+/**
+	@name tlv8.picComponent
+	@function
+	@description 图片组件
+	@param div
+	@param data
+	@param cellname
+	@param canEdit
+	@returns {void}
+*/
+
+/**
+	@name tlv8.isHaveAuthorization
+	@function
+	@description 判断是否有功能权限
+	@param url
+	@returns {void}
+*/
+
+/**
+	@name tlv8.isIE6
+	@function
+	@description 判断IE是否为IE6
+	@returns {Boolean}
+*/
+
+/**
+	@name tlv8.showModelState
+	@function
+	@description 模式操作
+	@param state
+	@returns {void}
+*/
+
+/**
+	@name tlv8.DateAdd
+	@function
+	@description 日期计算
+	@param strInterval
+	@param date
+	@param Number
+	@returns {void}
+*/
+
+/**
+	@name tlv8.loadOption
+	@function
+	@description 加载审核意见
+	@param viewID
+	@param sData1
+	@returns {void}
+*/
+
+/**
+	@name tlv8.writeOpinion
+	@function
+	@description 填写审批意见
+	@param viewID
+	@returns {void}
+*/
+
+/**
+	@name tlv8.requerat
+	@function
+	@description 标注必填{rel='remind',rel-value}
+	@returns {void}
+*/
+
+/**
+	@name tlv8.docpigeonhole
+	@function
+	@description 文件归档  
+	@param folder 归档目录  如："/行政审批/会议纪要"
+	@param title 显示标题
+	@param table 数据库表
+	@param billid 数据主键
+	@param surl 查看页面地址
+	@returns {void}
+*/
+
+/**
+	@name tlv8.Mydocpigeonhole
+	@function
+	@description 收藏到个人文件柜
+	@param title 显示标题
+	@param table 数据库表
+	@param billid 数据主键
+	@param surl 查看页面地址
+	@returns {void}
+*/
+
+/**
+	@name tlv8.ognDocpigeonhole
+	@function
+	@description 收藏到单位文件柜
+	@param title 显示标题
+	@param table 数据库表
+	@param billid 数据主键
+	@param surl 查看页面地址
+	@returns {void}
+*/
+
+/**
+	@name tlv8.docOpendeatail
+	@function
+	@description 查看归档的文件
+	@param name 功能标题
+	@param surl 页面地址
+	@param billid 数据主键
+	@returns {void}
+*/
+
+/**
+	@name tlv8.exportbar
+	@function
+	@description 导出工具栏组件
+	@param {HTMLDivElement} div -工具栏显示层
+	@param {string} expid -需要打印或导出的内容对象ID
+	@param {boolean} canprint -是否打印
+	@param {boolean} isword -是否导出Word
+	@param {boolean} isexcel -是否导出Excel
+	@param {boolean} ispdf -是否导出PDF
+	@returns {void}
+ */
