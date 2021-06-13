@@ -13,15 +13,15 @@
 
 #### 安装教程
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  下载[eclipse](http://download.eclipse.org/eclipse/downloads/)4.17+
+2.  将解压后的studio-app文件夹放到eclipse/dropins目录下
+3.  启动eclipse
 
 #### 使用说明
 
-1.  xxxx
-2.  xxxx
-3.  xxxx
+1.  jdk版本要求对应eclipse对jdk版本的要求
+2.  插件项目的jdk版本要求最低为1.6
+3.  报表设计器不支持IE环境，所以在Windows环境下需要Edge浏览器支持，这就要求eclipse必须在4.17及以上，如果不需要此功能eclipse最低版本支持到3.6.
 
 #### 参与贡献
 
