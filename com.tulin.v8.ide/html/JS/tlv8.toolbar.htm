@@ -1,0 +1,275 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>tlv8.toolbar</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+
+<body>
+<font size="5px"><b>Class tlv8.toolbar</b></font><br/>
+toolbar工具栏组件<br/> 
+<br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151" align="right">toolbar&nbsp;</td>
+    <td width="583">
+	<a href="#tlv8.toolbar">tlv8.toolbar(div,insertitem,saveitem,deleteitem,refreshitem)</a><br/>
+	toolbar工具栏组件</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_toolbar_insertAction">insertAction()</a><br/>
+	新增动作
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_toolbar_saveAction">saveAction()</a><br/>
+	保存动作
+	</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_toolbar_deleteAction">deleteAction()</a><br/>
+	删除动作
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_toolbar_refreshAction">refreshAction()</a><br/>
+	刷新动作
+	</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_toolbar_setItemStatus">setItemStatus(insertitem,saveitem,deleteitem,refreshitem)</a><br/>
+	设置按钮状态</td>
+  </tr>
+</table>
+ <br/>
+ <div class="tab_head">&nbsp;C<a name="tlv8.toolbar"></a>lass Detail </div>
+	toolbar tlv8.toolbar(div,insertitem,saveitem,deleteitem,refreshitem)<br/>
+	toolbar工具栏组件<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>div</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Element div}<b>[required]</b>用于显示工具栏的DIV标签<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>insertitem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean/string}<b>[required]</b>新增按钮状态(&quot;readonly&quot;:只读,true：可操作,false：不可见)<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>saveitem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean/string}<b>[required]</b>保存按钮状态(&quot;readonly&quot;:只读,true：可操作,false：不可见)<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>deleteitem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean/string}<b>[required]</b>删除按钮状态(&quot;readonly&quot;:只读,true：可操作,false：不可见)<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>refreshitem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean/string}<b>[required]</b>刷新按钮状态(&quot;readonly&quot;:只读,true：可操作,false：不可见)<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{toolbar}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;stander-bar&quot; insertAction=&quot;insert()&quot; saveAction=&quot;save()&quot;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	deleteAction=&quot;deleteMaindata()&quot; refreshAction=&quot;refreshMainData()&quot;/&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var bardiv = document.getElementById("stander-bar");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var toobar = new tlv8.toolbar(bardiv,"readonly",true,"readonly","readonly");<br/>
+	<br/>
+<div class="tab_head">&nbsp;Method Detail </div>
+<div>
+	void&nbsp;<a name="justep_yn_toolbar_insertAction"></a> insertAction()<br/>
+	新增动作<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;stander-bar&quot; insertAction=&quot;insert()&quot; saveAction=&quot;save()&quot;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	deleteAction=&quot;deleteMaindata()&quot; refreshAction=&quot;refreshMainData()&quot;/&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var bardiv = document.getElementById("stander-bar");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var toobar = new tlv8.toolbar(bardiv,"readonly",true,"readonly","readonly");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var item = toobar.items;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function insert(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//具体的新增动作代码写在这里<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.setItemStatus("readonly", true, "readonly", true);// 设置按钮状态<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	}<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_toolbar_saveAction"></a> saveAction()<br/>
+	保存动作<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;stander-bar&quot; insertAction=&quot;insert()&quot; saveAction=&quot;save()&quot;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	deleteAction=&quot;deleteMaindata()&quot; refreshAction=&quot;refreshMainData()&quot;/&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var bardiv = document.getElementById("stander-bar");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var toobar = new tlv8.toolbar(bardiv,"readonly",true,"readonly","readonly");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var item = toobar.items;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function save(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//具体的保存动作代码写在这里<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.setItemStatus(true, true, true, true);// 设置按钮状态<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	}<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_toolbar_deleteAction"></a> deleteAction()<br/>
+	删除动作<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;stander-bar&quot; insertAction=&quot;insert()&quot; saveAction=&quot;save()&quot;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	deleteAction=&quot;deleteMaindata()&quot; refreshAction=&quot;refreshMainData()&quot;/&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var bardiv = document.getElementById("stander-bar");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var toobar = new tlv8.toolbar(bardiv,"readonly",true,"readonly","readonly");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var item = toobar.items;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function deleteMaindata(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//具体的删除动作代码写在这里<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.setItemStatus(true, true, &quot;readonly&quot;, true);// 设置按钮状态<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	}<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_toolbar_refreshAction"></a> refreshAction()<br/>
+	删除动作<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;stander-bar&quot; insertAction=&quot;insert()&quot; saveAction=&quot;save()&quot;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	deleteAction=&quot;deleteMaindata()&quot; refreshAction=&quot;refreshMainData()&quot;/&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var bardiv = document.getElementById("stander-bar");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var toobar = new tlv8.toolbar(bardiv,"readonly",true,"readonly","readonly");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var item = toobar.items;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function refreshAction(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//具体的刷新动作代码写在这里<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	}<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_toolbar_setItemStatus"></a> setItemStatus(insertitem,saveitem,deleteitem,refreshitem)<br/>
+	设置按钮状态<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>insertitem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean/string}<b>[required]</b>新增按钮状态(&quot;readonly&quot;:只读,true：可操作,false：不可见)<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>saveitem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean/string}<b>[required]</b>保存按钮状态(&quot;readonly&quot;:只读,true：可操作,false：不可见)<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>deleteitem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean/string}<b>[required]</b>删除按钮状态(&quot;readonly&quot;:只读,true：可操作,false：不可见)<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>refreshitem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean/string}<b>[required]</b>刷新按钮状态(&quot;readonly&quot;:只读,true：可操作,false：不可见)<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;stander-bar&quot; insertAction=&quot;insert()&quot; saveAction=&quot;save()&quot;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	deleteAction=&quot;deleteMaindata()&quot; refreshAction=&quot;refreshMainData()&quot;/&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var bardiv = document.getElementById("stander-bar");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var toobar = new tlv8.toolbar(bardiv,"readonly",true,"readonly","readonly");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var item = toobar.items;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.setItemStatus(&quot;readonly&quot;, true, &quot;readonly&quot;, true);// 设置按钮状态<br/>
+	<hr/>
+</div>
+</body>
+</html>

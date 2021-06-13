@@ -1,0 +1,510 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+	<extension id="com.tulin.v8.ide" point="org.eclipse.core.runtime.products">
+      <product name="TuLin IDE" application="org.eclipse.ui.ide.workbench" >
+          <property name="windowImages" value="tulin16.png,tulin32.png,tulin48.png,tulin64.png,tulin128.png"/> 
+          <property name="aboutImage" value="eclipse_lg.png"/> 
+          <property name="aboutText" value="%productBlurb"/> 
+          <property name="appName" value="%topoc.TuLin"/> 
+          <property name="preferenceCustomization" value="plugin_customization.ini"/> 
+          
+          <property
+          		name="introTitle"
+          		value="%productIntroTitle"/>
+          <property
+          		name="introBrandingImage"
+          		value="product:intro-eclipse.png"/>
+          <property
+          		name="introBrandingImageText"
+          		value="%productIntroBrandingText"/>
+		  <property
+				name="introDescription-overview"
+				value="%introDescription-overview"/>
+		  <property
+				name="introDescription-tutorials"
+				value="%introDescription-tutorials"/>
+		  <property
+				name="introDescription-samples"
+				value="%introDescription-samples"/>
+		  <property
+				name="applicationXMI"
+				value="org.eclipse.platform/LegacyIDE.e4xmi">
+		  </property>
+		  <property
+				name="cssTheme"
+				value="org.eclipse.e4.ui.css.theme.e4_default">
+		  </property>
+		  <property
+				name="applicationCSSResources"
+          		value="platform:/plugin/org.eclipse.ui.themes/images/">
+		  </property>
+		  
+		  <property
+        		name="startupForegroundColor"
+            value="51f544"/>
+          <property
+                name="startupMessageRect"
+                value="7,265,320,20"/>
+          <property
+                name="startupProgressRect"
+                value="2,290,448,10"/>
+          <property
+                name="buildIdLocation"
+                value="0,220">
+          </property>
+          <property
+                name="buildIdSize"
+                value="395,40">
+          </property>
+      </product>
+   </extension>
+   
+   <extension
+		point="org.eclipse.ui.intro">
+      <introProductBinding
+            introId="org.eclipse.ui.intro.universal"
+            productId="com.tulin.v8.ide">
+      </introProductBinding>
+    </extension>
+    
+    <extension
+         point="org.eclipse.ui.splashHandlers">
+      <splashHandler
+            class="com.tulin.v8.ide.splashHandlers.InteractiveSplashHandler"
+            id="com.tulin.v8.ide.splashHandlers.interactive">
+      </splashHandler>
+      <splashHandlerProductBinding
+            splashId="com.tulin.v8.ide.splashHandlers.interactive"
+            productId="com.tulin.v8.ide">
+      </splashHandlerProductBinding>
+   </extension>
+    
+    <!--Studio 透视图-->
+   <extension
+         point="org.eclipse.ui.perspectives">
+         <perspective
+            name="Studio"
+            icon="icons/studio.gif"
+            class="com.tulin.v8.ide.perspectives.RelEngPerspective"
+            id="com.tulin.v8.ide.perspectives.RelEngPerspective">
+      	</perspective>
+   </extension>
+    
+    <!--Viewer-->
+   <extension
+         point="org.eclipse.ui.views">
+      <category
+            name="%category.name.2"
+            id="TuLin">
+      </category>
+      <view
+            category="TuLin"
+            class="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            id="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            icon="icons/studio_resource_view.gif"
+            name="%views.name.resourse"/>
+      <view
+            category="TuLin"
+            class="com.tulin.v8.ide.navigator.views.ModelView"
+            id="com.tulin.v8.ide.navigator.views.modelview"
+            icon="icons/model_viewer.png"
+            name="%view.name"/>
+   </extension>
+   <extension
+         point="org.eclipse.ui.navigator.viewer">
+      <viewer viewerId="com.tulin.v8.ide.navigator.views.ResourseViewer"/>
+      <viewerActionBinding 
+            viewerId="com.tulin.v8.ide.navigator.views.ResourseViewer"> 
+         <includes> 
+            <actionExtension 
+                  pattern="org.eclipse.ui.navigator.resources.*"> 
+            </actionExtension> 
+         </includes> 
+      </viewerActionBinding>
+      <viewerContentBinding viewerId="com.tulin.v8.ide.navigator.views.ResourseViewer">
+         <includes>
+         	<contentExtension pattern="org.eclipse.ui.navigator.resourceContent"/> 
+            <contentExtension pattern="org.eclipse.ui.navigator.resources.*"/> 
+            <contentExtension pattern="org.eclipse.ui.navigator.resources.filters.*"/>
+            <contentExtension pattern="org.eclipse.ui.navigator.resources.linkHelper"/>
+            <contentExtension pattern="org.eclipse.ui.navigator.resources.workingSets"/>
+         </includes>
+      </viewerContentBinding>
+   </extension>
+   <extension
+         point="org.eclipse.team.core.ignore">
+        <ignore pattern="bin" enabled="true"/>
+        <ignore pattern="classes" enabled="true"/>
+        <ignore
+              enabled="true"
+              pattern=".data">
+        </ignore>
+   </extension>
+   <extension
+         point="org.eclipse.ui.perspectiveExtensions">
+      <perspectiveExtension targetID="org.eclipse.debug.ui.DebugPerspective">
+         <perspectiveShortcut id="org.eclipse.jdt.ui.JavaPerspective"/>
+         <perspectiveShortcut id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
+         <actionSet id="org.eclipse.jdt.ui.JavaActionSet"/>
+         <showInPart id="com.tulin.v8.ide.navigator.views.ResourseViewer"/>
+      </perspectiveExtension>
+      <perspectiveExtension targetID="org.eclipse.jdt.ui.JavaPerspective">
+         <perspectiveShortcut id="org.eclipse.debug.ui.DebugPerspective"/>
+         <perspectiveShortcut id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
+         <showInPart id="com.tulin.v8.ide.navigator.views.ResourseViewer"/>
+         <viewShortcut id="org.eclipse.pde.runtime.LogView"/>
+      </perspectiveExtension>
+      <perspectiveExtension targetID="org.eclipse.jdt.ui.JavaBrowsingPerspective">
+         <perspectiveShortcut id="org.eclipse.jdt.ui.JavaPerspective"/>
+         <perspectiveShortcut id="org.eclipse.debug.ui.DebugPerspective"/>
+         <showInPart id="com.tulin.v8.ide.navigator.views.ResourseViewer"/>
+         <viewShortcut id="org.eclipse.pde.runtime.LogView"/>
+      </perspectiveExtension>
+      <perspectiveExtension targetID="org.eclipse.jdt.ui.JavaHierarchyPerspective">
+         <perspectiveShortcut id="org.eclipse.jdt.ui.JavaPerspective"/>
+         <perspectiveShortcut id="org.eclipse.jdt.ui.JavaBrowsingPerspective"/>
+         <perspectiveShortcut id="org.eclipse.debug.ui.DebugPerspective"/>
+         <showInPart id="com.tulin.v8.ide.navigator.views.ResourseViewer"/>
+         <viewShortcut id="org.eclipse.pde.runtime.LogView"/>
+      </perspectiveExtension>
+   </extension>
+
+   <!--Filters-->
+   <extension
+         point="org.eclipse.jdt.ui.javaElementFilters">
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.1"
+            enabled="true"
+            description="%filters.value.1"
+            pattern=".*">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.2"
+            enabled="true"
+            description="%filters.value.2"
+            class="com.tulin.v8.ide.navigator.views.filters.InnerClassFilesFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.HideInnerClassFilesFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.3"
+            enabled="false"
+            description="%filters.value.3"
+            class="com.tulin.v8.ide.navigator.views.filters.EmptyPackageFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.EmptyPackageFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.4"
+            enabled="true"
+            description="%filters.value.4"
+            class="com.tulin.v8.ide.navigator.views.filters.EmptyInnerPackageFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.EmptyInnerPackageFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.5"
+            enabled="false"
+            description="%HideNonJavaElements.description"
+            class="org.eclipse.jdt.internal.ui.filters.NonJavaElementFilter"
+            id="org.eclipse.jdt.ui.PackageExplorer.NonJavaElementFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.6"
+            enabled="true"
+            description="%filters.value.6"
+            class="com.tulin.v8.ide.navigator.views.filters.EmptyLibraryContainerFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.EmptyLibraryContainerFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.7"
+            enabled="false"
+            description="%filters.value.7"
+            class="com.tulin.v8.ide.navigator.views.filters.LibraryFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.LibraryFilter">
+      </filter>      
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.8"
+            enabled="false"
+            description="%filters.value.8"
+            class="com.tulin.v8.ide.navigator.views.filters.ContainedLibraryFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.ContainedLibraryFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.9"
+            enabled="false"
+            description="%filters.value.9"
+            class="com.tulin.v8.ide.navigator.views.filters.JavaFileFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.CuAndClassFileFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="Package declarations"
+            enabled="true"
+            description="Hides all package declarations"
+            class="org.eclipse.jdt.internal.ui.filters.PackageDeclarationFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.PackageDeclarationFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="Import declarations"
+            enabled="true"
+            description="Hides all import declarations"
+            class="org.eclipse.jdt.internal.ui.filters.ImportDeclarationFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.ImportDeclarationFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="Synthetic members"
+            enabled="true"
+            description="Java Declarations Filter"
+            class="org.eclipse.jdt.internal.ui.filters.SyntheticMembersFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.SyntheticMembersFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.10"
+            enabled="false"
+            description="%filters.value.10"
+            class="com.tulin.v8.ide.navigator.views.filters.NonJavaProjectsFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.NonJavaProjectsFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.11"
+            enabled="false"
+            description="%filters.value.11"
+            class="com.tulin.v8.ide.navigator.views.filters.NonSharedProjectFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.NonSharedProjectsFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.12"
+            enabled="false"
+            description="%filters.value.12"
+            class="com.tulin.v8.ide.navigator.views.filters.ClosedProjectFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.ClosedProjectsFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.13"
+            enabled="false"
+            description="%filters.value.13"
+            class="com.tulin.v8.ide.navigator.views.filters.FieldsFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.FieldsFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.14"
+            enabled="false"
+            description="%filters.value.14"
+            class="org.eclipse.jdt.internal.ui.filters.StaticsFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.StaticsFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.15"
+            enabled="false"
+            description="%filters.value.15"
+            class="org.eclipse.jdt.internal.ui.filters.NonPublicFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.NonPublicFilter">
+      </filter>
+      <filter
+            targetId="com.tulin.v8.ide.navigator.views.ResourseViewer"
+            name="%filters.name.16"
+            enabled="false"
+            description="%filters.value.16"
+            class="org.eclipse.jdt.internal.ui.filters.LocalTypesFilter"
+            id="com.tulin.v8.ide.navigator.views.filters.LocalTypesFilter">
+      </filter>
+   </extension>
+
+   
+   <!--首选项-->
+   <extension
+         point="org.eclipse.ui.preferencePages">
+      <page
+            name="%page.name"
+            class="com.tulin.v8.ide.preferences.StudioPreferencePage"
+            id="com.tulin.v8.ide.preferences.StudioPreferencePage">
+      </page>
+      <page
+            category="com.tulin.v8.ide.preferences.StudioPreferencePage"
+            class="com.tulin.v8.ide.preferences.JSLibraryPreferencePage"
+            id="com.tulin.v8.ide.preferences.JSLibraryPreferencePage"
+            name="%page.name.js">
+      </page>
+      <page name="%page.name.4"
+      		category="com.tulin.v8.ide.preferences.StudioPreferencePage"
+            class="com.tulin.v8.ide.preferences.DataSousePermissionPage"
+            id="com.tulin.v8.ide.preferences.DataSousePermissionPage">
+      </page>
+   </extension>
+   
+   <!--新建向导-->
+    <extension
+         point="org.eclipse.ui.newWizards">
+      <category
+            name="%category.name.1"
+            id="TuLin">
+      </category>
+      <wizard
+            name="%wizard.name.0"
+            icon="icons/page.gif"
+            category="TuLin"
+            class="com.tulin.v8.ide.wizards.SampleNewWizard"
+            id="com.tulin.v8.ide.wizards.SampleNewWizard">
+      </wizard>
+      <wizard
+            category="TuLin"
+            class="com.tulin.v8.ide.wizards.ChartNewWizard"
+            icon="icons/echart.gif"
+            id="com.tulin.v8.ide.wizards.ChartNewWizard"
+            name="EChart图表">
+      </wizard>
+      <!--
+      <wizard
+            name="%wizard.name.1"
+            icon="icons/mobile.png"
+            category="YunJie"
+            class="com.justep.yn.studio.wizards.mob.MobilePageWizard"
+            id="com.justep.yn.studio.wizards.mob.MobilePageWizard">
+      </wizard>
+      -->
+   </extension>
+   
+   <!-- 编辑器 -->
+   <extension point="org.eclipse.ui.editors">
+		<editor class="com.tulin.v8.ide.ui.editors.page.WebPageEditor"
+			contributorClass="com.tulin.v8.ide.ui.editors.MultiPageEditorContributor"
+			default="true"
+			extensions="html,htm,xhtml"
+			icon="icons/page.gif"
+			id="com.tulin.v8.ide.ui.editors.page.WebPageEditor"
+			name="%editor.name.0">
+		</editor>
+		<editor class="com.tulin.v8.ide.ui.editors.page.WebPageEditor1"
+			contributorClass="com.tulin.v8.ide.ui.editors.MultiPageEditorContributor"
+			extensions="jsp,jspx,jsf"
+			icon="icons/page1.gif"
+			id="com.tulin.v8.ide.ui.editors.page.WebPageEditor1"
+			name="%editor.name.1">
+		</editor>
+		<editor class="com.tulin.v8.ide.ui.editors.page.WebPageEditor1"
+			contributorClass="com.tulin.v8.ide.ui.editors.MultiPageEditorContributor"
+			extensions="html,htm,xhtml"
+			icon="icons/page1.gif"
+			id="com.tulin.v8.ide.ui.editors.page.WebPageEditor2"
+			name="%editor.name.0">
+		</editor>
+		<editor
+           class="com.tulin.v8.ide.ui.editors.css.CSSEditor"
+           contributorClass="com.tulin.v8.ide.ui.editors.css.CSSActionContributor"
+           default="true"
+           extensions="css"
+           icon="icons/css.gif"
+           id="com.tulin.v8.ide.ui.editors.css.CSSEditor"
+           name="%editor.name.5">
+		   <contentTypeBinding
+				contentTypeId="org.eclipse.wst.css.core.csssource" />
+     	</editor>
+     	<!--
+		<editor
+	           class="com.tulin.v8.ide.ui.editors.html.HTMLSourceEditor"
+	           contributorClass="com.tulin.v8.ide.ui.editors.html.HTMLActionContributor"
+	           default="true"
+	           icon="icons/html.gif"
+	           id="com.tulin.v8.ide.ui.editors.html.HTMLSourceEditor"
+	           name="%editor.name.6">
+				<class class="org.eclipse.wst.sse.ui.StructuredTextEditor">
+					<parameter name="org.eclipse.wst.sse.ui.unsupported_preferred_default" value="org.eclipse.wst.html.core.htmlsource"/>
+				</class>
+				<contentTypeBinding
+					contentTypeId="org.eclipse.wst.html.core.htmlsource" />
+	     </editor>
+	     <editor
+	           class="com.tulin.v8.ide.ui.editors.jsp.JSPEditor"
+	           contributorClass="com.tulin.v8.ide.ui.editors.jsp.JSPActionContributor"
+	           default="true"
+	           extensions="jsp, jsf, jspf, jspx, tag, tagx, tagf"
+	           icon="icons/jsp.gif"
+	           id="com.tulin.v8.ide.ui.editors.jsp.JSPEditor"
+	           name="%editor.name.7">
+				<contentTypeBinding contentTypeId="org.eclipse.jst.jsp.core.jspsource" />
+	     </editor>
+	     -->
+		<editor
+            name="%editor.name.10"
+            extensions="table"
+            icon="icons/table.gif"
+            class="com.tulin.v8.ide.ui.editors.data.DataEditor"
+            contributorClass="org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorActionBarContributor"
+            id="com.tulin.v8.ide.ui.editors.data.DataEditor">
+      </editor>
+	     <editor
+	            class="com.tulin.v8.ide.ui.editors.process.ProcessEditor"
+	            contributorClass="com.tulin.v8.ide.ui.editors.process.ProcessEditorContributor"
+	            default="false"
+	            extensions="process"
+	            icon="icons/M.gif"
+	            id="com.tulin.v8.ide.ui.editors.process.ProcessEditor"
+	            name="%editor.name.process">
+	     </editor>
+	     <editor
+            class="com.tulin.v8.ide.ui.editors.function.FunctionEditor"
+            contributorClass="com.tulin.v8.ide.ui.editors.XMLMultiPageEditorContributor"
+            default="true"
+            extensions="fun,fun.xml"
+            filenames="*.fun.xml"
+            icon="icons/F.gif"
+            id="com.tulin.v8.ide.ui.editors.func.FunctionEditor"
+            name="%editor.name.function">
+      </editor>
+      <editor
+            class="com.tulin.v8.ide.ui.editors.fn.FnEditor"
+            contributorClass="com.tulin.v8.ide.ui.editors.XMLMultiPageEditorContributor"
+            default="true"
+            extensions="fn,fn.xml"
+            filenames="*.fn.xml"
+            icon="icons/fun.gif"
+            id="com.tulin.v8.ide.ui.editors.fn.FnEditor"
+            name="%editor.name.fn">
+      </editor>
+      <editor
+            class="com.tulin.v8.ide.ui.editors.echt.EchartsEditor"
+            contributorClass="com.tulin.v8.ide.ui.editors.MultiPageEditorContributor"
+            extensions="echt"
+            icon="icons/echart.gif"
+            id="com.tulin.v8.ide.ui.editors.echt.EchartsEditor"
+            name="%editor.name.echarts">
+      </editor>
+	</extension>
+   
+   <!--启动项-->
+   <extension
+         id="StudioStartup"
+         name="StudioStartup"
+         point="org.eclipse.ui.startup">
+      <startup
+            class="com.tulin.v8.ide.StudioStartup">
+      </startup>
+   </extension>
+   
+   <!--帮助文档-->
+   <extension
+         point="org.eclipse.help.toc">
+      <toc file="toc.xml" primary="true"/>
+      <toc
+            file="topics_api.xml"
+            primary="false">
+      </toc>
+   </extension>
+
+</plugin>

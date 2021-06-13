@@ -1,0 +1,466 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>JTree</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+ 
+<body>
+<font size="5px"><b>Class Jtree</b></font><br/>
+tree<br/> 
+<br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151" align="right">Jtree</td>
+    <td width="583">Jtree (树形类) </td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Field Summary</td>
+  </tr>
+ 
+  <tr>
+    <td width="220" class="td_left">Array&nbsp;</td>
+    <td width="528"><a href="#JtreeBody">param</a><br/>
+    构建树所需参数</td>
+  </tr>
+ 
+    <tr>
+    <td width="220" class="td_left">Array&nbsp;</td>
+    <td width="528"><a href="#JtreeSetting">setting</a><br/>
+      设置Jtree的属性</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">Object&nbsp;</td>
+    <td width="528"><a href="#JtreeInit">init(treebody,setting,param);</a><br/>
+    加载树</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#quickPosition">quickPosition(text);</a><br/>
+     快速定位树节点</td>
+  </tr>
+	 <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#quickPosition">cancelSelectedNode(node);</a><br/>
+     取消选中节点</td>
+  </tr>
+  
+   <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#quickPosition">expandAll();</a><br/>
+     展开所有节点</td>
+  </tr>
+  
+   <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#quickPosition">expandNode(node, expandFlag, sonSign, focus, callbackFlag);</a><br/>
+     展开节点</td>
+  </tr>
+  
+   <tr>
+    <td width="220" class="td_left">Object&nbsp;</td>
+    <td width="528"><a href="#quickPosition">getNodes();</a><br/>
+     获取树的节点</td>
+  </tr>
+  
+   <tr>
+    <td width="220" class="td_left">Object&nbsp;</td>
+    <td width="528"><a href="#quickPosition">getNodeByParam(key, value, parentNode);</a><br/>
+     根据参数获取节点</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">Object&nbsp;</td>
+    <td width="528"><a href="#quickPosition">getNodeByTId(tId);</a><br/>
+    根据节点ID获取节点</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">Object&nbsp;</td>
+    <td width="528"><a href="#quickPosition">getNodesByParam(key, value, parentNode);</a><br/>
+    根据参数获取节点(多个)</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">int&nbsp;</td>
+    <td width="528"><a href="#quickPosition">getNodeIndex(node);</a><br/>
+    获取节点的序号</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">Object&nbsp;</td>
+    <td width="528"><a href="#quickPosition">getSelectedNodes();</a><br/>
+    获取选中的节点(多个)</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">boolean&nbsp;</td>
+    <td width="528"><a href="#quickPosition">isSelectedNode(node);</a><br/>
+    判断节点是否被选中</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">boolean&nbsp;</td>
+    <td width="528"><a href="#quickPosition">reAsyncChildNodes(parentNode, reloadType, isSilent);</a><br/>
+    是否为异步加载子节点</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#quickPosition">refresh();</a><br/>
+    刷新树</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#quickPosition">selectNode(node, addFlag);</a><br/>
+    选中指定节点</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">Array&nbsp;</td>
+    <td width="528"><a href="#quickPosition">transformToArray(nodes);</a><br/>
+    将多个节点转换成数组</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#quickPosition">updateNode(node, checkTypeFlag);</a><br/>
+      更新节点</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">Object&nbsp;</td>
+    <td width="528"><a href="#quickPosition">getSetting();</a><br/>
+    获取树的配置信息</td>
+  </tr>
+ 
+</table>
+ <br/>
+ <div class="tab_head">&nbsp;<a name="JtreeBody" id="JtreeBody">Class Detail</a> </div>
+ <div>
+   <p>｛Array｝param <br/>
+	 <B>[attribute]</B>构建树需要的参数<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var param = {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cell : {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+id : &quot;SID&quot;,//设置构建树的id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+name : &quot;SNAME&quot;,//树显示的名称<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+parent : &quot;SPARENT&quot;,//表示树的层级<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+other:&quot;SFID,SFNAME,SORGKINDID&quot;,//其他字段用逗号格开<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+tableName : &quot;SA_OPOrg&quot;,//对应的表名<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+databaseName:&quot;system&quot;, //数据库连接名<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+rootFilter : &quot; SCODE&lt;&gt;'SYSTEM' and SPARENT is null&quot;, //跟节点条件<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+orderby : &quot;SSEQUENCE asc&quot; //排序字段<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     }<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};<br/>
+     <br/>
+   </p>
+</div>
+	<div class="tab_head">&nbsp;<a name="JtreeSetting" id="JtreeSetting">Field Detail</a></div>
+<div>
+ 	<p>{Array}setting<br/>
+ 	  <B>[attribute]</B>设置Jtree属性<br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var setting = {<br>
+view: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+selectedMulti: false,		//设置是否允许同时选中多个节点。默认值: true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+autoCancelSelected: false,//点击节点时，按下 Ctrl 键是否允许取消选择操作。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+dblClickExpand: true //双击节点时，是否自动展开父节点的标识<br>
+&nbsp;&nbsp;&nbsp;
+},<br>
+data : {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+simpleData : {//初始化时的节点数据、异步加载时的节点数据<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+enable : true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+}<br>
+&nbsp;&nbsp;&nbsp;
+},<br>
+async : {<br>
+&nbsp;&nbsp;&nbsp;
+enable : true,//设置是否开启异步加载模式 <br>
+&nbsp;&nbsp;&nbsp;
+url : &quot;TreeSelectAction&quot;,//需要加载的Action<br>
+&nbsp;&nbsp;&nbsp;
+autoParam: [&quot;id=currenid&quot;]//异步加载时需要自动提交父节点属性参数。[setting.async.enable = true]   时生效<br>
+ 	&nbsp;&nbsp;&nbsp; type:&quot;post&quot;//提交方式<br>
+&nbsp;&nbsp;&nbsp;
+ 	  },<br>
+ 	  isquickPosition :{<br>
+&nbsp;&nbsp;
+ 	  enable : true, //是否有快速查询框<br>
+&nbsp;&nbsp;
+ 	  url:&quot;QuickTreeAction&quot;,<br>
+&nbsp;&nbsp;quickCells : &quot;SCODE,SNAME&quot;,//用于快速查询的字段<br>
+&nbsp;&nbsp;path : &quot;SFID&quot;//查询路径字段<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+ 	  }<br>
+    }，<br>
+ 	edit:{<br>
+ 	  &nbsp;&nbsp;
+enable:true,//设置 Tree 是否处于编辑状态<br>
+&nbsp;&nbsp;
+showRemoveBth:true,//设置是否显示删除按钮<br>
+&nbsp;&nbsp;
+showRenameBtn: true,//设置是否显示编辑名称按钮<br>
+&nbsp;
+drag:{<br>
+&nbsp;&nbsp;
+prev:true,//拖拽到目标节点时，设置是否允许移动到目标节点前面的操作<br>
+&nbsp;&nbsp;
+inner:true,//拖拽到目标节点时，设置是否允许成为目标节点的子节点<br>
+&nbsp;&nbsp;
+next:true,//拖拽到目标节点时，设置是否允许移动到目标节点后面的操作<br>
+&nbsp;&nbsp;
+isCopy:false,//拖拽时, 设置是否允许复制节点<br>
+&nbsp;&nbsp;
+isMove:true//拖拽时, 设置是否允许移动节点<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+}<br>
+&nbsp;&nbsp;&nbsp;}，<br/>
+callback:{<br>
+&nbsp;
+beforeDrag:beforeDrag,//用于捕获节点被拖拽之前的事件回调函数<br>
+&nbsp;
+beforeDrop: zTreeBeforeDrop,//用于捕获节点拖拽操作结束之前的事件回调函数<br>
+&nbsp;
+onRename: zTreeOnRename,//用于捕获节点编辑名称结束（Input 失去焦点 或 按下 Enter 键）之后<br>
+&nbsp;
+beforeRemove: zTreeBeforeRemove//用于捕获节点被删除之前的事件回调函数<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;	｝<br>
+ 	｝
+  <hr/>
+</div>
+
+
+
+
+ <div class="tab_head">&nbsp;<span class="tab_head">Method Summary</span></div>
+<div>
+  <p>Object&nbsp;<a name="JtreeInit" id="JtreeInit"></a>Jtree.init(treebody,setting,param);<br/>
+	加载事件（在显示树的UL标签中注册）<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Object}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> &lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;div class=&quot;zTreeDemoBackground left&quot;&gt;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;ul id=&quot;JtreeDemo&quot; class=&quot;ztree&quot;&gt;&lt;/ul&gt;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &lt;/div&gt;<br>           
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;/body&gt;&lt;/html&gt; <br>
+  &lt;script type=&quot;text/javascript&quot; language=&quot;javascript&quot;&gt; <br>
+&nbsp;&nbsp;&nbsp;	var param = {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+cell : {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+id : &quot;SID&quot;,//设置构建树的id<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+name : &quot;SNAME&quot;,//树显示的名称<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+parent : &quot;SPARENT&quot;,//表示树的层级<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+other:&quot;SFID,SFNAME,SORGKINDID&quot;,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+tableName : &quot;SA_OPOrg&quot;,//对应的表名<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+databaseName:&quot;system&quot;//数据库<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+};<br>
+  &nbsp;&nbsp;&nbsp;var setting = {<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; view: {<br>
+ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+selectedMulti: false,		//设置是否允许同时选中多个节点。默认值: true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+autoCancelSelected: false,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+dblClickExpand: true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+data : {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+simpleData : {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; enable : true//确定 JTree 初始化时的节点数据<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+async : {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+enable : true,//异步<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+url : &quot;TreeSelectAction&quot;,//异步交互的action<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+autoParam : [ &quot;id=currenid&quot; ] ,//异步需要的参数<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+type: &quot;post&quot;<br>
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+isquickPosition : {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+enable : false, //是否有快速查询框<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+url : &quot;TreeSelectAction&quot;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;edit:{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+enable:true,//设置 Tree 是否处于编辑状态<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+showRemoveBth:true,//设置是否显示删除按钮<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+showRenameBtn: true,//设置是否显示编辑名称按钮<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+drag:{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+prev:true,//拖拽到目标节点时，设置是否允许移动到目标节点前面的操作<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; inner:true,//拖拽到目标节点时，设置是否允许成为目标节点的子节点<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+next:true,//拖拽到目标节点时，设置是否允许移动到目标节点后面的操作<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+isCopy:false,//拖拽时, 设置是否允许复制节点<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+isMove:true//拖拽时, 设置是否允许移动节点<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+
+callback:{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+beforeDrag:beforeDrag,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+beforeDrop: zTreeBeforeDrop,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+onRename: zTreeOnRename,//用于捕获节点编辑名称结束（Input 失去焦点 或 按下 Enter 键）之后<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+beforeRemove: zTreeBeforeRemove<br> 
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+｝
+<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+｝
+  <p>&nbsp;&nbsp;&nbsp; var JtreeDemo = new Jtree();
+    <br>
+    &nbsp;&nbsp;&nbsp;
+var treebody = &quot;JtreeDemo&quot;<br> 
+&nbsp;&nbsp;&nbsp;JtreeDemo.init(treebody, setting, param);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  &lt;/script&gt;</p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="quickPosition"></a>quickPosition(text)<br/>
+	快速定位树节点（模糊查询）<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>text</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>需要定位的节点文本<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var setting = {<br>
+	  &nbsp;&nbsp;
+view: {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+selectedMulti: false,		//设置是否允许同时选中多个节点。默认值: true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+autoCancelSelected: false,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+dblClickExpand: true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+},<br>
+&nbsp;&nbsp;
+data : {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+simpleData : {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+enable : true<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+async : {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+enable : true,<br>
+&nbsp;&nbsp;&nbsp;
+url : &quot;getTreeSourAction&quot;,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+autoParam: [&quot;id=currenid&quot;]<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+},<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+isquickPosition :{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;
+enable : fase, //是否有快速查询框<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+url:&quot;&quot;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+};<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;		
+		&lt;input id=&quot;buttondemo&quot; type=&quot;button&quot; value=&quot;快速定位&quot; onclick=&quot;quickQuery();&quot;/&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var text=$(&quot;#buttondemo&quot;).val(); <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		function quickQuery(){<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Jtree.quickPosition(text);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		}<br/>
+		<br/>
+    </p>
+	<hr/>
+</div>
+</body>
+</html>
+

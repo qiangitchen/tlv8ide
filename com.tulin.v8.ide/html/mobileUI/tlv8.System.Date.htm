@@ -1,0 +1,115 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>tlv8.System.Date</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+
+<body>
+<font size="5px"><b>Class Date</b></font><br/>
+平台自定义Date对象<br/> <br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151">&nbsp;</td>
+    <td width="583">
+	<a href="#Date">Date()</a><br/>
+	平台自定义Date对象
+	</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">&lt;static&gt; string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_System_sysDate">sysDate()</a><br/>
+	获取当前系统日期（yyyy-MM-dd）
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">&lt;static&gt; string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_System_sysDateTime">sysDateTime()</a><br/>
+	获取当前系统日期时间（yyyy-MM-dd hh:mm:ss）
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">&lt;static&gt; <a href="Date.htm">Date</a>&nbsp;</td>
+    <td width="528"><a href="#justep_yn_System_strToDate">strToDate(str)</a><br/>
+	日期格式字符串转换为日期对象
+	</td>
+  </tr>
+</table>
+<br/>
+<div class="tab_head">&nbsp;C<a name="Date"></a>lass Detail </div>
+	Date<br/>
+	平台自定义Date对象<br/>
+	<br/>
+<div class="tab_head">&nbsp;Method Detail </div>
+<div>
+	&lt;static&gt; string<a name="justep_yn_System_sysDate"></a> sysDate()<br/>
+	获取当前系统日期（yyyy-MM-dd）<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.System.Date.sysDate()
+	<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	&lt;static&gt; string<a name="justep_yn_System_sysDateTime"></a> sysDateTime()<br/>
+	获取当前系统日期时间（yyyy-MM-dd yyyy-MM-dd hh:mm:ss）<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.System.Date.sysDateTime()
+	<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	&lt;static&gt; <a href="Date.htm">Date</a><a name="justep_yn_System_strToDate"></a> strToDate(str)<br/>
+	日期格式字符串转换为日期对象<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>str</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>日期格式字符串<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Date}<br/>
+	<br/>
+	
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.System.Date.strToDate("2011-01-21")
+	<br/>
+	<br/>
+	<hr/>
+</div>
+</body>
+</html>
