@@ -30,7 +30,7 @@
 3.  [起步科技](https://www.justep.com/)
 4.  [Eclipse](https://www.eclipse.org/)
 5.  [zigen](http://www.ne.jp/asahi/zigen/home/plugin/dbviewer/about_en.html)
-6.  Sysdeo Tomcat Launcher Plugin
+6.  [Sysdeo Tomcat Launcher Plugin](http://www.eclipsetotale.com/tomcatPlugin.html)
 7.  [ureport](https://gitee.com/youseries/ureport)
 
 
