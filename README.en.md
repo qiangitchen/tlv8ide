@@ -6,7 +6,7 @@ which integrates Tomcat plug-in, database plug-in, report design (visualization)
 It can realize the rapid development of business system, report system (only SQL) and workflow customization. 
 
 #### Software Architecture
-Software architecture description
+Eclipse plug in architecture 
 
 #### Installation
 
