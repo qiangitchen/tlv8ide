@@ -13,7 +13,7 @@
 
 #### 安装教程
 
-1.  下载[eclipse](http://download.eclipse.org/eclipse/downloads/)4.17+
+1.  下载[eclipse](https://www.eclipse.org/downloads/packages/)4.17+
 2.  将解压后的studio-app文件夹放到eclipse/dropins目录下
 3.  启动eclipse
 
