@@ -10,7 +10,7 @@ Software architecture description
 
 #### Installation
 
-1.  Download eclipse 4.17+ 
+1.  Download [eclipse](https://www.eclipse.org/downloads/packages/) 4.17+ 
 2.  Put the unzipped studio app folder in the eclipse / dropins directory 
 3.  Start eclipse 
 
@@ -22,19 +22,19 @@ Software architecture description
 
 #### Contribution
 
-1.  [ www.tulinxian.com [ https://www.tulinxian.com ） 
+1.  [www.tulinxian.com](https://www.tulinxian.com) 
 
-2.  [Ruanjie technology]（ https://www.yunagile.com/ ） 
+2.  [Ruanjie technology](https://www.yunagile.com/) 
 
-3.  [shooting]（ https://www.justep.com/ ） 
+3.  [shooting](https://www.justep.com/) 
 
-4.  [Eclipse]（ https://www.eclipse.org/ ） 
+4.  [Eclipse](https://www.eclipse.org/) 
 
-5.  [zigen]（ http://www.ne.jp/asahi/zigen/home/plugin/dbviewer/about_en.html ） 
+5.  [zigen](http://www.ne.jp/asahi/zigen/home/plugin/dbviewer/about_en.html)
 
-6.  SYSDEO Tomcat Launcher Plugin 
+6.  [SYSDEO Tomcat Launcher Plugin](http://www.eclipsetotale.com/tomcatPlugin.html) 
 
-7.  [ureport]（ https://gitee.com/youseries/ureport ）
+7.  [ureport](https://gitee.com/youseries/ureport )
 
 
 
