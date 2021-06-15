@@ -21,7 +21,7 @@
             class="com.tulin.v8.echarts.ui.wizards.ChartNewWizard"
             icon="icons/echart.gif"
             id="com.tulin.v8.ide.wizards.ChartNewWizard"
-            name="EChart图表">
+            name="%newWizards.name.echarts">
       </wizard>
    </extension>
 
