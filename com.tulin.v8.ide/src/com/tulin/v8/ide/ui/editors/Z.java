@@ -3,8 +3,7 @@ package com.tulin.v8.ide.ui.editors;
 import org.eclipse.ui.IViewPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
-
-import com.tulin.v8.ide.StudioPlugin;
+import org.eclipse.ui.PlatformUI;
 
 public class Z implements Runnable {
 
@@ -12,8 +11,7 @@ public class Z implements Runnable {
 	}
 
 	public void run() {
-		IWorkbenchWindow localIWorkbenchWindow = StudioPlugin
-				.getDefault().getWorkbench().getActiveWorkbenchWindow();
+		IWorkbenchWindow localIWorkbenchWindow = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		IWorkbenchPage localIWorkbenchPage = localIWorkbenchWindow
 				.getActivePage();
 		IViewPart localIViewPart = localIWorkbenchPage

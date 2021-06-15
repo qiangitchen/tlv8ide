@@ -6,6 +6,6 @@ import org.eclipse.wst.xml.ui.internal.tabletree.XMLMultiPageEditorActionBarCont
 public class XMLMultiPageEditorContributor extends XMLMultiPageEditorActionBarContributor {
 	
 	public XMLMultiPageEditorContributor() {
-
+		super();
 	}
 }

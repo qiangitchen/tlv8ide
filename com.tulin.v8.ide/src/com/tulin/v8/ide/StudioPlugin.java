@@ -231,7 +231,7 @@ public class StudioPlugin extends AbstractUIPlugin {
 	}
 
 	public static Shell getShell() {
-		return getDefault().getWorkbench().getActiveWorkbenchWindow().getShell();
+		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	}
 
 	public PluginSettingsManager getPluginSettingsManager() {
@@ -285,7 +285,7 @@ public class StudioPlugin extends AbstractUIPlugin {
 	}
 
 	private IWorkbenchPage internalGetActivePage() {
-		IWorkbenchWindow window = getWorkbench().getActiveWorkbenchWindow();
+		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow();
 		if (window == null)
 			return null;
 		return window.getActivePage();

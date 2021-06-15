@@ -64,7 +64,7 @@ public class d implements Runnable {
 			}
 		};
 		try {
-			StudioPlugin.getDefault().getWorkbench().getActiveWorkbenchWindow().run(true, true, process);
+			PlatformUI.getWorkbench().getActiveWorkbenchWindow().run(true, true, process);
 		} catch (InvocationTargetException e) {
 			e.printStackTrace();
 		} catch (InterruptedException e) {
