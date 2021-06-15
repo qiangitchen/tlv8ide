@@ -362,13 +362,6 @@
             class="com.tulin.v8.ide.wizards.SampleNewWizard"
             id="com.tulin.v8.ide.wizards.SampleNewWizard">
       </wizard>
-      <wizard
-            category="TuLin"
-            class="com.tulin.v8.ide.wizards.ChartNewWizard"
-            icon="icons/echart.gif"
-            id="com.tulin.v8.ide.wizards.ChartNewWizard"
-            name="EChart图表">
-      </wizard>
       <!--
       <wizard
             name="%wizard.name.1"
@@ -476,14 +469,6 @@
             icon="icons/fun.gif"
             id="com.tulin.v8.ide.ui.editors.fn.FnEditor"
             name="%editor.name.fn">
-      </editor>
-      <editor
-            class="com.tulin.v8.ide.ui.editors.echt.EchartsEditor"
-            contributorClass="com.tulin.v8.ide.ui.editors.MultiPageEditorContributor"
-            extensions="echt"
-            icon="icons/echart.gif"
-            id="com.tulin.v8.ide.ui.editors.echt.EchartsEditor"
-            name="%editor.name.echarts">
       </editor>
 	</extension>
    

@@ -75,4 +75,5 @@ Bundle-ClassPath: .,
  lib/trang.jar,
  lib/xercesImpl.jar,
  lib/xml-apis.jar
-Export-Package: com.tulin.v8.ide.utils
+Export-Package: com.tulin.v8.ide,
+ com.tulin.v8.ide.utils
