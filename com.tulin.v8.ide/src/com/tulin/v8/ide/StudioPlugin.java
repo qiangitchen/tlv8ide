@@ -359,8 +359,10 @@ public class StudioPlugin extends AbstractUIPlugin {
 		return (String) Platform.getBundle(getPluginId()).getHeaders().get("Bundle-Vendor");
 	}
 
+	@Deprecated
 	public static boolean isOldVersion() {
-		return Platform.getPluginRegistry() != null;
+//		return Platform.getPluginRegistry() != null;
+		return false;
 	}
 
 	public static void log(IStatus status) {
