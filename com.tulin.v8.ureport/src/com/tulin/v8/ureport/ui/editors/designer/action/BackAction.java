@@ -2,8 +2,8 @@ package com.tulin.v8.ureport.ui.editors.designer.action;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.swt.browser.Browser;
 
+import com.equo.swt.chromium.Browser;
 import com.tulin.v8.ureport.Activator;
 import com.tulin.v8.ureport.ui.Messages;
 

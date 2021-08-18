@@ -2,9 +2,8 @@ package com.tulin.v8.ureport.ui.editors.designer.call;
 
 import java.net.URLDecoder;
 
-import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.browser.BrowserFunction;
-
+import com.equo.swt.chromium.Browser;
+import com.equo.swt.chromium.BrowserFunction;
 import com.tulin.v8.core.XMLFormator;
 import com.tulin.v8.ureport.ui.editors.designer.UReportEditor;
 

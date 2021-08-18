@@ -8,13 +8,12 @@ import java.text.SimpleDateFormat;
 import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.browser.BrowserFunction;
 
 import com.bstek.ureport.console.designer.ReportDefinitionWrapper;
 import com.bstek.ureport.definition.ReportDefinition;
 import com.bstek.ureport.parser.ReportParser;
-
+import com.equo.swt.chromium.Browser;
+import com.equo.swt.chromium.BrowserFunction;
 import com.tulin.v8.ureport.ui.editors.designer.UReportEditor;
 
 public class LoadReport extends BrowserFunction {
