@@ -8,5 +8,9 @@ Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.wst.jsdt.ui;bundle-version="2.1.0"
+Require-Bundle: 
+ org.eclipse.core.runtime,
+ org.eclipse.ui.workbench,
+ org.eclipse.wst.jsdt.ui;bundle-version="2.1.0"
 Automatic-Module-Name: com.tulin.v8.js.ui
+Bundle-Activator: com.tulin.v8.js.ui.JSEditorPlugin
