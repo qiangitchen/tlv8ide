@@ -20,6 +20,8 @@ Eclipse插件体系结构
 1.  下载[eclipse](https://www.eclipse.org/downloads/packages/)4.17+
 2.  将解压后的studio-app文件夹放到eclipse/dropins目录下
 3.  启动eclipse
+4.  [下载项目](https://gitee.com/qianpou/tl)
+5.  运行Tomcat（也可以使用其他中间件）查看效果
 
 #### 使用说明
 
