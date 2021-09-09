@@ -13,6 +13,7 @@ Eclipse plug in architecture
 1.  Download [eclipse](https://www.eclipse.org/downloads/packages/) 4.17+ 
 2.  Put the unzipped studio app folder in the eclipse / dropins directory 
 3.  Start eclipse 
+4.  [Download Project Source](https://gitee.com/qianpou/tl)
 
 #### Instructions
 
