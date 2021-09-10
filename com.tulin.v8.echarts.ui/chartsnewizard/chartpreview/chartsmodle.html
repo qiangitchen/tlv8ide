@@ -20,13 +20,13 @@
 		var dom = document.getElementById("container");
 		var app = {};
 		function initCharts(){
-			var myChart = echarts.init(dom, getThemeCall());
+			var myChart = echarts.init(dom, window.getThemeCall());
 			try{
-		   		var mdscript = getScriptCall();
+		   		var mdscript = window.getScriptCall();
 		   		window.eval(mdscript);
 		   	}catch (e) {
 		   	}
-			options = loadSourceCall(); //加载模型
+			options = window.loadSourceCall(); //加载模型
 			try{
 				if(typeof options == "string"){
 					options = JSON.parse(options);
