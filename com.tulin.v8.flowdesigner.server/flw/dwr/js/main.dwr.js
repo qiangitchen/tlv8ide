@@ -420,7 +420,7 @@ function Group(id, name) {
 			if (obj.selected) {
 				obj.remove();
 				try {
-					EditorCallJava('remove', obj.id);
+					window.EditorCallJava('remove', obj.id);
 				} catch (e) {
 				}
 			} else {
@@ -566,7 +566,7 @@ function Group(id, name) {
 			}
 			line.jsonTo(jLines[i]);
 		}
-		dataInitedCall(JSON.encode(jNodes));
+		window.dataInitedCall(JSON.encode(jNodes));
 	};
 	this.setProp = function(selObj, flag) {
 		var win = document.getElementById('propWin');
@@ -733,15 +733,15 @@ var GroupEvent = {
 		}
 		Love.setGroupArea();
 		Love.action = null;
-		designChangeCall(Love.toJson());
+		window.designChangeCall(Love.toJson());
 		var selectedNode = Love.getSelectedNode();
 		var selectedLine = Love.getSelectedLine();
 		if (selectedNode.length == 1) {
-			selectedCall(JSON.encode(selectedNode[0].toJson()));
+			window.selectedCall(JSON.encode(selectedNode[0].toJson()));
 		} else if (selectedLine.length == 1) {
-			selectedCall(JSON.encode(selectedLine[0].toJson()));
+			window.selectedCall(JSON.encode(selectedLine[0].toJson()));
 		} else {
-			selectedCall("cancel");
+			window.selectedCall("cancel");
 		}
 		return false;
 	},
@@ -854,7 +854,7 @@ var GroupEvent = {
 		var group = document.getElementById('group');
 		var Love = group.bindClass;
 		Love.ctrlKey = false;
-		designChangeCall(Love.toJson());
+		window.designChangeCall(Love.toJson());
 	},
 	getX : function(x) {
 		return (x + document.body.scrollLeft);
@@ -1193,10 +1193,10 @@ var MenuAction = {
 		n.setName("开始");
 		// n.init();
 		this.autoLine(n);
-		EditorCallJava('add', JSON.encode(n.toJson()));
+		window.EditorCallJava('add', JSON.encode(n.toJson()));
 		var groupObj = document.getElementById('group');
 		var Love = groupObj.bindClass;
-		designChangeCall(Love.toJson());
+		window.designChangeCall(Love.toJson());
 	},
 	end : function() {
 		var n = new NodeOval();
@@ -1204,36 +1204,36 @@ var MenuAction = {
 		n.setName("结束");
 		// n.init();
 		this.autoLine(n);
-		EditorCallJava('add', JSON.encode(n.toJson()));
+		window.EditorCallJava('add', JSON.encode(n.toJson()));
 		var groupObj = document.getElementById('group');
 		var Love = groupObj.bindClass;
-		designChangeCall(Love.toJson());
+		window.designChangeCall(Love.toJson());
 	},
 	nodeRect : function() {
 		var n = new Node();
 		// n.init();
 		this.autoLine(n);
-		EditorCallJava('add', JSON.encode(n.toJson()));
+		window.EditorCallJava('add', JSON.encode(n.toJson()));
 		var groupObj = document.getElementById('group');
 		var Love = groupObj.bindClass;
-		designChangeCall(Love.toJson());
+		window.designChangeCall(Love.toJson());
 	},
 	nodeImg : function() {
 		var n = new NodeImg();
 		n.init();
-		EditorCallJava('add', JSON.encode(n.toJson()));
+		window.EditorCallJava('add', JSON.encode(n.toJson()));
 		var groupObj = document.getElementById('group');
 		var Love = groupObj.bindClass;
-		designChangeCall(Love.toJson());
+		window.designChangeCall(Love.toJson());
 	},
 	fork : function() {
 		var n = new Condition();
 		// n.init();
 		this.autoLine(n);
-		EditorCallJava('add', JSON.encode(n.toJson()));
+		window.EditorCallJava('add', JSON.encode(n.toJson()));
 		var groupObj = document.getElementById('group');
 		var Love = groupObj.bindClass;
-		designChangeCall(Love.toJson());
+		window.designChangeCall(Love.toJson());
 	},
 	line : function(cansele) {
 		var group = document.getElementById('group');
@@ -1259,7 +1259,7 @@ var MenuAction = {
 		var group = document.getElementById('group');
 		var Love = group.bindClass;
 		Love.removeSelected();
-		designChangeCall(Love.toJson());
+		window.designChangeCall(Love.toJson());
 	},
 	grid : function() {
 		var obj = document.body.style.backgroundImage;
@@ -2272,7 +2272,7 @@ function drow_init(processID, processName, json) {
 	} else if (json) {
 		g.jsonTo(json);
 	} else {
-		// dataInitedCall("empty");
+		// window.dataInitedCall("empty");
 	}
 }
 
@@ -2290,7 +2290,7 @@ function pageDataInited(sources){
 	}
 };
 function lookResourse(){
-	EditorCallJava("回调测试... ...");
+	window.EditorCallJava("回调测试... ...");
 };
 function selectSinglNodeById(nodeid){
 	var groupObj = document.getElementById('group');
@@ -2310,7 +2310,7 @@ function removeSinglNodeById(nodeid){
 	Love.setSelected(node);
 	// node.remove();
 	Love.removeSelected();
-	designChangeCall(Love.toJson());
+	window.designChangeCall(Love.toJson());
 };	
 function setSelObjectProperty(objid,properStr){
 	var groupObj = document.getElementById('group');
@@ -2325,7 +2325,7 @@ function setSelObjectProperty(objid,properStr){
 			line.property = JSON.decode(properStr);
 		}
 	}
-	designChangeCall(Love.toJson());
+	window.designChangeCall(Love.toJson());
 };
 function setSelObjectName(objid,newname){
 	var groupObj = document.getElementById('group');
@@ -2346,7 +2346,7 @@ function setSelObjectName(objid,newname){
 			line.obj.title = newname;
 		}
 	}
-	designChangeCall(Love.toJson());
+	window.designChangeCall(Love.toJson());
 };
 function JavaCreatDomConditionSelect(objid){
 	var group = document.getElementById('group');
@@ -2362,13 +2362,13 @@ function JavaCreatDomConditionSelect(objid){
 			optionsArray.push(djson);
 		}
 	}
-	EditorCallJava('setDomConditionSelect',JSON.encode(optionsArray));
+	window.EditorCallJava('setDomConditionSelect',JSON.encode(optionsArray));
 	return JSON.encode(optionsArray);
 };
 function JavaevIsselected(){
 	var group = document.getElementById('group');
 	var Love = group.bindClass;
-	EditorCallJava("setDeleteActionEnable", Love.getSelectedNode().length>0 || Love.getSelectedLine().length>0);
+	window.EditorCallJava("setDeleteActionEnable", Love.getSelectedNode().length>0 || Love.getSelectedLine().length>0);
 };
 function JavaparseNode(jsonstr){
 	var groupObj = document.getElementById('group');
@@ -2400,6 +2400,6 @@ function JavaparseNode(jsonstr){
 	node.left = Love.mouseX;
 	node.top = Love.mouseY;
 	node.init();
-	EditorCallJava('add', JSON.encode(node.toJson()));
-	designChangeCall(Love.toJson());
+	window.EditorCallJava('add', JSON.encode(node.toJson()));
+	window.designChangeCall(Love.toJson());
 };
