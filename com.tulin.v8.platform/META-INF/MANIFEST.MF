@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TuLin Platform
+Bundle-SymbolicName: com.tulin.v8.platform;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: TULIN
+Bundle-Encoding: UTF-8
+Bundle-Localization: plugin
+Automatic-Module-Name: com.tulin.v8.platform
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.swt,
+ org.eclipse.jface,
+ org.eclipse.core.runtime,
+ org.eclipse.ui.workbench,
+ com.tulin.v8.ide.ui
+Bundle-Activator: com.tulin.v8.ide.PlatformPlugin
+Bundle-ActivationPolicy: lazy

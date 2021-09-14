@@ -1,0 +1,170 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>tlv8.CheckBox</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+
+<body>
+<font size="5px"><b>Class tlv8.CheckBox</b></font><br/>
+CheckBox复选组件<br/> 
+<br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151" align="right">CheckBox</td>
+    <td width="583">
+<a href="#justep_yn_Radio_onselected">tlv8.CheckBox(div,item,splithtmlarray)</a><br>
+复选组件</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_CheckBox_onchecked">onchecked</a><br/>
+	获取复选组件当前选中值</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_CheckBox_checkAll">checkAll</a><br/>
+	选中全部</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_CheckBox_uncehckAll">uncehckAll</a><br/>
+	全部不选中</td>
+  </tr>
+</table>
+  <br/>
+ <div class="tab_head">&nbsp;<a name="justep_yn_CheckBox">Class Detail</a> </div>
+ <div>
+   <p>CheckBox tlv8.CheckBox<br/>
+	CheckBox 复选组件<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>div</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Element div}<b>[required]</b>复选组件所属的层<br/>
+	<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>item</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{<a href="Map.htm">Map</a>}<b>[required]</b>复选组件的选项<br/>
+	<br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <b>splithtmlarray</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Array}选项分隔标记数组 内容可以是任意html标签 如&quot;&lt;br&gt;&quot;,&quot;&nbsp;&quot; <strong>数组长度与选项个数相同</strong><br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{CheckBox}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 &lt;div id=&quot;sNameDemoMus&quot; &gt;&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 var checkboxDemo = document.getElementById(&quot;sNameDemoMus&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var item = new Map();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;yes&quot;,&quot;是&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;no&quot;,&quot;否&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;normal&quot;,&quot;未知&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   var sts = new tlv8.CheckBox(checkboxDemo,item);</p>
+   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;或 </p>
+   <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     &lt;div id=&quot;sNameDemoMus&quot; onchecked=&quot;kkkk&quot;&gt;&lt;/div&gt;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     var checkboxDemo = document.getElementById(&quot;sNameDemoMus&quot;);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     var item = new Map();<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     item.put(&quot;yes&quot;,&quot;是&quot;);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     item.put(&quot;no&quot;,&quot;否&quot;);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     item.put(&quot;normal&quot;,&quot;未知&quot;);<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var splithtmlarray = new Array();<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; splithtmlarray.push(&quot;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&quot;);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; splithtmlarray.push(&quot;&lt;br&gt;&quot;);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; splithtmlarray.push(&quot;&lt;br&gt;&quot;);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     var sts = new tlv8.CheckBox(checkboxDemo,item,splithtmlarray);<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     function kkkk(value){//在DIV标签中注册的kkkk事件不能加括号<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     alert(value);<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+     }</p>
+   <p><br/>
+     <br/>
+         </p>
+</div>
+ <div class="tab_head">&nbsp;Method Summary</div>
+  <div>
+ 	<p>{string}onchecked<a name="justep_yn_CheckBox_onchecked"></a><br/>
+ 	选择时触发:获取当前选中值<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 &lt;div id=&quot;sNameDemoMus&quot; onchecked=&quot;kkkk&quot;&gt;&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 var checkboxDemo = document.getElementById(&quot;sNameDemoMus&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var item = new Map();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;yes&quot;,&quot;是&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;no&quot;,&quot;否&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;normal&quot;,&quot;未知&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var sts = new tlv8.CheckBox(checkboxDemo,item);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function kkkk(value){//在DIV标签中注册的kkkk事件不能加括号<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		alert(value);<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	} </p>
+	<hr/>
+</div>
+ <div>
+ 	<p>{void}checkAll<a name="justep_yn_CheckBox_checkAll" id="justep_yn_CheckBox_checkAll"></a><br/>
+ 	全部选中<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 document.getElementById(&quot;FREMARK&quot;).Check.checkAll(); <br/>
+   </p>
+ 	<hr/>
+</div>
+ <div>
+ 	<p>{void}uncehckAll<a name="justep_yn_CheckBox_uncehckAll" id="justep_yn_CheckBox_uncehckAll"></a><br/>
+ 	  全部不选中<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 document.getElementById(&quot;FREMARK&quot;).Check.uncheckAll(); <br/>
+   </p>
+ 	<hr/>
+</div>
+</body>
+</html>

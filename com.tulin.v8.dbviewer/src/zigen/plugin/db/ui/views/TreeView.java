@@ -16,7 +16,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IWorkbenchActionConstants;
@@ -78,7 +77,6 @@ import zigen.plugin.db.ui.internal.Synonym;
 import zigen.plugin.db.ui.internal.Table;
 import zigen.plugin.db.ui.internal.TreeNode;
 import zigen.plugin.db.ui.internal.View;
-import zigen.plugin.db.ui.jobs.OracleSourceSearchJob;
 import zigen.plugin.db.ui.jobs.RefreshOracleSourceJob;
 import zigen.plugin.db.ui.jobs.RefreshTableJob;
 import zigen.plugin.db.ui.views.internal.ColumnFilter;
@@ -176,7 +174,7 @@ public class TreeView extends AbstractTreeView {
 
 	public void setFocus() {}
 
-	void makeActions() {
+	protected void makeActions() {
 		registDBAction = new RegistDBAction(viewer);
 		removeDBAction = new RemoveDBAction(viewer);
 		removeDBAction.setEnabled(false);
@@ -238,7 +236,7 @@ public class TreeView extends AbstractTreeView {
 		collapseAllAction = new CollapseAllAction(viewer);
 	}
 
-	void fillContextMenu(IMenuManager manager) {
+	protected void fillContextMenu(IMenuManager manager) {
 		Object obj = (Object) ((StructuredSelection) viewer.getSelection()).getFirstElement();
 
 		if (obj instanceof Root) {
@@ -340,7 +338,7 @@ public class TreeView extends AbstractTreeView {
 		else if (obj instanceof ITable) {
 
 			try {
-				ITable table = (ITable) obj;
+//				ITable table = (ITable) obj;
 
 				manager.add(openEditorAction);
 				// manager.add(tableDefineEditAction);
@@ -421,7 +419,7 @@ public class TreeView extends AbstractTreeView {
 		bars.getMenuManager().appendToGroup("ColumnFilter", action); //$NON-NLS-1$
 	}
 
-	void fillLocalToolBar(IToolBarManager manager) {
+	protected void fillLocalToolBar(IToolBarManager manager) {
 		manager.add(registDBAction);
 		// manager.add(removeDBAction);
 		manager.add(new Separator());
@@ -440,7 +438,7 @@ public class TreeView extends AbstractTreeView {
 		return selectedColumn;
 	}
 
-	void selectionChangeHandler(SelectionChangedEvent event) {
+	protected void selectionChangeHandler(SelectionChangedEvent event) {
 
 		selectedColumn = null;
 		removeDBAction.setEnabled(false);

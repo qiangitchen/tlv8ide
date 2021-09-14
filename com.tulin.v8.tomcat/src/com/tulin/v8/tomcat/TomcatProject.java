@@ -253,7 +253,7 @@ public class TomcatProject extends PlatformObject implements IProjectNature {
 	 * @return Returns a boolean
 	 */
 	public boolean getUpdateXml() {
-		return new Boolean(this.readProperty(KEY_UPDATEXML)).booleanValue();
+		return Boolean.valueOf(this.readProperty(KEY_UPDATEXML));
 	}
 
 	/**
@@ -271,7 +271,7 @@ public class TomcatProject extends PlatformObject implements IProjectNature {
 	 * @return Returns a boolean
 	 */
 	public boolean getExportSource() {
-		return new Boolean(this.readProperty(KEY_EXPORTSOURCE)).booleanValue();
+		return Boolean.valueOf(this.readProperty(KEY_EXPORTSOURCE));
 	}
 
 	/**
@@ -294,7 +294,7 @@ public class TomcatProject extends PlatformObject implements IProjectNature {
 		if (reloadableProperty.equals("")) {
 			reloadableProperty = "true";
 		}
-		return new Boolean(reloadableProperty).booleanValue();
+		return Boolean.valueOf(reloadableProperty);
 	}
 
 	/**
@@ -317,7 +317,7 @@ public class TomcatProject extends PlatformObject implements IProjectNature {
 		if (redirectLoggerProperty.equals("")) {
 			redirectLoggerProperty = "false";
 		}
-		return new Boolean(redirectLoggerProperty).booleanValue();
+		return Boolean.valueOf(redirectLoggerProperty);
 	}
 
 	/**

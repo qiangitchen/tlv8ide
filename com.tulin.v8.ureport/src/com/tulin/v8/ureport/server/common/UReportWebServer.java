@@ -362,6 +362,7 @@ public class UReportWebServer {
 				this.inputStream = inputStream;
 			}
 
+			@SuppressWarnings("unused")
 			public String getLineSeparator() {
 				switch (lineSeparator) {
 				case CR:
@@ -545,11 +546,12 @@ public class UReportWebServer {
 								}
 								dataContent = new String(chars);
 							} else {
-								StringBuilder sb = new StringBuilder();
-								char[] chars = new char[1024];
-								for (int i; (i = reader.read(chars)) != -1; sb.append(chars, 0, i)) {
-								}
-								dataContent = sb.toString();
+//								StringBuilder sb = new StringBuilder();
+//								char[] chars = new char[1024];
+//								for (int i; (i = reader.read(chars)) != -1; sb.append(chars, 0, i)) {
+//								}
+//								dataContent = sb.toString();
+								dataContent = "";
 							}
 							HTTPData httpData = new HTTPData();
 							Map<String, String> dataHeaderMap = httpData.getHeaderMap();

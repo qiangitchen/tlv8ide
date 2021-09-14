@@ -1,0 +1,203 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>tlv8.GridSelect</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+
+<body>
+<font size="5px"><b>Class tlv8.GridSelect</b></font><br/>
+列表下拉组件<br/> 
+<br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151" align="right">GridSelect&nbsp;</td>
+    <td width="583">
+	<a href="#justep_yn_GridSelect">tlv8.GridSelect(div,dbkey,sql,master,caninput)</a><br/>
+	列表下拉选择组件</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Field Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_GridSelect_disabled">disabled</a><br/>
+	下拉选择组件不可编辑</td>
+  </tr>
+</table>
+ <br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">Element&nbsp;</td>
+    <td width="528"><a href="#justep_yn_GridSelect_onselected">onselected()</a><br/>
+	单选事件</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">Element&nbsp;</td>
+    <td width="528"><a href="#justep_yn_GridSelect_onchecked">onchecked()</a><br/>
+	多选事件</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">Element&nbsp;</td>
+    <td width="528"><a href="#justep_yn_GridSelect_onValueChanged">onValueChanged()</a><br/>
+	值改变事件</td>
+  </tr>
+</table>
+ <br/>
+<div class="tab_head">&nbsp;C<a name="justep_yn_GridSelect"></a>lass Detail </div>
+<div>
+	GridSelect tlv8.GridSelect(div,dbkey,sql,master,caninput)<br/>
+	列表下拉选择组件<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Palabelidrameters:</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>div</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	{Element div}<b>[required]</b>用于显示表格的DIV标签<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>dbkey</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	{string}<b>[required]</b>数据库连接标志<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>sql</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	{string}<b>[required]</b>查询的sql<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>master</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	{string}<b>[required]</b>是否多选<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>caninput</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	{string}<b>[required]</b>是否可输入<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {GridSelect}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;test2&quot;/&gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    var gdiv = document.getElementById(&quot;test2&quot;); <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var sql = &quot;select sName from sa_oporg&quot;;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var GridSelect = new tlv8.GridSelect(gdiv,&quot;system&quot;,sql);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	<br/>
+</div>
+ <div class="tab_head">&nbsp;Field Detail</div>
+ <div>
+ 	{string}disabled<a name="justep_yn_GridSelect_disabled"></a><br/>
+ 	<B>[attribute]</B>列表下拉组件不可编辑<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;test2&quot; onselected=&quot;thisvalue(this)&quot; disabled=&quot;true&quot;&gt;&lt;/div&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//只需要在显示列表下拉组件的div中声明 disabled=&quot;true&quot; 即可<br/>
+    <br/>
+</div>
+<div class="tab_head">&nbsp;Method Detail </div>
+<div>
+	Element&nbsp;<a name="justep_yn_GridSelect_onselected"></a> onselected()<br/>
+	单选事件,在显示下拉选择组件的div中注册<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Element}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;test2&quot; onselected=&quot;thisvalue&quot;/&gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var gdiv = document.getElementById(&quot;test2&quot;); <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var sql = &quot;select sName from sa_oporg&quot;;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var GridSelect = new tlv8.GridSelect(gdiv,&quot;system&quot;,sql);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function thisvalue(element){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp;
+	alert(element.value);<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<hr/>
+</div>
+<div>
+	Element&nbsp;<a name="justep_yn_GridSelect_onchecked"></a> onchecked()<br/>
+	多选事件,在显示下拉选择组件的div中注册<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Element}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;mutestselect&quot; onchecked=&quot;thischeckedvalue&quot;&gt;&lt;/div&gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var mutestselect = document.getElementById(&quot;mutestselect&quot;);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var sql = &quot;select sName from sa_oporg&quot;;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var mutestselectGridSelect = new tlv8.GridSelect(<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+	mutestselect,&quot;system&quot;,sql,true,true);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function thischeckedvalue(element){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	alert(element.checkedValue);<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	}<br/>
+	<hr/>
+</div>
+<div>
+	Element&nbsp;<a name="justep_yn_GridSelect_onValueChanged"></a> onValueChanged()<br/>
+	值改变事件,在显示下拉选择组件的div中注册<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Element}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;mutestselect&quot; onValueChanged=&quot;thisvaluechange&quot;&gt;&lt;/div&gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var mutestselect = document.getElementById(&quot;mutestselect&quot;);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var sql = &quot;select sName from sa_oporg&quot;;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var mutestselectGridSelect = new tlv8.GridSelect(<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+	mutestselect,&quot;system&quot;,sql,true,true);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function thisvaluechange(element){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+	alert(element.value);<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<hr/>
+</div>
+</body>
+</html>

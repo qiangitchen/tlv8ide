@@ -1,0 +1,1737 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>tlv8.createGrid</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+<style type="text/css">
+<!--
+.STYLE1 {color: #CCCCFF}
+-->
+</style>
+</head>
+
+<body>
+<font size="5px"><b>Class tlv8.createGrid</b></font><br/>
+Grid表格组件<br/> 
+<br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151" align="right">Grid&nbsp;</td>
+    <td width="583">
+	<a href="#justep_yn_createGrid">tlv8.createGrid(div, labelid, labels, labelwidth, dataAction,witdh, height, data, limit, where, billdataformid, billcell,datatype, master, showindex,sql,fixColumn)</a><br/>
+	Grid表格控件</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Field Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_tree_select">select</a><br/>
+	表格中下拉选择</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#CurrentPage">CurrentPage</a><br/>
+	当前页码</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#billfilter">billfilter</a><br/>
+	grid过滤条件</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_tree_button">button</a><br/>
+	单元格按钮</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_tree_CurrentRowId">CurrentRowId</a><br/>
+	当前行ID</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_tree_checkedRowIds">checkedRowIds</a><br/>
+	所有选中行的ID（多选状态下）</td>
+  </tr>
+</table>
+ <br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_settoolbar">settoolbar(insertItem, saveItem, refreshItem, deleteItem)</a><br/>
+	设置表格工具栏</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_setValueByName">setValueByName(name, param, value)</a><br/>
+	根据列名设置值 后面的param参数可以是rowid 也可以是index</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_getValueByName">getValueByName(name, param)</a><br/>
+	根据列名获取值 后面的参数可以是rowid 也可以是index</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_refreshData">refreshData(filter)</a><br/>
+	表格刷新</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_seteditModel">seteditModel(editModel)</a><br/>
+	设置表格是否可编辑</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">boolean&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_saveData">saveData()</a><br/>
+	表格数据保存</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_insertData">insertData()</a><br/>
+	新增表格行</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">boolean&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_deleteData">deleteData()</a><br/>
+	删除选中行</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">number&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_getLength">getLength()</a><br/>
+	获取grid总行数</td>
+  </tr>
+    <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_setExcelimpBar">setExcelimpBar(param)</a><br/>
+	设置Excel导入</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_setExcelexpBar">setExcelexpBar(param)</a><br/>
+	设置Excel导出</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_getCurrentRowId">getCurrentRowId()</a><br/>
+	获取当前行ID</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_getRowId">getRowId(index)</a><br/>
+	获取指定行的ID</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_getIndex">getIndex(cId)</a><br/>
+	获取指定行的行号</td>
+  </tr>
+    <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_getCheckedRowIds">getCheckedRowIds()</a><br/>
+	获取选中行的ID</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_insertSelfBar">insertSelfBar(label, width, action, img)</a><br/>
+	自定义按钮</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">number&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_getgridRelationIndex">getgridRelationIndex(relation)</a><br/>
+	根据列名获取列的序号</td>
+  </tr>
+     <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_setrowState">setrowState(rowid, state)</a><br/>
+	设置某行的状态</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_addFooterrow">addFooterrow(cells)</a><br/>
+	grid末尾添加自定义行（可用作合计行）</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_setRequired">setRequired(cellName)</a><br/>
+	设置单元格必填</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_grid_setSql">setSQL(sql)</a><br/>
+	查询sql 查询动作为getGridActionBySQL时使用</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#getgridRelationIndex">getgridRelationIndex(relationName)</a><br/>
+    获取列的序号</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#quickSearch">quickSearch(text)</a><br/>
+    快速查询 </td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#checkAll">checkAll()</a><br/>
+    全部选中(grid行为多选时) </td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#uncheckAll">uncheckAll()</a><br/>
+    全部取消选中(grid行为多选时) </td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#locate">locate(relation,value)</a><br/>
+    查找列值对应的行ID</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#.fixTable">fixTable(obj)</a><br/>
+    重新调整列表</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#setFixColumn">setFixColumn(num)</a><br/>
+    设置grid锁定列数</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#setStaticFilter">setStaticFilter(filter)</a><br/>
+    设置静态过滤条件</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a>toPage(page)</a><br/>
+    跳到指定的页</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a>firstPage()</a><br/>
+    第一页</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a>previousPage()</a><br/>
+    上一页</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a>nextPage()</a><br/>
+    下一页</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a>lastPage()</a><br/>
+    最后一页</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">number&nbsp;</td>
+    <td width="528"><a>getPages()</a><br/>
+    获取数据总页数</td>
+  </tr>
+</table>
+ <p>&nbsp;</p>
+ <table >
+   <tr>
+     <td colspan="2" class="tab_head">&nbsp;Event Summary</td>
+   </tr>
+   <tr>
+     <td width="220" class="td_left">&nbsp;</td>
+     <td width="528"><a href="#justep_yn_grid_beforeInsert">beforeInsert</a><br/>
+     插入数据之前事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_grid_afterInert">afterInert</a><br/>
+     插入数据之后事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_grid_beforeSave">beforeSave</a><br/>
+     保存数据之前事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_grid_afterSave">afterSave</a><br/>
+     保存事件之后事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_grid_beforeDelete">beforeDelete</a><br/>
+     删除数据之前事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_grid_beforeDelete">afterDelete</a><br/>
+     删除数据之后事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_grid_beforeRefresh">beforeRefresh</a><br/>
+     刷新数据之前事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_grid_afterRefresh">afterRefresh</a><br/>
+     刷新数据之后事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_grid_onselected">onselected</a><br/>
+     行单击事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_grid_ondbclick">ondbclick</a><br/>
+     行双击事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><span class="STYLE1"><a href="#justep_yn_grid_griddbclick">griddbclick</a><br/>
+     双击行(非编辑状态)过时</span></td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#onRowInit">onRowInit</a><br/>
+       数据行初始化事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#dataValueChanged">dataValueChanged</a><br/>
+     值改变事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#onchecked">onchecked</a><br/>
+     选择事件(多选时)</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#oncheckAll">oncheckAll</a><br/>
+     全选事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#onuncheckAll">onuncheckAll</a><br/>
+     全选取消时事件</td>
+   </tr>
+ </table>
+ <p>&nbsp;</p>
+ <p><br/>
+ </p>
+ <div class="tab_head">&nbsp;C<a name="justep_yn_createGrid"></a>lass Detail </div>
+<div>
+ Grid tlv8.createGrid(div, labelid, labels, labelwidth, dataAction,witdh, height, data, <br/>
+ &nbsp;&nbsp;&nbsp;&nbsp;
+ limit, where, billdataformid, billcell,datatype, master, showindex,sql,fixColumn)<br/>
+	Grid表格组件<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>div</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>用于显示表格的DIV标签<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>labelid</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>需要绑定到表格的字段；master_check多选框<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>labels</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>表头显示的字段名<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>labelwidth</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>表格列宽<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>dataAction</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{object}<b>[required]</b>表格动作（{queryAction：查询动作；savAction：保存动作；<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	deleteAction：删除动作}）<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>witdh</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>表格宽度<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>height</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>表格高度<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>data</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{<a href="tlv8.Data.htm">Data</a>}<b>[required]</b>数据源<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>limit</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{number}每页显示行数<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>where</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}过滤条件<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>billdataformid</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}主从设置：指定主表的formid<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>billcell</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}外键字段名<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>datatype</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}绑定列的字段类型	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;字段类型<br/>
+	{string,number,year,yearmonth,month,date,datetime,ro,html:reader,select:id,button:action,checkBox:map,radio:map}<br/>
+	* //year,yearmonth,month 对应数据字段为字符型<br/>
+    * //html:reader 自定内容类型 reader为读取值的js函数； 函数reader(event) event有rowid、value<br>
+* //ro为只读列 <br>
+* //select:id{下拉选择类型 id为下拉组件id} <br>
+* //button:action为按钮类型（action为点击按钮时的动作 类型为js function）<br>
+* //checkBox:map 单选类型 map为多选内容k为值,v为项显示内容map{k,v}<br>
+* //radio:map 多选类型 map为选择内容 k为值,v为项显示内容map{k,v}<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>master</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}是否多选(&quot;true&quot;:多选；&quot;false&quot;:不多选)<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>showindex</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}是否序号(列No:序号；&quot;true&quot;:有序号；&quot;false&quot;：无序号)<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>sql</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}查询语句 （省略：标准grid；&quot;select * from tabl&quot;:查询结果列表 用sql时不能编辑） <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<b>fixColumn</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{number}固定列的数量 被固定列在横向滚动时会一直保持位置 效果类似excel的锁定列<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{grid}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;deatail_0&quot; width=&quot;100%&quot; / &gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var data = new <a href="tlv8.Data.htm">tlv8.Data()</a>;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.setTable(&quot;TMJ_TEST&quot;);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.setDbkey(&quot;tmjcrm&quot;);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var det = document.getElementById("deatail_0");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var labelid = "No,fName,fSex,fTel,fBirthday,fLike";<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var labels = "No.,姓名,性别,电话,出生日期,爱好";<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var datatype ="ro,string,string,string,datetime,string";<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var labelwidth = "40,80,60,80,80,80";<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var dataAction = {<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&quot;queryAction&quot; : &quot;getGridAction&quot;,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&quot;savAction&quot; : &quot;saveAction&quot;,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&quot;deleteAction&quot; : &quot;deleteAction&quot;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	};<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;);
+</div>
+	<br/>
+ <div class="tab_head">&nbsp;Field Detail</div>
+ <div>
+ 	{string}select<a name="justep_yn_tree_select"></a><br/>
+ 	<B>[attribute]</B>表格下拉选择<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var datatype ="ro,select:test1,string,string,datetime,string";<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//定义grid的数据类型select:test1(select:下拉选择框的ID)<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//实现grid编辑状态下该列的下拉选择<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;select id=&quot;test1&quot; style=&quot;display:none;width:100%&quot;&gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;option value=&quot;男&quot;&gt;男&lt;/option&gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;option value=&quot;女&quot;&gt;女&lt;/option&gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;/select&gt;<br/>
+    <br/>
+	<hr/>
+</div>
+<div>
+ 	{string}button<a name="justep_yn_tree_button"></a><br/>
+ 	<B>[attribute]</B>单元格按钮<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var datatype ="button:btnAction";<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//button:action为按钮类型（action为点击按钮时的动作 类型为js function）<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//实现grid编辑状态下单元格按钮触发事件<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function btnAction(){<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//单元格按钮事件写在这里<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	}<br/>
+    <br/>
+	<hr/>
+</div>
+<div>
+ 	{string}CurrentPage<a name="CurrentPage"></a><br/>
+ 	<B>[attribute]</B>当前页码<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var page = maingrid.grid.CurrentPage;<br/>
+    <br/>
+	<hr/>
+</div>
+<div>
+ 	{string}billfilter<a name="billfilter"></a><br/>
+ 	<B>[attribute]</B>grid过滤条件<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var billfilter = maingrid.grid.billfilter;<br/>
+    <br/>
+	<hr/>
+</div>
+<div>
+ 	{string}CurrentRowId<a name="justep_yn_tree_CurrentRowId"></a><br/>
+ 	<B>[attribute]</B>当前行ID<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var currentId = maingrid.grid.CurrentRowId;<br/>
+    <br/>
+	<hr/>
+</div>
+<div>
+ 	{string}checkedRowIds<a name="justep_yn_tree_checkedRowIds"></a><br/>
+ 	<B>[attribute]</B>所有选中行的ID<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var mSelIds = maingrid.grid.checkedRowIds;<br/>
+    <br/>
+	<hr/>
+</div>
+<div class="tab_head">&nbsp;Method Detail </div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_settoolbar"></a> settoolbar(insertItem, saveItem, refreshItem, deleteItem)<br/>
+	设置表格工具栏<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>insertItem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<b>[required]</b>新增<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>saveItem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<b>[required]</b>保存<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>refreshItem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<b>[required]</b>刷新<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>deleteItem</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<b>[required]</b>删除<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;deatail_0&quot; width=&quot;100%&quot; / &gt;
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var det = document.getElementById("deatail_0");
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;);
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	maingrid.grid.settoolbar(false, false, true, false);<br/>
+	<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	重写新增事件<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	document.getElementById(det.id + &quot;_insertItem&quot;).onclick = function(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;	
+	//你的自定义新增事件写在这里<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	};<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	重写保存事件
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	document.getElementById(det.id + &quot;_saveItem&quot;).onclick = function(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;	
+	//你的自定义保存事件写在这里<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	};<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	重写刷新事件<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	document.getElementById(det.id + &quot;_refreshItem&quot;).onclick = function(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;	
+	//你的自定义刷新事件写在这里<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	};<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	重写删除事件<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	document.getElementById(det.id + &quot;_deleteItem&quot;).onclick = function(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	&nbsp;&nbsp;	
+	//你的自定义删除事件写在这里<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	
+	};<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_setValueByName"></a> setValueByName(name, param, value)<br/>
+	根据列名设置值 后面的param参数可以是rowid 也可以是index<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>name</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<b>[required]</b>列名<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>param</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<b>[required]</b>行ID/行号<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>value</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<b>[required]</b>值<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;);
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	maingrid.grid.setValueByName(&quot;fName&quot;, &quot;6307123710684606509L&quot;, &quot;张三&quot;);<br/>
+	<hr/>
+</div>
+<div>
+	string&nbsp;<a name="justep_yn_grid_getValueByName"></a> getValueByName(name, param)<br/>
+	根据列名获取值 后面的参数可以是rowid 也可以是index<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>name</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<b>[required]</b>列名<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>param</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<b>[required]</b>行ID/行号<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;);
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var value=maingrid.grid.getValueByName(&quot;fName&quot;, &quot;6307123710684606509L&quot;);<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_griddbclick"></a> griddbclick(event)<br/>
+	行双击（非编辑状态）<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>event</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{object}<b>[required]</b>回调对象<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;cusomerSurvey-grid-view&quot; ondbclick=&quot;griddbclick&quot; / &gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//在显示Grid的Div中注册grid的行双击事件（事件名不加括号）<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;);
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function griddbclick(event){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var rowid = event.CurrentRowId;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.portal.openWindow(&quot;客户信息详细&quot;,&quot;/JBIZ/TMJCRM/custormer/create-<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	customer-info.html?rowid=&quot;+rowid);<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	}<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_refreshData"></a> refreshData(filter, isconfirm)<br/>
+	刷新表格<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	filter<br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}过滤条件<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;isconfirm<br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}刷新是否提示true|false&lt;默认true&gt;<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;);
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var filter=&quot;FCUSTORMERNAME like '%&quot;+trim(srFCUSTORMERNAME)+&quot;%' &quot;;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	maingrid.grid.refreshData(filter);<br/>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="justep_yn_grid_seteditModel"></a> seteditModel(editModel)<br/>
+	设置表格是否可编辑<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;editModel<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}编辑状态 true, false <br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;currentgrid.seteditModel(true); //设置为可编辑 <br/>
+	</p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="justep_yn_grid_saveData"></a> saveData(event, gridsavecalback)<br/>
+	表格数据保存<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+	<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;event<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Event}<br/>
+	<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;gridsavecalback<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  {function}保存后回调函数 <br/>
+	  <br/>
+&nbsp;&nbsp;
+	  <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  {void}<br/>
+	  <br/>
+&nbsp;&nbsp;
+	  <b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  maingrid.grid.saveData();<br/>
+	  <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="justep_yn_grid_insertData"></a> insertData(num_d)<br/>
+	新增数据行<br/>
+	<br/>
+    &nbsp;&nbsp; <b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;num_d<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  {boolean}true向下新增|false向上新增&nbsp;	</p>
+	<p>&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	maingrid.grid.insertData();<br/>
+	<br/>
+	</p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="justep_yn_grid_deleteData"></a> deleteData(deleteRowID, isConfirm, isRefresh)<br/>
+	删除选中行</p>
+	<p><br/>
+	  <b> &nbsp;&nbsp;Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;deleteRowID<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}需要删除的行ID<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;isConfirm<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}删除提示true|false&lt;默认true&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;deleteRowID<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}删除后刷新数据 true|false&lt;默认false&gt;	<br/>
+    <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	maingrid.grid.deleteData();<br/>
+	<br/>
+	</p>
+	<hr/>
+</div>
+<div>
+	number&nbsp;<a name="justep_yn_grid_getLength"></a> getLength()<br/>
+	获取grid总行数<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{number}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;);
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var num=maingrid.grid.getLength();<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_setExcelexpBar"></a> setExcelexpBar(param)<br/>
+	设置Excel导出<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>param</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<b>[required]</b>是否从Excel导出<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;);
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	maingrid.grid.setExcelexpBar(true);<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="justep_yn_grid_setExcelimpBar"></a> setExcelimpBar(param)<br/>
+	设置Excel导入（导入的Excel结构和grid的结构一样）<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>param</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<b>[required]</b>是否从Excel导入<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	maingrid.grid.setExcelimpBar(true);</p>
+	<b style="color:#FF0000;">注：当设置为true时，需要配置<a href="impConfirm.xml.htm">impConfirm.xml</a><br/>
+	将impConfirm.xml文件放在功能html文件同目录下，然后根据功能具体情况配置impConfirm.xml文件。	</b>
+      <br/>
+  </p>
+  
+  <hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_onselected"></a> onselected()<br/>
+	行单击事件<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;div_custormerSurvey_problem&quot; onselected='selectedItem()'&gt;&lt;/div&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//在显示Grid的Div中注册grid的行选中事件<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function selectedItem(){<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		//你的grid行选中事件写在这里<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	}
+	<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	string&nbsp;<a name="justep_yn_grid_getCurrentRowId"></a> getCurrentRowId()<br/>
+	获取当前行ID<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var currentRowId=maingrid.grid.getCurrentRowId();<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	string&nbsp;<a name="justep_yn_grid_getRowId"></a> getRowId(index)<br/>
+	获取指定行的ID<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>index</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{number}<b>[required]</b>行号<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var rowId=maingrid.grid.getRowId(2);<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	string&nbsp;<a name="justep_yn_grid_getIndex"></a> getIndex(cId)<br/>
+	获取指定行的行号<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>index</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{cId}<b>[required]</b>行ID<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var rowId=maingrid.grid.getIndex(&quot;dsfkjdhslfjlkdsjf&quot;);<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	string&nbsp;<a name="justep_yn_grid_getCheckedRowIds"></a> getCheckedRowIds()<br/>
+	获取选中行的ID<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var checkedIds=maingrid.grid.getCheckedRowIds();<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="justep_yn_grid_insertSelfBar"></a> insertSelfBar(label, width, action, img)<br/>
+	自定义按钮<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>label</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>标题<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>width</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{number}<b>[required]</b>宽度<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>action</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>动作(js函数)<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>img</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>图片的地址<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	maingrid.grid.insertSelfBar(&quot;重置密码&quot;,&quot;30px&quot;,&quot;resetPassword()&quot;,<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&quot;../../comon/image/toolbar/action/enable.gif&quot;);</p>
+	<p>另：工具条扩展：document.getElementById('&quot;+div.id+&quot;-grid-item').innerHTML = &quot;&quot;;嵌入自定义工具条内容<br>
+* // 自定义按钮{标题，宽度,动作(js 函数)，图片}<br/>
+      <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	number&nbsp;<a name="justep_yn_grid_getgridRelationIndex"></a> getgridRelationIndex(relation)<br/>
+    根据列名获取列的序号<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>relation</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{number}<b>[required]</b>查询的列名<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{number}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var index=maingrid.grid.getgridRelationIndex(&quot;sName&quot;);<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_setrowState"></a> setrowState(rowid, state)<br/>
+    设置某行状态<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>rowid</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{number}<b>[required]</b>行ID<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>state</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{number}<b>[required]</b>状态（&quot;readonly&quot;）<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	maingrid.grid.setrowState(&quot;readonly&quot;);<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_addFooterrow"></a> addFooterrow(cells)<br/>
+    添加统计行<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>cells</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	{string}<b>[required]</b>统计行插入的内容，单元格跨行加“:colspan(1)”<br/>
+	  <br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	maingrid.grid.addFooterrow(&quot;&lt;div&gt;合计&lt;/div&gt;:colspan(3),ddd,eee,fff,ggg,hhh,iii,jjj&quot;);<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_setRequired"></a> setRequired(cellName)<br/>
+    设置单元格必填<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>cellName</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	{string}<b>[required]</b>需要设置必填的列名，多个用逗号分隔<br/>
+	  <br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	maingrid.grid.setRequired(&quot;fName&quot;)<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_setSql"></a> setSQL(sql)<br/>
+    设置单元格必填<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;sql<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	{string}<b>grid数据加载使用的sql语句 </b>查询动作为getGridActionBySQL时使用<br/>
+	
+	  <br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var dataAction = {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;queryAction&quot; : &quot;getGridActionBySQL&quot;,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;savAction&quot; : &quot;&quot;,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&quot;deleteAction&quot; : &quot;&quot;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;};//<b>sql形式的列表作为数据报表使用，数据不能提交。</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var maingrid = new tlv8.createGrid(det, labelid, labels, labelwidth,<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	dataAction, &quot;100%&quot;, &quot;100%&quot;, data, 10,&quot;&quot;,&quot;&quot;,&quot;&quot;,datatype,&quot;false&quot;,&quot;true&quot;); <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	maingrid.grid.setRequired(&quot;fName&quot;)<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_beforeInsert"></a> beforeInsert()<br/>
+    插入前执行的动作,在显示grid的div中注册<br/>
+	  <br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;impTest&quot; beforeInsert=&quot;bInsert&quot;&gt;&lt;/div&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function  bInsert(){<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	//自定义插入前动作写在这里<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_afterInert"></a> afterInert()<br/>
+    插入后执行的动作,在显示grid的div中注册<br/>
+	  <br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;impTest&quot; afterInert=&quot;fInsert&quot;&gt;&lt;/div&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function  fInsert(){<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	//自定义插入后动作写在这里<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_beforeSave"></a> beforeSave()<br/>
+    保存前执行的动作,在显示grid的div中注册<br/>
+	  <br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;impTest&quot; beforeSave=&quot;bSave&quot;&gt;&lt;/div&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function  bSave(){<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	//自定义保存前动作写在这里<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_afterSave"></a> afterSave()<br/>
+    保存后执行的动作,在显示grid的div中注册<br/>
+	  <br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;impTest&quot; afterSave=&quot;fSave&quot;&gt;&lt;/div&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function  fSave(){<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	//自定义保存后动作写在这里<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_beforeDelete"></a> beforeDelete()<br/>
+    删除前执行的动作,在显示grid的div中注册<br/>
+	  <br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;impTest&quot; beforeDelete=&quot;bDelete&quot;&gt;&lt;/div&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function  bDelete(){<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	//自定义删除前动作写在这里<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_afterDelete"></a> afterDelete()<br/>
+    删除后执行的动作,在显示grid的div中注册<br/>
+	  <br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;impTest&quot; afterDelete=&quot;fDelete&quot;&gt;&lt;/div&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function  fDelete(){<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	//自定义删除后动作写在这里<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_afterRefresh"></a> afterRefresh()<br/>
+    刷新后执行的动作,在显示grid的div中注册<br/>
+	  <br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;impTest&quot; afterRefresh=&quot;fRefresh&quot;&gt;&lt;/div&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function  fRefresh(){<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	//自定义刷新后动作写在这里<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	void&nbsp;<a name="justep_yn_grid_beforeRefresh"></a> beforeRefresh()<br/>
+    刷新前执行的动作,在显示grid的div中注册<br/>
+	  <br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;impTest&quot; beforeRefresh=&quot;bRefresh&quot;&gt;&lt;/div&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function  bRefresh(){<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	//自定义刷新前动作写在这里<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="onRowInit" id="onRowInit"></a> onRowInit<br/>
+    刷新前执行的动作,在显示grid的div中注册<br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;impTest&quot; onRowInit=&quot;onRowInitFunction&quot;&gt;&lt;/div&gt;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function  bRefresh(){<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	//自定义刷新前动作写在这里<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+  }</p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>function onRowInitFunction(cgrid,rowObj){</p>
+	<p>//cgrid当前grid对象</p>
+	<p>//rowObj当前行对象</p>
+	<p>}</p>
+	<p>&lt;/script&gt; <br/>
+      <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="getgridRelationIndex" id="getgridRelationIndex"></a> getgridRelationIndex(relationName)<br/>
+  刷新前执行的动作,在显示grid的div中注册</p>
+	<p><b>&nbsp;&nbsp; Parameters:</b>relationName 列名<br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {number}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>document.getElementById(&quot;gridID&quot;).grid.getgridRelationIndex(&quot;fName&quot;);</p>
+	<p>&lt;/script&gt; <br/>
+      <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="quickSearch" id="quickSearch"></a> quickSearch(text)<br/>
+  快速查询</p>
+	<p><b>&nbsp;&nbsp; Parameters:</b> text 模糊查询的内容<br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>document.getElementById(&quot;gridID&quot;).grid.quickSearch(&quot;test&quot;);</p>
+	<p>&lt;/script&gt; <br/>
+      <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="checkAll" id="checkAll"></a> checkAll()<br/>
+	  全部选中
+  </p>
+	<p><b>&nbsp;&nbsp; Parameters:</b><br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>document.getElementById(&quot;gridID&quot;).grid.checkAll();</p>
+	<p>&lt;/script&gt; <br/>
+      <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="uncheckAll" id="uncheckAll"></a> uncheckAll()<br/>
+  全部取消选中</p>
+	<p><b>&nbsp;&nbsp; Parameters:</b><br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>document.getElementById(&quot;gridID&quot;).grid.uncheckAll();</p>
+	<p>&lt;/script&gt; <br/>
+      <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="dataValueChanged" id="dataValueChanged"></a> dataValueChanged<br/>
+	  值改变事件
+  </p>
+	<p><b>&nbsp;&nbsp; Parameters:</b><br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {event}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&lt;div id=&quot;gridID&quot;dataValueChanged=&quot;dataValueChangedAction&quot;&gt;</p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>function dataValueChangedAction(event){</p>
+	<p>//event.olddata //改变前的值</p>
+	<p>//event.newdata //改变后的值</p>
+	<p>//event.cellname //值改变的列名</p>
+	<p>//event.obj //值改变的列(TD)对象</p>
+	<p>//event.rowid //值改变的行id</p>
+	<p>event非grid对象</p>
+	<p>}</p>
+	<p>&lt;/script&gt; <br/>
+      <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="onchecked" id="onchecked"></a> onchecked<br/>
+	  多选选择事件
+  </p>
+	<p><b>&nbsp;&nbsp; Parameters:</b><br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {event}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&lt;div id=&quot;gridID&quot; onchecked=&quot;gridonchecked&quot;&gt;</p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>function gridonchecked(event){</p>
+	<p>//event.checked //是否选中</p>
+	<p>//event.rowid //选择的行id</p>
+	<p>event包含grid的全部方法 可以操作当前gird</p>
+	<p>}</p>
+	<p>&lt;/script&gt; <br/>
+      <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="oncheckAll" id="oncheckAll"></a> oncheckAll<br/>
+  全选事件</p>
+	<p><b>&nbsp;&nbsp; Parameters:</b><br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {event}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&lt;div id=&quot;gridID&quot;oncheckAll=&quot;gridoncheckAll&quot;&gt;</p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>function gridoncheckAll(event){</p>
+	<p>//event.checked //是否选中</p>
+	<p>//event.RowId //grid所有行的id数组</p>
+	<p>event包含grid的全部方法 可以操作当前gird</p>
+	<p>}</p>
+	<p>&lt;/script&gt; </p>
+	<p><br/>
+	  <br/>
+    </p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="onuncheckAll" id="onuncheckAll"></a> onuncheckAll<br/>
+  全选事件</p>
+	<p><b>&nbsp;&nbsp; Parameters:</b><br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {event}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&lt;div id=&quot;gridID&quot;onuncheckAll=&quot;gridonuncheckAll&quot;&gt;</p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>function gridonuncheckAll(event){</p>
+	<p>//event.checked //是否选中</p>
+	<p>//event.RowId //grid所有行的id数组</p>
+	<p>event包含grid的全部方法 可以操作当前gird</p>
+	<p>}</p>
+	<p>&lt;/script&gt; </p>
+	<p><br/>
+	  <br/>
+    </p>
+	<hr/>
+</div>
+<div>
+	<p>string&nbsp;<a name=".fixTable" id=".fixTable"></a> fixTable<br/>
+  查找关系值对应的行ID</p>
+	<p><b>&nbsp;&nbsp; Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fixColumn: 锁定列<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;fixColumnBack: 锁定列的背景<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;width: 显示宽度<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;height: 显示高度<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;} <br/>
+&nbsp;&nbsp;
+	  <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void} <br/>
+	  <br/>
+&nbsp;&nbsp;
+	  <b>Example:</b>
+  </p>
+	</p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>$(&quot;#&quot;+div.id+&quot;_grid_label&quot;).fixTable({<br>
+fixColumn: grid.fixColumn || 0,// 固定列数<br>
+fixColumnBack: grid.fixColumnBack || &quot;#ccc&quot;,// 固定列数<br>
+width:  $(&quot;#&quot;+div.id+&quot;_body_layout&quot;).width(),// 显示宽度<br>
+height: $(&quot;#&quot;+div.id+&quot;_body_layout&quot;).height()// 显示高度<br>
+});</p>
+	<p>&lt;/script&gt; </p>
+	<p><br/>
+	  <br/>
+    </p>
+	<hr/>
+</div>
+<div>
+	<p>string&nbsp;<a name="locate" id="locate"></a>locate<br/>
+  查找关系值对应的行ID</p>
+	<p><b>&nbsp;&nbsp; Parameters:</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;relation 查找字段<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;value 查找的值<br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {rowid} 返回字段值对应的行id没有查到时返回“”；空字符串值<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>var cvRowId = document.getElementById(&quot;gridID&quot;).grid.locate(&quot;fCode&quot;,&quot;TEST&quot;);</p>
+	<p>&lt;/script&gt; </p>
+	<p><br/>
+	  <br/>
+    </p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="setStaticFilter" id="setStaticFilter"></a>setFixColumn<br/>
+  设置静态过滤条件</p>
+	<p><b>&nbsp;&nbsp; Parameters:</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;num 指定锁定的列数<br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;<br><br>
+currentgrid.setFixColumn(3);</p>
+	<p>currentgrid.setFixColumnBack(&quot;#eee&quot;);//设置锁定列的背景颜色</p>
+	<p>&lt;/script&gt;<br/>
+	  <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void&nbsp;<a name="setStaticFilter" id="setStaticFilter"></a>setStaticFilter<br/>
+  设置静态过滤条件</p>
+	<p><b>&nbsp;&nbsp; Parameters:</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;filter 过滤条件<br/>
+	  <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b></p>
+	<p>&lt;script type=&quot;text/javascript&quot;&gt;</p>
+	<p>var filter = &quot;(SORGID = '&quot; + treeNode.id<br>
++ &quot;' and (SPERSONID is null or SPERSONID='')) or(&quot;<br>
++ &quot; SPERSONID = '&quot; + treeNode.id + &quot;')&quot;;<br>
+currentgrid.setStaticFilter(filter);</p>
+	<p>&lt;/script&gt; </p>
+	<p>此方法设置的过滤条件不会被刷新条件冲掉，有静态过滤条件时，刷新条件和静态过滤条件同时生效。</p>
+	<p>setStaticFilter(filter);并非初始化方法，可根据业务需求改变静态过滤条件。<br/>
+	  <br/>
+  </p>
+	<hr/>
+</div>
+</body>
+</html>

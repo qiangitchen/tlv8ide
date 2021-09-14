@@ -44,10 +44,10 @@ import org.eclipse.ui.PlatformUI;
 import com.tulin.v8.core.Configuration;
 import com.tulin.v8.core.DBUtils;
 import com.tulin.v8.core.StringArray;
+import com.tulin.v8.core.Sys;
+import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.echarts.ui.wizards.Messages;
-import com.tulin.v8.ide.StudioPlugin;
-import com.tulin.v8.ide.Sys;
 
 public class ChartOptionPage extends WizardPage {
 	private String dbkey = null;
@@ -224,7 +224,7 @@ public class ChartOptionPage extends WizardPage {
 						for (int i = 0; i < columnlist.size(); i++) {
 							TreeItem cellitem = new TreeItem(item, SWT.NONE);
 							cellitem.setText(columnlist.get(i));
-							cellitem.setImage(StudioPlugin.getIcon("column.gif"));
+							cellitem.setImage(TuLinPlugin.getIcon("column.gif"));
 						}
 						item.setExpanded(true);
 					} catch (Exception e1) {
@@ -383,14 +383,14 @@ public class ChartOptionPage extends WizardPage {
 		for (int i = 0; i < litable.size(); i++) {
 			TreeItem treeitem = new TreeItem(root1, SWT.NONE);
 			treeitem.setText(litable.get(i));
-			treeitem.setImage(StudioPlugin.getIcon("table.gif"));
+			treeitem.setImage(TuLinPlugin.getIcon("table.gif"));
 		}
 		root2.removeAll();
 		List<String> liview = TreeitemData.get("VIEW");
 		for (int i = 0; i < liview.size(); i++) {
 			TreeItem treeitem = new TreeItem(root2, SWT.NONE);
 			treeitem.setText(liview.get(i));
-			treeitem.setImage(StudioPlugin.getIcon("view.gif"));
+			treeitem.setImage(TuLinPlugin.getIcon("view.gif"));
 		}
 	}
 

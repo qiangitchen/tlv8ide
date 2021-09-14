@@ -1,0 +1,710 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>tlv8.Data</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+
+<body>
+<font size="5px"><b>Class tlv8.Data</b></font><br/>
+Data基础数据对象<br/> 
+<br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151">&nbsp;</td>
+    <td width="583">
+	<a href="#justep_yn_Data">tlv8.Data()</a><br/>
+	Data基础数据对象
+	</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setOrderby">setOrderby(ob)</a><br/>
+	排序</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setFilter">setFilter(fil)</a><br/>
+	过滤条件</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setCascade">setCascade(cas)</a><br/>
+	 级联删除{表名:外键,表名:外键。。。}</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setRowId">setRowId(id)</a><br/>
+    主键</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setDbkey">setDbkey(k)</a><br/>
+    数据库连接</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setSaveAction">setSaveAction(a)</a><br/>
+    保存动作</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setFormId">setFormId(s)</a><br/>
+    表单id</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setTable">setTable(t)</a><br/>
+    数据库表名</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setCells">setCells(cell)</a><br/>
+    列值</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> boolean &nbsp;</td>
+    <td width="528"><a href="#justep_yn_saveData">saveData()</a><br/>
+    保存</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setDeleteAction">setDeleteAction(del)</a><br/>
+    设置删除动作</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> boolean &nbsp;</td>
+    <td width="528"><a href="#justep_yn_deleteData">deleteData()</a><br/>
+    删除</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_refreshData">refreshData()</a><br/>
+    刷新</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setData">setData(data)</a><br/>
+    设置数据</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setReadonly">setReadonly(boolean)</a><br/>
+    设置整条数据为只读</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setonDataValueChanged">setonDataValueChanged(fn)</a><br/>
+    设置值改变事件</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left"> string &nbsp;</td>
+    <td width="528"><a href="#justep_yn_getValueByName">getValueByName(name)</a><br/>
+    获取指定字段的值</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left"> void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_setValueByName">setValueByName(name,value)</a><br/>
+    设置指定字段的值</td>
+  </tr>
+</table>
+<p>&nbsp;</p>
+ <table >
+   <tr>
+     <td colspan="2" class="tab_head">&nbsp;Event Summary</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_beforeSave">beforeSave</a><br/>
+     保存数据之前事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_afterSave">afterSave</a><br/>
+     保存事件之后事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_beforeDelete">beforeDelete</a><br/>
+     删除数据之前事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_afterDelete">afterDelete</a><br/>
+     删除数据之后事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_beforeRefresh">beforeRefresh</a><br/>
+     刷新数据之前事件</td>
+   </tr>
+   <tr>
+     <td class="td_left">&nbsp;</td>
+     <td><a href="#justep_yn_afterRefresh">afterRefresh</a><br/>
+     刷新数据之后事件</td>
+   </tr>
+ </table>
+ <p>&nbsp;</p>
+ <br/>
+  <div class="tab_head">&nbsp;C<a name="justep_yn_Data"></a>lass Detail </div>
+  Data()<br/>
+	Data基础数据对象<br/>
+	<br/>
+<div class="tab_head">&nbsp;Method Detail </div>
+<div>
+    void&nbsp;<a name="justep_yn_setOrderby"></a> setOrderby(ob)<br/>
+	排序<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>ob</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>排序规则<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var data = new tlv8.Data();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.setOrderby(&quot;FCREATETIME desc&quot;);<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+    void&nbsp;<a name="justep_yn_setFilter"></a> setFilter(fil)<br/>
+	过滤<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>fil</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>过滤条件<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var data = new tlv8.Data();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.setFilter(&quot;fid='813379027157379300L'&quot;);<br/>
+	<br/>
+	<hr/>
+  void&nbsp;<a name="justep_yn_setCascade"></a> setCascade(cas)<br/>
+	级联删除{表名:外键,表名:外键。。。}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>cas</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {string}<b>[required]</b>{表名:外键,表名:外键。。。}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var data = new tlv8.Data();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.setCascade(&quot;TMJ_ALREADYBUY_MATINFO:fBillID&quot;);<br/>
+	<br/>
+</div>
+<div>
+  <hr/>
+  void&nbsp;<a name="justep_yn_setRowId"></a> setRowId(id)<br/>
+	主键<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>id</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {string}<b>[required]</b>主键<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var data = new tlv8.Data();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var rowid = document.getElementById(表单ID).rowid;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; data.setRowId(rowid);<br/>
+	<br/>
+</div>
+<div>
+  <hr/>
+  void&nbsp;<a name="justep_yn_setDbkey"></a> setDbkey(k)<br/>
+	数据库连接<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>k</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {string}<b>[required]</b>数据库连接<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var data = new tlv8.Data();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.setDbkey(&quot;tmjcrm&quot;);<br/>
+	<br/>
+</div>
+<div>
+  <hr/>
+  void&nbsp;<a name="justep_yn_setSaveAction"></a> setSaveAction(a)<br/>
+	保存动作<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>a</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {string}<b>[required]</b>保存动作<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var data = new tlv8.Data();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.setSaveAction(&quot;saveAction&quot;);<br/>
+	<br/>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  void&nbsp;<a name="justep_yn_setFormId"></a> setFormId(s)<br/>
+	表单ID<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>s</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {string}<b>[required]</b>表单ID<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var data = new tlv8.Data();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.setFormId(&quot;tmj_customer_info&quot;);<br/>
+	<br/>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  void&nbsp;<a name="justep_yn_setTable"></a> setTable(t)<br/>
+	数据库表名<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	<strong>t</strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {string}<b>[required]</b>数据库表名<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var data = new tlv8.Data();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.setTable(&quot;TMJ_CUSTOMER_INFO&quot;);<br/>
+	<br/>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  void&nbsp;<a name="justep_yn_setCells"></a> setCells(cell)<br/>
+	数据库列名<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;	<strong>t</strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {<a href="Map.htm">Map</a>}<b>[required]</b>数据库列名<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var data = new tlv8.Data();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var cell=new Map();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	cell.put("a","a");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	cell.put("b","b");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.setCells(cell);<br/>
+	<br/>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  void&nbsp;<a name="justep_yn_saveData"></a> saveData()<br/>
+	保存<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var data = new tlv8.Data();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.saveData();<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+  void&nbsp;<a name="justep_yn_refreshData"></a> refreshData()<br/>
+	刷新<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var data = new tlv8.Data();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.refreshData();<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+  void&nbsp;<a name="justep_yn_setData"></a> setData(data)<br/>
+	设置数据<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;	<strong>data</strong><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {data对象}<b>[required]</b>服务器返回的数据对象<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var data = new tlv8.Data();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	data.setData(xmlHttp.responseText);<br/>
+	<br/>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  <p>void&nbsp;<a name="justep_yn_setReadonly" id="justep_yn_setReadonly"></a> setReadonly(boolean)<br/>
+	设置数据<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<strong>boolean</strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {逻辑值}<b>[required]</b>true 或 false <br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var data = new tlv8.Data();<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  data.setReadonly(true); true为设置为只读 false为取消只读</p>
+  <p><br/>
+    <br/>
+  </p>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  <p>void&nbsp;<a name="justep_yn_setReadonly" id="justep_yn_setonDataValueChanged"></a> setonDataValueChanged(fn)<br/>
+	设置值改变事件<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;fn<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {function}<b>[required]</b><br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;function dataAS_MENDRECORD_Changed(event, id, value, type) {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;//event:dom事件，id:值改变的列id，改变后的值，type:当前列的类型如：text，select等。<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(value);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var dataAS_MENDRECORD = new tlv8.Data();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataAS_MENDRECORD.setTable(&quot;AS_MENDRECORD&quot;);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataAS_MENDRECORD.setDbkey(&quot;dysam&quot;);&nbsp;&nbsp;&nbsp;&nbsp;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataAS_MENDRECORD.setonDataValueChanged(dataAS_MENDRECORD_Changed);</p>
+  <p><br/>
+    <br/>
+  </p>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  <p>string&nbsp;<a name="justep_yn_getValueByName" id="justep_yn_setonDataValueChanged"></a> getValueByName(name)<br/>
+	设置值改变事件<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {function}<b>[required]</b> 字段(页面字段)<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {string}对应字段的值<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var dataAS_MENDRECORD = new tlv8.Data();<br>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataAS_MENDRECORD.setTable(&quot;AS_MENDRECORD&quot;);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataAS_MENDRECORD.setDbkey(&quot;dysam&quot;);&nbsp;&nbsp;&nbsp;&nbsp;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var phone = dataAS_MENDRECORD.getValueByName(&quot;fRBUYERPHONE&quot;);</p>
+  <p><br/>
+    <br/>
+  </p>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  <p>void&nbsp;<a name="justep_yn_setValueByName" id="justep_yn_setonDataValueChanged"></a> setValueByName(name,value)<br/>
+	设置值改变事件<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;name<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {string}<b>[required]</b>字段(页面字段)<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;value<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {string}<b>[required]</b>需要赋予的值<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; </p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var dataAS_MENDRECORD = new tlv8.Data();<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataAS_MENDRECORD.setTable(&quot;AS_MENDRECORD&quot;);<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;dataAS_MENDRECORD.setDbkey(&quot;dysam&quot;);&nbsp;&nbsp;&nbsp;&nbsp;<br>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;var phone = dataAS_MENDRECORD.setValueByName(&quot;fRBUYERPHONE&quot;,111111);</p>
+  <p><br/>
+    <br/>
+  </p>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  <p>string&nbsp;<a name="justep_yn_beforeSave" id="justep_yn_beforeSave"></a> beforeSave(event)<br/>
+	保存前执行的动作<br/>
+	<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;form id=&quot;MAIN_DATA_FORM&quot; beforeSave=&quot;bSave&quot;&gt;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    function   bSave(event){<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    //自定义保存前动作写在这里<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    }<BR>
+  </p>
+  <p><br/>
+    <br/>
+  </p>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  <p>string&nbsp;<a name="justep_yn_afterSave" id="justep_yn_afterSave"></a> afterSave(event)<br/>
+    保存后执行的动作<br/>
+	<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;form id=&quot;MAIN_DATA_FORM&quot; afterSave=&quot;afSave&quot;&gt;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    function   afSave(event,result){<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    //自定义保存后动作写在这里
+    <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    }<BR>
+  </p>
+  <p><br/>
+    <br/>
+  </p>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  <p>string&nbsp;<a name="justep_yn_beforeDelete" id="justep_yn_beforeDelete"></a> beforeDelete(event)<br/>
+    删除前执行的动作<br/>
+	<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;form id=&quot;MAIN_DATA_FORM&quot; beforeDelete=&quot;bDelete&quot;&gt;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    function   bDelete(event){<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    //自定义删除前动作写在这里
+    <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    }<BR>
+  </p>
+  <p><br/>
+    <br/>
+  </p>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  <p>string&nbsp;<a name="justep_yn_afterDelete" id="justep_yn_afterDelete"></a> afterDelete(event)<br/>
+    删除后执行的动作<br/>
+	<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;form id=&quot;MAIN_DATA_FORM&quot; afterDelete=&quot;afDelete&quot;&gt;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    function   afDelete(event){<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    //自定义删除后动作写在这里
+    <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    }<BR>
+  </p>
+  <p><br/>
+    <br/>
+  </p>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  <p>string&nbsp;<a name="justep_yn_afterRefresh" id="justep_yn_afterRefresh"></a> afterRefresh(event)<br/>
+    刷新后执行的动作<br/>
+	<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;form id=&quot;MAIN_DATA_FORM&quot; afterRefresh=&quot;afRefresh&quot;&gt;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    function   afRefresh(event){<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    //自定义刷新后动作写在这里
+    <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    }<BR>
+  </p>
+  <p><br/>
+    <br/>
+  </p>
+</div>
+<div>
+  <hr/>
+</div>
+<div>
+  <p>string&nbsp;<a name="justep_yn_beforeRefresh" id="justep_yn_beforeRefresh"></a> beforeRefresh(event)<br/>
+    刷新前执行的动作<br/>
+	<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; {void}<br/>
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;  </p>
+  <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&lt;form id=&quot;MAIN_DATA_FORM&quot; beforeRefresh=&quot;afRefresh&quot;&gt;<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    function   afRefresh(event){<BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    //自定义刷新前动作写在这里
+    <BR>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+    }<BR>
+  </p>
+  <p><br/>
+    <br/>
+  </p>
+</div>
+</body>
+</html>

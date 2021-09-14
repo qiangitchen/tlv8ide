@@ -1,0 +1,30 @@
+<html>
+	<head>
+		<meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+		<title>YJTemplet_page.html</title>
+		<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/default/easyui.css" />
+		<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/icon.css" />
+		<link type="text/css" rel="stylesheet" href="/tlv8/comon/css/zTreeStyle/zTreeStyle.css"></link>
+		<script type="text/javascript" src="/tlv8/comon/js/jquery/jquery.min.js"></script>
+	  	<script type="text/javascript" src="/tlv8/comon/js/jquery/jquery.ztree.core-3.1.js"></script>
+	  	<script type="text/javascript" src="/tlv8/comon/js/jquery/jquery.ztree.excheck-3.1.js"></script>
+		<script type="text/javascript" src="/tlv8/comon/js/comon.main.js"></script>
+		<script type="text/javascript" src="/tlv8/comon/js/grid.main.js"></script>
+		<script type="text/javascript" src="/tlv8/comon/jTree/tree.main.js"></script>
+		<script type="text/javascript" src="/tlv8/resources/jquery-easyui/jquery.easyui.min.js"></script>
+		<script type="text/javascript" src="/tlv8/resources/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+		<script type="text/javascript" src="YJTemplet_page.js"></script>
+	</head>
+	<body onload="getDatagrid()">
+		<div class="easyui-layout" fit="true">
+			<div data-options="region:'west',title:'树',split:true" style="width:200px;overflow:auto;">
+				<ul id="JtreeView" class="ztree"></ul>
+			</div>
+			<div data-options="region:'center',title:'列表'">
+				<form id="main_data_form"></form>
+				<div component="dataGrid" id="main-grid-view" style="width: 100%; height: 100%; align: left;" afterSave="afupdate" afterDelete="afupdate">
+				</div>
+			</div>
+		</div>
+	</body>
+</html>

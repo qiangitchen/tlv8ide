@@ -111,7 +111,8 @@ public class UReportDesigner extends FormPage {
 		if (CommonUtil.isWinOS()) {
 			try {
 				if (CommonUtil.getOSVersion() >= 10) {
-					swtdesigner = new org.eclipse.swt.browser.Browser(composite, SWT.EDGE);
+					int EDGE = 1 << 18;
+					swtdesigner = new org.eclipse.swt.browser.Browser(composite, EDGE);
 				} else {
 					designer = new Browser(composite, SWT.NONE);
 				}

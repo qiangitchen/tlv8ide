@@ -107,7 +107,8 @@ public class UReportPreview extends FormPage {
 		if (CommonUtil.isWinOS()) {
 			try {
 				if (CommonUtil.getOSVersion() >= 10) {
-					swtbrowser = new org.eclipse.swt.browser.Browser(composite, SWT.EDGE);
+					int EDGE = 1 << 18;
+					swtbrowser = new org.eclipse.swt.browser.Browser(composite, EDGE);
 				} else {
 					browser = new com.equo.swt.chromium.Browser(composite, SWT.NONE);
 				}

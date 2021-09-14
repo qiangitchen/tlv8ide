@@ -15,7 +15,7 @@
          point="org.eclipse.ui.editors">
       <editor
             class="com.tulin.v8.ureport.ui.editors.designer.UReportEditor"
-            contributorClass="com.tulin.v8.ureport.ui.contributor.XMLEditorActionBarContributor"
+            contributorClass="com.tulin.v8.ureport.ui.contributor.MultiPageEditorContributor"
             extensions="ureport,ureport.xml,xml"
             filenames="*.ureport.xml"
             icon="icons/ureport.gif"

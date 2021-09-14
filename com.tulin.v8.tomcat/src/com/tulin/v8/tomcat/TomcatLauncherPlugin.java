@@ -26,6 +26,7 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -305,7 +306,7 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 	}
 	
 	public static Shell getShell() {
-		return getDefault().getWorkbench().getActiveWorkbenchWindow().getShell();
+		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	}
 	
 	static public boolean checkTomcatSettingsAndWarn() {

@@ -1,0 +1,160 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>tlv8.Radio</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+
+<body>
+<font size="5px"><b>Class tlv8.Radio</b></font><br/>
+Radio单选组件<br/> 
+<br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151" align="right">Radio</td>
+    <td width="583">
+<a href="#justep_yn_Radio">tlv8.Radio(div,item,splithtmlarray)</a><br>
+单选组件</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_Radio_onselected">onselected</a><br/>
+	获取单选组件当前选中值</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#justep_yn_Radio_setValue">setValue</a><br/>
+	设置选中值</td>
+  </tr>
+</table>
+  <br/>
+ <div class="tab_head">&nbsp;<a name="justep_yn_Radio">Class Detail</a> </div>
+ <div>
+   <p>Radio tlv8.Radio<br/>
+	Radio 单选组件<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>div</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Element div}<b>[required]</b>单选组件所属的层<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>item</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   {<a href="Map.htm">Map</a>}<b>[required]</b>单选组件的选项<br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp; <b>splithtmlarray</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Array}选项分隔标记数组 内容可以是任意html标签 如&quot;&lt;br&gt;&quot;,&quot;&nbsp;&quot; <strong>数组长度与选项个数相同</strong><br/>
+	 <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Radio}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 &lt;div id='sNameDemo' onselected='kkkk'&gt;&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var radioDemo = document.getElementById("sNameDemo");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var item = new Map();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;yes&quot;,&quot;是&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;no&quot;,&quot;否&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;normal&quot;,&quot;未知&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+   tlv8.Radio(radioDemo,item);</p>
+    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;或
+    <p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 &lt;div id='sNameDemo' onselected='kkkk'&gt;&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var radioDemo = document.getElementById("sNameDemo");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var item = new Map();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;yes&quot;,&quot;是&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;no&quot;,&quot;否&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;normal&quot;,&quot;未知&quot;); <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	var splithtmlarray = new Array();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; splithtmlarray.push(&quot;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; splithtmlarray.push(&quot;&lt;br&gt;&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; splithtmlarray.push(&quot;&lt;br&gt;&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.Radio(radioDemo,item,splithtmlarray);<br/>
+     <br/>
+   </p>
+</div>
+ <div class="tab_head">&nbsp;Method Summary</div>
+ <div>
+ 	{string}onselected<a name="justep_yn_Radio_onselected"></a><br/>
+ 	获取当前选中值<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 &lt;div id='sNameDemo' onselected='kkkk'&gt;&lt;/div&gt;<br>
+	 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var radioDemo = document.getElementById("sNameDemo");<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var item = new Map();<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;yes&quot;,&quot;是&quot;);<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;no&quot;,&quot;否&quot;);<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;normal&quot;,&quot;未知&quot;);<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.Radio(radioDemo,item);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function kkkk(value){//在DIV标签中注册的kkkk事件不能加括号<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+		alert(value);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	}
+	<br/>
+	<hr/>
+</div>
+<div>
+ 	<p>{void}setValue<a name="justep_yn_Radio_setValue" id="justep_yn_Radio_setValue"></a><br/>
+ 	获取当前选中值<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	 &lt;div id='sNameDemo' onselected='kkkk'&gt;&lt;/div&gt;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var radioDemo = document.getElementById("sNameDemo");<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var item = new Map();<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;yes&quot;,&quot;是&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;no&quot;,&quot;否&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	item.put(&quot;normal&quot;,&quot;未知&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.Radio(radioDemo,item);</p>
+ 	<p><br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;radioDemo.Radio.setValue(&quot;yes&quot;); '是'被选中 <br/>
+  </p>
+ 	<hr/>
+</div>
+</body>
+</html>

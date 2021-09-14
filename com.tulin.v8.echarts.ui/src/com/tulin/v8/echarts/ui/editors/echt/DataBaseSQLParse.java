@@ -21,7 +21,7 @@ import org.dom4j.Element;
 
 import com.tulin.v8.core.DBUtils;
 import com.tulin.v8.core.StringArray;
-import com.tulin.v8.ide.Sys;
+import com.tulin.v8.core.Sys;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class DataBaseSQLParse {

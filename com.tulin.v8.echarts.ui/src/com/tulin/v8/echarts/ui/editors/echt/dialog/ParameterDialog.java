@@ -17,8 +17,8 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.tulin.v8.core.StringArray;
+import com.tulin.v8.core.Sys;
 import com.tulin.v8.echarts.ui.editors.echt.Parameters;
-import com.tulin.v8.ide.Sys;
 
 public class ParameterDialog extends Dialog {
 	Parameters parameter;

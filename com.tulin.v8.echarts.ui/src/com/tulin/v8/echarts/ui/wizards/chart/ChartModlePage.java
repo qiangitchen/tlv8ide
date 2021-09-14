@@ -1,6 +1,6 @@
 package com.tulin.v8.echarts.ui.wizards.chart;
 
-import java.io.File;
+import java.io.InputStream;
 
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
@@ -20,7 +20,6 @@ import org.eclipse.swt.widgets.Text;
 import com.tulin.v8.core.FileAndString;
 import com.tulin.v8.core.XMLFormator;
 import com.tulin.v8.echarts.ui.wizards.Messages;
-import com.tulin.v8.ide.utils.StudioConfig;
 
 public class ChartModlePage extends WizardPage {
 	Text jdmText;
@@ -84,27 +83,18 @@ public class ChartModlePage extends WizardPage {
 		Element selectdata = getTypePage().getSelectdata();
 		modle = selectdata.attributeValue("id");
 		type = selectdata.getParent().attributeValue("label");
-		String filepath = StudioConfig.getStudioAppRootPath() + "/chartsnewizard/chartmodle/" + type + "/" + modle
-				+ ".jdm";
-		File jdmf = new File(filepath);
-		if (jdmf.exists()) {
-			return FileAndString.FileToString(filepath);
-		} else {
-			return "";
-		}
+		String filepath = "/chartsnewizard/chartmodle/" + type + "/" + modle + ".jdm";
+		InputStream input = ChartModlePage.class.getResourceAsStream(filepath);
+		return FileAndString.FileToString(input);
 	}
 
 	public String getScrtFileText() {
 		Element selectdata = getTypePage().getSelectdata();
 		modle = selectdata.attributeValue("id");
 		type = selectdata.getParent().attributeValue("label");
-		String filepath = StudioConfig.getStudioAppRootPath() + "/chartsnewizard/chartmodle/" + type + "/" + modle
-				+ ".scrt";
-		File scrtf = new File(filepath);
-		if (scrtf.exists()) {
-			return FileAndString.FileToString(filepath);
-		}
-		return null;
+		String filepath = "/chartsnewizard/chartmodle/" + type + "/" + modle + ".scrt";
+		InputStream input = ChartModlePage.class.getResourceAsStream(filepath);
+		return FileAndString.FileToString(input);
 	}
 
 	void transeDom() {

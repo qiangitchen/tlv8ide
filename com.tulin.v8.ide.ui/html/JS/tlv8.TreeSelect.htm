@@ -1,0 +1,155 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>tlv8.TreeSelect</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+
+<body>
+<font size="5px"><b>Class tlv8.TreeSelect</b></font><br/> 
+树型下拉组件
+<br/> 
+<br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151" align="right">TreeSelect&nbsp;</td>
+    <td width="583">
+	<a href="#justep_yn_TreeSelect">tlv8.TreeSelect(div,QueryAction,master)</a><br/>
+	树形下拉组件</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Field Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_GridSelect_disabled">disabled</a><br/>
+	树形下拉选择组件不可编辑</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">Element&nbsp;</td>
+    <td width="528"><a href="#justep_yn_GridSelect_onselected">onselected()</a><br/>
+	单选事件</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">Element&nbsp;</td>
+    <td width="528"><a href="#justep_yn_GridSelect_onchecked">onchecked()</a><br/>
+	多选选事件</td>
+  </tr>
+ </table>
+ <br/>
+<div class="tab_head">&nbsp;C<a name="justep_yn_TreeSelect"></a>lass Detail </div>
+<div>
+ TreeSelect tlv8.TreeSelect(div,QueryAction,master)<br/>
+	树形下拉组件<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>div</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>用于显示树的DIV标签<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>QueryAction</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>用于构建树的Action<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>master</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>是否多选<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{TreeSelect}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;tree-select-demo&quot;/&gt;</div>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var treeDiv = document.getElementById(&quot;tree-select-demo&quot;);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var Mtree = new tlv8.TreeSelect(treeDiv,'getOrgTreeInfo',true);<br/>
+<br/>
+<div class="tab_head">&nbsp;Field Detail</div>
+ <div>
+ 	{string}disabled<a name="justep_yn_GridSelect_disabled"></a><br/>
+ 	<B>[attribute]</B>列表下拉组件不可编辑<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;div id=&quot;test2&quot; onselected=&quot;thisvalue(this)&quot; disabled=&quot;true&quot;&gt;&lt;/div&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//只需要在显示树形下拉组件的div中声明 disabled=&quot;true&quot; 即可<br/>
+    <br/>
+<div class="tab_head">&nbsp;Method Detail </div>
+<div>
+	Element&nbsp;<a name="justep_yn_GridSelect_onselected"></a> onselected()<br/>
+	单选事件,在显示下拉选择组件的div中注册<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Element}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;tree-sign-select-demo&quot; onselected=&quot;treesignSelected&quot;/&gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var signtreeDiv = document.getElementById(&quot;tree-sign-select-demo&quot;);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var signMtree = new tlv8.TreeSelect(signtreeDiv,'getOrgTreeInfo',false);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function treesignSelected(element){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+	alert(element.value);//树形单选回调<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	Element&nbsp;<a name="justep_yn_GridSelect_onchecked"></a> onchecked()<br/>
+	多选事件,在显示下拉选择组件的div中注册<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Element}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	&lt;div id=&quot;tree-select-demo&quot; onchecked=&quot;treesignChecked&quot;/&gt;<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var treeDiv = document.getElementById(&quot;tree-select-demo&quot;);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	var Mtree = new tlv8.TreeSelect(treeDiv,'getOrgTreeInfo',true);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	function treesignChecked(element){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; &nbsp;&nbsp;&nbsp;&nbsp; 
+	alert(element.value);//树形多选回调<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+</div>
+</body>
+</html>

@@ -1,0 +1,278 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>_global_fun_</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+
+<body>
+<font size="5px"><b>Class _global_fun_</b></font><br/>
+全局函数<br/> <br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151">&nbsp;</td>
+    <td width="583">
+	<a href="#justep_yn_global_fun_">_global_fun_</a><br/>
+	全局函数
+	</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">HTMLElement&nbsp;</td>
+    <td width="528"><a href="#">J$(id)</a><br/>
+	获取document对象，相当于document.getElementById(id);
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">HTMLElements&nbsp;</td>
+    <td width="528"><a href="#">J$n(tagName)</a><br/>
+	获取document对象数组，相当于document.getElementsByTagName(tagName);
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#">J_u_encode(str)</a><br/>
+	将字符串UTF-8编码，执行两次encodeURIComponent；
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#">J_u_decode(str)</a><br/>
+	将字符串UTF-8解码，执行两次decodeURIComponent，解码失败时返回原文；
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#">enCode(str)</a><br/>
+	将字符串UTF-8编码，执行两次encodeURIComponent；
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#">deCode(str)</a><br/>
+	将字符串UTF-8解码，执行两次decodeURIComponent；
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_global_fun_trim">trim(text)</a><br/>
+	去除字符串两边的空格
+	</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_global_fun_str_trim">String.trim()</a><br/>
+	去除字符串两边的空格
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_global_fun_str_ltrim">String.ltrim()</a><br/>
+	去除字符串左边的空格
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_global_fun_str_rtrim">String.rtrim()</a><br/>
+	去除字符串右边的空格
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_global_fun_reMoveStr">reMoveStr(str1, str2)</a><br/>
+	移除字符串
+	</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_global_fun_replaceFirst">replaceFirst(str, p, m)</a><br/>
+	替换第一个字符串
+	</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#justep_yn_global_fun_getParamValueFromUrl">getParamValueFromUrl(paramname)</a><br/>
+	获取URL参数
+	</td>
+  </tr>
+  
+</table>
+ <br/>
+ <div class="tab_head">&nbsp;C<a name="justep_yn_global_fun_"></a>lass Detail </div>
+	_global_fun_<br/>
+	全局函数，只要引用common.main.js就可以直接使用<br/>
+	<br/>
+<div class="tab_head">&nbsp;Method Detail </div>
+<div>
+	string<a name="justep_yn_global_fun_trim"></a> trim(text)<br/>
+	去除字符串两边的空格<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>text</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>需要去掉空格的字符串<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var mystr=trim(" aaabbbddkk ")
+	<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	string<a name="justep_yn_global_fun_str_trim"></a> str.trim()<br/>
+	去除字符串两边的空格<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var str=" aaabbbddkk ";<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var mystr=str.trim();	<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	string<a name="justep_yn_global_fun_str_ltrim"></a> str.ltrim()<br/>
+	去除字符串左边的空格<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var str=" aaabbbddkk";<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var mystr=str.ltrim();	<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	string<a name="justep_yn_global_fun_str_rtrim"></a> str.rtrim()<br/>
+	去除字符串右边的空格<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var str="aaabbbddkk ";<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var mystr=str.rtrim();	<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	string<a name="justep_yn_global_fun_reMoveStr"></a> reMoveStr(str1, str2)<br/>
+	移除字符串<br/><br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>str1</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>主字符串<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>str2</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>需要从主字符串中移除的字符串<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	reMoveStr('stringStringMyStringMyString','My')
+	<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	string<a name="justep_yn_global_fun_replaceFirst"></a> replaceFirst(str, p, m)<br/>
+	替换第一个字符串<br/><br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>str</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>主字符串<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>p</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>主字符串中需要被替换的字符串<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>m</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>替换的字符串<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	replaceFirst('aabbccdd', 'cc', 'kk')
+	<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	string<a name="justep_yn_global_fun_getParamValueFromUrl"></a> getParamValueFromUrl(paramname)<br/>
+	获取URL参数<br/><br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>paramname</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>字符串<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var sData1 = getParamValueFromUrl("sData1");
+	<br/>
+	<br/>
+	<hr/>
+</div>
+</body>
+</html>

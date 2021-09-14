@@ -10,7 +10,6 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.jdt.internal.ui.JavaPlugin;
 import org.eclipse.jdt.internal.ui.wizards.dialogfields.CheckedListDialogField;
 import org.eclipse.jdt.internal.ui.wizards.dialogfields.DialogField;
 import org.eclipse.jdt.internal.ui.wizards.dialogfields.LayoutUtil;
@@ -20,6 +19,7 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.ui.IWorkbench;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
 import com.tulin.v8.tomcat.TomcatLauncherPlugin;
@@ -37,11 +37,9 @@ public class ProjectListEditor implements TomcatPluginResources {
 
 	public ProjectListEditor(String[] excludedNatures) {
 		this.fExcludedNatures = excludedNatures;
-		String[] buttonLabels = new String[] { PREF_PAGE_SELECTALL_LABEL,
-				PREF_PAGE_UNSELECTALL_LABEL };
+		String[] buttonLabels = new String[] { PREF_PAGE_SELECTALL_LABEL, PREF_PAGE_UNSELECTALL_LABEL };
 
-		fProjectsList = new CheckedListDialogField(null, buttonLabels,
-				new MyLabelProvider());
+		fProjectsList = new CheckedListDialogField(null, buttonLabels, new MyLabelProvider());
 		fProjectsList.setCheckAllButtonIndex(0);
 		fProjectsList.setUncheckAllButtonIndex(1);
 		updateProjectsList();
@@ -83,8 +81,7 @@ public class ProjectListEditor implements TomcatPluginResources {
 
 			// Remove Tomcat project for preference Store (for compatibility
 			// between tomcat plugin versions V2.x and V3)
-			List oldProjectsInCP = TomcatLauncherPlugin.getDefault()
-					.getProjectsInCP();
+			List oldProjectsInCP = TomcatLauncherPlugin.getDefault().getProjectsInCP();
 			List newProjectsInCP = new ArrayList();
 			for (Iterator iter = oldProjectsInCP.iterator(); iter.hasNext();) {
 				ProjectListElement element = (ProjectListElement) iter.next();
@@ -99,11 +96,9 @@ public class ProjectListEditor implements TomcatPluginResources {
 			}
 
 			/*
-			 * Quick hack : Using reflection for compatability with Eclipse 2.1
-			 * and 3.0 M9
+			 * Quick hack : Using reflection for compatability with Eclipse 2.1 and 3.0 M9
 			 * 
-			 * Old code : fProjectsList.setElements(projectsList);
-			 * fProjectsList.
+			 * Old code : fProjectsList.setElements(projectsList); fProjectsList.
 			 * setCheckedElements(HTMLPlugin.getDefault().getProjectsInCP());
 			 */
 			this.invokeForCompatibility("setElements", projectsList);
@@ -124,8 +119,7 @@ public class ProjectListEditor implements TomcatPluginResources {
 		Composite composite = new Composite(parent, SWT.NONE);
 
 		// fProjectsList.doFillIntoGrid(composite,3);
-		LayoutUtil.doDefaultLayout(composite,
-				new DialogField[] { fProjectsList }, true, 0, 0);
+		LayoutUtil.doDefaultLayout(composite, new DialogField[] { fProjectsList }, true, 0, 0);
 
 		return composite;
 	}
@@ -144,9 +138,8 @@ public class ProjectListEditor implements TomcatPluginResources {
 		 * @see ILabelProvider#getImage(Object)
 		 */
 		public Image getImage(Object element) {
-			IWorkbench workbench = JavaPlugin.getDefault().getWorkbench();
-			return workbench.getSharedImages().getImage(
-					IDE.SharedImages.IMG_OBJ_PROJECT);
+			IWorkbench workbench = PlatformUI.getWorkbench();
+			return workbench.getSharedImages().getImage(IDE.SharedImages.IMG_OBJ_PROJECT);
 		}
 
 		/*
@@ -159,8 +152,7 @@ public class ProjectListEditor implements TomcatPluginResources {
 	}
 
 	/*
-	 * Quick hack : Using reflection for compatability with Eclipse 2.1 and 3.0
-	 * M9
+	 * Quick hack : Using reflection for compatability with Eclipse 2.1 and 3.0 M9
 	 */
 	private void invokeForCompatibility(String methodName, List projects) {
 		Class clazz = fProjectsList.getClass();

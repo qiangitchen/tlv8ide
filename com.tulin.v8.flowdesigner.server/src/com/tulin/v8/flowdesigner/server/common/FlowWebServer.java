@@ -135,7 +135,7 @@ public class FlowWebServer {
 		}
 
 		public Map<String, String> getParameterMap() {
-			Map<String, String> map = new HashMap<String, String>();
+			Map<String, String> map = new HashMap<>();
 			if (!queryParameterMap.isEmpty()) {
 				for (String k : queryParameterMap.keySet()) {
 					map.put(k, queryParameterMap.get(k));

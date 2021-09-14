@@ -6,17 +6,32 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
 
 public class FileAndString {
+	public static String FileToString(InputStream input) {
+		String fileStr = "";
+		try {
+			BufferedReader Strreader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+			StringBuffer fileText = new StringBuffer();
+			while ((fileStr = Strreader.readLine()) != null) {
+				fileText.append(fileStr + "\n");
+			}
+			fileStr = fileText.toString().trim();
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		return fileStr;
+	}
+
 	public static String FileToString(File file) {
 		String fileStr = "";
 		try {
 			FileInputStream fileiptstream = new FileInputStream(file);
-			BufferedReader Strreader = new BufferedReader(
-					new InputStreamReader(fileiptstream, "UTF-8"));
+			BufferedReader Strreader = new BufferedReader(new InputStreamReader(fileiptstream, "UTF-8"));
 			StringBuffer fileText = new StringBuffer();
 			while ((fileStr = Strreader.readLine()) != null) {
 				fileText.append(fileStr + "\n");
@@ -33,8 +48,7 @@ public class FileAndString {
 		StringBuffer fileText = new StringBuffer();
 		try {
 			FileInputStream fileiptstream = new FileInputStream(file);
-			BufferedReader Strreader = new BufferedReader(
-					new InputStreamReader(fileiptstream, "UTF-8"));
+			BufferedReader Strreader = new BufferedReader(new InputStreamReader(fileiptstream, "UTF-8"));
 			String fileStr = "";
 			while ((fileStr = Strreader.readLine()) != null) {
 				fileText.append(fileStr + "\n");
@@ -51,8 +65,7 @@ public class FileAndString {
 		try {
 			File file = new File(filepath);
 			FileInputStream fileiptstream = new FileInputStream(file);
-			BufferedReader Strreader = new BufferedReader(
-					new InputStreamReader(fileiptstream, "UTF-8"));
+			BufferedReader Strreader = new BufferedReader(new InputStreamReader(fileiptstream, "UTF-8"));
 			StringBuffer fileText = new StringBuffer();
 			while ((fileStr = Strreader.readLine()) != null) {
 				fileText.append(fileStr + "\n");
@@ -64,14 +77,12 @@ public class FileAndString {
 		}
 		return fileStr;
 	}
-	
+
 	/**
 	 * 文本文件转换为指定编码的字符串
 	 * 
-	 * @param file
-	 *            文本文件
-	 * @param encoding
-	 *            编码类型
+	 * @param file     文本文件
+	 * @param encoding 编码类型
 	 * @return 转换后的字符串
 	 * @throws IOException
 	 */
@@ -87,8 +98,7 @@ public class FileAndString {
 		StringWriter writer = new StringWriter();
 		try {
 			if (encoding == null || "".equals(encoding.trim())) {
-				reader = new InputStreamReader(new FileInputStream(file),
-						encoding);
+				reader = new InputStreamReader(new FileInputStream(file), encoding);
 			} else {
 				reader = new InputStreamReader(new FileInputStream(file));
 			}
@@ -116,10 +126,8 @@ public class FileAndString {
 	/**
 	 * 将字符串写入指定文件(当指定的父路径中文件夹不存在时，会最大限度去创建，以保证保存成功！)
 	 * 
-	 * @param res
-	 *            原字符串
-	 * @param filePath
-	 *            文件路径
+	 * @param res      原字符串
+	 * @param filePath 文件路径
 	 * @return 成功标记
 	 */
 	public static boolean string2File(String res, String filePath) {
@@ -159,10 +167,8 @@ public class FileAndString {
 	/**
 	 * 将字符串写入指定文件(当指定的父路径中文件夹不存在时，会最大限度去创建，以保证保存成功！)
 	 * 
-	 * @param res
-	 *            原字符串
-	 * @param file
-	 *            文件
+	 * @param res  原字符串
+	 * @param file 文件
 	 * @return 成功标记
 	 */
 	public static boolean string2File(String res, File file) {

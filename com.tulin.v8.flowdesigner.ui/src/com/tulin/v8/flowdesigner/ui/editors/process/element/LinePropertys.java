@@ -1,0 +1,59 @@
+package com.tulin.v8.flowdesigner.ui.editors.process.element;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+public class LinePropertys implements IPropertys {
+	JSONArray data = new JSONArray();
+	List<IProperty> reslist = new ArrayList<IProperty>();
+
+	public LinePropertys(JSONArray data) {
+		if (data != null)
+			this.data = data;
+	}
+
+	public List<IProperty> getProperty() {
+		try {
+			Map<String, IProperty> res = new HashMap<String, IProperty>();
+			for (int i = 0; i < data.length(); i++) {
+				JSONObject json = data.getJSONObject(i);
+				PropertyElement proper = new PropertyElement(json);
+				String properid = proper.getId();
+				proper.setLabel(LinePropertySet.getProperLabel(properid));
+				res.put(properid, proper);
+			}
+			for (String properid : LinePropertySet.lineproperlist) {
+				if (res.containsKey(properid)) {
+					reslist.add(res.get(properid));
+				} else {
+					PropertyElement proper = new PropertyElement();
+					proper.setId(properid);
+					proper.setLabel(LinePropertySet.getProperLabel(properid));
+					proper.setValue("");
+					if ("l_p_name".equals(properid)) {
+						proper.setInputType("input");
+					} else {
+						proper.setInputType("span");
+					}
+					reslist.add(proper);
+				}
+			}
+		} catch (Exception e) {
+		}
+		return reslist;
+	}
+
+	@Override
+	public String toJSON() {
+		JSONArray json = new JSONArray();
+		for (IProperty proper : reslist) {
+			json.put(proper.toJSON());
+		}
+		return json.toString();
+	}
+}

@@ -29,7 +29,6 @@ import org.eclipse.jface.preference.FieldEditor;
  * 
  * @since 2.1
  */
-@SuppressWarnings("deprecation")
 public class ComboFieldEditor extends FieldEditor {
 
 	/**

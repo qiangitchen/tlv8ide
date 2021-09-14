@@ -33,13 +33,13 @@ import org.eclipse.ui.forms.widgets.FormToolkit;
 import org.eclipse.ui.forms.widgets.ScrolledForm;
 import org.eclipse.ui.forms.widgets.Section;
 
+import com.tulin.v8.core.Sys;
+import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.echarts.ui.editors.echt.action.RefreshAction;
 import com.tulin.v8.echarts.ui.editors.echt.call.GetScriptCallJava;
 import com.tulin.v8.echarts.ui.editors.echt.call.GetThemeCallJava;
 import com.tulin.v8.echarts.ui.editors.echt.call.LoadSourceCallJava;
 import com.tulin.v8.echarts.ui.utils.WebappManager;
-import com.tulin.v8.ide.StudioPlugin;
-import com.tulin.v8.ide.Sys;
 
 public class EchartsDesignPage extends FormPage {
 	EchartsEditor editor;
@@ -265,9 +265,9 @@ public class EchartsDesignPage extends FormPage {
 				TreeItem treeitem = new TreeItem(tree, SWT.NONE);
 				treeitem.setText(element.getName());
 				if ("data".equals(element.getName())) {
-					treeitem.setImage(StudioPlugin.getIcon("datas.gif"));
+					treeitem.setImage(TuLinPlugin.getIcon("datas.gif"));
 				} else {
-					treeitem.setImage(StudioPlugin.getIcon("element.gif"));
+					treeitem.setImage(TuLinPlugin.getIcon("element.gif"));
 				}
 				treeitem.setData(element);
 				loadChildModle(treeitem, element);
@@ -283,7 +283,7 @@ public class EchartsDesignPage extends FormPage {
 			Element element = eles.get(i);
 			TreeItem titem = new TreeItem(treeitem, SWT.NONE);
 			titem.setText(element.getName());
-			titem.setImage(StudioPlugin.getIcon("attribute.gif"));
+			titem.setImage(TuLinPlugin.getIcon("attribute.gif"));
 			titem.setData(element);
 		}
 	}
