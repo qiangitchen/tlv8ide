@@ -26,4 +26,19 @@ public class JSONToItem {
 		}
 		return item;
 	}
+
+	public static TreeItem parseLine(Tree tree, JSONObject jon) {
+		TreeItem item = new TreeItem(tree, SWT.NONE);
+		try {
+			item.setText(jon.getString("name") + "[" + jon.getString("from") + "->" + jon.getString("to") + "]");
+			if ("polyline".equals(jon.getString("shape"))) {
+				item.setImage(Activator.getIcon("process_icons/transition.png"));
+			} else {
+				item.setImage(Activator.getIcon("process_icons/forward.gif"));
+			}
+			item.setData(jon);
+		} catch (Exception e) {
+		}
+		return item;
+	}
 }

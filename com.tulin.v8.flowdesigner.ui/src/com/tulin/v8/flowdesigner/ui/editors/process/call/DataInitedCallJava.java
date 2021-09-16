@@ -13,8 +13,7 @@ public class DataInitedCallJava extends BrowserFunction {
 	Tree tree;
 	FlowDesignEditor editor;
 
-	public DataInitedCallJava(Browser browser, String name, Tree tree,
-			FlowDesignEditor editor) {
+	public DataInitedCallJava(Browser browser, String name, Tree tree, FlowDesignEditor editor) {
 		super(browser, name);
 		this.tree = tree;
 		this.editor = editor;
@@ -26,15 +25,21 @@ public class DataInitedCallJava extends BrowserFunction {
 		tree.removeAll();
 		if (arguments.length > 0) {
 			String jsons = (String) arguments[0];
-			// System.out.println(jsons);
-			if ("empty".equals(jsons)) {
+			if ("empty".equals(jsons) || jsons == null || "".equals(jsons)) {
 				return false;
 			}
 			try {
-				JSONArray json = new JSONArray(jsons);
-				for (int i = 0; i < json.length(); i++) {
-					JSONObject jon = json.getJSONObject(i);
+				JSONObject json = new JSONObject(jsons);
+				JSONArray nodes = json.getJSONArray("nodes");
+				for (int i = 0; i < nodes.length(); i++) {
+					JSONObject jon = nodes.getJSONObject(i);
 					TreeItem item = JSONToItem.parseItem(tree, jon);
+					editor.setElementItem(jon.getString("id"), item);
+				}
+				JSONArray lines = json.getJSONArray("lines");
+				for (int i = 0; i < lines.length(); i++) {
+					JSONObject jon = lines.getJSONObject(i);
+					TreeItem item = JSONToItem.parseLine(tree, jon);
 					editor.setElementItem(jon.getString("id"), item);
 				}
 			} catch (Exception e) {

@@ -33,10 +33,16 @@ public class DesignChangeCallJava extends BrowserFunction {
 			editor.setSourceText(jsons);
 			try {
 				JSONObject pro = new JSONObject(jsons);
-				JSONArray json = pro.getJSONArray("nodes");
-				for (int i = 0; i < json.length(); i++) {
-					JSONObject jon = json.getJSONObject(i);
+				JSONArray nodes = pro.getJSONArray("nodes");
+				for (int i = 0; i < nodes.length(); i++) {
+					JSONObject jon = nodes.getJSONObject(i);
 					TreeItem item = JSONToItem.parseItem(tree, jon);
+					editor.setElementItem(jon.getString("id"), item);
+				}
+				JSONArray lines = pro.getJSONArray("lines");
+				for (int i = 0; i < lines.length(); i++) {
+					JSONObject jon = lines.getJSONObject(i);
+					TreeItem item = JSONToItem.parseLine(tree, jon);
 					editor.setElementItem(jon.getString("id"), item);
 				}
 			} catch (Exception e) {

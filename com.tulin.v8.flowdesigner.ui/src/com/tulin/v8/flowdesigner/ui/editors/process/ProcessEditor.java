@@ -13,6 +13,7 @@ import org.eclipse.ui.part.MultiPageEditorPart;
 import com.tulin.v8.flowdesigner.ui.editors.Messages;
 import com.tulin.v8.js.ui.editors.javascript.JavaScriptEditor;
 
+@SuppressWarnings("restriction")
 public class ProcessEditor extends MultiPageEditorPart implements IResourceChangeListener {// IStatusChangeListener
 	public static String ID = "com.tulin.v8.flowdesigner.ui.editors.process.ProcessEditor";
 

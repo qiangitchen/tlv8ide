@@ -217,8 +217,8 @@ function Group(id, name) {
 	};
 	this.setSelected = function(node) {
 		try {
-			this.selectedObj.push(node);
 			node.setSelected();
+			this.selectedObj.push(node);
 			// alert($(document.body).width());
 		} catch (e) {
 		}
@@ -385,7 +385,10 @@ function Group(id, name) {
 	this.clearSelected = function() {
 		var num = this.selectedObj.length;
 		for (var i = 0; i < num; i++) {
-			this.selectedObj[i].clearSelected();
+			try{
+				this.selectedObj[i].clearSelected();
+			}catch(e){
+			}
 		}
 		this.selectedObj = [];
 	};
@@ -566,7 +569,7 @@ function Group(id, name) {
 			}
 			line.jsonTo(jLines[i]);
 		}
-		window.dataInitedCall(JSON.encode(jNodes));
+		window.dataInitedCall(JSON.encode(json));
 	};
 	this.setProp = function(selObj, flag) {
 		var win = document.getElementById('propWin');
@@ -864,34 +867,18 @@ var GroupEvent = {
 	},
 	getMouseX : function(event) {
 		var e = event || window.event;
-		var browser = GroupEvent.getBrowserInfo();
-		var verinfo = parseInt((browser + "").replace(/[^0-9.]/ig, ""));
-		if (GroupEvent.isIE() && verinfo > 8) {
-			if (e.pageX) {
-				return e.pageX;
-			} else {
-				return e.clientX + document.body.scrollLeft 
-						+ document.getElementById("drawView").scrollLeft
-						- document.body.clientLeft;
-			}
+		if (e.pageX) {
+			return e.pageX + document.getElementById("drawView").scrollLeft;
 		} else {
-			return e.clientX;
+			return e.clientX + document.body.scrollLeft - document.body.clientLeft + document.getElementById("drawView").scrollLeft;
 		}
 	},
 	getMouseY : function(event) {
 		var e = event || window.event;
-		var browser = GroupEvent.getBrowserInfo();
-		var verinfo = parseInt((browser + "").replace(/[^0-9.]/ig, ""));
-		if (GroupEvent.isIE() && verinfo > 8) {
-			if (e.pageY) {
-				return e.pageY;
-			} else {
-				return e.clientY + document.body.scrollTop 
-						+ document.getElementById("drawView").scrollTop
-						- document.body.clientTop;
-			}
+		if (e.pageY) {
+			return e.pageY + document.getElementById("drawView").scrollTop;
 		} else {
-			return e.clientY;
+			return e.clientY + document.body.scrollTop - document.body.clientTop + document.getElementById("drawView").scrollTop;
 		}
 	},
 	isIE : function() {
@@ -1635,10 +1622,10 @@ var Prop = {
 			for (var j = 0; j < obj.length; j++) {
 				switch (obj[j].text) {
 				case 'span':
-					document.getElementById(obj[j].id).innerHTML = '';
+					$("#"+obj[j].id).html('');
 					break;
 				default:
-					document.getElementById(obj[j].id).value = '';
+					$("#"+obj[j].id).val('');
 					break;
 				}
 			}
@@ -1648,10 +1635,10 @@ var Prop = {
 			for (var j = 0; j < obj.length; j++) {
 				switch (obj[j].text) {
 				case 'span':
-					document.getElementById(obj[j].id).innerHTML = '';
+					$("#"+obj[j].id).html('');
 					break;
 				default:
-					document.getElementById(obj[j].id).value = '';
+					$("#"+obj[j].id).val('');
 					break;
 				}
 			}
@@ -1672,10 +1659,10 @@ var Prop = {
 				var v = null;
 				switch (obj[j].text) {
 				case 'span':
-					v = document.getElementById(obj[j].id).innerHTML;
+					v = $("#"+obj[j].id).html();
 					break;
 				default:
-					v = document.getElementById(obj[j].id).value;
+					v = $("#"+obj[j].id).val();
 					break;
 				}
 				if (v) {
@@ -2296,20 +2283,40 @@ function selectSinglNodeById(nodeid){
 	var groupObj = document.getElementById('group');
 	var Love = groupObj.bindClass;
 	var node = Love.getNodeById(nodeid);
-	Love.clearSelected();
-	Love.setSelected(node);
-	node.obj.focus();
-	// ‘焦点’移动到元素位置
-	$("html,body").animate({scrollTop:node.top - ($(document.body).height()/2) + "px",scrollLeft:node.left - ($(document.body).width()/2) + "px"}, 10);
+	if(node){
+		Love.clearSelected();
+		Love.setSelected(node);
+		node.obj.focus();
+		// ‘焦点’移动到元素位置
+		$("#drawView").animate({scrollTop:node.top - ($(document.body).height()/2) + "px",scrollLeft:node.left - ($(document.body).width()/2) + "px"}, 10);
+		return;
+	}
+	var line = Love.getLineById(nodeid);
+	if(line){
+		Love.clearSelected();
+		Love.setSelected(line);
+		line.fromObj.obj.focus();
+		line.toObj.obj.focus();
+		// ‘焦点’移动到元素位置
+		$("#drawView").animate({scrollTop:line.fromObj.top - ($(document.body).height()/2) + "px",scrollLeft:line.fromObj.left - ($(document.body).width()/2) + "px"}, 10);
+	}
 };
 function removeSinglNodeById(nodeid){
 	var groupObj = document.getElementById('group');
 	var Love = groupObj.bindClass;
 	var node = Love.getNodeById(nodeid);
-	Love.clearSelected();
-	Love.setSelected(node);
-	// node.remove();
-	Love.removeSelected();
+	if(node){
+		Love.clearSelected();
+		Love.setSelected(node);
+		// node.remove();
+		Love.removeSelected();
+	}
+	var line = Love.getLineById(nodeid);
+	if(line){
+		Love.clearSelected();
+		Love.setSelected(line);
+		Love.removeSelected();
+	}
 	window.designChangeCall(Love.toJson());
 };	
 function setSelObjectProperty(objid,properStr){
