@@ -4,7 +4,6 @@ import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -280,10 +279,7 @@ public class CommonUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				DBUtils.CloseConn(conn, stm, rs);
-			} catch (SQLException e) {
-			}
+			DBUtils.CloseConn(conn, stm, rs);
 		}
 		return cm;
 	}
@@ -454,11 +450,7 @@ public class CommonUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				DBUtils.CloseConn(conn, stm, rs);
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
+			DBUtils.CloseConn(conn, stm, rs);
 		}
 		return result;
 	}
@@ -541,10 +533,7 @@ public class CommonUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				DBUtils.CloseConn(conn, stm, rs);
-			} catch (SQLException e) {
-			}
+			DBUtils.CloseConn(conn, stm, rs);
 		}
 		return r;
 	}

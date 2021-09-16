@@ -230,11 +230,7 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 					} catch (Exception e1) {
 						Sys.packErrMsg(e1.toString());
 					} finally {
-						try {
-							DBUtils.CloseConn(conn, stmt, null);
-						} catch (SQLException e1) {
-							Sys.packErrMsg(e1.toString());
-						}
+						DBUtils.CloseConn(conn, stmt, null);
 					}
 				}
 			}
@@ -453,11 +449,7 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 						} catch (Exception e1) {
 							Sys.packErrMsg(e1.toString());
 						} finally {
-							try {
-								DBUtils.CloseConn(conn, stmt, null);
-							} catch (SQLException e1) {
-								Sys.packErrMsg(e1.toString());
-							}
+							DBUtils.CloseConn(conn, stmt, null);
 						}
 					}
 				}

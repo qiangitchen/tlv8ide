@@ -2,7 +2,6 @@ package com.tulin.v8.ide.utils;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -57,10 +56,7 @@ public class FlowUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				DBUtils.CloseConn(conn, ps, null);
-			} catch (SQLException e) {
-			}
+			DBUtils.CloseConn(conn, ps, null);
 		}
 		return res;
 	}
@@ -87,10 +83,7 @@ public class FlowUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				DBUtils.CloseConn(conn, ps, null);
-			} catch (SQLException e) {
-			}
+			DBUtils.CloseConn(conn, ps, null);
 		}
 		return res;
 	}
@@ -109,10 +102,7 @@ public class FlowUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				DBUtils.CloseConn(conn, ps, null);
-			} catch (SQLException e) {
-			}
+			DBUtils.CloseConn(conn, ps, null);
 		}
 		return res;
 	}
@@ -163,10 +153,7 @@ public class FlowUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				DBUtils.CloseConn(conn, ps, null);
-			} catch (SQLException e) {
-			}
+			DBUtils.CloseConn(conn, ps, null);
 		}
 		return res;
 	}
@@ -185,10 +172,7 @@ public class FlowUtils {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				DBUtils.CloseConn(conn, ps, null);
-			} catch (SQLException e) {
-			}
+			DBUtils.CloseConn(conn, ps, null);
 		}
 		return res;
 	}

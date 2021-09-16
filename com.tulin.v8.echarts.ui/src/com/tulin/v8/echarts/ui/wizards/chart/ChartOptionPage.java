@@ -3,7 +3,6 @@ package com.tulin.v8.echarts.ui.wizards.chart;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
-import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -446,10 +445,7 @@ public class ChartOptionPage extends WizardPage {
 			setMessage(e.getMessage());
 			Sys.packErrMsg(e.getMessage());
 		} finally {
-			try {
-				DBUtils.CloseConn(conn, stm, rs);
-			} catch (SQLException e) {
-			}
+			DBUtils.CloseConn(conn, stm, rs);
 		}
 	}
 

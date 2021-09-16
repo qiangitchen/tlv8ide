@@ -49,11 +49,7 @@ public class DataSourceUtils {
 				json.put("flag", false);
 				json.put("message", result);
 			} finally {
-				try {
-					DBUtils.CloseConn(cn, null, null);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+				DBUtils.CloseConn(cn, null, null);
 			}
 		} catch (Exception e) {
 		}

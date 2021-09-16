@@ -1,7 +1,6 @@
 package com.tulin.v8.ide.editors.data.dialog;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.eclipse.jface.dialogs.Dialog;
@@ -278,11 +277,7 @@ public class TableColumnDialog extends Dialog {
 				err.printStackTrace();
 				return;
 			} finally {
-				try {
-					DBUtils.CloseConn(conn, st, null);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
+				DBUtils.CloseConn(conn, st, null);
 			}
 			String cSql = "";
 			if (DBUtils.IsMSSQLDB(dbkey)) {
@@ -309,11 +304,7 @@ public class TableColumnDialog extends Dialog {
 					err.printStackTrace();
 					return;
 				} finally {
-					try {
-						DBUtils.CloseConn(conn, st, null);
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+					DBUtils.CloseConn(conn, st, null);
 				}
 			}
 			if (DBUtils.IsPostgreSQL(dbkey)) {
@@ -333,11 +324,7 @@ public class TableColumnDialog extends Dialog {
 					err.printStackTrace();
 					return;
 				} finally {
-					try {
-						DBUtils.CloseConn(conn, st, null);
-					} catch (SQLException e) {
-						e.printStackTrace();
-					}
+					DBUtils.CloseConn(conn, st, null);
 				}
 			}
 			columnname = column;

@@ -1,7 +1,6 @@
 package com.tulin.v8.ide.wizards.table;
 
 import java.sql.Connection;
-import java.sql.SQLException;
 import java.sql.Statement;
 
 import org.eclipse.jface.wizard.IWizardPage;
@@ -60,10 +59,7 @@ public class CreateTableEndPage extends WizardPage {
 		} catch (Exception e) {
 			Sys.printErrMsg(e.toString() + "\n" + sql);
 		} finally {
-			try {
-				DBUtils.CloseConn(conn, stm, null);
-			} catch (SQLException e) {
-			}
+			DBUtils.CloseConn(conn, stm, null);
 		}
 		return result;
 	}

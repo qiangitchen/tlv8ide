@@ -2,7 +2,6 @@ package com.tulin.v8.flowdesigner.ui.editors.process.element;
 
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import java.util.List;
 import java.util.Map;
 
@@ -66,10 +65,7 @@ public class FlowFolderElement {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			try {
-				DBUtils.CloseConn(conn, ps, null);
-			} catch (SQLException e) {
-			}
+			DBUtils.CloseConn(conn, ps, null);
 		}
 		return res;
 	}

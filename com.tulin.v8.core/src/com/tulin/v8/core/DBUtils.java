@@ -102,8 +102,12 @@ public class DBUtils {
 				throw new SQLException(eN.toString());
 			}
 			try {
+				url = url.replace("&amp;", "&");
+			}catch (Exception e) {
+			}
+			try {
 				cn = DriverManager.getConnection(url, userName, password);
-			} catch (SQLException eJ) {
+			} catch (Exception eJ) {
 				throw new SQLException(eJ.toString());
 			}
 		}
@@ -246,7 +250,7 @@ public class DBUtils {
 	}
 
 	// 关闭连接
-	public static void CloseConn(Connection conn, Statement stm, ResultSet rs) throws SQLException {
+	public static void CloseConn(Connection conn, Statement stm, ResultSet rs) {
 		try {
 			if (rs != null)
 				rs.close();
@@ -260,8 +264,7 @@ public class DBUtils {
 		try {
 			if (conn != null)
 				conn.close();
-		} catch (SQLException e) {
-			throw new SQLException(e.toString());
+		} catch (Exception e) {
 		}
 	}
 
