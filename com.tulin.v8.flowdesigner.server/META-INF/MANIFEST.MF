@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Flowdesigner
 Bundle-SymbolicName: com.tulin.v8.flowdesigner.server;singleton:=true
-Bundle-Version: 1.1.0.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-Activator: com.tulin.v8.flowdesigner.server.Activator
 Bundle-Vendor: TULIN
 Require-Bundle: org.eclipse.ui,

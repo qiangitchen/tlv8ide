@@ -63,10 +63,6 @@ import com.tulin.v8.flowdesigner.ui.editors.process.action.CatAction;
 import com.tulin.v8.flowdesigner.ui.editors.process.action.CopyAction;
 import com.tulin.v8.flowdesigner.ui.editors.process.action.DeleteAction;
 import com.tulin.v8.flowdesigner.ui.editors.process.action.PasteAction;
-import com.tulin.v8.flowdesigner.ui.editors.process.call.CallJava;
-import com.tulin.v8.flowdesigner.ui.editors.process.call.DataInitedCallJava;
-import com.tulin.v8.flowdesigner.ui.editors.process.call.DesignChangeCallJava;
-import com.tulin.v8.flowdesigner.ui.editors.process.call.SelectedCallJava;
 import com.tulin.v8.flowdesigner.ui.editors.process.element.ConditionPropertys;
 import com.tulin.v8.flowdesigner.ui.editors.process.element.IProperty;
 import com.tulin.v8.flowdesigner.ui.editors.process.element.IPropertys;
@@ -74,7 +70,9 @@ import com.tulin.v8.flowdesigner.ui.editors.process.element.LinePropertys;
 import com.tulin.v8.flowdesigner.ui.editors.process.element.NodeOvalPropertys;
 import com.tulin.v8.flowdesigner.ui.editors.process.element.NodePropertys;
 import com.tulin.v8.flowdesigner.ui.editors.process.element.ProcessDrawElement;
+import com.tulin.v8.flowdesigner.ui.editors.process.listener.BreowserTitleListener;
 import com.tulin.v8.flowdesigner.ui.editors.process.listener.BrowserProgressListener;
+import com.tulin.v8.flowdesigner.ui.editors.process.listener.BrowserStatusTextListener;
 import com.tulin.v8.flowdesigner.ui.editors.process.listener.LEndAdpater;
 import com.tulin.v8.flowdesigner.ui.editors.process.listener.LForkAdpater;
 import com.tulin.v8.flowdesigner.ui.editors.process.listener.LLineAdpater;
@@ -517,10 +515,12 @@ public class FlowDesignEditor extends EditorPart {
 		browser.setLayoutData(new GridData(GridData.FILL_BOTH));
 		browser.setJavascriptEnabled(true);
 		browser.addProgressListener(new BrowserProgressListener(this));
-		new CallJava(browser, "EditorCallJava", tree, this);
-		new DataInitedCallJava(browser, "dataInitedCall", tree, this);
-		new DesignChangeCallJava(browser, "designChangeCall", tree, this);
-		new SelectedCallJava(browser, "selectedCall", tree, this);
+		browser.addStatusTextListener(new BrowserStatusTextListener(this, browser));
+		browser.addTitleListener(new BreowserTitleListener(this, browser));
+//		new CallJava(browser, "EditorCallJava", tree, this);
+//		new DataInitedCallJava(browser, "dataInitedCall", tree, this);
+//		new DesignChangeCallJava(browser, "designChangeCall", tree, this);
+//		new SelectedCallJava(browser, "selectedCall", tree, this);
 		browser.setMenu(createEditPopup());// 右键菜单
 
 		sashForm.setWeights(new int[] { 2, 6 });

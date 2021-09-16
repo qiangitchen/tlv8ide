@@ -423,7 +423,8 @@ function Group(id, name) {
 			if (obj.selected) {
 				obj.remove();
 				try {
-					window.EditorCallJava('remove', obj.id);
+					document.title = JSON.stringify({action:'EditorCallJava',option:'remove',data:obj.id});
+					//window.EditorCallJava('remove', obj.id);
 				} catch (e) {
 				}
 			} else {
@@ -525,7 +526,7 @@ function Group(id, name) {
 			nodes : jNodes,
 			lines : jLines
 		};
-		return JSON.encode(json);
+		return JSONC.encode(json);
 	};
 	this.jsonTo = function(json) {
 		if (!json) {
@@ -569,7 +570,8 @@ function Group(id, name) {
 			}
 			line.jsonTo(jLines[i]);
 		}
-		window.dataInitedCall(JSON.encode(json));
+		document.title = JSON.stringify({action:'dataInitedCall'});
+		//window.dataInitedCall(JSONC.encode(json));
 	};
 	this.setProp = function(selObj, flag) {
 		var win = document.getElementById('propWin');
@@ -736,15 +738,19 @@ var GroupEvent = {
 		}
 		Love.setGroupArea();
 		Love.action = null;
-		window.designChangeCall(Love.toJson());
+		document.title = JSON.stringify({action:'designChangeCall'});
+		//window.designChangeCall(Love.toJson());
 		var selectedNode = Love.getSelectedNode();
 		var selectedLine = Love.getSelectedLine();
 		if (selectedNode.length == 1) {
-			window.selectedCall(JSON.encode(selectedNode[0].toJson()));
+			document.title = JSON.stringify({action:'selectedCall',data:JSONC.encode(selectedNode[0].toJson())});
+			//window.selectedCall(JSONC.encode(selectedNode[0].toJson()));
 		} else if (selectedLine.length == 1) {
-			window.selectedCall(JSON.encode(selectedLine[0].toJson()));
+			document.title = JSON.stringify({action:'selectedCall',data:JSONC.encode(selectedLine[0].toJson())});
+			//window.selectedCall(JSONC.encode(selectedLine[0].toJson()));
 		} else {
-			window.selectedCall("cancel");
+			document.title = JSON.stringify({action:'selectedCall',data:'cancel'});
+			//window.selectedCall("cancel");
 		}
 		return false;
 	},
@@ -857,7 +863,8 @@ var GroupEvent = {
 		var group = document.getElementById('group');
 		var Love = group.bindClass;
 		Love.ctrlKey = false;
-		window.designChangeCall(Love.toJson());
+		document.title = JSON.stringify({action:'designChangeCall'});
+		//window.designChangeCall(Love.toJson());
 	},
 	getX : function(x) {
 		return (x + document.body.scrollLeft);
@@ -1180,10 +1187,12 @@ var MenuAction = {
 		n.setName("开始");
 		// n.init();
 		this.autoLine(n);
-		window.EditorCallJava('add', JSON.encode(n.toJson()));
+		document.title = JSON.stringify({action:'EditorCallJava',option:'add',data:JSONC.encode(n.toJson())});
+		//window.EditorCallJava('add', JSONC.encode(n.toJson()));
 		var groupObj = document.getElementById('group');
 		var Love = groupObj.bindClass;
-		window.designChangeCall(Love.toJson());
+		document.title = JSON.stringify({action:'designChangeCall'});
+		//window.designChangeCall(Love.toJson());
 	},
 	end : function() {
 		var n = new NodeOval();
@@ -1191,36 +1200,44 @@ var MenuAction = {
 		n.setName("结束");
 		// n.init();
 		this.autoLine(n);
-		window.EditorCallJava('add', JSON.encode(n.toJson()));
+		document.title = JSON.stringify({action:'EditorCallJava',option:'add',data:JSONC.encode(n.toJson())});
+		//window.EditorCallJava('add', JSONC.encode(n.toJson()));
 		var groupObj = document.getElementById('group');
 		var Love = groupObj.bindClass;
-		window.designChangeCall(Love.toJson());
+		document.title = JSON.stringify({action:'designChangeCall'});
+		//window.designChangeCall(Love.toJson());
 	},
 	nodeRect : function() {
 		var n = new Node();
 		// n.init();
 		this.autoLine(n);
-		window.EditorCallJava('add', JSON.encode(n.toJson()));
+		document.title = JSON.stringify({action:'EditorCallJava',option:'add',data:JSONC.encode(n.toJson())});
+		//window.EditorCallJava('add', JSONC.encode(n.toJson()));
 		var groupObj = document.getElementById('group');
 		var Love = groupObj.bindClass;
-		window.designChangeCall(Love.toJson());
+		document.title = JSON.stringify({action:'designChangeCall'});
+		//window.designChangeCall(Love.toJson());
 	},
 	nodeImg : function() {
 		var n = new NodeImg();
 		n.init();
-		window.EditorCallJava('add', JSON.encode(n.toJson()));
+		document.title = JSON.stringify({action:'EditorCallJava',option:'add',data:JSONC.encode(n.toJson())});
+		//window.EditorCallJava('add', JSONC.encode(n.toJson()));
 		var groupObj = document.getElementById('group');
 		var Love = groupObj.bindClass;
-		window.designChangeCall(Love.toJson());
+		document.title = JSON.stringify({action:'designChangeCall'});
+		//window.designChangeCall(Love.toJson());
 	},
 	fork : function() {
 		var n = new Condition();
 		// n.init();
 		this.autoLine(n);
-		window.EditorCallJava('add', JSON.encode(n.toJson()));
+		document.title = JSON.stringify({action:'EditorCallJava',option:'add',data:JSONC.encode(n.toJson())});
+		//window.EditorCallJava('add', JSONC.encode(n.toJson()));
 		var groupObj = document.getElementById('group');
 		var Love = groupObj.bindClass;
-		window.designChangeCall(Love.toJson());
+		document.title = JSON.stringify({action:'designChangeCall'});
+		//window.designChangeCall(Love.toJson());
 	},
 	line : function(cansele) {
 		var group = document.getElementById('group');
@@ -1246,7 +1263,8 @@ var MenuAction = {
 		var group = document.getElementById('group');
 		var Love = group.bindClass;
 		Love.removeSelected();
-		window.designChangeCall(Love.toJson());
+		document.title = JSON.stringify({action:'designChangeCall'});
+		//window.designChangeCall(Love.toJson());
 	},
 	grid : function() {
 		var obj = document.body.style.backgroundImage;
@@ -1702,7 +1720,7 @@ String.prototype.decodeSpechars = function() {
 	return str;
 };
 
-JSON = new function() {
+JSONC = new function() {
 	this.decode = function() {
 		var filter, result, self, tmp;
 		if ($$("toString")) {
@@ -1751,7 +1769,7 @@ JSON = new function() {
 			case Array:
 				result = [];
 				for (var i = 0, j = 0, k = self.length; j < k; j++) {
-					if (self[j] !== undefined && (tmp = JSON.encode(self[j])))
+					if (self[j] !== undefined && (tmp = JSONC.encode(self[j])))
 						result[i++] = tmp;
 				}
 				;
@@ -1779,7 +1797,7 @@ JSON = new function() {
 				result = [];
 				for (key in self) {
 					if (self[key] !== undefined
-							&& (tmp = JSON.encode(self[key])))
+							&& (tmp = JSONC.encode(self[key])))
 						result[i++] = '"'.concat(key.replace(rs, s).replace(ru,
 								u), '":', tmp);
 				}
@@ -2254,7 +2272,7 @@ function drow_init(processID, processName, json) {
 	// 加载流程图
 	if (json && typeof json == "string") {
 		// json = json.toString().decodeSpechars();
-		var j = JSON.decode(json);
+		var j = JSONC.decode(json);
 		g.jsonTo(j);
 	} else if (json) {
 		g.jsonTo(json);
@@ -2265,11 +2283,11 @@ function drow_init(processID, processName, json) {
 
 function pageDataInited(sources){
 	try{
-		var j = JSON.decode(deCode(sources));
+		var j = JSONC.decode(deCode(sources));
 		drow_init(j.id,j.name,j);
 	}catch(e){
 		try{
-			var j = JSON.decode(deCode(sources));
+			var j = JSONC.decode(deCode(sources));
 			drow_init(j.id,j.name);
 		}catch(e){
 			alert("模型加载失败!");
@@ -2317,7 +2335,8 @@ function removeSinglNodeById(nodeid){
 		Love.setSelected(line);
 		Love.removeSelected();
 	}
-	window.designChangeCall(Love.toJson());
+	document.title = JSON.stringify({action:'designChangeCall'});
+	//window.designChangeCall(Love.toJson());
 };	
 function setSelObjectProperty(objid,properStr){
 	var groupObj = document.getElementById('group');
@@ -2325,14 +2344,15 @@ function setSelObjectProperty(objid,properStr){
 	var node = Love.getNodeById(objid);
 	properStr = deCode(properStr);
 	if(node!=null){
-		node.property = JSON.decode(properStr);
+		node.property = JSONC.decode(properStr);
 	}else{
 		var line = Love.getLineById(objid);
 		if(line!=null){
-			line.property = JSON.decode(properStr);
+			line.property = JSONC.decode(properStr);
 		}
 	}
-	window.designChangeCall(Love.toJson());
+	document.title = JSON.stringify({action:'designChangeCall'});
+	//window.designChangeCall(Love.toJson());
 };
 function setSelObjectName(objid,newname){
 	var groupObj = document.getElementById('group');
@@ -2353,7 +2373,8 @@ function setSelObjectName(objid,newname){
 			line.obj.title = newname;
 		}
 	}
-	window.designChangeCall(Love.toJson());
+	document.title = JSON.stringify({action:'designChangeCall'});
+	//window.designChangeCall(Love.toJson());
 };
 function JavaCreatDomConditionSelect(objid){
 	var group = document.getElementById('group');
@@ -2369,18 +2390,20 @@ function JavaCreatDomConditionSelect(objid){
 			optionsArray.push(djson);
 		}
 	}
-	window.EditorCallJava('setDomConditionSelect',JSON.encode(optionsArray));
-	return JSON.encode(optionsArray);
+	document.title = JSON.stringify({action:'EditorCallJava',option:'setDomConditionSelect',data:JSONC.encode(optionsArray)});
+	//window.EditorCallJava('setDomConditionSelect',JSONC.encode(optionsArray));
+	return JSONC.encode(optionsArray);
 };
 function JavaevIsselected(){
 	var group = document.getElementById('group');
 	var Love = group.bindClass;
-	window.EditorCallJava("setDeleteActionEnable", Love.getSelectedNode().length>0 || Love.getSelectedLine().length>0);
+	document.title = JSON.stringify({action:'EditorCallJava',option:'setDeleteActionEnable',data:(Love.getSelectedNode().length>0 || Love.getSelectedLine().length>0)});
+	//window.EditorCallJava("setDeleteActionEnable", Love.getSelectedNode().length>0 || Love.getSelectedLine().length>0);
 };
 function JavaparseNode(jsonstr){
 	var groupObj = document.getElementById('group');
 	var Love = groupObj.bindClass;
-	var json = JSON.decode(jsonstr);
+	var json = JSONC.decode(jsonstr);
 	var hasnodelen = Love.getNodesById(json.id).length;
 	if(hasnodelen > 0){
 		json.id = json.id + "_" + hasnodelen;
@@ -2407,6 +2430,15 @@ function JavaparseNode(jsonstr){
 	node.left = Love.mouseX;
 	node.top = Love.mouseY;
 	node.init();
-	window.EditorCallJava('add', JSON.encode(node.toJson()));
-	window.designChangeCall(Love.toJson());
+	document.title = JSON.stringify({action:'EditorCallJava',option:'add',data:JSONC.encode(node.toJson())});
+	//window.EditorCallJava('add', JSONC.encode(node.toJson()));
+	document.title = JSON.stringify({action:'designChangeCall'});
+	//window.designChangeCall(Love.toJson());
 };
+
+function getPageDataJson(){
+	var groupObj = document.getElementById('group');
+	var Love = groupObj.bindClass;
+	var jsonstr = Love.toJson();
+	return jsonstr;
+}
