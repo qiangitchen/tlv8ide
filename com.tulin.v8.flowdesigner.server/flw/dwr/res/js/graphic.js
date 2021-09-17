@@ -308,8 +308,8 @@ function Node() {
 					minWidth : 100,
 					minHeight : 40,
 					onResize : function(e) {
-						this.action = Love.action;
 						var Love = groupObj.bindClass;
+						this.action = Love.action;
 						Love.action = "resizeNode";
 						Love.drawMirrorNodeEnd();
 					},
