@@ -21,6 +21,26 @@ Eclipse plug in architecture
 2.  The minimum requirement of JDK version for plug-in project is 1.6 
 3.  The report designer does not support ie environment, so it needs edge browser support in Windows environment, which requires eclipse to be 4.17 or above. If this function is not required, the minimum version of eclipse is 3.6 
 
+
+#### Exhibition
+One click Start Tomcat:
+![Tomcat](https://images.gitee.com/uploads/images/2021/0918/105611_a540e114_1210964.jpeg "tomcat.jpg")
+
+One stop database management:
+![Database](https://images.gitee.com/uploads/images/2021/0918/105734_2a26f3db_1210964.png "数据库.png")
+
+Visual report (Chart) design:
+![Report](https://images.gitee.com/uploads/images/2021/0918/105900_66e21efa_1210964.png "报表.png")
+![Chart](https://images.gitee.com/uploads/images/2021/0918/111012_b2ec2658_1210964.png "图表.png")
+
+Visual process design:
+![Process](https://images.gitee.com/uploads/images/2021/0918/110506_33fea444_1210964.png "流程设计.png")
+
+Page design (what you see and what you get):
+![Page](https://images.gitee.com/uploads/images/2021/0918/110719_6dbdae41_1210964.png "界面设计.png")
+
+
+
 #### Contribution
 
 1.  [www.tulinxian.com](https://www.tulinxian.com) 
