@@ -16,9 +16,9 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.wst.sse.core,
  org.eclipse.wst.sse.ui,
  org.eclipse.wst.xml.ui,
- org.eclipse.debug.ui,
- org.eclipse.emf.common,
- org.eclipse.wst.xml.core
+ org.eclipse.wst.xml.core,
+ org.eclipse.debug.ui;resolution:=optional,
+ org.eclipse.emf.common;resolution:=optional
 Bundle-ActivationPolicy: lazy
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ClassPath: .
