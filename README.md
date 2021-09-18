@@ -38,12 +38,17 @@ Eclipse插件体系结构
 #### 展示
 一键启动Tomcat：
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0918/105611_a540e114_1210964.jpeg "tomcat.jpg")
+
 一站式数据库管理：
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0918/105734_2a26f3db_1210964.png "数据库.png")
-可视化报表设计：
+
+可视化报表（图表）设计：
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0918/105900_66e21efa_1210964.png "报表.png")
+![输入图片说明](https://images.gitee.com/uploads/images/2021/0918/111012_b2ec2658_1210964.png "图表.png")
+
 可视化流程设计：
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0918/110506_33fea444_1210964.png "流程设计.png")
+
 页面设计（所见及所得）：
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0918/110719_6dbdae41_1210964.png "界面设计.png")
 
