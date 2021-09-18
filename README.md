@@ -28,7 +28,7 @@ Eclipse插件体系结构
 1.  jdk版本要求对应eclipse对jdk版本的要求
 2.  插件项目的jdk版本要求最低为1.6
 3.  报表设计器不支持IE环境，所以在Windows环境下需要CEF.
-4.  Win64系统安装CEF
+4.  Win64系统安装[CEF](https://github.com/equoplatform/chromium-swt)
 
     https://dl.equoplatform.com/chromium-swt-ce/69.0.0/repository 
 
