@@ -11,7 +11,6 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.swt,
  org.eclipse.jface,
  org.eclipse.core.runtime,
- org.eclipse.ui.workbench,
- com.tulin.v8.ide.ui
+ org.eclipse.ui.workbench
 Bundle-Activator: com.tulin.v8.ide.PlatformPlugin
 Bundle-ActivationPolicy: lazy
