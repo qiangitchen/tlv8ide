@@ -19,7 +19,6 @@ Require-Bundle: org.eclipse.jface,
  org.eclipse.jdt.ui,
  org.eclipse.jdt.core,
  org.eclipse.gef;resolution:=optional,
- org.eclipse.ui.genericeditor,
  com.tulin.v8.core,
  com.tulin.v8.xml
 Bundle-Activator: com.tulin.v8.function.editors.XMLEditorPlugin
