@@ -743,10 +743,10 @@ var GroupEvent = {
 		var selectedNode = Love.getSelectedNode();
 		var selectedLine = Love.getSelectedLine();
 		if (selectedNode.length == 1) {
-			document.title = JSON.stringify({action:'selectedCall',data:JSONC.encode(selectedNode[0].toJson())});
+			document.title = JSON.stringify({action:'selectedCall',data:selectedNode[0].id});
 			//window.selectedCall(JSONC.encode(selectedNode[0].toJson()));
 		} else if (selectedLine.length == 1) {
-			document.title = JSON.stringify({action:'selectedCall',data:JSONC.encode(selectedLine[0].toJson())});
+			document.title = JSON.stringify({action:'selectedCall',data:selectedLine[0].id});
 			//window.selectedCall(JSONC.encode(selectedLine[0].toJson()));
 		} else {
 			document.title = JSON.stringify({action:'selectedCall',data:'cancel'});

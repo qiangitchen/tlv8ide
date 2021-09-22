@@ -43,7 +43,7 @@ public class PropertyEditorManager {
 	}
 
 	private boolean isInput(IProperty property) {
-		return "input".equals(property.getInputType());
+		return "input".equals(property.getInputType()) && !"n_p_id".equals(property.getId());
 	}
 
 	private boolean isSelect(IProperty property) {

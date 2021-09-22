@@ -42,19 +42,17 @@ public class BreowserTitleListener implements TitleListener {
 				designChangeCall(jsonstr);
 			}
 			if ("selectedCall".equals(action)) {
-				try {
-					String jsonstr = json.getString("data");
-					JSONObject data = new JSONObject(jsonstr);
-					editor.setPropertyTable(data);
-					TreeItem item = editor.getElementItem(data.getString("id"));
-					if (item != null) {
-						editor.tree.setSelection(item);
-						editor.changeRemoveHanler(true);
-					}
-				} catch (Exception e) {
+				String id = json.getString("data");
+				TreeItem item = editor.getElementItem(id);
+				if (item != null) {
+					editor.tree.setSelection(item);
+					JSONObject seljson = (JSONObject) item.getData();
+					editor.setPropertyTable(seljson);
+					editor.changeRemoveHanler(true);
+				} else {
+					editor.tree.deselectAll();
 					editor.setPropertyTable(null);
 					editor.changeRemoveHanler(false);
-					editor.tree.deselectAll();
 				}
 			}
 			if ("EditorCallJava".equals(action)) {
@@ -109,7 +107,7 @@ public class BreowserTitleListener implements TitleListener {
 			e.printStackTrace();
 		}
 	}
-	
+
 	void designChangeCall(String jsons) {
 		String beforejsons = editor.getSourceText();
 		if (jsons.equals(beforejsons)) {
