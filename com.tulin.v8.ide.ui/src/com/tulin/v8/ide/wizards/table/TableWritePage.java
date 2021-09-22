@@ -5,7 +5,7 @@ import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.widgets.TableItem;
 
-import com.tulin.v8.ide.dialog.AddcolumnDialog;
+import com.tulin.v8.ide.wizards.utils.AddcolumnDialog;
 
 public class TableWritePage extends AbsolutelyTableCreate {
 	private String text;
