@@ -55,6 +55,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.ide.FileStoreEditorInput;
+import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 import com.tulin.v8.core.DBUtils;
 import com.tulin.v8.core.FileAndString;
@@ -68,7 +69,6 @@ import com.tulin.v8.ide.editors.data.dialog.UpdateSqlDialog;
 import com.tulin.v8.ide.editors.data.job.RefreshColumnUnViewJob;
 import com.tulin.v8.ide.utils.StudioConfig;
 import com.tulin.v8.ide.views.navigator.IStatusChangeListener;
-import com.tulin.v8.xml.editors.XMLEditor;
 
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.preference.SQLEditorPreferencePage;
@@ -86,7 +86,7 @@ import zigen.plugin.db.ui.views.internal.SQLSourceViewer;
 @SuppressWarnings("rawtypes")
 public class DataEditor extends TableViewEditorFor31 implements IResourceChangeListener, IStatusChangeListener {
 	public static String ID = "com.tulin.v8.ide.editors.data.DataEditor";
-	private XMLEditor editor;
+	private StructuredTextEditor editor;
 	private String tableName;
 	private TableItem itemdata;
 	private Table ColumnTable;
@@ -106,7 +106,7 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 
 	void createPage0() {
 		try {
-			editor = new XMLEditor();
+			editor = new StructuredTextEditor();
 			IEditorInput editorInput = getEditorInput();
 			int index;
 			if (editorInput instanceof TableViewEditorInput) {
@@ -154,6 +154,7 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 		} catch (PartInitException e) {
 			Sys.packErrMsg(e.toString());
 			ErrorDialog.openError(getSite().getShell(), "Error creating nested text editor", null, e.getStatus());
+			e.printStackTrace();
 		}
 	}
 
@@ -568,7 +569,7 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 		}
 	}
 
-	public XMLEditor getXMLEditor() {
+	public StructuredTextEditor getXMLEditor() {
 		return editor;
 	}
 
