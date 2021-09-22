@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.ide.feature"
       label="TuLin Studio"
-      version="2.1.1.qualifier"
+      version="2.1.2.qualifier"
       provider-name="TuLin ChenQian"
       plugin="com.tulin.v8.ide.ui">
 
