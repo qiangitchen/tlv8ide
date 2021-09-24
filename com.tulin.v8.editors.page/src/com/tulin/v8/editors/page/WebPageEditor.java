@@ -36,6 +36,7 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
+import org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditor;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
@@ -45,7 +46,6 @@ import com.tulin.v8.editors.html.HTMLSourceEditor;
 import com.tulin.v8.editors.page.design.LinkHref;
 import com.tulin.v8.editors.page.design.WEBDesignEditor;
 import com.tulin.v8.editors.page.design.WEBDesignEditorInterface;
-import com.tulin.v8.js.ui.editors.javascript.JavaScriptEditor;
 
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.ide.IDE;
@@ -66,7 +66,7 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	public final static String ID = "com.tulin.v8.editors.page.WebPageEditor";
 	private HTMLSourceEditor editor;
 	public WEBDesignEditorInterface _designViewer;
-	private JavaScriptEditor jseditor;
+	private CompilationUnitEditor jseditor;
 	public CSSEditor csseditor;
 	public Document pageDom;
 	public String editortext;
@@ -112,7 +112,7 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	 */
 	void createPage2() {
 		try {
-			jseditor = new JavaScriptEditor();
+			jseditor = new CompilationUnitEditor();
 			File nf = new File(getJSpathName());
 			IFile JSIFile = ResourcesPlugin.getWorkspace().getRoot().getFileForLocation(new Path(getJSpathName()));
 			int index = 2;
