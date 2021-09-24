@@ -10,7 +10,7 @@ Eclipse plug in architecture
 
 #### Installation
 
-1.  Download [eclipse](https://www.eclipse.org/downloads/packages/) 4.6+ 
+1.  Download [eclipse](https://www.eclipse.org/downloads/packages/) 4.8+ 
 2.  Put the unzipped studio app folder in the eclipse / dropins directory 
 3.  Start eclipse 
 4.  [Download Project Source](https://gitee.com/qianpou/tl)
