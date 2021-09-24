@@ -17,7 +17,7 @@ Eclipse插件体系结构
 
 #### 安装教程
 
-1.  下载[eclipse](https://www.eclipse.org/downloads/packages/)4.6+
+1.  下载[eclipse](https://www.eclipse.org/downloads/packages/)4.8+
 2.  将解压后的studio-app文件夹放到eclipse/dropins目录下
 3.  启动eclipse
 4.  [下载项目源码](https://gitee.com/qianpou/tl)
@@ -26,7 +26,7 @@ Eclipse插件体系结构
 #### 使用说明
 
 1.  jdk版本要求对应eclipse对jdk版本的要求
-2.  插件项目的jdk版本要求最低为1.6
+2.  插件项目的jdk版本要求1.6+
 3.  报表设计器不支持IE环境，所以在Windows环境下需要CEF.
 4.  Win64系统安装[CEF](https://github.com/equoplatform/chromium-swt)
 
