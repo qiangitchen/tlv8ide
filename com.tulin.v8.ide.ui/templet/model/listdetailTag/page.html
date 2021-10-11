@@ -2,6 +2,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 	<title>YJTemplet_page.html</title>
+	<link type="text/css" rel="stylesheet" href="/tlv8/resources/layui/css/layui.css"></link>
 	<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/default/easyui.css" />
 	<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/icon.css" />
   	<link type="text/css" rel="stylesheet" href="/tlv8/comon/css/formsyle.css"></link>
@@ -11,10 +12,11 @@
 	<script type="text/javascript" src="/tlv8/comon/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript" src="/tlv8/resources/jquery-easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="/tlv8/resources/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="/tlv8/resources/layui/layui.js"></script>
 	<script type="text/javascript" src="YJTemplet_page.js"></script>
  </head>
   
-  <body style="overflow: hidden;" onLoad="getData()">
+  <body style="overflow: hidden;" onLoad="getData();init_toolbar();">
 	<div id="tabveiw1" class="easyui-tabs" fit="true" data-options="onSelect:tabsselected">
 		<div id="detail_01" title="列表">
 			<div component="dataGrid" id="main_grid_view" style="width:100%;height:100%;" ondbclick="griddbclick">
@@ -34,22 +36,20 @@
 						</tr>
 					</table>
 				</div>
-				<div data-options="region:'center'" style="text-align: center; overflow: auto;">
-					<div style="width: 1000px; margin: auto;">
-						<form id="MAIN_DATA_FORM">
-						  <table id="printTable" style="width:100%;" border="0">
-							YJTemplet_dataItem
-						  </table>
-						</form>
+				<div data-options="region:'center',border:false">
+					<div class="layui-fluid">
+						<div class="layui-card">
+						    <div class="layui-card-header">表单信息</div>
+						    <div class="layui-card-body">
+								<form id="MAIN_DATA_FORM" class="layui-form">
+									YJTemplet_dataItem
+								</form>
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>
 		 </div>
 	</div>
-		 <script type="text/javascript">
-			var bardiv = J$("stander_bar");
-			var toobar = new tlv8.toolbar(bardiv, false, false,false,true);
-			var toolbarItem = toobar.items;
-		 </script>
   </body>
 </html>

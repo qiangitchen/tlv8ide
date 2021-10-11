@@ -39,8 +39,8 @@ function getData() {
 	MainData.setTable("YJTemplet_tableName");
 	MainData.setFormId("MAIN_DATA_FORM");//主表关联form
 	flwCompent = new tlv8.flw("flowToolbar", MainData, setting);
+	init_toolbar();
 	getData2();
-	
 	var rowid = tlv8.RequestURLParam.getParam("sData1");
 	if (rowid && rowid != "") {
 		J$("MAIN_DATA_FORM").rowid = rowid;

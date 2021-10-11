@@ -39,6 +39,9 @@ function initDocumentPage() {
 	datamian.setDbkey("YJTemplet_dbkey");
 	datamian.setTable("YJTemplet_tableName");
 	datamian.setFormId("MAIN_DATA_FORM");
+	
+	init_toolbar();
+	
 	flwCompent = new tlv8.flw("flowToolbar", datamian, setting);
 	
 	var rowid = tlv8.RequestURLParam.getParam("sData1");

@@ -1,3 +1,12 @@
+//工具条
+var toolbarItem;
+function init_toolbar() {
+	var bardiv = J$("stander_bar");
+	var toobar = new tlv8.toolbar(bardiv, false, "readonly", "readonly",
+			true);
+	toolbarItem = toobar.items;
+}
+
 /*==数据源===此项为必须定义==*/
 var currentgrid;
 var Maindata = new tlv8.Data();
