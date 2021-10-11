@@ -30,21 +30,21 @@ public class DataType {
 
 	public static String getItemBydataType(String dataType) {
 		if (dataType.equals("input")) {
-			return "class=\"forminput\"";
+			return "class=\"layui-input\"";
 		} else if (dataType.equals("output")) {
-			return "class=\"forminput\" readonly=\"readonly\" ";
+			return "class=\"layui-input\" readonly=\"readonly\" ";
 		} else if (dataType.equals("date")) {
-			return "class=\"WdateinputLine\" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd'})\" format=\"yyyy-MM-dd\"";
+			return "class=\"layui-input Wdate\" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd'})\" format=\"yyyy-MM-dd\"";
 		} else if (dataType.equals("datetime")) {
-			return "class=\"WdateinputLine\" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})\" format=\"yyyy-MM-dd HH:mm:ss\"";
+			return "class=\"layui-input Wdate\" onClick=\"WdatePicker({dateFmt:'yyyy-MM-dd HH:mm:ss'})\" format=\"yyyy-MM-dd HH:mm:ss\"";
 		} else if (dataType.equals("year")) {
-			return "class=\"WdateinputLine\" onClick=\"WdatePicker({dateFmt:'yyyy'})\" format=\"yyyy\"";
+			return "class=\"layui-input Wdate\" onClick=\"WdatePicker({dateFmt:'yyyy'})\" format=\"yyyy\"";
 		} else if (dataType.equals("month")) {
-			return "class=\"WdateinputLine\" onClick=\"WdatePicker({dateFmt:'MM'})\" format=\"MM\"";
+			return "class=\"layui-input Wdate\" onClick=\"WdatePicker({dateFmt:'MM'})\" format=\"MM\"";
 		} else if (dataType.equals("yearmont")) {
-			return "class=\"WdateinputLine\" onClick=\"WdatePicker({dateFmt:'yyyy-MM'})\" format=\"yyyy-MM\"";
+			return "class=\"layui-input Wdate\" onClick=\"WdatePicker({dateFmt:'yyyy-MM'})\" format=\"yyyy-MM\"";
 		}
-		return "class=\"forminput\"";
+		return "class=\"layui-input\"";
 	}
 
 	public static String dataTypeTranse(String dbkey, String dataType,

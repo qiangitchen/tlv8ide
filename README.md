@@ -23,6 +23,8 @@ Eclipse插件体系结构
 4.  [下载项目源码](https://gitee.com/qianpou/tl)
 5.  运行Tomcat（也可以使用其他中间件）查看效果
 
+[详细配置教程](https://blog.csdn.net/qianpou/article/details/120593335?spm=1001.2014.3001.5502)
+
 #### 使用说明
 
 1.  jdk版本要求对应eclipse对jdk版本的要求
