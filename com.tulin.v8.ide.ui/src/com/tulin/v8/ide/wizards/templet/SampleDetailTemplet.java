@@ -31,6 +31,7 @@ public class SampleDetailTemplet extends TempletsReader {
 			dataItem.append("<input type=\"text\" id=\"" + column + "\" name=\"" + column
 					+ "\" " + DataType.getItemBydataType(datatype) + "/>");
 			dataItem.append("</div>");
+			dataItem.append("</div>");
 		}
 		dataItem.append("</div>");
 		context = context.replace("YJTemplet_dataItem", dataItem);

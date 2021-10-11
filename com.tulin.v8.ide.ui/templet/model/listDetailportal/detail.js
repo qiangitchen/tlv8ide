@@ -14,6 +14,7 @@ function initDocumentPage() {
 	datamian.setDbkey("YJTemplet_dbkey");
 	datamian.setTable("YJTemplet_tableName");
 	datamian.setFormId("MAIN_DATA_FORM");
+	init_toolbar();
 	var rowid = tlv8.RequestURLParam.getParam("rowid");
 	J$("MAIN_DATA_FORM").rowid = rowid;
 	J$("MAIN_DATA_FORM").setAttribute("rowid", rowid);

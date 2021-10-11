@@ -13,6 +13,7 @@ function getData() {
 	MainData.setDbkey("YJTemplet_dbkey");//指定使用数据库连接
 	MainData.setTable("YJTemplet_tableName");
 	MainData.setFormId("MAIN_DATA_FORM");//主表关联form
+	init_toolbar();
 	getData2();
 }
 
