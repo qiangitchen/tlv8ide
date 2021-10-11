@@ -17,18 +17,22 @@ public class SampleDetailTemplet extends TempletsReader {
 				: getTempletPageContext("simpleDetail");
 		context = context.replace("YJTemplet_page", filename.subSequence(0, filename.lastIndexOf(".")));
 		StringBuffer dataItem = new StringBuffer();
-		dataItem.append("<tr>");
+		dataItem.append("<div class=\"layui-form-item\">");
 		for (int i = 0; i < columns.getLength(); i++) {
 			if (i % 3 == 0 && i != 0) {
-				dataItem.append("</tr><tr>");
+				dataItem.append("</div><div class=\"layui-form-item\">");
 			}
+			dataItem.append("<div class=\"layui-inline\">");
 			String column = columns.get(i);
 			String label = labels.get(i);
 			String datatype = datatypes.get(i);
-			dataItem.append("<td>" + label + "</td><td><input type=\"text\" id=\"" + column + "\" name=\"" + column
-					+ "\" " + DataType.getItemBydataType(datatype) + " style=\"width: 100%;\"/></td>");
+			dataItem.append("<label class=\"layui-form-label\">" + label + "</label>");
+			dataItem.append("<div class=\"layui-input-inline\">");
+			dataItem.append("<input type=\"text\" id=\"" + column + "\" name=\"" + column
+					+ "\" " + DataType.getItemBydataType(datatype) + "/>");
+			dataItem.append("</div>");
 		}
-		dataItem.append("</tr>");
+		dataItem.append("</div>");
 		context = context.replace("YJTemplet_dataItem", dataItem);
 		Document doc = Jsoup.parse(context);
 		return doc.html();

@@ -2,6 +2,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <title>YJTemplet_page.html</title>
+    <link type="text/css" rel="stylesheet" href="/tlv8/resources/layui/css/layui.css"></link>
 	<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/default/easyui.css" />
 	<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/icon.css" />
   	<link type="text/css" rel="stylesheet" href="/tlv8/comon/css/formsyle.css"></link>
@@ -10,6 +11,7 @@
   	<script type="text/javascript" src="/tlv8/comon/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript" src="/tlv8/resources/jquery-easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="/tlv8/resources/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="/tlv8/resources/layui/layui.js"></script>
   	<script type="text/javascript" src="YJTemplet_page.js"></script>
   </head> 
   <body style="overflow: hidden;" onload="initDocumentPage();">
@@ -25,39 +27,29 @@
 					</td>
 				</tr>
 			</table>
-			<script type="text/javascript">
-				init_toolbar();
-			</script>
 		</div>
-		<div data-options="region:'center'" style="text-align: center; overflow: auto; padding: 5px;">
-			<div style="width: 800px; margin: auto;">
-				<form id="MAIN_DATA_FORM">
-					<div class="easyui-panel" title="表单信息" style="padding: 5px; margin-bottom: 5px; overflow: hidden;">
-						<table class="Detailtable" style="table-layout: fixed; width:100%;" id="mainLayoutTable">
-							<tr height="5px">
-								<td width="80px"></td>
-								<td width="150px"></td>
-								<td width="80px"></td>
-								<td width="150px"></td>
-								<td width="80px"></td>
-								<td></td>
-							</tr>
+		<div data-options="region:'center',border:false">
+			<div class="layui-fluid">
+				<div class="layui-card">
+				    <div class="layui-card-header">表单信息</div>
+				    <div class="layui-card-body">
+						<form id="MAIN_DATA_FORM" class="layui-form">
 							YJTemplet_dataItem
-						</table>
+							<div style="display: none;">
+								<input type="text" name="FCREATEPSNFID" id="FCREATEPSNFID" />
+								<input type="text" name="FCREATEPSNID" id="FCREATEPSNID" />
+								<input type="text" name="FCREATEPSNNAME" id="FCREATEPSNNAME" />
+								<input type="text" name="FCREATEDEPTID" id="FCREATEDEPTID" />
+								<input type="text" name="FCREATEDEPTNAME" id="FCREATEDEPTNAME" />
+								<input type="text" name="FCREATEOGNID" id="FCREATEOGNID" />
+								<input type="text" name="FCREATEOGNNAME" id="FCREATEOGNNAME" />
+								<input type="text" name="FCREATEORGID" id="FCREATEORGID" />
+								<input type="text" name="FCREATEORGNAME" id="FCREATEORGNAME" />
+								<input type="text" name="FCREATETIME" id="FCREATETIME" />
+							</div>
+						</form>
 					</div>
-					<div style="display: none;">
-						<input type="text" name="FCREATEPSNFID" id="FCREATEPSNFID" />
-						<input type="text" name="FCREATEPSNID" id="FCREATEPSNID" />
-						<input type="text" name="FCREATEPSNNAME" id="FCREATEPSNNAME" />
-						<input type="text" name="FCREATEDEPTID" id="FCREATEDEPTID" />
-						<input type="text" name="FCREATEDEPTNAME" id="FCREATEDEPTNAME" />
-						<input type="text" name="FCREATEOGNID" id="FCREATEOGNID" />
-						<input type="text" name="FCREATEOGNNAME" id="FCREATEOGNNAME" />
-						<input type="text" name="FCREATEORGID" id="FCREATEORGID" />
-						<input type="text" name="FCREATEORGNAME" id="FCREATEORGNAME" />
-						<input type="text" name="FCREATETIME" id="FCREATETIME" />
-					</div>
-				</form>
+				</div>
 			</div>
 		</div>
 	</div>

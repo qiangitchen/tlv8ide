@@ -14,7 +14,7 @@ function initDocumentPage() {
 	datamian.setDbkey("YJTemplet_dbkey");
 	datamian.setTable("YJTemplet_tableName");
 	datamian.setFormId("MAIN_DATA_FORM");
-	
+	init_toolbar();
 	setCreatorInfo();
 }
 
