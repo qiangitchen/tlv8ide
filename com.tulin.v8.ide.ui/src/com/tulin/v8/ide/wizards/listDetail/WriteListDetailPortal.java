@@ -87,7 +87,7 @@ public class WriteListDetailPortal {
 
 		String ListjsText = ListDeatailPortalTemplet.getListJsContext("listDetailportal", dbkey, tableName,
 				columnsText.join(","), labelsText.join(","), widthsText.join(","), datatypesText.join(","),
-				containername.replace("/" + PROJECT_WEB_FOLDER, "") + "/" + detailFilename);
+				containername.replace("/" + PHANTOM_PROJECT_NAME + "/" + PROJECT_WEB_FOLDER, "") + "/" + detailFilename);
 		String DetailpageText = ListDeatailPortalTemplet.getDetailPageContext("listDetailportal", detailFilename,
 				decolumnsText, delabelsText, dedatatypesText);
 		String DetailjsText = ListDeatailPortalTemplet.getDetailJsContext("listDetailportal", dbkey, tableName);
