@@ -1,4 +1,16 @@
-# tlv8ide
+<p align="center">
+<a href="https://www.tlv8.com" rel="nofollow">
+   <img src="https://images.gitee.com/uploads/images/2021/1019/103335_e14063b4_1210964.png" alt="tlv8" width="360">
+</a>
+</p>
+
+<p align="center">  
+  <a href='https://gitee.com/qianpou/tlv8ide/stargazers'><img src='https://gitee.com/qianpou/tlv8ide/badge/star.svg?theme=dark' alt='star'></img></a>
+  <a href='https://gitee.com/qianpou/tlv8ide/blob/master/LICENSE'><img src='https://img.shields.io/badge/License-EPL2.0-blue.svg'></img></a>
+  <!--
+  <a href='https://gitee.com/qianpou/tlv8ide/releases'><img src='https://img.shields.io/github/v/release/qianpou/tlv8ide.svg'></a>
+  -->
+</p>
 
 #### Description
 This is a rapid development tool based on eclipse, 
