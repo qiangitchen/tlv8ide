@@ -2,7 +2,7 @@
 
 <p align="center">  
   <a href='https://gitee.com/qianpou/tlv8ide/stargazers'><img src='https://gitee.com/qianpou/tlv8ide/badge/star.svg?theme=dark' alt='star'></img></a>
-  
+  <a href='https://gitee.com/qianpou/tlv8ide/blob/master/LICENSE'><img src='https://img.shields.io/badge/License-EPL2.0-blue.svg'></img></a>
 </p>
 
 #### 介绍
