@@ -1,5 +1,10 @@
 # tlv8ide
 
+<p align="center">  
+  <a href='https://gitee.com/qianpou/tlv8ide/stargazers'><img src='https://gitee.com/qianpou/tlv8ide/badge/star.svg?theme=dark' alt='star'></img></a>
+  
+</p>
+
 #### 介绍
 这是一款基于eclipse开发的快速开发工具
 
