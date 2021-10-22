@@ -1,0 +1,107 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>tlv8.String</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+
+<body>
+<font size="5px"><b>Class String</b></font><br/>
+String核心基础对象<br/> 
+<br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151">&nbsp;</td>
+    <td width="583">
+	<a href="#Date">String()</a><br/>
+	String核心基础对象
+	</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">&lt;static&gt;&nbsp;boolean&nbsp;</td>
+    <td width="528"><a href="#justep_yn_isin">isin(abs, str)</a><br/>
+	判断字符串包含 abs中包含str返回true 否则返回false
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">&lt;static&gt;&nbsp;boolean&nbsp;</td>
+    <td width="528"><a href="#justep_yn_isHave">isHave(abs,str)</a><br/>
+	判断字符串包含 以英文逗号分隔的字符串数组abs中包含str返回true 否则返回false
+	</td>
+  </tr>
+ </table>
+<br/>
+<div class="tab_head">&nbsp;C<a name="Date"></a>lass Detail </div>
+	String<br/>
+	String核心基础对象<br/>
+	<br/>
+<div class="tab_head">&nbsp;Method Detail </div>
+<div>
+	&lt;static&gt; boolean<a name="justep_yn_isin"></a> isin(abs, str)<br/>
+	判断字符串包含 abs中包含str返回true 否则返回false<br/><br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>abs</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>主字符串<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>str</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>需要检查的字符串<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.String.isin('stringMystring','My')
+	<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	&lt;static&gt; boolean<a name="justep_yn_isHave"></a> isHave(abs, str)<br/>
+	判断字符串包含 以英文逗号分隔的字符串数组abs中包含str返回true 否则返回false<br/><br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>abs</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>主字符串( 以英文逗号分隔的字符串，如：aa,bb,cc,dd)<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>str</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>需要检查的字符串<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.String.isHave('dd,bb,cc,aad','cc')
+	<br/>
+	<br/>
+	<hr/>
+</div>
+</body>
+</html>

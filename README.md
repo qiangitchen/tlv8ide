@@ -7,9 +7,7 @@
 <p align="center">  
   <a href='https://gitee.com/qianpou/tlv8ide/stargazers'><img src='https://gitee.com/qianpou/tlv8ide/badge/star.svg?theme=dark' alt='star'></img></a>
   <a href='https://gitee.com/qianpou/tlv8ide/blob/master/LICENSE'><img src='https://img.shields.io/badge/License-EPL2.0-blue.svg'></img></a>
-  <!--
-  <a href='https://gitee.com/qianpou/tlv8ide/releases'><img src='https://img.shields.io/github/v/release/qianpou/tlv8ide.svg'></a>
-  -->
+  <a href='https://gitee.com/qianpou/tlv8ide/releases'><img src='https://img.shields.io/badge/gitee--release-2.1-blueviolet.svg'></a>
 </p>
 
 #### 介绍
@@ -21,6 +19,8 @@
 
 产品网站
 [www.tlv8.com](https://www.tlv8.com)
+帮助文档
+[doc.tlv8.com](https://doc.tlv8.com)
 
 
 #### 软件架构

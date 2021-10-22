@@ -1,0 +1,234 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>tlv8.portal.dailog</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+
+<body>
+<font size="5px"><b>Class tlv8.portal.dailog</b></font><br/>
+dailog核心基础对象<br/> <br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151">&nbsp;</td>
+    <td width="583">
+	<a href="#justep_yn_portal_classDetail">tlv8.portal.dailog()</a><br/>
+	dailog核心基础对象
+	</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">&lt;static&gt; void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_portal_dailog_openDailog">openDailog(name, url, width, height, callback, itemSetInit, titleItem, urlParam)</a><br/>
+	打开对话框
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">&lt;static&gt; void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_portal_dailog_dailogEngin">dailogEngin(param)</a><br/>
+	对话框确定
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">&lt;static&gt; void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_portal_dailog_dailogRefresh">tlv8.portal.dailog.dailogRefresh()</a><br/>
+	自定义对话框刷新
+	</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">&lt;static&gt; void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_portal_dailog_MydailogEngin">tlv8.portal.dailog.dailogEngin(param)</a><br/>
+	自定义对话框确定</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">&lt;static&gt; void &nbsp;</td>
+    <td width="528"><a href="#justep_yn_portal_dailog_dailogCancel">tlv8.portal.dailog.dailogCancel()</a><br/>
+	自定义对话框取消</td>
+  </tr>
+</table>
+<br/>
+<div class="tab_head">&nbsp;C<a name="justep_yn_portal_classDetail"></a>lass Detail </div>
+	tlv8.portal()<br/>
+	portal核心基础对象<br/>
+	<br/>
+<div class="tab_head">&nbsp;<a name="justep_yn_portal_methodDetail"></a>Method Detail </div>
+<div>
+	<p>&lt;static&gt;void<a name="justep_yn_portal_dailog_openDailog"></a> openDailog(name, url, width, height, callback, itemSetInit, titleItem, urlParam)<br/>
+	打开对话框<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>name</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string} 对话框的标题<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>url</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string} 指定要打开的页面<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>width</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string} 对话框宽度<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>height</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string} 对话框高度<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>callback</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string} 回调函数<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>itemSetInit</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string} itemSetInit：对话框按钮 <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	如item{refreshItem:true,enginItem:true,CanclItem:true}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	refreshItem:刷新按钮 enginItem:确定按钮 CanclItem:取消按钮<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<strong>titleItem</strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	boolean 为false时掩藏标题栏 <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong>urlParam</strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Object} js任意类型可以直接传递到对话框页面 对话框页面通过函数getUrlParam获取<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;<strong> </strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; 如：function getUrlParam(param){ //此函数在对话框打开时调用 </p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert(param);</p>
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;}<br/>
+      <br/>
+&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.portal.dailog.openDailog('人员信息','/system/opm/person-dailog.html',<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	500,350,dailogcallback,null) <br/>
+	<br/>
+	</p>
+	<hr/>
+</div>
+<div>
+	&lt;static&gt;void<a name="justep_yn_portal_dailog_dailogEngin"></a> dailogEngin(param)<br/>
+	对话框确认事件<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>param</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string} 确认参数<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//点击对话框确认按钮后触发的事件（在对话框页面使用）<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function dailogEngin(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+alert(&quot;确认&quot;);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	&lt;static&gt;void<a name="justep_yn_portal_dailog_dailogRefresh"></a> tlv8.portal.dailog.dailogRefresh()<br/>
+	自定义对话框刷新动作<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//自定义刷新按钮触发对话框刷新事件（在对话框页面使用）<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;input type=&quot;button&quot; value=&quot;刷新&quot; onclick=&quot;myRefresh()&quot;/&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function myRefresh(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+tlv8.portal.dailog.dailogRefresh()<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	&lt;static&gt;void<a name="justep_yn_portal_dailog_MydailogEngin"></a> tlv8.portal.dailog.dailogEngin(param)<br/>
+	自定义对话框确定动作<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>param</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string} 向父窗体回传的参数 <br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//自定义确定按钮触发对话框确定事件（在对话框页面使用）<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;input type=&quot;button&quot; value=&quot;确定&quot; onclick=&quot;myEnsure()&quot;/&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function myEnsure(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.portal.dailog.dailogEngin();<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+<div>
+	&lt;static&gt;void<a name="justep_yn_portal_dailog_dailogCancel"></a> tlv8.portal.dailog.dailogCancel()<br/>
+	自定义对话框取消动作<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	//自定义确定按钮触发对话框刷新事件（在对话框页面使用）<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	&lt;input type=&quot;button&quot; value=&quot;取消&quot; onclick=&quot;myCancal()&quot;/&gt;<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	function myCancal(){<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	tlv8.portal.dailog.dailogCancel()<br>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	}<br/>
+	<br/>
+	<hr/>
+</div>
+</body>
+</html>

@@ -1,0 +1,247 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>Map</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+
+<body>
+<font size="5px"><b>Class Map</b></font><br/>
+Map基础数据对象<br/> 
+<br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151">&nbsp;</td>
+    <td width="583">
+	<a href="#Map">Map()</a><br/>
+	Map基础数据对象
+	</td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#Map_put">put(key, value)</a><br/>
+	插入</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#Map_get">get(key)</a><br/>
+	取出</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#Map_remove">remove(key)</a><br/>
+	移除</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">number&nbsp;</td>
+    <td width="528"><a href="#Map_size">size()</a><br/>
+	获取Map中键值对个数</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">boolean&nbsp;</td>
+    <td width="528"><a href="#Map_isEmpty">isEmpty()</a><br/>
+	Map是否空</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">boolean&nbsp;</td>
+    <td width="528"><a href="#Map_containsKey">containsKey(key)</a><br/>
+	是否包含某个键</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">boolean&nbsp;</td>
+    <td width="528"><a href="#Map_containsValue">containsValue(value)</a><br/>
+	是否包含某个值</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">Array&nbsp;</td>
+    <td width="528"><a href="#Map_keySet">keySet()</a><br/>
+	获取键集合</td>
+  </tr>
+</table>
+ <br/>
+ <div class="tab_head">&nbsp;C<a name="Map"></a>lass Detail </div>
+  Map()<br/>
+	Map基础数据对象<br/>
+	<br/>
+<div class="tab_head">&nbsp;Method Detail </div>
+<div>
+    void &nbsp;<a name="Map_put"></a> put(key, value)<br/>
+	插入<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>key</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>键<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>value</b><br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>值<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var cell = new Map();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	cell.put(&quot;a&quot;,&quot;123&quot;);<br/>
+	<br/>
+	<hr/>
+</div>
+<div> 
+	string    &nbsp;<a name="Map_get"></a> get(key)<br/>
+	插入<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>key</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>键<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var cell = new Map();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	cell.put(&quot;a&quot;,&quot;123&quot;);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var a=cell.get(&quot;a&quot;);<br/>
+	<br/>
+	<hr/>
+</div>
+<div> 
+	void    &nbsp;<a name="Map_remove"></a> remove(key)<br/>
+	移除<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Parameters:</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>key</b><br/> 
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>键<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var cell = new Map();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	cell.put(&quot;a&quot;,&quot;123&quot;);<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	cell.remove(&quot;a&quot;);<br/>
+	<br/>
+	<hr/>
+</div>
+<div> 
+	number    &nbsp;<a name="Map_size"></a> size()<br/>
+	获取Map键值对个数<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{number}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var cell = new Map();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var num=cell.size();<br/>
+<br/>
+	<hr/>
+</div>
+<div> 
+	boolean    &nbsp;<a name="Map_isEmpty"></a> isEmpty()<br/>
+	判断Map是否空<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var cell = new Map();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var b=cell.isEmpty();<br/>
+	<br/>
+	<hr/>
+</div>
+<div> 
+	boolean    &nbsp;<a name="Map_containsKey"></a> containsKey(key)<br/>
+	是否包含某个键<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var cell = new Map();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var b=cell.containsKey(&quot;a&quot;);<br/>
+	<br/>
+	<hr/>
+</div>
+<div> 
+	boolean    &nbsp;<a name="Map_containsValue"></a> containsValue(value)<br/>
+	是否包含某个值<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{boolean}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var cell = new Map();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var b=cell.containsValue(&quot;a&quot;);<br/>
+	<br/>
+	<hr/>
+</div>
+<div> 
+	Array&nbsp;<a name="Map_keySet"></a> keySet()<br/>
+	是否包含某个值<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Returns:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Array}<br/>
+	<br/>
+	&nbsp;&nbsp;
+	<b>Example:</b> <br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	var cell = new Map();<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; var mArray=cell.keySet();<br/>
+	<br/>
+	<hr/>
+</div>
+</body>
+</html>

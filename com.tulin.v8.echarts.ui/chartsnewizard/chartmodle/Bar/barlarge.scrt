@@ -1,0 +1,33 @@
+function generateData(count) {
+    var baseValue = Math.random() * 1000;
+    var time = +new Date(2011, 0, 1);
+    var smallBaseValue;
+
+    function next(idx) {
+        smallBaseValue = idx % 30 === 0
+            ? Math.random() * 700
+            : (smallBaseValue + Math.random() * 500 - 250);
+        baseValue += Math.random() * 20 - 10;
+        return Math.max(
+            0,
+            Math.round(baseValue + smallBaseValue) + 3000
+        );
+    }
+
+    var categoryData = [];
+    var valueData = [];
+
+    for (var i = 0; i < count; i++) {
+        categoryData.push(echarts.format.formatTime('yyyy-MM-dd\nhh:mm:ss', time));
+        valueData.push(next(i).toFixed(2));
+        time += 1000;
+    }
+
+    return {
+        categoryData: categoryData,
+        valueData: valueData
+    };
+}
+
+var dataCount = 5e5;
+var data = generateData(dataCount);

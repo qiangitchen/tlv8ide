@@ -1,0 +1,604 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN"
+"http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=gb2312">
+<title>StaticGrid</title>
+<link rel="STYLESHEET" type="text/css" href="../common/css/common.css"></link>
+</head>
+ 
+<body>
+<font size="5px"><b>Class StaticGrid</b></font><br/>
+静态(动态)列表(grid)<br/> 
+<br/>
+<table width="750px" border="0">
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Class Summary</td>
+  </tr>
+  <tr>
+    <td width="151" align="right">&nbsp;</td>
+    <td width="583"><a href="#StaticGrid">StaticGrid </a><br/>
+    (静态grid类) </td>
+  </tr>
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Field Summary</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#">id</a><br/>
+    grid标识</td>
+  </tr>
+ 
+  <tr>
+    <td width="220" class="td_left">Element&nbsp;</td>
+    <td width="528"><a href="#">Dom</a><br/>
+    grid所在对象div</td>
+  </tr>
+ 
+    <tr>
+    <td width="220" class="td_left">Element&nbsp;</td>
+    <td width="528"><a href="#">element</a><br/>
+      grid的dom对象类型为table</td>
+  </tr>
+  
+  <tr>
+    <td width="220" class="td_left">Array&nbsp;</td>
+    <td width="528"><a href="#">data</a><br/>
+    grid的数据</td>
+  </tr>
+  
+   
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#">selectedRow</a><br/>
+    grid的当前选中行的ID</td>
+  </tr>
+  
+</table>
+<br/>
+<table >
+  <tr>
+    <td colspan="2" class="tab_head">&nbsp;Method Summary</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_init">init(LabArray)</a><br/>
+    初始化列表</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_initData">initData(json)</a><br/>
+     初始化数据</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_clearData">clearData()</a><br/>
+     清除数据</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_addData">addData(addData)</a><br/>
+    添加数据</td>
+  </tr>
+ <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_removeData">removeData(rowid)</a><br/>
+    删除数据</td>
+  </tr>
+   <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_getValue">getValue(rowid,column)</a><br/>
+    获取值</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_setValue">setValue(rowid, column, nvalue)</a><br/>
+    赋值</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_colour">colour()</a><br/>
+    数据行着色{斑马条}</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_setRowBackGround">setRowBackGround(rowid, backG)</a><br/>
+    设置行背景</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_setRowDbclick">setRowDbclick(fn)</a><br/>
+    设置行双击动作</td>
+  </tr>
+   <tr>
+    <td width="220" height="34" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_setEditMode">setEditMode(click)</a><br/>
+    设置编辑状态(click{dbclick:跟双击行事件会有冲突})</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">Element&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_getRowObjById">getRowObjById(rId)</a><br/>
+    根据rowid获取行Obj{Element}</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">Array&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_getScrollWed">getScrollWed()</a><br/>
+    获取位置(grid数据滚动条的位置)</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_setScrollWed">setScrollWed(ar)</a><br/>
+    定位(grid滚动条)</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">void&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_selectRowById">selectRowById(rId)</a><br/>
+    选中指定行{行ID}</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">boolean&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_checkRowId">checkRowId(rowid)</a><br/>
+    检查rowid是否已存在</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_getRowIds">getRowIds()</a><br/>
+    获取所有行的ID</td>
+  </tr>
+  <tr>
+    <td width="220" class="td_left">string&nbsp;</td>
+    <td width="528"><a href="#StaticGrid_getRowIds">dataToString()</a><br/>
+    将数据转换成 字符型</td>
+  </tr>
+</table>
+ <br/>
+ <div class="tab_head">&nbsp;<a name="StaticGrid" id="StaticGrid"></a><span class="tab_head">Class Detail</span></div>
+ <div>
+   <p>StaticGrid <br>
+  * 静态grid<br>
+  * 支持json数据 </p>
+   <br/>
+     例子：<br/>
+   &lt;div id=&quot;executorList&quot; style=&quot;width:100%;height:100%;overflow:auto;cursor:default;&quot;&gt;&lt;/div&gt;<br/>
+   <br/>&lt;script type="text/javascript"&gt;<br/>
+     &nbsp;&nbsp;var staticGrid = new StaticGrid(&quot;executorList&quot;); //实例化类 <br>
+     &nbsp;&nbsp;staticGrid.init(&quot;[{id:'fName',name:'名称',width:100},{id:'fType',name:'类型',width:80}]&quot;); //初始化 <br>
+     &nbsp;&nbsp;staticGrid.setRowDbclick(staticGridDbclick); //设置行双击事件 <br/>
+	 &lt;/script&gt;<br/>
+     <br/>
+     <br/>
+</div>
+
+
+
+
+ <div class="tab_head">&nbsp;<span class="tab_head">Method Summary</span></div>
+<div>
+  <p>void&nbsp;<a name="StaticGrid_init" id="StaticGrid_init"></a> init(LabArray);<br/>
+	初始化<br/>
+	<br/>
+&nbsp;&nbsp;	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;LabArray<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	[{object,object}]or{string}<b>[required]</b>表头配置信息<br/>
+	<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;类型：字符串或json数组 <br/>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;例如：[{id:'fCode',name:'编码',width:60},{id:'fName',name:'名称',width:60}]<br/>
+&nbsp;&nbsp;	<b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{Object}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> <br/><br/>
+  
+  staticGrid.init("[{id:'fName',name:'名称',width:100},{id:'fType',name:'类型',width:80}]"); //初始化 
+  <br/>
+  <hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_initData" id="StaticGrid_initData"></a>initData(json)<br/>
+	初始化数据<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>json</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	[{object,object}]<b>[required]</b>json数据<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+	例如：[{rowid:'xinhua',fCode:'zhangsan',fName:'张三'},{rowid:'xhege',fCode:'lisi',fName:'李四'}]	<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> <br/>
+		<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;var jsondata = [{rowid:'xinhua',fCode:'zhangsan',fName:'张三'},{rowid:'xhege',fCode:'lisi',fName:'李四'}];<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.initData(jsondata);<br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_clearData" id="StaticGrid_clearData"></a>clearData()<br/>
+	清除数据<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> <br/>
+		<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.clearData();<br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_addData" id="StaticGrid_addData"></a>addData(json)<br/>
+	初始化数据<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;
+	<b>json</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	[{object,object}]<b>[required]</b>json数据<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+	例如：{rowid:'dd',fCode:'test',fName:'测试'} 对应自己定义的列给值<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> <br/>
+		<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;var jsondata = {rowid:'dd',fCode:'test',fName:'测试'};<br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.addData(jsondata);<br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_removeData" id="StaticGrid_removeData"></a>removeData(rowid)<br/>
+	初始化数据<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rowid<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>数据行ID<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{void}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> <br/>
+  <br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.removeData(&quot;dd&quot;);<br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>string &nbsp;<a name="StaticGrid_getValue" id="StaticGrid_getValue"></a>getValue(rowid,column)<br/>
+	初始化数据<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rowid<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>数据行ID<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;column<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>数据列名&nbsp;&nbsp;&nbsp;	<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> <br/>
+  <br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.getValue(&quot;dd&quot;,&quot;name&quot;);<br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_setValue" id="StaticGrid_setValue"></a>setValue(rowid,column,nvalue)<br/>
+	初始化数据<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rowid<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>数据行ID<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;column<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>数据列名<br/>
+	&nbsp;&nbsp;&nbsp;&nbsp;nvalue<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>需要赋予的值&nbsp;&nbsp;&nbsp;	<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> <br/>
+  <br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.setValue(&quot;dd&quot;,&quot;name&quot;,&quot;李四&quot;);<br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_colour" id="StaticGrid_colour"></a>colour()<br/>
+	数据行着色{斑马条}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;	<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> <br/>
+  <br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.colour(); //改变数据行颜色后可用次方法将数据行颜色恢复为斑马条 <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_setRowBackGround" id="StaticGrid_setRowBackGround"></a>setRowBackGround(rowid, backG)<br/>
+	设置行背景<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rowid<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>数据行ID<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;backG<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{string}<b>[required]</b>需要设置为的颜色代码 如：#ffffff &nbsp;&nbsp;	<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> <br/>
+  <br/>
+		&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.setRowBackGround(&quot;dd&quot;,&quot;#eee&quot;); //改变数据行颜色 (个性化数据行颜色) <br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_setRowDbclick" id="StaticGrid_setRowDbclick"></a>setRowDbclick(fn)<br/>
+	设置行双击动作<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;fn<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{function}<b>[required]</b>双击行时需要执行的函数<br/>
+	&nbsp;&nbsp;	<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> <br/>
+  <br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;var row_dbclick_fun = function(event){</p>
+	<br/>
+   &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;alert("test");
+	<p>&nbsp;&nbsp;&nbsp;&nbsp;} <br/>
+      <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.setRowDbclick(row_dbclick_fun); <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+	</p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_setEditMode" id="StaticGrid_setEditMode"></a>setEditMode(click)<br/>
+	设置编辑状态<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;click<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	{object}<b>[required]</b> dbclick双击格子编辑 true单机编辑 false不能编辑<br/>
+	&nbsp;&nbsp;	<br/>
+	<br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	<br/>
+&nbsp;&nbsp;
+  <b>Example:</b> <br/>
+  <br/>
+      <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.setEditMode(&quot;dbclick&quot;); //双击编辑<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.setEditMode(true); //单击编辑<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.setEditMode(false); //取消编辑<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_getRowObjById" id="StaticGrid_getRowObjById"></a>getRowObjById(rId)<br/>
+	根据rowid获取行Obj{Element}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rId<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  {string}<b>[required]</b>行ID<br/>
+&nbsp;&nbsp;	<br/>
+	  <br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  <br/>
+&nbsp;&nbsp;
+	  <b>Example:</b> <br/>
+	  <br/>
+	  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var rElem = staticGrid.getRowObjById(&quot;dd&quot;); <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;alert(rElem.cells[0].innerHTML);//可以自由操作此对象
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>Array &nbsp;<a name="StaticGrid_getScrollWed" id="StaticGrid_getScrollWed"></a>getScrollWed()<br/>
+	获取位置<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+	  <br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{Array} 返回一个数组 如： [10,100] 滚动条的x坐标和y坐标<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  <br/>
+&nbsp;&nbsp;
+	  <b>Example:</b> <br/>
+	  <br/>
+	  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var srcoll = staticGrid.getScrollWed(); //可用于刷新数据后重定位 配合【setScrollWed】
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+  </p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_setScrollWed" id="StaticGrid_setScrollWed"></a>setScrollWed(ar)<br/>
+	定位(grid滚动条)<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;ar<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  {Array}<b>[required]</b> 数组 如： [10,100] 滚动条的x坐标和y坐标<br/>
+	  <br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  <br/>
+&nbsp;&nbsp;
+	  <b>Example:</b> <br/>
+	  <br/>
+	  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var srcoll = staticGrid.getScrollWed(); //可用于刷新数据后重定位 配合【setScrollWed】
+<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.initData(json);<br/>
+  &nbsp;&nbsp;&nbsp;&nbsp;staticGrid.setScrollWed(srcoll);</p>
+	<hr/>
+</div>
+<div>
+	<p>void &nbsp;<a name="StaticGrid_selectRowById" id="StaticGrid_selectRowById"></a>selectRowById(rId)<br/>
+	选中指定行{行ID}<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rId<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  {string}<b>[required]</b> 行ID <br/>
+	  <br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  <br/>
+&nbsp;&nbsp;
+	  <b>Example:</b> <br/>
+	  <br/>
+	  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;staticGrid.selectRowById(&quot;dd&quot;);  </p>
+	<hr/>
+</div>
+<div>
+	<p>boolean &nbsp;<a name="StaticGrid_checkRowId" id="StaticGrid_checkRowId"></a>checkRowId(rowid)<br/>
+	检查rowid是否已存在<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;rowid<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  {string}<b>[required]</b> 行ID <br/>
+	  <br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  <br/>
+&nbsp;&nbsp;
+	  <b>Example:</b> <br/>
+	  <br/>
+	  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var isHave = staticGrid.checkRowId(&quot;dd&quot;);  </p>
+	<hr/>
+</div>
+
+<div>
+	<p>string &nbsp;<a name="StaticGrid_getRowIds" id="StaticGrid_getRowIds"></a>getRowIds()<br/>
+	获取所有行的ID<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+	  <br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{String} //返回grid的所有id 以逗号分隔 &nbsp;<br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  <br/>
+&nbsp;&nbsp;
+	  <b>Example:</b> <br/>
+	  <br/>
+	  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var rowids = staticGrid.getRowIds(); //符号','分割 {rowid不允许出现英文逗号 }  </p>
+	<hr/>
+</div>
+<div>
+	<p>string &nbsp;<a name="StaticGrid_dataToString" id="StaticGrid_dataToString"></a>dataToString()<br/>
+	获取所有行的ID<br/>
+	<br/>
+&nbsp;&nbsp;
+	<b>Parameters:</b><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;<br/>
+	  <br/>
+&nbsp;&nbsp; <b>Returns:</b> <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{string} //字符型 json数组 可用于与后台数据交互 <br/><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<strong>如: </strong><br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;[{rowid:&quot;dd&quot;,id:&quot;dd&quot;,name:&quot;张三&quot;},{rowid:&quot;ll&quot;,id:&quot;dd&quot;,name:&quot;李四&quot;}] <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+	  <br/>
+&nbsp;&nbsp;
+	  <b>Example:</b> <br/>
+	  <br/>
+	  <br/>
+&nbsp;&nbsp;&nbsp;&nbsp;var jsonStrData = staticGrid.dataToString(); </p>
+	<hr/>
+</div>
+</body>
+</html>
+

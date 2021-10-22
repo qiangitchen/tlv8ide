@@ -1,0 +1,425 @@
+
+package zigen.plugin.db.ui.editors.event;
+
+import java.text.NumberFormat;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
+
+import org.eclipse.swt.SWT;
+import org.eclipse.swt.dnd.Clipboard;
+import org.eclipse.swt.dnd.TextTransfer;
+import org.eclipse.swt.events.KeyEvent;
+import org.eclipse.swt.events.KeyListener;
+import org.eclipse.swt.events.TraverseEvent;
+import org.eclipse.swt.events.TraverseListener;
+import org.eclipse.swt.widgets.Text;
+
+import zigen.plugin.db.DbPlugin;
+import zigen.plugin.db.DbPluginConstant;
+import zigen.plugin.db.core.ClipboardUtils;
+import zigen.plugin.db.core.IDBConfig;
+import zigen.plugin.db.core.TabTokenizer;
+import zigen.plugin.db.core.TableColumn;
+import zigen.plugin.db.core.TableElement;
+import zigen.plugin.db.core.Transaction;
+import zigen.plugin.db.ui.editors.ITableViewEditor;
+import zigen.plugin.db.ui.editors.QueryViewEditor2;
+import zigen.plugin.db.ui.internal.ITable;
+import zigen.plugin.db.ui.jobs.RecordCountForTableJob;
+
+/**
+ * 
+ * TableKeyAdapterクラス.
+ * 
+ * @author ZIGEN
+ * @version 1.0
+ * @since JDK1.4 history Symbol Date Person Note [1] 2006/02/08 ZIGEN create.
+ * 
+ */
+public class TableKeyAdapter implements KeyListener, TraverseListener {
+
+	private TableKeyEventHandler handler;
+
+	private ITableViewEditor editor;
+
+	/**
+	 * コンストラクタ
+	 * 
+	 */
+	public TableKeyAdapter(TableKeyEventHandler handler) {
+		this.handler = handler;
+		this.editor = handler.editor;
+
+	}
+
+	public void keyTraversed(TraverseEvent e) {
+		int row = handler.getSelectedRow(); // 行（先頭は0から)
+		int col = handler.getSelectedCellEditorIndex(); // 現在のカラム
+
+		if (e.character == SWT.TAB) {
+			if ((e.stateMask & SWT.SHIFT) != 0) {
+				if (handler.validate(row, col)) {
+					int prevCol = handler.getEditablePrevColumn(col);
+					handler.editTableElement(row, prevCol);
+				}
+			} else {
+				if (handler.validate(row, col)) {
+					int nextCol = handler.getEditableNextColumn(col);
+					handler.editTableElement(row, nextCol);
+				}
+			}
+			e.doit = false; // TABは常にfalse
+		}
+	}
+	/**
+	 * Enterイベント
+	 * @param e
+	 * @throws Exception
+	 */
+	private void enterEvent(KeyEvent e) throws Exception {
+		int row = handler.getSelectedRow(); // 行（先頭は0から)
+		int col = handler.getSelectedCellEditorIndex(); // 現在のカラム
+
+		TableElement element = (TableElement) handler.viewer.getElementAt(row);
+		if (!handler.validate(row, col)) {
+			e.doit = false;
+		} else {
+			if (handler.updateDataBase(element)) {
+				handler.selectRow(row);// 更新後選択状態にする
+				e.doit = true;
+			} else {
+				handler.editTableElement(row, col);
+				e.doit = false;
+			}
+		}
+
+	}
+
+	/**
+	 * 矢印イベント
+	 * @param e
+	 * @param text
+	 * @throws Exception
+	 */
+	private void arrowEvent(KeyEvent e, Text text) throws Exception {
+		int row = handler.getSelectedRow(); // 行（先頭は0から)
+		int col = handler.getSelectedCellEditorIndex(); // 現在のカラム
+		int prevCol = handler.getEditablePrevColumn(col);
+		int nextCol = handler.getEditableNextColumn(col);
+		int maxRow = handler.table.getItemCount();
+		int maxCol = handler.table.getColumnCount();
+		int caretPostion = text.getCaretPosition();
+		int carCount = text.getCharCount();
+		int selectionCount = text.getSelectionCount();
+		TableElement element = (TableElement) handler.viewer.getElementAt(row);
+		switch (e.keyCode) {
+		case SWT.ARROW_UP:
+//			if (row > 0) {
+			if (row >= 0) {
+				if (handler.validate(row, col)) { // validateしないとisModifyが有効にならない
+					if (element.isNew() && !element.isModify()) {
+						handler.removeRecord(element);
+						handler.editTableElement(row - 1, col);
+					} else {
+						if (handler.updateDataBase(element)) {
+							handler.editTableElement(row - 1, col);
+						} else {
+							handler.editTableElement(row, col);
+						}
+					}
+				}
+				e.doit = false;
+			}
+			break;
+		case SWT.ARROW_DOWN:
+			if (row < maxRow - 1) {
+				if (handler.validate(row, col)) {
+					if (handler.updateDataBase(element)) {
+						handler.editTableElement(row + 1, col);
+					} else {
+						handler.editTableElement(row, col);
+					}
+				}
+				e.doit = false;
+			} else {
+				if (handler.validate(row, col)) {
+					if (!element.isNew()) {
+						if (handler.updateDataBase(element)) {
+							if(editor instanceof QueryViewEditor2){
+								;// 何もしない
+								//handler.editTableElement(0, col);	// 先頭へ
+							}else{
+								handler.createNewRecord();
+							}
+						} else {
+							handler.editTableElement(row, col);
+						}
+					} else {
+						if (element.isModify()) {
+							if (handler.updateDataBase(element)) {
+								handler.createNewRecord();
+							} else {
+								handler.editTableElement(row, col);
+							}
+						}
+					}
+				}
+				e.doit = false;
+			}
+			break;
+		case SWT.ARROW_LEFT:
+			if (col == 1) {
+				if (selectionCount == carCount) {
+					e.doit = false;
+
+				} else {
+					e.doit = true;
+				}
+			} else if (col > 1) {
+				if ((selectionCount == 0 && caretPostion == 0) || selectionCount == carCount) {
+					handler.editTableElement(row, prevCol);
+					e.doit = false;
+				}
+			} else {
+				e.doit = false;
+			}
+			break;
+		case SWT.ARROW_RIGHT:
+			if (col == maxCol - 1) {
+				if (selectionCount == carCount) {
+					e.doit = false;
+
+				} else {
+					e.doit = true;
+				}
+			} else if (col < maxCol - 1) {
+				if (selectionCount == carCount || caretPostion == carCount) {
+					handler.editTableElement(row, nextCol);
+					e.doit = false;
+				}
+			} else {
+				e.doit = false;
+			}
+			break;
+		default:
+			break;
+		}
+
+	}
+
+
+	public void keyReleased(KeyEvent e) {
+		;
+	}
+
+	public void keyPressed(KeyEvent e) {
+		Text text = null;
+		try {
+			if (e.widget instanceof Text) {
+				text = (Text) e.widget;
+
+				// ENTER
+				if (e.character == SWT.CR) {
+					enterEvent(e);
+
+					// F2
+				} else if (e.keyCode == SWT.F2) {
+					text.clearSelection();// 選択テキストを解除する
+
+					// 矢印キーイベント
+				} else if (e.keyCode == SWT.ARROW_UP || e.keyCode == SWT.ARROW_DOWN || e.keyCode == SWT.ARROW_LEFT || e.keyCode == SWT.ARROW_RIGHT) {
+					arrowEvent(e, text);
+				}
+
+				/*
+				 * } else if (e.stateMask == SWT.CTRL && e.keyCode == 97) { //
+				 * CTL+A で文字選択 text.selectAll(); }
+				 */
+
+				// CTRL+V
+				if (e.stateMask == SWT.CTRL && e.keyCode == 118) {
+					if (createNewElement()) {
+						e.doit = false;
+					}
+				}
+
+			}
+		} catch (Exception e1) {
+			DbPlugin.getDefault().showErrorDialog(e1);
+		}
+	}
+
+	public boolean createNewElement() throws Exception {
+
+		String str = getCurrentClipboard();
+
+		//TableColumn[] columns = handler.getHeaderTableElement().getColumns();
+        TableColumn[] columns = null;
+        TableElement headerElement = handler.getHeaderTableElement();
+        if(headerElement == null){
+            // nullならば抜ける
+            return false;
+        }else{
+            columns = headerElement.getColumns();
+        }
+        
+		int columnCount = columns.length;
+
+		if (isRecordData(str, columnCount)) {
+			StringTokenizer tokenizer = new StringTokenizer(str, DbPluginConstant.LINE_SEP);
+
+			// TODO:ThreadLocalでエラーダイアログの連続表示を制御すること
+			PasteRecordMonitor.begin();
+
+			// コピーしたデータのカラムが全て同じかチェックする
+			while (tokenizer.hasMoreTokens()) {
+				String record = tokenizer.nextToken();
+
+				List itemList = new ArrayList();
+				TabTokenizer t = new TabTokenizer(record);
+				while (t.hasMoreElements()) {
+					String token = t.nextToken();
+					if (token.startsWith("\"") && token.endsWith("\"")) { //$NON-NLS-1$ //$NON-NLS-2$
+						token = token.replaceAll("^\"|\"$", "");// 前後の"を削除する
+																// //$NON-NLS-1$
+																// //$NON-NLS-2$
+						token = token.replaceAll("\"\"", "\"");// "" → " に変換
+																// //$NON-NLS-1$
+																// //$NON-NLS-2$
+
+					}
+					itemList.add(token);
+				}
+				String[] items = (String[]) itemList.toArray(new String[0]);
+
+				if (!isHeaderData(columns, items)) {
+					handler.createNewRecord(items); // Headerデータで無いなら新規レコード追加
+				}
+			}
+			PasteRecordMonitor.end();
+
+			// 件数の再計算はここで
+			countRecord();
+
+			return true;
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * レコード件数を計算
+	 *
+	 */
+	private void countRecord() {
+		TableElement[] elements = (TableElement[]) handler.viewer.getInput();
+		// int dispCnt = elements.length - 1;
+		int dispCnt = 0;
+		for (int i = 1; i < elements.length; i++) { // ヘッダー分の除くため、i = 1
+			if (!elements[i].isNew())
+				dispCnt++;
+		}
+
+		NumberFormat format = NumberFormat.getInstance();
+		editor.setTotalCount(format.format(dispCnt), ""); //$NON-NLS-1$
+		IDBConfig config = editor.getDBConfig();
+		ITable tableNode = editor.getTableNode();
+		String condition = editor.getCondition();
+		RecordCountForTableJob job2 = new RecordCountForTableJob(Transaction.getInstance(config), tableNode, condition, dispCnt);
+		job2.setUser(false);
+		job2.schedule();
+
+	}
+
+	private boolean isHeaderData(TableColumn[] colums, String[] items) {
+		boolean isHeader = true;
+		if (colums.length != items.length)
+			return false;
+
+		for (int i = 0; i < colums.length; i++) {
+			TableColumn col = colums[i];
+
+			if (!col.getColumnName().equals(items[i])) {
+				isHeader = false;
+			}
+
+		}
+		return isHeader;
+
+	}
+
+	private boolean isRecordData(String target, int columnCount) {
+
+		if (target == null || "".equals(target))return false; //$NON-NLS-1$
+
+		/*
+		 * StringTokenizer tokenizer = new StringTokenizer(target,
+		 * DbPluginConstant.LINE_SEP); while(tokenizer.hasMoreTokens()){ String
+		 * record = tokenizer.nextToken(); // \t\tで終わる場合を考慮して改行を入れる record =
+		 * record + DbPluginConstant.LINE_SEP;
+		 * 
+		 * String[] items = record.split("\t"); if(columnCount != items.length){
+		 * return false; } }
+		 */
+
+		StringTokenizer tokenizer = new StringTokenizer(target, DbPluginConstant.LINE_SEP);
+		while (tokenizer.hasMoreTokens()) {
+			String record = tokenizer.nextToken();
+			// \t\tで終わる場合を考慮して改行を入れる
+			record = record + DbPluginConstant.LINE_SEP;
+
+			TabTokenizer t = new TabTokenizer(record);
+			if (columnCount != t.getTokenCount()) {
+				return false;
+			}
+		}
+
+		return true;
+
+	}
+
+	private String getCurrentClipboard() {
+		String result = null;
+
+		Clipboard cp = ClipboardUtils.getInstance();
+		TextTransfer transfer = TextTransfer.getInstance();
+		// RTFTransfer rtransfer = RTFTransfer.getInstance();
+		String v[] = cp.getAvailableTypeNames();
+		for (int i = 0; i < v.length; i++) {
+			if (v[i].equals("CF_TEXT")) { //$NON-NLS-1$
+				result = (String) cp.getContents(transfer);
+				if (result != null)
+					return result;
+
+			}
+		}
+		return result;
+	}
+
+	public boolean canCreateNewElement() {
+		String str = getCurrentClipboard();
+
+		TableColumn[] columns = handler.getHeaderTableElement().getColumns();
+		int columnCount = columns.length;
+
+		if (isRecordData(str, columnCount)) {
+			if (str == null)
+				return false;
+
+			StringTokenizer tokenizer = new StringTokenizer(str, DbPluginConstant.LINE_SEP);
+
+			// コピーしたデータのカラムが全て同じかチェックする
+			while (tokenizer.hasMoreTokens()) {
+				String record = tokenizer.nextToken();
+				String[] items = record.split("\t"); //$NON-NLS-1$
+				if (!isHeaderData(columns, items)) {
+					return true; // 貼り付け可能状態
+				}
+			}
+		}
+		return false;
+	}
+
+
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IResource"
+            id="com.tulin.v8.easylook.contribution">
+         <action
+               label="%export"
+               class="com.tulin.v8.easylook.popup.actions.EasyLookAction"
+               icon="icon/easyexplore.gif"
+               menubarPath="additions"
+               enablesFor="1"
+               id="com.tulin.v8.easylook.newAction">
+         </action>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.jdt.core.IOpenable"
+            id="com.tulin.v8.easylook.contribution">
+         <action
+               label="%export"
+               class="com.tulin.v8.easylook.popup.actions.EasyLookAction"
+               icon="icon/easyexplore.gif"
+               menubarPath="additions"
+               enablesFor="1"
+               id="com.tulin.v8.easylook.newAction">
+         </action>
+      </objectContribution>
+   </extension>
+
+</plugin>

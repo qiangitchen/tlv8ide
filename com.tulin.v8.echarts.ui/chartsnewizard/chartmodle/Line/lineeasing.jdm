@@ -1,0 +1,11 @@
+{
+    title: titles.concat([{
+        text: 'Different Easing Functions',
+        top: 'bottom',
+        left: 'center'
+    }]),
+    grid: grids,
+    xAxis: xAxes,
+    yAxis: yAxes,
+    series: series
+}

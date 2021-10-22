@@ -1,0 +1,78 @@
+{
+    title: {
+        text: '在中国租个房子有多贵？',
+        subtext: '市中心一室月租费（数据来源：https://www.numbeo.com）'
+    },
+    legend: {
+        show: true,
+        data: ['价格范围', '均值']
+    },
+    grid: {
+        top: 100
+    },
+    angleAxis: {
+        type: 'category',
+        data: cities
+    },
+    tooltip: {
+        show: true,
+        formatter: function (params) {
+            var id = params.dataIndex;
+            return cities[id] + '<br>最低：' + data[id][0] + '<br>最高：' + data[id][1] + '<br>平均：' + data[id][2];
+        }
+    },
+    radiusAxis: {
+    },
+    polar: {
+    },
+    series: [{
+        type: 'bar',
+        itemStyle: {
+            normal: {
+                color: 'transparent'
+            }
+        },
+        data: data.map(function (d) {
+            return d[0];
+        }),
+        coordinateSystem: 'polar',
+        stack: '最大最小值',
+        silent: true
+    }, {
+        type: 'bar',
+        data: data.map(function (d) {
+            return d[1] - d[0];
+        }),
+        coordinateSystem: 'polar',
+        name: '价格范围',
+        stack: '最大最小值'
+    }, {
+        type: 'bar',
+        itemStyle: {
+            normal: {
+                color: 'transparent'
+            }
+        },
+        data: data.map(function (d) {
+            return d[2] - barHeight;
+        }),
+        coordinateSystem: 'polar',
+        stack: '均值',
+        silent: true,
+        z: 10
+    }, {
+        type: 'bar',
+        data: data.map(function (d) {
+            return barHeight * 2
+        }),
+        coordinateSystem: 'polar',
+        name: '均值',
+        stack: '均值',
+        barGap: '-100%',
+        z: 10
+    }],
+    legend: {
+        show: true,
+        data: ['A', 'B', 'C']
+    }
+}

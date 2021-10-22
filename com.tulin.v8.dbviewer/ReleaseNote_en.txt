@@ -1,0 +1,57 @@
+------------------------------------------------------------------
+DBViewer Plugin for Eclipse V1.2.1.20100421
+------------------------------------------------------------------
+
+New features /improvement
+---------------------------
+
+It came to be able to use the pager function with all DB.
+It came to be able to use the pager function for the query result.
+The Timestamp type is corrected as displayed at the Nano second (Only DB2).
+It is correctly displayed. When you omit the constraint name(Only Oracle).
+
+
+Bug Fix
+---------------------------
+
+The problem that was not able to be right-clicked as a table edit editor was corrected.
+There is a problem that the label is not correctly displayed under English-language environments.
+
+
+------------------------------------------------------------------
+DBViewer Plugin for Eclipse V1.2.0.20091112
+------------------------------------------------------------------
+
+New features /improvement
+---------------------------
+
+Speed-up of DBTreeView.
+Speed-up of Paste record data.
+Speed-up of TableEditor displaying.
+Defailt SQL demiliter is changed from '/' to ';'.
+Trouble to which SYSOPER is displayed with SYSOPEA is corrected.
+The record is done in Trim and copied" function is added by Table Editor.
+The table comment and the column comment are displayed by Symfoware.
+Time is shortened to the compilation of long PLSQL.
+
+Bug Fix
+---------------------------
+
+< DBTreeView >
+The icon is displayed when there is an error by Oracle Function/StoredProcedure.
+The problem that the schema is not displayed is corrected by DB2.
+It corrects it like displaying the digit of NCHAR and NVARCHAR2 of Oracle.
+
+< TableEditor>
+The constraint name is corrected like displaying initial.
+The trouble where data cannot be paste is corrected by linux.
+The trouble of the INSERT Statement making processing is corrected.
+
+< Diff(only Oracle) >
+・Trouble that Diff cannot be taken by the unit of Folder is corrected.
+
+< SQL Content Assist>
+Deterioration for the schema was corrected.
+It is corrected that the column name is correctly retrieved.
+
+

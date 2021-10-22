@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            id="com.tulin.v8.flowdesigner.ui.editors.process.ProcessEditor"
+            name="%editor.name.flow"
+            icon="icons/M.gif"
+            extensions="process"
+            class="com.tulin.v8.flowdesigner.ui.editors.process.ProcessEditor"
+            contributorClass="com.tulin.v8.flowdesigner.ui.editors.MultiPageEditorContributor">
+      </editor>
+   </extension>
+
+</plugin>
