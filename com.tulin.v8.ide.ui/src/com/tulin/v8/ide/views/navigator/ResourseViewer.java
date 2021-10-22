@@ -12,8 +12,9 @@ import com.tulin.v8.ide.utils.StudioConfig;
 import org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart;
 import org.eclipse.jface.viewers.IStructuredSelection;
 
-/*
+/**
  * 资源视图
+ * @author chenqian
  */
 @SuppressWarnings("restriction")
 public class ResourseViewer extends PackageExplorerPart {

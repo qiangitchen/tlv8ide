@@ -100,8 +100,8 @@ import zigen.plugin.db.ui.views.TreeView;
 
 /**
  * 模型视图
+ * @author chenqian
  */
-
 @SuppressWarnings("restriction")
 public class ModelView extends TreeView implements IStatusChangeListener, IViewPartInputProvider, IPackagesViewPart,
 		IMenuListener, IPropertyChangeListener, ISetSelectionTarget, IShowInTarget {
