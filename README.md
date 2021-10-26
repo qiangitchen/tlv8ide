@@ -5,6 +5,7 @@
 </p>
 
 <p align="center">  
+  <a href="#"><img src='https://img.shields.io/badge/jdk-1.8+-redviolet.svg'/></a>
   <a href='https://gitee.com/qianpou/tlv8ide/blob/master/LICENSE'><img src='https://img.shields.io/badge/License-EPL2.0-blue.svg'></img></a>
   <a href='https://gitee.com/qianpou/tlv8ide/releases'><img src='https://img.shields.io/badge/release-2.1-blueviolet.svg'></a>
 </p>
@@ -41,7 +42,7 @@ Eclipse插件体系结构
 #### 使用说明
 
 1.  jdk版本要求对应eclipse对jdk版本的要求
-2.  插件项目的jdk版本要求1.6+
+2.  插件项目的jdk版本要求1.8+
 3.  报表设计器不支持IE环境，所以在Windows环境下需要CEF.
 4.  Win64系统安装[CEF](https://github.com/equoplatform/chromium-swt)
 
