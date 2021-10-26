@@ -72,7 +72,7 @@ public class DataSoursePermisionDialog extends Dialog {
 		sTypel.setLayoutData(dataS);
 		dbkeyCombo = new Combo(copPer, SWT.DROP_DOWN);
 		String[] dbkeys = { Messages.getString("preferencePages.DataSousePermission.acde5"),
-				"oracle.jdbc.driver.OracleDriver", "net.sourceforge.jtds.jdbc.Driver", "com.mysql.jdbc.Driver",
+				"oracle.jdbc.driver.OracleDriver", "net.sourceforge.jtds.jdbc.Driver", "com.mysql.jdbc.Driver","com.mysql.cj.jdbc.Driver",
 				"org.postgresql.Driver", "dm.jdbc.driver.DmDriver", "com.kingbase8.Driver" };
 		dbkeyCombo.setItems(dbkeys);
 		String dbDrivtype = (table.getSelection().length > 0) ? (table.getSelection()[0]).getText(1)
@@ -163,7 +163,7 @@ public class DataSoursePermisionDialog extends Dialog {
 								sDbUrlv.setText("jdbc:jtds:sqlserver://127.0.0.1:1433/TLoa");
 								sDbTypev.setText("sqlserver");
 							}
-							if (sType.equals("com.mysql.jdbc.Driver")) {
+							if (sType.equals("com.mysql.jdbc.Driver")||"com.mysql.cj.jdbc.Driver".equals(sType)) {
 								sDbUrlv.setText(
 										"jdbc:mysql://127.0.0.1:3306/TLoa?characterEncoding=utf8&amp;useUnicode=true&amp;useSSL=false");
 								sDbTypev.setText("mysql");

@@ -57,7 +57,7 @@ public class DBType {
 	public static final int getType(String driverName) {
 		final String DB_ORACLE = "oracle"; //$NON-NLS-1$
 		final String DB_SYMFOWARE = "symfoware"; //$NON-NLS-1$
-		final String DB_MYSQL = "mysql"; // com.mysql.jdbc.Driver
+		final String DB_MYSQL = "mysql"; // com.mysql.jdbc.Driver com.mysql.cj.jdbc.Driver
 		// //$NON-NLS-1$
 		final String DB_HIRDB = "hirdb"; // JP.co.Hitachi.soft.HiRDB.JDBC.PrdbDriver
 		// //$NON-NLS-1$

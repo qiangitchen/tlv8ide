@@ -96,6 +96,9 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 
 		// for mysql
 		list.add(new String[] {"com.mysql.jdbc.Driver", "jdbc:mysql://<host>:3306/<database>"}); //$NON-NLS-1$ //$NON-NLS-2$
+		
+		// for mysql 8
+		list.add(new String[] {"com.mysql.cj.jdbc.Driver", "jdbc:mysql://<host>:3306/<database>"}); //$NON-NLS-1$ //$NON-NLS-2$
 
 		// for derby
 		list.add(new String[] {"org.apache.derby.jdbc.EmbeddedDriver", "jdbc:derby:<database>;create=false"}); //$NON-NLS-1$ //$NON-NLS-2$
