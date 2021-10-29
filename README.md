@@ -69,9 +69,9 @@ Eclipse插件体系结构
 ![输入图片说明](https://images.gitee.com/uploads/images/2021/0918/110719_6dbdae41_1210964.png "界面设计.png")
 
 
-#### 参与贡献
+#### 特别感谢
 
-1.  [www.tulinxian.com](https://www.tulinxian.com)
+1.  [昆明三体科技有限公司](https://e.gitee.com/kmsanti/)
 2.  [软捷科技](https://www.yunagile.com/)
 3.  [起步科技](https://www.justep.com/)
 4.  [Eclipse](https://www.eclipse.org/)
