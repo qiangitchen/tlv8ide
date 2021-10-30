@@ -33,6 +33,8 @@ Eclipse插件体系结构
 2.  离线安装：下载最新发行版压缩包studio-app.zip [https://gitee.com/qianpou/tlv8ide/releases](https://gitee.com/qianpou/tlv8ide/releases),将解压后的studio-app文件夹放到eclipse/dropins目录下；
 
     在线安装：eclipse-Help-Install New Software-Add,Location填写：[http://dl.tlv8.cn/updates/](http://dl.tlv8.cn/updates/),按提示步骤完成安装。
+
+    marketplace：eclipse|myeclipse-Help-Eclipse Marketplace-Search输入tlv8,点击安装即可。地址：[https://marketplace.eclipse.org/content/tlv8/](https://marketplace.eclipse.org/content/tlv8/)
 3.  启动eclipse
 4.  [下载项目源码](https://gitee.com/qianpou/tl)
 5.  运行Tomcat（也可以使用其他中间件）查看效果
