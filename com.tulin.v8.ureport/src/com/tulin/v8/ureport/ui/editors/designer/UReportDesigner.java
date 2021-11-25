@@ -1,5 +1,6 @@
 package com.tulin.v8.ureport.ui.editors.designer;
 
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -12,6 +13,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.forms.editor.FormPage;
+import org.osgi.framework.Version;
 
 import com.equo.swt.chromium.Browser;
 import com.equo.swt.chromium.BrowserFunction;
@@ -110,7 +112,8 @@ public class UReportDesigner extends FormPage {
 	private void createBrowser0(Composite composite) {
 		if (CommonUtil.isWinOS()) {
 			try {
-				if (CommonUtil.getOSVersion() >= 10) {
+				Version version = Platform.getBundle("org.eclipse.platform").getVersion();
+				if (CommonUtil.getOSVersion() >= 10 && version.getMajor() >= 4 && version.getMinor() > 18) {
 					int EDGE = 1 << 18;
 					swtdesigner = new org.eclipse.swt.browser.Browser(composite, EDGE);
 				} else {
