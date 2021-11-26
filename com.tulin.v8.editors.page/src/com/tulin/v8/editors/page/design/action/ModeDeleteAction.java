@@ -7,20 +7,17 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.editors.page.PageEditorInterface;
 
 public class ModeDeleteAction extends Action {
 	TreeViewer treeViewer;
-	StructuredTextEditor editor;
 	PageEditorInterface editorpart;
 
-	public ModeDeleteAction(TreeViewer treeViewer, StructuredTextEditor editor, PageEditorInterface editorpart) {
+	public ModeDeleteAction(TreeViewer treeViewer, PageEditorInterface editorpart) {
 		super();
 		this.treeViewer = treeViewer;
-		this.editor = editor;
 		this.editorpart = editorpart;
 		this.setText(Messages.getString("design.action.remove"));
 		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();

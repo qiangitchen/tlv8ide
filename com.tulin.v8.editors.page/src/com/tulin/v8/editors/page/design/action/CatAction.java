@@ -7,7 +7,6 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.jsoup.nodes.Element;
 
 import com.tulin.v8.core.TuLinPlugin;
@@ -17,14 +16,12 @@ public class CatAction extends Action {
 	Tree tree;
 	PageEditorInterface editorpart;
 	Clipboard clipbd;
-	StructuredTextEditor editor;
 
-	public CatAction(Tree tree, PageEditorInterface editorpart, Clipboard clipbd, StructuredTextEditor editor) {
+	public CatAction(Tree tree, PageEditorInterface editorpart, Clipboard clipbd) {
 		super();
 		this.tree = tree;
 		this.editorpart = editorpart;
 		this.clipbd = clipbd;
-		this.editor = editor;
 		this.setText(Messages.getString("design.action.cat"));
 		this.setImageDescriptor(ImageDescriptor.createFromImage(TuLinPlugin.getIcon("edit/CutHS.png")));
 	}

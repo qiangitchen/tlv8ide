@@ -139,11 +139,11 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 	 */
 	public void makeActions() {
 		addResourseAction = new AddResourseAction(tree, this);
-		catAction = new CatAction(tree, editorpart, clipbd, editor);
+		catAction = new CatAction(tree, editorpart, clipbd);
 		copyAction = new CopyAction(tree, clipbd);
 		pasteAction = new PasteAction(tree, clipbd, this);
 		viewSourseAction = new ViewSourseAction(editorpart, tree);
-		deleteAction = new DeleteAction(tree, editor, editorpart);
+		deleteAction = new DeleteAction(tree, editorpart);
 		refreshAction = new RefreshAction(browser);
 
 	}

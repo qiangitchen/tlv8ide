@@ -4,7 +4,6 @@ import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.jsoup.nodes.Element;
 
 import com.tulin.v8.core.TuLinPlugin;
@@ -12,13 +11,11 @@ import com.tulin.v8.editors.page.PageEditorInterface;
 
 public class DeleteAction extends Action {
 	Tree tree;
-	StructuredTextEditor editor;
 	PageEditorInterface editorpart;
 
-	public DeleteAction(Tree tree, StructuredTextEditor editor, PageEditorInterface editorpart) {
+	public DeleteAction(Tree tree, PageEditorInterface editorpart) {
 		super();
 		this.tree = tree;
-		this.editor = editor;
 		this.editorpart = editorpart;
 		this.setText(Messages.getString("design.action.remove"));
 		this.setImageDescriptor(ImageDescriptor.createFromImage(TuLinPlugin.getIcon("delete.gif")));

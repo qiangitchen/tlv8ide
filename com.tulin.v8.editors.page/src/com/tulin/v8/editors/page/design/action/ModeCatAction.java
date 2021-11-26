@@ -8,7 +8,6 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchCommandConstants;
 import org.eclipse.ui.PlatformUI;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 import com.tulin.v8.editors.page.PageEditorInterface;
 
@@ -16,15 +15,12 @@ public class ModeCatAction extends Action {
 	TreeViewer treeViewer;
 	PageEditorInterface editorpart;
 	Clipboard clipbd;
-	StructuredTextEditor editor;
 
-	public ModeCatAction(TreeViewer treeViewer, PageEditorInterface editorpart, Clipboard clipbd,
-			StructuredTextEditor editor) {
+	public ModeCatAction(TreeViewer treeViewer, PageEditorInterface editorpart, Clipboard clipbd) {
 		super();
 		this.treeViewer = treeViewer;
 		this.editorpart = editorpart;
 		this.clipbd = clipbd;
-		this.editor = editor;
 		this.setText(Messages.getString("design.action.cat"));
 		ISharedImages sharedImages = PlatformUI.getWorkbench().getSharedImages();
 		this.setImageDescriptor(sharedImages.getImageDescriptor(ISharedImages.IMG_TOOL_CUT));
