@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.tulin.v8.ide.feature"
-      label="TuLin Studio"
+      label="TuLin IDE"
       version="2.2.0.qualifier"
       provider-name="TuLin ChenQian"
       plugin="com.tulin.v8.ide.ui">
@@ -10,8 +10,8 @@
       TuLinv8 IDE
    </description>
 
-   <copyright>
-      www.tulinxian.com
+   <copyright url="https://www.tlv8.com">
+      https://www.tlv8.com
    </copyright>
 
    <license url="https://gitee.com/qianpou/tlv8ide/blob/master/LICENSE">
@@ -400,6 +400,13 @@ version(s), and exceptions or additional permissions here}.&quot;
 
    <plugin
          id="com.tulin.v8.xml"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.tulin.v8.js.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
