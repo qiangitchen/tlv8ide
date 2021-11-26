@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.tulin.v8.editors.fn.feature"
-      label="Expression Editor"
+      label="TuLin Expression Editor"
       version="1.0.0.qualifier"
       provider-name="TULIN"
       plugin="com.tulin.v8.editors.fn">

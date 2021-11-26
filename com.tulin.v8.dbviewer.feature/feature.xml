@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.tulin.v8.dbviewer.feature"
-      label="Data Base Viewer"
+      label="TuLin Data Base Viewer"
       version="1.0.0.qualifier"
       provider-name="ZIGEN &amp;CHENQIAN"
       plugin="com.tulin.v8.dbviewer">

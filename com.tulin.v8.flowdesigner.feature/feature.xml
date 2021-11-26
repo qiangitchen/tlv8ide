@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="com.tulin.v8.flowdesigner.feature"
-      label="FlowDesigner UI"
+      label="TuLin FlowDesigner UI"
       version="2.0.0.qualifier"
       provider-name="TULIN"
       plugin="com.tulin.v8.flowdesigner.ui">
