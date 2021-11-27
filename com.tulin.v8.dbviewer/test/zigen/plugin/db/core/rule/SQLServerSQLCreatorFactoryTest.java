@@ -1,18 +1,7 @@
 package zigen.plugin.db.core.rule;
 
-import junit.framework.TestCase;
-import kry.sql.format.ISqlFormat;
-import kry.sql.tokenizer.SqlScanner;
-import zigen.plugin.db.core.DBConfig;
-import zigen.plugin.db.core.DBType;
-import zigen.plugin.db.core.IDBConfig;
-import zigen.plugin.db.core.TableColumn;
 import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.Constraint;
-import zigen.plugin.db.ui.internal.DataBase;
-import zigen.plugin.db.ui.internal.Folder;
-import zigen.plugin.db.ui.internal.ITable;
-import zigen.plugin.db.ui.internal.Schema;
 import zigen.plugin.db.ui.internal.Table;
 
 public class SQLServerSQLCreatorFactoryTest extends OracleSQLCreatorFactoryTest {
