@@ -42,6 +42,7 @@ import zigen.plugin.db.core.FolderInfo;
 import zigen.plugin.db.ui.internal.DataBase;
 import zigen.plugin.db.ui.views.TreeView;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ElementFilterDialog extends Dialog {
 
 	PluginSettingsManager pluginMgr = DbPlugin.getDefault().getPluginSettingsManager();
@@ -93,10 +94,10 @@ public class ElementFilterDialog extends Dialog {
 			setReturnCode(buttonId);
 			close();
 		} else if (buttonId == IDialogConstants.OK_ID) {
-			pluginMgr.setValue(PluginSettingsManager.KEY_ELEM_FILTER_VISIBLE, new Boolean(filterComposite.visibleCheck.getSelection()));
+			pluginMgr.setValue(PluginSettingsManager.KEY_ELEM_FILTER_VISIBLE, Boolean.valueOf(filterComposite.visibleCheck.getSelection()));
 			pluginMgr.setValue(PluginSettingsManager.KEY_ELEM_FILTER_PATTERN, filterComposite.filterText.getText());
-			pluginMgr.setValue(PluginSettingsManager.KEY_ELEM_FILTER_REGULAREXP, new Boolean(filterComposite.regularExpressions.getSelection()));
-			pluginMgr.setValue(PluginSettingsManager.KEY_ELEM_FILTER_CASESENSITIVE, new Boolean(filterComposite.caseSensitive.getSelection()));
+			pluginMgr.setValue(PluginSettingsManager.KEY_ELEM_FILTER_REGULAREXP, Boolean.valueOf(filterComposite.regularExpressions.getSelection()));
+			pluginMgr.setValue(PluginSettingsManager.KEY_ELEM_FILTER_CASESENSITIVE, Boolean.valueOf(filterComposite.caseSensitive.getSelection()));
 
 			pluginMgr.setValue(PluginSettingsManager.KEY_ELEM_FILTER_FOLDER_LIST, filterFolders);
 

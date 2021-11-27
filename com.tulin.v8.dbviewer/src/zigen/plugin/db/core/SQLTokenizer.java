@@ -10,6 +10,7 @@ import java.util.NoSuchElementException;
 
 import zigen.plugin.db.DbPluginConstant;
 
+@SuppressWarnings("rawtypes")
 public class SQLTokenizer implements Enumeration {
 
 	public static final String LINE_SEP = "\n";

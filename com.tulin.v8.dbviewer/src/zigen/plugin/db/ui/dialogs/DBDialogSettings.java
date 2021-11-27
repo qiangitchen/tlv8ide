@@ -43,6 +43,7 @@ import org.xml.sax.SAXException;
 
 import zigen.plugin.db.core.SchemaInfo;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DBDialogSettings implements IDBDialogSettings {
 
 	private String name;
@@ -105,7 +106,7 @@ public class DBDialogSettings implements IDBDialogSettings {
 	}
 
 	public boolean getBoolean(String key) {
-		return new Boolean((String) items.get(key)).booleanValue();
+		return Boolean.valueOf((String) items.get(key));
 	}
 
 	public double getDouble(String key) throws NumberFormatException {
@@ -113,7 +114,7 @@ public class DBDialogSettings implements IDBDialogSettings {
 		if (setting == null)
 			throw new NumberFormatException("There is no setting associated with the key \"" + key + "\"");//$NON-NLS-1$ //$NON-NLS-2$
 
-		return new Double(setting).doubleValue();
+		return Double.valueOf(setting);
 	}
 
 	public float getFloat(String key) throws NumberFormatException {
@@ -121,7 +122,7 @@ public class DBDialogSettings implements IDBDialogSettings {
 		if (setting == null)
 			throw new NumberFormatException("There is no setting associated with the key \"" + key + "\"");//$NON-NLS-1$ //$NON-NLS-2$
 
-		return new Float(setting).floatValue();
+		return Float.valueOf(setting);
 	}
 
 	public int getInt(String key) throws NumberFormatException {
@@ -132,8 +133,7 @@ public class DBDialogSettings implements IDBDialogSettings {
 			// is clearer.
 			throw new NumberFormatException("There is no setting associated with the key \"" + key + "\"");//$NON-NLS-1$ //$NON-NLS-2$
 		}
-
-		return new Integer(setting).intValue();
+		return Integer.valueOf(setting);
 	}
 
 	public long getLong(String key) throws NumberFormatException {
@@ -145,7 +145,7 @@ public class DBDialogSettings implements IDBDialogSettings {
 			throw new NumberFormatException("There is no setting associated with the key \"" + key + "\"");//$NON-NLS-1$ //$NON-NLS-2$
 		}
 
-		return new Long(setting).longValue();
+		return Long.valueOf(setting);
 	}
 
 	public String getName() {
@@ -240,7 +240,7 @@ public class DBDialogSettings implements IDBDialogSettings {
 					if (child == node.getParentNode()) {
 						SchemaInfo s = new SchemaInfo();
 						s.setName(node.getAttribute(TAG_NAME));
-						s.setChecked(new Boolean(node.getAttribute(TAG_CHECKED)).booleanValue());
+						s.setChecked(Boolean.valueOf(node.getAttribute(TAG_CHECKED)));
 						valueList.add(s);
 						// valueList.add(node.getAttribute(TAG_VALUE));
 

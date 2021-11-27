@@ -21,6 +21,7 @@ import zigen.sql.parser.ast.ASTFrom;
 import zigen.sql.parser.ast.ASTSelectStatement;
 import zigen.sql.parser.ast.ASTTable;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SelectProcessor extends DefaultProcessor {
 
 	public SelectProcessor(List proposals, ProcessorInfo info) {

@@ -23,6 +23,7 @@ import zigen.plugin.db.core.rule.AbstractSQLCreatorFactory;
 import zigen.plugin.db.core.rule.ISQLCreatorFactory;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class RenameTableAction extends Action implements Runnable {
 
 	private StructuredViewer viewer = null;

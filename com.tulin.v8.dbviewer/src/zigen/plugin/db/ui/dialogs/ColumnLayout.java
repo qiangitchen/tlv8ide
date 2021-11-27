@@ -26,6 +26,7 @@ import org.eclipse.swt.widgets.TableColumn;
  * 
  * @since 3.2
  */
+@SuppressWarnings({"rawtypes","unchecked"})
 final class ColumnLayout extends Layout {
 
 	/**

@@ -11,6 +11,7 @@ import java.util.Map;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ImageCacher {
 
 	private static ImageCacher instance;

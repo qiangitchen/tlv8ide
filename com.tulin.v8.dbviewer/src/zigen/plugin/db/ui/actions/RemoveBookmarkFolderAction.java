@@ -16,6 +16,7 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.internal.BookmarkFolder;
 import zigen.plugin.db.ui.views.TreeContentProvider;
 
+@SuppressWarnings({"rawtypes"})
 public class RemoveBookmarkFolderAction extends Action implements Runnable {
 
 	StructuredViewer viewer = null;
@@ -36,7 +37,7 @@ public class RemoveBookmarkFolderAction extends Action implements Runnable {
 
 		IContentProvider obj = viewer.getContentProvider();
 		if (obj instanceof TreeContentProvider) {
-			TreeContentProvider provider = (TreeContentProvider) obj;
+//			TreeContentProvider provider = (TreeContentProvider) obj;
 			if (DbPlugin.getDefault().confirmDialog(Messages.getString("RemoveBookmarkFolderAction.2"))) { //$NON-NLS-1$
 				while (iter.hasNext()) {
 					Object object = iter.next();

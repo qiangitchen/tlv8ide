@@ -13,6 +13,7 @@ import zigen.plugin.db.core.TableIDXColumn;
 import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes"})
 public interface ISQLCreatorFactory {
 
 	public static final int TYPE_NONUNIQUE_INDEX = 0;

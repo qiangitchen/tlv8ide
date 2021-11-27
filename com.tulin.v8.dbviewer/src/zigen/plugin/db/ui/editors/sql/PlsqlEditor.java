@@ -12,9 +12,7 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentEvent;
@@ -27,14 +25,11 @@ import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.FormAttachment;
 import org.eclipse.swt.layout.FormData;
 import org.eclipse.swt.layout.FormLayout;
 import org.eclipse.swt.widgets.Composite;
-import org.eclipse.swt.widgets.Menu;
-import org.eclipse.ui.IEditorActionBarContributor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
@@ -47,6 +42,7 @@ import zigen.plugin.db.ui.views.internal.PLSQLCodeConfiguration;
 import zigen.plugin.db.ui.views.internal.PLSQLSourceViewer;
 import zigen.plugin.db.ui.views.internal.SQLToolBarForPlsqlEditor;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class PlsqlEditor extends SqlEditor2 implements IPlsqlEditor, IPropertyChangeListener, IDocumentListener {
 
 	public void documentAboutToBeChanged(DocumentEvent event) {
@@ -100,29 +96,29 @@ public class PlsqlEditor extends SqlEditor2 implements IPlsqlEditor, IPropertyCh
 
 	}
 
-	private void hookContextMenu() {
-		MenuManager menuMgr = new MenuManager("#PopupMenu"); //$NON-NLS-1$
-		menuMgr.setRemoveAllWhenShown(true);
-		menuMgr.addMenuListener(new IMenuListener() {
+//	private void hookContextMenu() {
+//		MenuManager menuMgr = new MenuManager("#PopupMenu"); //$NON-NLS-1$
+//		menuMgr.setRemoveAllWhenShown(true);
+//		menuMgr.addMenuListener(new IMenuListener() {
+//
+//			public void menuAboutToShow(IMenuManager manager) {
+//				getContributor().fillContextMenu(manager);
+//			}
+//		});
+//		StyledText text = sqlViewer.getTextWidget();
+//		Menu menu = menuMgr.createContextMenu(text);
+//		text.setMenu(menu);
+//		getSite().registerContextMenu(menuMgr, sqlViewer);
+//	}
 
-			public void menuAboutToShow(IMenuManager manager) {
-				getContributor().fillContextMenu(manager);
-			}
-		});
-		StyledText text = sqlViewer.getTextWidget();
-		Menu menu = menuMgr.createContextMenu(text);
-		text.setMenu(menu);
-		getSite().registerContextMenu(menuMgr, sqlViewer);
-	}
-
-	private PlsqlEditorContributor getContributor() {
-		IEditorActionBarContributor contributor = getEditorSite().getActionBarContributor();
-		if (contributor instanceof PlsqlEditorContributor) {
-			return (PlsqlEditorContributor) contributor;
-		} else {
-			return null;
-		}
-	}
+//	private PlsqlEditorContributor getContributor() {
+//		IEditorActionBarContributor contributor = getEditorSite().getActionBarContributor();
+//		if (contributor instanceof PlsqlEditorContributor) {
+//			return (PlsqlEditorContributor) contributor;
+//		} else {
+//			return null;
+//		}
+//	}
 
 	// public void selectionChanged(IWorkbenchPart part, ISelection selection) {
 	// IEditorInput input = getEditorInput();
@@ -173,7 +169,7 @@ public class PlsqlEditor extends SqlEditor2 implements IPlsqlEditor, IPropertyCh
 	public void setError(OracleSourceErrorInfo[] errors) {
 		if (resource != null) {
 			try {
-				StyledText text = getSourceViewer().getTextWidget();
+//				StyledText text = getSourceViewer().getTextWidget();
 				IDocument doc = getSourceViewer().getDocument();
 
 				for (int i = 0; i < errors.length; i++) {
@@ -210,7 +206,7 @@ public class PlsqlEditor extends SqlEditor2 implements IPlsqlEditor, IPropertyCh
 
 							MarkerUtilities.setMessage(attributes, info.getErrorText());
 
-							attributes.put(IMarker.SEVERITY, new Integer(IMarker.SEVERITY_ERROR));
+							attributes.put(IMarker.SEVERITY, IMarker.SEVERITY_ERROR);
 							attributes.put("selection", selection.getText() == null ? "" : selection.getText());
 
 							MarkerUtilities.createMarker(resource, attributes, "zigen.plugin.db.markers.myProblem");

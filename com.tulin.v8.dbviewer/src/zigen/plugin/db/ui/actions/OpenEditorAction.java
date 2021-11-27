@@ -14,6 +14,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.jobs.OpenEditorJob;
 
+@SuppressWarnings({"rawtypes"})
 public class OpenEditorAction extends Action implements Runnable {
 
 	TreeViewer viewer = null;

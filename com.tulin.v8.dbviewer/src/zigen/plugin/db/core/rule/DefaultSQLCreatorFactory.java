@@ -23,6 +23,7 @@ import zigen.plugin.db.preference.SQLFormatPreferencePage;
 import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DefaultSQLCreatorFactory extends AbstractSQLCreatorFactory implements ISQLCreatorFactory {
 
 	protected Column[] cols;
@@ -376,7 +377,7 @@ public class DefaultSQLCreatorFactory extends AbstractSQLCreatorFactory implemen
 
 		List result = new ArrayList();
 
-		String name = null;
+//		String name = null;
 		String type = null;
 		String paramater = null;
 		for (Iterator iter = cons.iterator(); iter.hasNext();) {
@@ -390,7 +391,7 @@ public class DefaultSQLCreatorFactory extends AbstractSQLCreatorFactory implemen
 				if (i == 0) {
 
 					if (column.getColumnName() == null && !"".equals(column.getSearch_condition())) {
-						name = column.getName();
+//						name = column.getName();
 						type = "CHECK";
 
 						if (column.getSearch_condition() != null) {
@@ -407,7 +408,7 @@ public class DefaultSQLCreatorFactory extends AbstractSQLCreatorFactory implemen
 						break;
 
 					} else {
-						name = column.getName();
+//						name = column.getName();
 						if (column.isNonUnique()) {
 							type = "NONUNIQUE";
 						} else {
@@ -486,7 +487,7 @@ public class DefaultSQLCreatorFactory extends AbstractSQLCreatorFactory implemen
 		String[] cons = getConstraintOtherStr();
 		String[] idxs = getConstraintIDXStr();
 
-		boolean hasPk = !(pks == null || pks.length() == 0);
+//		boolean hasPk = !(pks == null || pks.length() == 0);
 		boolean hasFk = !(fks == null || fks.length == 0);
 		boolean hasCs = !(cons == null || cons.length == 0);
 		boolean hasIx = !(idxs == null || idxs.length == 0);

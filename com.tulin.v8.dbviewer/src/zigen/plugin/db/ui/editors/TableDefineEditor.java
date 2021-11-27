@@ -52,8 +52,6 @@ import zigen.plugin.db.core.TableIDXColumn;
 import zigen.plugin.db.core.Transaction;
 import zigen.plugin.db.core.rule.AbstractSQLCreatorFactory;
 import zigen.plugin.db.core.rule.ISQLCreatorFactory;
-import zigen.plugin.db.ext.oracle.internal.OracleSourceInfo;
-import zigen.plugin.db.ext.oracle.internal.OracleSourceSearcher;
 import zigen.plugin.db.ext.oracle.internal.OracleTriggerInfo;
 import zigen.plugin.db.ext.oracle.internal.OracleTriggerSearcher;
 import zigen.plugin.db.ui.editors.event.TextSelectionListener;
@@ -72,13 +70,14 @@ import zigen.plugin.db.ui.internal.Trigger;
 import zigen.plugin.db.ui.internal.TriggerRoot;
 import zigen.plugin.db.ui.views.TreeViewSorter;
 
+@SuppressWarnings({"rawtypes"})
 public class TableDefineEditor {
 
-	private List results;
+//	private List results;
 
-	private String orgTableName;
+//	private String orgTableName;
 
-	private String orgTableComment;
+//	private String orgTableComment;
 
 	private Text txtTableName;
 
@@ -127,8 +126,8 @@ public class TableDefineEditor {
 
 			this.txtTableName.setText(tableNode.getName());
 			this.txtTableComment.setText(tableNode.getRemarks());
-			this.orgTableName = tableNode.getName();
-			this.orgTableComment = tableNode.getRemarks();
+//			this.orgTableName = tableNode.getName();
+//			this.orgTableComment = tableNode.getRemarks();
 
 			defineViewer.setInput(tableNode.getColumns());
 			defineViewer.refresh();
@@ -355,6 +354,7 @@ public class TableDefineEditor {
 		col4.setResizable(true);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void createTableDefineWidget(Composite comp) {
 		defineViewer = new TableViewer(comp, SWT.BORDER | SWT.SINGLE | SWT.FULL_SELECTION);
 		GridData gd = new GridData(GridData.FILL_BOTH);
@@ -482,11 +482,11 @@ public class TableDefineEditor {
 	}
 
 	public void setOrgTableName(String tableName) {
-		this.orgTableName = tableName;
+//		this.orgTableName = tableName;
 	}
 
 	public void setOrgTableComment(String tableComment) {
-		this.orgTableComment = tableComment;
+//		this.orgTableComment = tableComment;
 	}
 
 	private class ColumnLabelProvider extends LabelProvider implements ITableLabelProvider {

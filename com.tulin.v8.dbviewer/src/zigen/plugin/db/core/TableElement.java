@@ -14,6 +14,7 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.preference.PreferencePage;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class TableElement implements Serializable, Cloneable {
 
 	private static final long serialVersionUID = 1L;

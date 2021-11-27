@@ -22,7 +22,7 @@ import zigen.plugin.db.ui.internal.TreeNode;
 
 public class AddColumnAction extends TableViewEditorAction {
 
-	private TableViewer tableViewer;
+//	private TableViewer tableViewer;
 
 	public AddColumnAction() {
 		this.setText(Messages.getString("AddColumnAction.0")); //$NON-NLS-1$
@@ -53,7 +53,7 @@ public class AddColumnAction extends TableViewEditorAction {
 	}
 
 	public void setTableViewer(TableViewer tableViewer) {
-		this.tableViewer = tableViewer;
+//		this.tableViewer = tableViewer;
 	}
 
 }

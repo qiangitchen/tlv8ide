@@ -35,6 +35,7 @@ import zigen.plugin.db.ui.internal.TreeLeaf;
 import zigen.plugin.db.ui.internal.TreeNode;
 import zigen.plugin.db.ui.internal.View;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class RefreshFolderJob extends AbstractJob {
 
 	private TreeViewer viewer;

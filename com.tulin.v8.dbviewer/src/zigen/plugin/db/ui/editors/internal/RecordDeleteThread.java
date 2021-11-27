@@ -20,6 +20,7 @@ import zigen.plugin.db.core.TransactionForTableEditor;
 import zigen.plugin.db.ui.editors.ITableViewEditor;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes"})
 public class RecordDeleteThread implements Runnable {
 
 	private ITableViewEditor editor;

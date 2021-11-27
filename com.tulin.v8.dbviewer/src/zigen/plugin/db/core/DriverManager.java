@@ -8,6 +8,7 @@ package zigen.plugin.db.core;
 import java.sql.Driver;
 import java.util.HashMap;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DriverManager {
 
 	private static DriverManager _instance;
@@ -57,6 +58,7 @@ public class DriverManager {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	private Driver getDriver(String driverName, String[] classpaths) throws Exception {
 		Class driverClass = null;
 		PluginClassLoader loader = PluginClassLoader.getClassLoader(classpaths, getClass().getClassLoader());

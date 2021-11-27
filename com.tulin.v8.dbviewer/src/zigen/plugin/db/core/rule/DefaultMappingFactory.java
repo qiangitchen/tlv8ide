@@ -10,7 +10,6 @@ import java.io.CharArrayReader;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.InputStream;
 import java.io.StringReader;
 import java.math.BigDecimal;
 import java.sql.PreparedStatement;
@@ -352,7 +351,7 @@ public class DefaultMappingFactory extends AbstractMappingFactory implements IMa
 		String obj = null;
 		try {
 
-			InputStream is = rs.getBinaryStream(icol);
+//			InputStream is = rs.getBinaryStream(icol);
 
 			if (rs.wasNull())
 				return nullSymbol;
@@ -368,7 +367,7 @@ public class DefaultMappingFactory extends AbstractMappingFactory implements IMa
 	}
 
 	protected Object getClob(ResultSet rs, int icol) throws SQLException {
-		Object value = rs.getObject(icol);
+//		Object value = rs.getObject(icol);
 
 		if (rs.wasNull())
 			return nullSymbol;
@@ -377,7 +376,7 @@ public class DefaultMappingFactory extends AbstractMappingFactory implements IMa
 	}
 
 	protected Object getBlob(ResultSet rs, int icol) throws SQLException {
-		Object value = rs.getObject(icol);
+//		Object value = rs.getObject(icol);
 
 		if (rs.wasNull())
 			return nullSymbol;
@@ -385,7 +384,7 @@ public class DefaultMappingFactory extends AbstractMappingFactory implements IMa
 	}
 
 	protected String getOther(ResultSet rs, int icol) throws SQLException {
-		Object value = rs.getObject(icol);
+//		Object value = rs.getObject(icol);
 
 		if (rs.wasNull())
 			return nullSymbol;
@@ -393,7 +392,7 @@ public class DefaultMappingFactory extends AbstractMappingFactory implements IMa
 	}
 
 	protected String getUnknown(ResultSet rs, int icol, int type) throws SQLException {
-		Object value = rs.getObject(icol);
+//		Object value = rs.getObject(icol);
 
 		if (rs.wasNull())
 			return nullSymbol;
@@ -670,6 +669,7 @@ public class DefaultMappingFactory extends AbstractMappingFactory implements IMa
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	protected final String toStringForDisplay(BigDecimal num) {
 		BigDecimal a = num.setScale(0, BigDecimal.ROUND_CEILING);
 		BigDecimal b = num.setScale(0, BigDecimal.ROUND_FLOOR);

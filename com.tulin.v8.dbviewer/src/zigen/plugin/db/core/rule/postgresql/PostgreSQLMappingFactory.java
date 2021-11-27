@@ -69,9 +69,7 @@ public class PostgreSQLMappingFactory extends DefaultMappingFactory implements I
 		if (nullSymbol.equals(str)) {
 			pst.setNull(icol, Types.FLOAT);
 		} else {
-			float a = Float.parseFloat(str);
 			pst.setFloat(icol, Float.parseFloat(str));
-
 		}
 	}
 

@@ -125,7 +125,7 @@ public class TableTypeSearchJob extends AbstractJob {
 					source.setName(DbPluginConstant.TREE_LEAF_LOADING);
 					folder.addChild(source);
 
-					int errorCount = OracleSourceErrorSearcher.execute(con, owner, stype).length;
+					OracleSourceErrorSearcher.execute(con, owner, stype);
 					schema.addChild(folder);
 					if (monitor.isCanceled()) {
 						return Status.CANCEL_STATUS;

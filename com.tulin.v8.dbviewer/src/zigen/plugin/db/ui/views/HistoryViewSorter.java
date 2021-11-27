@@ -11,6 +11,7 @@ import org.eclipse.jface.viewers.ViewerSorter;
 import zigen.plugin.db.ui.internal.Folder;
 import zigen.plugin.db.ui.internal.History;
 
+@SuppressWarnings("deprecation")
 public class HistoryViewSorter extends ViewerSorter {
 
 	public int compare(Viewer viewer, Object e1, Object e2) {

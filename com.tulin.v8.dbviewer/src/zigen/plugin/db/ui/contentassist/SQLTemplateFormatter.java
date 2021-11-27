@@ -57,7 +57,7 @@ public class SQLTemplateFormatter {
 		StringTokenizer tokenizer = new StringTokenizer(sql, " ");
 		String token = null;
 		int indent = 0;
-		int preIndent = 0;
+//		int preIndent = 0;
 
 		boolean isDoru = false;
 		boolean isStart = false;
@@ -72,19 +72,19 @@ public class SQLTemplateFormatter {
 					sb.append(" ");
 					sb.append(StringUtil.indent(token, indent));
 
-					preIndent = indent;
+//					preIndent = indent;
 					indent = 0;
 
 				} else if (wk.startsWith("{")) {
 					isStart = true;
 					sb.append(StringUtil.indent(token, indent));
-					preIndent = indent;
+//					preIndent = indent;
 					indent = 0;
 
 				} else if (wk.startsWith("}")) {
 					isEnd = true;
 					sb.append(StringUtil.indent(token, indent));
-					preIndent = indent;
+//					preIndent = indent;
 					indent = 0;
 				} else {
 					if (sb.length() == 0) {
@@ -103,7 +103,7 @@ public class SQLTemplateFormatter {
 						sb.append(" ");
 						sb.append(StringUtil.indent(token, indent));
 					}
-					preIndent = indent;
+//					preIndent = indent;
 					indent = 0;
 				}
 

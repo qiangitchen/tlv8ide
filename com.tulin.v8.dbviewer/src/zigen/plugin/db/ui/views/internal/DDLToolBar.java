@@ -5,7 +5,6 @@
  */
 package zigen.plugin.db.ui.views.internal;
 
-import org.eclipse.jface.action.Action;
 import org.eclipse.jface.action.CoolBarManager;
 import org.eclipse.jface.action.ToolBarContributionItem;
 import org.eclipse.jface.action.ToolBarManager;
@@ -18,7 +17,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.CoolBar;
 import org.eclipse.ui.IEditorPart;
 
-import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.actions.SaveSQLAction;
 
 public class DDLToolBar {
@@ -76,16 +74,16 @@ public class DDLToolBar {
 		return fSourceViewer;
 	}
 
-	private class SaveAction extends Action {
-
-		public SaveAction() {
-			this.setToolTipText(Messages.getString("SQLToolBar.3")); //$NON-NLS-1$
-			this.setImageDescriptor(DbPlugin.getDefault().getImageDescriptor(DbPlugin.IMG_CODE_SAVE));
-		}
-
-		public void run() {
-			fEditor.doSave(null);
-		}
-
-	}
+//	private class SaveAction extends Action {
+//
+//		public SaveAction() {
+//			this.setToolTipText(Messages.getString("SQLToolBar.3")); //$NON-NLS-1$
+//			this.setImageDescriptor(DbPlugin.getDefault().getImageDescriptor(DbPlugin.IMG_CODE_SAVE));
+//		}
+//
+//		public void run() {
+//			fEditor.doSave(null);
+//		}
+//
+//	}
 }

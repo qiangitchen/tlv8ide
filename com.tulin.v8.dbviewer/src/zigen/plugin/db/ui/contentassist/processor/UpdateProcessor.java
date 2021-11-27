@@ -17,6 +17,7 @@ import zigen.sql.parser.SqlParser;
 import zigen.sql.parser.ast.ASTTable;
 import zigen.sql.parser.ast.ASTUpdateStatement;
 
+@SuppressWarnings({"rawtypes"})
 public class UpdateProcessor extends DefaultProcessor {
 
 	public UpdateProcessor(List proposals, ProcessorInfo info) {

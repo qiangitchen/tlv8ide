@@ -22,6 +22,7 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.internal.DataBase;
 import zigen.plugin.db.ui.internal.Root;
 
+@SuppressWarnings({"rawtypes"})
 public class ExpWizardPage1 extends DefaultWizardPage {
 
 	public static final String MSG = Messages.getString("ExpWizardPage1.0"); //$NON-NLS-1$

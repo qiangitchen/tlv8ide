@@ -67,6 +67,7 @@ public class TimeWatcher {
 		return sb.toString();
 	}
 
+	@SuppressWarnings("deprecation")
 	private static String formart(double time) {
 		BigDecimal decimal = new BigDecimal(time);
 		// decimal = decimal.movePointLeft(4);

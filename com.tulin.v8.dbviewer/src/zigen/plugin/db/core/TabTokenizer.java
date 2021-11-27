@@ -8,6 +8,7 @@ package zigen.plugin.db.core;
 import java.util.Enumeration;
 import java.util.NoSuchElementException;
 
+@SuppressWarnings("rawtypes")
 public class TabTokenizer implements Enumeration {
 
 	public static final String DEMILITER = "\t"; //$NON-NLS-1$

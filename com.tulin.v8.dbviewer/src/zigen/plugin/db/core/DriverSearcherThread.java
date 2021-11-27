@@ -14,6 +14,7 @@ import java.util.jar.JarEntry;
 import java.util.jar.JarFile;
 import java.util.zip.ZipInputStream;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DriverSearcherThread implements Runnable {
 
 	private ClassLoader loader;
@@ -32,6 +33,7 @@ public class DriverSearcherThread implements Runnable {
 		driverNames = searchDriver();
 	}
 
+	@SuppressWarnings("resource")
 	public List searchDriver() {
 
 		List driverList = new ArrayList();

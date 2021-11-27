@@ -7,6 +7,7 @@ package zigen.plugin.db.core;
 
 import java.util.List;
 
+@SuppressWarnings({"rawtypes"})
 public class Condition {
 
 	private String connectionUrl;

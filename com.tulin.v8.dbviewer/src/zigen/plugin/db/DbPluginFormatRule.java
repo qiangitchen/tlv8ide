@@ -17,6 +17,7 @@ import org.eclipse.jface.text.templates.Template;
 import zigen.plugin.db.preference.SQLTemplateEditorUI;
 import zigen.plugin.db.ui.views.internal.SQLContextType;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DbPluginFormatRule {
 
 	private static DbPluginFormatRule instance;

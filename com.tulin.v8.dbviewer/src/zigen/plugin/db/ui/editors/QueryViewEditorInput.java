@@ -12,6 +12,7 @@ import org.eclipse.ui.IPersistableElement;
 
 import zigen.plugin.db.core.IDBConfig;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class QueryViewEditorInput implements IEditorInput {
 
 	private String tooltip;

@@ -11,6 +11,7 @@ import java.util.Hashtable;
 
 import zigen.plugin.db.ui.editors.exceptions.NotFoundDBConfigException;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class Transaction {
 
 	private class TransactionElement {
@@ -52,7 +53,7 @@ public class Transaction {
 		if (config == null)
 			throw new NotFoundDBConfigException("There is no Data Base definition information. "); //$NON-NLS-1$
 
-		TransactionElement elem = null;
+//		TransactionElement elem = null;
 		if (!map.containsKey(config.getDbName())) {
 			map.put(config.getDbName(), new TransactionElement(config));
 

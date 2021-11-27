@@ -20,7 +20,7 @@ import zigen.plugin.db.ui.actions.GlobalAction;
 
 public class SourceEditorContributor extends MultiPageEditorActionBarContributor {
 
-	private SourceEditor editor;
+//	private SourceEditor editor;
 
 	private SourceViewer viewer;
 
@@ -57,7 +57,7 @@ public class SourceEditorContributor extends MultiPageEditorActionBarContributor
 	public void setActiveEditor(IEditorPart target) {
 		super.setActiveEditor(target);
 		if (target instanceof SourceEditor) {
-			editor = (SourceEditor) target;
+//			editor = (SourceEditor) target;
 			// viewer = editor.sourceViewer;
 		}
 	}

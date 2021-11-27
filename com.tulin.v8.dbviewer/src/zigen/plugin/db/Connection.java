@@ -14,8 +14,6 @@ import com.tulin.v8.core.DBUtils;
 import com.tulin.v8.core.FileAndString;
 import com.tulin.v8.core.XMLFormator;
 
-import zigen.plugin.db.core.SchemaSearcher;
-
 public class Connection {
 	/*
 	 * 数据源配置转移到 数据库管理中

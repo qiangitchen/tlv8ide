@@ -32,11 +32,12 @@ import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.views.ColumnSearchAction;
 import zigen.plugin.db.ui.views.TreeView;
 
+@SuppressWarnings({"rawtypes"})
 public class CopyCreateStatementAction implements IViewActionDelegate {
 
 	private ISelection selection = null;
 
-	private IViewPart viewPart;
+//	private IViewPart viewPart;
 
 	TreeViewer treeViewer;
 
@@ -45,7 +46,7 @@ public class CopyCreateStatementAction implements IViewActionDelegate {
 	StringBuffer sb = null;
 
 	public void init(IViewPart view) {
-		this.viewPart = view;
+//		this.viewPart = view;
 
 		if (view instanceof TreeView) {
 			treeViewer = ((TreeView) view).getTreeViewer();
@@ -61,9 +62,6 @@ public class CopyCreateStatementAction implements IViewActionDelegate {
 		try {
 			if (selection instanceof IStructuredSelection) {
 				IStructuredSelection ss = (IStructuredSelection) selection;
-
-				StringBuffer sb = new StringBuffer();
-
 				if (!checkLoadColumn(ss)) {
 					String msg = Messages.getString("CopyCreateStatementAction.0"); //$NON-NLS-1$
 					msg += Messages.getString("CopyCreateStatementAction.1"); //$NON-NLS-1$

@@ -5,9 +5,6 @@
  */
 package zigen.plugin.db.ui.wizard;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -84,7 +81,7 @@ abstract class DefaultWizardPage extends WizardPage {
 
 	protected class TableContentProvider implements IStructuredContentProvider {
 
-		private List contents = null;
+//		private List contents = null;
 
 		public Object[] getElements(Object inputElement) {
 			if (inputElement instanceof IItem[]) {
@@ -94,11 +91,11 @@ abstract class DefaultWizardPage extends WizardPage {
 		}
 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			contents = null;
+//			contents = null;
 		}
 
 		public void dispose() {
-			contents = null;
+//			contents = null;
 		}
 
 	}

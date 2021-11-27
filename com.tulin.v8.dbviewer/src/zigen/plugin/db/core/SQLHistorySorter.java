@@ -7,6 +7,7 @@ package zigen.plugin.db.core;
 
 import java.util.Comparator;
 
+@SuppressWarnings("rawtypes")
 public class SQLHistorySorter implements Comparator {
 
 	public SQLHistorySorter() {

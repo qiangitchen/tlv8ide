@@ -18,6 +18,7 @@ import zigen.plugin.db.core.TableConstraintColumn;
 import zigen.plugin.db.core.TimeWatcher;
 import zigen.plugin.db.core.rule.DefaultConstraintSearcherFactory;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class OracleConstraintSearcharFactory extends DefaultConstraintSearcherFactory {
 
 	public OracleConstraintSearcharFactory() {

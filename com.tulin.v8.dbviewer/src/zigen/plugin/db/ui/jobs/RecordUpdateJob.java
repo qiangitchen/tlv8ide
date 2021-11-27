@@ -32,7 +32,7 @@ public class RecordUpdateJob extends AbstractJob {
 
 	public static final String JOB_NAME = RecordUpdateJob.class.getName();
 
-	private ITableViewEditor editor;
+//	private ITableViewEditor editor;
 
 	private TableViewer viewer;
 
@@ -44,7 +44,7 @@ public class RecordUpdateJob extends AbstractJob {
 
 	public RecordUpdateJob(ITableViewEditor editor) {
 		super(Messages.getString("RecordSearchJob.0")); //$NON-NLS-1$
-		this.editor = editor;
+//		this.editor = editor;
 		this.viewer = editor.getViewer();
 		this.table = editor.getTableNode();
 		this.trans = TransactionForTableEditor.getInstance(table.getDbConfig());

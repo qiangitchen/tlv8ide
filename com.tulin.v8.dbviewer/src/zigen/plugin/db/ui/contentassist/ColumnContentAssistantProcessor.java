@@ -18,6 +18,7 @@ import org.eclipse.jface.text.contentassist.IContextInformationValidator;
 
 import zigen.plugin.db.ui.internal.Column;
 
+@SuppressWarnings({"rawtypes","unchecked", "deprecation"})
 public class ColumnContentAssistantProcessor implements IContentAssistProcessor, ISubjectControlContentAssistProcessor {
 
 	static final String[] Keywords = {"AND", "ASC", "BETWEEN", "BY", "DESC", "EXISTS", "IN", "IS NULL", "IS NOT NULL", "LIKE", "NOT", "NOT EXISTS", "NULL", "OR", "ORDER BY"};

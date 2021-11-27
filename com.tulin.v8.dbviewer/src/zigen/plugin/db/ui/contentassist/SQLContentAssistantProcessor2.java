@@ -58,6 +58,7 @@ import zigen.sql.parser.ast.ASTSelectStatement;
 import zigen.sql.parser.ast.ASTUpdateStatement;
 import zigen.sql.parser.exception.ParserException;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SQLContentAssistantProcessor2 extends TemplateCompletionProcessor implements IContentAssistProcessor {
 
 	private static final class ProposalComparator implements Comparator {
@@ -69,9 +70,9 @@ public class SQLContentAssistantProcessor2 extends TemplateCompletionProcessor i
 
 	private static final Comparator fgProposalComparator = new ProposalComparator();
 
-	private int current = -1;
+//	private int current = -1;
 
-	private int scope = -1;
+//	private int scope = -1;
 
 	private INode currentNode;
 
@@ -81,8 +82,8 @@ public class SQLContentAssistantProcessor2 extends TemplateCompletionProcessor i
 
 	public SQLContentAssistantProcessor2() {
 		this.preferenceStore = DbPlugin.getDefault().getPreferenceStore();
-		this.current = -1;
-		this.scope = -1;
+//		this.current = -1;
+//		this.scope = -1;
 		this.currentNode = null;
 		this.rule = DbPluginFormatRule.getInstance();
 	}
@@ -353,6 +354,7 @@ public class SQLContentAssistantProcessor2 extends TemplateCompletionProcessor i
 		return null;
 	}
 
+	@SuppressWarnings("deprecation")
 	protected TemplateContextType getContextTypeForFunction(ITextViewer viewer, IRegion region) {
 		return SQLTemplateEditorUI.getDefault().getContextTypeRegistry().getContextType(SQLContextType.CONTEXT_TYPE_FUNCTION);
 	}
@@ -393,6 +395,7 @@ public class SQLContentAssistantProcessor2 extends TemplateCompletionProcessor i
 		return SQLTemplateEditorUI.getDefault().getTemplateStore().getTemplates();
 	}
 
+	@SuppressWarnings("deprecation")
 	protected TemplateContextType getContextType(ITextViewer viewer, IRegion region) {
 		return SQLTemplateEditorUI.getDefault().getContextTypeRegistry().getContextType(SQLContextType.CONTEXT_TYPE_SQL);
 	}

@@ -42,6 +42,7 @@ import org.eclipse.ui.IWorkbenchPreferencePage;
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.util.WidgetUtil;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class URLPreferencePage extends PreferencePage implements IWorkbenchPreferencePage {
 
 	public static final String P_URLDefine = "URLPreferencePage.URLDefine"; //$NON-NLS-1$
@@ -300,7 +301,7 @@ public class URLPreferencePage extends PreferencePage implements IWorkbenchPrefe
 
 	private class TableContentProvider implements IStructuredContentProvider {
 
-		private List contents = null;
+//		private List contents = null;
 
 		public Object[] getElements(Object inputElement) {
 			if (inputElement instanceof List) {
@@ -312,9 +313,9 @@ public class URLPreferencePage extends PreferencePage implements IWorkbenchPrefe
 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
 			if (newInput instanceof List) {
-				contents = (List) newInput;
+//				contents = (List) newInput;
 			} else {
-				contents = null;
+//				contents = null;
 			}
 		}
 

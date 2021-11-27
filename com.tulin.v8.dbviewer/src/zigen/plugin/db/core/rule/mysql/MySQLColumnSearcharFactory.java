@@ -18,6 +18,7 @@ import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.TableColumn;
 import zigen.plugin.db.core.rule.DefaultColumnSearcherFactory;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class MySQLColumnSearcharFactory extends DefaultColumnSearcherFactory {
 
 	public MySQLColumnSearcharFactory(DatabaseMetaData meta, boolean convertUnicode) {
@@ -27,37 +28,37 @@ public class MySQLColumnSearcharFactory extends DefaultColumnSearcherFactory {
 	static Map typeMap = new TreeMap();
 
 	static {
-		typeMap.put("BIT", new Integer(Types.BIT));
-		typeMap.put("TINYINT", new Integer(Types.TINYINT));
-		typeMap.put("SMALLINT", new Integer(Types.SMALLINT));
-		typeMap.put("MEDIUMINT", new Integer(Types.INTEGER));
-		typeMap.put("INT", new Integer(Types.INTEGER));
-		typeMap.put("INTEGER", new Integer(Types.INTEGER));
-		typeMap.put("BIGINT", new Integer(Types.BIGINT));
-		typeMap.put("INT24", new Integer(Types.INTEGER));
-		typeMap.put("REAL", new Integer(Types.DOUBLE));
-		typeMap.put("FLOAT", new Integer(Types.REAL));
-		typeMap.put("DECIMAL", new Integer(Types.DECIMAL));
-		typeMap.put("NUMERIC", new Integer(Types.DECIMAL));
-		typeMap.put("DOUBLE", new Integer(Types.DOUBLE));
-		typeMap.put("CHAR", new Integer(Types.CHAR));
-		typeMap.put("VARCHAR", new Integer(Types.VARCHAR));
-		typeMap.put("DATE", new Integer(Types.DATE));
-		typeMap.put("TIME", new Integer(Types.TIME));
-		typeMap.put("YEAR", new Integer(Types.DATE));
-		typeMap.put("TIMESTAMP", new Integer(Types.TIMESTAMP));
-		typeMap.put("DATETIME", new Integer(Types.TIMESTAMP));
-		typeMap.put("TINYBLOB", new Integer(Types.BINARY));
-		typeMap.put("BLOB", new Integer(Types.LONGVARBINARY));
-		typeMap.put("MEDIUMBLOB", new Integer(Types.LONGVARBINARY));
-		typeMap.put("LONGBLOB", new Integer(Types.LONGVARBINARY));
-		typeMap.put("TINYTEXT", new Integer(Types.VARCHAR));
-		typeMap.put("TEXT", new Integer(Types.LONGVARCHAR));
-		typeMap.put("MEDIUMTEXT", new Integer(Types.LONGVARCHAR));
-		typeMap.put("LONGTEXT", new Integer(Types.LONGVARCHAR));
-		typeMap.put("ENUM", new Integer(Types.CHAR));
-		typeMap.put("SET", new Integer(Types.CHAR));
-		typeMap.put("GEOMETRY", new Integer(Types.BINARY));
+		typeMap.put("BIT", Types.BIT);
+		typeMap.put("TINYINT", Types.TINYINT);
+		typeMap.put("SMALLINT", Types.SMALLINT);
+		typeMap.put("MEDIUMINT", Types.INTEGER);
+		typeMap.put("INT", Types.INTEGER);
+		typeMap.put("INTEGER", Types.INTEGER);
+		typeMap.put("BIGINT", Types.BIGINT);
+		typeMap.put("INT24", Types.INTEGER);
+		typeMap.put("REAL", Types.DOUBLE);
+		typeMap.put("FLOAT", Types.REAL);
+		typeMap.put("DECIMAL", Types.DECIMAL);
+		typeMap.put("NUMERIC", Types.DECIMAL);
+		typeMap.put("DOUBLE", Types.DOUBLE);
+		typeMap.put("CHAR", Types.CHAR);
+		typeMap.put("VARCHAR", Types.VARCHAR);
+		typeMap.put("DATE", Types.DATE);
+		typeMap.put("TIME", Types.TIME);
+		typeMap.put("YEAR", Types.DATE);
+		typeMap.put("TIMESTAMP", Types.TIMESTAMP);
+		typeMap.put("DATETIME", Types.TIMESTAMP);
+		typeMap.put("TINYBLOB", Types.BINARY);
+		typeMap.put("BLOB", Types.LONGVARBINARY);
+		typeMap.put("MEDIUMBLOB", Types.LONGVARBINARY);
+		typeMap.put("LONGBLOB", Types.LONGVARBINARY);
+		typeMap.put("TINYTEXT", Types.VARCHAR);
+		typeMap.put("TEXT", Types.LONGVARCHAR);
+		typeMap.put("MEDIUMTEXT", Types.LONGVARCHAR);
+		typeMap.put("LONGTEXT", Types.LONGVARCHAR);
+		typeMap.put("ENUM", Types.CHAR);
+		typeMap.put("SET", Types.CHAR);
+		typeMap.put("GEOMETRY", Types.BINARY);
 	}
 
 	private int getJavaType(String typeName) {

@@ -8,6 +8,7 @@ package zigen.plugin.db.ui.internal;
 import java.util.Iterator;
 import java.util.List;
 
+@SuppressWarnings({"rawtypes"})
 public class Folder extends TreeNode {
 
 	private static final long serialVersionUID = 1L;

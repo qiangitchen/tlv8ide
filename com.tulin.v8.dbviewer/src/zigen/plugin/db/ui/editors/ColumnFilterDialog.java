@@ -6,7 +6,6 @@
 package zigen.plugin.db.ui.editors;
 
 import java.util.Iterator;
-import java.util.List;
 import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -49,6 +48,7 @@ import zigen.plugin.db.ui.editors.internal.ColumnFilterInfo;
 import zigen.plugin.db.ui.jobs.RecordSearchJob;
 import zigen.plugin.db.ui.jobs.TableFilterJob;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ColumnFilterDialog extends Dialog {
 
 	private TableViewEditorFor31 editor;
@@ -76,7 +76,7 @@ public class ColumnFilterDialog extends Dialog {
 		for (int i = 0; i < infos.length; i++) {
 			int sortNum = infos[i].getSortNo();
 			if (sortNum > 0) {
-				map.put(new Integer(sortNum), infos[i]);
+				map.put(sortNum, infos[i]);
 			}
 		}
 		int cnt = 0;
@@ -499,7 +499,7 @@ public class ColumnFilterDialog extends Dialog {
 
 	private class ColumnSelectContentProvider implements IStructuredContentProvider {
 
-		private List contents = null;
+//		private List contents = null;
 
 		public Object[] getElements(Object inputElement) {
 			if (inputElement instanceof ColumnFilterInfo[]) {
@@ -509,11 +509,11 @@ public class ColumnFilterDialog extends Dialog {
 		}
 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			contents = null;
+//			contents = null;
 		}
 
 		public void dispose() {
-			contents = null;
+//			contents = null;
 		}
 
 	}
@@ -529,9 +529,9 @@ public class ColumnFilterDialog extends Dialog {
 		public Object getValue(Object element, String property) {
 			ColumnFilterInfo item = (ColumnFilterInfo) element;
 			if (property == "check") { //$NON-NLS-1$
-				return new Boolean(item.isChecked());
+				return item.isChecked();
 			} else if (property == "sort") { //$NON-NLS-1$
-				return new Boolean(item.isChecked());
+				return item.isChecked();
 			} else {
 				return item.getColumnName();
 			}
@@ -574,7 +574,7 @@ public class ColumnFilterDialog extends Dialog {
 		for (int i = 0; i < infos.length; i++) {
 			int sortNum = infos[i].getSortNo();
 			if (sortNum > 0) {
-				map.put(new Integer(sortNum), infos[i]);
+				map.put(sortNum, infos[i]);
 			}
 		}
 		int cnt = 0;

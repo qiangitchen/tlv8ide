@@ -7,6 +7,7 @@ package zigen.plugin.db.core;
 
 import java.util.Comparator;
 
+@SuppressWarnings("rawtypes")
 public class ConstraintSeqSorter implements Comparator {
 
 	public int compare(Object arg0, Object arg1) {

@@ -20,7 +20,7 @@ import zigen.plugin.db.core.IDBConfig;
 
 public class ImpWizardPage1 extends DefaultWizardPage {
 
-	private final String LINE_SEP = System.getProperty("line.separator"); //$NON-NLS-1$
+//	private final String LINE_SEP = System.getProperty("line.separator"); //$NON-NLS-1$
 
 	public static final String MSG = Messages.getString("ImpWizardPage1.1"); //$NON-NLS-1$
 

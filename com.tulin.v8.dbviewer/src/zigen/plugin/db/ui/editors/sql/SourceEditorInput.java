@@ -23,6 +23,7 @@ import zigen.plugin.db.ext.oracle.internal.OracleSourceDetailInfo;
 import zigen.plugin.db.ext.oracle.internal.OracleSourceErrorInfo;
 import zigen.plugin.db.ui.internal.OracleSource;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SourceEditorInput implements IStorageEditorInput, IEditorInput {
 
 	private String tooltip;

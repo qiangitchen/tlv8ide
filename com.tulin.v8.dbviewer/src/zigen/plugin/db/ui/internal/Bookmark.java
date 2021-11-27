@@ -10,12 +10,12 @@ import java.util.List;
 
 import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.core.SQLUtil;
-import zigen.plugin.db.core.StringUtil;
 import zigen.plugin.db.core.TableConstraintColumn;
 import zigen.plugin.db.core.TableFKColumn;
 import zigen.plugin.db.core.TableIDXColumn;
 import zigen.plugin.db.core.TablePKColumn;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class Bookmark extends TreeNode implements ITable {
 
 	private static final long serialVersionUID = 1L;

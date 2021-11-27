@@ -114,6 +114,7 @@ import zigen.plugin.db.ui.views.internal.SQLOutinePage;
 import zigen.plugin.db.ui.views.internal.SQLSourceViewer;
 import zigen.plugin.db.ui.views.internal.SQLToolBar;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SQLExecuteView extends ViewPart implements ITextEditorExtension2, IPropertyChangeListener, ISelectionListener, IStatusChangeListener {
 
 	//
@@ -575,6 +576,7 @@ public class SQLExecuteView extends ViewPart implements ITextEditorExtension2, I
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void setGlobalAction() {
 		IActionBars actionBars = getViewSite().getActionBars();
 		ResourceBundle bundle = DbPlugin.getDefault().getResourceBundle();

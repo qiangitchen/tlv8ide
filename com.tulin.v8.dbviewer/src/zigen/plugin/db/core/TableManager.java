@@ -25,6 +25,7 @@ import zigen.plugin.db.ui.actions.MaxRecordException;
 import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class TableManager {
 
 	public static TableElement[] invoke(IDBConfig config, ITable table) throws Exception, MaxRecordException {
@@ -222,7 +223,7 @@ public class TableManager {
 
 			int recordNo = 0;
 			int addCount = 0;
-			int size = meta.getColumnCount();
+//			int size = meta.getColumnCount();
 			while (rs.next()) {
 
 				recordNo++;
@@ -441,7 +442,7 @@ public class TableManager {
 
 	static TableElement createHeaderElement(ResultSet rs, ITable table, TableColumn[] columns, TableIDXColumn[] idxs, TableFKColumn[] fks) throws Exception {
 		TableElement elements = null;
-		int size = rs.getMetaData().getColumnCount();
+//		int size = rs.getMetaData().getColumnCount();
 
 		List uniqueColumnList = new ArrayList();
 		// for (int i = 0; i < size; i++) {

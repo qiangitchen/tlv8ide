@@ -142,7 +142,7 @@ public class SQLUtil {
 		StringTokenizer t = new StringTokenizer(sql, " ");
 		String token = null;
 		int indent = 0;
-		int preIndent = 0;
+//		int preIndent = 0;
 
 		while ((token = t.nextToken()) != null) {
 			if (token.trim().length() == 0) {
@@ -175,7 +175,7 @@ public class SQLUtil {
 					sb.append(StringUtil.indent(buff.toString(), indent));
 				}
 
-				preIndent = indent;
+//				preIndent = indent;
 				indent = 0;
 
 			}

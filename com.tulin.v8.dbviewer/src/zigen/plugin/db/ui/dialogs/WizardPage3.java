@@ -48,6 +48,7 @@ import zigen.plugin.db.ui.actions.AutoDelayListener;
 import zigen.plugin.db.ui.editors.event.TextSelectionListener;
 import zigen.plugin.db.ui.util.WidgetUtil;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class WizardPage3 extends DefaultWizardPage {
 
 	public static final String MSG = Messages.getString("WizardPage3.0"); //$NON-NLS-1$

@@ -24,7 +24,7 @@ public class ImpWizardPage1CellModifier implements ICellModifier {
 		TableItem item = (TableItem) element;
 		// return item.getText();
 		if (property == "check") {
-			return new Boolean(item.isChecked());
+			return Boolean.valueOf(item.isChecked());
 		} else {
 			return item.getDbName();
 		}

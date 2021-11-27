@@ -17,6 +17,7 @@ import zigen.plugin.db.core.SchemaInfo;
 import zigen.plugin.db.core.TableInfo;
 import zigen.plugin.db.ui.internal.Column;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SQLProposalCreator2 {
 
 	public static void addProposal(List proposals, String[] modifiers, ProcessorInfo pinfo) {

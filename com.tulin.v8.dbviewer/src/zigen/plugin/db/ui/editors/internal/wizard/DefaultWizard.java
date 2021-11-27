@@ -46,8 +46,6 @@ abstract public class DefaultWizard extends Wizard implements IConfirmDDLWizard 
 		try {
 			confirmPage.generateSQL();
 
-			int rowAffected = 0;
-
 			String demiliter = DbPlugin.getDefault().getPreferenceStore().getString(SQLEditorPreferencePage.P_SQL_DEMILITER);
 			String sqlString = confirmPage.getDocument().get();
 
@@ -56,7 +54,7 @@ abstract public class DefaultWizard extends Wizard implements IConfirmDDLWizard 
 			while (tokenizer.hasMoreElements()) {
 				String sql = tokenizer.nextToken();
 				if (sql != null && sql.length() > 0) {
-					rowAffected += SQLInvoker.executeUpdate(trans.getConnection(), sql);
+					SQLInvoker.executeUpdate(trans.getConnection(), sql);
 				}
 			}
 

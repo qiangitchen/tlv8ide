@@ -25,6 +25,7 @@ import zigen.plugin.db.ui.internal.Root;
 import zigen.plugin.db.ui.internal.TreeLeaf;
 import zigen.plugin.db.ui.internal.TreeNode;
 
+@SuppressWarnings({"rawtypes"})
 public class HistoryContentProvider implements ITreeContentProvider {
 
 	protected SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd"); //$NON-NLS-1$
@@ -89,7 +90,7 @@ public class HistoryContentProvider implements ITreeContentProvider {
 			SQLHistory element = (SQLHistory) iter.next();
 
 			HistoryFolder folder = new HistoryFolder(element.getDate());
-			HistoryDataBaseFolder dbFolder = new HistoryDataBaseFolder(element.getConfig());
+			new HistoryDataBaseFolder(element.getConfig());
 
 			History history = new History(element);
 

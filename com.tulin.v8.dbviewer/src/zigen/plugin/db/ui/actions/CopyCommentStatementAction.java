@@ -32,11 +32,12 @@ import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.views.ColumnSearchAction;
 import zigen.plugin.db.ui.views.TreeView;
 
+@SuppressWarnings({"rawtypes"})
 public class CopyCommentStatementAction implements IViewActionDelegate {
 
 	private ISelection selection = null;
 
-	private IViewPart viewPart;
+//	private IViewPart viewPart;
 
 	TreeViewer treeViewer;
 
@@ -45,7 +46,7 @@ public class CopyCommentStatementAction implements IViewActionDelegate {
 	StringBuffer buffer = new StringBuffer();
 
 	public void init(IViewPart view) {
-		this.viewPart = view;
+//		this.viewPart = view;
 
 		if (view instanceof TreeView) {
 			treeViewer = ((TreeView) view).getTreeViewer();
@@ -72,18 +73,18 @@ public class CopyCommentStatementAction implements IViewActionDelegate {
 		}
 	}
 
-	private boolean checkLoadColumn(IStructuredSelection ss) {
-		for (Iterator iter = ss.iterator(); iter.hasNext();) {
-			Object obj = iter.next();
-			if (obj instanceof ITable) {
-				ITable table = (ITable) obj;
-				if (!table.isExpanded()) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+//	private boolean checkLoadColumn(IStructuredSelection ss) {
+//		for (Iterator iter = ss.iterator(); iter.hasNext();) {
+//			Object obj = iter.next();
+//			if (obj instanceof ITable) {
+//				ITable table = (ITable) obj;
+//				if (!table.isExpanded()) {
+//					return false;
+//				}
+//			}
+//		}
+//		return true;
+//	}
 
 
 	void setContents(String contents) {

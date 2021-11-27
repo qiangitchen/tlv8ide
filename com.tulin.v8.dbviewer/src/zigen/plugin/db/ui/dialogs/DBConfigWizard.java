@@ -25,6 +25,7 @@ import zigen.plugin.db.ui.internal.DataBase;
 import zigen.plugin.db.ui.internal.Root;
 import zigen.plugin.db.ui.internal.TreeLeaf;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DBConfigWizard extends Wizard {
 
 	IDBConfig oldConfig;

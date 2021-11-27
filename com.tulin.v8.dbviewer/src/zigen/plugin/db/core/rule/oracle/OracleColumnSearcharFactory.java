@@ -1,7 +1,6 @@
 package zigen.plugin.db.core.rule.oracle;
 
 import java.sql.DatabaseMetaData;
-import java.sql.SQLException;
 import java.util.Map;
 
 import zigen.plugin.db.core.SQLUtil;
@@ -9,6 +8,7 @@ import zigen.plugin.db.core.TableColumn;
 import zigen.plugin.db.core.rule.ColumnInfo;
 import zigen.plugin.db.core.rule.DefaultColumnSearcherFactory;
 
+@SuppressWarnings({"rawtypes"})
 public class OracleColumnSearcharFactory extends DefaultColumnSearcherFactory {
 
 	public OracleColumnSearcharFactory(DatabaseMetaData meta, boolean convertUnicode) {

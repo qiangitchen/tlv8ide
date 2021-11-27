@@ -28,7 +28,6 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableItem;
-import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
@@ -101,7 +100,7 @@ public class ContentAssist {
 
 	private Combo comb;
 
-	private zigen.plugin.db.ui.internal.ITable table;
+//	private zigen.plugin.db.ui.internal.ITable table;
 
 	private Column[] columns;
 
@@ -109,7 +108,7 @@ public class ContentAssist {
 		this.comb = text;
 		this.rectangle = getRectangle(text);
 		this.display = DbPlugin.getDefault().getShell().getDisplay();
-		this.table = table;
+//		this.table = table;
 		ContentInfo ci = new ContentInfo(table.getDbConfig());
 		columns = ci.getColumns(table.getName());
 		createComposite();
@@ -131,21 +130,20 @@ public class ContentAssist {
 
 	}
 
-	private Rectangle getRectangle(Text text) {
-		Rectangle rectangle = new Rectangle(text.getBorderWidth(), text.getLineHeight(), 0, 0);
-		Composite parent = text.getParent();
-		while (parent != null) {
-			if (parent instanceof Composite) {
-				rectangle.x += parent.getBounds().x;
-				rectangle.y += parent.getBounds().y;
-				parent = parent.getParent();
-			}
-		}
-		rectangle.x += text.getBounds().x + text.getCaretLocation().x;
-		rectangle.y += text.getBounds().y + text.getLineHeight();
-		return rectangle;
-
-	}
+//	private Rectangle getRectangle(Text text) {
+//		Rectangle rectangle = new Rectangle(text.getBorderWidth(), text.getLineHeight(), 0, 0);
+//		Composite parent = text.getParent();
+//		while (parent != null) {
+//			if (parent instanceof Composite) {
+//				rectangle.x += parent.getBounds().x;
+//				rectangle.y += parent.getBounds().y;
+//				parent = parent.getParent();
+//			}
+//		}
+//		rectangle.x += text.getBounds().x + text.getCaretLocation().x;
+//		rectangle.y += text.getBounds().y + text.getLineHeight();
+//		return rectangle;
+//	}
 
 	protected void createComposite() {
 		final Shell composite = new Shell(display, SWT.ON_TOP);

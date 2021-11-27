@@ -5,8 +5,6 @@
  */
 package zigen.plugin.db.ui.jobs;
 
-import java.sql.Connection;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
@@ -52,7 +50,7 @@ public class OpenEditorJob extends RefreshColumnJob {
 		try {
 			synchronized (lock) {
 				IDBConfig config = table.getDbConfig();
-				Connection con = Transaction.getInstance(config).getConnection();
+				Transaction.getInstance(config).getConnection();
 
 				monitor.beginTask("Open Editor...", 10);
 

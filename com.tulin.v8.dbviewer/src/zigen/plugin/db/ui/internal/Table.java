@@ -15,6 +15,7 @@ import zigen.plugin.db.core.TableFKColumn;
 import zigen.plugin.db.core.TableIDXColumn;
 import zigen.plugin.db.core.TablePKColumn;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class Table extends TreeNode implements ITable {
 
 	private static final long serialVersionUID = 1L;

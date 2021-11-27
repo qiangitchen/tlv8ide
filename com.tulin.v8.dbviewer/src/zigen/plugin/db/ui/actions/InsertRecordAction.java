@@ -28,7 +28,7 @@ public class InsertRecordAction extends TableViewEditorAction {
 	}
 
 	public void run() {
-		String nullSymbol = DbPlugin.getDefault().getPreferenceStore().getString(PreferencePage.P_NULL_SYMBOL);
+		DbPlugin.getDefault().getPreferenceStore().getString(PreferencePage.P_NULL_SYMBOL);
 		ITable table = editor.getTableNode();
 		TableViewer viewer = editor.getViewer();
 		TableElement elem = editor.getHeaderTableElement();

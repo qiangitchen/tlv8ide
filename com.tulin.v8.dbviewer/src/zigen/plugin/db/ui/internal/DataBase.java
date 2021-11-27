@@ -8,10 +8,7 @@ package zigen.plugin.db.ui.internal;
 import java.sql.Connection;
 
 import zigen.plugin.db.core.IDBConfig;
-import zigen.plugin.db.core.rule.AbstractSQLCreatorFactory;
 import zigen.plugin.db.core.rule.AbstractStatementFactory;
-import zigen.plugin.db.core.rule.DefaultStatementFactory;
-
 
 public class DataBase extends TreeNode {
 

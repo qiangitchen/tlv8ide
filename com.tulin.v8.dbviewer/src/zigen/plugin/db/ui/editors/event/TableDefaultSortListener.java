@@ -18,6 +18,7 @@ public class TableDefaultSortListener extends TableSortListener {
 		super(editor, columnIndex);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void widgetSelected(SelectionEvent e) {
 		TableColumn col = (TableColumn) e.widget;
 		Table table = col.getParent();

@@ -22,6 +22,7 @@ import zigen.plugin.db.core.TableElement;
 import zigen.plugin.db.ui.editors.TableViewEditorFor31;
 import zigen.plugin.db.ui.editors.internal.ColumnFilterInfo;
 
+@SuppressWarnings({"rawtypes"})
 public class CopyRecordDataAction extends TableViewEditorAction {
 
 	protected final String LINE_SEP = System.getProperty("line.separator"); //$NON-NLS-1$
@@ -71,8 +72,8 @@ public class CopyRecordDataAction extends TableViewEditorAction {
 					boolean isFirst = true;
 					for (int i = 0; i < columns.length; i++) {
 						if (isVisibled(i)) {
-							TableColumn col = columns[i];
-							int type = col.getDataType();
+//							TableColumn col = columns[i];
+//							int type = col.getDataType();
 							// String value = String.valueOf(elem.getItem(col));
 							String value = String.valueOf(elem.getItem(i));
 

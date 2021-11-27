@@ -22,9 +22,10 @@ import zigen.plugin.db.core.rule.IStatementFactory;
 import zigen.plugin.db.preference.SQLEditorPreferencePage;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes"})
 public class CopyInsertStatementAction extends TableViewEditorAction {
 
-	private final String LINE_SEP = System.getProperty("line.separator"); //$NON-NLS-1$
+//	private final String LINE_SEP = System.getProperty("line.separator"); //$NON-NLS-1$
 
 	IStructuredSelection selection;
 
@@ -42,7 +43,7 @@ public class CopyInsertStatementAction extends TableViewEditorAction {
 			ITable table = editor.getTableNode();
 
 			Iterator iter = selection.iterator();
-			int index = 0;
+//			int index = 0;
 			while (iter.hasNext()) {
 				Object obj = iter.next();
 				if (obj instanceof TableElement) {
@@ -89,8 +90,7 @@ public class CopyInsertStatementAction extends TableViewEditorAction {
 					sb.append(demiliter);
 					sb.append(DbPluginConstant.LINE_SEP);
 
-
-					index++;
+//					index++;
 
 				}
 			}

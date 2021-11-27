@@ -3,6 +3,7 @@ package zigen.plugin.db.ui.internal;
 import zigen.plugin.db.ext.oracle.internal.OracleSourceInfo;
 import zigen.plugin.db.ext.oracle.internal.OracleTriggerInfo;
 
+@SuppressWarnings("serial")
 public class Trigger extends OracleSource {
 	
 	ITable table;

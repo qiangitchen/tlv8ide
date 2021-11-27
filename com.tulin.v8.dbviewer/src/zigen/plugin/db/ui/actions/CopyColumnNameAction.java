@@ -18,6 +18,7 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.core.ClipboardUtils;
 import zigen.plugin.db.ui.internal.Column;
 
+@SuppressWarnings({"rawtypes"})
 public class CopyColumnNameAction extends Action implements Runnable {
 
 	// private final String LINE_SEP = System.getProperty("line.separator");

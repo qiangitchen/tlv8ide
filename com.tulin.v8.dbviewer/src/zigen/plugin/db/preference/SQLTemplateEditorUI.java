@@ -19,6 +19,7 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.views.internal.SQLContextType;
 
+@SuppressWarnings("deprecation")
 public class SQLTemplateEditorUI {
 
 	private static final String CUSTOM_TEMPLATES_KEY = "zigen.plugin.db.preference.SQLTemplateEditorUI"; //$NON-NLS-1$

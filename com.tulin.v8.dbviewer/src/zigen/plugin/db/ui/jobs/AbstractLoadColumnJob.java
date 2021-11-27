@@ -35,6 +35,7 @@ import zigen.plugin.db.ui.internal.OracleColumn;
 import zigen.plugin.db.ui.internal.Synonym;
 import zigen.plugin.db.ui.internal.TreeLeaf;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 abstract public class AbstractLoadColumnJob extends AbstractJob {
 
 	public AbstractLoadColumnJob(String msg) {

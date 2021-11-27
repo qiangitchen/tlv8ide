@@ -5,23 +5,21 @@
  */
 package zigen.plugin.db.ui.editors.event;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class PasteRecordMonitor {
 
 	private static final ThreadLocal session = new ThreadLocal();
 
 	public static void begin() {
-		Boolean b = new Boolean(true);
+		Boolean b = true;
 		session.set(b);
 	}
 
 	public static void end() {
 		Boolean b = (Boolean) session.get();
-
 		if (b != null) {
 			session.set(null);
-		} else {
-			;
-		}
+		} 
 	}
 
 	public static boolean isPasting() {

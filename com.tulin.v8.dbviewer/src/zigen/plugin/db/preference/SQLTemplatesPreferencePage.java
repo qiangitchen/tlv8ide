@@ -16,6 +16,7 @@ import org.eclipse.ui.texteditor.templates.TemplatePreferencePage;
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.contentassist.SQLTemplateFormatter;
 
+@SuppressWarnings("deprecation")
 public class SQLTemplatesPreferencePage extends TemplatePreferencePage implements IWorkbenchPreferencePage {
 
 	public static final String DESC = Messages.getString("SQLTemplatesPreferencePage.0"); //$NON-NLS-1$

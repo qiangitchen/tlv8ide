@@ -23,6 +23,7 @@ import zigen.plugin.db.ui.internal.DataBase;
 import zigen.plugin.db.ui.internal.TreeLeaf;
 import zigen.plugin.db.ui.views.TreeContentProvider;
 
+@SuppressWarnings({"rawtypes"})
 public class RemoveDBAction extends Action implements Runnable {
 
 	TreeViewer viewer = null;

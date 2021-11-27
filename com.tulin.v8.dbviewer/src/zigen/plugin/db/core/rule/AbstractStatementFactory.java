@@ -16,6 +16,7 @@ import zigen.plugin.db.core.rule.mysql.MySQLStatementFactory;
 import zigen.plugin.db.core.rule.oracle.OracleStatementFactory;
 import zigen.plugin.db.core.rule.symfoware.SymfowareStatementFactory;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public abstract class AbstractStatementFactory implements IStatementFactory {
 
 	protected static String NULL = "null";

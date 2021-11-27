@@ -15,6 +15,7 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.DbPluginConstant;
 import zigen.plugin.db.DefaultXmlManager;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ConditionManager extends DefaultXmlManager {
 
 	private Map map = null;

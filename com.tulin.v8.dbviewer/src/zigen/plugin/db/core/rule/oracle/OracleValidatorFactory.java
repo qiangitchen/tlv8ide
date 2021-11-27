@@ -16,7 +16,7 @@ public class OracleValidatorFactory extends DefaultValidatorFactory implements I
 	public String validateDataType(TableColumn column, Object value) throws UnSupportedTypeException {
 
 		int type = column.getDataType();
-		String columnName = column.getColumnName();
+//		String columnName = column.getColumnName();
 		switch (type) {
 		// case Types.DATE:
 		// return validate_DATE(columnName, (String) value);

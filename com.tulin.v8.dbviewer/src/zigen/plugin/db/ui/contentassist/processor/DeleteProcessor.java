@@ -17,6 +17,7 @@ import zigen.sql.parser.SqlParser;
 import zigen.sql.parser.ast.ASTDeleteStatement;
 import zigen.sql.parser.ast.ASTFrom;
 
+@SuppressWarnings({"rawtypes"})
 public class DeleteProcessor extends DefaultProcessor {
 
 	public DeleteProcessor(List proposals, ProcessorInfo info) {

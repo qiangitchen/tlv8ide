@@ -34,10 +34,10 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.preference.SQLEditorPreferencePage;
 import zigen.plugin.db.ui.views.internal.SQLPartitionScanner;
 
-
 /**
  * A template editor using the Java formatter to format a template buffer.
  */
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SQLFormatter {
 
 	private static final String COMMENT_START = "/*-"; //$NON-NLS-1$
@@ -48,7 +48,7 @@ public class SQLFormatter {
 	private final String fLineDelimiter;
 
 	/** The initial indent level */
-	private final int fInitialIndentLevel;
+//	private final int fInitialIndentLevel;
 
 	/** The java partitioner */
 	private boolean fUseCodeFormatter;
@@ -94,7 +94,7 @@ public class SQLFormatter {
 		 *            the document
 		 */
 		private static void installJavaStuff(Document document) {
-			String demiliter = DbPlugin.getDefault().getPreferenceStore().getString(SQLEditorPreferencePage.P_SQL_DEMILITER);
+			DbPlugin.getDefault().getPreferenceStore().getString(SQLEditorPreferencePage.P_SQL_DEMILITER);
 			String[] types = new String[] {SQLPartitionScanner.SQL_STRING, SQLPartitionScanner.SQL_COMMENT};
 			FastPartitioner partitioner = new FastPartitioner(new SQLPartitionScanner(), types);
 			partitioner.connect(document);
@@ -241,7 +241,7 @@ public class SQLFormatter {
 	public SQLFormatter(String lineDelimiter, int initialIndentLevel, boolean useCodeFormatter) {
 		fLineDelimiter = lineDelimiter;
 		fUseCodeFormatter = useCodeFormatter;
-		fInitialIndentLevel = initialIndentLevel;
+//		fInitialIndentLevel = initialIndentLevel;
 	}
 
 	/**

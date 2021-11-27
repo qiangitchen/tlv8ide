@@ -19,6 +19,7 @@ import zigen.plugin.db.ui.internal.TreeLeaf;
 import zigen.plugin.db.ui.jobs.LoadColumnsJob;
 import zigen.plugin.db.ui.jobs.OpenEditorJob;
 
+@SuppressWarnings({"rawtypes"})
 public class LoadColumnAction extends Action implements Runnable {
 
 	TreeViewer viewer = null;

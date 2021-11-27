@@ -20,6 +20,7 @@ import zigen.plugin.db.ui.internal.BookmarkRoot;
 import zigen.plugin.db.ui.internal.TreeLeaf;
 import zigen.plugin.db.ui.internal.TreeNode;
 
+@SuppressWarnings({"rawtypes"})
 public class DropBookmarkAdapter extends DropTargetAdapter {
 
 

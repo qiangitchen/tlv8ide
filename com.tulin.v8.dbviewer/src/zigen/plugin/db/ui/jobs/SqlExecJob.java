@@ -143,7 +143,7 @@ public class SqlExecJob extends AbstractJob {
 	}
 
 	protected ASTStatement findASTStatement(INode root) {
-		int size = root.getChildrenSize();
+//		int size = root.getChildrenSize();
 		for (int i = 0; i < root.getChildrenSize(); i++) {
 			INode n = root.getChild(i);
 			if (n instanceof ASTStatement) {
@@ -155,7 +155,7 @@ public class SqlExecJob extends AbstractJob {
 
 
 	protected ASTCreateStatement findASTCreateStatement(INode node) {
-		int size = node.getChildrenSize();
+//		int size = node.getChildrenSize();
 		for (int i = 0; i < node.getChildrenSize(); i++) {
 			INode n = node.getChild(i);
 			if (n instanceof ASTCreateStatement) {
@@ -166,7 +166,7 @@ public class SqlExecJob extends AbstractJob {
 	}
 
 	protected ASTType findASTType(ASTCreateStatement cs) {
-		int size = cs.getChildrenSize();
+//		int size = cs.getChildrenSize();
 		for (int i = 0; i < cs.getChildrenSize(); i++) {
 			INode n = cs.getChild(i);
 			if (n instanceof ASTType) {

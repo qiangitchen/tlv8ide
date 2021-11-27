@@ -22,12 +22,12 @@ public class CellEditorValidator implements ICellEditorValidator {
 
 	private int columnIndex;
 
-	private IDBConfig config;
+//	private IDBConfig config;
 
 	private IValidatorFactory factory = null;
 
 	public CellEditorValidator(IDBConfig config, TableViewer viewer, int columnIndex) {
-		this.config = config;
+//		this.config = config;
 		this.viewer = viewer;
 		this.columnIndex = columnIndex;
 		factory = AbstractValidatorFactory.getFactory(config);

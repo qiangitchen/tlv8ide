@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.ISharedImages;
@@ -21,19 +20,15 @@ import org.eclipse.ui.PlatformUI;
 
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.core.DropSQLInvoker;
-import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.ext.oracle.internal.OracleSequenceInfo;
-import zigen.plugin.db.ui.editors.QueryViewEditorInput;
-import zigen.plugin.db.ui.editors.TableViewEditorInput;
 import zigen.plugin.db.ui.editors.sql.SequenceEditorInput;
 import zigen.plugin.db.ui.editors.sql.SourceEditorInput;
-import zigen.plugin.db.ui.internal.Folder;
 import zigen.plugin.db.ui.internal.OracleSequence;
 import zigen.plugin.db.ui.internal.OracleSource;
 import zigen.plugin.db.ui.internal.Schema;
 import zigen.plugin.db.ui.internal.TreeNode;
-import zigen.plugin.db.ui.jobs.OracleSourceSearchJob;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DropTreeNodeAction extends Action implements Runnable {
 
 	StructuredViewer viewer = null;

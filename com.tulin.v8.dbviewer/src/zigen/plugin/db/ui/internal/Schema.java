@@ -11,6 +11,7 @@ import java.util.List;
 import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.core.SQLUtil;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class Schema extends TreeNode {
 
 	private static final long serialVersionUID = 1L;

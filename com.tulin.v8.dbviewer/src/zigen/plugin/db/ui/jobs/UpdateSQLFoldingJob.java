@@ -23,6 +23,7 @@ import zigen.plugin.db.ui.views.internal.ParseSqlThread;
 import zigen.sql.parser.INode;
 import zigen.sql.parser.ast.ASTParentheses;
 
+@SuppressWarnings({"rawtypes"})
 public class UpdateSQLFoldingJob extends AbstractJob {
 
 	IDocument document;

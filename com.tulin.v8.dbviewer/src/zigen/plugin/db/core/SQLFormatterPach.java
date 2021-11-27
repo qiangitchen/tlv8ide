@@ -165,7 +165,7 @@ public class SQLFormatterPach {
 		StringTokenizer t3 = new StringTokenizer(sql, " ");
 		String token3 = null;
 		int indent = 0;
-		int preIndent = 0;
+//		int preIndent = 0;
 
 		boolean isCoron = false;
 		while ((token3 = t3.nextToken()) != null) {
@@ -178,7 +178,7 @@ public class SQLFormatterPach {
 					sb.append(" ");
 					sb.append(StringUtil.indent(token3, indent));
 
-					preIndent = indent;
+//					preIndent = indent;
 					indent = 0;
 
 				} else {
@@ -191,7 +191,7 @@ public class SQLFormatterPach {
 						sb.append(" ");
 						sb.append(StringUtil.indent(token3, indent));
 					}
-					preIndent = indent;
+//					preIndent = indent;
 					indent = 0;
 				}
 

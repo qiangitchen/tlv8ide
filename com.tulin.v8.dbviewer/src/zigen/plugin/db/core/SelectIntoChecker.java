@@ -8,6 +8,7 @@ package zigen.plugin.db.core;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SelectIntoChecker {
 
 	public static boolean check(String text) {

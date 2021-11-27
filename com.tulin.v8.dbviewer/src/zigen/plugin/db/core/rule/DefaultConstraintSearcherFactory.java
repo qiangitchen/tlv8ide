@@ -34,6 +34,7 @@ import zigen.plugin.db.core.TimeWatcher;
  * @since JDK1.4 history Symbol Date Person Note [1] 2005/11/25 ZIGEN create.
  *
  */
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DefaultConstraintSearcherFactory extends AbstractConstraintSearcherFactory implements IConstraintSearcherFactory {
 
 
@@ -52,9 +53,9 @@ public class DefaultConstraintSearcherFactory extends AbstractConstraintSearcher
 				rs = objMet.getPrimaryKeys(null, "%", tableName); //$NON-NLS-1$
 			}
 
-			int i = 0;
+//			int i = 0;
 			while (rs.next()) {
-				i++;
+//				i++;
 				TablePKColumn column = new TablePKColumn();
 				column.setSep(rs.getInt("KEY_SEQ")); //$NON-NLS-1$
 				column.setColumnName(rs.getString("COLUMN_NAME")); //$NON-NLS-1$

@@ -22,6 +22,7 @@ import zigen.plugin.db.ui.internal.Root;
 import zigen.plugin.db.ui.internal.TreeLeaf;
 import zigen.plugin.db.ui.internal.TreeNode;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class TreeContentProvider implements ITreeContentProvider {
 
 	private BookmarkManager bookMarkMgr = DbPlugin.getDefault().getBookmarkManager();

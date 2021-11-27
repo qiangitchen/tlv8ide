@@ -41,6 +41,7 @@ import zigen.plugin.db.ui.editors.event.TextSelectionListener;
 import zigen.plugin.db.ui.jobs.TestConnectThread;
 import zigen.plugin.db.ui.util.WidgetUtil;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class WizardPage2 extends DefaultWizardPage {
 
 	public static final String MSG = Messages.getString("WizardPage2.0"); //$NON-NLS-1$
@@ -258,21 +259,21 @@ public class WizardPage2 extends DefaultWizardPage {
 		}
 	}
 
-	private void addSavePassowrdSection(Composite group) {
-		Label urlLabel = new Label(group, SWT.NONE);
-
-		savePassword = new Button(group, SWT.CHECK);
-		savePassword.setText(Messages.getString("WizardPage2.13")); //$NON-NLS-1$
-		if (getOldConfig() != null) {
-			savePassword.setSelection(getOldConfig().isSavePassword());
-		} else {
-			savePassword.setSelection(DEFAULT_SAVEPASSWORD);
-		}
-
-	}
+//	private void addSavePassowrdSection(Composite group) {
+//		Label urlLabel = new Label(group, SWT.NONE);
+//
+//		savePassword = new Button(group, SWT.CHECK);
+//		savePassword.setText(Messages.getString("WizardPage2.13")); //$NON-NLS-1$
+//		if (getOldConfig() != null) {
+//			savePassword.setSelection(getOldConfig().isSavePassword());
+//		} else {
+//			savePassword.setSelection(DEFAULT_SAVEPASSWORD);
+//		}
+//
+//	}
 
 	private void addTestConnectSection(Composite group) {
-		Label dummy = new Label(group, SWT.NULL);
+//		Label dummy = new Label(group, SWT.NULL);
 		testBtn = WidgetUtil.createButton(group, SWT.PUSH, Messages.getString("WizardPage2.14"), BUTTON_WIDTH, new GridData()); //$NON-NLS-1$
 		testBtn.addSelectionListener(new SelectionAdapter() {
 
@@ -398,7 +399,7 @@ public class WizardPage2 extends DefaultWizardPage {
 				selectIndex = driverCombox.getSelectionIndex();
 				if (selectIndex >= 0 && urlText != null && userIdText != null) {
 					String url = urlText.getText().trim();
-					String userid = userIdText.getText().trim();
+//					String userid = userIdText.getText().trim();
 					String driver = driverCombox.getItem(selectIndex).trim();
 
 					// if(!"".equals(url) && !"".equals(userid) &&

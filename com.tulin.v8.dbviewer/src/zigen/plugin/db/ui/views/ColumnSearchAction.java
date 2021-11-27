@@ -36,6 +36,7 @@ import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.internal.OracleColumn;
 import zigen.plugin.db.ui.internal.Synonym;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ColumnSearchAction implements Runnable {
 
 

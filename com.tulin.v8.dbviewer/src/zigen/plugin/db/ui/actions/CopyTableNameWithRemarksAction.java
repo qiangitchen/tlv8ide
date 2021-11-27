@@ -18,6 +18,7 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.core.ClipboardUtils;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes"})
 public class CopyTableNameWithRemarksAction extends Action implements Runnable {
 
 	StructuredViewer viewer = null;

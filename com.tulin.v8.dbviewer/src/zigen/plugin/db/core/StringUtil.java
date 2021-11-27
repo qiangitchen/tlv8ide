@@ -10,6 +10,7 @@ import java.util.LinkedList;
 import java.util.TreeSet;
 import java.util.regex.Pattern;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class StringUtil {
 
 	public static int endWordPosition(String text) {

@@ -36,6 +36,7 @@ public class GlobalAction extends Action {
 		}
 	}
 
+	@SuppressWarnings("deprecation")
 	public void setImage(int operation) {
 		String imageName = null;
 		switch (operation) {

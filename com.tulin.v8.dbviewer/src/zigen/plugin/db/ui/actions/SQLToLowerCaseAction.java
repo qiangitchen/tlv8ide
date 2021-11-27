@@ -18,7 +18,7 @@ import zigen.plugin.db.ui.views.SQLExecuteView;
 
 public class SQLToLowerCaseAction implements IViewActionDelegate {
 
-	private static final String LINE_SEP = System.getProperty("line.separator");
+//	private static final String LINE_SEP = System.getProperty("line.separator");
 
 	private ISelection selection;
 

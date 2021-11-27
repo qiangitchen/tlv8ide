@@ -36,6 +36,7 @@ import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.util.WidgetUtil;
 import zigen.plugin.db.ui.views.TreeViewSorter;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class PKWizardPage extends DefaultWizardPage {
 
 	public static final String MSG_DSC = Messages.getString("PKWizardPage.0"); //$NON-NLS-1$
@@ -109,6 +110,7 @@ public class PKWizardPage extends DefaultWizardPage {
 		});
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void createColumnSelectConstrol(Composite container) {
 		Composite main = new Composite(container, SWT.NULL);
 		main.setLayout(new GridLayout(3, false));
@@ -120,7 +122,7 @@ public class PKWizardPage extends DefaultWizardPage {
 
 		Label label1 = new Label(main, SWT.NULL);
 		label1.setText(Messages.getString("PKWizardPage.8")); //$NON-NLS-1$
-		Label dummy = new Label(main, SWT.NULL);
+//		Label dummy = new Label(main, SWT.NULL);
 		Label label2 = new Label(main, SWT.NULL);
 		label2.setText(Messages.getString("PKWizardPage.9")); //$NON-NLS-1$
 

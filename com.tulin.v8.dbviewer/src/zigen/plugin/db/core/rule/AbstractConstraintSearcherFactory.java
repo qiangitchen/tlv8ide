@@ -15,6 +15,7 @@ import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.core.rule.mysql.MySQLConstraintSearcharFactory;
 import zigen.plugin.db.core.rule.oracle.OracleConstraintSearcharFactory;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public abstract class AbstractConstraintSearcherFactory implements IConstraintSearcherFactory {
 
 	public static final String getIndexTypeName(int indexType) {

@@ -15,6 +15,7 @@ import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.Folder;
 import zigen.plugin.db.ui.internal.Root;
 
+@SuppressWarnings("deprecation")
 public class TreeViewSorter extends ViewerSorter {
 
 	public int compare(Viewer viewer, Object e1, Object e2) {

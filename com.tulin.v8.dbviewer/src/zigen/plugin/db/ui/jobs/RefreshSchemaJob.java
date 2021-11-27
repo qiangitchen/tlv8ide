@@ -18,6 +18,7 @@ import zigen.plugin.db.core.DBType;
 import zigen.plugin.db.ui.internal.Folder;
 import zigen.plugin.db.ui.internal.Schema;
 
+@SuppressWarnings({"rawtypes"})
 public class RefreshSchemaJob extends AbstractJob {
 
 	private TreeViewer viewer;

@@ -7,6 +7,7 @@ package zigen.plugin.db.core;
 
 import java.util.Enumeration;
 
+@SuppressWarnings("rawtypes")
 public class StringTokenizer implements Enumeration {
 
 	private String demiliter = null;

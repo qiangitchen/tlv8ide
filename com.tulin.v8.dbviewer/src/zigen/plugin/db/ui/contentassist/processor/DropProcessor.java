@@ -16,6 +16,7 @@ import zigen.plugin.db.ui.contentassist.SQLProposalCreator2;
 import zigen.sql.parser.SqlParser;
 import zigen.sql.parser.ast.ASTDropStatement;
 
+@SuppressWarnings({"rawtypes"})
 public class DropProcessor extends DefaultProcessor {
 
 	public DropProcessor(List proposals, ProcessorInfo info) {

@@ -81,11 +81,10 @@ import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.jobs.ChangeColorJob;
 import zigen.plugin.db.ui.jobs.RecordCountForQueryJob;
-import zigen.plugin.db.ui.jobs.RecordSearchJob;
 import zigen.plugin.db.ui.jobs.SqlExecForPagerJob;
-import zigen.plugin.db.ui.jobs.SqlExecJob;
 import zigen.plugin.db.ui.views.StatusLineContributionItem;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class QueryViewEditor2 extends MultiPageEditorPart implements ITableViewEditor, IQueryViewEditor, IPageChangeListener {
 	protected int limit = 0;
 	protected int offset = 0;
@@ -307,7 +306,7 @@ public class QueryViewEditor2 extends MultiPageEditorPart implements ITableViewE
 
 		createFooterArea(main);
 		
-		int index = addPage(main);
+		addPage(main);
 
 		setActivePage(getPageCount() - 1);
 
@@ -370,7 +369,7 @@ public class QueryViewEditor2 extends MultiPageEditorPart implements ITableViewE
 		TableElement element = elements[0];
 		int size = element.getColumns().length + 1;
 		String[] properties = new String[size];
-		zigen.plugin.db.core.TableColumn[] cols = element.getColumns();
+//		zigen.plugin.db.core.TableColumn[] cols = element.getColumns();
 		cellEditors = new CellEditor[size];
 		TableKeyAdapter keyAdapter = new TableKeyAdapter(handler);
 		for (int i = 0; i < cellEditors.length; i++) {

@@ -20,6 +20,7 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ImageCacher;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 abstract public class AbstractTableViewerPager {
 
 	protected ImageCacher ic = ImageCacher.getInstance();

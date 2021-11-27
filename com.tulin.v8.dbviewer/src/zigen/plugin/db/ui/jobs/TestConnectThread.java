@@ -10,8 +10,6 @@ import java.sql.Connection;
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.core.ConnectionManager;
 import zigen.plugin.db.core.IDBConfig;
-import zigen.plugin.db.core.SchemaSearcher;
-import zigen.plugin.db.core.Transaction;
 
 public class TestConnectThread implements Runnable {
 

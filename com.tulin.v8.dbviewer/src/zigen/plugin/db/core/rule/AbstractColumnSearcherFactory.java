@@ -15,7 +15,6 @@ import java.util.Map;
 
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.core.DBType;
-import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.core.JDBCUnicodeConvertor;
 import zigen.plugin.db.core.ResultSetUtil;
 import zigen.plugin.db.core.StatementUtil;
@@ -23,6 +22,7 @@ import zigen.plugin.db.core.rule.mysql.MySQLColumnSearcharFactory;
 import zigen.plugin.db.core.rule.oracle.OracleColumnSearcharFactory;
 import zigen.plugin.db.core.rule.symfoware.SymfowareColumnSearcharFactory;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public abstract class AbstractColumnSearcherFactory implements IColumnSearcherFactory {
 
 	public static final String COLUMN_NAME_STR = "COLUMN_NAME";

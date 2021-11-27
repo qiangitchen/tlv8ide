@@ -20,6 +20,7 @@ import zigen.plugin.db.core.rule.oracle.OracleValidatorFactory;
 import zigen.plugin.db.core.rule.symfoware.SymfowareValidatorFactory;
 import zigen.plugin.db.preference.PreferencePage;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public abstract class AbstractValidatorFactory implements IValidatorFactory {
 
 	String nullSymbol;

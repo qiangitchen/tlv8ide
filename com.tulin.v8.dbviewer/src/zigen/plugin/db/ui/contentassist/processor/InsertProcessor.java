@@ -17,6 +17,7 @@ import zigen.sql.parser.SqlParser;
 import zigen.sql.parser.ast.ASTInsertStatement;
 import zigen.sql.parser.ast.ASTTable;
 
+@SuppressWarnings({"rawtypes"})
 public class InsertProcessor extends DefaultProcessor {
 
 	public InsertProcessor(List proposals, ProcessorInfo info) {

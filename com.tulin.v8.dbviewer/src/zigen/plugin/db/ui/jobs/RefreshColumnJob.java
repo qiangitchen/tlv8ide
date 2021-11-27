@@ -28,7 +28,7 @@ import zigen.plugin.db.ui.views.TreeContentProvider;
 
 public class RefreshColumnJob extends AbstractLoadColumnJob {
 
-	private static Object lock = new Object();
+//	private static Object lock = new Object();
 
 	protected TreeViewer treeViewer;
 

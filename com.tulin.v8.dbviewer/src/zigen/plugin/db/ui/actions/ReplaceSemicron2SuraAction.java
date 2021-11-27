@@ -18,7 +18,7 @@ public class ReplaceSemicron2SuraAction implements IViewActionDelegate {
 
 	private IViewPart viewPart;
 
-	private ISelection selection;
+//	private ISelection selection;
 
 	public void init(IViewPart view) {
 		this.viewPart = view;
@@ -35,6 +35,6 @@ public class ReplaceSemicron2SuraAction implements IViewActionDelegate {
 	}
 
 	public void selectionChanged(IAction action, ISelection selection) {
-		this.selection = selection;
+//		this.selection = selection;
 	}
 }

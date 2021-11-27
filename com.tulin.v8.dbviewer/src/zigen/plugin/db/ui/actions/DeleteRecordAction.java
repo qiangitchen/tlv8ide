@@ -14,7 +14,6 @@ import org.eclipse.jface.viewers.TableViewer;
 
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.core.DeleteSQLInvoker;
-import zigen.plugin.db.core.SQLCreator;
 import zigen.plugin.db.core.TableColumn;
 import zigen.plugin.db.core.TableElement;
 import zigen.plugin.db.core.TimeWatcher;
@@ -25,6 +24,7 @@ import zigen.plugin.db.ui.editors.internal.TableViewerManager;
 import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.jobs.RecordCountForTableJob;
 
+@SuppressWarnings({"rawtypes"})
 public class DeleteRecordAction extends TableViewEditorAction {
 
 	protected IStructuredSelection selection;

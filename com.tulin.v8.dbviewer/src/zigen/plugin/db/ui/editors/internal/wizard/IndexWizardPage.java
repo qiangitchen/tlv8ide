@@ -27,6 +27,7 @@ import zigen.plugin.db.ui.editors.event.TextSelectionListener;
 import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"unchecked"})
 public class IndexWizardPage extends PKWizardPage {
 
 	public static final String MSG_DSC = Messages.getString("IndexWizardPage.0"); //$NON-NLS-1$

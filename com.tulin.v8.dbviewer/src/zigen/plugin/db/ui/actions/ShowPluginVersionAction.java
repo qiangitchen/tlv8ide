@@ -8,7 +8,6 @@ package zigen.plugin.db.ui.actions;
 import org.eclipse.jface.action.Action;
 
 import zigen.plugin.db.DbPlugin;
-import zigen.plugin.db.DbPluginConstant;
 
 public class ShowPluginVersionAction extends Action implements Runnable {
 

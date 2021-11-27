@@ -33,6 +33,7 @@ import zigen.plugin.db.core.rule.sqlite.SqliteMappingFactory;
 import zigen.plugin.db.core.rule.symfoware.SymfowareMappingFactory;
 import zigen.plugin.db.preference.PreferencePage;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public abstract class AbstractMappingFactory implements IMappingFactory {
 
 	protected SimpleDateFormat timeStampFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

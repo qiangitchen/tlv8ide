@@ -7,8 +7,6 @@ package zigen.plugin.db.ui.actions;
 
 import java.util.Iterator;
 
-import org.eclipse.jface.text.ITextOperationTarget;
-import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.dnd.Clipboard;
@@ -20,9 +18,8 @@ import zigen.plugin.db.core.ClipboardUtils;
 import zigen.plugin.db.core.StringUtil;
 import zigen.plugin.db.core.TableColumn;
 import zigen.plugin.db.core.TableElement;
-import zigen.plugin.db.ui.editors.TableViewEditorFor31;
-import zigen.plugin.db.ui.editors.internal.ColumnFilterInfo;
 
+@SuppressWarnings({"rawtypes"})
 public class CopyRecordTrimDataAction extends CopyRecordDataAction {
 
 	public CopyRecordTrimDataAction() {
@@ -53,8 +50,8 @@ public class CopyRecordTrimDataAction extends CopyRecordDataAction {
 					boolean isFirst = true;
 					for (int i = 0; i < columns.length; i++) {
 						if (isVisibled(i)) {
-							TableColumn col = columns[i];
-							int type = col.getDataType();
+//							TableColumn col = columns[i];
+//							int type = col.getDataType();
 							// String value = String.valueOf(elem.getItem(col));
 							//String value = String.valueOf(elem.getItem(i));
 

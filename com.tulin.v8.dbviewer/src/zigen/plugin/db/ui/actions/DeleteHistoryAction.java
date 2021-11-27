@@ -27,6 +27,7 @@ import zigen.plugin.db.ui.internal.HistoryFolder;
 import zigen.plugin.db.ui.views.HistoryContentProvider;
 import zigen.plugin.db.ui.views.HistoryView;
 
+@SuppressWarnings({"rawtypes"})
 public class DeleteHistoryAction extends Action implements Runnable {
 
 	StructuredViewer viewer = null;
@@ -48,7 +49,7 @@ public class DeleteHistoryAction extends Action implements Runnable {
 
 		IContentProvider obj = viewer.getContentProvider();
 		if (obj instanceof HistoryContentProvider) {
-			HistoryContentProvider provider = (HistoryContentProvider) obj;
+//			HistoryContentProvider provider = (HistoryContentProvider) obj;
 			if (DbPlugin.getDefault().confirmDialog(Messages.getString("DeleteHistoryAction.2"))) { //$NON-NLS-1$
 				SQLHistoryManager mgr = DbPlugin.getDefault().getHistoryManager();
 

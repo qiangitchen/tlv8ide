@@ -12,6 +12,7 @@ import java.util.Hashtable;
 
 import zigen.plugin.db.DbPlugin;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class TransactionForTableEditor {
 
 	private class TransactionElement {
@@ -52,7 +53,7 @@ public class TransactionForTableEditor {
 	private TransactionForTableEditor() {}
 
 	private void create() {
-		TransactionElement elem = null;
+//		TransactionElement elem = null;
 
 		if (!map.containsKey(config.getDbName())) {
 			map.put(config.getDbName(), new TransactionElement(config));

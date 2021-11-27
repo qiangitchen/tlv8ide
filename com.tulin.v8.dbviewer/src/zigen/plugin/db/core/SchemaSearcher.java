@@ -13,6 +13,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SchemaSearcher {
 
 	public static String[] execute(IDBConfig config) throws Exception {

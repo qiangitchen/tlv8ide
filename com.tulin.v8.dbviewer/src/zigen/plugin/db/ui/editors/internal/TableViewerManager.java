@@ -15,6 +15,7 @@ import org.eclipse.jface.viewers.TableViewer;
 import zigen.plugin.db.core.TableElement;
 import zigen.plugin.db.core.TimeWatcher;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class TableViewerManager {
 
 	public static void insert(TableViewer viewer, TableElement newElement) {

@@ -16,6 +16,7 @@ import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.TablePKColumn;
 import zigen.plugin.db.core.rule.DefaultConstraintSearcherFactory;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class MySQLConstraintSearcharFactory extends DefaultConstraintSearcherFactory {
 
 	public MySQLConstraintSearcharFactory() {
@@ -34,9 +35,9 @@ public class MySQLConstraintSearcharFactory extends DefaultConstraintSearcherFac
 
 				st = con.createStatement();
 				rs = st.executeQuery(getSQL(schemaPattern, tableName));
-				int i = 0;
+//				int i = 0;
 				while (rs.next()) {
-					i++;
+//					i++;
 					TablePKColumn column = new TablePKColumn();
 					column.setSep(rs.getInt("KEY_SEQ")); //$NON-NLS-1$
 					column.setColumnName(rs.getString("COLUMN_NAME")); //$NON-NLS-1$

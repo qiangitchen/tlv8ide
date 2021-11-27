@@ -13,13 +13,13 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.core.SQLUtil;
 import zigen.plugin.db.core.SchemaSearcher;
-import zigen.plugin.db.core.StringUtil;
 import zigen.plugin.db.core.TableConstraintColumn;
 import zigen.plugin.db.core.TableFKColumn;
 import zigen.plugin.db.core.TableIDXColumn;
 import zigen.plugin.db.core.TablePKColumn;
 import zigen.plugin.db.core.Transaction;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ContentAssistTable extends TreeNode implements ITable {
 
 	private static final long serialVersionUID = 1L;

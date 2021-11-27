@@ -32,6 +32,7 @@ import zigen.plugin.db.ui.internal.Schema;
 import zigen.plugin.db.ui.internal.TreeNode;
 import zigen.plugin.db.ui.views.TreeView;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ContentInfo {
 
 	IDBConfig config;
@@ -82,7 +83,7 @@ public class ContentInfo {
 	}
 
 	private String findCurrentSchema() throws Exception {
-		TreeView tw = (TreeView) DbPlugin.getDefault().findView(DbPluginConstant.VIEW_ID_TreeView);
+		TreeView tw = (TreeView) DbPlugin.findView(DbPluginConstant.VIEW_ID_TreeView);
 		if (tw != null) {
 			DataBase db = tw.getContentProvider().findDataBase(config);
 			if (SchemaSearcher.isSupport(trans.getConnection())) {
@@ -143,6 +144,7 @@ public class ContentInfo {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	public TableInfo[] getTableInfo(String schemaName) throws Exception {
 
 		if (config == null)

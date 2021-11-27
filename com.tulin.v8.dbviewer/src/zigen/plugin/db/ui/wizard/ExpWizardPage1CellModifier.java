@@ -25,7 +25,7 @@ public class ExpWizardPage1CellModifier implements ICellModifier {
 		// return item.getText();
 
 		if (property == "check") { //$NON-NLS-1$
-			return new Boolean(item.isChecked());
+			return Boolean.valueOf(item.isChecked());
 		} else {
 			return item.getDbName();
 		}

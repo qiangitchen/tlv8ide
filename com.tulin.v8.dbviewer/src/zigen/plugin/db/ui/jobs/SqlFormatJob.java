@@ -16,7 +16,6 @@ import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.swt.SWT;
-import org.eclipse.ui.IWorkbenchPage;
 
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.DbPluginConstant;
@@ -183,9 +182,9 @@ public class SqlFormatJob extends AbstractJob {
 				int offset = viewer.getTextWidget().getCaretOffset();
 				int line = doc.getLineOfOffset(offset);
 				int x = offset - doc.getLineOffset(line);
-				int y = doc.getLineOfOffset(offset);
+//				int y = doc.getLineOfOffset(offset);
 
-				int caretPosition = viewer.getTextWidget().getCaretOffset();
+//				int caretPosition = viewer.getTextWidget().getCaretOffset();
 
 				String preSql = null;
 
@@ -257,8 +256,8 @@ public class SqlFormatJob extends AbstractJob {
 
 		public void run() {
 			try {
-				IWorkbenchPage page = DbPlugin.getDefault().getPage();
-				SQLExecuteView view = (SQLExecuteView) DbPlugin.getDefault().findView(DbPluginConstant.VIEW_ID_SQLExecute, secondaryId);
+//				IWorkbenchPage page = DbPlugin.getDefault().getPage();
+				SQLExecuteView view = (SQLExecuteView) DbPlugin.findView(DbPluginConstant.VIEW_ID_SQLExecute, secondaryId);
 				if (view != null) {
 
 					if (!view.getSqlViewer().isEditable()) {

@@ -33,7 +33,7 @@ public class SQLFormatter {
 
 				return formatter.format(preSql, offset);
 			} catch (SqlFormatException e) {
-				DbPlugin.getDefault().log(e);
+				DbPlugin.log(e);
 			}
 			return preSql;
 		} else {
@@ -50,7 +50,7 @@ public class SQLFormatter {
 				return StringUtil.convertLineSep(result, DbPluginConstant.LINE_SEP);
 
 			} catch (BlancoSqlFormatterException e) {
-				DbPlugin.getDefault().log(e);
+				DbPlugin.log(e);
 			}
 			return preSql;
 

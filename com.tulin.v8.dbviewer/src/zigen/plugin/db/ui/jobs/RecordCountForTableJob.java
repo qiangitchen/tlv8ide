@@ -5,18 +5,14 @@
  */
 package zigen.plugin.db.ui.jobs;
 
-import java.sql.Connection;
-
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchPage;
 
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.DbPluginConstant;
-import zigen.plugin.db.core.ConnectionManager;
 import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.core.Transaction;
 import zigen.plugin.db.core.rule.DefaultSQLCreatorFactory;
@@ -115,7 +111,7 @@ public class RecordCountForTableJob extends AbstractJob {
 
 		public void run() {
 			try {
-				IWorkbenchPage page = DbPlugin.getDefault().getPage();
+//				IWorkbenchPage page = DbPlugin.getDefault().getPage();
 				TableViewEditorInput input = new TableViewEditorInput(trans.getConfig(), table);
 
 				IEditorPart editor = DbPlugin.getDefault().getPage().findEditor(input);

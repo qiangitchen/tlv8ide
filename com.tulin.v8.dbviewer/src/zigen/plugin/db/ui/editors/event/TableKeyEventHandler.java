@@ -139,11 +139,11 @@ public class TableKeyEventHandler {
 		CellEditor editor = viewer.getCellEditors()[col];
 		if (editor == null)
 			throw new IllegalStateException("CellEditor is not set."); //$NON-NLS-1$
-		int columnIndex = -1;
+//		int columnIndex = -1;
 		if (editor instanceof TextCellEditor) {
 			TextCellEditor tce = (TextCellEditor) editor;
 			newValue = tce.getInputValue();
-			columnIndex = tce.getColumnIndex();
+//			columnIndex = tce.getColumnIndex();
 
 		}
 		Object oldValue = element.getItems()[col - 1];
@@ -251,8 +251,7 @@ public class TableKeyEventHandler {
 	}
 
 	public void createNewRecord() {
-
-		String nullSymbol = DbPlugin.getDefault().getPreferenceStore().getString(PreferencePage.P_NULL_SYMBOL);
+		DbPlugin.getDefault().getPreferenceStore().getString(PreferencePage.P_NULL_SYMBOL);
 
 		TableElement elem = getHeaderTableElement();
 		ITable tbl = elem.getTable();

@@ -33,6 +33,7 @@ import zigen.plugin.db.core.rule.symfoware.SymfowareSQLCreatorFactory;
 import zigen.plugin.db.preference.SQLEditorPreferencePage;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public abstract class AbstractSQLCreatorFactory implements ISQLCreatorFactory {
 
 	protected ITable table;

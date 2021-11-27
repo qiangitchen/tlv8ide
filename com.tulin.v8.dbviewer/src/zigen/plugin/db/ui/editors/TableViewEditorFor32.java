@@ -36,26 +36,27 @@ import zigen.plugin.db.ui.contentassist.ContentAssistUtil;
 import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.views.internal.SQLWhitespaceDetector;
 
+@SuppressWarnings({"rawtypes","unchecked", "deprecation"})
 public class TableViewEditorFor32 extends TableViewEditorFor31 implements ITableViewEditor {
 
 	private int wordLen = 0;
 
 	private boolean contentAssisting = false;
 
-	private boolean proposalFiltering = false;
+//	private boolean proposalFiltering = false;
 
 	static final String[] Keywords = {"AND", "ASC", "BETWEEN", "BY", "DESC", "EXISTS", "IN", "IS NULL", "IS NOT NULL", "LIKE", "NOT", "NOT EXISTS", "NULL", "OR", "ORDER BY"};
 
 	private class ColumnContentProposal implements IContentProposalProvider {
 
-		IContentProposal[] contentProposals;
+//		IContentProposal[] contentProposals;
 
 		Column[] columns;
 
 		public ColumnContentProposal(Column[] columns) {
 			this.columns = columns;
 			// this.contentProposals = new IContentProposal[columns.length];
-			this.contentProposals = new IContentProposal[columns.length + Keywords.length];
+//			this.contentProposals = new IContentProposal[columns.length + Keywords.length];
 
 		}
 
@@ -65,7 +66,7 @@ public class TableViewEditorFor32 extends TableViewEditorFor31 implements ITable
 				final String colName = col.getName();
 				final String value = ContentAssistUtil.subString(colName, wordLen);
 				if (word != null && !"".equals(word)) { //$NON-NLS-1$
-					proposalFiltering = true;
+//					proposalFiltering = true;
 					if (value.compareToIgnoreCase(word) == 0) {
 						IContentProposal p = new IContentProposal() {
 							public String getContent() {
@@ -88,7 +89,7 @@ public class TableViewEditorFor32 extends TableViewEditorFor31 implements ITable
 						proposalList.add(p);
 					}
 				} else {
-					proposalFiltering = false;
+//					proposalFiltering = false;
 					IContentProposal p = new IContentProposal() {
 
 						public String getContent() {
@@ -118,7 +119,7 @@ public class TableViewEditorFor32 extends TableViewEditorFor31 implements ITable
 				final String keyword = Keywords[i];
 				final String value = ContentAssistUtil.subString(keyword, wordLen);
 				if (word != null && !"".equals(word)) { //$NON-NLS-1$
-					proposalFiltering = true;
+//					proposalFiltering = true;
 					if (value.compareToIgnoreCase(word) == 0) {
 						IContentProposal p = new IContentProposal() {
 
@@ -142,7 +143,7 @@ public class TableViewEditorFor32 extends TableViewEditorFor31 implements ITable
 						proposalList.add(p);
 					}
 				} else {
-					proposalFiltering = false;
+//					proposalFiltering = false;
 					IContentProposal p = new IContentProposal() {
 
 						public String getContent() {

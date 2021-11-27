@@ -11,6 +11,7 @@ import java.util.Map;
 
 import org.eclipse.core.runtime.IPath;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class PluginSettingsManager extends DefaultXmlManager {
 
 	public static final String KEY_DEFAULT_DB = "KEY_DEFAULT_DB"; //$NON-NLS-1$

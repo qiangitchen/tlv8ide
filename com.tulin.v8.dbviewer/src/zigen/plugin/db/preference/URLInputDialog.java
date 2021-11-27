@@ -25,6 +25,7 @@ import org.eclipse.swt.widgets.Text;
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.editors.event.TextSelectionListener;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class URLInputDialog extends Dialog {
 
 	private static final int LEVEL_FIELD_WIDTH = 20;

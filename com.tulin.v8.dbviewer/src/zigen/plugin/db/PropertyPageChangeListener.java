@@ -11,6 +11,7 @@ import java.util.List;
 
 import zigen.plugin.db.ui.editors.sql.IPropertyPageChangeListener;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class PropertyPageChangeListener {
 
 	public static final int EVT_SetDataBase = 101;

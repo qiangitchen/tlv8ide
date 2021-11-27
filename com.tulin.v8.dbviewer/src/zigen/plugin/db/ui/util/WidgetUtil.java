@@ -6,8 +6,6 @@
 package zigen.plugin.db.ui.util;
 
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.graphics.FontMetrics;
-import org.eclipse.swt.graphics.GC;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;

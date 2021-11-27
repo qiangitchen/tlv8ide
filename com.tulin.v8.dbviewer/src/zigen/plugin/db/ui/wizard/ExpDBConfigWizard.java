@@ -21,6 +21,7 @@ import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.core.XMLManager;
 import zigen.plugin.db.ui.internal.Root;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ExpDBConfigWizard extends Wizard {
 
 	private ExpWizardPage1 page1;

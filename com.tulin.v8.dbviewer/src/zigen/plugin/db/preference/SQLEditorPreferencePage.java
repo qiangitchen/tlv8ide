@@ -66,10 +66,10 @@ public class SQLEditorPreferencePage extends FieldEditorPreferencePage implement
 		super.setDescription(DESC);
 	}
 
-	private String[][] radioLine = new String[][] {new String[] {"CR+LF (Windows)", "\r\n" //$NON-NLS-1$ //$NON-NLS-2$
-	}, new String[] {"LF (Unix)", "\n" //$NON-NLS-1$ //$NON-NLS-2$
-	}, new String[] {"CR (Mac)", "\r" //$NON-NLS-1$ //$NON-NLS-2$
-	},};
+//	private String[][] radioLine = new String[][] {new String[] {"CR+LF (Windows)", "\r\n" //$NON-NLS-1$ //$NON-NLS-2$
+//	}, new String[] {"LF (Unix)", "\n" //$NON-NLS-1$ //$NON-NLS-2$
+//	}, new String[] {"CR (Mac)", "\r" //$NON-NLS-1$ //$NON-NLS-2$
+//	},};
 
 	private String[][] radioSql = new String[][] {new String[] {Messages.getString("SQLEditorPreferencePage.18"), "/" //$NON-NLS-1$ //$NON-NLS-2$
 	}, new String[] {Messages.getString("SQLEditorPreferencePage.20"), ";" //$NON-NLS-1$ //$NON-NLS-2$

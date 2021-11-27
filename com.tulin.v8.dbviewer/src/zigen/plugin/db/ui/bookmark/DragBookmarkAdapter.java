@@ -16,6 +16,7 @@ import org.eclipse.swt.dnd.DragSourceEvent;
 import zigen.plugin.db.ui.internal.TreeLeaf;
 import zigen.plugin.db.ui.internal.TreeNode;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DragBookmarkAdapter extends DragSourceAdapter {
 
 

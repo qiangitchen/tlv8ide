@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.Shell;
 import zigen.plugin.db.ui.internal.DataBase;
 import zigen.plugin.db.ui.internal.TreeLeaf;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DriverSelectDialog extends TitleAreaDialog {
 
 	TreeViewer viewer;

@@ -45,6 +45,7 @@ import zigen.plugin.db.core.ColumnLayout;
 import zigen.plugin.db.ui.editors.event.TextSelectionListener;
 import zigen.plugin.db.ui.util.WidgetUtil;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class WizardPage1 extends DefaultWizardPage {
 
 	ImageCacher ic = ImageCacher.getInstance();

@@ -13,6 +13,7 @@ import org.eclipse.ui.IPersistableElement;
 import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.ext.oracle.internal.OracleSequenceInfo;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SequenceEditorInput implements IEditorInput {
 
 	private String tooltip;

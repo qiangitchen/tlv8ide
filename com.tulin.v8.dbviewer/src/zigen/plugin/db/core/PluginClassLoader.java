@@ -23,6 +23,7 @@ public class PluginClassLoader extends URLClassLoader {
 		return loader;
 	}
 
+	@SuppressWarnings("deprecation")
 	private static URL[] convert(String[] classpaths) {
 		URL[] wk = new URL[classpaths.length];
 		int cnt = 0;

@@ -9,6 +9,7 @@ import java.util.Comparator;
 
 import zigen.plugin.db.ui.internal.Column;
 
+@SuppressWarnings("rawtypes")
 public class ColumnSeqSorter implements Comparator {
 
 	public int compare(Object arg0, Object arg1) {

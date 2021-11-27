@@ -14,6 +14,7 @@ import org.eclipse.swt.dnd.DragSourceEvent;
 
 import zigen.plugin.db.ui.internal.TreeLeaf;
 
+@SuppressWarnings({"rawtypes"})
 public class DragElementAdapter extends DragSourceAdapter {
 
 	StructuredViewer viewer;

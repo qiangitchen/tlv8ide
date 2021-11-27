@@ -13,6 +13,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.views.contentoutline.ContentOutline;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SQLContentOutline extends ContentOutline implements ISelectionProvider, ISelectionChangedListener {
 
 	public SQLContentOutline() {

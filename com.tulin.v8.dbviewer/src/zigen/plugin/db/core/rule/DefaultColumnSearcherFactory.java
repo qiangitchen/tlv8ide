@@ -19,7 +19,7 @@ import zigen.plugin.db.core.ResultSetUtil;
 import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.TableColumn;
 
-
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DefaultColumnSearcherFactory extends AbstractColumnSearcherFactory implements IColumnSearcherFactory {
 
 	public DefaultColumnSearcherFactory(DatabaseMetaData meta, boolean convertUnicode){

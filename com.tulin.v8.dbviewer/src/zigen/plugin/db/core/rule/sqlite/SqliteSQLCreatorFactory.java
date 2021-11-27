@@ -5,15 +5,8 @@
  */
 package zigen.plugin.db.core.rule.sqlite;
 
-import zigen.plugin.db.DbPlugin;
-import zigen.plugin.db.DbPluginConstant;
-import zigen.plugin.db.core.SQLFormatter;
-import zigen.plugin.db.core.SQLUtil;
-import zigen.plugin.db.core.TableColumn;
 import zigen.plugin.db.core.TablePKColumn;
 import zigen.plugin.db.core.rule.DefaultSQLCreatorFactory;
-import zigen.plugin.db.preference.SQLFormatPreferencePage;
-import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.ITable;
 
 public class SqliteSQLCreatorFactory extends DefaultSQLCreatorFactory {

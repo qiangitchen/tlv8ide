@@ -12,8 +12,8 @@ public class SourceDocumentProvider extends StorageDocumentProvider {
 	public SourceDocumentProvider() {}
 
 	protected void doSaveDocument(IProgressMonitor monitor, Object element, IDocument document, boolean overwrite) throws CoreException {
-		SourceEditorInput input = (SourceEditorInput) element;
-		String source = document.get();
+//		SourceEditorInput input = (SourceEditorInput) element;
+//		String source = document.get();
 	}
 
 	public IAnnotationModel getAnnotationModel(Object element) {

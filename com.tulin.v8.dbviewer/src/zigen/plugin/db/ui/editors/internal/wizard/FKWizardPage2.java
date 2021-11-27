@@ -34,6 +34,7 @@ import zigen.plugin.db.core.rule.ISQLCreatorFactory;
 import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class FKWizardPage2 extends PKWizardPage {
 
 	public static final String MSG_DSC = Messages.getString("FKWizardPage2.0"); //$NON-NLS-1$

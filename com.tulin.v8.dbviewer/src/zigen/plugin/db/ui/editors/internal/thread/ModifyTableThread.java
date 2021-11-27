@@ -11,6 +11,7 @@ import java.util.List;
 import zigen.plugin.db.core.rule.ISQLCreatorFactory;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ModifyTableThread extends AbstractSQLThread {
 
 	private String newTableName;

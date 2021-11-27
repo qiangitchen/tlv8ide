@@ -14,14 +14,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import zigen.plugin.db.DbPlugin;
-import zigen.plugin.db.DbPluginConstant;
 import zigen.plugin.db.core.rule.AbstractMappingFactory;
-import zigen.plugin.db.core.rule.DefaultSQLCreatorFactory;
 import zigen.plugin.db.core.rule.IMappingFactory;
-import zigen.plugin.db.core.rule.ISQLCreatorFactory;
 import zigen.plugin.db.preference.PreferencePage;
 import zigen.plugin.db.ui.actions.MaxRecordException;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SQLInvoker {
 
 	public static TableElement[] executeQuery(IDBConfig config, String query) throws Exception, MaxRecordException {

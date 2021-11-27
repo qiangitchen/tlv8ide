@@ -12,7 +12,6 @@ import java.util.List;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.swt.SWT;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorReference;
 
@@ -27,6 +26,7 @@ import zigen.plugin.db.ui.internal.DataBase;
 import zigen.plugin.db.ui.jobs.DisconnectDBJob;
 import zigen.plugin.db.ui.jobs.ConnectDBJob;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class CloseDBAction extends Action implements Runnable {
 
 	TreeViewer viewer = null;

@@ -12,21 +12,21 @@ import org.eclipse.swt.widgets.TableColumn;
 
 public class TableColumnContorolListener extends ControlAdapter {
 
-	private TableViewer viewer = null;
+//	private TableViewer viewer = null;
 
-	private int columnIndex;
+//	private int columnIndex;
 
-	private int columnWidth;
+//	private int columnWidth;
 
 	public TableColumnContorolListener(TableViewer viewer, int columnIndex) {
-		this.viewer = viewer;
-		this.columnIndex = columnIndex;
+//		this.viewer = viewer;
+//		this.columnIndex = columnIndex;
 	}
 
 	public void controlResized(ControlEvent e) {
 		if (e.widget instanceof TableColumn) {
-			TableColumn c = (TableColumn) e.widget;
-			columnWidth = c.getWidth();
+//			TableColumn c = (TableColumn) e.widget;
+//			columnWidth = c.getWidth();
 		}
 	}
 }

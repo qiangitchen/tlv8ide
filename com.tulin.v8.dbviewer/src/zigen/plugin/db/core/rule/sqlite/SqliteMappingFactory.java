@@ -3,7 +3,6 @@ package zigen.plugin.db.core.rule.sqlite;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
-import java.sql.Types;
 
 import zigen.plugin.db.core.rule.DefaultMappingFactory;
 

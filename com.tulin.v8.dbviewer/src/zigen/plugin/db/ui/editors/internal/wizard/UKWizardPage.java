@@ -12,9 +12,9 @@ public class UKWizardPage extends PKWizardPage {
 
 	public static final String MSG_DSC = Messages.getString("UKWizardPage.0"); //$NON-NLS-1$
 
-	private static final String MSG_REQUIRE_NAME = Messages.getString("UKWizardPage.1"); //$NON-NLS-1$
+//	private static final String MSG_REQUIRE_NAME = Messages.getString("UKWizardPage.1"); //$NON-NLS-1$
 
-	private static final String MSG_REQUIRE_COLUMN = Messages.getString("UKWizardPage.2"); //$NON-NLS-1$
+//	private static final String MSG_REQUIRE_COLUMN = Messages.getString("UKWizardPage.2"); //$NON-NLS-1$
 
 	public UKWizardPage(ISQLCreatorFactory factory, ITable table) {
 		super(factory, table);

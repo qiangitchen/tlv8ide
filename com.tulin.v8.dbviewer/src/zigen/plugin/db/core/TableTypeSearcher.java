@@ -12,6 +12,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class TableTypeSearcher {
 
 	public static String[] execute(IDBConfig config) throws Exception {

@@ -26,7 +26,6 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
-import org.eclipse.swt.widgets.TreeItem;
 
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.actions.RegistBookmarkFolderAction;
@@ -65,7 +64,7 @@ public class BookmarkDialog extends Dialog {
 
 	private Button removeBtn;
 
-	private TreeItem dragSourceItem;
+//	private TreeItem dragSourceItem;
 
 	class BookmarkFilter extends ViewerFilter {
 
@@ -120,6 +119,7 @@ public class BookmarkDialog extends Dialog {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	private void createList(Composite composite) {
 
 		viewer = new TreeViewer(composite, SWT.BORDER | SWT.MULTI | SWT.H_SCROLL | SWT.V_SCROLL | SWT.SINGLE);

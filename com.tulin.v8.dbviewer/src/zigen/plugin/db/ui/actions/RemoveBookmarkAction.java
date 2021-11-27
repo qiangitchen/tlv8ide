@@ -18,6 +18,7 @@ import zigen.plugin.db.ui.internal.BookmarkFolder;
 import zigen.plugin.db.ui.internal.BookmarkRoot;
 import zigen.plugin.db.ui.views.TreeContentProvider;
 
+@SuppressWarnings({"rawtypes"})
 public class RemoveBookmarkAction extends Action implements Runnable {
 
 	StructuredViewer viewer = null;

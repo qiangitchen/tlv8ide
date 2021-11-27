@@ -8,11 +8,10 @@ import java.util.TreeMap;
 import zigen.plugin.db.core.JDBCUnicodeConvertor;
 import zigen.plugin.db.core.SQLUtil;
 import zigen.plugin.db.core.TableColumn;
-import zigen.plugin.db.core.rule.AbstractTableInfoSearchFactory;
 import zigen.plugin.db.core.rule.ColumnInfo;
 import zigen.plugin.db.core.rule.DefaultColumnSearcherFactory;
-import zigen.plugin.db.core.rule.ITableInfoSearchFactory;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SymfowareColumnSearcharFactory extends DefaultColumnSearcherFactory {
 	public SymfowareColumnSearcharFactory(DatabaseMetaData meta, boolean convertUnicode) {
 		super(meta, convertUnicode);
@@ -20,22 +19,22 @@ public class SymfowareColumnSearcharFactory extends DefaultColumnSearcherFactory
 
 	static Map typeMap = new TreeMap();
 	static {
-		typeMap.put("CH", new Integer(Types.CHAR));
-		typeMap.put("CV", new Integer(Types.VARCHAR));
-		typeMap.put("BL", new Integer(Types.BLOB));
-		typeMap.put("CN", new Integer(Types.CHAR));
-		typeMap.put("NV", new Integer(Types.CHAR));
-		typeMap.put("IN", new Integer(Types.INTEGER));
-		typeMap.put("SI", new Integer(Types.SMALLINT));
-		typeMap.put("NU", new Integer(Types.DECIMAL));
-		typeMap.put("DE", new Integer(Types.DECIMAL));
-		typeMap.put("FL", new Integer(Types.FLOAT));
-		typeMap.put("DP", new Integer(Types.DOUBLE));
-		typeMap.put("RE", new Integer(Types.REAL));
-		typeMap.put("TM", new Integer(Types.TIMESTAMP));
-		typeMap.put("DT", new Integer(Types.DATE));
-		typeMap.put("TI", new Integer(Types.TIME));
-		typeMap.put("IT", new Integer(Types.OTHER));
+		typeMap.put("CH", Types.CHAR);
+		typeMap.put("CV", Types.VARCHAR);
+		typeMap.put("BL", Types.BLOB);
+		typeMap.put("CN", Types.CHAR);
+		typeMap.put("NV", Types.CHAR);
+		typeMap.put("IN", Types.INTEGER);
+		typeMap.put("SI", Types.SMALLINT);
+		typeMap.put("NU", Types.DECIMAL);
+		typeMap.put("DE", Types.DECIMAL);
+		typeMap.put("FL", Types.FLOAT);
+		typeMap.put("DP", Types.DOUBLE);
+		typeMap.put("RE", Types.REAL);
+		typeMap.put("TM", Types.TIMESTAMP);
+		typeMap.put("DT", Types.DATE);
+		typeMap.put("TI", Types.TIME);
+		typeMap.put("IT", Types.OTHER);
 	}
 
 	static Map typeNameMap = new TreeMap();

@@ -15,6 +15,7 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.internal.DataBase;
 import zigen.plugin.db.ui.jobs.ConnectDBJob;
 
+@SuppressWarnings({"rawtypes"})
 public class ConnectDBAction extends Action implements Runnable {
 
 	TreeViewer viewer = null;

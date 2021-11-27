@@ -72,6 +72,7 @@ import zigen.sql.parser.ast.ASTTable;
 import zigen.sql.parser.ast.ASTValue;
 import zigen.sql.parser.exception.ParserException;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SQLOutinePage extends ContentOutlinePage implements ISelectionListener {
 
 	SqlEditor2 editor;
@@ -139,7 +140,7 @@ public class SQLOutinePage extends ContentOutlinePage implements ISelectionListe
 	}
 
 	protected void contextMenuAboutToShow(IMenuManager menu) {
-		IStructuredSelection selection = (IStructuredSelection) getSelection();
+//		IStructuredSelection selection = (IStructuredSelection) getSelection();
 		menu.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
@@ -293,7 +294,7 @@ public class SQLOutinePage extends ContentOutlinePage implements ISelectionListe
 
 		private void calc(ASTFunction node) {
 			if (node.getChildrenSize() == 1 && node.getChild(0) instanceof ASTParentheses) {
-				ASTParentheses p = (ASTParentheses) node.getChild(0);
+//				ASTParentheses p = (ASTParentheses) node.getChild(0);
 				calc((ASTParentheses) node.getChild(0));
 				offset = node.getOffset();
 				length += node.getLength();

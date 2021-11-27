@@ -24,6 +24,7 @@ import zigen.plugin.db.preference.PreferencePage;
 import zigen.plugin.db.ui.internal.History;
 import zigen.plugin.db.ui.util.FileUtil;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SQLHistoryManager extends DefaultXmlManager {
 
 	private int maxSize = 100;
@@ -233,7 +234,7 @@ public class SQLHistoryManager extends DefaultXmlManager {
 		tw.start();
 		boolean isAdd = false;
 		String sql = his.getSql();
-		SQLHistory current = currentHistory();
+		currentHistory();
 
 		if (!isSameHistory(sql, currentPosition)) {
 

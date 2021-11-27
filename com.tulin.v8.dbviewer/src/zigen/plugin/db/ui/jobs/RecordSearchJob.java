@@ -50,7 +50,7 @@ public class RecordSearchJob extends AbstractJob {
 
 		TimeWatcher time = new TimeWatcher();
 		time.start();
-		boolean doCalculate = false;
+//		boolean doCalculate = false;
 		try {
 			ITable table = editor.getTableNode();
 

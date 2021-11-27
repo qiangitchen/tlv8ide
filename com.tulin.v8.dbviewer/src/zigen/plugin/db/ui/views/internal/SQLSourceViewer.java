@@ -182,7 +182,7 @@ public class SQLSourceViewer extends ProjectionViewer implements ISQLOperationTa
 
 		}
 
-		int offset = getTextWidget().getCaretOffset();
+//		int offset = getTextWidget().getCaretOffset();
 		Display display = Display.getDefault();
 		display.syncExec((Runnable) new ExecuteSQLAction(config, this, secondaryId));
 

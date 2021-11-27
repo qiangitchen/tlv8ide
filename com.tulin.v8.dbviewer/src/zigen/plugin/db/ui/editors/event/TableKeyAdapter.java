@@ -5,8 +5,6 @@
  */
 package zigen.plugin.db.ui.editors.event;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.StringTokenizer;
 
 import org.eclipse.core.runtime.IProgressMonitor;
@@ -304,7 +302,7 @@ public class TableKeyAdapter implements KeyListener, TraverseListener {
 	}
 
 	private String getCurrentClipboard() {
-		String result = null;
+//		String result = null;
 
 		Clipboard cp = ClipboardUtils.getInstance();
 		TextTransfer transfer = TextTransfer.getInstance();

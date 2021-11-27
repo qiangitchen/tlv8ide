@@ -13,16 +13,12 @@ import java.util.Map;
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.core.DBType;
 import zigen.plugin.db.core.ResultSetUtil;
-import zigen.plugin.db.core.SQLUtil;
 import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.TableInfo;
-import zigen.plugin.db.core.rule.mysql.MySQLColumnSearcharFactory;
-import zigen.plugin.db.core.rule.oracle.OracleColumnSearcharFactory;
 import zigen.plugin.db.core.rule.oracle.OracleTableInfoSearchFactory;
-import zigen.plugin.db.core.rule.symfoware.SymfowareColumnSearcharFactory;
 import zigen.plugin.db.core.rule.symfoware.SymfowareTableInfoSearchFactory;
 
-
+@SuppressWarnings({"rawtypes","unchecked"})
 abstract public class AbstractTableInfoSearchFactory implements ITableInfoSearchFactory {
 
 	private static Map map = new HashMap();

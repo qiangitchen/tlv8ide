@@ -15,7 +15,7 @@ public class SQLCharacterPairMatcher implements ICharacterPairMatcher {
 
 	private int depth;
 
-	private int offset;
+//	private int offset;
 
 	private IDocument doc;
 
@@ -29,7 +29,7 @@ public class SQLCharacterPairMatcher implements ICharacterPairMatcher {
 
 	public IRegion match(IDocument document, int offset) {
 		this.doc = document;
-		this.offset = offset;
+//		this.offset = offset;
 
 		if (offset < 0)
 			return null;

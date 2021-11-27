@@ -15,7 +15,7 @@ import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.TableInfo;
 import zigen.plugin.db.core.rule.DefaultTableInfoSearchFactory;
 
-
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SymfowareTableInfoSearchFactory extends DefaultTableInfoSearchFactory{
 
 	public SymfowareTableInfoSearchFactory(DatabaseMetaData meta){

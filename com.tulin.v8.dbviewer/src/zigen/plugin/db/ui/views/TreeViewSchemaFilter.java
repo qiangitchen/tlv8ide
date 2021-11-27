@@ -14,6 +14,7 @@ import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.core.SchemaInfo;
 import zigen.plugin.db.ui.internal.Schema;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class TreeViewSchemaFilter extends ViewerFilter {
 
 	TreeMap settingSchemaMap = new TreeMap();

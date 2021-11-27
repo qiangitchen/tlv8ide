@@ -51,6 +51,7 @@ import zigen.plugin.db.ui.bookmark.TreeLeafListTransfer;
 import zigen.plugin.db.ui.views.internal.ColumnFilter;
 import zigen.plugin.db.ui.views.internal.TableFilter;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public abstract class AbstractTreeView extends ViewPart implements IStatusChangeListener {
 
 	protected PluginSettingsManager settringMgr = DbPlugin.getDefault().getPluginSettingsManager();
@@ -79,7 +80,7 @@ public abstract class AbstractTreeView extends ViewPart implements IStatusChange
 
 	public void setLinkingEnabled(boolean enabled) {
 		// fLinkingEnabled = enabled;
-		settringMgr.setValue(PluginSettingsManager.KEY_LINKED_EDITOR, new Boolean(enabled));
+		settringMgr.setValue(PluginSettingsManager.KEY_LINKED_EDITOR, Boolean.valueOf(enabled));
 	}
 
 	public boolean isLinkingEnabled() {
@@ -155,6 +156,7 @@ public abstract class AbstractTreeView extends ViewPart implements IStatusChange
 
 	protected TreeContentProvider contentProvider;
 
+	@SuppressWarnings("deprecation")
 	protected void createTreeArea(Composite parent) {
 		Composite body = new Composite(parent, SWT.NONE);
 		body.setLayoutData(new GridData(GridData.FILL_BOTH));

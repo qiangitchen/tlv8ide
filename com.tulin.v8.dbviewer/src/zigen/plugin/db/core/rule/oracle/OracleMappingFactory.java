@@ -11,8 +11,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.StringReader;
-import java.sql.Blob;
-import java.sql.Clob;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
@@ -26,7 +24,6 @@ import zigen.plugin.db.core.JDBCUnicodeConvertor;
 import zigen.plugin.db.core.StringUtil;
 import zigen.plugin.db.core.rule.DefaultMappingFactory;
 import zigen.plugin.db.core.rule.IMappingFactory;
-
 
 public class OracleMappingFactory extends DefaultMappingFactory implements IMappingFactory {
 
@@ -172,16 +169,11 @@ public class OracleMappingFactory extends DefaultMappingFactory implements IMapp
 
 	protected Object getBlob(ResultSet rs, int icol) throws SQLException {
 		Object obj = null;
-
 		try {
-
-			Blob blob = rs.getBlob(icol);
-
+//			Blob blob = rs.getBlob(icol);
 			if (rs.wasNull())
 				return nullSymbol;
-
 			obj = "<<BLOB>>";
-
 		} catch (Exception e) {
 			DbPlugin.log(e);
 			throw new SQLException(e.getMessage());
@@ -227,20 +219,15 @@ public class OracleMappingFactory extends DefaultMappingFactory implements IMapp
 	protected Object getClob(ResultSet rs, int icol) throws SQLException {
 		Object obj = null;
 		try {
-
-			Clob clob = rs.getClob(icol);
-
+//			Clob clob = rs.getClob(icol);
 			if (rs.wasNull())
 				return nullSymbol;
-
 			obj = "<<CLOB>>";
-
 		} catch (Exception e) {
 			DbPlugin.log(e);
 			throw new SQLException(e.getMessage());
 		}
 		return obj;
-
 	}
 
 	protected boolean canModify_BLOB() {

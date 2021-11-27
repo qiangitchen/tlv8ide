@@ -19,7 +19,7 @@ import org.eclipse.swt.widgets.Shell;
 
 public class MessageDialogWithToggle2 extends MessageDialogWithToggle {
 
-	private Button toggleButton2 = null;
+//	private Button toggleButton2 = null;
 
 	private String toggleMessage2 = "Defualt Message";
 
@@ -62,7 +62,7 @@ public class MessageDialogWithToggle2 extends MessageDialogWithToggle {
 			button.setText(toggleMessage2);
 			button.setSelection(toggleState2);
 		}
-		this.toggleButton2 = button;
+//		this.toggleButton2 = button;
 	}
 
 	public static MessageDialogWithToggle2 open(Shell parent, String title, String message, String toggleMessage, boolean toggleState, String toggleMessage2, boolean toggleState2) {

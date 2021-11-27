@@ -17,7 +17,7 @@ import zigen.plugin.db.ui.views.internal.SQLSourceViewer;
 
 abstract public class AbstractExecuteSQLAction extends SQLSourceViewerAction implements Runnable {
 
-	private static int MAX_BYTES_SIZE = 1024 * 1024;
+//	private static int MAX_BYTES_SIZE = 1024 * 1024;
 
 	protected IDBConfig config;
 

@@ -41,6 +41,7 @@ public class StatusLineContributionItem extends ContributionItem {
 		setVisible(false);
 	}
 
+	@SuppressWarnings("deprecation")
 	public void fill(Composite parent) {
 		statusLine = parent;
 

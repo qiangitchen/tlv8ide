@@ -23,16 +23,12 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IDocumentExtension4;
 import org.eclipse.jface.text.IDocumentPartitioner;
-import org.eclipse.jface.text.IRegion;
-import org.eclipse.jface.text.ISelectionValidator;
 import org.eclipse.jface.text.ISynchronizable;
 import org.eclipse.jface.text.ITextOperationTarget;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.ITextViewerExtension2;
 import org.eclipse.jface.text.Position;
-import org.eclipse.jface.text.link.LinkedModeModel;
 import org.eclipse.jface.text.rules.FastPartitioner;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
@@ -87,6 +83,7 @@ import zigen.plugin.db.ui.views.internal.SQLPartitionScanner;
 import zigen.plugin.db.ui.views.internal.SQLSourceViewer;
 import zigen.plugin.db.ui.views.internal.SQLToolBarForSqlEditor;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SqlEditor extends TextEditor implements ISqlEditor, IPropertyChangeListener, IStatusChangeListener, IPropertyPageChangeListener {
 
 	protected ImageCacher ic = ImageCacher.getInstance();
@@ -141,7 +138,7 @@ public class SqlEditor extends TextEditor implements ISqlEditor, IPropertyChange
 		super.createPartControl(parent);
 
 		sqlViewer = (SQLSourceViewer) getSourceViewer();
-		String demiliter = DbPlugin.getDefault().getPreferenceStore().getString(SQLEditorPreferencePage.P_SQL_DEMILITER);
+		DbPlugin.getDefault().getPreferenceStore().getString(SQLEditorPreferencePage.P_SQL_DEMILITER);
 
 		IDocument doc = sqlViewer.getDocument();
 		IDocumentPartitioner partitioner = new FastPartitioner(new SQLPartitionScanner(), new String[] {SQLPartitionScanner.SQL_STRING, SQLPartitionScanner.SQL_COMMENT});
@@ -431,41 +428,41 @@ public class SqlEditor extends TextEditor implements ISqlEditor, IPropertyChange
 
 	class OccurrencesFinderJob extends Job {
 
-		private IDocument fDocument;
+//		private IDocument fDocument;
 
-		private ISelection fSelection;
+//		private ISelection fSelection;
 
-		private ISelectionValidator fPostSelectionValidator;
+//		private ISelectionValidator fPostSelectionValidator;
 
-		private boolean fCanceled = false;
+//		private boolean fCanceled = false;
 
-		private IProgressMonitor fProgressMonitor;
+//		private IProgressMonitor fProgressMonitor;
 
 		private Position[] fPositions;
 
 		public OccurrencesFinderJob(IDocument document, Position[] positions, ISelection selection) {
 			super(""); //$NON-NLS-1$
-			fDocument = document;
-			fSelection = selection;
+//			fDocument = document;
+//			fSelection = selection;
 			fPositions = positions;
 
-			if (getSelectionProvider() instanceof ISelectionValidator)
-				fPostSelectionValidator = (ISelectionValidator) getSelectionProvider();
+//			if (getSelectionProvider() instanceof ISelectionValidator)
+//				fPostSelectionValidator = (ISelectionValidator) getSelectionProvider();
 		}
 
 		void doCancel() {
-			fCanceled = true;
+//			fCanceled = true;
 			cancel();
 		}
 
-		private boolean isCanceled() {
-			return fCanceled || fProgressMonitor.isCanceled() || fPostSelectionValidator != null
-					&& !(fPostSelectionValidator.isValid(fSelection) || fForcedMarkOccurrencesSelection == fSelection) || LinkedModeModel.hasInstalledModel(fDocument);
-		}
+//		private boolean isCanceled() {
+//			return fCanceled || fProgressMonitor.isCanceled() || fPostSelectionValidator != null
+//					&& !(fPostSelectionValidator.isValid(fSelection) || fForcedMarkOccurrencesSelection == fSelection) || LinkedModeModel.hasInstalledModel(fDocument);
+//		}
 
 		public IStatus run(IProgressMonitor progressMonitor) {
 
-			fProgressMonitor = progressMonitor;
+//			fProgressMonitor = progressMonitor;
 
 			// if (isCanceled())
 			// return Status.CANCEL_STATUS;
@@ -482,7 +479,7 @@ public class SqlEditor extends TextEditor implements ISqlEditor, IPropertyChange
 			if (documentProvider == null)
 				return Status.CANCEL_STATUS;
 
-			fForcedMarkOccurrencesSelection = getSelectionProvider().getSelection();
+//			fForcedMarkOccurrencesSelection = getSelectionProvider().getSelection();
 
 			IAnnotationModel annotationModel = documentProvider.getAnnotationModel(getEditorInput());
 			if (annotationModel == null)
@@ -535,11 +532,11 @@ public class SqlEditor extends TextEditor implements ISqlEditor, IPropertyChange
 
 	private Annotation[] fOccurrenceAnnotations;
 
-	private IRegion fMarkOccurrenceTargetRegion;
+//	private IRegion fMarkOccurrenceTargetRegion;
 
-	private long fMarkOccurrenceModificationStamp = IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
+//	private long fMarkOccurrenceModificationStamp = IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
 
-	private ISelection fForcedMarkOccurrencesSelection;
+//	private ISelection fForcedMarkOccurrencesSelection;
 
 	private Object getLockObject(IAnnotationModel annotationModel) {
 		if (annotationModel instanceof ISynchronizable) {
@@ -551,8 +548,8 @@ public class SqlEditor extends TextEditor implements ISqlEditor, IPropertyChange
 	}
 
 	void removeOccurrenceAnnotations() {
-		fMarkOccurrenceModificationStamp = IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
-		fMarkOccurrenceTargetRegion = null;
+//		fMarkOccurrenceModificationStamp = IDocumentExtension4.UNKNOWN_MODIFICATION_STAMP;
+//		fMarkOccurrenceTargetRegion = null;
 
 		IDocumentProvider documentProvider = getDocumentProvider();
 		if (documentProvider == null)

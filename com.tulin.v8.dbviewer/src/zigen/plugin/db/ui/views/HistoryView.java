@@ -70,6 +70,7 @@ import zigen.plugin.db.ui.views.internal.SQLCodeConfiguration;
 import zigen.plugin.db.ui.views.internal.SQLDocument;
 import zigen.plugin.db.ui.views.internal.SQLSourceViewer;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class HistoryView extends ViewPart implements IStatusChangeListener {
 
 	protected SQLHistoryManager mgr = DbPlugin.getDefault().getHistoryManager();
@@ -125,6 +126,7 @@ public class HistoryView extends ViewPart implements IStatusChangeListener {
 
 	}
 
+	@SuppressWarnings("deprecation")
 	protected void createTreeArea(Composite parent) {
 		Composite body = new Composite(parent, SWT.NONE);
 		body.setLayoutData(new GridData(GridData.FILL_BOTH));

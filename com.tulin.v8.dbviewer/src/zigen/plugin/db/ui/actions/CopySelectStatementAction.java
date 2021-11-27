@@ -21,21 +21,21 @@ import org.eclipse.ui.PartInitException;
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.core.ClipboardUtils;
 import zigen.plugin.db.core.SQLFormatter;
-import zigen.plugin.db.preference.SQLEditorPreferencePage;
 import zigen.plugin.db.preference.SQLFormatPreferencePage;
 import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes"})
 public class CopySelectStatementAction implements IViewActionDelegate {
 
 	private ISelection selection = null;
 
-	private IViewPart viewPart;
+//	private IViewPart viewPart;
 
 	boolean isSelectedColumn = false;
 
 	public void init(IViewPart view) {
-		this.viewPart = view;
+//		this.viewPart = view;
 
 	}
 
@@ -103,10 +103,10 @@ public class CopySelectStatementAction implements IViewActionDelegate {
 
 	private void copyString(String sql) throws PartInitException {
 		IPreferenceStore ps = DbPlugin.getDefault().getPreferenceStore();
-		String demiliter = ps.getString(SQLEditorPreferencePage.P_SQL_DEMILITER);
+//		String demiliter = ps.getString(SQLEditorPreferencePage.P_SQL_DEMILITER);
 		boolean onPatch = ps.getBoolean(SQLFormatPreferencePage.P_FORMAT_PATCH);
 		int type = ps.getInt(SQLFormatPreferencePage.P_USE_FORMATTER_TYPE);
-		int max = ps.getInt(SQLFormatPreferencePage.P_MAX_SQL_COUNT);
+//		int max = ps.getInt(SQLFormatPreferencePage.P_MAX_SQL_COUNT);
 
 		sql = SQLFormatter.format(sql, type, onPatch);
 

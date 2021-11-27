@@ -21,6 +21,7 @@ import org.eclipse.jface.operation.IRunnableWithProgress;
 
 import zigen.plugin.db.DbPlugin;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DriverSearcherWithProgress implements IRunnableWithProgress {
 
 	private ClassLoader loader;
@@ -54,8 +55,7 @@ public class DriverSearcherWithProgress implements IRunnableWithProgress {
 					} else {
 						File classFile = new File(classpaths[i]);
 						in = new ZipInputStream(new FileInputStream(classFile));
-						ZipEntry entry = null;
-						while ((entry = in.getNextEntry()) != null) {
+						while (in.getNextEntry() != null) {
 							cnt++;
 						}
 					}

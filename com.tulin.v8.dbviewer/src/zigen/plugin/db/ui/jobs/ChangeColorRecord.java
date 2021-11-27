@@ -71,7 +71,7 @@ public class ChangeColorRecord implements Runnable {
 
 			if (tableNode == null || selectedColumn == null) {
 				for (int k = 0; k < columnSize - 1; k++) {
-					TableColumn tCol = tableColmns[k];
+//					TableColumn tCol = tableColmns[k];
 					if (nullSymbol.equals(item.getText(k + 1))) {
 						item.setForeground(k + 1, blue);
 					} else {

@@ -8,6 +8,7 @@ package zigen.plugin.db.core;
 import java.math.BigDecimal;
 import java.util.Comparator;
 
+@SuppressWarnings("rawtypes")
 public class DBConfigSorter implements Comparator {
 
 	boolean isDesc = false;

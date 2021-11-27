@@ -79,6 +79,7 @@ import zigen.plugin.db.ui.views.internal.SQLOutinePage;
 import zigen.plugin.db.ui.views.internal.SQLPartitionScanner;
 import zigen.plugin.db.ui.views.internal.SQLSourceViewer;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class SourceEditor extends TextEditor implements IPlsqlEditor, IPropertyChangeListener {
 
 	public static final String ID = "zigen.plugin.db.ui.editors.sql.SourceEditor"; //$NON-NLS-1$
@@ -153,7 +154,7 @@ public class SourceEditor extends TextEditor implements IPlsqlEditor, IPropertyC
 		super.createPartControl(parent);
 
 		sourceViewer = (PLSQLSourceViewer) getSourceViewer();
-		String demiliter = DbPlugin.getDefault().getPreferenceStore().getString(SQLEditorPreferencePage.P_SQL_DEMILITER);
+		DbPlugin.getDefault().getPreferenceStore().getString(SQLEditorPreferencePage.P_SQL_DEMILITER);
 
 		IDocument doc = sourceViewer.getDocument();
 		IDocumentPartitioner partitioner = new FastPartitioner(new SQLPartitionScanner(), new String[] {SQLPartitionScanner.SQL_STRING, SQLPartitionScanner.SQL_COMMENT});
@@ -487,10 +488,10 @@ public class SourceEditor extends TextEditor implements IPlsqlEditor, IPropertyC
 
 		private Root invisibleRoot;
 
-		private TreeViewer viewer;
+//		private TreeViewer viewer;
 
 		public void inputChanged(Viewer v, Object oldInput, Object newInput) {
-			this.viewer = (TreeViewer) v;
+//			this.viewer = (TreeViewer) v;
 			this.invisibleRoot = new Root("invisible", true);
 			if (newInput instanceof OracleSourceErrorInfo[]) {
 				OracleSourceErrorInfo[] errors = (OracleSourceErrorInfo[]) newInput;
@@ -530,8 +531,8 @@ public class SourceEditor extends TextEditor implements IPlsqlEditor, IPropertyC
 			return false;
 		}
 
-		public Root getInvisibleRoot() {
-			return invisibleRoot;
-		}
+//		public Root getInvisibleRoot() {
+//			return invisibleRoot;
+//		}
 	}
 }

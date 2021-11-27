@@ -15,6 +15,7 @@ import org.eclipse.jface.preference.IPreferenceStore;
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.preference.CodeAssistPreferencePage;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ObjectCacher {
 
 	private static final Map map = new HashMap();

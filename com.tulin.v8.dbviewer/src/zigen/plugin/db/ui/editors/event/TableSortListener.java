@@ -19,6 +19,7 @@ import zigen.plugin.db.ImageCacher;
 import zigen.plugin.db.core.TableElement;
 import zigen.plugin.db.ui.editors.ITableViewEditor;
 
+@SuppressWarnings("deprecation")
 public class TableSortListener extends SelectionAdapter {
 
 	protected ImageCacher ic = ImageCacher.getInstance();

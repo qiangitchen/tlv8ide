@@ -8,11 +8,6 @@ package zigen.plugin.db.ui.jobs;
 import java.sql.Connection;
 import java.sql.DatabaseMetaData;
 
-import org.eclipse.jface.action.IStatusLineManager;
-import org.eclipse.ui.IActionBars;
-import org.eclipse.ui.IEditorSite;
-import org.eclipse.ui.PartInitException;
-
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.DbPluginConstant;
 import zigen.plugin.db.core.IDBConfig;

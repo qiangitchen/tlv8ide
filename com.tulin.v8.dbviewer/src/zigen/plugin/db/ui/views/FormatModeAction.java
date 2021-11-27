@@ -133,6 +133,6 @@ public class FormatModeAction extends SQLSourceViewerAction implements IMenuCrea
 	}
 
 	protected void setLastAutoFormatMode(boolean auto) {
-		pluginMgr.setValue(PluginSettingsManager.KEY_AUTO_FORMAT, new Boolean(auto));
+		pluginMgr.setValue(PluginSettingsManager.KEY_AUTO_FORMAT, Boolean.valueOf(auto));
 	}
 }

@@ -48,7 +48,6 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.IStatusChangeListener;
-import zigen.plugin.db.ImageCacher;
 import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.core.TableElement;
 import zigen.plugin.db.csv.CreateCSVForQueryAction;
@@ -81,7 +80,7 @@ public class SqlEditor2 extends SqlEditor implements ITableViewEditor, IQueryVie
 		setDirty(true);
 	}
 
-	private ImageCacher ic = ImageCacher.getInstance();
+//	private ImageCacher ic = ImageCacher.getInstance();
 
 	private Table table;
 
@@ -320,7 +319,7 @@ public class SqlEditor2 extends SqlEditor implements ITableViewEditor, IQueryVie
 		TableElement element = elements[0];
 		int size = element.getColumns().length + 1;
 		String[] properties = new String[size];
-		zigen.plugin.db.core.TableColumn[] cols = element.getColumns();
+//		zigen.plugin.db.core.TableColumn[] cols = element.getColumns();
 		cellEditors = new CellEditor[size];
 		TableKeyAdapter keyAdapter = new TableKeyAdapter(handler);
 		for (int i = 0; i < cellEditors.length; i++) {
@@ -530,6 +529,7 @@ public class SqlEditor2 extends SqlEditor implements ITableViewEditor, IQueryVie
 		}
 	}
 
+	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Class adapter) {
 		if (IContentOutlinePage.class.equals(adapter)) {
 			if (outlinePage == null) {

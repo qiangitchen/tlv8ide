@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Display;
 
 import zigen.plugin.db.DbPlugin;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ColorManager {
 
 	protected Map fColorTable = new HashMap();

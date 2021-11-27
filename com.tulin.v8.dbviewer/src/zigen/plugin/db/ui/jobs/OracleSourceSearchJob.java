@@ -27,6 +27,7 @@ import zigen.plugin.db.ui.internal.OracleSource;
 import zigen.plugin.db.ui.internal.Schema;
 import zigen.plugin.db.ui.internal.TreeLeaf;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class OracleSourceSearchJob extends AbstractJob {
 
 	private TreeViewer viewer;

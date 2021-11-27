@@ -8,10 +8,8 @@ package zigen.plugin.db.core.rule;
 import java.sql.SQLException;
 import java.sql.Types;
 
-import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.core.JDBCUnicodeConvertor;
 import zigen.plugin.db.core.SQLUtil;
-import zigen.plugin.db.preference.PreferencePage;
 
 public class DefaultStatementFactory extends AbstractStatementFactory implements IStatementFactory {
 	protected String nullSymbol;

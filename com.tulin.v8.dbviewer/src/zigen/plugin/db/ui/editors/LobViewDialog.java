@@ -41,7 +41,6 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
 import zigen.plugin.db.DbPlugin;
-import zigen.plugin.db.ImageCacher;
 import zigen.plugin.db.PluginSettingsManager;
 import zigen.plugin.db.core.ByteArrayUtil;
 import zigen.plugin.db.core.IDBConfig;
@@ -53,7 +52,7 @@ import zigen.plugin.db.ui.editors.internal.FillCellEditorUtil;
 
 public class LobViewDialog extends Dialog {
 
-	private ImageCacher ic = ImageCacher.getInstance();
+//	private ImageCacher ic = ImageCacher.getInstance();
 
 	protected PluginSettingsManager pluginMgr = DbPlugin.getDefault().getPluginSettingsManager();
 
@@ -176,16 +175,15 @@ public class LobViewDialog extends Dialog {
 			try {
 				IDBConfig config = tableElement.getTable().getDbConfig();
 				TransactionForTableEditor trans = TransactionForTableEditor.getInstance(config);
-				int rowAffected = 0;
 				if (isClob()) {
 					String str = ByteArrayUtil.toString((byte[]) newData, charsetItem.getText());
-					rowAffected = FillCellEditorUtil.update(trans.getConnection(), tableElement, colIndex, str);
+					FillCellEditorUtil.update(trans.getConnection(), tableElement, colIndex, str);
 
 					originalData = str;
 					charsetItem.setEnabled(false);
 
 				} else {
-					rowAffected = FillCellEditorUtil.update(trans.getConnection(), tableElement, colIndex, newData);
+					FillCellEditorUtil.update(trans.getConnection(), tableElement, colIndex, newData);
 					originalData = newData;
 					charsetItem.setEnabled(true);
 				}
@@ -221,9 +219,8 @@ public class LobViewDialog extends Dialog {
 			try {
 				IDBConfig config = tableElement.getTable().getDbConfig();
 				TransactionForTableEditor trans = TransactionForTableEditor.getInstance(config);
-				int rowAffected = 0;
 
-				rowAffected = FillCellEditorUtil.delete(trans.getConnection(), tableElement, colIndex);
+				FillCellEditorUtil.delete(trans.getConnection(), tableElement, colIndex);
 
 				trans.commit();
 				addTextPages(null, ORIGINAL, false);
@@ -300,11 +297,11 @@ public class LobViewDialog extends Dialog {
 		});
 		new ToolItem(toolBar, SWT.SEPARATOR);
 
-		String defaultCharset = DEFAULT_CHARSET;
+//		String defaultCharset = DEFAULT_CHARSET;
 
 		Object obj = pluginMgr.getValue(PluginSettingsManager.KEY_LOB_CHARSET);
 		if (obj != null && obj instanceof String) {
-			defaultCharset = (String) obj;
+//			defaultCharset = (String) obj;
 		}
 
 		charsetItem = createToolItem(toolBar, SWT.DROP_DOWN, DEFAULT_CHARSET, null, null, "This is dropdown one"); //$NON-NLS-1$

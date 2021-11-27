@@ -31,6 +31,7 @@ import zigen.sql.parser.ast.ASTTable;
 import zigen.sql.parser.ast.ASTUnion;
 import zigen.sql.parser.ast.ASTUpdateStatement;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class DefaultProcessor {
 
 	protected List proposals;

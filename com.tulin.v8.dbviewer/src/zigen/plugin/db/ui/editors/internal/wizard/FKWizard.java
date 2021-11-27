@@ -14,6 +14,7 @@ import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.internal.Schema;
 import zigen.plugin.db.ui.internal.Table;
 
+@SuppressWarnings({"unchecked"})
 public class FKWizard extends DefaultWizard implements IConfirmDDLWizard {
 
 	private FKWizardPage1 page1;

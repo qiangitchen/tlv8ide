@@ -6,7 +6,6 @@
 package zigen.plugin.db.core;
 
 import java.io.CharArrayReader;
-import java.io.IOException;
 import java.io.StringWriter;
 
 import zigen.plugin.db.DbPlugin;

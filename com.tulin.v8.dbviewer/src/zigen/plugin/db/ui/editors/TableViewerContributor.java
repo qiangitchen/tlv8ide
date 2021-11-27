@@ -44,7 +44,6 @@ import zigen.plugin.db.ui.internal.ConstraintRoot;
 import zigen.plugin.db.ui.internal.Index;
 import zigen.plugin.db.ui.internal.IndexRoot;
 import zigen.plugin.db.ui.internal.Trigger;
-import zigen.plugin.db.ui.internal.TriggerRoot;
 
 public class TableViewerContributor extends MultiPageEditorActionBarContributor {
 
@@ -152,7 +151,7 @@ public class TableViewerContributor extends MultiPageEditorActionBarContributor 
 	}
 
 	public void fillContextMenuForDefine(IMenuManager manager, ISelection selection) {
-		Object obj = (Object) ((StructuredSelection) selection).getFirstElement();
+//		Object obj = (Object) ((StructuredSelection) selection).getFirstElement();
 
 		manager.add(addColumnAction);
 		manager.add(editColumnAction);

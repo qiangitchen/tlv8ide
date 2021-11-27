@@ -9,6 +9,7 @@ import zigen.plugin.db.core.rule.ISQLCreatorFactory;
 import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"unchecked"})
 public class UKWizard extends DefaultWizard implements IConfirmDDLWizard {
 
 

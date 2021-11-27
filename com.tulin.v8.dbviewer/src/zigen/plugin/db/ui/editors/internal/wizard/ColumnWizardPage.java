@@ -40,7 +40,7 @@ public class ColumnWizardPage extends DefaultWizardPage {
 
 	private Column column;
 
-	private Column newColumn;
+//	private Column newColumn;
 
 	Text txtColumnName;
 
@@ -198,7 +198,7 @@ public class ColumnWizardPage extends DefaultWizardPage {
 		txtDefualtt.addFocusListener(new TextSelectionListener());
 
 
-		Label dummy = new Label(composite, SWT.NULL);
+//		Label dummy = new Label(composite, SWT.NULL);
 		Label label2 = new Label(composite, SWT.NULL);
 		gd = new GridData(GridData.FILL_HORIZONTAL);
 		gd.horizontalSpan = 3;

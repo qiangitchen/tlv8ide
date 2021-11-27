@@ -14,7 +14,6 @@ import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.rules.Token;
 import org.eclipse.jface.text.rules.WhitespaceRule;
 import org.eclipse.jface.text.rules.WordRule;
-import org.eclipse.swt.SWT;
 
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.DbPluginFormatRule;

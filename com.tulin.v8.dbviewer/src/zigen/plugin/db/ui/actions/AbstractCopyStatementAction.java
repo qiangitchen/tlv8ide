@@ -29,6 +29,7 @@ import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.views.ColumnSearchAction;
 import zigen.plugin.db.ui.views.TreeView;
 
+@SuppressWarnings({"rawtypes"})
 abstract public class AbstractCopyStatementAction implements IViewActionDelegate {
 
 	protected ISelection selection = null;
@@ -58,12 +59,7 @@ abstract public class AbstractCopyStatementAction implements IViewActionDelegate
 		try {
 			if (selection instanceof IStructuredSelection) {
 				IStructuredSelection ss = (IStructuredSelection) selection;
-
-				StringBuffer sb = new StringBuffer();
-
 				new CopyAction(treeViewer, ss).run();
-
-
 			}
 
 		} catch (Exception e) {
@@ -71,18 +67,18 @@ abstract public class AbstractCopyStatementAction implements IViewActionDelegate
 		}
 	}
 
-	private boolean checkLoadColumn(IStructuredSelection ss) {
-		for (Iterator iter = ss.iterator(); iter.hasNext();) {
-			Object obj = iter.next();
-			if (obj instanceof ITable) {
-				ITable table = (ITable) obj;
-				if (!table.isExpanded()) {
-					return false;
-				}
-			}
-		}
-		return true;
-	}
+//	private boolean checkLoadColumn(IStructuredSelection ss) {
+//		for (Iterator iter = ss.iterator(); iter.hasNext();) {
+//			Object obj = iter.next();
+//			if (obj instanceof ITable) {
+//				ITable table = (ITable) obj;
+//				if (!table.isExpanded()) {
+//					return false;
+//				}
+//			}
+//		}
+//		return true;
+//	}
 
 
 	void setContents(String contents) {

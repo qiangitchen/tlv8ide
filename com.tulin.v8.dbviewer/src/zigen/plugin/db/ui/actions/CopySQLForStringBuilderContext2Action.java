@@ -25,10 +25,10 @@ public class CopySQLForStringBuilderContext2Action implements IViewActionDelegat
 
 	private ISelection selection;
 
-	private IViewPart viewPart;
+//	private IViewPart viewPart;
 
 	public void init(IViewPart view) {
-		this.viewPart = view;
+//		this.viewPart = view;
 	}
 
 	public void run(IAction action) {

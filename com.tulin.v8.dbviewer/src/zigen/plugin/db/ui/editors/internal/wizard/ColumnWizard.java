@@ -12,13 +12,14 @@ import zigen.plugin.db.core.rule.ISQLCreatorFactory;
 import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ColumnWizard extends DefaultWizard implements IConfirmDDLWizard {
 
 	private ColumnWizardPage page1;
 
 	private Column column;
 
-	private Column newColumn;
+//	private Column newColumn;
 
 	private boolean isAddColumn = false;
 

@@ -16,6 +16,7 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.core.ClipboardUtils;
 import zigen.plugin.db.ui.internal.Column;
 
+@SuppressWarnings({"rawtypes"})
 public class CopyLogicalColumnNameAction extends AbstractCopyAction {
 
 	public void run(IAction action) {

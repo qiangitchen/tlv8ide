@@ -8,6 +8,7 @@ package zigen.plugin.db.core;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ConstraintUtil {
 
 	public static boolean isPKColumn(TablePKColumn[] pks, String columnName) {

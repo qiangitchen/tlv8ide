@@ -23,6 +23,7 @@ import zigen.plugin.db.ui.internal.Table;
 import zigen.plugin.db.ui.internal.TreeNode;
 import zigen.plugin.db.ui.views.TreeContentProvider;
 
+@SuppressWarnings({"rawtypes"})
 public class RegistBookmarkAction extends Action implements Runnable {
 
 	TreeViewer viewer = null;

@@ -10,6 +10,7 @@ import java.util.List;
 
 import zigen.sql.parser.INode;
 
+@SuppressWarnings({"rawtypes","unchecked"})
 public class ASTUtil2 {
 
 	public static INode findParent(INode node, String type) {

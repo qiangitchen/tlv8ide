@@ -8,7 +8,6 @@ package zigen.plugin.db.ui.editors.internal.action;
 import java.sql.Connection;
 
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.ide.IDE;
@@ -56,7 +55,7 @@ public class OpenTriggerAction extends TableViewEditorAction {
 					sourceErrors = OracleSourceErrorSearcher.execute(con, owner, name, type);
 					SourceEditorInput input = new SourceEditorInput(table.getDbConfig(), trigger, sourceDetail, sourceErrors);
 					IWorkbenchPage page = DbPlugin.getDefault().getPage();
-					IEditorPart editor = IDE.openEditor(page, input, DbPluginConstant.EDITOR_ID_SOURCE, true);
+					IDE.openEditor(page, input, DbPluginConstant.EDITOR_ID_SOURCE, true);
 				}
 			}
 		} catch (Exception e) {
