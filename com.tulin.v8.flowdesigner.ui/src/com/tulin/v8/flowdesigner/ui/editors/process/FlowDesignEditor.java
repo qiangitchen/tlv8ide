@@ -249,7 +249,7 @@ public class FlowDesignEditor extends EditorPart {
 	 * 初始化全局命令
 	 */
 	private void hookGlobalHanlers() {
-		handlerService = getSite().getService(IHandlerService.class);
+		handlerService = (IHandlerService) getSite().getService(IHandlerService.class);
 		removeHanler = new AbstractHandler() {
 			@Override
 			public Object execute(ExecutionEvent event) throws ExecutionException {
