@@ -16,6 +16,6 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.ui.forms,
  com.tulin.v8.core,
  com.tulin.v8.xml
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Automatic-Module-Name: com.tulin.v8.echarts.ui
 Bundle-ActivationPolicy: lazy

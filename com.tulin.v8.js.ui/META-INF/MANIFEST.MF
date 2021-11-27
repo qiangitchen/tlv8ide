@@ -6,7 +6,7 @@ Bundle-Version: 2.0.0.qualifier
 Bundle-Vendor: %Bundle-Author
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.wst.jsdt.ui;bundle-version="2.1.0"
 Automatic-Module-Name: com.tulin.v8.js.ui

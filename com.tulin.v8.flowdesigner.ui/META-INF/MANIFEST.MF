@@ -19,7 +19,7 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.wst.jsdt.web.ui,
  com.tulin.v8.core,
  com.tulin.v8.flowdesigner.server
-Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Automatic-Module-Name: com.tulin.v8.flowdesigner.ui
 Bundle-ActivationPolicy: lazy
 Export-Package: com.tulin.v8.flowdesigner.ui,
