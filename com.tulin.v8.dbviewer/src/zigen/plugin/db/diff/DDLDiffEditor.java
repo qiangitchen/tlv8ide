@@ -19,7 +19,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.ToolBarManager;
 import org.eclipse.jface.viewers.TreeViewer;
@@ -144,10 +143,10 @@ public class DDLDiffEditor extends EditorPart {
 
 	}
 
-	private IToolBarManager getToolBarManager() {
-		return getEditorSite().getActionBars().getToolBarManager();
-
-	}
+//	private IToolBarManager getToolBarManager() {
+//		return getEditorSite().getActionBars().getToolBarManager();
+//
+//	}
 
 	public void dispose() {
 		super.dispose();

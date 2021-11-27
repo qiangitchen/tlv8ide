@@ -5,9 +5,6 @@
  */
 package zigen.plugin.db.ext.oracle.tablespace.wizard;
 
-import java.sql.SQLException;
-import java.util.List;
-
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.CellEditor;
@@ -38,7 +35,7 @@ public class WizardPage1 extends DefaultWizardPage {
 
 	private String[] headers = {HEADER_TABLE};
 
-	private ISelection selection;
+	//private ISelection selection;
 
 	zigen.plugin.db.ui.internal.Schema schemaNode;
 
@@ -46,7 +43,7 @@ public class WizardPage1 extends DefaultWizardPage {
 
 	public WizardPage1(ISelection selection) {
 		super("wizardPage"); //$NON-NLS-1$
-		this.selection = selection;
+		//this.selection = selection;
 		this.schemaNode = getSelectedSchema(selection);
 
 		setTitle(Messages.getString("WizardPage1.2")); //$NON-NLS-1$
@@ -160,7 +157,7 @@ public class WizardPage1 extends DefaultWizardPage {
 
 	private class TableContentProvider implements IStructuredContentProvider {
 
-		private List contents = null;
+		//private List contents = null;
 
 		public Object[] getElements(Object inputElement) {
 			if (inputElement instanceof IItem[]) {
@@ -170,11 +167,11 @@ public class WizardPage1 extends DefaultWizardPage {
 		}
 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			contents = null;
+			//contents = null;
 		}
 
 		public void dispose() {
-			contents = null;
+			//contents = null;
 		}
 
 	}

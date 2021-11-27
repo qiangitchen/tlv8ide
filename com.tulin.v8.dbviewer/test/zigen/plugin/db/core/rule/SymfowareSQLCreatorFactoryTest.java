@@ -1,18 +1,7 @@
 package zigen.plugin.db.core.rule;
 
-import junit.framework.TestCase;
-import kry.sql.format.ISqlFormat;
-import kry.sql.tokenizer.SqlScanner;
-import zigen.plugin.db.core.DBConfig;
-import zigen.plugin.db.core.DBType;
-import zigen.plugin.db.core.IDBConfig;
-import zigen.plugin.db.core.TableColumn;
 import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.Constraint;
-import zigen.plugin.db.ui.internal.DataBase;
-import zigen.plugin.db.ui.internal.Folder;
-import zigen.plugin.db.ui.internal.ITable;
-import zigen.plugin.db.ui.internal.Schema;
 import zigen.plugin.db.ui.internal.Table;
 
 public class SymfowareSQLCreatorFactoryTest extends OracleSQLCreatorFactoryTest {
@@ -217,13 +206,13 @@ public class SymfowareSQLCreatorFactoryTest extends OracleSQLCreatorFactoryTest 
 		table = createTable("SCOTT", "EMP");
 		f = AbstractSQLCreatorFactory.getFactory(table.getDbConfig(), table);
 		f.setVisibleSchemaName(true);
-		sql = f.createCommentOnTableDDL("コメント");
+		sql = f.createCommentOnTableDDL("�R�����g�ł�");
 		assertEquals(null, sql);
 
 		table = createTable("SCOTT-1", "EMP-1");
 		f = AbstractSQLCreatorFactory.getFactory(table.getDbConfig(), table);
 		f.setVisibleSchemaName(true);
-		sql = f.createCommentOnTableDDL("コメント");
+		sql = f.createCommentOnTableDDL("�R'�����g\"�ł�");
 		assertEquals(null, sql);
 
 	}
@@ -237,7 +226,7 @@ public class SymfowareSQLCreatorFactoryTest extends OracleSQLCreatorFactoryTest 
 		assertEquals(null, sql);
 
 		table = createTable("SCOTT-1", "EMP-1");
-		table.addChild(createColumn("EMPNO-1", "NUMBER", null, "Comment"));
+		table.addChild(createColumn("EMPNO-1", "NUMBER", null, "�R'����\"�g"));
 		f = AbstractSQLCreatorFactory.getFactory(table.getDbConfig(), table);
 		f.setVisibleSchemaName(true);
 		sql = f.createCommentOnColumnDDL(table.getColumns()[0]);
@@ -321,7 +310,7 @@ public class SymfowareSQLCreatorFactoryTest extends OracleSQLCreatorFactoryTest 
 		f.setVisibleSchemaName(true);
 
 		// ���O�͂����ł͕ς����Ȃ�(ALTER TABLE RENAME COLUMN���g����j
-		Column toCol = createColumn("EMONO", "VARCHAR2", "abc", "コメント2");
+		Column toCol = createColumn("EMONO", "VARCHAR2", "abc", "コメント");
 		toCol.setSize("10");
 		toCol.setNotNull(true);
 		String[] sqls;
@@ -338,7 +327,7 @@ public class SymfowareSQLCreatorFactoryTest extends OracleSQLCreatorFactoryTest 
 		f = AbstractSQLCreatorFactory.getFactory(table.getDbConfig(), table);
 		f.setVisibleSchemaName(true);
 
-		toCol = createColumn("EMONO-1", "VARCHAR2", "abc", "コメント2");
+		toCol = createColumn("EMONO-1", "VARCHAR2", "abc", "コメント");
 		toCol.setSize("10");
 		toCol.setNotNull(true);
 

@@ -134,7 +134,7 @@ public class PageWebServer {
 		}
 
 		public Map<String, String> getParameterMap() {
-			Map<String, String> map = new HashMap<>();
+			Map<String, String> map = new HashMap<String, String>();
 			if (!queryParameterMap.isEmpty()) {
 				for (String k : queryParameterMap.keySet()) {
 					map.put(k, queryParameterMap.get(k));

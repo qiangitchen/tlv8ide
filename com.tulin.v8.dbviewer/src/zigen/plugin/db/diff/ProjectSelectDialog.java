@@ -13,7 +13,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.IMessageProvider;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -158,15 +157,15 @@ public class ProjectSelectDialog extends TitleAreaDialog {
 
 	}
 
-	private void validate() {
-		IContainer container = getContainer();
-		if (container != null) {
-			IFile file = container.getFile(new Path(getSaveFileName()));
-			if (file.exists()) {
-				super.setMessage(Messages.getString("ProjectSelectDialog.4"), IMessageProvider.WARNING); //$NON-NLS-1$
-			}
-		}
-	}
+//	private void validate() {
+//		IContainer container = getContainer();
+//		if (container != null) {
+//			IFile file = container.getFile(new Path(getSaveFileName()));
+//			if (file.exists()) {
+//				super.setMessage(Messages.getString("ProjectSelectDialog.4"), IMessageProvider.WARNING); //$NON-NLS-1$
+//			}
+//		}
+//	}
 
 	protected Point getInitialSize() {
 		return new Point(480, 450);

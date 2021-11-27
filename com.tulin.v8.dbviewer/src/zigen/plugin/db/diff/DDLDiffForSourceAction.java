@@ -20,6 +20,7 @@ import zigen.plugin.db.ext.oracle.internal.OracleSourceDetailInfo;
 import zigen.plugin.db.ext.oracle.internal.OracleSourceDetailSearcher;
 import zigen.plugin.db.ui.internal.OracleSource;
 
+@SuppressWarnings({ "rawtypes" })
 public class DDLDiffForSourceAction extends Action implements Runnable {
 
 	private StructuredViewer viewer = null;

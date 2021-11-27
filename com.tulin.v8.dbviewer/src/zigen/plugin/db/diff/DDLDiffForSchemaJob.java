@@ -56,13 +56,14 @@ import zigen.plugin.db.ui.internal.TreeLeaf;
 import zigen.plugin.db.ui.jobs.AbstractJob;
 import zigen.plugin.db.ui.views.TableSearchThread;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class DDLDiffForSchemaJob extends AbstractJob {
 
 	public static final String TargetFolderPattern = "^TABLE|^VIEW|^SYNONYM|^ALIAS"; //$NON-NLS-1$
 
 	public static final String TargetFolderPattern2 = "^FUNCTION|^PROCEDURE|^PACKAGE"; //$NON-NLS-1$
 
-	private TreeViewer viewer;
+//	private TreeViewer viewer;
 
 	private List allTables = new ArrayList();
 
@@ -80,7 +81,7 @@ public class DDLDiffForSchemaJob extends AbstractJob {
 		super(Messages.getString("DDLDiffJob.0")); //$NON-NLS-1$
 		this.s1 = s1;
 		this.s2 = s2;
-		this.viewer = viewer;
+//		this.viewer = viewer;
 	}
 
 	protected IStatus run(IProgressMonitor monitor) {
@@ -428,7 +429,7 @@ public class DDLDiffForSchemaJob extends AbstractJob {
 				IEditorPart editor = IDE.openEditor(page, input, DDLDiffEditor.ID, true);
 
 				if (editor instanceof DDLDiffEditor) {
-					DDLDiffEditor dEditor = (DDLDiffEditor) editor;
+//					DDLDiffEditor dEditor = (DDLDiffEditor) editor;
 				}
 
 			} catch (Exception e) {

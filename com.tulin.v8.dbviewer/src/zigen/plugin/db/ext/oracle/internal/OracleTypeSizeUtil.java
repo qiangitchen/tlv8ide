@@ -8,6 +8,7 @@ package zigen.plugin.db.ext.oracle.internal;
 import java.sql.Connection;
 import java.util.HashMap;
 
+@SuppressWarnings({ "rawtypes" })
 public class OracleTypeSizeUtil {
 
 	public static final String UB1 = "UB1"; //$NON-NLS-1$

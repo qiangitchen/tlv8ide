@@ -18,6 +18,7 @@ import zigen.plugin.db.core.SQLUtil;
 import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.Transaction;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class OracleSourceSearcher {
 
 	public static OracleSourceInfo[] execute(IDBConfig config, String owner, String type) throws Exception {

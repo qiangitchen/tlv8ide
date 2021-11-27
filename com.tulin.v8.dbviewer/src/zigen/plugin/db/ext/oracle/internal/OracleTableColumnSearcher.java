@@ -18,6 +18,7 @@ import zigen.plugin.db.core.rule.IColumnSearcherFactory;
 import zigen.plugin.db.ext.oracle.tablespace.OracleTableColumn;
 import zigen.plugin.db.ui.internal.Table;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class OracleTableColumnSearcher {
 
 	public static OracleTableColumn[] execute(IDBConfig config, Table table) throws Exception {

@@ -24,6 +24,7 @@ import zigen.plugin.db.DbPluginConstant;
 import zigen.plugin.db.core.ClipboardUtils;
 import zigen.plugin.db.ui.internal.Folder;
 
+@SuppressWarnings({ "rawtypes" })
 public class CopyNodeNameAction extends Action {
 
 	DDLDiffEditor editor;

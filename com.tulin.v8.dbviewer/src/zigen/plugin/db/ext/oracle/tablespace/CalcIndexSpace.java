@@ -17,6 +17,7 @@ import zigen.plugin.db.ext.oracle.internal.OracleDbBlockSizeSearcher;
 import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.internal.Table;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class CalcIndexSpace {
 
 	int block_header = 100; // 100byte
@@ -72,6 +73,7 @@ public class CalcIndexSpace {
 		this.maxRecord = maxRecord;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void calcurate() throws Exception {
 		try {
 

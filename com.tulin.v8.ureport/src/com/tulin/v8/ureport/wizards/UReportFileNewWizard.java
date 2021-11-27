@@ -28,6 +28,7 @@ import org.eclipse.ui.ide.IDE;
 public class UReportFileNewWizard extends Wizard implements INewWizard {
 	private ISelection selection;
 	NewUReportFilePage newfilepage;
+	private IFile files;
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
@@ -83,7 +84,7 @@ public class UReportFileNewWizard extends Wizard implements INewWizard {
 			throwCoreException(Messages.getString("wizards.message.missfolder").replace("{1}", containerName));
 		}
 		IContainer container = (IContainer) resource;
-		IFile files = container.getFile(new Path(fileName));
+		files = container.getFile(new Path(fileName));
 		try {
 			InputStream stream = openContentStream();
 			if (files.exists()) {

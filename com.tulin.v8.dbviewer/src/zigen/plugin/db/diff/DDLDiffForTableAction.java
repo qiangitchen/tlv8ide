@@ -18,6 +18,7 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.views.ColumnSearchAction;
 
+@SuppressWarnings({ "rawtypes" })
 public class DDLDiffForTableAction extends Action implements Runnable {
 
 	private StructuredViewer viewer = null;

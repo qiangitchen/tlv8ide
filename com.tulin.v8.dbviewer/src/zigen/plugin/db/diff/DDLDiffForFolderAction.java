@@ -14,6 +14,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.internal.Folder;
 
+@SuppressWarnings({ "rawtypes" })
 public class DDLDiffForFolderAction extends Action implements Runnable {
 
 	private boolean showDialog = true;

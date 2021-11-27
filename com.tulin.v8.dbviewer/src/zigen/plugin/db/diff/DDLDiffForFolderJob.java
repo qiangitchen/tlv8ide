@@ -17,7 +17,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.viewers.TreeViewer;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.ui.progress.IProgressConstants;
@@ -55,13 +54,14 @@ import zigen.plugin.db.ui.internal.Synonym;
 import zigen.plugin.db.ui.jobs.AbstractJob;
 import zigen.plugin.db.ui.views.TableSearchThread;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class DDLDiffForFolderJob extends AbstractJob {
 
 	public static final String TargetFolderPattern = "^TABLE|^VIEW|^SYNONYM|^ALIAS"; //$NON-NLS-1$
 
 	public static final String TargetFolderPattern2 = "^FUNCTION|^PROCEDURE|^PACKAGE"; //$NON-NLS-1$
 
-	private TreeViewer viewer;
+//	private TreeViewer viewer;
 
 	private List allList = new ArrayList();
 
@@ -79,7 +79,7 @@ public class DDLDiffForFolderJob extends AbstractJob {
 		super(Messages.getString("DDLDiffJob.0")); //$NON-NLS-1$
 		this.f1 = f1;
 		this.f2 = f2;
-		this.viewer = viewer;
+//		this.viewer = viewer;
 	}
 
 	protected IStatus run(IProgressMonitor monitor) {
@@ -439,7 +439,7 @@ public class DDLDiffForFolderJob extends AbstractJob {
 
 				DDLDiffEditorInput input = new DDLDiffEditorInput(diffs, false);
 				IWorkbenchPage page = DbPlugin.getDefault().getPage();
-				IEditorPart editor = IDE.openEditor(page, input, DDLDiffEditor.ID, true);
+				IDE.openEditor(page, input, DDLDiffEditor.ID, true);
 
 				// if (editor instanceof DDLDiffEditor) {
 				// DDLDiffEditor dEditor = (DDLDiffEditor) editor;

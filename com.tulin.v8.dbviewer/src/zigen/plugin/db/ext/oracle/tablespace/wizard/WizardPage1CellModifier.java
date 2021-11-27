@@ -23,7 +23,7 @@ public class WizardPage1CellModifier implements ICellModifier {
 	public Object getValue(Object element, String property) {
 		TableItem item = (TableItem) element;
 		if (property == "check") { //$NON-NLS-1$
-			return new Boolean(item.isChecked());
+			return item.isChecked();
 		} else {
 			return item.getTableName();
 		}

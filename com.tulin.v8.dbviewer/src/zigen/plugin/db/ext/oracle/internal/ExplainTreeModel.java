@@ -9,6 +9,7 @@ import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class ExplainTreeModel implements java.io.Serializable {
 
 	private static final long serialVersionUID = 1L;

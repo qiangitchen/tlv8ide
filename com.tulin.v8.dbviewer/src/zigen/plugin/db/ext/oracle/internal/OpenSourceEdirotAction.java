@@ -11,7 +11,6 @@ import java.util.Iterator;
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.StructuredViewer;
-import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
@@ -25,6 +24,7 @@ import zigen.plugin.db.ui.editors.sql.SourceEditorInput;
 import zigen.plugin.db.ui.internal.OracleSequence;
 import zigen.plugin.db.ui.internal.OracleSource;
 
+@SuppressWarnings({ "rawtypes" })
 public class OpenSourceEdirotAction extends Action implements Runnable {
 
 	StructuredViewer viewer = null;
@@ -40,7 +40,6 @@ public class OpenSourceEdirotAction extends Action implements Runnable {
 
 	public void run() {
 		IStructuredSelection selection = (IStructuredSelection) viewer.getSelection();
-
 		for (Iterator iter = selection.iterator(); iter.hasNext();) {
 			Object element = (Object) iter.next();
 			if (element instanceof OracleSource) {
@@ -55,13 +54,11 @@ public class OpenSourceEdirotAction extends Action implements Runnable {
 				throw new IllegalStateException("OpenSourceEdirotAction#run()"); //$NON-NLS-1$
 			}
 		}
-
 	}
 
 	protected void openSourceEditor(OracleSource source) {
 		OracleSourceDetailInfo sourceDetail = null;
 		OracleSourceErrorInfo[] sourceErrors = null;
-
 		try {
 			Connection con = Transaction.getInstance(source.getDbConfig()).getConnection();
 
@@ -74,23 +71,19 @@ public class OpenSourceEdirotAction extends Action implements Runnable {
 
 			SourceEditorInput input = new SourceEditorInput(source.getDbConfig(), source, sourceDetail, sourceErrors);
 			IWorkbenchPage page = DbPlugin.getDefault().getPage();
-			IEditorPart editor = IDE.openEditor(page, input, DbPluginConstant.EDITOR_ID_SOURCE, true);
-
+			IDE.openEditor(page, input, DbPluginConstant.EDITOR_ID_SOURCE, true);
 		} catch (Exception e) {
 			DbPlugin.getDefault().showErrorDialog(e);
 		}
 	}
 
 	protected void openSequenceEditor(OracleSequence seq) {
-
 		try {
 			SequenceEditorInput input = new SequenceEditorInput(seq.getDbConfig(), seq.getOracleSequenceInfo());
 			IWorkbenchPage page = DbPlugin.getDefault().getPage();
-			IEditorPart editor = IDE.openEditor(page, input, DbPluginConstant.EDITOR_ID_SEQUENCE, true);
-
+			IDE.openEditor(page, input, DbPluginConstant.EDITOR_ID_SEQUENCE, true);
 		} catch (Exception e) {
 			DbPlugin.getDefault().showErrorDialog(e);
-
 		}
 	}
 

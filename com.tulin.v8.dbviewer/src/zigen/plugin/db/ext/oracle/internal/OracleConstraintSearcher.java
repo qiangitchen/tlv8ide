@@ -22,6 +22,7 @@ import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.TableConstraintColumn;
 import zigen.plugin.db.core.TimeWatcher;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class OracleConstraintSearcher {
 
 

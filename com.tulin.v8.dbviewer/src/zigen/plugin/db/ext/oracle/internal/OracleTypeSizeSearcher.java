@@ -16,6 +16,7 @@ import zigen.plugin.db.core.ResultSetUtil;
 import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.Transaction;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class OracleTypeSizeSearcher {
 
 	public static HashMap execute(IDBConfig config) throws Exception {
@@ -40,7 +41,7 @@ public class OracleTypeSizeSearcher {
 				String type = rs.getString("TYPE"); //$NON-NLS-1$
 				int size = rs.getInt("TYPE_SIZE"); //$NON-NLS-1$
 
-				map.put(type, new Integer(size));
+				map.put(type, size);
 			}
 			return map;
 

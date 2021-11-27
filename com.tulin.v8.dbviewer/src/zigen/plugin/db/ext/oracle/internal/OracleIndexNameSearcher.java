@@ -19,6 +19,7 @@ import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.Transaction;
 import zigen.plugin.db.ui.internal.Table;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class OracleIndexNameSearcher {
 
 	public static String[] execute(IDBConfig config, Table table) throws Exception {

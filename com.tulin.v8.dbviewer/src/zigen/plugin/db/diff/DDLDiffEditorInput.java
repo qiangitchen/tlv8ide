@@ -10,6 +10,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class DDLDiffEditorInput implements IEditorInput {
 
 	private String tooltip;

@@ -14,6 +14,7 @@ import java.util.List;
 
 import zigen.plugin.db.DbPlugin;
 
+@SuppressWarnings({ "rawtypes" })
 public class CSVResultWriter {
 
 	private char demiliter = ',';

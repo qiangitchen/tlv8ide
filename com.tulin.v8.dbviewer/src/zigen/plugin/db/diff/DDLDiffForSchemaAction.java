@@ -14,6 +14,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ui.internal.Schema;
 
+@SuppressWarnings({ "rawtypes" })
 public class DDLDiffForSchemaAction extends Action implements Runnable {
 
 	private boolean showDialog = true;
@@ -33,7 +34,6 @@ public class DDLDiffForSchemaAction extends Action implements Runnable {
 	public void run() {
 		IStructuredSelection selection = (IStructuredSelection) viewer.getSelection();
 		try {
-
 			int index = 0;
 			for (Iterator iter = selection.iterator(); iter.hasNext();) {
 				Object obj = iter.next();

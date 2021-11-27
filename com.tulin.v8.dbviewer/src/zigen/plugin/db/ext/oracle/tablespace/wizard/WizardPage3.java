@@ -6,7 +6,6 @@
 package zigen.plugin.db.ext.oracle.tablespace.wizard;
 
 import java.io.File;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +36,7 @@ import zigen.plugin.db.ext.oracle.tablespace.CalcIndexSpace;
 import zigen.plugin.db.ext.oracle.tablespace.CalcIndexSpaces;
 import zigen.plugin.db.ext.oracle.tablespace.CalcTableSpace;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class WizardPage3 extends DefaultWizardPage {
 
 	public static final String HEADER_SCHEMANAME = Messages.getString("WizardPage3.0"); //$NON-NLS-1$
@@ -284,18 +284,18 @@ public class WizardPage3 extends DefaultWizardPage {
 
 	private class TableContentProvider implements IStructuredContentProvider {
 
-		private List contents = null;
+		//private List contents = null;
 
 		public Object[] getElements(Object inputElement) {
 			return (IItem[]) inputElement;
 		}
 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			contents = null;
+			//contents = null;
 		}
 
 		public void dispose() {
-			contents = null;
+			//contents = null;
 		}
 
 	}

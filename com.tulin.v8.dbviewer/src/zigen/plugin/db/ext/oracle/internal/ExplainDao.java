@@ -16,6 +16,7 @@ import zigen.plugin.db.core.ResultSetUtil;
 import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.Transaction;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class ExplainDao {
 
 	public ExplainVo[] execute(IDBConfig config) throws Exception {

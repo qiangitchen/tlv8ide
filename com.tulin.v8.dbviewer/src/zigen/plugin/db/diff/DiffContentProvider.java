@@ -6,7 +6,6 @@
 package zigen.plugin.db.diff;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 
 import zigen.plugin.db.ui.internal.Folder;
@@ -27,7 +26,7 @@ public class DiffContentProvider implements ITreeContentProvider {
 
 	private Root invisibleRoot;
 
-	private TreeViewer viewer;
+//	private TreeViewer viewer;
 
 	Table[] tables = null;
 
@@ -46,7 +45,7 @@ public class DiffContentProvider implements ITreeContentProvider {
 			invisibleRoot.addChild(folder3);
 			invisibleRoot.addChild(folder4);
 
-			this.viewer = (TreeViewer) v;
+//			this.viewer = (TreeViewer) v;
 
 			if (newInput instanceof IDDLDiff[]) {
 				IDDLDiff[] diffs = (IDDLDiff[]) newInput;

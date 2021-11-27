@@ -21,6 +21,7 @@ import zigen.plugin.db.core.SQLUtil;
 import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.TableIDXColumn;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class OracleIndexSearcher {
 
 	private static String getIndexQuery(String schemaPattern, String tableName, boolean uniqueIndex) {

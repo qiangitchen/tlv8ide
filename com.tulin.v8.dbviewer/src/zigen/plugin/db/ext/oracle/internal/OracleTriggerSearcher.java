@@ -18,6 +18,7 @@ import zigen.plugin.db.core.SQLUtil;
 import zigen.plugin.db.core.StatementUtil;
 import zigen.plugin.db.core.Transaction;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class OracleTriggerSearcher {
 
 	public static OracleTriggerInfo[] execute(IDBConfig config, String owner, String table) throws Exception {

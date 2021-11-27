@@ -387,13 +387,15 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	 */
 	public void resourceChanged(final IResourceChangeEvent event) {
 		if (event.getType() == IResourceChangeEvent.PRE_CLOSE) {
-			Display.getDefault().asyncExec(() -> {
-				IWorkbenchPage[] pages = getSite().getWorkbenchWindow().getPages();
-				for (int i = 0; i < pages.length; i++) {
-					if (((FileEditorInput) editor.getEditorInput()).getFile().getProject()
-							.equals(event.getResource())) {
-						IEditorPart editorPart = pages[i].findEditor(editor.getEditorInput());
-						pages[i].closeEditor(editorPart, true);
+			Display.getDefault().asyncExec(new Runnable() {
+				public void run() {
+					IWorkbenchPage[] pages = getSite().getWorkbenchWindow().getPages();
+					for (int i = 0; i < pages.length; i++) {
+						if (((FileEditorInput) editor.getEditorInput()).getFile().getProject()
+								.equals(event.getResource())) {
+							IEditorPart editorPart = pages[i].findEditor(editor.getEditorInput());
+							pages[i].closeEditor(editorPart, true);
+						}
 					}
 				}
 			});

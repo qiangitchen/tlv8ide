@@ -24,6 +24,7 @@ import org.eclipse.swt.widgets.Composite;
 import zigen.plugin.db.ui.views.internal.ColorManager;
 import zigen.plugin.db.ui.views.internal.SQLCodeConfiguration;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class DDLDiffViewer extends TextMergeViewer {
 
 	List fSourceViewer;

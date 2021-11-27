@@ -15,6 +15,7 @@ import zigen.plugin.db.ext.oracle.internal.OracleIndexColumnSearcher;
 import zigen.plugin.db.ext.oracle.internal.OracleIndexNameSearcher;
 import zigen.plugin.db.ui.internal.Table;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class CalcIndexSpaces {
 
 	private Table table;

@@ -23,6 +23,7 @@ import zigen.plugin.db.core.rule.IColumnSearcherFactory;
 import zigen.plugin.db.ext.oracle.tablespace.OracleIndexColumn;
 import zigen.plugin.db.ui.internal.ITable;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class OracleIndexColumnSearcher {
 
 	public static OracleIndexColumn[] execute(IDBConfig config, ITable table, String indexName) throws Exception {

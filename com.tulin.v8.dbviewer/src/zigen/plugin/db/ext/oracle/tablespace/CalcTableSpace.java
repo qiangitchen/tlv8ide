@@ -18,6 +18,7 @@ import zigen.plugin.db.ext.oracle.internal.OracleDbBlockSizeSearcher;
 import zigen.plugin.db.ext.oracle.internal.OracleTableColumnSearcher;
 import zigen.plugin.db.ui.internal.Table;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class CalcTableSpace {
 
 	int block_header = 100; // 100bye
@@ -65,6 +66,7 @@ public class CalcTableSpace {
 		this.maxRecord = maxRecord;
 	}
 
+	@SuppressWarnings("deprecation")
 	public void calcurate() throws CalcTableSpaceException {
 		try {
 			IDBConfig config = table.getDbConfig();

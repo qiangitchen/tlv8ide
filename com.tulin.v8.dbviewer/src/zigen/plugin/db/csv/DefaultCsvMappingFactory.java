@@ -312,7 +312,7 @@ public class DefaultCsvMappingFactory extends AbstractCsvMappingFactory implemen
 	}
 
 	protected String getOTHER(ResultSet rs, int icol) throws SQLException {
-		Object value = rs.getObject(icol);
+//		Object value = rs.getObject(icol);
 		if (rs.wasNull())
 			return NULL;
 		return "<<OTHER>>"; //$NON-NLS-1$

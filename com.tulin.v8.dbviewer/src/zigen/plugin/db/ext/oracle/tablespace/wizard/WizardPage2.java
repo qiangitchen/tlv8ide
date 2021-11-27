@@ -5,7 +5,6 @@
  */
 package zigen.plugin.db.ext.oracle.tablespace.wizard;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -34,6 +33,7 @@ import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.ext.oracle.internal.OracleDbBlockSizeSearcher;
 import zigen.plugin.db.ui.editors.event.TextSelectionListener;
 
+@SuppressWarnings({ "rawtypes", "unchecked" })
 public class WizardPage2 extends DefaultWizardPage {
 
 	private DbBlockSizeVerifyListener verifyListener = new DbBlockSizeVerifyListener();
@@ -185,7 +185,7 @@ public class WizardPage2 extends DefaultWizardPage {
 
 	private class TableContentProvider implements IStructuredContentProvider {
 
-		private List contents = null;
+		//private List contents = null;
 
 		public Object[] getElements(Object inputElement) {
 			if (inputElement instanceof IItem[]) {
@@ -196,11 +196,11 @@ public class WizardPage2 extends DefaultWizardPage {
 		}
 
 		public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-			contents = null;
+			//contents = null;
 		}
 
 		public void dispose() {
-			contents = null;
+			//contents = null;
 		}
 
 		private List getCheckedList(TableItem[] items) {
@@ -252,7 +252,7 @@ public class WizardPage2 extends DefaultWizardPage {
 		private String acceptableChar = "1234567890"; //$NON-NLS-1$
 
 		public void verifyText(VerifyEvent e) {
-			char chr = e.character;
+			//char chr = e.character;
 			if (e.character == SWT.BS || e.character == SWT.DEL) {
 				return;
 			}
