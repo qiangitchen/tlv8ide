@@ -25,6 +25,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 
+import com.tulin.v8.core.Sys;
 import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.core.utils.LocalBrowser;
 import com.tulin.v8.xml.editors.XMLEditor;
@@ -78,6 +79,7 @@ public class UReportEditor extends MultiPageEditorPart implements IResourceChang
 				int index = addPage(designer, getEditorInput());
 				setPageText(index, Messages.getString("UReportEditor.pageEditor.3"));
 			} catch (Exception e) {
+				Sys.printErrMsg(e);
 				e.printStackTrace();
 			}
 		} else {
@@ -107,6 +109,7 @@ public class UReportEditor extends MultiPageEditorPart implements IResourceChang
 				int index = addPage(preview, getEditorInput());
 				setPageText(index, Messages.getString("UReportEditor.pageEditor.5"));
 			} catch (Exception e) {
+				Sys.printErrMsg(e);
 				e.printStackTrace();
 			}
 		} else {
@@ -127,10 +130,10 @@ public class UReportEditor extends MultiPageEditorPart implements IResourceChang
 	}
 
 	protected void createPages() {
+		setPartName(getEditorInput().getName());// 标题显示为文件名
 		createPage0();
 		createPage1();
 		createPage2();
-		setPartName(editor.getPartName());// 标题显示为文件名
 		try {
 			setActivePage(1);// 默认展示‘设计’
 		} catch (Exception e) {
