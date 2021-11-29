@@ -322,6 +322,11 @@ version(s), and exceptions or additional permissions here}.&quot;
          id="com.tulin.v8.dbviewer.feature"
          version="0.0.0"/>
 
+   <includes
+         id="com.tulin.v8.js.ui.feature"
+         version="0.0.0"
+         optional="true"/>
+
    <requires>
       <import plugin="org.eclipse.core.runtime"/>
       <import plugin="org.eclipse.core.resources"/>
