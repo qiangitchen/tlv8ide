@@ -1,5 +1,8 @@
 package com.tulin.v8.ureport.ui.editors.designer;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
@@ -15,9 +18,9 @@ import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.forms.editor.FormPage;
 import org.osgi.framework.Version;
 
-import com.equo.swt.chromium.Browser;
-import com.equo.swt.chromium.BrowserFunction;
 import com.tulin.v8.core.utils.CommonUtil;
+import com.tulin.v8.swt.chromium.Browser;
+import com.tulin.v8.swt.chromium.BrowserFunction;
 import com.tulin.v8.ureport.ui.editors.designer.action.BackAction;
 import com.tulin.v8.ureport.ui.editors.designer.action.CatAction;
 import com.tulin.v8.ureport.ui.editors.designer.action.CopyAction;
@@ -44,9 +47,21 @@ public class UReportDesigner extends FormPage {
 	private PasteAction pasteAction;
 	private ViewSourseAction viewSourseAction;
 
+	Clipboard clipbd = Toolkit.getDefaultToolkit().getSystemClipboard();
+
 	public UReportDesigner(UReportEditor meditor, String title) {
 		super("ureportDesigner", title);
 		this.meditor = meditor;
+	}
+
+	/**
+	 * 创建右键菜单
+	 */
+	public void makeActions() {
+		catAction = new CatAction(clipbd);
+		copyAction = new CopyAction(clipbd);
+		pasteAction = new PasteAction(clipbd);
+		viewSourseAction = new ViewSourseAction(meditor);
 	}
 
 	public void fillContextMenu(IMenuManager manager) {
@@ -106,6 +121,7 @@ public class UReportDesigner extends FormPage {
 			});
 			Menu menu = menuMgr.createContextMenu(designer);
 			designer.setMenu(menu);
+			makeActions();
 		}
 	}
 

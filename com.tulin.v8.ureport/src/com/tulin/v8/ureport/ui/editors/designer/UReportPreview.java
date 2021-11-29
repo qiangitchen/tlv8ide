@@ -1,5 +1,9 @@
 package com.tulin.v8.ureport.ui.editors.designer;
 
+import java.awt.Toolkit;
+import java.awt.datatransfer.Clipboard;
+
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
@@ -12,6 +16,7 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.forms.editor.FormPage;
+import org.osgi.framework.Version;
 
 import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.ureport.ui.editors.designer.action.BackAction;
@@ -32,16 +37,28 @@ public class UReportPreview extends FormPage {
 	UReportEditor meditor;
 
 	private org.eclipse.swt.browser.Browser swtbrowser = null;
-	private com.equo.swt.chromium.Browser browser = null;
+	private com.tulin.v8.swt.chromium.Browser browser = null;
 
 	private CatAction catAction;
 	private CopyAction copyAction;
 	private PasteAction pasteAction;
 	private ViewSourseAction viewSourseAction;
+	
+	Clipboard clipbd = Toolkit.getDefaultToolkit().getSystemClipboard();
 
 	public UReportPreview(UReportEditor meditor, String title) {
 		super("ureportPreview", title);
 		this.meditor = meditor;
+	}
+	
+	/**
+	 * 创建右键菜单
+	 */
+	public void makeActions() {
+		catAction = new CatAction(clipbd);
+		copyAction = new CopyAction(clipbd);
+		pasteAction = new PasteAction(clipbd);
+		viewSourseAction = new ViewSourseAction(meditor);
 	}
 
 	public void fillContextMenu(IMenuManager manager) {
@@ -71,7 +88,7 @@ public class UReportPreview extends FormPage {
 		} else if (browser != null) {
 			browser.setJavascriptEnabled(true);
 			new LoadReport(meditor, browser, "callLoadReport");
-			new com.equo.swt.chromium.BrowserFunction(browser, "callPreviewReport") {
+			new com.tulin.v8.swt.chromium.BrowserFunction(browser, "callPreviewReport") {
 				@Override
 				public Object function(Object[] arguments) {
 					meditor.setActivePages(2);
@@ -100,17 +117,19 @@ public class UReportPreview extends FormPage {
 			});
 			Menu menu = menuMgr.createContextMenu(browser);
 			browser.setMenu(menu);
+			makeActions();
 		}
 	}
 
 	private void createBrowser0(Composite composite) {
 		if (CommonUtil.isWinOS()) {
 			try {
-				if (CommonUtil.getOSVersion() >= 10) {
+				Version version = Platform.getBundle("org.eclipse.platform").getVersion();
+				if (CommonUtil.getOSVersion() >= 10 && version.getMajor() >= 4 && version.getMinor() > 18) {
 					int EDGE = 1 << 18;
 					swtbrowser = new org.eclipse.swt.browser.Browser(composite, EDGE);
 				} else {
-					browser = new com.equo.swt.chromium.Browser(composite, SWT.NONE);
+					browser = new com.tulin.v8.swt.chromium.Browser(composite, SWT.NONE);
 				}
 			} catch (SWTError e) {
 				try {
@@ -121,7 +140,7 @@ public class UReportPreview extends FormPage {
 				} finally {
 					swtbrowser = null;
 				}
-				browser = new com.equo.swt.chromium.Browser(composite, SWT.NONE);
+				browser = new com.tulin.v8.swt.chromium.Browser(composite, SWT.NONE);
 			}
 		} else {
 			swtbrowser = new org.eclipse.swt.browser.Browser(composite, SWT.NONE);
