@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: TuLin Platform
 Bundle-SymbolicName: com.tulin.v8.platform;singleton:=true
 Bundle-Version: 2.2.0.qualifier
-Bundle-Vendor: TULIN
+Bundle-Vendor: TuLin
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
 Automatic-Module-Name: com.tulin.v8.platform

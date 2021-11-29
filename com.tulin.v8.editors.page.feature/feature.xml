@@ -3,7 +3,7 @@
       id="com.tulin.v8.editors.page.feature"
       label="TuLin Page Editor"
       version="1.1.0.qualifier"
-      provider-name="TULIN"
+      provider-name="TuLin"
       plugin="com.tulin.v8.editors.page">
 
    <description>

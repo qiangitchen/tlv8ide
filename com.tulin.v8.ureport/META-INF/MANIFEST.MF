@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
-Bundle-Vendor: %Bundle-Author
+Bundle-Vendor: TuLin
 Bundle-SymbolicName: com.tulin.v8.ureport;singleton:=true
 Bundle-Version: 1.2.1.qualifier
 Bundle-Activator: com.tulin.v8.ureport.Activator

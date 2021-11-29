@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.tulin.v8.editors.function;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: %Bundle-Author
+Bundle-Vendor: TuLin
 Automatic-Module-Name: com.tulin.v8.function
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin

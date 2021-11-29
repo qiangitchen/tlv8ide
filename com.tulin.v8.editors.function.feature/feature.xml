@@ -3,7 +3,7 @@
       id="com.tulin.v8.editors.function.feature"
       label="TuLin Function Tree Editor"
       version="1.0.0.qualifier"
-      provider-name="TULIN"
+      provider-name="TuLin"
       plugin="com.tulin.v8.editors.function">
 
    <description>

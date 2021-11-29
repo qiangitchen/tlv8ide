@@ -4,7 +4,7 @@ Bundle-Name: Flowdesigner
 Bundle-SymbolicName: com.tulin.v8.flowdesigner.server;singleton:=true
 Bundle-Version: 2.0.2.qualifier
 Bundle-Activator: com.tulin.v8.flowdesigner.server.Activator
-Bundle-Vendor: TULIN
+Bundle-Vendor: TuLin
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,

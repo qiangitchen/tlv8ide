@@ -3,7 +3,7 @@
       id="com.tulin.v8.ureport.feature"
       label="TuLin UReport"
       version="1.0.0.qualifier"
-      provider-name="TULIN"
+      provider-name="TuLin"
       plugin="com.tulin.v8.ureport">
 
    <description>

@@ -4,7 +4,7 @@ Bundle-Name: PageDesignerServer
 Bundle-SymbolicName: com.tulin.v8.pagedesigner.server
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: com.tulin.v8.pagedesigner.server.Activator
-Bundle-Vendor: TULIN
+Bundle-Vendor: TuLin
 Require-Bundle: org.eclipse.core.runtime,
  com.tulin.v8.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6

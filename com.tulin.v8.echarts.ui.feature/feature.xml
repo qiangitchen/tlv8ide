@@ -3,7 +3,7 @@
       id="com.tulin.v8.echarts.ui.feature"
       label="TuLin ECharts plugin"
       version="1.0.0.qualifier"
-      provider-name="TULIN"
+      provider-name="TuLin"
       plugin="com.tulin.v8.echarts.ui">
 
    <description>

@@ -3,7 +3,7 @@
       id="com.tulin.v8.flowdesigner.feature"
       label="TuLin FlowDesigner UI"
       version="2.0.0.qualifier"
-      provider-name="TULIN"
+      provider-name="TuLin"
       plugin="com.tulin.v8.flowdesigner.ui">
 
    <description>

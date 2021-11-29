@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: Tomcat
 Bundle-SymbolicName: com.tulin.v8.tomcat;singleton:=true
 Bundle-Version: 1.0.0.qualifier
-Bundle-Vendor: SYSDEO &CHENQIAN
+Bundle-Vendor: TuLin
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
 Bundle-Activator: com.tulin.v8.tomcat.TomcatLauncherPlugin
