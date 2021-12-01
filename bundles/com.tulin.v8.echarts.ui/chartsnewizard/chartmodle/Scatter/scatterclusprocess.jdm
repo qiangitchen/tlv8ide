@@ -1,0 +1,38 @@
+{
+    timeline: {
+        top: 'center',
+        right: 35,
+        height: 300,
+        width: 10,
+        inverse: true,
+        playInterval: 2500,
+        symbol: 'none',
+        orient: 'vertical',
+        axisType: 'category',
+        autoPlay: true,
+        label: {
+            normal: {
+                show: false
+            }
+        },
+        data: []
+    },
+    baseOption: {
+        title: {
+            text: 'Process of Clustering',
+            subtext: 'By ecStat.hierarchicalKMeans',
+            sublink: 'https://github.com/ecomfe/echarts-stat',
+            left: 'center'
+        },
+        xAxis: {
+            type: 'value'
+        },
+        yAxis: {
+            type: 'value'
+        },
+        series: [{
+            type: 'scatter'
+        }]
+    },
+    options: []
+}

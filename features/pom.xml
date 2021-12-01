@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>com.tulin.v8.ide.features</artifactId>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>com.tulin.v8.ide</groupId>
+        <artifactId>com.tulin.v8.ide.root</artifactId>
+        <version>2.2.1-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>com.tulin.v8.dbviewer.feature</module>
+        <module>com.tulin.v8.echarts.ui.feature</module>
+        <module>com.tulin.v8.editors.fn.feature</module>
+        <module>com.tulin.v8.editors.function.feature</module>
+		<module>com.tulin.v8.editors.page.feature</module>
+		<module>com.tulin.v8.flowdesigner.feature</module>
+		<module>com.tulin.v8.ide.feature</module>
+		<module>com.tulin.v8.js.ui.feature</module>
+		<module>com.tulin.v8.ureport.feature</module>
+    </modules>
+	
+</project>

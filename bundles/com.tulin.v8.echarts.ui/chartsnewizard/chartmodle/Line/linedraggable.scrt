@@ -1,0 +1,65 @@
+var symbolSize = 20;
+var data = [[15, 0], [-50, 10], [-56.5, 20], [-46.5, 30], [-22.1, 40]];
+
+if (!app.inNode) {
+    setTimeout(function () {
+        myChart.setOption({
+            graphic: echarts.util.map(data, function (item, dataIndex) {
+                return {
+                    type: 'circle',
+                    position: myChart.convertToPixel('grid', item),
+                    shape: {
+                        cx: 0,
+                        cy: 0,
+                        r: symbolSize / 2
+                    },
+                    invisible: true,
+                    draggable: true,
+                    ondrag: echarts.util.curry(onPointDragging, dataIndex),
+                    onmousemove: echarts.util.curry(showTooltip, dataIndex),
+                    onmouseout: echarts.util.curry(hideTooltip, dataIndex),
+                    z: 100
+                };
+            })
+        });
+    }, 0);
+
+    window.addEventListener('resize', updatePosition);
+}
+
+myChart.on('dataZoom', updatePosition);
+
+function updatePosition() {
+    myChart.setOption({
+        graphic: echarts.util.map(data, function (item, dataIndex) {
+            return {
+                position: myChart.convertToPixel('grid', item)
+            };
+        })
+    });
+}
+
+function showTooltip(dataIndex) {
+    myChart.dispatchAction({
+        type: 'showTip',
+        seriesIndex: 0,
+        dataIndex: dataIndex
+    });
+}
+
+function hideTooltip(dataIndex) {
+    myChart.dispatchAction({
+        type: 'hideTip'
+    });
+}
+
+function onPointDragging(dataIndex, dx, dy) {
+    data[dataIndex] = myChart.convertFromPixel('grid', this.position);
+
+    myChart.setOption({
+        series: [{
+            id: 'a',
+            data: data
+        }]
+    });
+}

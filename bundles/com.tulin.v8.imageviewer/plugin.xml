@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            name="%ImageViewer"
+            icon="icons/image.gif"
+            category="TuLin"
+            class="com.tulin.v8.imageviewer.views.ImageView"
+            id="com.tulin.v8.imageviewer.ImageView">
+      </view>
+   </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            class="com.tulin.v8.imageviewer.editors.ImageViewEditor"
+            default="true"
+            extensions="gif,jpg,jpeg,png,bmp,ico"
+            icon="icons/sample.png"
+            id="com.tulin.v8.imageviewer.editors.ImageViewEditor"
+            name="%editerName">
+      </editor>
+   </extension>
+   
+   <!-- Toolbar buttons -->
+   <extension
+         point="org.eclipse.ui.viewActions">
+      <viewContribution
+            id="com.tulin.v8.imageviewer.ImageView.pushbutton"
+            targetID="com.tulin.v8.imageviewer.ImageView">
+         <!-- Open button -->
+         <action
+               label="%item.open"
+               icon="icons/Open16.gif"
+               tooltip="%item.open"
+               class="com.tulin.v8.imageviewer.actions.PushActionDelegate"
+               toolbarPath="push_group"
+               enablesFor="*"
+               id="toolbar.open">
+               <!--id="org.eclipse.ui.file.open"-->
+         </action>
+         <!-- Rotation button -->
+         <action
+               label="%item.Rotate"
+               icon="icons/Rotate16.png"
+               tooltip="%item.Rotate"
+               class="com.tulin.v8.imageviewer.actions.PushActionDelegate"
+               toolbarPath="push_group"
+               enablesFor="*"
+               id="toolbar.rotate">
+         </action>
+          <action
+               label="%item.Rotater"
+               icon="icons/rRotate16.png"
+               tooltip="%item.Rotater"
+               class="com.tulin.v8.imageviewer.actions.PushActionDelegate"
+               toolbarPath="push_group"
+               enablesFor="*"
+               id="toolbar.rotater">
+         </action>
+         <!-- Fit button -->
+         <action
+               label="%item.Fit"
+               icon="icons/Fit16.png"
+               tooltip="%item.Fit"
+               class="com.tulin.v8.imageviewer.actions.PushActionDelegate"
+               toolbarPath="push_group"
+               enablesFor="*"
+               id="toolbar.fit">
+         </action>
+         <!-- Original button -->
+         <action
+               label="%item.Original"
+               icon="icons/Original16.png"
+               tooltip="%item.Original"
+               class="com.tulin.v8.imageviewer.actions.PushActionDelegate"
+               toolbarPath="push_group"
+               enablesFor="*"
+               id="toolbar.original">
+         </action>
+         <!-- ZoomIn button -->
+         <action
+               label="%item.ZoomIn"
+               icon="icons/ZoomIn16.png"
+               tooltip="%item.ZoomIn"
+               class="com.tulin.v8.imageviewer.actions.PushActionDelegate"
+               toolbarPath="push_group"
+               enablesFor="*"
+               id="toolbar.zoomin">
+         </action>
+         <!-- ZoomOut button -->
+         <action
+               label="%item.ZoomOut"
+               icon="icons/ZoomOut16.png"
+               tooltip="%item.ZoomOut"
+               class="com.tulin.v8.imageviewer.actions.PushActionDelegate"
+               toolbarPath="push_group"
+               enablesFor="*"
+               id="toolbar.zoomout">
+         </action>
+      </viewContribution>
+   </extension>
+
+</plugin>

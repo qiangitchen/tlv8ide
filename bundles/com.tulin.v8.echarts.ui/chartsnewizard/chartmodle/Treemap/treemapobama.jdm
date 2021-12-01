@@ -1,0 +1,29 @@
+{
+    title: {
+        top: 5,
+        left: 'center',
+        text: 'How $3.7 Trillion is Spent',
+        subtext: 'Obama’s 2012 Budget Proposal',
+        backgroundColor: 'rgb(243,243,243)',
+        borderRadius: [5, 5, 0, 0]
+    },
+    legend: {
+        data: modes,
+        selectedMode: 'single',
+        top: 55,
+        itemGap: 5,
+        backgroundColor: 'rgb(243,243,243)',
+        borderRadius: 5
+    },
+    tooltip: {
+    },
+    series: modes.map(function (mode, idx) {
+        var seriesOpt = createSeriesCommon(idx);
+        seriesOpt.name = mode;
+        seriesOpt.top = 80;
+        seriesOpt.visualDimension = idx === 2 ? 2 : null;
+        seriesOpt.data = buildData(idx, obama_budget_2012);
+        seriesOpt.levels = getLevelOption(idx);
+        return seriesOpt;
+    })
+}
