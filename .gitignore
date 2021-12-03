@@ -22,4 +22,4 @@
 hs_err_pid*
 /.metadata/
 target/
-bin/
+#bin/
