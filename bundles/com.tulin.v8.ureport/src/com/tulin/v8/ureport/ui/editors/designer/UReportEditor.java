@@ -1,8 +1,5 @@
 package com.tulin.v8.ureport.ui.editors.designer;
 
-import java.awt.Toolkit;
-import java.awt.datatransfer.Clipboard;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
@@ -46,11 +43,9 @@ public class UReportEditor extends MultiPageEditorPart implements IResourceChang
 	private XMLEditor editor;
 	private org.eclipse.swt.browser.Browser swtdesigner = null;
 	private org.eclipse.swt.browser.Browser swtbrowser = null;
-	UReportDesigner designer;
-	UReportPreview preview;
+	private UReportDesigner designer;
+	private UReportPreview preview;
 	private String url;
-
-	Clipboard clipbd = Toolkit.getDefaultToolkit().getSystemClipboard();
 
 	public UReportEditor() {
 		super();

@@ -36,7 +36,7 @@ import com.tulin.v8.ureport.ui.editors.designer.call.SWTSaveReportFile;
 import com.tulin.v8.ureport.ui.editors.designer.call.SaveReportFile;
 
 public class UReportDesigner extends FormPage {
-	UReportEditor meditor;
+	private UReportEditor meditor;
 
 	private org.eclipse.swt.browser.Browser swtdesigner = null;
 
@@ -47,7 +47,7 @@ public class UReportDesigner extends FormPage {
 	private PasteAction pasteAction;
 	private ViewSourseAction viewSourseAction;
 
-	Clipboard clipbd = Toolkit.getDefaultToolkit().getSystemClipboard();
+	private Clipboard clipbd;
 
 	public UReportDesigner(UReportEditor meditor, String title) {
 		super("ureportDesigner", title);
@@ -58,6 +58,9 @@ public class UReportDesigner extends FormPage {
 	 * 创建右键菜单
 	 */
 	public void makeActions() {
+		if (clipbd == null) {
+			clipbd = Toolkit.getDefaultToolkit().getSystemClipboard();
+		}
 		catAction = new CatAction(clipbd);
 		copyAction = new CopyAction(clipbd);
 		pasteAction = new PasteAction(clipbd);
