@@ -27,7 +27,9 @@
 		<module>com.tulin.v8.platform</module>
 		<module>com.tulin.v8.easylook</module>
 		<module>com.tulin.v8.imageviewer</module>
-		<module>com.tulin.v8.ureport</module>
+		<module>com.tulin.v8.ureport.core</module>
+		<module>com.tulin.v8.ureport.server</module>
+		<module>com.tulin.v8.ureport.ui</module>
     </modules>
 	
 </project>

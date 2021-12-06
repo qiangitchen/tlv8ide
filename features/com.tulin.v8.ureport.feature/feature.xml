@@ -2,9 +2,9 @@
 <feature
       id="com.tulin.v8.ureport.feature"
       label="TuLin UReport"
-      version="1.0.0.qualifier"
+      version="2.2.1.qualifier"
       provider-name="TuLin"
-      plugin="com.tulin.v8.ureport">
+      plugin="com.tulin.v8.ureport.ui">
 
    <description>
       UReport Plugin
@@ -295,14 +295,27 @@ version(s), and exceptions or additional permissions here}.&quot;
    </license>
 
    <plugin
-         id="com.tulin.v8.ureport"
+         id="com.tulin.v8.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="com.tulin.v8.core"
+         id="com.tulin.v8.ureport.core"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"/>
+
+   <plugin
+         id="com.tulin.v8.ureport.server"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="com.tulin.v8.ureport.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
