@@ -3,7 +3,8 @@
       id="com.tulin.v8.js.ui.feature"
       label="TuLin JS Editor"
       version="1.0.0.qualifier"
-      provider-name="TuLin">
+      provider-name="TuLin"
+      plugin="com.tulin.v8.js.ui">
 
    <description>
       TuLin JS Editor
