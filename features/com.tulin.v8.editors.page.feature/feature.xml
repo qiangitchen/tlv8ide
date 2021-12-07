@@ -302,14 +302,14 @@ version(s), and exceptions or additional permissions here}.&quot;
          unpack="false"/>
 
    <plugin
-         id="com.tulin.v8.pagedesigner.server"
+         id="com.tulin.v8.core"
          download-size="0"
          install-size="0"
          version="0.0.0"
          unpack="false"/>
 
    <plugin
-         id="com.tulin.v8.core"
+         id="com.tulin.v8.editors.page.server"
          download-size="0"
          install-size="0"
          version="0.0.0"

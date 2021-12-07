@@ -1,4 +1,4 @@
-package com.tulin.v8.pagedesigner.server;
+package com.tulin.v8.editors.page.server;
 
 import org.osgi.framework.BundleActivator;
 import org.osgi.framework.BundleContext;

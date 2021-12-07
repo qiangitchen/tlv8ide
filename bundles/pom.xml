@@ -18,7 +18,7 @@
         <module>com.tulin.v8.echarts.ui</module>
         <module>com.tulin.v8.editors.fn</module>
         <module>com.tulin.v8.editors.function</module>
-		<module>com.tulin.v8.pagedesigner.server</module>
+		<module>com.tulin.v8.editors.page.server</module>
         <module>com.tulin.v8.editors.page</module>
 		<module>com.tulin.v8.flowdesigner.server</module>
 		<module>com.tulin.v8.flowdesigner.ui</module>

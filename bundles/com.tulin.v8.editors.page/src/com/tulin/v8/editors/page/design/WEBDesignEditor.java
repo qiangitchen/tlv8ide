@@ -79,8 +79,8 @@ import com.tulin.v8.editors.page.design.listener.DOpenWindowListener;
 import com.tulin.v8.editors.page.design.listener.DProgressListener;
 import com.tulin.v8.editors.page.design.listener.DStatusTextListener;
 import com.tulin.v8.editors.page.design.listener.DTitleListener;
-import com.tulin.v8.pagedesigner.server.common.PageWebServer;
-import com.tulin.v8.pagedesigner.server.utils.WebappManager;
+import com.tulin.v8.editors.page.server.common.PageWebServer;
+import com.tulin.v8.editors.page.server.utils.WebappManager;
 
 /**
  * @Des 网页设计器(预览效果)

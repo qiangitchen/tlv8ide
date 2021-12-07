@@ -1,6 +1,6 @@
-package com.tulin.v8.pagedesigner.server.utils;
+package com.tulin.v8.editors.page.server.utils;
 
-import com.tulin.v8.pagedesigner.server.common.PageWebServer;
+import com.tulin.v8.editors.page.server.common.PageWebServer;
 
 public class WebappManager {
 	public static String getHost() {

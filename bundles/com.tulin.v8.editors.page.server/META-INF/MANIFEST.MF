@@ -1,14 +1,14 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: PageDesignerServer
-Bundle-SymbolicName: com.tulin.v8.pagedesigner.server
+Bundle-SymbolicName: com.tulin.v8.editors.page.server
 Bundle-Version: 1.0.0.qualifier
-Bundle-Activator: com.tulin.v8.pagedesigner.server.Activator
+Bundle-Activator: com.tulin.v8.editors.page.server.Activator
 Bundle-Vendor: TuLin
 Require-Bundle: org.eclipse.core.runtime,
  com.tulin.v8.core
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
-Automatic-Module-Name: com.tulin.v8.pagedesigner.server
+Automatic-Module-Name: com.tulin.v8.editors.page.server
 Bundle-ActivationPolicy: lazy
-Export-Package: com.tulin.v8.pagedesigner.server.common,
- com.tulin.v8.pagedesigner.server.utils
+Export-Package: com.tulin.v8.editors.page.server.common,
+ com.tulin.v8.editors.page.server.utils

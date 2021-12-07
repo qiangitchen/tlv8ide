@@ -1,4 +1,4 @@
-package com.tulin.v8.pagedesigner.server.common;
+package com.tulin.v8.editors.page.server.common;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
