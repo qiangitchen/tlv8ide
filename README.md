@@ -30,13 +30,17 @@ Eclipse插件体系结构
 #### 安装教程
 
 1.  下载[eclipse](https://www.eclipse.org/downloads/packages/)4.8+
-2.  离线安装：下载最新发行版压缩包studio-app.zip [https://gitee.com/qianpou/tlv8ide/releases](https://gitee.com/qianpou/tlv8ide/releases),将解压后的studio-app文件夹放到eclipse/dropins目录下；
+2.  离线安装：
 
-    在线安装：eclipse-Help-Install New Software-Add,Location填写：[http://dl.tlv8.cn/updates/](http://dl.tlv8.cn/updates/),按提示步骤完成安装。
+（1）v2.2.0及以前的版本：下载发行版压缩包studio-app.zip [https://gitee.com/qianpou/tlv8ide/releases](https://gitee.com/qianpou/tlv8ide/releases),将解压后的studio-app文件夹放到eclipse/dropins目录下；
 
-    marketplace：eclipse|myeclipse-Help-Eclipse Marketplace-Search输入tlv8,点击安装即可。地址：[https://marketplace.eclipse.org/content/tlv8/](https://marketplace.eclipse.org/content/tlv8/)
+（2）v2.2.1及以后的版本：下载发行版分压包，解压后得到版本文件如【com.tulin.v8.ide.update-2.2.1-SNAPSHOT.zip】eclipse-Help-Install New Software-Add,Location选择归档文件，根据提示完成安装。
 
-    [![Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client](https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.svg)](http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=5466625 "Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client")
+在线安装：eclipse-Help-Install New Software-Add,Location填写：[http://dl.tlv8.cn/updates/](http://dl.tlv8.cn/updates/),按提示步骤完成安装。
+
+marketplace：eclipse|myeclipse-Help-Eclipse Marketplace-Search输入tlv8,点击安装即可。地址：[https://marketplace.eclipse.org/content/tlv8/](https://marketplace.eclipse.org/content/tlv8/)
+
+[![Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client](https://marketplace.eclipse.org/sites/all/themes/solstice/public/images/marketplace/btn-install.svg)](http://marketplace.eclipse.org/marketplace-client-intro?mpc_install=5466625 "Drag to your running Eclipse* workspace. *Requires Eclipse Marketplace Client")
 
 3.  启动eclipse
 4.  [下载项目源码](https://gitee.com/qianpou/tl)
@@ -49,7 +53,7 @@ Eclipse插件体系结构
 1.  jdk版本要求对应eclipse对jdk版本的要求
 2.  插件项目的jdk版本要求1.8+
 3.  报表设计器不支持IE环境，所以在Windows环境下需要CEF.
-4.  Win64系统安装[CEF](https://gitee.com/qianpou/chromium-swt)
+4.  Win64系统安装[CEF](https://gitee.com/qianpou/chromium-swt)，v2.2.1+不需要单独安装。
 
 
 #### 展示
