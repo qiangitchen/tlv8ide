@@ -76,12 +76,14 @@ marketplace：eclipse|myeclipse-Help-Eclipse Marketplace-Search输入tlv8,点击
 
 #### 特别感谢
 
-1.  [昆明三体科技有限公司](https://e.gitee.com/kmsanti/)
-2.  [软捷科技](https://www.yunagile.com/)
-3.  [起步科技](https://www.justep.com/)
-4.  [Eclipse](https://www.eclipse.org/)
-5.  [zigen](http://www.ne.jp/asahi/zigen/home/plugin/dbviewer/about_en.html)
-6.  [Sysdeo Tomcat Launcher Plugin](http://www.eclipsetotale.com/tomcatPlugin.html)
-7.  [ureport](https://gitee.com/youseries/ureport)
+
+- [昆明三体科技有限公司](https://e.gitee.com/kmsanti/)
+- [软捷科技](https://www.yunagile.com/)
+- [起步科技](https://www.justep.com/)
+- [Eclipse](https://www.eclipse.org/)
+- [zigen](http://www.ne.jp/asahi/zigen/home/plugin/dbviewer/about_en.html)
+- [Sysdeo Tomcat Launcher Plugin](http://www.eclipsetotale.com/tomcatPlugin.html)
+- [ureport](https://gitee.com/youseries/ureport)
+
 
 
