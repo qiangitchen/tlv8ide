@@ -38,8 +38,22 @@ function getData() {
 	MainData.setDbkey("YJTemplet_dbkey");//指定使用数据库连接
 	MainData.setTable("YJTemplet_tableName");
 	MainData.setFormId("MAIN_DATA_FORM");//主表关联form
-	flwCompent = new tlv8.flw("flowToolbar", MainData, setting);
 	init_toolbar();
+	flwCompent = new tlv8.flw("flowToolbar", MainData, setting);
+	layui.form.on('submit(mainform)', function(data) {
+		//console.log(data.field);
+		datamian.saveData(data.field);
+		
+		flwCompent.setItemStatus({
+           back : false,//回退按钮
+           out : true,//流转按钮
+           transmit : false,//转发按钮
+           pause : false,//暂停按钮
+           stop : "readonly" //终止按钮
+         });
+		
+		return false;//阻止表单跳转。如果需要表单跳转，去掉这段即可。
+	});
 	getData2();
 	var rowid = tlv8.RequestURLParam.getParam("sData1");
 	if (rowid && rowid != "") {
@@ -47,6 +61,14 @@ function getData() {
 		J$("MAIN_DATA_FORM").setAttribute("rowid", rowid);
 		$("#MAIN_DATA_FORM").attr("rowid", rowid);
 		dataRefresh();
+		
+		flwCompent.setItemStatus({
+           back : false,//回退按钮
+           out : true,//流转按钮
+           transmit : false,//转发按钮
+           pause : false,//暂停按钮
+           stop : true //终止按钮
+         });
 	}
 }
 
@@ -89,9 +111,7 @@ function dataInsert(){
 
 //数据保存
 function dataSave() {
-	var rowid = MainData.saveData();
-	J$("MAIN_DATA_FORM").rowid = rowid;
-	J$("MAIN_DATA_FORM").setAttribute("rowid", rowid);
+	$("#mainfsub").click();
 }
 
 //数据刷新

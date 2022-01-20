@@ -15,6 +15,11 @@ function initDocumentPage() {
 	datamian.setTable("YJTemplet_tableName");
 	datamian.setFormId("MAIN_DATA_FORM");
 	init_toolbar();
+	layui.form.on('submit(mainform)', function(data) {
+		//console.log(data.field);
+		datamian.saveData(data.field);
+		return false;//阻止表单跳转。如果需要表单跳转，去掉这段即可。
+	});
 }
 
 //新增数据
@@ -27,10 +32,7 @@ function dataInsert(){
 
 //数据保存
 function dataSave() {
-	var rowid = datamian.saveData();
-	J$("MAIN_DATA_FORM").rowid = rowid;
-	J$("MAIN_DATA_FORM").setAttribute("rowid", rowid);
-	$("#MAIN_DATA_FORM").attr("rowid", rowid);
+	$("#mainfsub").click();
 }
 
 //数据刷新

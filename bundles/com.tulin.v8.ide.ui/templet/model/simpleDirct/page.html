@@ -2,6 +2,7 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
     <title>YJTemplet_page.html</title>
+    <link type="text/css" rel="stylesheet" href="/tlv8/resources/bootstrap/css/bootstrap.min.css"> 
     <link type="text/css" rel="stylesheet" href="/tlv8/resources/layui/css/layui.css"></link>
 	<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/default/easyui.css" />
 	<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/icon.css" />
@@ -12,13 +13,14 @@
 	<script type="text/javascript" src="/tlv8/comon/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript" src="/tlv8/resources/jquery-easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="/tlv8/resources/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="/tlv8/resources/bootstrap/js/bootstrap.min.js"></script> 
 	<script type="text/javascript" src="/tlv8/resources/layui/layui.js"></script>
 	<script type="text/javascript" src="YJTemplet_page.js"></script>
   </head>
   
   <body onload="getData();" style="overflow:hidden;">
     <div class="easyui-layout" fit="true">
-		<div data-options="region:'north',split:false" style="height:30px;overflow: hidden;">		
+		<div data-options="region:'north',split:false" style="height:40px;overflow: hidden; padding: 4px;">		
 			<table>
 				<tr>
 					<td>
@@ -37,6 +39,10 @@
 				    <div class="layui-card-body">
 						<form id="MAIN_DATA_FORM" class="layui-form">
 							YJTemplet_dataItem
+							<div style="display: none;">
+							    <button id="mainfsub" class="layui-btn" lay-submit lay-filter="mainform">立即提交</button> 
+					         	<button type="reset" class="layui-btn layui-btn-primary">重置</button> 
+					        </div> 
 						</form>
 					</div>
 				</div>

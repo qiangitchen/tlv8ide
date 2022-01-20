@@ -2,7 +2,8 @@
   <head>
     <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
 	<title>YJTemplet_page.html</title>
-	<link type="text/css" rel="stylesheet" href="/tlv8/resources/layui/css/layui.css"></link>
+	<link type="text/css" rel="stylesheet" href="/tlv8/resources/bootstrap/css/bootstrap.min.css"> 
+    <link type="text/css" rel="stylesheet" href="/tlv8/resources/layui/css/layui.css"></link>
 	<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/default/easyui.css" />
 	<link type="text/css" rel="stylesheet" href="/tlv8/resources/jquery-easyui/themes/icon.css" />
   	<link type="text/css" rel="stylesheet" href="/tlv8/comon/css/formsyle.css"></link>
@@ -12,10 +13,10 @@
 	<script type="text/javascript" src="/tlv8/comon/My97DatePicker/WdatePicker.js"></script>
 	<script type="text/javascript" src="/tlv8/resources/jquery-easyui/jquery.easyui.min.js"></script>
 	<script type="text/javascript" src="/tlv8/resources/jquery-easyui/locale/easyui-lang-zh_CN.js"></script>
+	<script type="text/javascript" src="/tlv8/resources/bootstrap/js/bootstrap.min.js"></script> 
 	<script type="text/javascript" src="/tlv8/resources/layui/layui.js"></script>
 	<script type="text/javascript" src="YJTemplet_page.js"></script>
  </head>
-  
   <body style="overflow: hidden;" onLoad="getData();init_toolbar();">
 	<div id="tabveiw1" class="easyui-tabs" fit="true" data-options="onSelect:tabsselected">
 		<div id="detail_01" title="列表">
@@ -24,7 +25,7 @@
 		 </div>
 		<div id="detail_02" title="详细" style="height:100%;">
 			<div class="easyui-layout" fit="true">
-				<div data-options="region:'north',split:false" style="height:30px; overflow: hidden;">
+				<div data-options="region:'north',split:false" style="height:40px; overflow: hidden; padding: 4px;">
 					<table>
 						<tr>
 							<td>

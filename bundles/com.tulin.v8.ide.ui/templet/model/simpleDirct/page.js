@@ -15,6 +15,11 @@ function getData() {
 	MainData.setFormId("MAIN_DATA_FORM");//主表关联form
 	init_toolbar();
 	getData2();
+	layui.form.on('submit(mainform)', function(data) {
+		//console.log(data.field);
+		MainData.saveData(data.field);
+		return false;//阻止表单跳转。如果需要表单跳转，去掉这段即可。
+	});
 }
 
 /*======从表配置======*/
@@ -57,9 +62,7 @@ function dataInsert(){
 
 //数据保存
 function dataSave() {
-	var rowid = MainData.saveData();
-	J$("MAIN_DATA_FORM").rowid = rowid;
-	J$("MAIN_DATA_FORM").setAttribute("rowid", rowid);
+	$("#mainfsub").click();
 }
 
 //数据刷新
