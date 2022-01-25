@@ -327,39 +327,6 @@ version(s), and exceptions or additional permissions here}.&quot;
          version="0.0.0"
          optional="true"/>
 
-   <requires>
-      <import plugin="org.eclipse.core.runtime"/>
-      <import plugin="org.eclipse.core.resources"/>
-      <import plugin="org.eclipse.ui.navigator"/>
-      <import plugin="org.eclipse.ui.navigator.resources"/>
-      <import plugin="org.eclipse.ui.console"/>
-      <import plugin="org.eclipse.core.expressions"/>
-      <import plugin="org.eclipse.jdt.ui"/>
-      <import plugin="org.eclipse.jdt.core"/>
-      <import plugin="org.eclipse.jdt"/>
-      <import plugin="org.eclipse.team.core"/>
-      <import plugin="org.eclipse.wst.sse.core"/>
-      <import plugin="org.eclipse.wst.sse.ui"/>
-      <import plugin="org.eclipse.jface.text"/>
-      <import plugin="org.eclipse.wst.jsdt.core"/>
-      <import plugin="org.eclipse.wst.jsdt.ui"/>
-      <import plugin="org.eclipse.wst.jsdt.web.core"/>
-      <import plugin="org.eclipse.wst.jsdt.web.ui"/>
-      <import plugin="org.eclipse.wst.xml.ui"/>
-      <import plugin="org.eclipse.core.filesystem"/>
-      <import plugin="org.eclipse.wst.xml.core"/>
-      <import plugin="org.eclipse.ui.ide"/>
-      <import plugin="org.eclipse.jdt.launching"/>
-      <import plugin="org.eclipse.debug.core"/>
-      <import plugin="org.eclipse.debug.ui"/>
-      <import plugin="org.eclipse.ui.views"/>
-      <import plugin="org.eclipse.wst.html.ui"/>
-      <import plugin="org.eclipse.jst.jsp.ui"/>
-      <import plugin="org.eclipse.wst.css.ui"/>
-      <import plugin="org.eclipse.ui.forms"/>
-      <import plugin="org.eclipse.help"/>
-   </requires>
-
    <plugin
          id="com.tulin.v8.core"
          download-size="0"
