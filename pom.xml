@@ -15,12 +15,12 @@
 	<repositories>
 		<repository>
 			<id>eclipse</id>
-			<url>http://download.eclipse.org/releases/2020-06</url>
+			<url>https://download.eclipse.org/releases/2021-06</url>
 			<layout>p2</layout>
 		</repository>
 		<repository>
 			<id>eclipse-updates</id>
-			<url>http://download.eclipse.org/eclipse/updates/4.16</url>
+			<url>https://download.eclipse.org/eclipse/updates/4.20</url>
 			<layout>p2</layout>
 		</repository>
 	</repositories>
