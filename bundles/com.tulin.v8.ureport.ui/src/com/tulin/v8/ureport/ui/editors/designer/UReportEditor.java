@@ -68,7 +68,7 @@ public class UReportEditor extends MultiPageEditorPart implements IResourceChang
 	}
 
 	void createPage1() {
-		if (CommonUtil.isWinOS()) {
+		if (CommonUtil.isWin64()) {
 			try {
 				designer = new UReportDesigner(this, Messages.getString("UReportEditor.pageEditor.3"));
 				int index = addPage(designer, getEditorInput());
@@ -98,7 +98,7 @@ public class UReportEditor extends MultiPageEditorPart implements IResourceChang
 	}
 
 	void createPage2() {
-		if (CommonUtil.isWinOS()) {
+		if (CommonUtil.isWin64()) {
 			try {
 				preview = new UReportPreview(this, Messages.getString("UReportEditor.pageEditor.3"));
 				int index = addPage(preview, getEditorInput());
