@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.core.runtime.Platform;
+
 import com.tulin.v8.core.DBUtils;
 
 @SuppressWarnings({ "rawtypes", "unchecked" })
@@ -62,21 +64,65 @@ public class CommonUtil {
 	public static double getOSVersion() {
 		// window 版本号，例如win2000是5.0，xp是5.1，vista是6.0，win7是6.1 win10是10.0
 		String osversion = System.getProperty("os.version");
-		System.out.println("OS Name:" + getOSName());
-		System.out.println("OS Version:" + osversion);
+		// System.out.println("OS Name:" + getOSName());
+		// System.out.println("OS Version:" + osversion);
 		return Double.parseDouble(osversion);
 	}
 
+	/**
+	 * 是否为Windows系统
+	 * @return boolean
+	 */
 	public static boolean isWinOS() {
 		return getOSName().contains("win");
 	}
 
+	/**
+	 * 是否为Mac OS系统
+	 * @return boolean
+	 */
 	public static boolean isMacOS() {
 		return getOSName().contains("mac");
 	}
 
+	/**
+	 * 是否为Linux系统
+	 * @return boolean
+	 */
 	public static boolean isLinuxOS() {
 		return getOSName().contains("linux");
+	}
+
+	/**
+	 * 是否为32位架构
+	 * @return boolean
+	 */
+	public static boolean is32() {
+		return "x86".equals(Platform.getOSArch());
+	}
+
+	/**
+	 * 是否为64位架构
+	 * @return boolean
+	 */
+	public static boolean is64() {
+		return Platform.getOSArch().indexOf("64") > -1;
+	}
+
+	/**
+	 * 是否为32位架构Windows系统
+	 * @return boolean
+	 */
+	public static boolean isWin32() {
+		return isWinOS() && is32();
+	}
+
+	/**
+	 * 是否为64位架构Windows系统
+	 * @return boolean
+	 */
+	public static boolean isWin64() {
+		return isWinOS() && is64();
 	}
 
 	/**
