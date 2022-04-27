@@ -19,15 +19,19 @@
   	<div class="layui-fluid">
   		<div class="layui-card">
 			<div class="layui-card-header">主表信息</div>
-			<div class="layui-card-body" style="height: 45%; padding: 1px;">
+			<div class="layui-card-body">
 				<form id="direct_form" style="display: none;"></form>
-				<div component="dataGrid" id="direct_from_grid" style="width:100%;height:100%;" onselected="refresh_child_data()"></div>
+				<div style="width: 100%; height: 300px; overflow: hidden;">
+					<div component="dataGrid" id="direct_from_grid" style="width:100%;height:100%;" onselected="refresh_child_data()"></div>
+				</div>
 			</div>
 		</div>
 		<div class="layui-card">
 			<div class="layui-card-header">从表信息</div>
-			<div class="layui-card-body" style="height: 45%; padding: 1px;">
-				<div component="dataGrid" id="direct_from_subgrid" style="width:100%;height:100%;" dataValueChanged="cheng_stae_bar()"></div>
+			<div class="layui-card-body">
+				<div style="width: 100%; height: 300px; overflow: hidden;">
+					<div component="dataGrid" id="direct_from_subgrid" style="width:100%;height:100%;" dataValueChanged="cheng_stae_bar()"></div>
+				</div>
 			</div>
 		</div>
   	</div>
