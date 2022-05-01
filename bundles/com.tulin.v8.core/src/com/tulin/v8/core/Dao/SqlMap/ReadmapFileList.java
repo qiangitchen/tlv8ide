@@ -22,7 +22,7 @@ public class ReadmapFileList {
 	}
 
 	public ReadmapFileList() {
-		String filePathDir = AppConfig.getClassesPath();
+		String filePathDir = AppConfig.getResourcesPath();
 		List list = generateFileList(filePathDir);
 		setExtrealPath(filePathDir);
 		setFileList(list);

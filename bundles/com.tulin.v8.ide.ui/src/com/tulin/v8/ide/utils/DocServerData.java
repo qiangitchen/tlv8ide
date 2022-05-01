@@ -8,13 +8,26 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Properties;
 
+import org.eclipse.core.resources.IResource;
+
 import com.tulin.v8.core.config.AppConfig;
 
 public class DocServerData {
+	public static String mvn_doc_db = "src/main/resources/jdbc.properties";
+	public static String ant_doc_db = "WEB-INF/classes/jdbc.properties";
+
+	public static IResource getDocDBSource() {
+		IResource dsource = AppConfig.getProject("DocServer").findMember(mvn_doc_db);
+		if (dsource == null) {
+			dsource = AppConfig.getProject("DocServer").findMember(ant_doc_db);
+		}
+		return dsource;
+	}
+
 	public static Map<String, String> getConfig() throws Exception {
 		Map<String, String> m = new HashMap<String, String>();
-		InputStream in = new BufferedInputStream(new FileInputStream(AppConfig.getProject("DocServer")
-				.findMember("WEB-INF/classes/jdbc.properties").getLocation().toString()));
+		IResource dsource = getDocDBSource();
+		InputStream in = new BufferedInputStream(new FileInputStream(dsource.getLocation().toString()));
 		Properties p = new Properties();
 		p.load(in);
 		m.put("driver", p.getProperty("driver"));
@@ -26,9 +39,8 @@ public class DocServerData {
 
 	public static void writeConfig(String name, String driverStr, String url, String userName, String password) {
 		try {
-			String file = AppConfig.getProject("DocServer").findMember("WEB-INF/classes/jdbc.properties").getLocation()
-					.toString();
-			String sfile = AppConfig.getProject("DocServer").findMember("src/jdbc.properties").getLocation().toString();
+			IResource dsource = getDocDBSource();
+			String file = dsource.getLocation().toString();
 			InputStream in = new BufferedInputStream(new FileInputStream(file));
 			Properties p = new Properties();
 			p.load(in);
@@ -42,7 +54,6 @@ public class DocServerData {
 			p.setProperty("username", userName);
 			p.setProperty("password", password);
 			p.store(new FileOutputStream(file), null);
-			p.store(new FileOutputStream(sfile), null);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

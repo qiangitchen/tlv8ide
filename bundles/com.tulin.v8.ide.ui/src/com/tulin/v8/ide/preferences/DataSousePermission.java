@@ -166,7 +166,7 @@ public class DataSousePermission {
 			}
 			// Sys.printMsg(doc.asXML());
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			//e1.printStackTrace();
 		}
 	}
 
@@ -237,13 +237,6 @@ public class DataSousePermission {
 			out.write(strb.toString().trim().getBytes("UTF-8"));
 			out.flush();
 			out.close();
-			String srcFilePath = SqlMapfilePath.substring(0, SqlMapfilePath.indexOf(StudioConfig.PROJECT_WEB_FOLDER));
-			srcFilePath += "src/" + name + ".mybatis.xml";
-			FileOutputStream oss = new FileOutputStream(new File(srcFilePath));
-			DataOutputStream outs = new DataOutputStream(oss);
-			outs.write(strb.toString().trim().getBytes("UTF-8"));
-			outs.flush();
-			outs.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -308,14 +301,6 @@ public class DataSousePermission {
 			out.write(strb.toString().trim().getBytes("UTF-8"));
 			out.flush();
 			out.close();
-			String srcFilePath = SqlMapfilePath.substring(0, SqlMapfilePath.indexOf(StudioConfig.PROJECT_WEB_FOLDER));
-			String[] sts = SqlMapfilePath.split("/");
-			srcFilePath += "src/" + sts[sts.length - 1];
-			FileOutputStream oss = new FileOutputStream(new File(srcFilePath));
-			DataOutputStream outs = new DataOutputStream(oss);
-			outs.write(strb.toString().trim().getBytes("UTF-8"));
-			outs.flush();
-			outs.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

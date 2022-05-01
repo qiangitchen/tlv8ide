@@ -19,6 +19,7 @@ import com.tulin.v8.core.StringArray;
 import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.ide.wizards.Messages;
 import com.tulin.v8.ide.wizards.templet.ListDeatailPortalTemplet;
+import com.tulin.v8.ide.wizards.utils.FilePathUtils;
 
 public class WriteListDetailPortal {
 	private String dbkey = null;
@@ -83,18 +84,15 @@ public class WriteListDetailPortal {
 		String ListpageText = ListDeatailPortalTemplet.getListPageContext("listDetailportal", filename);
 
 		String PHANTOM_PROJECT_NAME = TuLinPlugin.getCurrentProjectName();
-		String PROJECT_WEB_FOLDER = TuLinPlugin.getCurrentProjectWebFolderName();
+		String containerPath = FilePathUtils.getContainerPath(containername);
 
 		String ListjsText = ListDeatailPortalTemplet.getListJsContext("listDetailportal", dbkey, tableName,
 				columnsText.join(","), labelsText.join(","), widthsText.join(","), datatypesText.join(","),
-				containername.replace("/" + PHANTOM_PROJECT_NAME + "/" + PROJECT_WEB_FOLDER, "") + "/" + detailFilename);
+				"/" + containerPath + "/" + detailFilename);
 		String DetailpageText = ListDeatailPortalTemplet.getDetailPageContext("listDetailportal", detailFilename,
 				decolumnsText, delabelsText, dedatatypesText);
 		String DetailjsText = ListDeatailPortalTemplet.getDetailJsContext("listDetailportal", dbkey, tableName);
 
-		String containerPath = containername
-				.substring(containername.indexOf("/" + PHANTOM_PROJECT_NAME + "/" + PROJECT_WEB_FOLDER + "/")
-						+ PHANTOM_PROJECT_NAME.length() + PROJECT_WEB_FOLDER.length() + 3);
 		String rootpath = "";
 		if (!"".equals(containerPath)) {
 			String[] dotns = containerPath.split("/");

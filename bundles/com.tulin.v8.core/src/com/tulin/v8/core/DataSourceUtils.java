@@ -12,9 +12,8 @@ import javax.sql.DataSource;
 import org.json.JSONObject;
 
 public class DataSourceUtils {
-	public static Connection getAppConn(String key) throws SQLException,
-			NamingException, InstantiationException, IllegalAccessException,
-			ClassNotFoundException {
+	public static Connection getAppConn(String key) throws SQLException, NamingException, InstantiationException,
+			IllegalAccessException, ClassNotFoundException {
 		Context context = new InitialContext();
 		DataSource ds = (DataSource) context.lookup("java:comp/env/" + key);
 		Connection cn = ds.getConnection();
@@ -23,8 +22,7 @@ public class DataSourceUtils {
 		return cn;
 	}
 
-	public static JSONObject testLink(String driverStr, String url,
-			String userName, String password) {
+	public static JSONObject testLink(String driverStr, String url, String userName, String password) {
 		String result = Messages.getString("DataSourceUtils.result.1");
 		Connection cn = null;
 		JSONObject json = new JSONObject();
@@ -32,20 +30,22 @@ public class DataSourceUtils {
 			try {
 				Class.forName(driverStr);
 			} catch (ClassNotFoundException eN) {
-				result = Messages.getString("DataSourceUtils.result.2")
-						+ driverStr + "! e:" + eN.toString();
+				result = Messages.getString("DataSourceUtils.result.2") + driverStr + "! e:" + eN.toString();
 				json.put("flag", false);
 				json.put("message", result);
 				return json;
+			}
+			try {
+				url = url.replace("&amp;", "&");
+			} catch (Exception e) {
 			}
 			try {
 				cn = DriverManager.getConnection(url, userName, password);
 				json.put("flag", true);
 				json.put("message", Messages.getString("DataSourceUtils.result.1"));
 			} catch (SQLException eJ) {
-				result = String.format(
-						Messages.getString("DataSourceUtils.result.3"), url,
-						userName, password) + "! e:" + eJ.toString();
+				result = String.format(Messages.getString("DataSourceUtils.result.3"), url, userName, password) + "! e:"
+						+ eJ.toString();
 				json.put("flag", false);
 				json.put("message", result);
 			} finally {

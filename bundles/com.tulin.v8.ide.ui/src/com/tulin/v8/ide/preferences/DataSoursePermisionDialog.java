@@ -160,12 +160,12 @@ public class DataSoursePermisionDialog extends Dialog {
 								sDbUrlv.setText("jdbc:oracle:thin:@127.0.0.1:1521:orcl");
 							}
 							if (sType.equals("net.sourceforge.jtds.jdbc.Driver")) {
-								sDbUrlv.setText("jdbc:jtds:sqlserver://127.0.0.1:1433/TLoa");
+								sDbUrlv.setText("jdbc:jtds:sqlserver://127.0.0.1:1433/v8oa");
 								sDbTypev.setText("sqlserver");
 							}
 							if (sType.equals("com.mysql.jdbc.Driver")||"com.mysql.cj.jdbc.Driver".equals(sType)) {
 								sDbUrlv.setText(
-										"jdbc:mysql://127.0.0.1:3306/TLoa?characterEncoding=utf8&amp;useUnicode=true&amp;useSSL=false");
+										"jdbc:mysql://127.0.0.1:3306/v8oa?characterEncoding=utf8&amp;useUnicode=true&amp;useSSL=false");
 								sDbTypev.setText("mysql");
 							}
 							if (sType.equals("org.postgresql.Driver")) {

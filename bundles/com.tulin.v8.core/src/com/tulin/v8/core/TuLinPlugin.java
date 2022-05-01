@@ -1,7 +1,6 @@
 package com.tulin.v8.core;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -144,13 +143,16 @@ public class TuLinPlugin extends AbstractUIPlugin {
 		return project.getName();
 	}
 
-	public static IFolder getCurrentProjectWebFolder() {
+	public static IResource getCurrentProjectWebFolder() {
 		IProject project = getCurrentProject();
-		IFolder WEB_FOLDER = project.getFolder("WebContent");
-		if (WEB_FOLDER == null) {
-			WEB_FOLDER = project.getFolder("WebRoot");
+		IResource resource = project.findMember("WebContent");
+		if (resource == null) {
+			resource = project.findMember("WebRoot");
 		}
-		return WEB_FOLDER;
+		if (resource == null) {
+			resource = project.findMember("src/main/webapp");
+		}
+		return resource;
 	}
 
 	public static String getCurrentProjectWebFolderName() {

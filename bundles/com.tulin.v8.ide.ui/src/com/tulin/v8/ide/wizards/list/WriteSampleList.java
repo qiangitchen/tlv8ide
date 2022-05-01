@@ -19,6 +19,7 @@ import com.tulin.v8.core.StringArray;
 import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.ide.wizards.Messages;
 import com.tulin.v8.ide.wizards.templet.ListTemplet;
+import com.tulin.v8.ide.wizards.utils.FilePathUtils;
 
 public class WriteSampleList {
 	private String dbkey = null;
@@ -63,10 +64,7 @@ public class WriteSampleList {
 		}
 
 		String PHANTOM_PROJECT_NAME = TuLinPlugin.getCurrentProjectName();
-		String PROJECT_WEB_FOLDER = TuLinPlugin.getCurrentProjectWebFolderName();
-		String containerPath = containername
-				.substring(containername.indexOf("/" + PHANTOM_PROJECT_NAME + "/" + PROJECT_WEB_FOLDER + "/")
-						+ PHANTOM_PROJECT_NAME.length() + PROJECT_WEB_FOLDER.length() + 3);
+		String containerPath = FilePathUtils.getContainerPath(containername);
 		String rootpath = "";
 		if (!"".equals(containerPath)) {
 			String[] dotns = containerPath.split("/");

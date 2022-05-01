@@ -3,6 +3,7 @@ package com.tulin.v8.core.config;
 import java.io.File;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
 
 public class AppConfig {
@@ -63,10 +64,30 @@ public class AppConfig {
 		return ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
 	}
 
+	/**
+	 * 获取class输出目录
+	 * 
+	 * @return
+	 */
 	public static String getClassesPath() {
 		String pname = getProjectName();
 		IProject project = getProject(pname);
 		String webfolder = getProjectWebFolder(pname);
 		return project.findMember(webfolder + "/WEB-INF/classes").getLocation().toString();
+	}
+
+	/**
+	 * 获取资源位置
+	 * 
+	 * @return
+	 */
+	public static String getResourcesPath() {
+		String pname = getProjectName();
+		IProject project = getProject(pname);
+		IResource dsource = project.findMember("src/main/resources");
+		if (dsource == null) {
+			dsource = project.findMember("src");
+		}
+		return dsource.getLocation().toString();
 	}
 }
