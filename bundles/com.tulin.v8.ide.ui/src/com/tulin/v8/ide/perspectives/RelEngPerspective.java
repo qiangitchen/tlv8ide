@@ -29,13 +29,11 @@ public class RelEngPerspective implements IPerspectiveFactory {
 	private void addViews() {
 		IFolderLayout topLeft = factory.createFolder("topLeft", // NON-NLS-1
 				IPageLayout.LEFT, 0.25f, factory.getEditorArea());
-		topLeft.addView("com.tulin.v8.ide.navigator.views.ResourseViewer"); // 资源视图
+		topLeft.addView("org.eclipse.ui.navigator.ProjectExplorer"); // 资源视图
 		topLeft.addView("com.tulin.v8.ide.navigator.views.modelview");// 模型试图
-		// topLeft.addView("org.eclipse.ui.navigator.ProjectExplorer");// 项目资源管理器
 		topLeft.addPlaceholder("org.eclipse.ui.views.ResourceNavigator");
 		topLeft.addPlaceholder("org.eclipse.jdt.ui.TypeHierarchy");
 		topLeft.addPlaceholder(JavaUI.ID_PACKAGES_VIEW);
-		// topLeft.addView("com.tulin.v8.ide.navigator.views.modelview"); // 模型视图
 		IFolderLayout bottom = factory.createFolder("bottomRight", // NON-NLS-1
 				IPageLayout.BOTTOM, 0.75f, factory.getEditorArea());
 		bottom.addView(IConsoleConstants.ID_CONSOLE_VIEW); // 控制台
