@@ -6,7 +6,7 @@ import org.eclipse.ui.IPageLayout;
 import org.eclipse.ui.IPerspectiveFactory;
 import org.eclipse.ui.console.IConsoleConstants;
 
-/*
+/**
  * Studio透视图
  */
 public class RelEngPerspective implements IPerspectiveFactory {
@@ -29,7 +29,8 @@ public class RelEngPerspective implements IPerspectiveFactory {
 	private void addViews() {
 		IFolderLayout topLeft = factory.createFolder("topLeft", // NON-NLS-1
 				IPageLayout.LEFT, 0.25f, factory.getEditorArea());
-		topLeft.addView("org.eclipse.ui.navigator.ProjectExplorer"); // 资源视图
+		topLeft.addView("org.eclipse.ui.navigator.ProjectExplorer"); // 项目资源管理器
+		topLeft.addView("org.eclipse.jdt.ui.PackageExplorer"); // 包资源管理器
 		topLeft.addView("com.tulin.v8.ide.navigator.views.modelview");// 模型试图
 		topLeft.addPlaceholder("org.eclipse.ui.views.ResourceNavigator");
 		topLeft.addPlaceholder("org.eclipse.jdt.ui.TypeHierarchy");
@@ -53,9 +54,11 @@ public class RelEngPerspective implements IPerspectiveFactory {
 		factory.addNewWizardShortcut("org.eclipse.jdt.ui.wizards.NewClassCreationWizard");// NON-NLS-1
 		factory.addNewWizardShortcut("org.eclipse.ui.wizards.new.folder");// NON-NLS-1
 		factory.addNewWizardShortcut("org.eclipse.ui.wizards.new.file");// NON-NLS-1
-//		factory.addNewWizardShortcut("org.eclipse.jst.jsp.ui.internal.wizard.NewJSPWizard");// NON-NLS-1
+		// factory.addNewWizardShortcut("org.eclipse.jst.jsp.ui.internal.wizard.NewJSPWizard");//
+		// NON-NLS-1
 		factory.addNewWizardShortcut("com.tulin.v8.webtools.wizards.JSPNewWizard");// NON-NLS-1
-//		factory.addNewWizardShortcut("org.eclipse.wst.html.ui.internal.wizard.NewHTMLWizard");// NON-NLS-1
+		// factory.addNewWizardShortcut("org.eclipse.wst.html.ui.internal.wizard.NewHTMLWizard");//
+		// NON-NLS-1
 		factory.addNewWizardShortcut("com.tulin.v8.webtools.wizards.HTMLNewWizard");// NON-NLS-1
 		factory.addNewWizardShortcut("com.tulin.v8.ide.wizards.SampleNewWizard");// NON-NLS-1
 		factory.addNewWizardShortcut("com.tulin.v8.ide.wizards.ChartNewWizard");// NON-NLS-1
