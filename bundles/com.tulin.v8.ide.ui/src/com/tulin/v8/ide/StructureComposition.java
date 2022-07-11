@@ -15,8 +15,14 @@ import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.ide.utils.StudioConfig;
 
 public class StructureComposition {
-	/*
+	/**
 	 * 获取表的配置文件内容
+	 * 
+	 * @param dbkey
+	 * @param tablename
+	 * @param tbtype
+	 * @return String
+	 * @throws Exception
 	 */
 	public static String getTablePermision(String dbkey, String tablename, String tbtype) throws Exception {
 		String result = "";
@@ -39,8 +45,14 @@ public class StructureComposition {
 		return result;
 	}
 
-	/*
+	/**
 	 * 生成配置文件
+	 * 
+	 * @param file
+	 * @param dbkey
+	 * @param tablename
+	 * @param tbtype
+	 * @return String
 	 */
 	@SuppressWarnings("deprecation")
 	public static String WriteTablePermision(File file, String dbkey, String tablename, String tbtype) {

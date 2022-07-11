@@ -31,7 +31,7 @@ public class TableViewEditorInput implements IEditorInput {
 		this.schemaName = table.getSchemaName();
 		this.table = table;
 		this.name = table.getName();
-		this.tooltip = table.getName() + " [" + config.getUserId() + " : " + config.getDbName() + "]"; //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+		this.tooltip = table.getName() + " [" + config.getUserId() + " : " + config.getDbName() + "]"; 
 
 
 		StringBuffer sb = new StringBuffer();

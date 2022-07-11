@@ -23,6 +23,11 @@ import oracle.jdbc.driver.OracleTypes;
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class DBUtils {
 
+	/**
+	 * 获取数据源配置信息
+	 * 
+	 * @return {@link java.util.Map}
+	 */
 	public static Map<String, Map<String, String>> getDBConfig() {
 		return Configuration.getConfig();
 	}
@@ -40,7 +45,12 @@ public class DBUtils {
 		return url.toUpperCase().indexOf((":postgresql:").toUpperCase()) > 0 ? true : false;
 	}
 
-	// 判断数据库类型达梦数据库
+	/**
+	 * 判断数据库类型达梦数据库
+	 * 
+	 * @param key
+	 * @return boolean
+	 */
 	public static boolean IsDMDB(String key) {
 		Map<String, Map<String, String>> rm = Configuration.getConfig();
 		Map<String, String> m = rm.get(key);
@@ -49,7 +59,12 @@ public class DBUtils {
 		return url.toUpperCase().indexOf((":dm:").toUpperCase()) > 0 ? true : false;
 	}
 
-	// 判断数据库类型金仓数据库
+	/**
+	 * 判断数据库类型金仓数据库
+	 * 
+	 * @param key
+	 * @return boolean
+	 */
 	public static boolean IsKingDB(String key) {
 		Map<String, Map<String, String>> rm = Configuration.getConfig();
 		Map<String, String> m = rm.get(key);
@@ -58,7 +73,12 @@ public class DBUtils {
 		return url.toUpperCase().indexOf(("kingbase").toUpperCase()) > 0 ? true : false;
 	}
 
-	// 判断数据库类型Oracle
+	/**
+	 * 判断数据库类型Oracle
+	 * 
+	 * @param key
+	 * @return boolean
+	 */
 	public static boolean IsOracleDB(String key) {
 		Map<String, Map<String, String>> rm = Configuration.getConfig();
 		Map<String, String> m = rm.get(key);
@@ -67,7 +87,12 @@ public class DBUtils {
 		return url.toUpperCase().indexOf(("oracle").toUpperCase()) > 0 ? true : false;
 	}
 
-	// 判断数据库类型MySQL
+	/**
+	 * 判断数据库类型MySQL
+	 * 
+	 * @param key
+	 * @return boolean
+	 */
 	public static boolean IsMySQLDB(String key) {
 		Map<String, Map<String, String>> rm = Configuration.getConfig();
 		Map<String, String> m = rm.get(key);
@@ -76,7 +101,12 @@ public class DBUtils {
 		return url.toUpperCase().indexOf(("mysql").toUpperCase()) > 0 ? true : false;
 	}
 
-	// 判断数据库类型SQLServer
+	/**
+	 * 判断数据库类型SQLServer
+	 * 
+	 * @param key
+	 * @return boolean
+	 */
 	public static boolean IsMSSQLDB(String key) {
 		Map<String, Map<String, String>> rm = Configuration.getConfig();
 		Map<String, String> m = rm.get(key);
@@ -85,7 +115,14 @@ public class DBUtils {
 		return url.toUpperCase().indexOf(("jtds").toUpperCase()) > 0 ? true : false;
 	}
 
-	// 获取连接
+	/**
+	 * 获取连接
+	 * 
+	 * @param key
+	 * @return {@link java.sql.Connection}
+	 * @throws SQLException
+	 * @throws NamingException
+	 */
 	public static Connection getAppConn(String key) throws SQLException, NamingException {
 		Connection cn = null;
 		if (cn == null) {
@@ -103,7 +140,7 @@ public class DBUtils {
 			}
 			try {
 				url = url.replace("&amp;", "&");
-			}catch (Exception e) {
+			} catch (Exception e) {
 			}
 			try {
 				cn = DriverManager.getConnection(url, userName, password);
@@ -114,7 +151,12 @@ public class DBUtils {
 		return cn;
 	}
 
-	// 获取数据库名
+	/**
+	 * 获取数据库名
+	 * 
+	 * @param key
+	 * @return String
+	 */
 	public static String getDataName(String key) {
 		String result = "";
 		Map<String, Map<String, String>> rm = Configuration.getConfig();
@@ -130,7 +172,12 @@ public class DBUtils {
 		return result;
 	}
 
-	// 获取数据库用户名
+	/**
+	 * 获取数据库用户名
+	 * 
+	 * @param key
+	 * @return String
+	 */
 	public static String getUserName(String key) {
 		Map<String, Map<String, String>> rm = Configuration.getConfig();
 		Map<String, String> m = rm.get(key);
@@ -138,7 +185,14 @@ public class DBUtils {
 		return user;
 	}
 
-	// 查询操作JDBC
+	/**
+	 * 查询操作JDBC
+	 * 
+	 * @param key
+	 * @param sql
+	 * @return {@link java.util.List}
+	 * @throws SQLException
+	 */
 	public static List execQueryforList(String key, String sql) throws SQLException {
 		ResultSet rs = null;
 		ResultSetMetaData rsmd = null;
@@ -218,7 +272,14 @@ public class DBUtils {
 		return li;
 	}
 
-	// 查詢操作[为了兼容老版本]不推荐使用
+	/**
+	 * 查詢操作[为了兼容老版本]不推荐使用
+	 * 
+	 * @param aConn
+	 * @param aSQL
+	 * @return {@link java.sql.ResultSet}
+	 * @throws SQLException
+	 */
 	@Deprecated
 	public static ResultSet execQuery(Connection aConn, String aSQL) throws SQLException {
 		ResultSet result = null;
@@ -232,6 +293,14 @@ public class DBUtils {
 		}
 	}
 
+	/**
+	 * 执行sql
+	 * 
+	 * @param dbkey
+	 * @param sql
+	 * @return boolean
+	 * @throws Exception
+	 */
 	public static boolean execute(String dbkey, String sql) throws Exception {
 		boolean result = false;
 		Connection conn = null;
@@ -249,7 +318,13 @@ public class DBUtils {
 		return result;
 	}
 
-	// 关闭连接
+	/**
+	 * 关闭连接
+	 * 
+	 * @param conn
+	 * @param stm
+	 * @param rs
+	 */
 	public static void CloseConn(Connection conn, Statement stm, ResultSet rs) {
 		try {
 			if (rs != null)
@@ -268,7 +343,13 @@ public class DBUtils {
 		}
 	}
 
-	// 调用存储过程; aParams为分号分割的字符串参数值列表, 所有参数只能是字符串类型, 且只能是in类型
+	/**
+	 * 调用存储过程; aParams为分号分割的字符串参数值列表, 所有参数只能是字符串类型, 且只能是in类型
+	 * 
+	 * @param aProcName
+	 * @param aParamValues
+	 * @return String
+	 */
 	public static String callProc(String aProcName, String aParamValues) {
 		String result;
 		result = "调用存储过程";

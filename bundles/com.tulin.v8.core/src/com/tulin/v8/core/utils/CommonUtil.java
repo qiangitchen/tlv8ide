@@ -29,7 +29,7 @@ public class CommonUtil {
 	 * 判断内容是否为空
 	 * 
 	 * @param paramObject
-	 * @return
+	 * @return boolean
 	 */
 	public static boolean isEmpty(Object paramObject) {
 		return (paramObject == null) || (paramObject.toString().trim().equals(""));
@@ -39,7 +39,7 @@ public class CommonUtil {
 	 * 重构文件路径
 	 * 
 	 * @param paramString
-	 * @return
+	 * @return String
 	 */
 	public static String rebuildFilePath(String paramString) {
 		return paramString.replace("\\", "/");
@@ -48,7 +48,7 @@ public class CommonUtil {
 	/**
 	 * 获取操作系统名称
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public static String getOSName() {
 		String osname = System.getProperty("os.name").toLowerCase();
@@ -59,7 +59,7 @@ public class CommonUtil {
 	/**
 	 * 获取操作系统版本
 	 * 
-	 * @return
+	 * @return double
 	 */
 	public static double getOSVersion() {
 		// window 版本号，例如win2000是5.0，xp是5.1，vista是6.0，win7是6.1 win10是10.0
@@ -71,6 +71,7 @@ public class CommonUtil {
 
 	/**
 	 * 是否为Windows系统
+	 * 
 	 * @return boolean
 	 */
 	public static boolean isWinOS() {
@@ -79,6 +80,7 @@ public class CommonUtil {
 
 	/**
 	 * 是否为Mac OS系统
+	 * 
 	 * @return boolean
 	 */
 	public static boolean isMacOS() {
@@ -87,6 +89,7 @@ public class CommonUtil {
 
 	/**
 	 * 是否为Linux系统
+	 * 
 	 * @return boolean
 	 */
 	public static boolean isLinuxOS() {
@@ -95,6 +98,7 @@ public class CommonUtil {
 
 	/**
 	 * 是否为32位架构
+	 * 
 	 * @return boolean
 	 */
 	public static boolean is32() {
@@ -103,6 +107,7 @@ public class CommonUtil {
 
 	/**
 	 * 是否为64位架构
+	 * 
 	 * @return boolean
 	 */
 	public static boolean is64() {
@@ -111,6 +116,7 @@ public class CommonUtil {
 
 	/**
 	 * 是否为32位架构Windows系统
+	 * 
 	 * @return boolean
 	 */
 	public static boolean isWin32() {
@@ -119,6 +125,7 @@ public class CommonUtil {
 
 	/**
 	 * 是否为64位架构Windows系统
+	 * 
 	 * @return boolean
 	 */
 	public static boolean isWin64() {
@@ -128,7 +135,7 @@ public class CommonUtil {
 	/**
 	 * 获取文件路径分隔符
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public static String getPathdep() {
 		if (isWinOS()) {
@@ -142,7 +149,7 @@ public class CommonUtil {
 	 * 获取数据库对象【表和视图】
 	 * 
 	 * @param dbkey
-	 * @return
+	 * @return {@link java.util.Map}
 	 * @throws Exception
 	 */
 	public static Map<String, List<String>> getDataObject(String dbkey) throws Exception {
@@ -206,7 +213,7 @@ public class CommonUtil {
 	 * 获取数据库对象【表和视图】【JDBC】
 	 * 
 	 * @param dbkey
-	 * @return
+	 * @return {@link java.util.Map}
 	 * @throws Exception
 	 */
 	@SuppressWarnings("resource")
@@ -253,7 +260,7 @@ public class CommonUtil {
 	 * 
 	 * @param dbkey
 	 * @param tablename
-	 * @return
+	 * @return String
 	 */
 	public static String getTableComments(String dbkey, String tablename) {
 		String coms = getTableComments(dbkey, null, tablename, new String[] { "TABLE", "VIEW" });
@@ -304,7 +311,7 @@ public class CommonUtil {
 	 * 
 	 * @param dbkey
 	 * @param tablename
-	 * @return
+	 * @return String
 	 */
 	public static String getTableComments(String dbkey, String schemaPattern, String tablename, String[] types) {
 		String cm = null;
@@ -335,7 +342,7 @@ public class CommonUtil {
 	 * 
 	 * @param dbkey
 	 * @param tableName
-	 * @return
+	 * @return {@link java.util.List}
 	 * @throws Exception
 	 */
 	public static List<String[]> getTableColumn(String dbkey, String tableName) throws Exception {
@@ -423,7 +430,7 @@ public class CommonUtil {
 	 * 
 	 * @param dbkey
 	 * @param tableName
-	 * @return
+	 * @return {@link java.util.List}
 	 * @throws Exception
 	 */
 	public static List<String[]> getTableColumn(String dbkey, String schemaPattern, String tableName) throws Exception {
@@ -477,7 +484,7 @@ public class CommonUtil {
 	 * @param schemaPattern
 	 * @param tableName
 	 * @param columnName
-	 * @return
+	 * @return String
 	 */
 	public static String getColumnType(String dbkey, String schemaPattern, String tableName, String columnName) {
 		String result = "";
@@ -507,7 +514,7 @@ public class CommonUtil {
 	 * @param dbkey
 	 * @param tableName
 	 * @param columnName
-	 * @return
+	 * @return boolean
 	 */
 	public static boolean ColumnsnNllAbled(String dbkey, String tableName, String columnName) {
 		int n = ColumnsnNllAbled(dbkey, null, tableName, columnName);
@@ -558,7 +565,7 @@ public class CommonUtil {
 	 * @param dbkey
 	 * @param tableName
 	 * @param columnName
-	 * @return
+	 * @return int
 	 */
 	public static int ColumnsnNllAbled(String dbkey, String schemaPattern, String tableName, String columnName) {
 		int r = -1;
