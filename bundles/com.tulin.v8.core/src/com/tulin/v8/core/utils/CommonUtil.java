@@ -351,47 +351,49 @@ public class CommonUtil {
 			return rlist;
 		}
 		rlist = new ArrayList<String[]>();
-		String sql = "select t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH "
+		String sql = "select t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH,t1.DATA_DEFAULT AS COLUMN_DEF "
 				+ "from user_tab_columns t1  left join " + "user_col_comments t2 on t1.TABLE_NAME = t2.table_name "
 				+ "and t1.COLUMN_NAME = t2.column_name";
 		if (tableName == null || "".equals(tableName)) {
 			if (DBUtils.IsMSSQLDB(dbkey)) {
 				sql = "select b.name as TABLE_NAME,a.name as COLUMN_NAME,c.name as DATA_TYPE,"
-						+ "d.value as COMMENTS,a.prec as CHAR_LENGTH from dbo.syscolumns as a "
-						+ "inner join dbo.sysobjects as b on b.id = a.id "
+						+ "d.value as COMMENTS,a.prec as CHAR_LENGTH,a.text as COLUMN_DEF "
+						+ "from dbo.syscolumns as a " + "inner join dbo.sysobjects as b on b.id = a.id "
 						+ "inner join dbo.systypes as c on a.xtype = c.xtype and c.xusertype = c.xtype "
 						+ "left join sys.extended_properties d on d.major_id = a.id and d.minor_id = a.colid";
 			} else if (DBUtils.IsMySQLDB(dbkey)) {
-				sql = "select TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS,character_maximum_length as CHAR_LENGTH,COLUMN_TYPE "
+				sql = "select TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS,character_maximum_length as CHAR_LENGTH,COLUMN_TYPE,COLUMN_DEFAULT AS COLUMN_DEF "
 						+ " from information_schema.columns";
 			} else if (DBUtils.IsPostgreSQL(dbkey)) {
 				sql = "select a.attnum,a.attname AS COLUMN_NAME,t.typname AS DATA_TYPE,"
 						+ "a.attlen AS length,a.atttypmod AS CHAR_LENGTH,"
-						+ "a.attnotnull AS notnull,b.description AS COMMENTS  FROM pg_class c,"
+						+ "a.attnotnull AS notnull,b.description AS COMMENTS,d.adsrc as COLUMN_DEF  "
+						+ "FROM pg_class c,"
 						+ "pg_attribute a LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,"
-						+ "pg_type t WHERE a.attnum > 0  and a.attrelid = c.oid and a.atttypid = t.oid";
+						+ "pg_type t left join pg_attrdef d on d.adrelid=a.attrelid and d.adnum=a.attnum WHERE a.attnum > 0  and a.attrelid = c.oid and a.atttypid = t.oid";
 			}
 		} else {
-			sql = "select t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH "
+			sql = "select t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH,t1.DATA_DEFAULT AS COLUMN_DEF "
 					+ "from user_tab_columns t1  left join " + "user_col_comments t2 on t1.TABLE_NAME = t2.table_name "
 					+ "and t1.COLUMN_NAME = t2.column_name " + "where t2.table_name = '" + tableName + "'";
 			if (DBUtils.IsMSSQLDB(dbkey)) {
 				sql = "select b.name as TABLE_NAME,a.name as COLUMN_NAME,c.name as DATA_TYPE,"
-						+ "d.value as COMMENTS,a.prec as CHAR_LENGTH from dbo.syscolumns as a "
-						+ "inner join dbo.sysobjects as b on b.id = a.id "
+						+ "d.value as COMMENTS,a.prec as CHAR_LENGTH,a.text as COLUMN_DEF "
+						+ "from dbo.syscolumns as a " + "inner join dbo.sysobjects as b on b.id = a.id "
 						+ "inner join dbo.systypes as c on a.xtype = c.xtype and c.xusertype = c.xtype "
 						+ "left join sys.extended_properties d on d.major_id = a.id and d.minor_id = a.colid "
 						+ "where b.name = '" + tableName + "'";
 			} else if (DBUtils.IsMySQLDB(dbkey)) {
-				sql = "select TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS,character_maximum_length as CHAR_LENGTH,COLUMN_TYPE "
+				sql = "select TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS,character_maximum_length as CHAR_LENGTH,COLUMN_TYPE,COLUMN_DEFAULT AS COLUMN_DEF "
 						+ " from information_schema.columns where table_name='" + tableName + "'";
 			} else if (DBUtils.IsPostgreSQL(dbkey)) {
 				sql = "select a.attnum,a.attname AS COLUMN_NAME,t.typname AS DATA_TYPE,"
 						+ "a.attlen AS length,a.atttypmod AS CHAR_LENGTH,"
-						+ "a.attnotnull AS notnull,b.description AS COMMENTS  FROM pg_class c,"
+						+ "a.attnotnull AS notnull,b.description AS COMMENTS,d.adsrc as COLUMN_DEF  "
+						+ "FROM pg_class c,"
 						+ "pg_attribute a LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,"
-						+ "pg_type t WHERE c.relname = '" + tableName
-						+ "' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid";
+						+ "pg_type t left join pg_attrdef d on d.adrelid=a.attrelid and d.adnum=a.attnum WHERE c.relname = '"
+						+ tableName + "' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid";
 			}
 		}
 		Connection conn = null;
@@ -402,19 +404,20 @@ public class CommonUtil {
 			stm = conn.createStatement();
 			rs = stm.executeQuery(sql);
 			while (rs.next()) {
-				String[] item = new String[5];
-				item[0] = (String) rs.getString("COLUMN_NAME");
-				item[1] = (String) rs.getString("DATA_TYPE");
-				item[2] = (String) rs.getString("COMMENTS");
-				item[3] = (String) rs.getString("CHAR_LENGTH");
+				String[] item = new String[6];
+				item[0] = rs.getString("COLUMN_NAME");
+				item[1] = rs.getString("DATA_TYPE");
+				item[2] = rs.getString("COMMENTS");
+				item[3] = rs.getString("CHAR_LENGTH");
 				if (item[3] == null || Long.parseLong(item[3]) < 1) {
 					item[3] = "";
 				}
 				if (DBUtils.IsMySQLDB(dbkey)) {
-					item[4] = (String) rs.getString("COLUMN_TYPE");
+					item[4] = rs.getString("COLUMN_TYPE");
 				} else {
 					item[4] = "";
 				}
+				item[5] = rs.getString("COLUMN_DEF");
 				rlist.add(item);
 			}
 		} catch (Exception e) {
@@ -447,7 +450,7 @@ public class CommonUtil {
 				rs = objMet.getColumns(null, "%", tableName, "%"); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			while (rs.next()) {
-				String[] item = new String[5];
+				String[] item = new String[6];
 				item[0] = rs.getString("COLUMN_NAME");
 				item[1] = rs.getString("TYPE_NAME");
 				item[2] = rs.getString("REMARKS");
@@ -467,6 +470,7 @@ public class CommonUtil {
 				} else {
 					item[4] = "";
 				}
+				item[5] = rs.getString("COLUMN_DEF");
 				rlist.add(item);
 			}
 		} catch (Exception e) {
@@ -589,5 +593,14 @@ public class CommonUtil {
 			DBUtils.CloseConn(conn, stm, rs);
 		}
 		return r;
+	}
+
+	public static boolean needQuotation(String columnType) {
+		String type = columnType.toLowerCase();
+		if (type.contains("date") || type.contains("time") || type.contains("int") || type.contains("float")
+				|| type.contains("double") || type.contains("decimal")) {
+			return false;
+		}
+		return true;
 	}
 }

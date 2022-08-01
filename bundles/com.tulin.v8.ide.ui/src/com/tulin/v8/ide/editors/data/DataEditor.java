@@ -62,6 +62,7 @@ import com.tulin.v8.core.FileAndString;
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.core.XMLFormator;
+import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.ide.StudioPlugin;
 import com.tulin.v8.ide.editors.Messages;
 import com.tulin.v8.ide.editors.data.dialog.TableColumnDialog;
@@ -288,6 +289,9 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 		TableColumn Textcolumn = new TableColumn(ColumnTable, SWT.NONE);
 		Textcolumn.setWidth(200);
 		Textcolumn.setText(Messages.getString("TLEditor.dataEditor.13"));
+		TableColumn DefTextcolumn = new TableColumn(ColumnTable, SWT.NONE);
+		DefTextcolumn.setWidth(200);
+		DefTextcolumn.setText(Messages.getString("TLEditor.dataEditor.15"));
 		ColumnTable.setData(TableDocument.getRootElement());
 		initColumn();
 
@@ -304,7 +308,7 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 					while (index < ColumnTable.getItemCount()) {
 						boolean visible = false;
 						final TableItem item = ColumnTable.getItem(index);
-						for (int i = 3; i < ColumnTable.getColumnCount(); i++) {
+						for (int i = 3; i < 4; i++) {
 							Rectangle rectangle = item.getBounds(i);
 							if (rectangle.contains(point)) {
 								final int column = i;
@@ -380,11 +384,13 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 						element.setAttributeValue("type", dialog.getColumntype());
 						element.setAttributeValue("length", dialog.getColumntlength());
 						element.setAttributeValue("text", dialog.getColumntcomment());
-						String[] itemdata = new String[4];
+						element.setAttributeValue("def", dialog.getDefaultvalue());
+						String[] itemdata = new String[5];
 						itemdata[0] = element.attributeValue("name");
 						itemdata[1] = element.attributeValue("type");
 						itemdata[2] = element.attributeValue("length");
 						itemdata[3] = element.attributeValue("text");
+						itemdata[4] = element.attributeValue("def");
 						itemList[listHaveChouse].setText(itemdata);
 						setDataText();
 					}
@@ -407,11 +413,13 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 					ele.setAttributeValue("type", dialog.getColumntype());
 					ele.setAttributeValue("length", dialog.getColumntlength());
 					ele.setAttributeValue("text", dialog.getColumntcomment());
-					String[] itemdata = new String[4];
+					ele.setAttributeValue("def", dialog.getDefaultvalue());
+					String[] itemdata = new String[5];
 					itemdata[0] = ele.attributeValue("name");
 					itemdata[1] = ele.attributeValue("type");
 					itemdata[2] = ele.attributeValue("length");
 					itemdata[3] = ele.attributeValue("text");
+					itemdata[4] = ele.attributeValue("def");
 					TableItem tableitem = new TableItem(ColumnTable, SWT.NONE);
 					tableitem.setText(itemdata);
 					tableitem.setData(ele);
@@ -602,11 +610,12 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 		ColumnTable.removeAll();
 		for (int i = 0; i < list.size(); i++) {
 			Element item = (Element) list.get(i);
-			String[] itemdata = new String[4];
+			String[] itemdata = new String[5];
 			itemdata[0] = item.attributeValue("name");
 			itemdata[1] = item.attributeValue("type");
 			itemdata[2] = item.attributeValue("length");
 			itemdata[3] = item.attributeValue("text");
+			itemdata[4] = item.attributeValue("def");
 			TableItem tableitem = new TableItem(ColumnTable, SWT.NONE);
 			tableitem.setText(itemdata);
 			tableitem.setData(item);
@@ -646,7 +655,17 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 		} else if (DBUtils.IsMySQLDB(dbkey)) {
 			Element element = (Element) item.getData();
 			upsql = "alter table " + tableName + " modify column " + ColumnName + " "
-					+ element.attributeValue("COLUMN_TYPE") + " comment '" + text + "';";
+					+ element.attributeValue("COLUMN_TYPE");
+			if (item.getText(4) != null && !"".equals(item.getText(4))) {
+				if (CommonUtil.needQuotation(item.getText(1))) {
+					upsql += " default '" + item.getText(4) + "' ";
+				} else {
+					upsql += " default " + item.getText(4) + " ";
+				}
+			} else {
+				upsql += " default null ";
+			}
+			upsql += " comment '" + text + "';";
 		}
 		sqlMap.put(tableName + "." + ColumnName, upsql);
 		updatebtn.setEnabled(true);

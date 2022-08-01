@@ -79,6 +79,7 @@ public class StructureComposition {
 					columnItem.setAttributeValue("COLUMN_TYPE", column[4]);
 				} catch (Exception e) {
 				}
+				columnItem.setAttributeValue("def", column[5]);
 			}
 			OutputFormat format = OutputFormat.createPrettyPrint();
 			format.setEncoding("UTF-8");

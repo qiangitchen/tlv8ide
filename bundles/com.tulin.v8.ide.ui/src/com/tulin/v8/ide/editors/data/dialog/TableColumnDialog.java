@@ -35,6 +35,7 @@ public class TableColumnDialog extends Dialog {
 	String columntype;
 	String columntlength;
 	String columntcomment;
+	String defaultvalue;
 	private TableItem tableitem;
 	private Text info;
 	private Text colname;
@@ -42,6 +43,7 @@ public class TableColumnDialog extends Dialog {
 	private Text colulength;
 	private Button cannull;
 	private Text cocomment;
+	private Text defaultval;
 	private boolean isnull = false;
 
 	protected TableColumnDialog(Shell parentShell) {
@@ -77,10 +79,10 @@ public class TableColumnDialog extends Dialog {
 		Label tablelabel = new Label(namegroup, SWT.NONE);
 		tablelabel.setText(Messages.getString("TLEditor.TableColumn.2"));
 		GridData laebllay = new GridData();
+		laebllay.widthHint = 70;
 		tablelabel.setLayoutData(laebllay);
 		Text tbename = new Text(namegroup, SWT.BORDER);
 		GridData textlay = new GridData(GridData.FILL_HORIZONTAL);
-		textlay.widthHint = 220;
 		textlay.grabExcessHorizontalSpace = true;
 		tbename.setLayoutData(textlay);
 		tbename.setText(tablename);
@@ -118,6 +120,11 @@ public class TableColumnDialog extends Dialog {
 		colcomment.setText(Messages.getString("TLEditor.TableColumn.8"));
 		cocomment = new Text(sysgroup, SWT.BORDER);
 		cocomment.setLayoutData(textlay);
+		Label defaultv = new Label(sysgroup, SWT.NONE);
+		defaultv.setLayoutData(laebllay);
+		defaultv.setText(Messages.getString("TLEditor.TableColumn.13"));
+		defaultval = new Text(sysgroup, SWT.BORDER);
+		defaultval.setLayoutData(textlay);
 
 		if (tableitem != null) {
 			colname.setText(tableitem.getText(0));
@@ -140,6 +147,7 @@ public class TableColumnDialog extends Dialog {
 				isnull = true;
 			}
 			colname.setEditable(false);
+			defaultval.setText(tableitem.getText(4));
 		} else {
 			colname.setEditable(true);
 		}
@@ -184,7 +192,7 @@ public class TableColumnDialog extends Dialog {
 			colutype.add("image");
 			colutype.add("binary");
 			info.setText(Messages.getString("TLEditor.TableColumn.11"));
-		}else {
+		} else {
 			colutype.add("char");
 			colutype.add("varchar");
 			colutype.add("nvarchar");
@@ -251,11 +259,20 @@ public class TableColumnDialog extends Dialog {
 					scolumntype = " type " + scolumntype;
 				}
 			}
+			String defval = " default null ";
+			if (defaultval.getText() != null && !"".equals(defaultval.getText())) {
+				if (CommonUtil.needQuotation(colutype.getText())) {
+					defval = " default '" + defaultval.getText() + "' ";
+				} else {
+					defval = " default " + defaultval.getText() + " ";
+				}
+			}
 			String nullpre = isNUll();
 			if (DBUtils.IsPostgreSQL(dbkey)) {
 				nullpre = "";
 			}
-			String sql = "ALTER TABLE " + tablename + " " + opption + " " + column + " " + scolumntype + " " + nullpre;
+			String sql = "ALTER TABLE " + tablename + " " + opption + " " + column + " " + scolumntype + " " + defval
+					+ " " + nullpre;
 			String comment = "";
 			if (cocomment.getText() != null) {
 				comment = cocomment.getText();
@@ -310,7 +327,7 @@ public class TableColumnDialog extends Dialog {
 			if (DBUtils.IsPostgreSQL(dbkey)) {
 				String nsql = "ALTER TABLE " + tablename + " ALTER COLUMN " + column + "  drop not NULL";
 				if (!"".equals(isNUll())) {
-					 nsql = "ALTER TABLE " + tablename + " ALTER COLUMN " + column + "  set not NULL";
+					nsql = "ALTER TABLE " + tablename + " ALTER COLUMN " + column + "  set not NULL";
 				}
 				try {
 					conn = DBUtils.getAppConn(dbkey);
@@ -331,6 +348,7 @@ public class TableColumnDialog extends Dialog {
 			columntype = colutype.getText();
 			columntlength = colulength.getText();
 			columntcomment = comment;
+			defaultvalue = defaultval.getText();
 		}
 		super.buttonPressed(buttonId);
 	}
@@ -382,6 +400,14 @@ public class TableColumnDialog extends Dialog {
 
 	public void setColumntcomment(String columntcomment) {
 		this.columntcomment = columntcomment;
+	}
+
+	public String getDefaultvalue() {
+		return defaultvalue;
+	}
+
+	public void setDefaultvalue(String defaultvalue) {
+		this.defaultvalue = defaultvalue;
 	}
 
 }
