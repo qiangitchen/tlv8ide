@@ -56,15 +56,16 @@ class DataConversion {
 				} else {
 					treeitem = new TreeItem((TreeItem) parentItem, SWT.NONE);
 				}
-				String[] row = new String[6];
+				String[] row = new String[7];
 				row[0] = item.getAttribute("label");
 				row[1] = item.getAttribute("icon");
-				row[2] = item.getAttribute("display");
-				row[3] = item.getAttribute("url");
-				row[4] = item.getAttribute("process");
-				row[5] = item.getAttribute("activity");
+				row[2] = item.getAttribute("layuiIcon");
+				row[3] = item.getAttribute("display");
+				row[4] = item.getAttribute("url");
+				row[5] = item.getAttribute("process");
+				row[6] = item.getAttribute("activity");
 				treeitem.setText(row);
-				treeitem.setImage(getImage(row[3]));
+				treeitem.setImage(getImage(item.getAttribute("url")));
 				treeitem.setData(item);
 				setData(treeitem, item);
 			}
@@ -136,10 +137,11 @@ class DataConversion {
 		Element childItem = parentItem.getOwnerDocument().createElement("item");
 		childItem.setAttribute("label", attr[0]);
 		childItem.setAttribute("icon", attr[1]);
-		childItem.setAttribute("display", attr[2]);
-		childItem.setAttribute("url", attr[3]);
-		childItem.setAttribute("process", attr[4]);
-		childItem.setAttribute("activity", attr[5]);
+		childItem.setAttribute("layuiIcon", attr[2]);
+		childItem.setAttribute("display", attr[3]);
+		childItem.setAttribute("url", attr[4]);
+		childItem.setAttribute("process", attr[5]);
+		childItem.setAttribute("activity", attr[6]);
 		parentItem.appendChild(childItem);
 		return childItem;
 	}

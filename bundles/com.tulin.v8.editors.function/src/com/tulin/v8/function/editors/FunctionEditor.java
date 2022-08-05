@@ -158,7 +158,8 @@ public class FunctionEditor extends MultiPageEditorPart implements IResourceChan
 	public void addrootItem() {
 		Element rootItem = datacon.addRootItem();
 		TreeItem newRootItem = new TreeItem(treegrid, SWT.NONE);
-		String[] row = new String[] { Messages.getString("editors.FunEditor.rootEle"), "", "solid", "", "", "" };
+		String[] row = new String[] { Messages.getString("editors.FunEditor.rootEle"), "", "layui-icon layui-icon-app",
+				"solid", "", "", "" };
 		newRootItem.setText(row);
 		newRootItem.setImage(datacon.getImage(""));
 		newRootItem.setData(rootItem);
@@ -172,7 +173,8 @@ public class FunctionEditor extends MultiPageEditorPart implements IResourceChan
 			return;
 		Element childItem = datacon.addChildItem((Element) selectItems[0].getData());
 		TreeItem newChildItem = new TreeItem(selectItems[0], SWT.NONE);
-		String[] row = new String[] { Messages.getString("editors.FunEditor.subEle"), "", "", "", "", "" };
+		String[] row = new String[] { Messages.getString("editors.FunEditor.subEle"), "", "layui-icon layui-icon-component",
+				"", "", "", "" };
 		newChildItem.setText(row);
 		newChildItem.setImage(datacon.getImage(""));
 		newChildItem.setData(childItem);
@@ -187,8 +189,8 @@ public class FunctionEditor extends MultiPageEditorPart implements IResourceChan
 		SelectFunctionDialog dialog = new SelectFunctionDialog(getSite().getShell());
 		if (dialog.open() == IDialogConstants.OK_ID) {
 			TreeItem[] selectItem = treegrid.getSelection();
-			String[] row = new String[] { dialog.getSname(), "", "", dialog.getSurl(), dialog.getProcess(),
-					dialog.getActivity() };
+			String[] row = new String[] { dialog.getSname(), "", "layui-icon layui-icon-file", "", dialog.getSurl(),
+					dialog.getProcess(), dialog.getActivity() };
 			Element funcItem = datacon.addFunctionItem((Element) selectItem[0].getData(), row);
 			TreeItem newFuncItem = new TreeItem(selectItem[0], SWT.NONE);
 			newFuncItem.setText(row);
@@ -290,8 +292,11 @@ public class FunctionEditor extends MultiPageEditorPart implements IResourceChan
 		tablecolumn1.setWidth(180);
 		tablecolumn1.setText(Messages.getString("editors.FunEditor.tablecnamel"));
 		TreeColumn tablecolumn2 = new TreeColumn(treegrid, SWT.NONE);
-		tablecolumn2.setWidth(90);
+		tablecolumn2.setWidth(100);
 		tablecolumn2.setText(Messages.getString("editors.FunEditor.tableciconl"));
+		TreeColumn tablecolumn2_1 = new TreeColumn(treegrid, SWT.NONE);
+		tablecolumn2_1.setWidth(200);
+		tablecolumn2_1.setText(Messages.getString("editors.FunEditor.tableclayiconl"));
 		TreeColumn tablecolumn3 = new TreeColumn(treegrid, SWT.NONE);
 		tablecolumn3.setWidth(90);
 		tablecolumn3.setText(Messages.getString("editors.FunEditor.tablecshowtypel"));
@@ -302,7 +307,7 @@ public class FunctionEditor extends MultiPageEditorPart implements IResourceChan
 		tablecolumn5.setWidth(200);
 		tablecolumn5.setText("Process");
 		TreeColumn tablecolumn6 = new TreeColumn(treegrid, SWT.NONE);
-		tablecolumn6.setWidth(60);
+		tablecolumn6.setWidth(80);
 		tablecolumn6.setText("Activity");
 
 		loadData();
@@ -347,7 +352,7 @@ public class FunctionEditor extends MultiPageEditorPart implements IResourceChan
 						index = i;
 				}
 				editortext = item.getText(index);
-				if (index != 2) {
+				if (index != 3) {
 					if (text != null) {
 						text.dispose();
 					}
@@ -386,7 +391,7 @@ public class FunctionEditor extends MultiPageEditorPart implements IResourceChan
 					text.selectAll();
 					text.setFocus();
 					tbeditor.setEditor(text, item, index);
-				} else if (index == 2) {
+				} else if (index == 3) {
 					combo = new Combo(treegrid, SWT.DROP_DOWN);
 					combo.setItems(new String[] { "solid", "hide", "" });
 					Listener comboListener = new Listener() {
@@ -649,18 +654,22 @@ public class FunctionEditor extends MultiPageEditorPart implements IResourceChan
 				el.setAttribute("icon", text);
 			break;
 		case 2:
+			if (!text.equals(el.getAttribute("layuiIcon")))
+				el.setAttribute("layuiIcon", text);
+			break;
+		case 3:
 			if (!text.equals(el.getAttribute("display")))
 				el.setAttribute("display", text);
 			break;
-		case 3:
+		case 4:
 			if (!text.equals(el.getAttribute("url")))
 				el.setAttribute("url", text);
 			break;
-		case 4:
+		case 5:
 			if (!text.equals(el.getAttribute("process")))
 				el.setAttribute("process", text);
 			break;
-		case 5:
+		case 6:
 			if (!text.equals(el.getAttribute("activity")))
 				el.setAttribute("activity", text);
 			break;
@@ -745,7 +754,7 @@ public class FunctionEditor extends MultiPageEditorPart implements IResourceChan
 	public XMLEditor getXMLEditor() {
 		return editor;
 	}
-	
+
 	@Override
 	public Object getSelectedPage() {
 		return editor;
