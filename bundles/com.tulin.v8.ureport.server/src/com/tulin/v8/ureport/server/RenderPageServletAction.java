@@ -17,16 +17,16 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig;
 import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 
-import com.tulin.v8.ureport.server.common.UReportWebServer.HTTPRequest;
-import com.tulin.v8.ureport.server.common.UReportWebServer.WebServerContent;
+import chrriis.common.Request;
+import chrriis.common.WebServerContent;
 
 public abstract class RenderPageServletAction {
 	protected VelocityEngine ve;
 	public static final String PREVIEW_KEY = "p";
 
-	protected HTTPRequest httpRequest;
+	protected Request httpRequest;
 
-	public RenderPageServletAction(HTTPRequest httpRequest) {
+	public RenderPageServletAction(Request httpRequest) {
 		this.httpRequest = httpRequest;
 		ve = new VelocityEngine();
 		ve.setProperty(Velocity.RESOURCE_LOADER, "class");

@@ -17,9 +17,11 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.concurrent.Semaphore;
 
 import chrriis.dj.nativeswing.NSSystemProperty;
@@ -29,7 +31,7 @@ import chrriis.dj.nativeswing.NSSystemProperty;
  */
 public class WebServer {
 
-	public static class HTTPRequest implements Cloneable {
+	public static class HTTPRequest implements Cloneable, Request {
 		HTTPRequest(String urlPath, Map<String, String> headerMap) {
 			this.headerMap = headerMap == null ? new HashMap<String, String>() : headerMap;
 			setURLPath(urlPath);
@@ -44,7 +46,7 @@ public class WebServer {
 		private String endQuery = "";
 		private String urlPath;
 
-		void setURLPath(String urlPath) {
+		public void setURLPath(String urlPath) {
 			this.urlPath = urlPath;
 			resourcePath = urlPath;
 			int index = resourcePath.indexOf('?');
@@ -77,7 +79,7 @@ public class WebServer {
 
 		private String resourcePath;
 
-		void setResourcePath(String resourcePath) {
+		public void setResourcePath(String resourcePath) {
 			this.resourcePath = resourcePath;
 			urlPath = resourcePath + endQuery;
 		}
@@ -117,7 +119,7 @@ public class WebServer {
 		public HTTPData[] getHTTPPostDataArray() {
 			return httpPostDataArray;
 		}
-		
+
 		public String getParameter(String param) {
 			String res = null;
 			if (queryParameterMap.containsKey(param)) {
@@ -155,7 +157,7 @@ public class WebServer {
 		}
 
 		@Override
-		protected HTTPRequest clone() {
+		public HTTPRequest clone() {
 			try {
 				HTTPRequest httpRequest = (HTTPRequest) super.clone();
 				httpRequest.queryParameterMap = new HashMap<String, String>(queryParameterMap);
@@ -163,6 +165,35 @@ public class WebServer {
 			} catch (CloneNotSupportedException e) {
 				throw new RuntimeException(e);
 			}
+		}
+
+		@Override
+		public String getRequestURI() {
+			String path = urlPath;
+			if (path.indexOf("?") > 0) {
+				path = path.substring(0, path.indexOf("?"));
+			}
+			return path;
+		}
+
+		@Override
+		public Enumeration<?> getParameterNames() {
+			Vector<String> dayNames = new Vector<String>();
+			Map<String, String> map = getParameterMap();
+			for (String k : map.keySet()) {
+				dayNames.add(k);
+			}
+			return dayNames.elements();
+		}
+		
+		public String getHeader(String name) {
+			Map<String,String> map = getHeaderMap();
+			for(String k : map.keySet()) {
+				if(k.equalsIgnoreCase(name)) {
+					return map.get(k);
+				}
+			}
+			return null;
 		}
 	}
 
@@ -187,42 +218,6 @@ public class WebServer {
 		}
 	}
 
-	public static abstract class WebServerContent {
-
-		private static final String MIME_APPLICATION_OCTET_STREAM = "application/octet-stream";
-
-		public static String getDefaultMimeType(String extension) {
-			String mimeType = MimeTypes.getMimeType(extension);
-			return mimeType == null ? MIME_APPLICATION_OCTET_STREAM : mimeType;
-		}
-
-		public abstract InputStream getInputStream();
-
-		public static InputStream getInputStream(String content) {
-			if (content == null) {
-				return null;
-			}
-			try {
-				return new ByteArrayInputStream(content.getBytes("UTF-8"));
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}
-		}
-
-		public String getContentType() {
-			return getDefaultMimeType(".html");
-		}
-
-		public long getContentLength() {
-			return -1;
-		}
-
-		public long getLastModified() {
-			return System.currentTimeMillis();
-		}
-
-	}
 
 	private static class WebServerConnectionThread extends Thread {
 

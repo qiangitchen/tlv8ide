@@ -20,7 +20,8 @@ import com.bstek.ureport.parser.ReportParser;
 import com.bstek.ureport.provider.report.ReportProvider;
 import com.tulin.v8.ureport.server.cache.TempObjectCache;
 import com.tulin.v8.ureport.server.common.UReportWebServer.HTTPRequest;
-import com.tulin.v8.ureport.server.common.UReportWebServer.WebServerContent;
+
+import chrriis.common.WebServerContent;
 
 public class DesignerServletAction extends RenderPageServletAction {
 	private ReportRender reportRender;

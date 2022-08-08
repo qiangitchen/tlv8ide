@@ -2,7 +2,8 @@ package com.tulin.v8.ureport.server.importexcel;
 
 import com.tulin.v8.ureport.server.RenderPageServletAction;
 import com.tulin.v8.ureport.server.common.UReportWebServer.HTTPRequest;
-import com.tulin.v8.ureport.server.common.UReportWebServer.WebServerContent;
+
+import chrriis.common.WebServerContent;
 
 public class ImportExcelServletAction extends RenderPageServletAction{
 

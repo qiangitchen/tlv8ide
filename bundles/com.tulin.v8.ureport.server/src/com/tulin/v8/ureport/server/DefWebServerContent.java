@@ -4,7 +4,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.InputStream;
 
-import com.tulin.v8.ureport.server.common.UReportWebServer.WebServerContent;
+import chrriis.common.WebServerContent;
 
 public class DefWebServerContent extends WebServerContent {
 	ByteArrayOutputStream out = null;
@@ -26,6 +26,11 @@ public class DefWebServerContent extends WebServerContent {
 	@Override
 	public InputStream getInputStream() {
 		return new ByteArrayInputStream(out.toByteArray());
+	}
+
+	@Override
+	public String getContentDisposition() {
+		return null;
 	}
 
 }

@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: TuLin Ureport Server
 Bundle-Vendor: TuLin
 Bundle-SymbolicName: com.tulin.v8.ureport.server;singleton:=true
-Bundle-Version: 2.2.2.qualifier
+Bundle-Version: 2.2.3.qualifier
 Bundle-Activator: com.tulin.v8.ureport.server.Activator
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
@@ -19,6 +19,8 @@ Export-Package: com.bstek.ureport.console.designer,
  com.bstek.ureport.console.importexcel,
  com.bstek.ureport.definition,
  com.bstek.ureport.parser,
+ com.tulin.v8.ureport.server.html,
+ com.tulin.v8.ureport.server.res,
  com.tulin.v8.ureport.server.utils
 Bundle-ClassPath: .,
  lib/spring-aop-4.1.2.RELEASE.jar,

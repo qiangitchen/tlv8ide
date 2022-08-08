@@ -18,7 +18,7 @@ package com.tulin.v8.ureport.server;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import com.tulin.v8.ureport.server.common.UReportWebServer.HTTPRequest;
+import chrriis.common.Request;
 
 /**
  * @author Jacky.gao
@@ -35,7 +35,7 @@ public class MobileUtils {
 	private static Pattern phonePat = Pattern.compile(phoneReg, Pattern.CASE_INSENSITIVE);
 	private static Pattern tablePat = Pattern.compile(tableReg, Pattern.CASE_INSENSITIVE);
 	
-	public static boolean isMobile(HTTPRequest req){
+	public static boolean isMobile(Request req){
 		String userAgent = req.getHeader("USER-AGENT");  
         if(userAgent==null){    
             userAgent = "";    

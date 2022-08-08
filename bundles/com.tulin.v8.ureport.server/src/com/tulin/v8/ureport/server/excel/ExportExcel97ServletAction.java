@@ -22,7 +22,8 @@ import com.bstek.ureport.model.Report;
 import com.tulin.v8.ureport.server.Activator;
 import com.tulin.v8.ureport.server.RenderPageServletAction;
 import com.tulin.v8.ureport.server.common.UReportWebServer.HTTPRequest;
-import com.tulin.v8.ureport.server.common.UReportWebServer.WebServerContent;
+
+import chrriis.common.WebServerContent;
 
 public class ExportExcel97ServletAction extends RenderPageServletAction {
 	private ReportBuilder reportBuilder;

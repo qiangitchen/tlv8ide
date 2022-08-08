@@ -42,10 +42,11 @@ import com.tulin.v8.ureport.server.pdf.ExportPdfServletAction;
 import com.tulin.v8.ureport.server.res.ResourceLoaderServletAction;
 import com.tulin.v8.ureport.server.word.ExportWordServletAction;
 
-import chrriis.common.MimeTypes;
 import chrriis.common.ObjectRegistry;
+import chrriis.common.Request;
 import chrriis.common.SystemProperty;
 import chrriis.common.Utils;
+import chrriis.common.WebServerContent;
 import chrriis.dj.nativeswing.NSSystemProperty;
 
 /**
@@ -53,7 +54,7 @@ import chrriis.dj.nativeswing.NSSystemProperty;
  */
 public class UReportWebServer {
 
-	public static class HTTPRequest implements Cloneable {
+	public static class HTTPRequest implements Cloneable, Request {
 		HTTPRequest(String urlPath, Map<String, String> headerMap) {
 			this.headerMap = headerMap == null ? new HashMap<String, String>() : headerMap;
 			setURLPath(urlPath);
@@ -101,7 +102,7 @@ public class UReportWebServer {
 
 		private String resourcePath;
 
-		void setResourcePath(String resourcePath) {
+		public void setResourcePath(String resourcePath) {
 			this.resourcePath = resourcePath;
 			urlPath = resourcePath + endQuery;
 		}
@@ -179,7 +180,7 @@ public class UReportWebServer {
 		}
 
 		@Override
-		protected HTTPRequest clone() {
+		public Request clone() {
 			try {
 				HTTPRequest httpRequest = (HTTPRequest) super.clone();
 				httpRequest.queryParameterMap = new HashMap<String, String>(queryParameterMap);
@@ -236,47 +237,6 @@ public class UReportWebServer {
 		void setBytes(byte[] bytes) {
 			this.bytes = bytes;
 		}
-	}
-
-	public static abstract class WebServerContent {
-
-		private static final String MIME_APPLICATION_OCTET_STREAM = "application/octet-stream";
-
-		public static String getDefaultMimeType(String extension) {
-			String mimeType = MimeTypes.getMimeType(extension);
-			return mimeType == null ? MIME_APPLICATION_OCTET_STREAM : mimeType;
-		}
-
-		public abstract InputStream getInputStream();
-
-		public static InputStream getInputStream(String content) {
-			if (content == null) {
-				return null;
-			}
-			try {
-				return new ByteArrayInputStream(content.getBytes("UTF-8"));
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}
-		}
-
-		public String getContentType() {
-			return getDefaultMimeType(".html");
-		}
-
-		public long getContentLength() {
-			return -1;
-		}
-
-		public long getLastModified() {
-			return System.currentTimeMillis();
-		}
-
-		public String getContentDisposition() {
-			return null;
-		}
-
 	}
 
 	private static class WebServerConnectionThread extends Thread {
@@ -842,7 +802,7 @@ public class UReportWebServer {
 		 * @return the content, or null to ignore the request and potentially let
 		 *         another handler process it.
 		 */
-		public WebServerContent getWebServerContent(HTTPRequest httpRequest);
+		public WebServerContent getWebServerContent(Request httpRequest);
 	}
 
 	private List<WebServerContentProvider> contentProviderList = new ArrayList<WebServerContentProvider>();
@@ -866,7 +826,7 @@ public class UReportWebServer {
 		contentProviderList.remove(webServerContentProvider);
 	}
 
-	public static WebServerContent getWebServerContent(HTTPRequest httpRequest) {
+	public static WebServerContent getWebServerContent(Request httpRequest) {
 		String parameter = httpRequest.getResourcePath();
 		if (parameter.startsWith("/")) {
 			parameter = parameter.substring(1);

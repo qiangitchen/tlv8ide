@@ -5,7 +5,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 
-import com.tulin.v8.ureport.server.common.UReportWebServer.WebServerContent;
+import chrriis.common.WebServerContent;
 
 public class PdfWebServerContent extends WebServerContent {
 	ByteArrayOutputStream out = null;

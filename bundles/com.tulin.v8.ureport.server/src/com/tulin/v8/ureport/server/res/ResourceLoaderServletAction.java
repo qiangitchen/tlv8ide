@@ -2,13 +2,14 @@ package com.tulin.v8.ureport.server.res;
 
 import com.tulin.v8.ureport.server.RenderPageServletAction;
 import com.tulin.v8.ureport.server.common.UReportWebServer;
-import com.tulin.v8.ureport.server.common.UReportWebServer.HTTPRequest;
-import com.tulin.v8.ureport.server.common.UReportWebServer.WebServerContent;
 import com.tulin.v8.ureport.server.utils.UreportWebappManager;
+
+import chrriis.common.Request;
+import chrriis.common.WebServerContent;
 
 public class ResourceLoaderServletAction extends RenderPageServletAction {
 
-	public ResourceLoaderServletAction(HTTPRequest httpRequest) {
+	public ResourceLoaderServletAction(Request httpRequest) {
 		super(httpRequest);
 	}
 

@@ -2,7 +2,6 @@ package com.tulin.v8.editors.page.server.common;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
-import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -16,19 +15,24 @@ import java.net.Socket;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Vector;
 import java.util.concurrent.Semaphore;
 
-import chrriis.common.MimeTypes;
+import com.tulin.v8.editors.page.server.echat.EChatExecuter;
+
 import chrriis.common.ObjectRegistry;
+import chrriis.common.Request;
 import chrriis.common.SystemProperty;
 import chrriis.common.Utils;
+import chrriis.common.WebServerContent;
 import chrriis.dj.nativeswing.NSSystemProperty;
 
 public class PageWebServer {
-	public static class HTTPRequest implements Cloneable {
+	public static class HTTPRequest implements Cloneable, Request {
 		HTTPRequest(String urlPath, Map<String, String> headerMap) {
 			this.headerMap = headerMap == null ? new HashMap<String, String>() : headerMap;
 			setURLPath(urlPath);
@@ -76,7 +80,7 @@ public class PageWebServer {
 
 		private String resourcePath;
 
-		void setResourcePath(String resourcePath) {
+		public void setResourcePath(String resourcePath) {
 			this.resourcePath = resourcePath;
 			urlPath = resourcePath + endQuery;
 		}
@@ -154,7 +158,7 @@ public class PageWebServer {
 		}
 
 		@Override
-		protected HTTPRequest clone() {
+		public Request clone() {
 			try {
 				HTTPRequest httpRequest = (HTTPRequest) super.clone();
 				httpRequest.queryParameterMap = new HashMap<String, String>(queryParameterMap);
@@ -162,6 +166,36 @@ public class PageWebServer {
 			} catch (CloneNotSupportedException e) {
 				throw new RuntimeException(e);
 			}
+		}
+
+		@Override
+		public String getHeader(String name) {
+			Map<String, String> map = getHeaderMap();
+			for (String k : map.keySet()) {
+				if (k.equalsIgnoreCase(name)) {
+					return map.get(k);
+				}
+			}
+			return null;
+		}
+
+		@Override
+		public String getRequestURI() {
+			String path = urlPath;
+			if (path.indexOf("?") > 0) {
+				path = path.substring(0, path.indexOf("?"));
+			}
+			return path;
+		}
+
+		@Override
+		public Enumeration<?> getParameterNames() {
+			Vector<String> dayNames = new Vector<String>();
+			Map<String, String> map = getParameterMap();
+			for (String k : map.keySet()) {
+				dayNames.add(k);
+			}
+			return dayNames.elements();
 		}
 	}
 
@@ -184,43 +218,6 @@ public class PageWebServer {
 		void setBytes(byte[] bytes) {
 			this.bytes = bytes;
 		}
-	}
-
-	public static abstract class WebServerContent {
-
-		private static final String MIME_APPLICATION_OCTET_STREAM = "application/octet-stream";
-
-		public static String getDefaultMimeType(String extension) {
-			String mimeType = MimeTypes.getMimeType(extension);
-			return mimeType == null ? MIME_APPLICATION_OCTET_STREAM : mimeType;
-		}
-
-		public abstract InputStream getInputStream();
-
-		public static InputStream getInputStream(String content) {
-			if (content == null) {
-				return null;
-			}
-			try {
-				return new ByteArrayInputStream(content.getBytes("UTF-8"));
-			} catch (Exception e) {
-				e.printStackTrace();
-				return null;
-			}
-		}
-
-		public String getContentType() {
-			return getDefaultMimeType(".html");
-		}
-
-		public long getContentLength() {
-			return -1;
-		}
-
-		public long getLastModified() {
-			return System.currentTimeMillis();
-		}
-
 	}
 
 	private static class WebServerConnectionThread extends Thread {
@@ -491,7 +488,24 @@ public class PageWebServer {
 //						}
 //						httpRequest.setHTTPPostDataArray(httpDataArray);
 //					}
-					WebServerContent webServerContent = getWebServerContent(httpRequest);
+					WebServerContent webServerContent = null;
+					if (httpRequest.getURLPath().contains("/ureport/")) {
+						try {
+							if (httpRequest.getResourcePath().endsWith("/ureport/preview")) {
+								webServerContent = new com.tulin.v8.ureport.server.html.HtmlPreviewServletAction(
+										httpRequest).execute();
+							} else if (httpRequest.getURLPath().startsWith("/ureport/res/")) {
+								webServerContent = new com.tulin.v8.ureport.server.res.ResourceLoaderServletAction(
+										httpRequest).execute();
+							}else {
+								webServerContent = getWebServerContent(httpRequest);
+							}
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					} else {
+						webServerContent = getWebServerContent(httpRequest);
+					}
 					InputStream resourceStream_ = null;
 					if (webServerContent != null) {
 						try {
@@ -500,6 +514,17 @@ public class PageWebServer {
 							e.printStackTrace();
 						}
 					}
+
+					// echat文件特殊处理
+					if (httpRequest.getResourcePath().toLowerCase().endsWith(".echt")) {
+						try {
+							webServerContent = EChatExecuter.handleChart(resourceStream_, httpRequest);
+							resourceStream_ = webServerContent.getInputStream();
+						} catch (Exception e) {
+							e.printStackTrace();
+						}
+					}
+
 					boolean isPrintRequestsDebug = Boolean
 							.parseBoolean(NSSystemProperty.WEBSERVER_DEBUG_PRINTREQUESTS.get());
 					String printDataProperty = NSSystemProperty.WEBSERVER_DEBUG_PRINTDATA.get();
@@ -738,7 +763,7 @@ public class PageWebServer {
 		 * @return the content, or null to ignore the request and potentially let
 		 *         another handler process it.
 		 */
-		public WebServerContent getWebServerContent(HTTPRequest httpRequest);
+		public WebServerContent getWebServerContent(Request httpRequest);
 	}
 
 	private List<WebServerContentProvider> contentProviderList = new ArrayList<WebServerContentProvider>();
@@ -762,7 +787,7 @@ public class PageWebServer {
 		contentProviderList.remove(webServerContentProvider);
 	}
 
-	public static WebServerContent getWebServerContent(HTTPRequest httpRequest) {
+	public static WebServerContent getWebServerContent(Request httpRequest) {
 		String parameter = httpRequest.getResourcePath();
 		if (parameter.startsWith("/")) {
 			parameter = parameter.substring(1);
@@ -836,6 +861,11 @@ public class PageWebServer {
 							return null;
 						}
 					}
+
+					@Override
+					public String getContentDisposition() {
+						return null;
+					}
 				};
 			}
 			if ("location".equals(type)) {
@@ -892,6 +922,11 @@ public class PageWebServer {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
+						return null;
+					}
+
+					@Override
+					public String getContentDisposition() {
 						return null;
 					}
 				};
@@ -954,6 +989,11 @@ public class PageWebServer {
 						} catch (Exception e) {
 							e.printStackTrace();
 						}
+						return null;
+					}
+
+					@Override
+					public String getContentDisposition() {
 						return null;
 					}
 				};

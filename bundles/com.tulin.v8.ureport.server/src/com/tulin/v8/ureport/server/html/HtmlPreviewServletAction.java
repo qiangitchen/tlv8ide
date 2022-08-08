@@ -42,8 +42,9 @@ import com.tulin.v8.ureport.server.HmWebServerContent;
 import com.tulin.v8.ureport.server.MobileUtils;
 import com.tulin.v8.ureport.server.RenderPageServletAction;
 import com.tulin.v8.ureport.server.cache.TempObjectCache;
-import com.tulin.v8.ureport.server.common.UReportWebServer.HTTPRequest;
-import com.tulin.v8.ureport.server.common.UReportWebServer.WebServerContent;
+
+import chrriis.common.Request;
+import chrriis.common.WebServerContent;
 
 public class HtmlPreviewServletAction extends RenderPageServletAction {
 	private ExportManager exportManager;
@@ -53,7 +54,7 @@ public class HtmlPreviewServletAction extends RenderPageServletAction {
 
 	ApplicationContext applicationContext;
 
-	public HtmlPreviewServletAction(HTTPRequest httpRequest) {
+	public HtmlPreviewServletAction(Request httpRequest) {
 		super(httpRequest);
 		this.applicationContext = Activator.applicationContext;
 		exportManager = applicationContext.getBean(ExportManager.class);

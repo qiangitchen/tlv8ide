@@ -53,7 +53,8 @@ import com.bstek.ureport.expression.model.data.ExpressionData;
 import com.bstek.ureport.expression.model.data.ObjectExpressionData;
 import com.bstek.ureport.utils.ProcedureUtils;
 import com.tulin.v8.ureport.server.common.UReportWebServer.HTTPRequest;
-import com.tulin.v8.ureport.server.common.UReportWebServer.WebServerContent;
+
+import chrriis.common.WebServerContent;
 
 public class DatasourceServletAction extends RenderPageServletAction {
 	ApplicationContext applicationContext;
@@ -274,7 +275,7 @@ public class DatasourceServletAction extends RenderPageServletAction {
 		return sqlForUse;
 	}
 
-	@SuppressWarnings({ "unchecked", "deprecation" })
+	@SuppressWarnings({ "unchecked" })
 	private Map<String, Object> buildParameters(String parameters)
 			throws IOException, JsonParseException, JsonMappingException {
 		Map<String, Object> map = new HashMap<String, Object>();

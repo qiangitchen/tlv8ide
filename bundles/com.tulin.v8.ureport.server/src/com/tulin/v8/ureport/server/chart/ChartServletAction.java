@@ -9,7 +9,8 @@ import com.bstek.ureport.utils.UnitUtils;
 import com.tulin.v8.ureport.server.DefWebServerContent;
 import com.tulin.v8.ureport.server.RenderPageServletAction;
 import com.tulin.v8.ureport.server.common.UReportWebServer.HTTPRequest;
-import com.tulin.v8.ureport.server.common.UReportWebServer.WebServerContent;
+
+import chrriis.common.WebServerContent;
 
 public class ChartServletAction extends RenderPageServletAction {
 
