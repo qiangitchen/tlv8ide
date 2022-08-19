@@ -294,6 +294,10 @@ version(s), and exceptions or additional permissions here}.&quot;
   You may add additional accurate notices of copyright ownership.
    </license>
 
+   <includes
+         id="com.tulin.v8.swt.chromium.feature"
+         version="0.0.0"/>
+
    <plugin
          id="com.tulin.v8.core"
          download-size="0"
