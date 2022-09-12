@@ -454,7 +454,7 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 				"document.getElementById(\"" + elementid + "\")");
 		text = text.replace("$(\"#" + oldid + "\")", "$(\"#" + elementid + "\")");
 		text = text.replace("$('#" + oldid + "')", "$(\"#" + elementid + "\")");
-		System.out.println(text);
+		//System.out.println(text);
 		jseditor.getDocumentProvider().getDocument(jseditor.getEditorInput()).set(text);
 	}
 

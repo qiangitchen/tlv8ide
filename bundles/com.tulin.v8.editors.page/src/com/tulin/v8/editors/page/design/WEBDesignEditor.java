@@ -98,7 +98,7 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 
 	protected Document pageDom;
 
-	public Action viewSourseAction;
+	public ViewSourseAction viewSourseAction;
 
 	private SashForm sashForm;
 	private Browser browser;
@@ -655,6 +655,43 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 			String designUrl = WebappManager.getDesignerURL();
 			if (editorpage.indexOf("/mobileUI/") > 0) {
 				designUrl = WebappManager.getMDesignerURL();
+
+				MenuManager menuMgr = new MenuManager("#PopupMenu");
+				menuMgr.setRemoveAllWhenShown(true);
+				menuMgr.addMenuListener(new IMenuListener() {
+					public void menuAboutToShow(IMenuManager manager) {
+						manager.removeAll();
+						WEBDesignEditor.this.fillContextMenu(manager);
+						manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+						manager.add(refreshAction);
+						manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+						manager.add(new Action() {
+							@Override
+							public String getText() {
+								return Messages.getString("design.action.setverticalscreen");
+							}
+
+							public void run() {
+								browser.execute("setVerticalScreen()");
+							}
+						});
+						manager.add(new Action() {
+							@Override
+							public String getText() {
+								return Messages.getString("design.action.sethorizontalscreen");
+							}
+
+							public void run() {
+								browser.execute("setHorizontalScreen()");
+							}
+						});
+						manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+						manager.add(viewSourseAction);
+					}
+				});
+				Menu menu = menuMgr.createContextMenu(browser);
+				browser.setMenu(menu);
+
 			}
 			editPage = PageWebServer.getDefaultWebServer().getResourcePathURL(projectpath,
 					editorpage.substring(projectpath.length()));
