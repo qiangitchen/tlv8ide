@@ -5,7 +5,6 @@
 		<editor
 	        contributorClass="org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditorActionContributor"
             class="org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditor"
-            symbolicFontName="org.eclipse.wst.jsdt.ui.editors.textfont"
 	        default="true"
 	        extensions="js"
 	        icon="icons/js.gif"
