@@ -44,10 +44,27 @@ public class EasyLookAction implements IObjectActionDelegate {
 					Runtime.getRuntime().exec("nautilus " + directory.toString());
 				}
 			} else {
-				Runtime.getRuntime().exec("nautilus " + directory.toString());
+				openLinuxExplorer(directory.toString());
 			}
 		} catch (Exception localException) {
+			localException.printStackTrace();
 		}
+	}
+
+	public void openLinuxExplorer(String path) throws Exception {
+		// Unix or Linux的打开方式
+		String[] explorers = { "dde-file-manager", "peony", "nautilus" };
+		String explorer = null;
+		for (int count = 0; count < explorers.length && explorer == null; count++)
+			// 执行代码，在brower有值后跳出，
+			// 这里是如果进程创建成功了，==0是表示正常结束。
+			if (Runtime.getRuntime().exec(new String[] { "which", explorers[count] }).waitFor() == 0)
+				explorer = explorers[count];
+		if (explorer == null)
+			throw new Exception("Could not find explorer");
+		else
+			// 这个值在上面已经成功的得到了一个进程。
+			Runtime.getRuntime().exec(new String[] { explorer, path });
 	}
 
 	public String getOSName() {
