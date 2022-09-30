@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.tulin.v8.ide.feature"
-      label="TuLin IDE"
-      version="2.4.4.qualifier"
+      id="com.tulin.v8.easylook.feature"
+      label="TuLin Switch to Explorer"
+      version="1.1.0.qualifier"
       provider-name="TuLin"
-      plugin="com.tulin.v8.ide.ui">
+      plugin="com.tulin.v8.easylook">
 
    <description>
-      TuLinv8 IDE
+      Switch to Explorer Resource Manager
    </description>
 
-   <copyright url="https://www.tlv8.com">
-      https://www.tlv8.com
+   <copyright>
+      www.tlv8.com
    </copyright>
 
    <license url="https://gitee.com/qianpou/tlv8ide/blob/master/LICENSE">
@@ -294,80 +294,8 @@ version(s), and exceptions or additional permissions here}.&quot;
   You may add additional accurate notices of copyright ownership.
    </license>
 
-   <includes
-         id="com.tulin.v8.echarts.ui.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.editors.fn.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.editors.function.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.editors.page.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.flowdesigner.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.ureport.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.dbviewer.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.js.ui.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.easylook.feature"
-         version="0.0.0"/>
-
    <plugin
-         id="com.tulin.v8.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.tulin.v8.tomcat"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.tulin.v8.imageviewer"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.tulin.v8.platform"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.tulin.v8.ide.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.tulin.v8.xml"
+         id="com.tulin.v8.easylook"
          download-size="0"
          install-size="0"
          version="0.0.0"

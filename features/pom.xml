@@ -12,6 +12,7 @@
 
     <modules>
         <module>com.tulin.v8.dbviewer.feature</module>
+        <module>com.tulin.v8.easylook.feature</module>
         <module>com.tulin.v8.echarts.ui.feature</module>
         <module>com.tulin.v8.editors.fn.feature</module>
         <module>com.tulin.v8.editors.function.feature</module>
