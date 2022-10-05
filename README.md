@@ -92,8 +92,5 @@ marketplace：eclipse|myeclipse-Help-Eclipse Marketplace-Search输入tlv8,点击
 - [ureport](https://gitee.com/youseries/ureport)
 
 
-#### 云服务
 
-[![【腾讯云】多款云产品1折起，买云服务器送免费机器，最长免费续3个月](345X200-9ae456f58874df499adf7c331c02cb0fed12b81d.jpg)](https://curl.qcloud.com/g6un08Wt)
-[![服务器0元试用，首购低至0.9元/月起](aly345.png)](https://www.aliyun.com/daily-act/ecs/activity_selection?userCode=5q2npjmp)
 
