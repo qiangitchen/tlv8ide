@@ -31,6 +31,9 @@ public class EasyLookAction implements IObjectActionDelegate {
 		if ((this.selected instanceof IFile)) {
 			directory = directory.getParentFile();
 		}
+		if ((this.selected instanceof File)) {
+			directory = (File) this.selected;
+		}
 		if (directory == null)
 			return;
 		String osname = getOSName();
