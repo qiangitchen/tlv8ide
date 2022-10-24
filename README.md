@@ -42,7 +42,7 @@ Eclipse插件体系结构
 
 （2）v2.2.1及以后的版本：下载发行版分压包，解压后得到版本文件如【com.tulin.v8.ide.update-2.2.1-SNAPSHOT.zip】eclipse-Help-Install New Software-Add,Location选择归档文件，根据提示完成安装。
 
-在线安装：eclipse-Help-Install New Software-Add,Location填写：[http://dl.tlv8.cn/updates/](http://dl.tlv8.cn/updates/),按提示步骤完成安装。
+在线安装：eclipse-Help-Install New Software-Add,Location填写：[https://dl.tlv8.com/updates/](https://dl.tlv8.com/updates/),按提示步骤完成安装。
 
 marketplace：eclipse|myeclipse-Help-Eclipse Marketplace-Search输入tlv8,点击安装即可。地址：[https://marketplace.eclipse.org/content/tlv8/](https://marketplace.eclipse.org/content/tlv8/)
 
