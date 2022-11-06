@@ -285,6 +285,7 @@ public class TableColumnDialog extends Dialog {
 			try {
 				conn = DBUtils.getAppConn(dbkey);
 				st = conn.createStatement();
+				Sys.printMsg(sql);
 				st.execute(sql);
 			} catch (Exception err) {
 				info.setText(Messages.getString("TLEditor.TableColumn.btn3") + err.getMessage()
@@ -312,6 +313,7 @@ public class TableColumnDialog extends Dialog {
 				try {
 					conn = DBUtils.getAppConn(dbkey);
 					st = conn.createStatement();
+					Sys.printMsg(cSql);
 					st.execute(cSql);
 				} catch (Exception err) {
 					info.setText(Messages.getString("TLEditor.TableColumn.btn3") + err.getMessage()
@@ -332,6 +334,7 @@ public class TableColumnDialog extends Dialog {
 				try {
 					conn = DBUtils.getAppConn(dbkey);
 					st = conn.createStatement();
+					Sys.printMsg(nsql);
 					st.execute(nsql);
 				} catch (Exception err) {
 					info.setText(Messages.getString("TLEditor.TableColumn.btn3") + err.getMessage()

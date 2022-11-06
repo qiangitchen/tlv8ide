@@ -84,6 +84,11 @@ import zigen.plugin.db.ui.views.internal.SQLCodeConfiguration;
 import zigen.plugin.db.ui.views.internal.SQLDocument;
 import zigen.plugin.db.ui.views.internal.SQLSourceViewer;
 
+/**
+ * 表&视图编辑器
+ * @author 陈乾
+ *
+ */
 @SuppressWarnings("rawtypes")
 public class DataEditor extends TableViewEditorFor31 implements IResourceChangeListener, IStatusChangeListener {
 	public static String ID = "com.tulin.v8.ide.editors.data.DataEditor";
@@ -373,10 +378,10 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 					TableItem[] itemList = ColumnTable.getItems();
 					int listHaveChouse = ColumnTable.getSelectionIndex();
 					String dbkey = ((Element) Table.getData()).attributeValue("dbkey");
-					String tablename = Table.getText();
-					String columnname = itemList[listHaveChouse].getText(0);
-					TableColumnDialog dialog = new TableColumnDialog(StudioPlugin.getShell(), dbkey, tablename,
-							columnname, itemList[listHaveChouse]);
+					String tableName = Table.getText();
+					String columnName = itemList[listHaveChouse].getText(0);
+					TableColumnDialog dialog = new TableColumnDialog(StudioPlugin.getShell(), dbkey, tableName,
+							columnName, itemList[listHaveChouse]);
 					int state = dialog.open();
 					if (state == IDialogConstants.OK_ID) {
 						Element element = (Element) itemList[listHaveChouse].getData();
@@ -448,6 +453,7 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 						try {
 							conn = DBUtils.getAppConn(dbkey);
 							stmt = conn.createStatement();
+							Sys.printMsg(desql);
 							stmt.execute(desql);
 							// 删除编辑器对应的内容
 							Element element = (Element) selectitem.getData();
@@ -632,13 +638,13 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 
 	private void changedText(String tableName, TableItem item, String text) {
 		String dbkey = ((Element) Table.getData()).attributeValue("dbkey");
-		String ColumnName = item.getText();
-		String upsql = "comment on column " + tableName + "." + ColumnName + " is '" + text + "';";
+		String columnName = item.getText();
+		String upsql = "comment on column " + tableName + "." + columnName + " is '" + text + "';";
 		if (DBUtils.IsMSSQLDB(dbkey)) {
 			String sql = "select d.value as COMMENTS from sys.extended_properties d where "
 					+ "d.major_id in(select a.id from dbo.syscolumns as a inner join "
 					+ "dbo.sysobjects as b on b.id = a.id where d.minor_id = a.colid and b.name = '" + tableName
-					+ "' and a.name = '" + ColumnName + "')";
+					+ "' and a.name = '" + columnName + "')";
 			List list = new ArrayList();
 			try {
 				list = DBUtils.execQueryforList(dbkey, sql);
@@ -647,14 +653,14 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 			}
 			if (list.size() > 0) {
 				upsql = "EXECUTE sp_updateextendedproperty N'MS_Description', N'" + text
-						+ "', 'USER', N'dbo', 'TABLE', N'" + tableName + "', 'COLUMN', N'" + ColumnName + "';";
+						+ "', 'USER', N'dbo', 'TABLE', N'" + tableName + "', 'COLUMN', N'" + columnName + "';";
 			} else {
 				upsql = "EXECUTE sp_addextendedproperty N'MS_Description', N'" + text + "', 'USER', N'dbo', 'TABLE', N'"
-						+ tableName + "', 'COLUMN', N'" + ColumnName + "';";
+						+ tableName + "', 'COLUMN', N'" + columnName + "';";
 			}
 		} else if (DBUtils.IsMySQLDB(dbkey)) {
 			Element element = (Element) item.getData();
-			upsql = "alter table " + tableName + " modify column " + ColumnName + " "
+			upsql = "alter table " + tableName + " modify column " + columnName + " "
 					+ element.attributeValue("COLUMN_TYPE");
 			if (item.getText(4) != null && !"".equals(item.getText(4))) {
 				if (CommonUtil.needQuotation(item.getText(1))) {
@@ -667,7 +673,7 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 			}
 			upsql += " comment '" + text + "';";
 		}
-		sqlMap.put(tableName + "." + ColumnName, upsql);
+		sqlMap.put(tableName + "." + columnName, upsql);
 		updatebtn.setEnabled(true);
 	}
 
