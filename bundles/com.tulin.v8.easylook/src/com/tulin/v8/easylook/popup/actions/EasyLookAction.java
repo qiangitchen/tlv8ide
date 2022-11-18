@@ -2,7 +2,6 @@ package com.tulin.v8.easylook.popup.actions;
 
 import java.io.File;
 
-//import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.jdt.internal.core.JarPackageFragmentRoot;
@@ -28,9 +27,6 @@ public class EasyLookAction implements IObjectActionDelegate {
 		if ((this.selected instanceof IResource)) {
 			directory = new File(((IResource) this.selected).getLocation().toOSString());
 		}
-		//if ((this.selected instanceof IFile)) {
-		//	directory = directory.getParentFile();
-		//}
 		if ((this.selected instanceof File)) {
 			directory = (File) this.selected;
 		}
@@ -38,11 +34,14 @@ public class EasyLookAction implements IObjectActionDelegate {
 			return;
 		String osname = getOSName();
 		try {
-			if (osname.contains("win")) {
-				Runtime.getRuntime().exec("explorer.exe /n," + directory.toString());
-			} else if (osname.contains("mac")) {
+			if (osname.contains("win") || osname.contains("mac")) {
+				if (directory.isFile()) {
+					directory = directory.getParentFile();
+				}
 				if (java.awt.Desktop.isDesktopSupported()) {
 					java.awt.Desktop.getDesktop().open(directory);
+				} else if (osname.contains("win")) {
+					Runtime.getRuntime().exec("explorer.exe /n," + directory.toString());
 				} else {
 					Runtime.getRuntime().exec("nautilus " + directory.toString());
 				}
