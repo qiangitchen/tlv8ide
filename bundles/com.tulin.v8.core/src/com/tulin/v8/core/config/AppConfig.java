@@ -2,6 +2,7 @@ package com.tulin.v8.core.config;
 
 import java.io.File;
 
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -36,7 +37,7 @@ public class AppConfig {
 
 	public static String getProjectName() {
 		IProject project = getProject("tlv8");
-		if (project != null) {
+		if (project != null && project.exists()) {
 			return "tlv8";
 		}
 		return "JBIZ";// 为了兼容云捷项目资源保留
@@ -44,8 +45,9 @@ public class AppConfig {
 
 	public static String getProjectWebFolder(String name) {
 		IProject project = getProject(name);
-		String WEB_FOLDER = project.getFolder("WebContent").getName();
-		if (WEB_FOLDER == null) {
+		IFolder folder = project.getFolder("WebContent");
+		String WEB_FOLDER = folder.getName();
+		if (!folder.exists() || WEB_FOLDER == null) {
 			WEB_FOLDER = project.getFolder("WebRoot").getName();
 		}
 		return WEB_FOLDER;

@@ -2,6 +2,7 @@ package com.tulin.v8.ide.utils;
 
 import java.io.File;
 
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.jface.preference.IPreferenceStore;
@@ -18,7 +19,7 @@ public class StudioConfig {
 
 	private static String getProjectName() {
 		IProject project = TuLinPlugin.getProject("tlv8");
-		if (project != null) {
+		if (project != null && project.exists()) {
 			return "tlv8";
 		}
 		return "JBIZ";// 为了兼容云捷项目资源保留
@@ -26,8 +27,9 @@ public class StudioConfig {
 
 	private static String getWebFolder() {
 		IProject project = TuLinPlugin.getProject(PHANTOM_PROJECT_NAME);
-		String WEB_FOLDER = project.getFolder("WebContent").getName();
-		if (WEB_FOLDER == null) {
+		IFolder folder = project.getFolder("WebContent");
+		String WEB_FOLDER = folder.getName();
+		if (!folder.exists() || WEB_FOLDER == null) {
 			WEB_FOLDER = project.getFolder("WebRoot").getName();
 		}
 		return WEB_FOLDER;
