@@ -18,9 +18,6 @@ public class SampleFlowTemplet extends TempletsReader {
 		StringBuffer dataItem = new StringBuffer();
 		dataItem.append("<div class=\"layui-form-item\">");
 		for (int i = 0; i < columns.getLength(); i++) {
-			if (i % 3 == 0 && i != 0) {
-				dataItem.append("</div><div class=\"layui-form-item\">");
-			}
 			dataItem.append("<div class=\"layui-inline\">");
 			String column = columns.get(i);
 			String label = labels.get(i);
