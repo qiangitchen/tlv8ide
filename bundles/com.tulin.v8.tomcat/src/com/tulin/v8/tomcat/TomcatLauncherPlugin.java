@@ -112,7 +112,7 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 		IPreferenceStore pref = getDefault().getPreferenceStore();
 		String result = pref.getString(TOMCAT_PREF_VERSION_KEY);
 		if (result.equals(""))
-			result = TOMCAT_VERSION10;
+			result = TOMCAT_VERSION9;
 		return result;
 	}
 
