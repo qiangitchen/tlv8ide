@@ -63,7 +63,8 @@ public class TomcatPreferencePage extends PreferencePage implements IWorkbenchPr
 						{ PREF_PAGE_VERSION7_LABEL, TomcatLauncherPlugin.TOMCAT_VERSION7 },
 						{ PREF_PAGE_VERSION8_LABEL, TomcatLauncherPlugin.TOMCAT_VERSION8 },
 						{ PREF_PAGE_VERSION9_LABEL, TomcatLauncherPlugin.TOMCAT_VERSION9 },
-						{ PREF_PAGE_VERSION10_LABEL, TomcatLauncherPlugin.TOMCAT_VERSION10 } },
+						{ PREF_PAGE_VERSION10_LABEL, TomcatLauncherPlugin.TOMCAT_VERSION10 },
+						{ PREF_PAGE_VERSION11_LABEL, TomcatLauncherPlugin.TOMCAT_VERSION11 } },
 				composite, true);
 
 		Group homeGroup = new Group(composite, SWT.NONE);

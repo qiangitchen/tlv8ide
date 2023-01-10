@@ -67,6 +67,7 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 	public static final String TOMCAT_VERSION8 = "tomcatV8";
 	public static final String TOMCAT_VERSION9 = "tomcatV9";
 	public static final String TOMCAT_VERSION10 = "tomcatV10";
+	public static final String TOMCAT_VERSION11 = "tomcatV11";
 	public static final String TOMCAT_DEFAULTSET = "default";
 	public static final String TOMCAT_MYSELFSET = "myself";
 	public static final String TOMCAT_PREF_CONFMODE_KEY = "configMode";
@@ -111,7 +112,7 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 		IPreferenceStore pref = getDefault().getPreferenceStore();
 		String result = pref.getString(TOMCAT_PREF_VERSION_KEY);
 		if (result.equals(""))
-			result = TOMCAT_VERSION6;
+			result = TOMCAT_VERSION10;
 		return result;
 	}
 
@@ -134,6 +135,9 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 		}
 		if (getTomcatVersion().equals(TOMCAT_VERSION10)) {
 			tomcatBootsrap = new Tomcat10Bootstrap();
+		}
+		if (getTomcatVersion().equals(TOMCAT_VERSION11)) {
+			tomcatBootsrap = new Tomcat11Bootstrap();
 		}
 		return tomcatBootsrap;
 	}

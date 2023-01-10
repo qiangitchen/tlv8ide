@@ -15,7 +15,7 @@ public class TomcatConfigInit {
 			return;
 		}
 		perf.setValue(TomcatLauncherPlugin.TOMCAT_PREF_SET_KEY, TomcatLauncherPlugin.TOMCAT_DEFAULTSET);
-		perf.setValue(TomcatLauncherPlugin.TOMCAT_PREF_VERSION_KEY, TomcatLauncherPlugin.TOMCAT_VERSION8);
+		perf.setValue(TomcatLauncherPlugin.TOMCAT_PREF_VERSION_KEY, TomcatLauncherPlugin.TOMCAT_VERSION10);
 		String tomcatDir = getTomcatDefaultDir();
 		perf.setValue(TomcatLauncherPlugin.TOMCAT_PREF_HOME_KEY, tomcatDir);
 		perf.setValue(TomcatLauncherPlugin.TOMCAT_PREF_CONFMODE_KEY, TomcatLauncherPlugin.SERVERXML_MODE);
