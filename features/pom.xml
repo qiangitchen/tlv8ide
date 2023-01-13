@@ -21,6 +21,7 @@
 		<module>com.tulin.v8.ide.feature</module>
 		<module>com.tulin.v8.js.ui.feature</module>
 		<module>com.tulin.v8.ureport.feature</module>
+		<module>com.tulin.v8.markdown.feature</module>
     </modules>
 	
 </project>
