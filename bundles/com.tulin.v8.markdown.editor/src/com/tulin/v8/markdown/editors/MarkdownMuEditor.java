@@ -35,6 +35,7 @@ public class MarkdownMuEditor extends FormEditor {
 			int index = addPage(editor, getEditorInput());
 			setPageText(index, Messages.getString("editors.MKEditor.1"));
 			addPage(new MarkdownBrowser(this));
+			setPartName(getEditorInput().getName());
 		} catch (PartInitException e) {
 			ErrorDialog.openError(getSite().getShell(), "MarkdownMuEditor", Messages.getString("editors.MKEditor.2"),
 					e.getStatus());
