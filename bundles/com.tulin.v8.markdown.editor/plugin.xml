@@ -9,13 +9,13 @@
             extensions="txt,md,mdown,markdown,mdwn"
             icon="icons/notepad.gif"
             contributorClass="com.tulin.v8.markdown.editors.ActionBarContributor"
-            class="com.tulin.v8.markdown.editors.MarkdownEditor"
-            id="winterwell.markdown.editors.MarkdownEditor"
+            class="com.tulin.v8.markdown.editors.MarkdownMuEditor"
+            id="com.tulin.v8.markdown.editors.MarkdownEditor"
             default="true">
       </editor>
       
       <editor
-            class="com.tulin.v8.markdown.editors.MarkdownEditor"
+            class="com.tulin.v8.markdown.editors.MarkdownMuEditor"
             contributorClass="com.tulin.v8.markdown.editors.ActionBarContributor"
             default="true"
             extensions="litcoffee"
@@ -27,83 +27,34 @@
    </extension>
    
    <extension
-         point="org.eclipse.ui.menus">
-      <menuContribution
-            allPopups="false"
-            locationURI="toolbar:winterwell.markdown.views.MarkdownPreview">
-         <command
-               commandId="winterwell.markdown.commands.OpenGfmView"
-               icon="icons/github-cat_yellow.png"
-               style="push">
-         </command>
-         <command
-               commandId="winterwell.markdown.commands.Preferences"
-               icon="icons/settings16_yellow.png"
-               style="push">
-         </command>
-      </menuContribution>
-      <menuContribution
-            allPopups="false"
-            locationURI="toolbar:org.eclipse.ui.main.toolbar?after=additions">
-         <toolbar
-               id="winterwell.markdown.MarkdownEditor">
-            <command
-                  commandId="winterwell.markdown.commands.OpenMdView"
-                  icon="icons/notepad.gif"
-                  style="push">
-               <visibleWhen
-                     checkEnabled="true">
-               </visibleWhen>
-            </command>
-         </toolbar>
-      </menuContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            defaultHandler="com.tulin.v8.markdown.commands.OpenGfmView"
-            id="winterwell.markdown.commands.OpenGfmView"
-            name="Open GitHub Flavored Markdown View">
-      </command>
-      <command
-            id="winterwell.markdown.commands.OpenMdView"
-            name="Open Markdown View">
-      </command>
-      <command
-            defaultHandler="com.tulin.v8.markdown.commands.Preferences"
-            id="winterwell.markdown.commands.Preferences"
-            name="Preferences">
-      </command>
-   </extension>
-   
-   <extension
          point="org.eclipse.ui.views">
       <category
-            id="winterwell.markdown"
+            id="com.tulin.v8.markdown"
             name="Markdown"/>
       <view
-            category="winterwell.markdown"
+            category="com.tulin.v8.markdown"
             class="com.tulin.v8.markdown.views.MarkdownPreview"
             icon="icons/notepad.gif"
-            id="winterwell.markdown.views.MarkdownPreview"
+            id="com.tulin.v8.markdown.views.MarkdownPreview"
             name="Markdown View"/>
    </extension>
+   
    <extension
          point="org.eclipse.ui.preferencePages">
       <page
             class="com.tulin.v8.markdown.preferences.MarkdownPreferencePage"
-            id="winterwell.markdown.preferences.MarkdownPreferencePage"
+            id="com.tulin.v8.markdown.preferences.MarkdownPreferencePage"
             name="Markdown"
-            category="org.eclipse.ui.preferencePages.GeneralTextEditor">
+            category="com.tulin.v8.ide.preferences.StudioPreferencePage">
          <keywordReference
-               id="winterwell.markdown.prefsKeywordReference">
+               id="com.tulin.v8.markdown.prefsKeywordReference">
          </keywordReference>
       </page>
    </extension>
    <extension
          point="org.eclipse.ui.keywords">
       <keyword
-            id="winterwell.markdown.prefsKeywordReference"
+            id="com.tulin.v8.markdown.prefsKeywordReference"
             label="word wrapping tool tags">
       </keyword>
    </extension>
@@ -112,48 +63,18 @@
       <command
             defaultHandler="com.tulin.v8.markdown.editors.FormatAction"
             description="Format the paragraph under the caret to fit the print margins by inserting/removing line-breaks"
-            id="winterwell.markdown.formatParagraphCommand"
+            id="com.tulin.v8.markdown.formatParagraphCommand"
             name="Format paragraph">
       </command>
    </extension>
    <extension
          point="org.eclipse.ui.bindings">
       <key
-            commandId="winterwell.markdown.formatParagraphCommand"
+            commandId="com.tulin.v8.markdown.formatParagraphCommand"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
             sequence="Alt+Q">
       </key>
-   </extension>
-   <extension
-         point="org.eclipse.ui.actionSets">
-      <actionSet
-            id="winterwell.markdown.actionSet"
-            label="winterwell.markdown.actionSet">
-         <action
-               class="com.tulin.v8.markdown.editors.FormatAction"
-               definitionId="winterwell.markdown.formatParagraphCommand"
-               id="winterwell.markdown.formatParagraphAction"
-               label="Format paragraph"
-               menubarPath="edit"
-               style="push">
-         </action>
-      </actionSet>
-   </extension>
-   <extension
-         point="org.eclipse.ui.handlers">
-      <handler
-            class="com.tulin.v8.markdown.commands.OpenMdView"
-            commandId="winterwell.markdown.commands.OpenMdView">
-         <activeWhen>
-            <with
-                  variable="activeEditorId">
-               <equals
-                     value="winterwell.markdown.editors.MarkdownEditor">
-               </equals>
-            </with>
-         </activeWhen>
-      </handler>
    </extension>
 
 </plugin>

@@ -213,7 +213,7 @@ public class MarkdownPage {
 	private Map<String, String> multiMarkdownTags = new HashMap<String, String>();
 	
 	// Regular expression for Github support
-	private static Pattern githubURLDetection = Pattern.compile("((https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])");
+	//private static Pattern githubURLDetection = Pattern.compile("((https?|ftp|file)://[-a-zA-Z0-9+&@#/%?=~_|!:,.;]*[-a-zA-Z0-9+&@#/%=~_|])");
 
 	/**
 	 * The top-level headers. FIXME handle documents which have a 2nd level
@@ -407,6 +407,7 @@ public class MarkdownPage {
 			 * Support for URL Detection
 			 * We search for links that are not captured by Markdown syntax
 			 */
+			/*
 			for (lineNum = 0; lineNum < lines.size(); lineNum++) {
 				String line = lines.get(lineNum);
 				// When a link has been replaced we need to scan again the string
@@ -459,6 +460,7 @@ public class MarkdownPage {
 					}
 				} while (urlReplaced);
 			}
+			*/
 		}
 	}
 
@@ -496,42 +498,6 @@ public class MarkdownPage {
 		}
 		return Collections.unmodifiableList(parent.subHeaders);
 	}
-
-	// public WebPage getWebPage() {
-	// WebPage page = new WebPage();
-	// // Add the lines, one by one
-	// boolean inParagraph = false;
-	// for (int i=0; i<lines.size(); i++) {
-	// String line = lines.get(i);
-	// KLineType type = lineTypes.get(i);
-	// switch(type) {
-	// // Heading?
-	// case H1: case H2: case H3:
-	// case H4: case H5: case H6:
-	// if (inParagraph) page.addText("</p>");
-	// line = cleanHeader(line);
-	// page.addText("<"+type+">"+line+"</"+type+">");
-	// continue;
-	// case MARKER: // Ignore
-	// continue;
-	// // TODO List?
-	// // TODO Block quote?
-	// }
-	// // Paragraph end?
-	// if (Utils.isBlank(line)) {
-	// if (inParagraph) page.addText("</p>");
-	// continue;
-	// }
-	// // Paragraph start?
-	// if (!inParagraph) {
-	// page.addText("<p>");
-	// inParagraph = true;
-	// }
-	// // Plain text
-	// page.addText(line);
-	// }
-	// return page;
-	// }
 
 	/**
 	 * Get the HTML for this page. Uses the MarkdownJ project.

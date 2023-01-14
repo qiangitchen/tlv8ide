@@ -428,30 +428,3 @@ public class MarkdownEditor extends TextEditor implements IDocumentListener
 
 
 }
-
-
-
-/*
-
-  <?xml version="1.0" encoding="UTF-8" ?> 
-- <templates>
-  <template name="updateSWT" description="Performs an update to an SWT control in the SWT thread" context="java" enabled="true">${control}.getDisplay().syncExec(new Runnable() { public void run() { ${control}.${cursor} } });</template> 
-  <template name="findView" description="Find a workbench view by ID" context="java" enabled="true" deleted="false">${viewType} ${view} = null; IWorkbenchWindow ${window} = PlatformUI.getWorkbench().getActiveWorkbenchWindow(); if (${window} != null) { IWorkbenchPage ${activePage} = ${window}.getActivePage(); if (${activePage} != null) ${view} = (${viewType}) ${activePage}.findView("${viewID}"); } if (${view} != null) { ${cursor}//${todo}: Add operations for opened view }</template> 
-  <template name="getActiveEditor" description="Retrieves the currently active editor in the active page" context="java" enabled="true" deleted="false">IEditorPart ${editor} = null; IWorkbenchWindow ${window} = PlatformUI.getWorkbench().getActiveWorkbenchWindow(); if (${window} != null) { IWorkbenchPage ${activePage} = ${window}.getActivePage(); if (${activePage} != null) ${editor} = ${activePage}.getActiveEditor(); } if (${editor} != null) { ${cursor}//${todo}: Add operations for active editor }</template>
-   IEditorPart editor = null; 
-		IWorkbenchWindow window = PlatformUI.getWorkbench().getActiveWorkbenchWindow(); 
-		if (window != null) { 
-			IWorkbenchPage activePage = window.getActivePage(); 
-			if (activePage != null) editor = activePage.getActiveEditor(); 
-		} 
-		if (editor != null) { 
-			// todo: Add operations for active editor 			
-		}
-		
-  <template name="openDialog" description="Creates and opens a JFace dialog" context="java" enabled="true" deleted="false">${dialogType} ${dialog} = new ${dialogType}(${cursor}); ${dialog}.create(); //${todo}: Complete dialog creation if (${dialog}.open() == Dialog.OK) { //${todo}: Perform actions on success };</template> 
-  <template name="scanExtensionRegistry" description="Scans the extension registry for extensions of a given extension point" context="java" enabled="true" deleted="false">IExtensionRegistry ${registry} = Platform.getExtensionRegistry(); IExtensionPoint ${point} = ${registry}.getExtensionPoint(${pluginId}, ${expointId}); IExtension[] ${extensions} = ${point}.getExtensions(); for (int ${index} = 0; ${index} < ${extensions}.length; ${index}++) { IConfigurationElement[] ${elements} = ${extensions}[${index}].getConfigurationElements(); for (int ${index2} = 0; ${index2} < ${elements}.length; ${index2}++) { IConfigurationElement ${element} = ${elements}[${index2}]; String ${attValue} = ${element}.getAttribute(${attName}); ${cursor}//${todo}: Implement processing for configuration element } }</template> 
-  <template name="showView" description="finds a workbench view by ID and shows it" context="java" enabled="true" deleted="false">${viewType} ${view} = null; IWorkbenchWindow ${window} = PlatformUI.getWorkbench().getActiveWorkbenchWindow(); if (${window} != null) { IWorkbenchPage ${activePage} = ${window}.getActivePage(); if (${activePage} != null) try { ${view} = (${viewType}) ${activePage}.showView("${viewID}"); } catch (${Exception} e) { // ${todo}: handle exception } } if (${view} != null) { ${cursor} }</template> 
-  <template name="signalError" description="Shows an error message in the editors status line" context="java" enabled="true" deleted="false">IEditorActionBarContributor ${contributor} = ${editor}.getEditorSite().getActionBarContributor(); if (${contributor} instanceof EditorActionBarContributor) { IActionBars ${actionBars} = ((EditorActionBarContributor) ${contributor}).getActionBars(); if (${actionBars} != null) { IStatusLineManager ${manager} = ${actionBars}.getStatusLineManager(); if (${manager} != null) ${manager}.setErrorMessage(msg); } }</template> 
-  </templates>
-
-*/

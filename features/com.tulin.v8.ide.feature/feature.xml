@@ -331,6 +331,10 @@ version(s), and exceptions or additional permissions here}.&quot;
          id="com.tulin.v8.easylook.feature"
          version="0.0.0"/>
 
+   <includes
+         id="com.tulin.v8.markdown.feature"
+         version="0.0.0"/>
+
    <plugin
          id="com.tulin.v8.core"
          download-size="0"

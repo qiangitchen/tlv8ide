@@ -3,11 +3,11 @@ package com.tulin.v8.markdown.editors;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.editors.text.TextEditorActionContributor;
+import org.eclipse.ui.part.MultiPageEditorActionBarContributor;
 
 import com.tulin.v8.markdown.views.MarkdownPreview;
 
-public class ActionBarContributor extends TextEditorActionContributor {
+public class ActionBarContributor extends MultiPageEditorActionBarContributor {
 	
 	private static IEditorPart activeEditor = null;
 
@@ -44,6 +44,12 @@ public class ActionBarContributor extends TextEditorActionContributor {
 		if (file != null) {
 			file.appendToGroup("import.ext", new ExportHTMLAction());
 		}		
+	}
+	@Override
+	public void setActivePage(IEditorPart part) {
+		if (activeEditor == part)
+			return;
+		activeEditor = part;
 	}
 
 }
