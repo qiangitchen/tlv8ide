@@ -1397,14 +1397,13 @@ public class TableViewEditorFor31 extends MultiPageEditorPart implements ITableV
 		return false;
 	}
 
-	@SuppressWarnings("deprecation")
 	public String getOrderByString() {
 		if (!hasOrderBy()) {
 			TreeMap map = new TreeMap();
 			for (int i = 0; i < filterInfos.length; i++) {
 				int sortNum = filterInfos[i].getSortNo();
 				if (sortNum > 0) {
-					map.put(new Integer(sortNum), filterInfos[i]);
+					map.put(Integer.valueOf(sortNum), filterInfos[i]);
 				}
 			}
 			StringBuffer sb = new StringBuffer();

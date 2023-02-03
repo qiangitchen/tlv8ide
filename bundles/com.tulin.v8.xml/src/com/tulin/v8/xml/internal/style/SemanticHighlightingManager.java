@@ -26,7 +26,6 @@ import org.eclipse.wst.sse.ui.ISemanticHighlighting;
 import org.eclipse.wst.sse.ui.ISemanticHighlightingExtension2;
 import org.eclipse.wst.sse.ui.internal.Logger;
 import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
-import org.eclipse.wst.sse.ui.internal.preferences.EditorPreferenceNames;
 import org.eclipse.wst.sse.ui.internal.preferences.ui.ColorHelper;
 import org.eclipse.wst.sse.ui.internal.provisional.style.StructuredPresentationReconciler;
 import org.eclipse.wst.sse.ui.internal.reconcile.DocumentRegionProcessor;

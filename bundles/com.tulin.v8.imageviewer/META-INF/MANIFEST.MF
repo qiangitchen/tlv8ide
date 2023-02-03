@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: com.tulin.v8.imageviewer
 Bundle-Name: %editerName
 Bundle-SymbolicName: com.tulin.v8.imageviewer;singleton:=true
 Bundle-Version: 1.0.0.qualifier

@@ -295,7 +295,7 @@ public class DatasourceServletAction extends RenderPageServletAction {
 				case Date:
 					map.put(name, new Date());
 				case Float:
-					map.put(name, new Float(0));
+					map.put(name, Float.valueOf(0));
 				case Integer:
 					map.put(name, 0);
 				case String:

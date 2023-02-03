@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: com.tulin.v8.tomcat
 Bundle-Name: Tomcat
 Bundle-SymbolicName: com.tulin.v8.tomcat;singleton:=true
 Bundle-Version: 2.1.0.qualifier

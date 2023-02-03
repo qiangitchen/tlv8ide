@@ -144,7 +144,6 @@ public class ContentInfo {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	public TableInfo[] getTableInfo(String schemaName) throws Exception {
 
 		if (config == null)
@@ -171,11 +170,9 @@ public class ContentInfo {
 			if (result == null) {
 				try {
 					if (schemaName != null) {
-//						result = TableSearcher.execute(trans.getConnection(), schemaName, tableTypes);
-						result = TableSearcher.execute(trans.getConnection(), schemaName, tableTypes, new Character(encloseChar));
+						result = TableSearcher.execute(trans.getConnection(), schemaName, tableTypes, Character.valueOf(encloseChar));
 					} else {
-//						result = TableSearcher.execute(trans.getConnection(), null, tableTypes);
-						result = TableSearcher.execute(trans.getConnection(), null, tableTypes, new Character(encloseChar));
+						result = TableSearcher.execute(trans.getConnection(), null, tableTypes, Character.valueOf(encloseChar));
 					}
 
 				} catch (Exception e) {

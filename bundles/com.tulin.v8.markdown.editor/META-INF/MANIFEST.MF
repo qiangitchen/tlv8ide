@@ -1,5 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
+Automatic-Module-Name: com.tulin.v8.markdown.editor
 Bundle-Name: Markdown
 Bundle-SymbolicName: com.tulin.v8.markdown.editor;singleton:=true
 Bundle-Version: 1.0.0.qualifier
@@ -15,7 +16,7 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.swt,
  org.eclipse.ui.workbench,
  org.eclipse.ui.forms
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Import-Package: org.eclipse.core.internal.resources,
  org.eclipse.jface.text,

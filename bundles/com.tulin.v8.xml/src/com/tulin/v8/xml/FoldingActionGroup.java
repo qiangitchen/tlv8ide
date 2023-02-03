@@ -17,7 +17,6 @@ import org.eclipse.ui.texteditor.ResourceAction;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.wst.sse.ui.internal.SSEUIMessages;
 import org.eclipse.wst.sse.ui.internal.SSEUIPlugin;
-import org.eclipse.wst.sse.ui.internal.projection.AbstractStructuredFoldingStrategy;
 
 @SuppressWarnings({ "restriction" })
 public class FoldingActionGroup extends ActionGroup {

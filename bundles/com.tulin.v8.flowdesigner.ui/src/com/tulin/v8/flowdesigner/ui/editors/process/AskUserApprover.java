@@ -9,11 +9,11 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 
 public class AskUserApprover implements IOperationApprover {
-	private IUndoContext undoContext;
+//	private IUndoContext undoContext;
 
 	public AskUserApprover(IUndoContext context) {
 		super();
-		this.undoContext = context;
+//		this.undoContext = context;
 	}
 
 	public IStatus proceedRedoing(IUndoableOperation operation, IOperationHistory history, IAdaptable info) {
