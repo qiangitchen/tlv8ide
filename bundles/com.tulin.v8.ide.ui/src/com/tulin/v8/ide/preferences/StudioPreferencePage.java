@@ -33,7 +33,7 @@ public class StudioPreferencePage extends FieldEditorPreferencePage implements
 
 		Label label = new Label(composite, SWT.NONE);
 		label.setText("TuLin Enterprise Workbench"
-				+ "\nCopyright www.tulinxian.com\n"
+				+ "\nCopyright www.tlv8.com\n"
 				+ "\nName: "
 				+ StudioPlugin.getPluginName()
 				+ "\nVendor: "
