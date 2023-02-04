@@ -7,7 +7,8 @@ Bundle-Activator: com.tulin.v8.editors.page.server.Activator
 Bundle-Vendor: TuLin
 Require-Bundle: org.eclipse.core.runtime,
  com.tulin.v8.core,
- com.tulin.v8.ureport.server;resolution:=optional
+ com.tulin.v8.ureport.server;resolution:=optional,
+ org.eclipse.core.resources
 Bundle-RequiredExecutionEnvironment: JavaSE-1.6
 Automatic-Module-Name: com.tulin.v8.editors.page.server
 Bundle-ActivationPolicy: lazy

@@ -22,6 +22,10 @@ import java.util.Map;
 import java.util.Vector;
 import java.util.concurrent.Semaphore;
 
+import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IResource;
+
+import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.editors.page.server.echat.EChatExecuter;
 
 import chrriis.common.ObjectRegistry;
@@ -497,7 +501,7 @@ public class PageWebServer {
 							} else if (httpRequest.getURLPath().startsWith("/ureport/res/")) {
 								webServerContent = new com.tulin.v8.ureport.server.res.ResourceLoaderServletAction(
 										httpRequest).execute();
-							}else {
+							} else {
 								webServerContent = getWebServerContent(httpRequest);
 							}
 						} catch (Exception e) {
@@ -997,6 +1001,52 @@ public class PageWebServer {
 						return null;
 					}
 				};
+			}
+			IProject project = TuLinPlugin.getProject(type);
+			if (project != null && project.exists()) {
+				IResource resource = TuLinPlugin.getProjectWebFolder(project);
+				if (resource != null && resource.exists()) {
+					String resourceURL = resource.getLocation().toFile().getAbsolutePath();
+					resourceURL = resourceURL + "/" + removeHTMLAnchor(parameter);
+					if (new File(resourceURL).exists()) {
+						final String resourceURL_ = resourceURL;
+						return new WebServerContent() {
+							@Override
+							public long getContentLength() {
+								File file = Utils.getLocalFile(resourceURL_);
+								if (file != null) {
+									return file.length();
+								}
+								return super.getContentLength();
+							}
+
+							@Override
+							public String getContentType() {
+								int index = resourceURL_.lastIndexOf('.');
+								return getDefaultMimeType(index == -1 ? null : resourceURL_.substring(index));
+							}
+
+							@Override
+							public InputStream getInputStream() {
+								try {
+									return new URL(resourceURL_).openStream();
+								} catch (Exception e) {
+								}
+								try {
+									return new FileInputStream("/" + resourceURL_);
+								} catch (Exception e) {
+									e.printStackTrace();
+								}
+								return null;
+							}
+
+							@Override
+							public String getContentDisposition() {
+								return null;
+							}
+						};
+					}
+				}
 			}
 		}
 		for (WebServerContentProvider contentProvider : webServer.contentProviderList) {

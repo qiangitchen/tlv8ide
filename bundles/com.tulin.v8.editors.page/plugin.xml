@@ -8,7 +8,7 @@
             class="com.tulin.v8.editors.page.WebPageEditor"
             contributorClass="com.tulin.v8.editors.page.MultiPageEditorContributor"
             default="true"
-            extensions="html,xhtml"
+            extensions="htm,html,xhtml"
             icon="icons/page.gif"
             id="com.tulin.v8.editors.page.WebPageEditor"
             name="%editor.name.page">

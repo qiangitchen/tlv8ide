@@ -134,31 +134,55 @@ public class TuLinPlugin extends AbstractUIPlugin {
 		return project;
 	}
 
+	/**
+	 * 获取指定名称的项目
+	 */
 	public static IProject getProject(String name) {
 		return ResourcesPlugin.getWorkspace().getRoot().getProject(name);
 	}
 
+	/**
+	 * 获取当前（选中的）项目
+	 */
 	public static String getCurrentProjectName() {
 		IProject project = getCurrentProject();
 		return project.getName();
 	}
 
+	/**
+	 * 获取当前项目的web目录
+	 */
 	public static IResource getCurrentProjectWebFolder() {
 		IProject project = getCurrentProject();
-		IResource resource = project.findMember("WebContent");
-		if (resource == null) {
-			resource = project.findMember("WebRoot");
+		return getProjectWebFolder(project);
+	}
+
+	public static IResource getProjectWebFolder(String name) {
+		IProject project = getProject(name);
+		return getProjectWebFolder(project);
+	}
+
+	public static IResource getProjectWebFolder(IProject project) {
+		IResource resource = project.getFolder("WebContent");
+		if (resource == null || !resource.exists()) {
+			resource = project.getFolder("WebRoot");
 		}
-		if (resource == null) {
+		if (resource == null || !resource.exists()) {
 			resource = project.findMember("src/main/webapp");
 		}
 		return resource;
 	}
 
+	/**
+	 * 获取当前项目web目录的名称
+	 */
 	public static String getCurrentProjectWebFolderName() {
 		return getCurrentProjectWebFolder().getName();
 	}
 
+	/**
+	 * 获取当前项目的位置
+	 */
 	public static String getCurrentProjectWebFolderPath() {
 		return getCurrentProjectWebFolder().getLocation().toFile().getAbsolutePath();
 	}
