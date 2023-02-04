@@ -6,15 +6,6 @@
 	font-size: 12px;
 }
 
-!
-important {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	font-family: Tahoma, Arial, Helvetica, Sans-serif;
-	font-size: 12px;
-}
-
 .easyui-layout{
 	width:100%;
 	height:100%;

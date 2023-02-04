@@ -5,13 +5,6 @@
 	font-family: Tahoma, Arial, Helvetica, Sans-serif;
 	font-size: 12px;
 }
-!important {
-	margin: 0;
-	padding: 0;
-	list-style: none;
-	font-family: Tahoma, Arial, Helvetica, Sans-serif;
-	font-size: 12px;
-}
 
 v\:* {
 	BEHAVIOR: url(#default#VML)
@@ -67,10 +60,6 @@ body {
 	padding-top: 5px;
 	padding-bottom: 2px;
 	padding-right: 5;
-}
-
-.x-window {
-	
 }
 
 .x-window-tc {
@@ -265,8 +254,7 @@ body {
 	BORDER-TOP: #7b9ebd 1px solid;
 	PADDING-LEFT: 2px;
 	FONT-SIZE: 12px;
-	FILTER: progid : DXImageTransform.Microsoft.Gradient ( GradientType = 0,
-		StartColorStr = #ffffff, EndColorStr = #cecfde );
+	FILTER: "progid : DXImageTransform.Microsoft.Gradient ( GradientType = 0,StartColorStr = #ffffff, EndColorStr = #cecfde )";
 	BORDER-LEFT: #7b9ebd 1px solid;
 	CURSOR: hand;
 	COLOR: black;
@@ -276,6 +264,6 @@ body {
 
 .toolbar_line{
 	position: relative;
-	top: expression(this.parentElement.scrollTop-1);
+	top: "expression(this.parentElement.scrollTop-1)";
 	z-index: 2;
 }
