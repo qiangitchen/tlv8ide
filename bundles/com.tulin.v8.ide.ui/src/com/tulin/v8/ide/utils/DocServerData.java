@@ -10,16 +10,16 @@ import java.util.Properties;
 
 import org.eclipse.core.resources.IResource;
 
-import com.tulin.v8.core.config.AppConfig;
+import com.tulin.v8.core.TuLinPlugin;
 
 public class DocServerData {
 	public static String mvn_doc_db = "src/main/resources/jdbc.properties";
 	public static String ant_doc_db = "WEB-INF/classes/jdbc.properties";
 
 	public static IResource getDocDBSource() {
-		IResource dsource = AppConfig.getProject("DocServer").findMember(mvn_doc_db);
+		IResource dsource = TuLinPlugin.getProject("DocServer").findMember(mvn_doc_db);
 		if (dsource == null) {
-			dsource = AppConfig.getProject("DocServer").findMember(ant_doc_db);
+			dsource = TuLinPlugin.getProject("DocServer").findMember(ant_doc_db);
 		}
 		return dsource;
 	}
