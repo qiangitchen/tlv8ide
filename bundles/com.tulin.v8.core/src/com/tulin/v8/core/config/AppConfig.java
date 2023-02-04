@@ -2,10 +2,11 @@ package com.tulin.v8.core.config;
 
 import java.io.File;
 
-import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+
+import com.tulin.v8.core.TuLinPlugin;
 
 public class AppConfig {
 	private static AppConfig a = null;
@@ -31,51 +32,22 @@ public class AppConfig {
 		return getOSName().contains("mac");
 	}
 
-	public static IProject getProject(String name) {
-		return ResourcesPlugin.getWorkspace().getRoot().getProject(name);
-	}
-
-	public static String getProjectName() {
-		IProject project = getProject("tlv8");
-		if (project != null && project.exists()) {
-			return "tlv8";
-		}
-		return "JBIZ";// 为了兼容云捷项目资源保留
-	}
-
-	public static String getProjectWebFolder(String name) {
-		IProject project = getProject(name);
-		IFolder folder = project.getFolder("WebContent");
-		String WEB_FOLDER = folder.getName();
-		if (!folder.exists() || WEB_FOLDER == null) {
-			WEB_FOLDER = project.getFolder("WebRoot").getName();
-		}
-		return WEB_FOLDER;
-	}
-
 	public static String getWorkspacesPath() {
-//		String realPath = getStudioPath();
-//		if (realPath.indexOf("workspace") > 0) {
-//			realPath = realPath.substring(0, realPath.indexOf("workspace"));
-//			realPath += "/workspace";
-//		} else {
-//			File file = new File(realPath);
-//			realPath = file.getParent() + "/workspace";
-//		}
-//		return realPath;
 		return ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
 	}
 
 	/**
-	 * 获取class输出目录
+	 * 获取当前项目的classes位置
 	 * 
 	 * @return
 	 */
 	public static String getClassesPath() {
-		String pname = getProjectName();
-		IProject project = getProject(pname);
-		String webfolder = getProjectWebFolder(pname);
-		return project.findMember(webfolder + "/WEB-INF/classes").getLocation().toString();
+		IProject project = TuLinPlugin.getCurrentProject();
+		IResource resource = TuLinPlugin.getProjectWebFolder(project);
+		if (resource == null) {
+			return project.findMember("src/main/resources").getLocation().toString();
+		}
+		return project.findMember(resource.getName() + "/WEB-INF/classes").getLocation().toString();
 	}
 
 	/**
@@ -84,8 +56,7 @@ public class AppConfig {
 	 * @return
 	 */
 	public static String getResourcesPath() {
-		String pname = getProjectName();
-		IProject project = getProject(pname);
+		IProject project = TuLinPlugin.getCurrentProject();
 		IResource dsource = project.findMember("src/main/resources");
 		if (dsource == null) {
 			dsource = project.findMember("src");
