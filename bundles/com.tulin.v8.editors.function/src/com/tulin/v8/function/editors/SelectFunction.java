@@ -20,14 +20,16 @@ public class SelectFunction {
 
 	public static String getPagePath() {
 		IProject project = TuLinPlugin.getCurrentProject();
-		String currentPath = project.getLocation().toOSString();
+//		String currentPath = project.getLocation().toOSString();
 		PHANTOM_PROJECT_NAME = project.getName();
-		PROJECT_WEB_FOLDER = project.getFolder("WebContent").getName();
-		if (PROJECT_WEB_FOLDER == null) {
-			PROJECT_WEB_FOLDER = project.getFolder("WebRoot").getName();
-		}
-		String dps = CommonUtil.getPathdep();
-		return currentPath + dps + PROJECT_WEB_FOLDER;
+		PROJECT_WEB_FOLDER = TuLinPlugin.getProjectWebFolderPath(project);
+//		PROJECT_WEB_FOLDER = project.getFolder("WebContent").getName();
+//		if (PROJECT_WEB_FOLDER == null) {
+//			PROJECT_WEB_FOLDER = project.getFolder("WebRoot").getName();
+//		}
+//		String dps = CommonUtil.getPathdep();
+//		return currentPath + dps + PROJECT_WEB_FOLDER;
+		return TuLinPlugin.getProjectWebFolderPath(project);
 	}
 
 	public static List<String> loadFunctionPage() {

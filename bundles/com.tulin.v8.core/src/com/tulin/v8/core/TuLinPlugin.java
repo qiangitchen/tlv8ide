@@ -186,4 +186,11 @@ public class TuLinPlugin extends AbstractUIPlugin {
 	public static String getCurrentProjectWebFolderPath() {
 		return getCurrentProjectWebFolder().getLocation().toFile().getAbsolutePath();
 	}
+	
+	/**
+	 * 获取项目的位置
+	 */
+	public static String getProjectWebFolderPath(IProject project) {
+		return getProjectWebFolder(project).getLocation().toFile().getAbsolutePath();
+	}
 }
