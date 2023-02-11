@@ -53,6 +53,7 @@ public class SelectFunction {
 						f = f.substring(f.indexOf(pds + PHANTOM_PROJECT_NAME + pds));
 						f = CommonUtil.rebuildFilePath(f);
 						f = f.replace("/" + PROJECT_WEB_FOLDER + "/", "/");
+						f = f.replace("/src/main/webapp/", "/");
 						funcpage.add(f);
 					}
 				} else {
@@ -79,6 +80,7 @@ public class SelectFunction {
 						f = f.substring(
 								f.indexOf("/" + PHANTOM_PROJECT_NAME + "/") + PHANTOM_PROJECT_NAME.length() + 1);
 						f = f.replace("/" + PROJECT_WEB_FOLDER + "/", "/");
+						f = f.replace("/src/main/webapp/", "/");
 						TreeItem nitem = new TreeItem(treeitem, SWT.NONE);
 						nitem.setText(f);
 						if (f.endsWith(".jsp")) {
@@ -92,6 +94,7 @@ public class SelectFunction {
 					f = CommonUtil.rebuildFilePath(f);
 					f = f.substring(f.indexOf("/" + PHANTOM_PROJECT_NAME + "/") + PHANTOM_PROJECT_NAME.length() + 1);
 					f = f.replace("/" + PROJECT_WEB_FOLDER + "/", "/");
+					f = f.replace("/src/main/webapp/", "/");
 					if (!f.endsWith(".svn") && !f.endsWith("WEB-INF") && !f.endsWith("META-INF")
 							&& isPageFolder(subFile)) {
 						TreeItem nitem = new TreeItem(treeitem, SWT.NONE);
