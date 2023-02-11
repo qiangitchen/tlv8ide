@@ -2,6 +2,8 @@ package com.tulin.v8.ureport;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -40,6 +42,10 @@ public class Activator extends AbstractUIPlugin {
 	
 	public static Image getIcon(String imgname) {
 		return getDefault().getImage("/icons/" + imgname);
+	}
+	
+	public static Shell getShell() {
+		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	}
 
 }

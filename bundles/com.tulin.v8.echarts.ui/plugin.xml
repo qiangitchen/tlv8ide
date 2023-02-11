@@ -24,5 +24,19 @@
             name="%newWizards.name.echarts">
       </wizard>
    </extension>
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IResource"
+            id="com.tulin.v8.echarts.ui.wizards.contribution">
+         <action
+               label="%menu.name.newecharts"
+               class="com.tulin.v8.echarts.ui.popup.actions.NewEChatsFileAction"
+               icon="icons/echart.gif"
+               menubarPath="Menu1/Group1"
+               enablesFor="1"
+               id="com.tulin.v8.echt.action.ChartNewWizard">
+         </action>
+      </objectContribution>
+   </extension>
 
 </plugin>

@@ -87,6 +87,13 @@ public class SampleNewWizard extends Wizard implements INewWizard {
 		setNeedsProgressMonitor(true);
 		setHelpAvailable(false);
 	}
+	
+	public SampleNewWizard(ISelection selection) {
+		super();
+		this.selection = selection;
+		setNeedsProgressMonitor(true);
+		setHelpAvailable(false);
+	}
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {

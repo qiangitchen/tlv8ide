@@ -29,6 +29,15 @@ public class UReportFileNewWizard extends Wizard implements INewWizard {
 	private ISelection selection;
 	NewUReportFilePage newfilepage;
 	private IFile files;
+	
+	public UReportFileNewWizard() {
+		super();
+	}
+	
+	public UReportFileNewWizard(ISelection selection) {
+		super();
+		this.selection = selection;
+	}
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {

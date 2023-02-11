@@ -102,9 +102,13 @@ public class TuLinPlugin extends AbstractUIPlugin {
 					Object object = part.getEditorInput().getAdapter(IFile.class);
 					if (object != null) {
 						project = ((IFile) object).getProject();
+					} else {
+						project = null;
 					}
+				} else {
+					project = null;
 				}
-				if (project == null) {
+				if (project == null || !project.exists()) {
 					// 没有单开编辑器时 获取当前选中的项目
 					ISelectionService selectionService = Workbench.getInstance().getActiveWorkbenchWindow()
 							.getSelectionService();
@@ -131,6 +135,7 @@ public class TuLinPlugin extends AbstractUIPlugin {
 		if (project == null) {
 			project = getProject("tlv8");
 		}
+		System.out.println(project);
 		return project;
 	}
 
@@ -186,7 +191,7 @@ public class TuLinPlugin extends AbstractUIPlugin {
 	public static String getCurrentProjectWebFolderPath() {
 		return getCurrentProjectWebFolder().getLocation().toFile().getAbsolutePath();
 	}
-	
+
 	/**
 	 * 获取项目的位置
 	 */

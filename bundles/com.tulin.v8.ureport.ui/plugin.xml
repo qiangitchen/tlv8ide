@@ -1,16 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.4"?>
 <plugin>
-    <extension
-         point="org.eclipse.ui.newWizards">
-         <wizard
-            category="TuLin"
-            class="com.tulin.v8.ureport.wizards.UReportFileNewWizard"
-            icon="icons/ureport.gif"
-            id="com.tulin.v8.ureport.wizards.UReportFileNewWizard"
-            name="%ureportfile">
-      </wizard>
-   </extension>
    <extension
          point="org.eclipse.ui.editors">
       <editor
@@ -22,5 +12,30 @@
             id="com.tulin.v8.ureport.ui.editors.designer.UReportEditor"
             name="%editor.name">
       </editor>
+   </extension>
+   <extension
+         point="org.eclipse.ui.newWizards">
+         <wizard
+            category="TuLin"
+            class="com.tulin.v8.ureport.wizards.UReportFileNewWizard"
+            icon="icons/ureport.gif"
+            id="com.tulin.v8.ureport.wizards.UReportFileNewWizard"
+            name="%ureportfile">
+      </wizard>
+   </extension>
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            id="com.tulin.v8.ureport.ui.wizards.contribution"
+            nameFilter="ureportfiles"
+            objectClass="org.eclipse.core.resources.IResource">
+         <action
+               label="%newureportfile"
+               class="com.tulin.v8.ureport.ui.popup.actions.NewUReportFileAction"
+               icon="icons/ureport.gif"
+               menubarPath="Menu1/Group1"
+               enablesFor="1"
+               id="com.tulin.v8.ureport.ui.actions.NewUReportFileAction">
+         </action>
+      </objectContribution>
    </extension>
 </plugin>

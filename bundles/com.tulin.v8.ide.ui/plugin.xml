@@ -72,6 +72,27 @@
       -->
    </extension>
    
+   <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IResource"
+            id="com.tulin.v8.ide.wizards.contribution">
+         <menu
+               icon="icons/tulin.png"
+               id="Menu1"
+               label="%category.name.1">
+      		<separator name="Group1"/>
+   		 </menu>
+         <action
+               label="%menu.wizard.name.0"
+               class="com.tulin.v8.ide.popup.actions.NewPageFileAction"
+               icon="icons/page.gif"
+               menubarPath="Menu1/Group1"
+               enablesFor="1"
+               id="com.tulin.v8.ide.actions.NewPageFileAction">
+         </action>
+      </objectContribution>
+   </extension>
+   
    <!-- 编辑器 -->
    <extension point="org.eclipse.ui.editors">
 		<!--
