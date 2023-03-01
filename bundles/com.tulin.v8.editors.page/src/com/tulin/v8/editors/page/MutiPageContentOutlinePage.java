@@ -10,8 +10,7 @@ import org.eclipse.ui.part.Page;
 import org.eclipse.ui.part.PageBook;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
-public class MutiPageContentOutlinePage extends Page implements
-		IContentOutlinePage {
+public class MutiPageContentOutlinePage extends Page implements IContentOutlinePage {
 	private PageBook jdField_a_of_type_OrgEclipseUiPartPageBook;
 	private IContentOutlinePage jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage;
 	private boolean jdField_a_of_type_Boolean;
@@ -20,16 +19,14 @@ public class MutiPageContentOutlinePage extends Page implements
 	}
 
 	public void createControl(Composite paramComposite) {
-		this.jdField_a_of_type_OrgEclipseUiPartPageBook = new PageBook(
-				paramComposite, 0);
+		this.jdField_a_of_type_OrgEclipseUiPartPageBook = new PageBook(paramComposite, 0);
 		if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
 			setPageActive(this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage);
 	}
 
 	public void dispose() {
 		if ((this.jdField_a_of_type_OrgEclipseUiPartPageBook != null)
-				&& (!this.jdField_a_of_type_OrgEclipseUiPartPageBook
-						.isDisposed()))
+				&& (!this.jdField_a_of_type_OrgEclipseUiPartPageBook.isDisposed()))
 			this.jdField_a_of_type_OrgEclipseUiPartPageBook.dispose();
 		this.jdField_a_of_type_OrgEclipseUiPartPageBook = null;
 		this.jdField_a_of_type_Boolean = true;
@@ -48,24 +45,22 @@ public class MutiPageContentOutlinePage extends Page implements
 
 	public void setFocus() {
 		if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
-			this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage
-					.setFocus();
+			this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage.setFocus();
 	}
 
-	public void addSelectionChangedListener(
-			ISelectionChangedListener paramISelectionChangedListener) {
+	public void addSelectionChangedListener(ISelectionChangedListener paramISelectionChangedListener) {
 		if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
 			this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage
 					.addSelectionChangedListener(paramISelectionChangedListener);
 	}
 
 	public ISelection getSelection() {
-		return this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null ? this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage
-				.getSelection() : null;
+		return this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null
+				? this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage.getSelection()
+				: null;
 	}
 
-	public void removeSelectionChangedListener(
-			ISelectionChangedListener paramISelectionChangedListener) {
+	public void removeSelectionChangedListener(ISelectionChangedListener paramISelectionChangedListener) {
 		if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
 			this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage
 					.removeSelectionChangedListener(paramISelectionChangedListener);
@@ -73,24 +68,24 @@ public class MutiPageContentOutlinePage extends Page implements
 
 	public void setSelection(ISelection paramISelection) {
 		if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
-			this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage
-					.setSelection(paramISelection);
+			this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage.setSelection(paramISelection);
 	}
 
 	public void setPageActive(IContentOutlinePage paramIContentOutlinePage) {
 		this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage = paramIContentOutlinePage;
 		// getSite().getActionBars().getToolBarManager().removeAll();
 		// getSite().getActionBars().getMenuManager().removeAll();
-		if (getSite() != null) {
-			Control localControl = paramIContentOutlinePage.getControl();
-			if ((localControl == null) || (localControl.isDisposed())) {
-				paramIContentOutlinePage
-						.createControl(this.jdField_a_of_type_OrgEclipseUiPartPageBook);
-				localControl = paramIContentOutlinePage.getControl();
+		try {
+			if (getSite() != null) {
+				Control localControl = paramIContentOutlinePage.getControl();
+				if ((localControl == null) || (localControl.isDisposed())) {
+					paramIContentOutlinePage.createControl(this.jdField_a_of_type_OrgEclipseUiPartPageBook);
+					localControl = paramIContentOutlinePage.getControl();
+				}
+				getSite().getActionBars().updateActionBars();
+				this.jdField_a_of_type_OrgEclipseUiPartPageBook.showPage(localControl);
 			}
-			getSite().getActionBars().updateActionBars();
-			this.jdField_a_of_type_OrgEclipseUiPartPageBook
-					.showPage(localControl);
+		} catch (Exception e) {
 		}
 	}
 

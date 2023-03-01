@@ -72,7 +72,7 @@ public class AddResourseAction extends Action {
 			newitem.setImage(TuLinPlugin.getIcon("brkp_obj.gif"));
 			newitem.setData(newele);
 		}
-		editor.getEditorpart().setSourcePageText(editor.getPageDom().html());
+		editor.getEditorpart().setSourcePageText(editor.getHTMLEditor().getPageDom().html());
 	}
 
 }

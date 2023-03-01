@@ -4,7 +4,6 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
-import org.jsoup.nodes.Element;
 
 import com.tulin.v8.editors.page.design.WEBDesignEditorInterface;
 
@@ -16,8 +15,6 @@ public interface PageEditorInterface {
 	public void activhtmlEditor();
 
 	public StructuredTextEditor getSourceEditor();
-
-	public Element getPageDom();
 
 	public int getDesignerMode();
 

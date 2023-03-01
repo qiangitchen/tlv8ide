@@ -843,11 +843,6 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 	}
 
 	@Override
-	public Document getPageDom() {
-		return pageDom;
-	}
-
-	@Override
 	public StructuredTextEditor getTextEditor() {
 		return editor;
 	}
@@ -870,6 +865,12 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 	@Override
 	public StructuredTextEditor getSourceEditor() {
 		return editor;
+	}
+
+	@Override
+	public Document getPageDom() {
+		setModel();
+		return pageDom;
 	}
 
 }

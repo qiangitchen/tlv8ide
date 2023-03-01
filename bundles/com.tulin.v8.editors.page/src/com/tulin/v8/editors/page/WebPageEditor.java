@@ -40,6 +40,7 @@ import org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditor;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 
+import com.tulin.v8.core.FileAndString;
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.editors.css.CSSEditor;
 import com.tulin.v8.editors.html.HTMLSourceEditor;
@@ -68,7 +69,6 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	public WEBDesignEditorInterface _designViewer;
 	private CompilationUnitEditor jseditor;
 	public CSSEditor csseditor;
-	public Document pageDom;
 	public String editortext;
 
 	private MutiPageContentOutlinePage mutiPageContentOutlinePage;
@@ -232,6 +232,7 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	 */
 	public void doSave(IProgressMonitor monitor) {
 		File jsfile = new File(getJSpathName());
+		Document pageDom = _designViewer.getPageDom();
 		if (jseditor.isDirty()) {
 			try {
 				String jseditorText = jseditor.getDocumentProvider().getDocument(jseditor.getEditorInput()).get();
@@ -241,58 +242,42 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 							.getFileForLocation(new Path(getJSpathName()));
 					if (pageDom != null) {
 						LinkHref.addScript(pageDom.getElementsByTag("head").first(), JSIFile.getName());
-						setSourcePageText();
+						setSourcePageText(pageDom);
 					}
 					try {
-						JSIFile.refreshLocal(0, null);
+						JSIFile.refreshLocal(0, monitor);
 					} catch (CoreException localCoreException1) {
 						localCoreException1.printStackTrace();
 					}
-					FileEditorInput localFileEditorInput1 = new FileEditorInput(JSIFile);
-					jseditor.setInput(localFileEditorInput1);
-					jseditor.getDocumentProvider().getDocument(jseditor.getEditorInput()).set(jseditorText);
 				}
+				jseditor.doSave(monitor);
 			} catch (Exception e) {
 				Sys.packErrMsg("JS:" + e.toString());
 				e.printStackTrace();
 			}
-			jseditor.doSave(monitor);
 		}
 		File cssfile = new File(getCSSpathName());
-		final IProgressMonitor monitors = monitor;
 		if (csseditor.isDirty()) {
-			boolean havefile = true;
 			try {
-				final String cseditorText = csseditor.getDocumentProvider().getDocument(csseditor.getEditorInput())
-						.get();
+				String cseditorText = csseditor.getDocumentProvider().getDocument(csseditor.getEditorInput()).get();
 				if (!cssfile.exists()) {
 					cssfile.createNewFile();
-					final IFile CSSIFile = ResourcesPlugin.getWorkspace().getRoot()
+					IFile CSSIFile = ResourcesPlugin.getWorkspace().getRoot()
 							.getFileForLocation(new Path(getCSSpathName()));
 					if (pageDom != null) {
 						LinkHref.addLink(pageDom.getElementsByTag("head").first(), CSSIFile.getName());
-						setSourcePageText();
+						setSourcePageText(pageDom);
 					}
 					try {
-						CSSIFile.refreshLocal(0, null);
+						CSSIFile.refreshLocal(0, monitor);
 					} catch (CoreException localCoreException1) {
 						localCoreException1.printStackTrace();
 					}
-					try {
-						FileEditorInput localFileEditorInput2 = new FileEditorInput(CSSIFile);
-						csseditor.setInput(localFileEditorInput2);
-						csseditor.getDocumentProvider().getDocument(csseditor.getEditorInput()).set(cseditorText);
-						csseditor.doSave(monitors);
-					} catch (Exception e) {
-
-					}
 				}
+				csseditor.doSave(monitor);
 			} catch (Exception e) {
 				Sys.packErrMsg("CSS:" + e.toString());
 				e.printStackTrace();
-			}
-			if (havefile) {
-				csseditor.doSave(monitor);
 			}
 		}
 		getEditor(0).doSave(monitor);
@@ -352,7 +337,6 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 		} else if (newPageIndex == 2) {
 			act(this.jseditor);
 		} else if (newPageIndex == 3) {
-			setCSSWords();
 			act(this.csseditor);
 		}
 	}
@@ -403,7 +387,7 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	}
 
 	public void setModel() {
-		pageDom = _designViewer.setModel();
+		_designViewer.setModel();
 	}
 
 	private void loadBrowser() {
@@ -436,11 +420,6 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	}
 
 	@Override
-	public Element getPageDom() {
-		return pageDom;
-	}
-
-	@Override
 	public int getDesignerMode() {
 		return 2;
 	}
@@ -454,7 +433,7 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 				"document.getElementById(\"" + elementid + "\")");
 		text = text.replace("$(\"#" + oldid + "\")", "$(\"#" + elementid + "\")");
 		text = text.replace("$('#" + oldid + "')", "$(\"#" + elementid + "\")");
-		//System.out.println(text);
+		// System.out.println(text);
 		jseditor.getDocumentProvider().getDocument(jseditor.getEditorInput()).set(text);
 	}
 
@@ -473,7 +452,7 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 		return jseditor.getDocumentProvider().getDocument(jseditor.getEditorInput()).get();
 	}
 
-	public void setSourcePageText() {
+	public void setSourcePageText(Document pageDom) {
 		editor.getDocumentProvider().getDocument(editor.getEditorInput()).set(pageDom.html());
 	}
 

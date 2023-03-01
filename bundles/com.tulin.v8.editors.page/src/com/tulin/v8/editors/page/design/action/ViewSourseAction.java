@@ -39,7 +39,7 @@ public class ViewSourseAction extends Action {
 			IDocument document = editorpart.getSourceEditor().getDocumentProvider()
 					.getDocument(editorpart.getSourceEditor().getEditorInput());
 			try {
-				String editorText = editorpart.getPageDom().html();
+				String editorText = document.get();
 				int s = document.search(0, se, true, false, false);
 				int e = se.length();
 				if (s < 0 && !isEmpty(element.attr("id"))) {
