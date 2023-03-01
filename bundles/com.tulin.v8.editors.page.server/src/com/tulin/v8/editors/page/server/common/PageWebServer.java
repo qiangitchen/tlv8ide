@@ -13,6 +13,7 @@ import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.URL;
+import java.net.URLDecoder;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Enumeration;
@@ -796,9 +797,20 @@ public class PageWebServer {
 		if (parameter.startsWith("/")) {
 			parameter = parameter.substring(1);
 		}
+		try {
+			int bi = URLDecoder.decode(parameter, "utf-8").indexOf("${contextPath}");
+			if (bi > 0) {
+				parameter = parameter.substring(bi);
+			}
+		} catch (Exception e) {
+		}
 		int index = parameter.indexOf('/');
 		if (index != -1) {
 			String type = parameter.substring(0, index);
+			try {
+				type = URLDecoder.decode(type, "utf-8");
+			} catch (Exception e) {
+			}
 			parameter = parameter.substring(index + 1);
 			if ("class".equals(type)) {
 				index = parameter.indexOf('/');
@@ -1003,11 +1015,19 @@ public class PageWebServer {
 				};
 			}
 			IProject project = TuLinPlugin.getProject(type);
+			if ("${contextPath}".equals(type)) {
+				project = TuLinPlugin.getCurrentProject();
+				if (parameter.indexOf("/res/") > 0) {
+					parameter = parameter.substring(parameter.indexOf("/res/") + 5);
+				}
+			}
+			System.out.println(parameter);
 			if (project != null && project.exists()) {
 				IResource resource = TuLinPlugin.getProjectWebFolder(project);
 				if (resource != null && resource.exists()) {
 					String resourceURL = resource.getLocation().toFile().getAbsolutePath();
 					resourceURL = resourceURL + "/" + removeHTMLAnchor(parameter);
+					System.out.println(resourceURL);
 					if (new File(resourceURL).exists()) {
 						final String resourceURL_ = resourceURL;
 						return new WebServerContent() {
