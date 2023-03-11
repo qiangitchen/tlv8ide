@@ -3,7 +3,7 @@
 <plugin>
 	<extension id="com.tulin.v8.ide" point="org.eclipse.core.runtime.products">
       <product name="TuLin IDE" application="org.eclipse.ui.ide.workbench" >
-          <property name="windowImages" value="tulin16.png,tulin32.png,tulin48.png,tulin64.png,tulin128.png"/> 
+          <property name="windowImages" value="tlv8ide16.png,tlv8ide32.png,tlv8ide48.png,tlv8ide64.png,tlv8ide128.png"/> 
           <property name="aboutImage" value="eclipse_lg.png"/> 
           <property name="aboutText" value="%productBlurb"/> 
           <property name="appName" value="TuLin IDE"/> 

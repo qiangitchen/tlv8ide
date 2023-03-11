@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Automatic-Module-Name: com.tulin.v8.markdown.editor
 Bundle-Name: Markdown
 Bundle-SymbolicName: com.tulin.v8.markdown.editor;singleton:=true
-Bundle-Version: 1.0.0.qualifier
+Bundle-Version: 1.2.0.qualifier
 Bundle-Activator: com.tulin.v8.markdown.Activator
 Bundle-Vendor: TuLin
 Require-Bundle: org.eclipse.ui,

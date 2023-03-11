@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.markdown.feature"
       label="Markdown"
-      version="1.0.0.qualifier"
+      version="1.2.0.qualifier"
       provider-name="TuLin"
       plugin="com.tulin.v8.markdown.editor">
 

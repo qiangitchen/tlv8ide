@@ -296,7 +296,8 @@ version(s), and exceptions or additional permissions here}.&quot;
 
    <includes
          id="com.tulin.v8.echarts.ui.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="com.tulin.v8.editors.fn.feature"
@@ -309,7 +310,8 @@ version(s), and exceptions or additional permissions here}.&quot;
 
    <includes
          id="com.tulin.v8.editors.page.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="com.tulin.v8.flowdesigner.feature"
@@ -317,7 +319,8 @@ version(s), and exceptions or additional permissions here}.&quot;
 
    <includes
          id="com.tulin.v8.ureport.feature"
-         version="0.0.0"/>
+         version="0.0.0"
+         optional="true"/>
 
    <includes
          id="com.tulin.v8.dbviewer.feature"
@@ -336,15 +339,13 @@ version(s), and exceptions or additional permissions here}.&quot;
          id="com.tulin.v8.markdown.feature"
          version="0.0.0"/>
 
-   <plugin
-         id="com.tulin.v8.core"
-         download-size="0"
-         install-size="0"
+   <includes
+         id="com.tulin.v8.tomcat.feature"
          version="0.0.0"
-         unpack="false"/>
+         optional="true"/>
 
    <plugin
-         id="com.tulin.v8.tomcat"
+         id="com.tulin.v8.core"
          download-size="0"
          install-size="0"
          version="0.0.0"

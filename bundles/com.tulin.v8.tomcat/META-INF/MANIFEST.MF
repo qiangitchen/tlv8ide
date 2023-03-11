@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Automatic-Module-Name: com.tulin.v8.tomcat
 Bundle-Name: Tomcat
 Bundle-SymbolicName: com.tulin.v8.tomcat;singleton:=true
-Bundle-Version: 2.1.0.qualifier
+Bundle-Version: 2.2.0.qualifier
 Bundle-Vendor: TuLin
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin

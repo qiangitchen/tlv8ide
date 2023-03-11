@@ -39,6 +39,9 @@
    <feature id="com.tulin.v8.markdown.feature">
       <category name="TLv8_Editors"/>
    </feature>
+   <feature id="com.tulin.v8.tomcat.feature">
+      <category name="TLv8_IDE"/>
+   </feature>
    <category-def name="TLv8_IDE" label="TLv8 IDE"/>
    <category-def name="TLv8_Editors" label="TLv8 Editors"/>
    <category-def name="TLv8_Flow" label="TLv8 Flow Designer"/>
