@@ -7,12 +7,10 @@ import java.util.Map;
 import com.tulin.v8.core.DBUtils;
 import com.tulin.v8.core.StringArray;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
 public class OrgUtils {
 
-	public static List<Map> getOrgTreeRootData(String rootFilter,
-			String filter, String orderby) {
-		List<Map> rli = new ArrayList<Map>();
+	public static List<Map<String, String>> getOrgTreeRootData(String rootFilter, String filter, String orderby) {
+		List<Map<String, String>> rli = new ArrayList<Map<String, String>>();
 		String sql = "select * from sa_oporg_view where 1=1 ";
 		if (rootFilter != null && !"".equals(rootFilter)) {
 			sql += " and (" + rootFilter + ")";
@@ -31,11 +29,10 @@ public class OrgUtils {
 		return rli;
 	}
 
-	public static List<Map> getOrgTreeChiledData(String parent,
-			String rootFilter, String filter, String orderby) {
-		List<Map> rli = new ArrayList<Map>();
-		String sql = "select * from sa_oporg_view where sParent = '" + parent
-				+ "' ";
+	public static List<Map<String, String>> getOrgTreeChiledData(String parent, String rootFilter, String filter,
+			String orderby) {
+		List<Map<String, String>> rli = new ArrayList<Map<String, String>>();
+		String sql = "select * from sa_oporg_view where sParent = '" + parent + "' ";
 		if (filter != null && !"".equals(filter)) {
 			sql += " and (" + filter + ")";
 		}
@@ -51,11 +48,10 @@ public class OrgUtils {
 	}
 
 	public static boolean haveChildren(String parent) {
-		String sql = "select sID from sa_oporg_view where sParent = '" + parent
-				+ "' ";
+		String sql = "select sID from sa_oporg_view where sParent = '" + parent + "' ";
 		boolean res = false;
 		try {
-			List<Map> rli = DBUtils.execQueryforList("system", sql);
+			List<Map<String, String>> rli = DBUtils.execQueryforList("system", sql);
 			if (rli.size() > 0)
 				res = true;
 		} catch (Exception e) {
@@ -64,11 +60,10 @@ public class OrgUtils {
 		return res;
 	}
 
-	public static List<Map> getOrgViewSearchList(String searchText,
-			String filter) {
-		List<Map> rli = new ArrayList<Map>();
-		String sql = "select * from sa_oporg_view where (sNAME like '%"
-				+ searchText + "%' or sCode like '%" + searchText + "%')";
+	public static List<Map<String, String>> getOrgViewSearchList(String searchText, String filter) {
+		List<Map<String, String>> rli = new ArrayList<Map<String, String>>();
+		String sql = "select * from sa_oporg_view where (sNAME like '%" + searchText + "%' or sCode like '%"
+				+ searchText + "%')";
 		if (filter != null && !"".equals(filter)) {
 			sql += " and (" + filter + ")";
 		}
@@ -80,10 +75,9 @@ public class OrgUtils {
 		return rli;
 	}
 
-	public static List<Map> getOrgViewPersonList(String sfid) {
-		List<Map> rli = new ArrayList<Map>();
-		String sql = "select * from sa_oporg_view where SFID like '" + sfid
-				+ "%' and sOrgKindID='psm'";
+	public static List<Map<String, String>> getOrgViewPersonList(String sfid) {
+		List<Map<String, String>> rli = new ArrayList<Map<String, String>>();
+		String sql = "select * from sa_oporg_view where SFID like '" + sfid + "%' and sOrgKindID='psm'";
 		try {
 			rli = DBUtils.execQueryforList("system", sql);
 		} catch (Exception e) {
@@ -92,11 +86,11 @@ public class OrgUtils {
 		return rli;
 	}
 
-	public static List<Map> getOrgViewPersonList(String sfid, String searchText) {
-		List<Map> rli = new ArrayList<Map>();
+	public static List<Map<String, String>> getOrgViewPersonList(String sfid, String searchText) {
+		List<Map<String, String>> rli = new ArrayList<Map<String, String>>();
 		String sql = "select * from sa_oporg_view where SFID like '" + sfid
-				+ "%' and sOrgKindID='psm' and (sName like '%" + searchText
-				+ "%' or sCode like '%" + searchText + "%')";
+				+ "%' and sOrgKindID='psm' and (sName like '%" + searchText + "%' or sCode like '%" + searchText
+				+ "%')";
 		try {
 			rli = DBUtils.execQueryforList("system", sql);
 		} catch (Exception e) {
@@ -105,10 +99,9 @@ public class OrgUtils {
 		return rli;
 	}
 
-	public static List<Map> getOrgViewPersonList(StringArray ids) {
-		List<Map> rli = new ArrayList<Map>();
-		String sql = "select * from sa_oporg_view where SID in ('"
-				+ ids.join("','") + "') and sOrgKindID='psm'";
+	public static List<Map<String, String>> getOrgViewPersonList(StringArray ids) {
+		List<Map<String, String>> rli = new ArrayList<Map<String, String>>();
+		String sql = "select * from sa_oporg_view where SID in ('" + ids.join("','") + "') and sOrgKindID='psm'";
 		try {
 			rli = DBUtils.execQueryforList("system", sql);
 		} catch (Exception e) {

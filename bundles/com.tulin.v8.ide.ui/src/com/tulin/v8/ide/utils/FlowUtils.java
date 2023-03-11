@@ -13,8 +13,8 @@ import com.tulin.v8.core.utils.IDUtils;
 @SuppressWarnings({ "rawtypes", "unchecked" })
 public class FlowUtils {
 
-	public static List<Map> getRootFolder() {
-		List<Map> rli = new ArrayList<Map>();
+	public static List<Map<String, String>> getRootFolder() {
+		List<Map<String, String>> rli = new ArrayList<Map<String, String>>();
 		String sql = "select * from sa_flowfolder where SPARENT is null ";
 		try {
 			rli = DBUtils.execQueryforList("system", sql);
@@ -24,10 +24,9 @@ public class FlowUtils {
 		return rli;
 	}
 
-	public static List<Map> getChildFolder(String parent) {
-		List<Map> rli = new ArrayList<Map>();
-		String sql = "select * from sa_flowfolder where SPARENT = '" + parent
-				+ "'";
+	public static List<Map<String, String>> getChildFolder(String parent) {
+		List<Map<String, String>> rli = new ArrayList<Map<String, String>>();
+		String sql = "select * from sa_flowfolder where SPARENT = '" + parent + "'";
 		try {
 			rli = DBUtils.execQueryforList("system", sql);
 		} catch (Exception e) {
@@ -61,8 +60,8 @@ public class FlowUtils {
 		return res;
 	}
 
-	public static boolean addChildFolder(String code, String name, String pid,
-			String pfid, String pfcode, String pfname) {
+	public static boolean addChildFolder(String code, String name, String pid, String pfid, String pfcode,
+			String pfname) {
 		boolean res = false;
 		String sql = "insert into sa_flowfolder(SID,SCODE,SNAME,SIDPATH,SCODEPATH,SNAMEPATH,SPARENT,VERSION)values(?,?,?,?,?,?,?,0)";
 		Connection conn = null;
@@ -107,8 +106,8 @@ public class FlowUtils {
 		return res;
 	}
 
-	public static List<Map> getDrawByFolderId(String folderid) {
-		List<Map> rli = new ArrayList<Map>();
+	public static List<Map<String, String>> getDrawByFolderId(String folderid) {
+		List<Map<String, String>> rli = new ArrayList<Map<String, String>>();
 		String sql = "select SID,SFOLDERID,SPROCESSID,SPROCESSNAME,SPROCESSACTY,FENABLED,VERSION from sa_flowdrawlg where SFOLDERID = '"
 				+ folderid + "'";
 		try {
@@ -119,12 +118,12 @@ public class FlowUtils {
 		return rli;
 	}
 
-	public static Map getDrawById(String sid) {
-		Map rmap = new HashMap();
+	public static Map<String, String> getDrawById(String sid) {
+		Map<String, String> rmap = new HashMap();
 		String sql = "select SID,SFOLDERID,SPROCESSID,SPROCESSNAME,SPROCESSACTY,FENABLED,VERSION from sa_flowdrawlg where SID = '"
 				+ sid + "'";
 		try {
-			List<Map> rli = DBUtils.execQueryforList("system", sql);
+			List<Map<String, String>> rli = DBUtils.execQueryforList("system", sql);
 			if (rli.size() > 0) {
 				rmap = rli.get(0);
 			}
@@ -133,8 +132,7 @@ public class FlowUtils {
 		return rmap;
 	}
 
-	public static boolean addFlowDraw(String id, String code, String name,
-			String pid) {
+	public static boolean addFlowDraw(String id, String code, String name, String pid) {
 		boolean res = false;
 		String sql = "insert into sa_flowdrawlg(SID,SFOLDERID,SPROCESSID,SPROCESSNAME,SPROCESSACTY,FENABLED,VERSION)values(?,?,?,?,?,?,0)";
 		Connection conn = null;

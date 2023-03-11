@@ -181,7 +181,7 @@ public class CommonUtil {
 			map.put("TABLE", li);
 			DBUtils.CloseConn(conn, null, rs);
 		} else {
-			List<Map> list = DBUtils.execQueryforList(dbkey, tsql);
+			List<Map<String, String>> list = DBUtils.execQueryforList(dbkey, tsql);
 			List<String> li = new ArrayList<String>();
 			for (int i = 0; i < list.size(); i++) {
 				Map m = list.get(i);
@@ -200,7 +200,7 @@ public class CommonUtil {
 					+ " and a.relnamespace in (SELECT oid FROM pg_namespace WHERE nspname='public' or nspname='"
 					+ userName + "')";
 		}
-		List<Map> listv = DBUtils.execQueryforList(dbkey, vsql);
+		List<Map<String, String>> listv = DBUtils.execQueryforList(dbkey, vsql);
 		for (int i = 0; i < listv.size(); i++) {
 			Map m = listv.get(i);
 			liv.add((String) m.get("VIEW_NAME"));

@@ -7,7 +7,7 @@ import java.util.Map;
 
 import com.tulin.v8.core.DBUtils;
 
-@SuppressWarnings({ "unchecked", "rawtypes" })
+@SuppressWarnings({ "rawtypes" })
 public class ProcessDrawElement {
 	private String sid;
 	private String sfolderid;
@@ -39,7 +39,7 @@ public class ProcessDrawElement {
 		String sql = "select SID,SFOLDERID,SPROCESSID,SPROCESSNAME,SPROCESSACTY,FENABLED,VERSION from sa_flowdrawlg where SID = '"
 				+ id + "'";
 		try {
-			List<Map> rli = DBUtils.execQueryforList("system", sql);
+			List<Map<String, String>> rli = DBUtils.execQueryforList("system", sql);
 			if (rli.size() > 0) {
 				Map m = rli.get(0);
 				sid = (String) m.get("SID");

@@ -16,15 +16,18 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import com.tulin.v8.core.TuLinPlugin;
+import com.tulin.v8.flowdesigner.ui.data.MenuData;
 import com.tulin.v8.flowdesigner.ui.editors.process.FuncTreeController;
 
 public class FunctionTreeDialog extends Dialog {
 	private Tree funTree;
-	private Element element;
 	private String curUrl = "";
 	private TreeItem curtreeitem;
+	private JSONObject selData;
 
 	public FunctionTreeDialog(Shell parentShell) {
 		super(parentShell);
@@ -59,36 +62,70 @@ public class FunctionTreeDialog extends Dialog {
 
 	private void loadData() {
 		try {
-			Element root = new FuncTreeController().index("WEB-INF/funtree/");
-			List<Element> funs = root.elements();
-			for (int i = 0; i < funs.size(); i++) {
+			JSONArray jsona = MenuData.getMenuTree();
+			for (int i = 0; i < jsona.length(); i++) {
 				TreeItem treeitem = new TreeItem(funTree, SWT.NONE);
-				readElement(funs.get(i), treeitem);
+				readElement(jsona.getJSONObject(i), treeitem);
 			}
-		} catch (Exception e) {
-
+		} catch (Exception er) {
+			try {
+				Element root = new FuncTreeController().index("WEB-INF/funtree/");
+				List<Element> funs = root.elements();
+				for (int i = 0; i < funs.size(); i++) {
+					TreeItem treeitem = new TreeItem(funTree, SWT.NONE);
+					readElement(funs.get(i), treeitem);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
 	private void readElement(Element ele, TreeItem treeitem) {
-		treeitem.setText(ele.attributeValue("label"));
-		treeitem.setData(ele);
-		if (curUrl.equals(ele.attributeValue("url"))) {
-			curtreeitem = treeitem;
-			element = ele;
-		}
-		List<Element> eles = ele.elements();
-		if (!eles.isEmpty()) {
-			treeitem.setImage(TuLinPlugin.getIcon("folder.gif"));
-			for (int i = 0; i < eles.size(); i++) {
-				TreeItem ctreeitem = new TreeItem(treeitem, SWT.NONE);
-				readElement(eles.get(i), ctreeitem);
+		try {
+			treeitem.setText(ele.attributeValue("label"));
+			JSONObject json = new JSONObject();
+			json.put("label", ele.attributeValue("label"));
+			json.put("url", ele.attributeValue("url"));
+			treeitem.setData(json);
+			if (curUrl.equals(ele.attributeValue("url"))) {
+				curtreeitem = treeitem;
 			}
-		} else {
-			treeitem.setImage(TuLinPlugin.getIcon("html.gif"));
+			List<Element> eles = ele.elements();
+			if (!eles.isEmpty()) {
+				treeitem.setImage(TuLinPlugin.getIcon("folder.gif"));
+				for (int i = 0; i < eles.size(); i++) {
+					TreeItem ctreeitem = new TreeItem(treeitem, SWT.NONE);
+					readElement(eles.get(i), ctreeitem);
+				}
+			} else {
+				treeitem.setImage(TuLinPlugin.getIcon("html.gif"));
+			}
+		} catch (Exception e) {
 		}
 	}
-	
+
+	private void readElement(JSONObject json, TreeItem treeitem) {
+		try {
+			treeitem.setText(json.getString("label"));
+			treeitem.setData(json);
+			if (curUrl.equals(json.getString("url"))) {
+				curtreeitem = treeitem;
+			}
+			JSONArray eles = json.getJSONArray("children");
+			if (eles.length() > 0) {
+				treeitem.setImage(TuLinPlugin.getIcon("folder.gif"));
+				for (int i = 0; i < eles.length(); i++) {
+					TreeItem ctreeitem = new TreeItem(treeitem, SWT.NONE);
+					readElement(eles.getJSONObject(i), ctreeitem);
+				}
+			} else {
+				treeitem.setImage(TuLinPlugin.getIcon("html.gif"));
+			}
+		} catch (Exception e) {
+		}
+	}
+
 	protected int getShellStyle() {
 		return super.getShellStyle() | SWT.RESIZE;
 	}
@@ -104,17 +141,18 @@ public class FunctionTreeDialog extends Dialog {
 		if (buttonId == IDialogConstants.OK_ID) {
 			TreeItem[] select = funTree.getSelection();
 			if (select.length > 0) {
-				element = (Element) select[0].getData();
-				String url = element.attributeValue("url");
-				if (url == null) {
-					MessageDialog.openInformation(getShell(),
-							Messages.getString("TLEditor.message.title1"),
-							Messages.getString("TLEditor.message.selpage"));
-					return;
+				selData = (JSONObject) select[0].getData();
+				try {
+					String url = selData.getString("url");
+					if (url == null) {
+						MessageDialog.openInformation(getShell(), Messages.getString("TLEditor.message.title1"),
+								Messages.getString("TLEditor.message.selpage"));
+						return;
+					}
+				} catch (Exception e) {
 				}
 			} else {
-				MessageDialog.openInformation(getShell(),
-						Messages.getString("TLEditor.message.title1"),
+				MessageDialog.openInformation(getShell(), Messages.getString("TLEditor.message.title1"),
 						Messages.getString("TLEditor.message.selpage"));
 				return;
 			}
@@ -122,8 +160,8 @@ public class FunctionTreeDialog extends Dialog {
 		super.buttonPressed(buttonId);
 	}
 
-	public Element getSelectData() {
-		return element;
+	public JSONObject getSelectData() {
+		return selData;
 	}
 
 	public String getCurUrl() {

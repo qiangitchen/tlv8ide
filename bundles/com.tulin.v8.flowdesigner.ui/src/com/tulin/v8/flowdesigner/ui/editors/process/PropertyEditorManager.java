@@ -4,7 +4,6 @@ import java.net.URLEncoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.dom4j.Element;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.TreeEditor;
@@ -179,15 +178,19 @@ public class PropertyEditorManager {
 					dialog.setCurUrl(property.getValue());
 					int state = dialog.open();
 					if (state == IDialogConstants.OK_ID) {
-						Element element = dialog.getSelectData();
-						String url = element.attributeValue("url");
-						if (control instanceof Text) {
-							((Text) control).setText(url);
-						} else if (control instanceof Label) {
-							((Label) control).setText(url);
-							changeProperValue(tree, patitem, url);
+						try {
+							JSONObject json = dialog.getSelectData();
+							String url = json.getString("url");
+							if (control instanceof Text) {
+								((Text) control).setText(url);
+							} else if (control instanceof Label) {
+								((Label) control).setText(url);
+								changeProperValue(tree, patitem, url);
+							}
+							patitem.setText(1, url);
+						} catch (Exception er) {
+							er.printStackTrace();
 						}
-						patitem.setText(1, url);
 					}
 				} else if ("selectexePerson".equals(property.getButton())) {
 					TreeItem patitemid = getProperItemById("n_p_roleID");

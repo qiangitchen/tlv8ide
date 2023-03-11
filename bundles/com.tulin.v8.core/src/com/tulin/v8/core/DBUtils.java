@@ -201,33 +201,31 @@ public class DBUtils {
 	 */
 	public static Connection getAppConn(String key) throws SQLException, NamingException {
 		Connection cn = null;
-		if (cn == null) {
-			Map<String, Map<String, String>> rm = Configuration.getConfig();
-			Map<String, String> m = rm.get(key);
-			if (m != null) {
-				String driverStr = m.get("driver");
-				String url = m.get("url");
-				String userName = m.get("username");
-				String password = m.get("password");
-				try {
-					Class.forName(driverStr);
-				} catch (ClassNotFoundException eN) {
-					eN.printStackTrace();
-					throw new SQLException(eN.toString());
-				}
-				try {
-					url = url.replace("&amp;", "&");
-				} catch (Exception e) {
-				}
-				try {
-					cn = DriverManager.getConnection(url, userName, password);
-				} catch (Exception eJ) {
-					throw new SQLException(eJ.toString());
-				}
-			} else {
-				SpringDatasource datasource = AppConfig.getSpringDatasource();
-				cn = getAppConn(datasource);
+		Map<String, Map<String, String>> rm = Configuration.getConfig();
+		Map<String, String> m = rm.get(key);
+		if (m != null) {
+			String driverStr = m.get("driver");
+			String url = m.get("url");
+			String userName = m.get("username");
+			String password = m.get("password");
+			try {
+				Class.forName(driverStr);
+			} catch (ClassNotFoundException eN) {
+				eN.printStackTrace();
+				throw new SQLException(eN.toString());
 			}
+			try {
+				url = url.replace("&amp;", "&");
+			} catch (Exception e) {
+			}
+			try {
+				cn = DriverManager.getConnection(url, userName, password);
+			} catch (Exception eJ) {
+				throw new SQLException(eJ.toString());
+			}
+		} else {
+			SpringDatasource datasource = AppConfig.getSpringDatasource();
+			cn = getAppConn(datasource);
 		}
 		return cn;
 	}
@@ -340,7 +338,7 @@ public class DBUtils {
 	 * @return {@link java.util.List}
 	 * @throws SQLException
 	 */
-	public static List execQueryforList(String key, String sql) throws SQLException {
+	public static List<Map<String, String>> execQueryforList(String key, String sql) throws SQLException {
 		ResultSet rs = null;
 		ResultSetMetaData rsmd = null;
 		List li = new ArrayList();
@@ -415,6 +413,87 @@ public class DBUtils {
 			throw new SQLException(e.toString() + ">>\n sql:" + sql);
 		} finally {
 			CloseConn(aConn, qry, rs);
+		}
+		return li;
+	}
+
+	/**
+	 * 查询操作JDBC
+	 * 
+	 * @param aConn
+	 * @param sql
+	 * @return {@link java.util.List}
+	 * @throws SQLException
+	 */
+	public static List<Map<String, String>> execQueryforList(Connection aConn, String sql) throws SQLException {
+		ResultSet rs = null;
+		ResultSetMetaData rsmd = null;
+		List li = new ArrayList();
+		Statement qry = aConn.createStatement(1004, 1007);
+		try {
+			rs = qry.executeQuery(sql);
+			rsmd = rs.getMetaData();
+			int size = rsmd.getColumnCount();
+			while (rs.next()) {
+				Map sm = new HashMap();
+				for (int i = 1; i <= size; i++) {
+					String cellType = rsmd.getColumnTypeName(i);
+					String cellName = rsmd.getColumnLabel(i).toUpperCase();
+					if ("DATE".equals(cellType) || "DATETIME".equals(cellType)) {
+						try {
+							try {
+								SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+								String v_l = format.format(format.parse(rs.getString(i)));
+								sm.put(cellName, v_l);
+							} catch (Exception e) {
+								try {
+									SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+									SimpleDateFormat nformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+									String v_l = nformat.format(format.parse(rs.getString(i)));
+									sm.put(cellName, v_l);
+								} catch (Exception er) {
+									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+									String v_l = format.format(format.parse(rs.getString(i)));
+									sm.put(cellName, v_l);
+								}
+							}
+						} catch (Exception e) {
+							sm.put(cellName, "");
+						}
+					} else if ("BLOB".equals(cellType)) {
+						try {
+							sm.put(cellName, rs.getBlob(i));
+						} catch (Exception e) {
+							sm.put(cellName, null);
+						}
+					} else if ("CLOB".equals(cellType)) {
+						Clob clob = rs.getClob(i);
+						String content = "";
+						if (clob != null) {
+							BufferedReader in = new BufferedReader(clob.getCharacterStream());
+							StringWriter out = new StringWriter();
+							int c;
+							try {
+								while ((c = in.read()) != -1) {
+									out.write(c);
+								}
+							} catch (IOException e) {
+								e.printStackTrace();
+							}
+							content = out.toString();
+						}
+						sm.put(cellName, content);
+					} else {
+						sm.put(cellName, (rs.getString(i) == null) ? "" : String.valueOf(rs.getString(i)));
+					}
+				}
+
+				li.add(sm);
+			}
+		} catch (SQLException e) {
+			throw new SQLException(e.toString() + ">>\n sql:" + sql);
+		} finally {
+			CloseConn(null, qry, rs);
 		}
 		return li;
 	}

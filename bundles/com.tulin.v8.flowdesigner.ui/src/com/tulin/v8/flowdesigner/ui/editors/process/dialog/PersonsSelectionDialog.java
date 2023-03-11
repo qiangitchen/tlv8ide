@@ -224,7 +224,7 @@ public class PersonsSelectionDialog extends Dialog {
 	private void loadPsmTableData(Tree Orgview) {
 		psmtable.removeAll();
 		TreeItem[] treeitems = Orgview.getSelection();
-		List<Map> rli = new ArrayList<Map>();
+		List<Map<String, String>> rli = new ArrayList<Map<String, String>>();
 		currentItem = treeitems[0];
 		Map itemdata = (Map) currentItem.getData("map");
 		String sfid = (String) itemdata.get("SFID");
@@ -236,7 +236,7 @@ public class PersonsSelectionDialog extends Dialog {
 		buildPersonTable(rli);
 	}
 
-	private void buildPersonTable(List<Map> rli) {
+	private void buildPersonTable(List<Map<String, String>> rli) {
 		for (int i = 0; i < rli.size(); i++) {
 			Map<String, String> m = rli.get(i);
 			TableItem item = new TableItem(psmtable, SWT.NONE);
@@ -253,7 +253,7 @@ public class PersonsSelectionDialog extends Dialog {
 			Map itemdata = (Map) currentItem.getData("map");
 			sfid = (String) itemdata.get("SFID");
 		}
-		List<Map> rli = OrgUtils.getOrgViewPersonList(sfid, searchtext1.getText());
+		List<Map<String, String>> rli = OrgUtils.getOrgViewPersonList(sfid, searchtext1.getText());
 		buildPersonTable(rli);
 	}
 
@@ -349,7 +349,7 @@ public class PersonsSelectionDialog extends Dialog {
 	}
 
 	private void insidePerSelect() {
-		List<Map> rli = new ArrayList<Map>();
+		List<Map<String, String>> rli = new ArrayList<Map<String, String>>();
 		try {
 			StringArray ids = new StringArray(perSelectIds.split(","));
 			rli = OrgUtils.getOrgViewPersonList(ids);

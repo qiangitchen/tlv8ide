@@ -127,7 +127,7 @@ public class ActionUtils {
 			return;
 		}
 		node.removeChildAll();
-		List<Map> rootf = FlowUtils.getRootFolder();
+		List<Map<String, String>> rootf = FlowUtils.getRootFolder();
 		for (int i = 0; i < rootf.size(); i++) {
 			Map m = rootf.get(i);
 			FlowFolder folder = new FlowFolder(m);
@@ -140,7 +140,7 @@ public class ActionUtils {
 	public static void loadFlowFolder(FlowFolder folder) {
 		folder.removeChildAll();
 		String pid = folder.getElement().getSid();
-		List<Map> childf = FlowUtils.getChildFolder(pid);
+		List<Map<String, String>> childf = FlowUtils.getChildFolder(pid);
 		for (int i = 0; i < childf.size(); i++) {
 			Map m = childf.get(i);
 			FlowFolder chilfolder = new FlowFolder(m);
@@ -153,7 +153,7 @@ public class ActionUtils {
 
 	private static void loadFlowDraw(FlowFolder folder) {
 		String pid = folder.getElement().getSid();
-		List<Map> dlist = FlowUtils.getDrawByFolderId(pid);
+		List<Map<String, String>> dlist = FlowUtils.getDrawByFolderId(pid);
 		for (int i = 0; i < dlist.size(); i++) {
 			Map m = dlist.get(i);
 			FlowDraw draw = new FlowDraw(m);

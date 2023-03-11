@@ -80,7 +80,7 @@ public class OrgTreeComposite extends Composite {
 	}
 
 	private void doTreeSearch() {
-		List<Map> slist = OrgUtils.getOrgViewSearchList(searchtext.getText(), filter);
+		List<Map<String, String>> slist = OrgUtils.getOrgViewSearchList(searchtext.getText(), filter);
 		if (slist.size() > 0) {
 			String sfid = slist.get(0).get("SFID").toString();
 			String[] sids = sfid.split("/");
@@ -93,7 +93,7 @@ public class OrgTreeComposite extends Composite {
 	public void initTreeData() {
 		Orgview.removeAll();
 		orgItem.clear();
-		List<Map> roots = OrgUtils.getOrgTreeRootData(rootFilter, filter, orderby);
+		List<Map<String, String>> roots = OrgUtils.getOrgTreeRootData(rootFilter, filter, orderby);
 		for (int i = 0; i < roots.size(); i++) {
 			Map m = roots.get(i);
 			String id = (String) m.get("SID");
@@ -110,7 +110,7 @@ public class OrgTreeComposite extends Composite {
 	}
 
 	private void chilTreeData(TreeItem pitem, String parent) {
-		List<Map> datas = OrgUtils.getOrgTreeChiledData(parent, rootFilter, filter, orderby);
+		List<Map<String, String>> datas = OrgUtils.getOrgTreeChiledData(parent, rootFilter, filter, orderby);
 		for (int i = 0; i < datas.size(); i++) {
 			Map m = datas.get(i);
 			String id = (String) m.get("SID");

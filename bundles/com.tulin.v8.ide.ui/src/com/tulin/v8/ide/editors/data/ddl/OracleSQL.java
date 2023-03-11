@@ -12,7 +12,6 @@ import com.tulin.v8.core.StringArray;
 
 import zigen.plugin.db.DbPluginConstant;
 
-@SuppressWarnings({ "rawtypes", "unchecked" })
 public class OracleSQL {
 	private static String getViewDDL_SQL(String owner, String view) {
 		StringBuffer sb = new StringBuffer();
@@ -23,8 +22,7 @@ public class OracleSQL {
 		return sb.toString();
 	}
 
-	protected static String getViewDDL(String dbName, String owner, String view)
-			throws Exception {
+	protected static String getViewDDL(String dbName, String owner, String view) throws Exception {
 		Connection con = null;
 		ResultSet rs = null;
 		Statement st = null;
@@ -75,17 +73,15 @@ public class OracleSQL {
 		return sb.toString();
 	}
 
-	private static void setDemiliter(StringBuffer sb, String dbName,
-			String table) {
+	private static void setDemiliter(StringBuffer sb, String dbName, String table) {
 		sb.append(DbPluginConstant.LINE_SEP);
 		StringArray array = new StringArray();
 		try {
 			List<Map<String, String>> columns = getColumn(dbName, table);
 			for (int i = 0; i < columns.size(); i++) {
-				if (columns.get(i).get("COMMENTS") != null
-						&& !"".equals(columns.get(i).get("COMMENTS"))) {
-					array.push(createCommentOnColumnDDL(table, columns.get(i)
-							.get("COLUMN_NAME"), columns.get(i).get("COMMENTS")));
+				if (columns.get(i).get("COMMENTS") != null && !"".equals(columns.get(i).get("COMMENTS"))) {
+					array.push(createCommentOnColumnDDL(table, columns.get(i).get("COLUMN_NAME"),
+							columns.get(i).get("COMMENTS")));
 				}
 			}
 		} catch (Exception e) {
@@ -94,8 +90,7 @@ public class OracleSQL {
 		sb.append(array.join(DbPluginConstant.LINE_SEP));
 	}
 
-	public static String createCommentOnColumnDDL(String tableName,
-			String columnName, String remarks) {
+	public static String createCommentOnColumnDDL(String tableName, String columnName, String remarks) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("COMMENT ON COLUMN ");
 		sb.append(tableName);
@@ -106,8 +101,7 @@ public class OracleSQL {
 		return sb.toString();
 	}
 
-	public static String createCommentOnTableDDL(String tableName,
-			String remarks) {
+	public static String createCommentOnTableDDL(String tableName, String remarks) {
 		StringBuffer sb = new StringBuffer();
 		sb.append("COMMENT ON TABLE ");
 		sb.append(tableName);
@@ -122,8 +116,7 @@ public class OracleSQL {
 		try {
 			List<Map<String, String>> columns = getColumn(dbName, table);
 			for (int i = 0; i < columns.size(); i++) {
-				String columndip = "  " + columns.get(i).get("COLUMN_NAME")
-						+ " " + columns.get(i).get("DATA_TYPE");
+				String columndip = "  " + columns.get(i).get("COLUMN_NAME") + " " + columns.get(i).get("DATA_TYPE");
 				if (columns.get(i).get("DATA_TYPE").indexOf("VARCHAR") > -1) {
 					columndip += "(" + columns.get(i).get("CHAR_LENGTH") + ")";
 				}
@@ -132,30 +125,25 @@ public class OracleSQL {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return array.join("," + DbPluginConstant.LINE_SEP)
-				+ DbPluginConstant.LINE_SEP;
+		return array.join("," + DbPluginConstant.LINE_SEP) + DbPluginConstant.LINE_SEP;
 	}
 
-	private static List<Map<String, String>> getColumn(String dbName,
-			String table) throws Exception {
+	private static List<Map<String, String>> getColumn(String dbName, String table) throws Exception {
 		String sql = "select t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH "
-				+ "from user_tab_columns t1  left join "
-				+ "user_col_comments t2 on t1.TABLE_NAME = t2.table_name "
-				+ "and t1.COLUMN_NAME = t2.column_name "
-				+ "where t2.table_name = '" + table + "'";
+				+ "from user_tab_columns t1  left join " + "user_col_comments t2 on t1.TABLE_NAME = t2.table_name "
+				+ "and t1.COLUMN_NAME = t2.column_name " + "where t2.table_name = '" + table + "'";
 		return DBUtils.execQueryforList(dbName, sql);
 	}
 
 	private static String getTableComments(String dbkey, String tablename) {
 		String result = "";
 		String sql = "select t.table_name TABLE_NAME,t.comments TABLE_COMMENT "
-				+ " from user_tab_comments t where t.table_name = '"
-				+ tablename + "'";
+				+ " from user_tab_comments t where t.table_name = '" + tablename + "'";
 		try {
-			List<Map> list = DBUtils.execQueryforList(dbkey, sql);
+			List<Map<String, String>> list = DBUtils.execQueryforList(dbkey, sql);
 			if (list.size() > 0) {
-				Map m = list.get(0);
-				String val = (String) m.get("TABLE_COMMENT");
+				Map<String, String> m = list.get(0);
+				String val = m.get("TABLE_COMMENT");
 				if (val != null && !"null".equals(val)) {
 					result = val;
 				}
