@@ -22,7 +22,11 @@ public class StudioConfig {
 		if (project != null && project.exists()) {
 			return "tlv8";
 		}
-		return "JBIZ";// 为了兼容云捷项目资源保留
+		project = TuLinPlugin.getProject("JBIZ");
+		if (project != null && project.exists()) {
+			return "JBIZ";// 为了兼容云捷项目资源保留
+		}
+		return TuLinPlugin.getCurrentProjectName();
 	}
 
 	private static String getWebFolder() {

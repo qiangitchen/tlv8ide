@@ -1021,13 +1021,11 @@ public class PageWebServer {
 					parameter = parameter.substring(parameter.indexOf("/res/") + 5);
 				}
 			}
-			System.out.println(parameter);
 			if (project != null && project.exists()) {
 				IResource resource = TuLinPlugin.getProjectWebFolder(project);
 				if (resource != null && resource.exists()) {
 					String resourceURL = resource.getLocation().toFile().getAbsolutePath();
 					resourceURL = resourceURL + "/" + removeHTMLAnchor(parameter);
-					System.out.println(resourceURL);
 					if (new File(resourceURL).exists()) {
 						final String resourceURL_ = resourceURL;
 						return new WebServerContent() {

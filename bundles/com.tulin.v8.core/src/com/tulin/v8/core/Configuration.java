@@ -14,11 +14,6 @@ import com.tulin.v8.core.Dao.SqlMap.GetSqlMapByKey;
  * @since 0.1
  */
 public final class Configuration {
-	// private static final String property="jpolite.properties";
-
-	public static void main(String[] args) {
-		System.out.print(getConfigInfo());
-	}
 
 	public static String getConfigInfo() {
 		String xml = "";

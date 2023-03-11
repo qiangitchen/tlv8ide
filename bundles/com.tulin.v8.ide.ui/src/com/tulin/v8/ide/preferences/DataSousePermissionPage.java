@@ -262,7 +262,6 @@ public class DataSousePermissionPage extends FieldEditorPreferencePage implement
 			tableitem.setText(pers);
 		} catch (Exception e) {
 			Sys.printErrMsg(Messages.getString("preferencePages.DataSousePermission.linktest4"));
-			e.printStackTrace();
 		}
 	}
 

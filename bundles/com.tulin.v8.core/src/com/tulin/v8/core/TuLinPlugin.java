@@ -93,6 +93,11 @@ public class TuLinPlugin extends AbstractUIPlugin {
 
 	static IProject project = null;
 
+	/**
+	 * 获取当前项目
+	 * 
+	 * @return IProject
+	 */
 	public static IProject getCurrentProject() {
 		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 			public void run() {
@@ -135,6 +140,12 @@ public class TuLinPlugin extends AbstractUIPlugin {
 		if (project == null) {
 			project = getProject("tlv8");
 		}
+		if (project == null || !project.exists()) {
+			project = getProject("tlv8-main");
+		}
+		if (project == null || !project.exists()) {
+			project = getProject("tlv8-common");
+		}
 		System.out.println(project);
 		return project;
 	}
@@ -162,11 +173,23 @@ public class TuLinPlugin extends AbstractUIPlugin {
 		return getProjectWebFolder(project);
 	}
 
+	/**
+	 * 获取指定项目的Web目录
+	 * 
+	 * @param name
+	 * @return IResource
+	 */
 	public static IResource getProjectWebFolder(String name) {
 		IProject project = getProject(name);
 		return getProjectWebFolder(project);
 	}
 
+	/**
+	 * 获取项目的Web页面位置
+	 * 
+	 * @param project
+	 * @return IResource
+	 */
 	public static IResource getProjectWebFolder(IProject project) {
 		IResource resource = project.getFolder("WebContent");
 		if (resource == null || !resource.exists()) {
@@ -174,12 +197,6 @@ public class TuLinPlugin extends AbstractUIPlugin {
 		}
 		if (resource == null || !resource.exists()) {
 			resource = project.findMember("src/main/webapp");
-		}
-		if (resource == null || !resource.exists()) {
-			resource = project.findMember("src/main/resources/static");
-		}
-		if (resource == null || !resource.exists()) {
-			resource = project.findMember("src/main/resources");
 		}
 		return resource;
 	}

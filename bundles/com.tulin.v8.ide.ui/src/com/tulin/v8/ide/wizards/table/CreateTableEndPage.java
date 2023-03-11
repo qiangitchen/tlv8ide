@@ -75,7 +75,11 @@ public class CreateTableEndPage extends WizardPage {
 	public IWizardPage getNextPage() {
 		StringBuffer sql = new StringBuffer();
 		sql.append("create table " + tablewritepage.TableName.getText() + "(");
-		sql.append("fID " + DataType.dataTypeTranse(tablewritepage.getDbkey(), "string", "32") + " NOT NULL,");
+		if (DBUtils.IsPostgreSQL(tablewritepage.getDbkey())) {
+			sql.append("fid " + DataType.dataTypeTranse(tablewritepage.getDbkey(), "string", "32") + " NOT NULL,");
+		} else {
+			sql.append("fID " + DataType.dataTypeTranse(tablewritepage.getDbkey(), "string", "32") + " NOT NULL,");
+		}
 		TableItem[] items = tablewritepage.celltable.getItems();
 		boolean autocinf = tablewritepage.checkbox.getSelection();
 		for (int i = 0; i < items.length; i++) {
@@ -100,6 +104,17 @@ public class CreateTableEndPage extends WizardPage {
 			sql.append("FCREATEORGID VARCHAR(36) comment '组织ID',");
 			sql.append("FCREATEORGNAME VARCHAR(200) comment '组织名称',");
 			sql.append("FCREATETIME DATETIME comment '创建时间',");
+		} else if (autocinf && DBUtils.IsPostgreSQL(tablewritepage.getDbkey())) {
+			sql.append("fcreatepsnfid VARCHAR(2048),");
+			sql.append("fcreatepsnid VARCHAR(36),");
+			sql.append("fcreatepsnname VARCHAR(100),");
+			sql.append("fcreatedeptid VARCHAR(36),");
+			sql.append("fcreatedeptname VARCHAR(200),");
+			sql.append("fcreateognid VARCHAR(36),");
+			sql.append("fcreateognname VARCHAR(200),");
+			sql.append("fcreateorgid VARCHAR(36),");
+			sql.append("fcreateorgname VARCHAR(200),");
+			sql.append("fcreatetime timestamp,");
 		} else if (autocinf && DBUtils.IsMSSQLDB(tablewritepage.getDbkey())) {
 			sql.append("FCREATEPSNFID nvarchar(2048),");
 			sql.append("FCREATEPSNID nvarchar(36),");
@@ -160,6 +175,29 @@ public class CreateTableEndPage extends WizardPage {
 			}
 		} else if (DBUtils.IsMySQLDB(tablewritepage.getDbkey())) {
 			sql.append("alter table " + tablewritepage.TableName.getText() + " ADD PRIMARY KEY (fID);");
+			sql.append("alter table " + tablewritepage.TableName.getText() + " comment '"
+					+ tablewritepage.TableText.getText() + "';");
+		} else if (DBUtils.IsPostgreSQL(tablewritepage.getDbkey())) {
+			sql.append("alter table " + tablewritepage.TableName.getText() + " ADD PRIMARY KEY (fid);");
+			sql.append("COMMENT ON TABLE " + tablewritepage.TableName.getText() + " IS '"
+					+ tablewritepage.TableText.getText() + "';");
+			for (int i = 0; i < items.length; i++) {
+				TableItem item = items[i];
+				sql.append("COMMENT ON COLUMN " + tablewritepage.TableName.getText() + "." + item.getText(1) + " IS '"
+						+ item.getText(4) + "';");
+			}
+			if (autocinf) {
+				sql.append("COMMENT ON COLUMN " + tablewritepage.TableName.getText() + ".fcreatepsnfid IS '创建人FID';");
+				sql.append("COMMENT ON COLUMN " + tablewritepage.TableName.getText() + ".fcreatepsnid IS '创建人ID';");
+				sql.append("COMMENT ON COLUMN " + tablewritepage.TableName.getText() + ".fcreatepsnname IS '创建人名称';");
+				sql.append("COMMENT ON COLUMN " + tablewritepage.TableName.getText() + ".fcreatedeptid IS '部门ID';");
+				sql.append("COMMENT ON COLUMN " + tablewritepage.TableName.getText() + ".fcreatedeptname IS '部门名称';");
+				sql.append("COMMENT ON COLUMN " + tablewritepage.TableName.getText() + ".fcreateognid IS '机构ID';");
+				sql.append("COMMENT ON COLUMN " + tablewritepage.TableName.getText() + ".fcreateognname IS '机构名称';");
+				sql.append("COMMENT ON COLUMN " + tablewritepage.TableName.getText() + ".fcreateorgid IS '组织ID';");
+				sql.append("COMMENT ON COLUMN " + tablewritepage.TableName.getText() + ".fcreateorgname IS '组织名称';");
+				sql.append("COMMENT ON COLUMN " + tablewritepage.TableName.getText() + ".fcreatetime IS '创建时间';");
+			}
 		} else {
 			sql.append("alter table " + tablewritepage.TableName.getText() + " add constraint "
 					+ tablewritepage.getOwner() + "_" + tablewritepage.TableName.getText() + "_KEY primary key (fID);");

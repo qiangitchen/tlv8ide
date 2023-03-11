@@ -2,10 +2,8 @@ package com.tulin.v8.ide.utils;
 
 import java.io.File;
 import java.lang.reflect.InvocationTargetException;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
@@ -19,7 +17,6 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.progress.UIJob;
 
-import com.tulin.v8.core.Configuration;
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.flowdesigner.ui.editors.process.element.ProcessDrawElement;
@@ -37,7 +34,6 @@ import zigen.plugin.db.ui.internal.Schema;
 import zigen.plugin.db.ui.internal.Table;
 import zigen.plugin.db.ui.internal.TreeNode;
 import zigen.plugin.db.ui.internal.View;
-import zigen.plugin.db.ui.jobs.ConnectDBJob;
 
 @SuppressWarnings("rawtypes")
 public class ActionUtils {
@@ -86,24 +82,19 @@ public class ActionUtils {
 //		root.addChild(BIZ);
 //		root.addChild(UI);
 		try {
-			Map<String, Map<String, String>> rm = Configuration.getConfig();
-			Set<String> k = rm.keySet();
-			Iterator<String> it = k.iterator();
-			int ms = rm.size();
-			while (it.hasNext()) {
+			IDBConfig[] configs = DBConfigManager.getDBConfigs();
+			int ms = configs.length;
+			for (int i = 0; i < configs.length; i++) {
 				monitor.worked(1 / ms);
 				try {
 					Thread.sleep(5);
 				} catch (InterruptedException e) {
 				}
-				String key = (String) it.next();
-				Map<String, String> m = rm.get(key);
-				IDBConfig dbconfig = DBConfigManager.getDBConfig(key);
+				IDBConfig dbconfig = configs[i];
 				DataBase db = new DataBase(dbconfig);
 				db.setTvtype("dbkey");
-				db.setUsername(m.get("username"));
+				db.setUsername(dbconfig.getDbName());
 				DATA.addChild(db);
-				// adddataview(db, key, m.get("username"), true);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -300,23 +291,19 @@ public class ActionUtils {
 			public void run(IProgressMonitor monitor) throws InvocationTargetException, InterruptedException {
 				monitor.beginTask(Messages.getString("View.Action.model.3"), 30);
 				try {
-					Map<String, Map<String, String>> rm = Configuration.getConfig();
-					Set<String> k = rm.keySet();
-					Iterator<String> it = k.iterator();
-					while (it.hasNext()) {
-						monitor.worked((int) ((1.0 / k.size()) * 100));
+					IDBConfig[] configs = DBConfigManager.getDBConfigs();
+					int ms = configs.length;
+					for (int i = 0; i < configs.length; i++) {
+						monitor.worked(1 / ms);
 						try {
 							Thread.sleep(5);
 						} catch (InterruptedException e) {
 						}
-						String key = (String) it.next();
-						Map<String, String> m = rm.get(key);
-						IDBConfig dbconfig = DBConfigManager.getDBConfig(key);
+						IDBConfig dbconfig = configs[i];
 						DataBase db = new DataBase(dbconfig);
 						db.setTvtype("dbkey");
-						db.setUsername(m.get("username"));
+						db.setUsername(dbconfig.getDbName());
 						DATA.addChild(db);
-						adddataview(db, key, m.get("username"), false);
 					}
 				} catch (Exception e) {
 				}
@@ -332,24 +319,24 @@ public class ActionUtils {
 		}
 	}
 
-	public static void adddataview(TreeNode treeparent, String dbkey, String username, boolean isInit) {
-		try {
-			Schema user = new Schema(username);
-			user.setTvtype("dbuser");
-			user.setDbkey(dbkey);
-			treeparent.addChild(user);
-			if (isInit == false) {
-				DataBase db = (DataBase) treeparent;
-				ConnectDBJob job = new ConnectDBJob(viewer, db);
-				job.setPriority(ConnectDBJob.SHORT);
-				job.setUser(false);
-				job.setSystem(false);
-				job.schedule();
-			}
-		} catch (Exception e) {
-			Sys.packErrMsg(e.toString());
-		}
-	}
+//	public static void adddataview(TreeNode treeparent, String dbkey, String username, boolean isInit) {
+//		try {
+//			Schema user = new Schema(username);
+//			user.setTvtype("dbuser");
+//			user.setDbkey(dbkey);
+//			treeparent.addChild(user);
+//			if (isInit == false) {
+//				DataBase db = (DataBase) treeparent;
+//				ConnectDBJob job = new ConnectDBJob(viewer, db);
+//				job.setPriority(ConnectDBJob.SHORT);
+//				job.setUser(false);
+//				job.setSystem(false);
+//				job.schedule();
+//			}
+//		} catch (Exception e) {
+//			Sys.packErrMsg(e.toString());
+//		}
+//	}
 
 	public static void adddataTypeview(Schema treeparent, String dbkey) {
 		// Map<String, List<String>> TreeitemData;
