@@ -2,6 +2,7 @@ package com.tulin.v8.editors.page.server.common;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
+import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -25,6 +26,7 @@ import java.util.concurrent.Semaphore;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
+import org.json.JSONArray;
 
 import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.editors.page.server.echat.EChatExecuter;
@@ -1021,7 +1023,30 @@ public class PageWebServer {
 					parameter = parameter.substring(parameter.indexOf("/res/") + 5);
 				}
 			}
-			if (project != null && project.exists()) {
+			final JSONArray json = new JSONArray();
+			if (!isPageFile(parameter)) {// 给Ajax请求返回固定的信息,防止设计器异常.
+				return new WebServerContent() {
+					@Override
+					public long getContentLength() {
+						return json.toString().length();
+					}
+
+					@Override
+					public String getContentType() {
+						return "application/json;charset=UTF-8";
+					}
+
+					@Override
+					public InputStream getInputStream() {
+						return new ByteArrayInputStream(json.toString().getBytes());
+					}
+
+					@Override
+					public String getContentDisposition() {
+						return null;
+					}
+				};
+			} else if (project != null && project.exists()) {
 				IResource resource = TuLinPlugin.getProjectWebFolder(project);
 				if (resource != null && resource.exists()) {
 					String resourceURL = resource.getLocation().toFile().getAbsolutePath();
@@ -1063,7 +1088,7 @@ public class PageWebServer {
 								return null;
 							}
 						};
-					}
+					} 
 				}
 			}
 		}
@@ -1074,6 +1099,19 @@ public class PageWebServer {
 			}
 		}
 		return null;
+	}
+
+	private static boolean isPageFile(String path) {
+		if (path == null || "".equals(path)) {
+			return false;
+		}
+		if (path.indexOf("/") > -1) {
+			path = path.substring(path.lastIndexOf("/"));
+		}
+		if (path.indexOf(".") > 0 || path.contains("initPortalInfo")) {
+			return true;
+		}
+		return false;
 	}
 
 	private static String removeHTMLAnchor(String location) {
