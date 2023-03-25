@@ -31,7 +31,8 @@ Require-Bundle: org.eclipse.jface,
  com.tulin.v8.editors.fn,
  com.tulin.v8.editors.function,
  com.tulin.v8.editors.page,
- com.tulin.v8.flowdesigner.ui
+ com.tulin.v8.flowdesigner.ui,
+ com.tulin.v8.generator
 Bundle-ClassPath: lib/pinyin4j-1.1.0.jar,
  .
 Bundle-Activator: com.tulin.v8.ide.StudioPlugin

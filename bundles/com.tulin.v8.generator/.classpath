@@ -2,7 +2,6 @@
 <classpath>
 	<classpathentry exported="true" kind="lib" path="lib/guava-31.1-jre.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/commons-lang3-3.4.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/mapper-4.2.2.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/spring-beans-5.3.25.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/mybatis-3.5.6.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/freemarker-2.3.32.jar"/>

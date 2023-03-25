@@ -75,6 +75,7 @@ import com.tulin.v8.ide.views.navigator.action.CollapseAllAction;
 import com.tulin.v8.ide.views.navigator.action.DeleteObjAction;
 import com.tulin.v8.ide.views.navigator.action.NewFlowDrawAction;
 import com.tulin.v8.ide.views.navigator.action.NewFlowFolderAction;
+import com.tulin.v8.ide.views.navigator.action.NewMapperAction;
 import com.tulin.v8.ide.views.navigator.action.NewTableAction;
 import com.tulin.v8.ide.views.navigator.action.OpenFileAction;
 import com.tulin.v8.ide.views.navigator.action.OpenFlowDrawAction;
@@ -100,6 +101,7 @@ import zigen.plugin.db.ui.views.TreeView;
 
 /**
  * 模型视图
+ * 
  * @author chenqian
  */
 @SuppressWarnings("restriction")
@@ -122,6 +124,7 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 	private NewTableAction newTableAction;
 	private RenameAction reNameAction;
 	private DeleteObjAction DeleteAction;
+	private NewMapperAction newMapperAction;
 
 	public ModelView() {
 		this.fDialogSettings = StudioPlugin.getDefault().getDialogSettingsSection(getClass().getName());
@@ -273,6 +276,8 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 	protected void fillLocalPullDown(IMenuManager manager) {
 		manager.add(openAction);
 		manager.add(new Separator());
+		manager.add(newMapperAction);
+		manager.add(new Separator());
 		manager.add(reNameAction);
 		manager.add(DeleteAction);
 	}
@@ -319,6 +324,7 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 				manager.add(DeleteAction);
 				DeleteAction.setEnabled(true);
 			}
+			manager.add(newMapperAction);
 		} else if (obj instanceof FlowDraw) {
 			openflowdrawaction = new OpenFlowDrawAction(this.viewer);
 			Action openaction = new Action() {
@@ -354,8 +360,7 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 							.setImageDescriptor(ImageDescriptor.createFromImage(TuLinPlugin.getIcon("table.gif")));
 				} else {
 					newTableAction.setText(Messages.getString("ModelView.newTableAction.view"));
-					newTableAction
-							.setImageDescriptor(ImageDescriptor.createFromImage(TuLinPlugin.getIcon("view.gif")));
+					newTableAction.setImageDescriptor(ImageDescriptor.createFromImage(TuLinPlugin.getIcon("view.gif")));
 				}
 			}
 			if ("file".equals(tr.getTvtype())) {
@@ -434,6 +439,7 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 		newTableAction = new NewTableAction(this, viewer);
 		collapseAllAction = new CollapseAllAction(viewer);
 		toggleLinkingAction = new ToggleLinkingAction(this);
+		newMapperAction = new NewMapperAction(viewer);
 	}
 
 	protected void hookDoubleClickAction() {
