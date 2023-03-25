@@ -36,5 +36,6 @@ Bundle-ClassPath: .,
  lib/commons-lang3-3.4.jar,
  lib/guava-31.1-jre.jar
 Bundle-Activator: com.tulin.v8.generator.GeneratorPlugin
-Bundle-ActivationPolicy: lazy
 Export-Package: com.tulin.v8.generator
+Bundle-ActivationPolicy: lazy
+Eclipse-BundleShape: dir
