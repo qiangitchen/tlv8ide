@@ -14,6 +14,7 @@ import org.eclipse.jdt.internal.ui.packageview.PackageExplorerPart;
 import org.eclipse.jdt.internal.ui.viewsupport.IViewPartInputProvider;
 import org.eclipse.jdt.ui.IPackagesViewPart;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.GroupMarker;
 import org.eclipse.jface.action.IMenuListener;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IStatusLineManager;
@@ -89,6 +90,10 @@ import com.tulin.v8.ide.views.navigator.action.ToggleLinkingAction;
 import zigen.plugin.db.ext.oracle.internal.OpenSourceEdirotAction;
 import zigen.plugin.db.ui.actions.CloseDBAction;
 import zigen.plugin.db.ui.actions.ConnectDBAction;
+import zigen.plugin.db.ui.actions.CopyColumnNameAction;
+import zigen.plugin.db.ui.actions.CopyTableNameAction;
+import zigen.plugin.db.ui.actions.CopyTableNameWithRemarksAction;
+import zigen.plugin.db.ui.internal.Column;
 import zigen.plugin.db.ui.internal.DataBase;
 import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.internal.OracleSequence;
@@ -118,6 +123,9 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 	private OpenFileAction openAction;
 	private OpenTableViewFileAction opentableviewfileaction;
 	private OpenFlowDrawAction openflowdrawaction;
+	private CopyTableNameAction copyTableNameAction;
+	private CopyTableNameWithRemarksAction copyTableNameWithRemarksAction;
+	private CopyColumnNameAction copyColumnNameAction;
 	private RefreshAction actionRefresh;
 	private NewFlowFolderAction newflowfolderaction;
 	private NewFlowDrawAction newflowdrawaction;
@@ -318,13 +326,26 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 			MenuManager openmenu = new MenuManager(Messages.getString("ModelView.opentableview.2"));
 			manager.add(openmenu);
 			openmenu.add(opentableviewfileaction);
+			manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
+			manager.add(newMapperAction);
+			manager.add(new Separator());
+			manager.add(copyTableNameAction);
+			manager.add(copyTableNameWithRemarksAction);
+			manager.add(new Separator());
+			manager.add(new GroupMarker("group.copy.table"));
+			manager.add(new Separator());
+			manager.add(new GroupMarker("group.copy.statement"));
 			// 可以删除表和视图 View是Table的子类
 			if (obj instanceof Table) {
 				manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 				manager.add(DeleteAction);
 				DeleteAction.setEnabled(true);
 			}
-			manager.add(newMapperAction);
+		} else if (obj instanceof Column) {
+			manager.add(copyColumnNameAction);
+			manager.add(new GroupMarker("group.copy.column"));
+			manager.add(new Separator());
+			manager.add(new GroupMarker("group.copy.statement"));
 		} else if (obj instanceof FlowDraw) {
 			openflowdrawaction = new OpenFlowDrawAction(this.viewer);
 			Action openaction = new Action() {
@@ -408,11 +429,11 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 			manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 			manager.add(actionRefresh);
 		}
+		manager.add(new Separator("additions"));
+		manager.add(new Separator("additions-end"));
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 		PropertyViewerAction propertyvieweraction = new PropertyViewerAction(viewer);
 		manager.add(propertyvieweraction);
-		manager.add(new Separator("additions"));
-		manager.add(new Separator("additions-end"));
 	}
 
 	protected void fillLocalToolBar(IToolBarManager manager) {
@@ -440,6 +461,9 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 		collapseAllAction = new CollapseAllAction(viewer);
 		toggleLinkingAction = new ToggleLinkingAction(this);
 		newMapperAction = new NewMapperAction(viewer);
+		copyTableNameAction = new CopyTableNameAction(viewer);
+		copyTableNameWithRemarksAction = new CopyTableNameWithRemarksAction(viewer);
+		copyColumnNameAction = new CopyColumnNameAction(viewer);
 	}
 
 	protected void hookDoubleClickAction() {
