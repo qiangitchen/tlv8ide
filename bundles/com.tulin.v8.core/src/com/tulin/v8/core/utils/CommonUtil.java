@@ -421,6 +421,7 @@ public class CommonUtil {
 				rlist.add(item);
 			}
 		} catch (Exception e) {
+			System.err.println(sql);
 			e.printStackTrace();
 		} finally {
 			DBUtils.CloseConn(conn, stm, rs);

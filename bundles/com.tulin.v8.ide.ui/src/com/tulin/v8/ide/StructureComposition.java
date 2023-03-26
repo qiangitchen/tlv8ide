@@ -24,14 +24,13 @@ public class StructureComposition {
 	 * @return String
 	 * @throws Exception
 	 */
-	public static String getTablePermision(String dbkey, String tablename, String tbtype) throws Exception {
-		String result = "";
+	public static File getTablePermision(String dbkey, String tablename, String tbtype) throws Exception {
 		String dataPath = StudioConfig.getUIPath() + "/.data";
 		String fileName = dbkey + "_" + tablename + ".xml";
 		String bzPath = dataPath + "/" + fileName;
 		File dirfiel = new File(dataPath);
 		if (!dirfiel.exists()) {
-			dirfiel.mkdir();
+			dirfiel.mkdirs();
 		}
 		File file = new File(bzPath);
 		if (file.exists()) {
@@ -41,8 +40,8 @@ public class StructureComposition {
 			}
 		}
 		file.createNewFile();
-		result = WriteTablePermision(file, dbkey, tablename, tbtype);
-		return result;
+		WriteTablePermision(file, dbkey, tablename, tbtype);
+		return file;
 	}
 
 	/**

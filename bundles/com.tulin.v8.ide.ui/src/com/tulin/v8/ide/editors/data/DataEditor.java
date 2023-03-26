@@ -128,32 +128,14 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 				FileStoreEditorInput nleStoreEditorInput = new FileStoreEditorInput(fileStore);
 				index = addPage(editor, nleStoreEditorInput);
 			} else {
-				// //////<<<<<<<<<<<<<<<<<////
 				filename = getEditorInput().getName();
 				if (filename.indexOf("/") > 0) {
 					filename = filename.substring(filename.lastIndexOf("/") + 1);
 				}
-				/* 2021-03-24实质不可能出现，所以取消名称解析。-陈乾 */
-//				if (filename.indexOf("[") > 0) {
-//					String dbkey = filename.substring(filename.indexOf("[") + 1, filename.indexOf("]"));
-//					String tvname = "";
-//					if (filename.indexOf(".") > 0) {
-//						tvname = filename.substring(filename.indexOf(".") + 1);
-//					}
-//					if (tvname.indexOf("[") > 0) {
-//						tvname = tvname.substring(0, tvname.indexOf("["));
-//					}
-//					tvname = tvname.trim();
-//					filename = dbkey;
-//					filename += "_" + tvname;
-//					filename += ".xml";
-//				}
-				/* end 2021-3-24 d1 */
 				String name = filename;
 				name = name.substring(name.indexOf("_") + 1);
 				name = name.replace(".xml", "");
 				tableName = name;
-				// ////////>>>>>>>>>>>>>>>>/////
 				index = addPage(editor, getEditorInput());
 			}
 			setPageText(index, Messages.getString("TLEditor.pageEditor.1"));

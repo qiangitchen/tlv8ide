@@ -1,20 +1,20 @@
 package com.tulin.v8.ide.views.navigator.job;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.ResourcesPlugin;
+import java.io.File;
+
+import org.eclipse.core.internal.filesystem.local.LocalFile;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.ide.IDE;
 
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.ide.StructureComposition;
 import com.tulin.v8.ide.editors.data.DataEditor;
-import com.tulin.v8.ide.utils.StudioConfig;
 import com.tulin.v8.ide.views.navigator.action.Messages;
 
 import zigen.plugin.db.core.IDBConfig;
@@ -25,6 +25,7 @@ import zigen.plugin.db.ui.internal.Table;
 import zigen.plugin.db.ui.internal.View;
 import zigen.plugin.db.ui.jobs.RefreshColumnJob;
 
+@SuppressWarnings("restriction")
 public class OpenTableViewEditorJob extends RefreshColumnJob {
 	public static final String JOB_NAME = OpenTableViewEditorJob.class.getName();
 	private ITable table;
@@ -68,8 +69,7 @@ public class OpenTableViewEditorJob extends RefreshColumnJob {
 				Table tr = (Table) table;
 				try {
 					// 生成数据文件
-					StructureComposition.getTablePermision(tr.getDbkey(), tr.getName(), tr.getTvtype());
-
+					File file = StructureComposition.getTablePermision(tr.getDbkey(), tr.getName(), tr.getTvtype());
 					//// 打开数据文件////
 					if (table instanceof View) {
 						View view = (View) table;
@@ -79,10 +79,9 @@ public class OpenTableViewEditorJob extends RefreshColumnJob {
 						TableViewEditorInput editorinput = new TableViewEditorInput(table.getDbConfig(), table);
 						IDE.openEditor(page, editorinput, DataEditor.ID);
 					} else {
-						String filename = "/" + StudioConfig.PHANTOM_PROJECT_NAME + "/.data/" + tr.getDbkey() + "_"
-								+ tr.getName() + ".xml";
-						IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(new Path(filename));
-						IDE.openEditor(page, file, DataEditor.ID);
+						LocalFile localLocalFile = new LocalFile(file);
+						FileStoreEditorInput localFileStoreEditorInput = new FileStoreEditorInput(localLocalFile);
+						IDE.openEditor(page, localFileStoreEditorInput, DataEditor.ID);
 					}
 				} catch (Exception e) {
 					Sys.packErrMsg(e.toString());

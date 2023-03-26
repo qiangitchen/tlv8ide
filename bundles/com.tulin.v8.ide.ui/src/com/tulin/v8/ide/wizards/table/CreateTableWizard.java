@@ -97,19 +97,11 @@ public class CreateTableWizard extends Wizard implements INewWizard {
 		if (re) {
 			final String cdbkey = dbkey;
 			final String tablename = tablewritepage.TableName.getText().toUpperCase();
-			viewer.getSite().getShell().getDisplay().asyncExec(new Runnable() {
+			viewer.getSite().getShell().getDisplay().syncExec(new Runnable() {
 				public void run() {
-					try {
-						StructureComposition.getTablePermision(cdbkey, tablename, "TABLE");
-					} catch (Exception e1) {
-						Sys.printErrMsg(e1);
-						e1.printStackTrace();
-					}
-//					IFile file = ResourcesPlugin.getWorkspace().getRoot().getFile(
-//							new Path(StudioConfig.getUIPath() + "/.data/" + cdbkey + "_" + tablename + ".xml"));
 					IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 					try {
-						File nf = new File(StudioConfig.getUIPath() + "/.data/" + cdbkey + "_" + tablename + ".xml");
+						File nf = StructureComposition.getTablePermision(cdbkey, tablename, "TABLE");;
 						if (nf.exists()) {
 							LocalFile localLocalFile = new LocalFile(nf);
 							FileStoreEditorInput localFileStoreEditorInput = new FileStoreEditorInput(localLocalFile);
@@ -117,7 +109,7 @@ public class CreateTableWizard extends Wizard implements INewWizard {
 						} else {
 							showMessage("无法打开的文件类型，或文件不存在！path:" + nf.getAbsolutePath());
 						}
-					} catch (PartInitException e) {
+					} catch (Exception e) {
 						showMessage(e.toString());
 					}
 				}
