@@ -14,7 +14,7 @@ import zigen.plugin.db.core.rule.AbstractSQLCreatorFactory;
 import zigen.plugin.db.core.rule.ISQLCreatorFactory;
 import zigen.plugin.db.preference.DBTreeViewPreferencePage;
 
-public class Column extends TreeLeaf {
+public class Column extends TreeNode {
 
 	private static final long serialVersionUID = 1L;
 
