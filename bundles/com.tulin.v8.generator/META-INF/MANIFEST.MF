@@ -38,4 +38,3 @@ Bundle-ClassPath: .,
 Bundle-Activator: com.tulin.v8.generator.GeneratorPlugin
 Export-Package: com.tulin.v8.generator
 Bundle-ActivationPolicy: lazy
-Eclipse-BundleShape: dir

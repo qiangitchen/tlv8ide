@@ -22,6 +22,7 @@
         <module>com.tulin.v8.editors.page</module>
 		<module>com.tulin.v8.flowdesigner.server</module>
 		<module>com.tulin.v8.flowdesigner.ui</module>
+		<module>com.tulin.v8.generator</module>
 		<module>com.tulin.v8.ide.ui</module>
 		<module>com.tulin.v8.js.ui</module>
 		<module>com.tulin.v8.platform</module>
