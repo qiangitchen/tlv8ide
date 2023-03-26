@@ -1,7 +1,10 @@
 package com.tulin.v8.generator;
 
 import com.google.common.base.CaseFormat;
+import com.tulin.v8.core.Sys;
 import com.tulin.v8.core.TuLinPlugin;
+
+import freemarker.template.Template;
 import freemarker.template.TemplateExceptionHandler;
 import zigen.plugin.db.ui.internal.DataBase;
 
@@ -10,9 +13,12 @@ import org.mybatis.generator.api.MyBatisGenerator;
 import org.mybatis.generator.config.*;
 import org.mybatis.generator.internal.DefaultShellCallback;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.text.SimpleDateFormat;
 import java.util.*;
 
@@ -22,8 +28,9 @@ import java.util.*;
 public class CodeGenerator {
 	// private final String BASE_PATH = System.getProperty("user.dir");//
 	// 项目在硬盘上的基础路径
-	private final String TEMPLATE_FILE_PATH = GeneratorPlugin.getDefault().getStateLocation().toOSString()+"/template";
-	//CodeGenerator.class.getClassLoader().getResource("template").getFile();// 模板位置
+//	private String TEMPLATE_FILE_PATH = System.getProperty("user.dir") + "/template";
+	// CodeGenerator.class.getClassLoader().getResource("template").getFile();//
+	// 模板位置
 
 	public String PROJECT_PATH = System.getProperty("user.dir");
 	// TuLinPlugin.getCurrentProject().getFolder("src").getLocation().toFile().getAbsolutePath();
@@ -38,33 +45,44 @@ public class CodeGenerator {
 	private final String JAVA_PATH = "/src/main/java"; // java文件路径
 	private final String RESOURCES_PATH = "/src/main/resources";// 资源文件路径
 
-	public Object BASE_PACKAGE = "com.tlv8.project";
+	private String BASE_PACKAGE = "com.tlv8";
 	private String MODEL_PACKAGE = BASE_PACKAGE + ".pojo";// 生成的Model所在包
 	private String MAPPER_PACKAGE = BASE_PACKAGE + ".mapper";// 生成的Mapper所在包
 	private String SERVICE_PACKAGE = BASE_PACKAGE + ".service";// 生成的Service所在包
 	private String SERVICE_IMPL_PACKAGE = SERVICE_PACKAGE + ".impl";// 生成的ServiceImpl所在包
 	private String CONTROLLER_PACKAGE = BASE_PACKAGE + ".controller";// 生成的Controller所在包
 
-	private final String PACKAGE_PATH_SERVICE = packageConvertPath(SERVICE_PACKAGE);// 生成的Service存放路径
-	private final String PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);// 生成的Service实现存放路径
-	private final String PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);// 生成的Controller存放路径
+	private String PACKAGE_PATH_SERVICE = packageConvertPath(SERVICE_PACKAGE);// 生成的Service存放路径
+	private String PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);// 生成的Service实现存放路径
+	private String PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);// 生成的Controller存放路径
 
 	private final String AUTHOR = "TLv8 IDE";// @author
 	private final String DATE = new SimpleDateFormat("yyyy/MM/dd").format(new Date());// @date
 
+	private String keyField = "fid";
+
 	public CodeGenerator() {
 	}
 
-	public CodeGenerator(DataBase db, String packageName) {
+	public CodeGenerator(DataBase db, String packageName, String keyField) {
 		this.BASE_PACKAGE = packageName;
+		this.MODEL_PACKAGE = BASE_PACKAGE + ".pojo";// 生成的Model所在包
+		this.MAPPER_PACKAGE = BASE_PACKAGE + ".mapper";// 生成的Mapper所在包
+		this.SERVICE_PACKAGE = BASE_PACKAGE + ".service";// 生成的Service所在包
+		this.SERVICE_IMPL_PACKAGE = SERVICE_PACKAGE + ".impl";// 生成的ServiceImpl所在包
+		this.CONTROLLER_PACKAGE = BASE_PACKAGE + ".controller";// 生成的Controller所在包
+		this.PACKAGE_PATH_SERVICE = packageConvertPath(SERVICE_PACKAGE);// 生成的Service存放路径
+		this.PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);// 生成的Service实现存放路径
+		this.PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);// 生成的Controller存放路径
 		this.PROJECT_PATH = TuLinPlugin.getCurrentProject().getLocation().toFile().getAbsolutePath();
 		this.JDBC_URL = db.getDbConfig().getUrl();
 		this.JDBC_USERNAME = db.getDbConfig().getUserId();
 		this.JDBC_PASSWORD = db.getDbConfig().getPassword();
 		this.JDBC_DIVER_CLASS_NAME = db.getDbConfig().getDriverName();
-		System.out.println(TEMPLATE_FILE_PATH);
+		this.keyField = keyField;
 	}
 
+	@SuppressWarnings("resource")
 	public static void main(String[] args) {
 		while (true) {
 			System.out.println("请输入表名:");
@@ -145,7 +163,7 @@ public class CodeGenerator {
 		tableConfiguration.setTableName(tableName);
 		if (StringUtils.isNotEmpty(modelName))
 			tableConfiguration.setDomainObjectName(modelName);
-		tableConfiguration.setGeneratedKey(new GeneratedKey("fid", "Mysql", true, null));
+		tableConfiguration.setGeneratedKey(new GeneratedKey(keyField, "JDBC", false, null));
 		context.addTableConfiguration(tableConfiguration);
 
 		List<String> warnings;
@@ -169,9 +187,9 @@ public class CodeGenerator {
 		}
 		if (StringUtils.isEmpty(modelName))
 			modelName = tableNameConvertUpperCamel(tableName);
-		System.out.println(modelName + ".java 生成成功");
-		System.out.println(modelName + "Mapper.java 生成成功");
-		System.out.println(modelName + "Mapper.xml 生成成功");
+		Sys.printMsg(modelName + ".java 生成成功");
+		Sys.printMsg(modelName + "Mapper.java 生成成功");
+		Sys.printMsg(modelName + "Mapper.xml 生成成功");
 	}
 
 	public void genService(String tableName, String modelName) {
@@ -179,13 +197,13 @@ public class CodeGenerator {
 			freemarker.template.Configuration cfg = getConfiguration();
 			String modelNameUpperCamel = StringUtils.isEmpty(modelName) ? tableNameConvertUpperCamel(tableName)
 					: modelName;
-
 			Map<String, Object> data = new HashMap<>();
 			data.put("date", DATE);
 			data.put("author", AUTHOR);
 			data.put("modelNameUpperCamel", modelNameUpperCamel);
 			data.put("modelNameLowerCamel", tableNameConvertLowerCamel(tableName));
 			data.put("basePackage", BASE_PACKAGE);
+			data.put("modelPackage", MODEL_PACKAGE);
 			data.put("tableName", tableName);
 
 			File file = new File(
@@ -193,17 +211,27 @@ public class CodeGenerator {
 			if (!file.getParentFile().exists()) {
 				file.getParentFile().mkdirs();
 			}
-			cfg.getTemplate("service.ftl").process(data, new FileWriter(file));
-			System.out.println(modelNameUpperCamel + "Service.java 生成成功");
+			Template template = new Template("service.ftl",
+					new InputStreamReader(CodeGenerator.class.getResourceAsStream("/template/service.ftl"), "UTF-8"),
+					cfg);
+//			Template template = Template.getPlainTextTemplate("service.ftl", getContent(CodeGenerator.class.getResourceAsStream("/template/service.ftl")), cfg);
+			template.process(data, new FileWriter(file));
+//			cfg.getTemplate("service.ftl").process(data, new FileWriter(file));
+			Sys.printMsg(modelNameUpperCamel + "Service.java 生成成功");
 
 			File file1 = new File(
 					PROJECT_PATH + JAVA_PATH + PACKAGE_PATH_SERVICE_IMPL + modelNameUpperCamel + "ServiceImpl.java");
 			if (!file1.getParentFile().exists()) {
 				file1.getParentFile().mkdirs();
 			}
-			cfg.getTemplate("service-impl.ftl").process(data, new FileWriter(file1));
-			System.out.println(modelNameUpperCamel + "ServiceImpl.java 生成成功");
+			Template template1 = new Template("service-impl.ftl", new InputStreamReader(
+					CodeGenerator.class.getResourceAsStream("/template/service-impl.ftl"), "UTF-8"), cfg);
+//			Template template1 = Template.getPlainTextTemplate("service-impl.ftl", getContent(CodeGenerator.class.getResourceAsStream("/template/service-impl.ftl")), cfg);
+			template1.process(data, new FileWriter(file1));
+//			cfg.getTemplate("service-impl.ftl").process(data, new FileWriter(file1));
+			Sys.printMsg(modelNameUpperCamel + "ServiceImpl.java 生成成功");
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException("生成Service失败", e);
 		}
 	}
@@ -221,6 +249,7 @@ public class CodeGenerator {
 			data.put("modelNameUpperCamel", modelNameUpperCamel);
 			data.put("modelNameLowerCamel", CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_CAMEL, modelNameUpperCamel));
 			data.put("basePackage", BASE_PACKAGE);
+			data.put("modelPackage", MODEL_PACKAGE);
 			data.put("tableName", tableName);
 
 			File file = new File(
@@ -230,10 +259,16 @@ public class CodeGenerator {
 			}
 			// cfg.getTemplate("controller-restful.ftl").process(data, new
 			// FileWriter(file));
-			cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
+			Template template = new Template("controller.ftl",
+					new InputStreamReader(CodeGenerator.class.getResourceAsStream("/template/controller.ftl"), "UTF-8"),
+					cfg);
+//			Template template = Template.getPlainTextTemplate("controller.ftl", getContent(CodeGenerator.class.getResourceAsStream("/template/controller.ftl")), cfg);
+			template.process(data, new FileWriter(file));
+//			cfg.getTemplate("controller.ftl").process(data, new FileWriter(file));
 
-			System.out.println(modelNameUpperCamel + "Controller.java 生成成功");
+			Sys.printMsg(modelNameUpperCamel + "Controller.java 生成成功");
 		} catch (Exception e) {
+			e.printStackTrace();
 			throw new RuntimeException("生成Controller失败", e);
 		}
 
@@ -242,32 +277,43 @@ public class CodeGenerator {
 	private freemarker.template.Configuration getConfiguration() throws IOException {
 		freemarker.template.Configuration cfg = new freemarker.template.Configuration(
 				freemarker.template.Configuration.VERSION_2_3_23);
-		cfg.setDirectoryForTemplateLoading(new File(TEMPLATE_FILE_PATH));
+		// cfg.setDirectoryForTemplateLoading(new File(TEMPLATE_FILE_PATH));
 		cfg.setDefaultEncoding("UTF-8");
 		cfg.setTemplateExceptionHandler(TemplateExceptionHandler.IGNORE_HANDLER);
 		return cfg;
 	}
 
-	private String tableNameConvertLowerCamel(String tableName) {
+	public static String getContent(InputStream fileiptstream) throws Exception {
+		BufferedReader Strreader = new BufferedReader(new InputStreamReader(fileiptstream));
+		StringBuffer fileText = new StringBuffer();
+		String fileStr = "";
+		while ((fileStr = Strreader.readLine()) != null) {
+			fileText.append(fileStr);
+		}
+		Sys.printMsg(fileText);
+		return fileText.toString();
+	}
+
+	public static String tableNameConvertLowerCamel(String tableName) {
 		return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.LOWER_CAMEL, tableName.toLowerCase());
 	}
 
-	private String tableNameConvertUpperCamel(String tableName) {
+	public static String tableNameConvertUpperCamel(String tableName) {
 		return CaseFormat.LOWER_UNDERSCORE.to(CaseFormat.UPPER_CAMEL, tableName.toLowerCase());
 
 	}
 
-	private String tableNameConvertMappingPath(String tableName) {
+	public static String tableNameConvertMappingPath(String tableName) {
 		tableName = tableName.toLowerCase();// 兼容使用大写的表名
 		return "/" + (tableName.contains("_") ? tableName.replaceAll("_", "/") : tableName);
 	}
 
-	private String modelNameConvertMappingPath(String modelName) {
+	public static String modelNameConvertMappingPath(String modelName) {
 		String tableName = CaseFormat.UPPER_CAMEL.to(CaseFormat.LOWER_UNDERSCORE, modelName);
 		return tableNameConvertMappingPath(tableName);
 	}
 
-	private String packageConvertPath(String packageName) {
+	public static String packageConvertPath(String packageName) {
 		return String.format("/%s/", packageName.contains(".") ? packageName.replaceAll("\\.", "/") : packageName);
 	}
 

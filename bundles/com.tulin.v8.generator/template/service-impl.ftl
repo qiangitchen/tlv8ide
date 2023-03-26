@@ -1,14 +1,14 @@
 package ${basePackage}.service.impl;
 
 import ${basePackage}.mapper.${modelNameUpperCamel}Mapper;
-import ${basePackage}.entity.${modelNameUpperCamel};
+import ${modelPackage}.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
 
 import org.springframework.stereotype.Service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-
+import java.util.List;
 /**
  * Created by ${author} on ${date}.
  */

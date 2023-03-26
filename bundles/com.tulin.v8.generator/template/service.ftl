@@ -1,6 +1,6 @@
 package ${basePackage}.service;
 
-import ${basePackage}.entity.${modelNameUpperCamel};
+import ${modelPackage}.${modelNameUpperCamel};
 
 import java.util.List;
 

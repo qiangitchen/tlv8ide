@@ -1,22 +1,19 @@
 package ${basePackage}.controller;
 
-import ${basePackage}.entity.${modelNameUpperCamel};
+import ${modelPackage}.${modelNameUpperCamel};
 import ${basePackage}.service.${modelNameUpperCamel}Service;
 
 import com.tlv8.common.domain.AjaxResult;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import java.util.List;
 
 /**
 * Created by ${author} on ${date}.
 */
-@RestController
+@Controller
 @RequestMapping("/${modelNameLowerCamel}")
 public class ${modelNameUpperCamel}Controller {
     @Autowired
