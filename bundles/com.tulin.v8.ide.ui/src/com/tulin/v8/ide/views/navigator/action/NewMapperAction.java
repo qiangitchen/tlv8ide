@@ -18,8 +18,8 @@ public class NewMapperAction extends Action implements Runnable {
 
 	public NewMapperAction(TreeViewer viewer) {
 		this.viewer = viewer;
-		this.setText("New Mapper");
-		this.setToolTipText("New Mapper Controller Entry for Table");
+		this.setText(Messages.getString("View.Action.NewMapper.title"));
+		this.setToolTipText(Messages.getString("View.Action.NewMapper.text"));
 		this.setImageDescriptor(ImageDescriptor.createFromImage(TuLinPlugin.getIcon("add.gif")));
 	}
 

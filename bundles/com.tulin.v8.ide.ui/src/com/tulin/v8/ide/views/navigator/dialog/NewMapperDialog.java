@@ -14,6 +14,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.generator.CodeGenerator;
+import com.tulin.v8.ide.views.navigator.action.Messages;
 
 import zigen.plugin.db.core.TablePKColumn;
 import zigen.plugin.db.ui.internal.ITable;
@@ -32,13 +33,13 @@ public class NewMapperDialog extends Dialog {
 	}
 
 	protected Control createDialogArea(Composite parent) {
-		getShell().setText("New Mapper");
+		getShell().setText(Messages.getString("View.Action.NewMapper.title"));
 		Composite container = (Composite) super.createDialogArea(parent);
 		container.setLayout(new FillLayout());
 		Composite composite = new Composite(container, SWT.FILL);
 		composite.setLayout(new GridLayout(2, false));
 		Label code = new Label(composite, SWT.NONE);
-		code.setText("Table Name:");
+		code.setText(Messages.getString("View.Action.NewMapper.tname"));
 		code.setLayoutData(new GridData(SWT.NONE));
 		tableName = new Text(composite, SWT.FILL | SWT.BORDER);
 		GridData ttlay = new GridData(GridData.FILL_HORIZONTAL);
@@ -47,18 +48,18 @@ public class NewMapperDialog extends Dialog {
 		ttlay.heightHint = 25;
 		tableName.setLayoutData(ttlay);
 		Label name = new Label(composite, SWT.NONE);
-		name.setText("Table keyField:");
+		name.setText(Messages.getString("View.Action.NewMapper.keyfield"));
 		name.setLayoutData(new GridData(SWT.NONE));
 		keyField = new Text(composite, SWT.FILL | SWT.BORDER);
 		keyField.setLayoutData(ttlay);
 		Label packgeNameLable = new Label(composite, SWT.NONE);
-		packgeNameLable.setText("Package Name:");
+		packgeNameLable.setText(Messages.getString("View.Action.NewMapper.pname"));
 		packgeNameLable.setLayoutData(new GridData(SWT.NONE));
 		packgeName = new Text(composite, SWT.FILL | SWT.BORDER);
 		packgeName.setLayoutData(ttlay);
 
 		Label modelNameLable = new Label(composite, SWT.NONE);
-		modelNameLable.setText("Package Name:");
+		modelNameLable.setText(Messages.getString("View.Action.NewMapper.mname"));
 		modelNameLable.setLayoutData(new GridData(SWT.NONE));
 		modelName = new Text(composite, SWT.FILL | SWT.BORDER);
 		modelName.setLayoutData(ttlay);
