@@ -61,15 +61,14 @@
             class="com.tulin.v8.ide.wizards.SampleNewWizard"
             id="com.tulin.v8.ide.wizards.SampleNewWizard">
       </wizard>
-      <!--
       <wizard
-            name="%wizard.name.1"
-            icon="icons/mobile.png"
-            category="YunJie"
-            class="com.justep.yn.studio.wizards.mob.MobilePageWizard"
-            id="com.justep.yn.studio.wizards.mob.MobilePageWizard">
+            name="%wizard.name.2"
+            icon="icons/mybatisico.png"
+            category="TuLin"
+            class="com.tulin.v8.ide.wizards.NewMapperWizard"
+            id="com.tulin.v8.ide.wizards.NewMapperWizard">
+            <keywordReference id="org.eclipse.jdt.ui.wizards.java"/>
       </wizard>
-      -->
    </extension>
    
    <extension point="org.eclipse.ui.popupMenus">
@@ -87,6 +86,24 @@
                class="com.tulin.v8.ide.popup.actions.NewPageFileAction"
                icon="icons/page.gif"
                menubarPath="Menu1/Group1"
+               enablesFor="1"
+               id="com.tulin.v8.ide.actions.NewPageFileAction">
+         </action>
+      </objectContribution>
+      <objectContribution
+            objectClass="org.eclipse.jdt.core.IPackageFragment"
+            id="com.tulin.v8.ide.wizards.contribution">
+         <menu
+               icon="icons/tulin.png"
+               id="Menu2"
+               label="%category.name.1">
+      		<separator name="Group2"/>
+   		 </menu>
+         <action
+               label="%menu.wizard.name.1"
+               class="com.tulin.v8.ide.popup.actions.NewMapperAction"
+               icon="icons/mybatisico.png"
+               menubarPath="Menu2/Group2"
                enablesFor="1"
                id="com.tulin.v8.ide.actions.NewPageFileAction">
          </action>

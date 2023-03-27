@@ -280,15 +280,39 @@ public class DBUtils {
 	 */
 	public static String getDataName(String key) {
 		String result = "";
-		Map<String, Map<String, String>> rm = Configuration.getConfig();
-		Map<String, String> m = rm.get(key);
-		String url = m.get("url");
-		if (IsOracleDB(key)) {
-			result = url.substring(url.lastIndexOf(":") + 1);
-		} else if (IsMySQLDB(key)) {
-			result = url.substring(url.lastIndexOf("/") + 1, url.indexOf("?"));
-		} else {
-			result = url.substring(url.lastIndexOf("/") + 1);
+		try {
+			Map<String, Map<String, String>> rm = Configuration.getConfig();
+			Map<String, String> m = rm.get(key);
+			String url = m.get("url");
+			if (IsOracleDB(key)) {
+				result = url.substring(url.lastIndexOf(":") + 1);
+			} else if (IsMySQLDB(key)) {
+				result = url.substring(url.lastIndexOf("/") + 1, url.indexOf("?"));
+			} else {
+				result = url.substring(url.lastIndexOf("/") + 1);
+			}
+		} catch (Exception e) {
+			SpringDatasource datasource = AppConfig.getSpringDatasource();
+			result = getDataName(datasource);
+		}
+		return result;
+	}
+
+	/**
+	 * 获取数据库名
+	 * 
+	 * @param key
+	 * @return String
+	 */
+	public static String getDataUrl(String key) {
+		String result = "";
+		try {
+			Map<String, Map<String, String>> rm = Configuration.getConfig();
+			Map<String, String> m = rm.get(key);
+			result = m.get("url");
+		} catch (Exception e) {
+			SpringDatasource datasource = AppConfig.getSpringDatasource();
+			result = datasource.getUrl();
 		}
 		return result;
 	}
@@ -327,6 +351,30 @@ public class DBUtils {
 		} else {
 			SpringDatasource datasource = AppConfig.getSpringDatasource();
 			return datasource.getUsername();
+		}
+	}
+
+	public static String getPassWord(String key) {
+		Map<String, Map<String, String>> rm = Configuration.getConfig();
+		Map<String, String> m = rm.get(key);
+		if (m != null) {
+			String user = m.get("password");
+			return user;
+		} else {
+			SpringDatasource datasource = AppConfig.getSpringDatasource();
+			return datasource.getPassword();
+		}
+	}
+
+	public static String getDriverClassName(String key) {
+		Map<String, Map<String, String>> rm = Configuration.getConfig();
+		Map<String, String> m = rm.get(key);
+		if (m != null) {
+			String user = m.get("driver");
+			return user;
+		} else {
+			SpringDatasource datasource = AppConfig.getSpringDatasource();
+			return datasource.getDriverClassName();
 		}
 	}
 

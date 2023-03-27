@@ -1,6 +1,7 @@
 package com.tulin.v8.generator;
 
 import com.google.common.base.CaseFormat;
+import com.tulin.v8.core.DBUtils;
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.core.TuLinPlugin;
 
@@ -79,6 +80,24 @@ public class CodeGenerator {
 		this.JDBC_USERNAME = db.getDbConfig().getUserId();
 		this.JDBC_PASSWORD = db.getDbConfig().getPassword();
 		this.JDBC_DIVER_CLASS_NAME = db.getDbConfig().getDriverName();
+		this.keyField = keyField;
+	}
+
+	public CodeGenerator(String dbkey, String packageName, String keyField, String projectPath) {
+		this.BASE_PACKAGE = packageName;
+		this.MODEL_PACKAGE = BASE_PACKAGE + ".pojo";// 生成的Model所在包
+		this.MAPPER_PACKAGE = BASE_PACKAGE + ".mapper";// 生成的Mapper所在包
+		this.SERVICE_PACKAGE = BASE_PACKAGE + ".service";// 生成的Service所在包
+		this.SERVICE_IMPL_PACKAGE = SERVICE_PACKAGE + ".impl";// 生成的ServiceImpl所在包
+		this.CONTROLLER_PACKAGE = BASE_PACKAGE + ".controller";// 生成的Controller所在包
+		this.PACKAGE_PATH_SERVICE = packageConvertPath(SERVICE_PACKAGE);// 生成的Service存放路径
+		this.PACKAGE_PATH_SERVICE_IMPL = packageConvertPath(SERVICE_IMPL_PACKAGE);// 生成的Service实现存放路径
+		this.PACKAGE_PATH_CONTROLLER = packageConvertPath(CONTROLLER_PACKAGE);// 生成的Controller存放路径
+		this.PROJECT_PATH = projectPath;
+		this.JDBC_URL = DBUtils.getDataUrl(dbkey);
+		this.JDBC_USERNAME = DBUtils.getUserName(dbkey);
+		this.JDBC_PASSWORD = DBUtils.getPassWord(dbkey);
+		this.JDBC_DIVER_CLASS_NAME = DBUtils.getDriverClassName(dbkey);
 		this.keyField = keyField;
 	}
 
