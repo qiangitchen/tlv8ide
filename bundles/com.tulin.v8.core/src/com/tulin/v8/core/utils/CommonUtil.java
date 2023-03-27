@@ -280,7 +280,7 @@ public class CommonUtil {
 		} else if (DBUtils.IsPostgreSQL(dbkey)) {
 			sql = "select a.relname AS TABLE_NAME,b.description AS TABLE_COMMENT "
 					+ " FROM pg_class a LEFT OUTER JOIN pg_description b "
-					+ " ON b.objsubid=0 AND a.oid = b.objoid WHERE a.relname='" + tablename + "' AND a.relkind='r'";
+					+ " ON b.objsubid=0 AND a.oid = b.objoid WHERE a.relname='" + tablename.toLowerCase() + "' AND a.relkind='r'";
 		}
 		Connection conn = null;
 		Statement stm = null;
@@ -368,9 +368,10 @@ public class CommonUtil {
 				sql = "select a.attnum,a.attname AS COLUMN_NAME,t.typname AS DATA_TYPE,"
 						+ "a.attlen AS length,a.atttypmod AS CHAR_LENGTH,"
 						+ "a.attnotnull AS notnull,b.description AS COMMENTS,d.adsrc as COLUMN_DEF  "
-						+ "FROM pg_class c,"
-						+ "pg_attribute a LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,"
-						+ "pg_type t left join pg_attrdef d on d.adrelid=a.attrelid and d.adnum=a.attnum WHERE a.attnum > 0  and a.attrelid = c.oid and a.atttypid = t.oid";
+						+ "FROM pg_class c left join pg_attribute a on a.attrelid = c.oid "
+						+ " LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid "
+						+ " left join pg_type t on a.atttypid = t.oid "
+						+ " left join pg_attrdef d on d.adrelid=a.attrelid and d.adnum=a.attnum WHERE a.attnum > 0";
 			}
 		} else {
 			sql = "select t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH,t1.DATA_DEFAULT AS COLUMN_DEF "
@@ -387,13 +388,14 @@ public class CommonUtil {
 				sql = "select TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS,character_maximum_length as CHAR_LENGTH,COLUMN_TYPE,COLUMN_DEFAULT AS COLUMN_DEF "
 						+ " from information_schema.columns where table_name='" + tableName + "'";
 			} else if (DBUtils.IsPostgreSQL(dbkey)) {
-				sql = "select a.attnum,a.attname AS COLUMN_NAME,t.typname AS DATA_TYPE,"
-						+ "a.attlen AS length,a.atttypmod AS CHAR_LENGTH,"
-						+ "a.attnotnull AS notnull,b.description AS COMMENTS,d.adsrc as COLUMN_DEF  "
-						+ "FROM pg_class c,"
-						+ "pg_attribute a LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid,"
-						+ "pg_type t left join pg_attrdef d on d.adrelid=a.attrelid and d.adnum=a.attnum WHERE c.relname = '"
-						+ tableName + "' and a.attnum > 0 and a.attrelid = c.oid and a.atttypid = t.oid";
+				sql = "SELECT A.attnum,A.attname AS COLUMN_NAME,T.typname AS DATA_TYPE,A.attlen AS LENGTH,"
+						+ "	A.atttypmod AS CHAR_LENGTH,A.attnotnull AS NOTNULL,"
+						+ "	b.description AS COMMENTS,d.adsrc AS COLUMN_DEF FROM "
+						+ "	pg_class C LEFT JOIN pg_attribute A ON A.attrelid = C.oid"
+						+ "	LEFT OUTER JOIN pg_description b ON A.attrelid = b.objoid "
+						+ "	AND A.attnum = b.objsubid LEFT JOIN pg_type T ON A.atttypid = T.oid"
+						+ "	LEFT JOIN pg_attrdef d ON d.adrelid = A.attrelid AND d.adnum = A.attnum "
+						+ " WHERE C.relname = '" + tableName.toLowerCase() + "' and a.attnum > 0";
 			}
 		}
 		Connection conn = null;

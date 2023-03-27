@@ -16,10 +16,12 @@ import org.eclipse.swt.widgets.Listener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
+import com.tulin.v8.core.DBUtils;
 import com.tulin.v8.ide.utils.DataType;
 import com.tulin.v8.ide.utils.StudioUtil;
 
 public class AddcolumnDialog extends Dialog {
+	public String dbkey;
 	public String textv;
 	public String namev;
 	public String datatypev;
@@ -73,8 +75,13 @@ public class AddcolumnDialog extends Dialog {
 		text.addListener(SWT.FocusOut, new Listener() {
 			@Override
 			public void handleEvent(Event arg0) {
-				String cellname = "f";
-				cellname += StudioUtil.Hanzi2UPinyin(text.getText());
+				String cellname = "F" + StudioUtil.Hanzi2UPinyin(text.getText());
+				if (cellname.length() > 10) {
+					cellname = "F" + StudioUtil.getSimPinYinByString(text.getText(), true);
+				}
+				if (DBUtils.IsPostgreSQL(dbkey)) {
+					cellname = cellname.toLowerCase();
+				}
 				name.setText(cellname);
 				validate();
 			}

@@ -74,10 +74,11 @@ public class CreateTableEndPage extends WizardPage {
 
 	public IWizardPage getNextPage() {
 		StringBuffer sql = new StringBuffer();
-		sql.append("create table " + tablewritepage.TableName.getText() + "(");
 		if (DBUtils.IsPostgreSQL(tablewritepage.getDbkey())) {
+			sql.append("create table " + tablewritepage.TableName.getText().toLowerCase() + "(");
 			sql.append("fid " + DataType.dataTypeTranse(tablewritepage.getDbkey(), "string", "32") + " NOT NULL,");
 		} else {
+			sql.append("create table " + tablewritepage.TableName.getText() + "(");
 			sql.append("fID " + DataType.dataTypeTranse(tablewritepage.getDbkey(), "string", "32") + " NOT NULL,");
 		}
 		TableItem[] items = tablewritepage.celltable.getItems();
@@ -138,7 +139,11 @@ public class CreateTableEndPage extends WizardPage {
 			sql.append("FCREATEORGNAME VARCHAR2(200),");
 			sql.append("FCREATETIME DATE,");
 		}
-		sql.append("VERSION integer);");
+		if (DBUtils.IsPostgreSQL(tablewritepage.getDbkey())) {
+			sql.append("version integer);");
+		} else {
+			sql.append("VERSION integer);");
+		}
 
 		if (DBUtils.IsMSSQLDB(tablewritepage.getDbkey())) {
 			sql.append("alter table [dbo].[" + tablewritepage.TableName.getText()

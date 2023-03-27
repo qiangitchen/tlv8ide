@@ -31,6 +31,7 @@ public class TableWritePage extends AbsolutelyTableCreate {
 			}
 		};
 		AddcolumnDialog dial = new AddcolumnDialog(getShell());
+		dial.dbkey = dbkey;
 		int result = dial.open();
 		if (IDialogConstants.OK_ID == result) {
 			name = dial.namev;

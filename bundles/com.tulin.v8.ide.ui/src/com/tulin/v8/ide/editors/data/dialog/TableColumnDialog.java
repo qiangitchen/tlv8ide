@@ -260,12 +260,18 @@ public class TableColumnDialog extends Dialog {
 				}
 			}
 			String defval = " default null ";
+			String deftext = "";
 			if (defaultval.getText() != null && !"".equals(defaultval.getText())) {
 				if (CommonUtil.needQuotation(colutype.getText())) {
 					defval = " default '" + defaultval.getText() + "' ";
+					deftext = "'" + defaultval.getText() + "'";
 				} else {
 					defval = " default " + defaultval.getText() + " ";
+					deftext = defaultval.getText();
 				}
+			}
+			if (DBUtils.IsPostgreSQL(dbkey)) {
+				defval = " ";
 			}
 			String nullpre = isNUll();
 			if (DBUtils.IsPostgreSQL(dbkey)) {
@@ -287,6 +293,18 @@ public class TableColumnDialog extends Dialog {
 				st = conn.createStatement();
 				Sys.printMsg(sql);
 				st.execute(sql);
+				if (DBUtils.IsPostgreSQL(dbkey)) {
+					if (!"".equals(deftext)) {
+						String dsql = "alter table  " + tablename + " alter  column " + column + " set default "
+								+ deftext;
+						Sys.printMsg(dsql);
+						st.execute(dsql);
+					} else {
+						String dsql = "alter table  " + tablename + " alter  column " + column + " drop default ";
+						Sys.printMsg(dsql);
+						st.execute(dsql);
+					}
+				}
 			} catch (Exception err) {
 				info.setText(Messages.getString("TLEditor.TableColumn.btn3") + err.getMessage()
 						+ Messages.getString("TLEditor.TableColumn.btn4") + sql);

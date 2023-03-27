@@ -37,8 +37,8 @@ import com.tulin.v8.ide.wizards.Messages;
 
 public class AbsolutelyTableCreate extends WizardPage {
 	SelectDbkeyPage selectdbkeypage;
-	private String dbkey;
-	private String owner;
+	protected String dbkey;
+	protected String owner;
 	public Text TableName;
 	public Text TableText;
 	public Table celltable;
