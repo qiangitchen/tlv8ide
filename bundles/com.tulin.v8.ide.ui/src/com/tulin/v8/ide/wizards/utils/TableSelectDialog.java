@@ -1,8 +1,6 @@
 package com.tulin.v8.ide.wizards.utils;
 
-import java.util.Iterator;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -23,10 +21,12 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import com.tulin.v8.core.Configuration;
 import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.ide.wizards.DataSelectPage;
 import com.tulin.v8.ide.wizards.Messages;
+
+import zigen.plugin.db.core.DBConfigManager;
+import zigen.plugin.db.core.IDBConfig;
 
 public class TableSelectDialog extends TitleAreaDialog {
 	/*
@@ -43,15 +43,10 @@ public class TableSelectDialog extends TitleAreaDialog {
 	public TableSelectDialog(Shell shell, String dbkey) {
 		super(shell);
 		this.dbkey = dbkey;
-		Map<String, Map<String, String>> rm = Configuration.getConfig();
-		Set<String> k = rm.keySet();
-		Iterator<String> it = k.iterator();
-		String[] dbkeys = new String[k.size()];
-		int i = 0;
-		while (it.hasNext()) {
-			String key = (String) it.next();
-			dbkeys[i] = key;
-			i++;
+		IDBConfig[] dbConfigs = DBConfigManager.getDBConfigs();
+		String[] dbkeys = new String[dbConfigs.length];
+		for (int i = 0; i < dbConfigs.length; i++) {
+			dbkeys[i] = dbConfigs[i].getDbName();
 		}
 		items = dbkeys;
 	}

@@ -344,6 +344,11 @@ version(s), and exceptions or additional permissions here}.&quot;
          version="0.0.0"
          optional="true"/>
 
+   <includes
+         id="com.tulin.v8.editors.vue.feature"
+         version="0.0.0"
+         optional="true"/>
+
    <plugin
          id="com.tulin.v8.core"
          download-size="0"

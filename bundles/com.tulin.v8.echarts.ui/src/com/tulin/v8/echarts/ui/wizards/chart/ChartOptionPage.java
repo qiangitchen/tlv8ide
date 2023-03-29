@@ -6,10 +6,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
@@ -40,13 +38,15 @@ import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.PlatformUI;
 
-import com.tulin.v8.core.Configuration;
 import com.tulin.v8.core.DBUtils;
 import com.tulin.v8.core.StringArray;
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.echarts.ui.wizards.Messages;
+
+import zigen.plugin.db.core.DBConfigManager;
+import zigen.plugin.db.core.IDBConfig;
 
 public class ChartOptionPage extends WizardPage {
 	private String dbkey = null;
@@ -77,15 +77,10 @@ public class ChartOptionPage extends WizardPage {
 		dbs.setLayout(new GridLayout());
 		dbs.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		final Combo dbkeyCombo = new Combo(dbs, SWT.DROP_DOWN);
-		Map<String, Map<String, String>> rm = Configuration.getConfig();
-		Set<String> k = rm.keySet();
-		Iterator<String> it = k.iterator();
-		String[] dbkeys = new String[k.size()];
-		int i = 0;
-		while (it.hasNext()) {
-			String key = (String) it.next();
-			dbkeys[i] = key;
-			i++;
+		IDBConfig[] dbConfigs = DBConfigManager.getDBConfigs();
+		String[] dbkeys = new String[dbConfigs.length];
+		for (int i = 0; i < dbConfigs.length; i++) {
+			dbkeys[i] = dbConfigs[i].getDbName();
 		}
 		dbkeyCombo.setItems(dbkeys);
 		dbkeyCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));

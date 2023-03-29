@@ -2,10 +2,8 @@ package com.tulin.v8.ide.wizards.utils;
 
 import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
@@ -27,11 +25,13 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
-import com.tulin.v8.core.Configuration;
 import com.tulin.v8.core.StringArray;
 import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.ide.wizards.DataSelectPage;
 import com.tulin.v8.ide.wizards.Messages;
+
+import zigen.plugin.db.core.DBConfigManager;
+import zigen.plugin.db.core.IDBConfig;
 
 public class TableCellsSelectDialog extends TitleAreaDialog {
 	/*
@@ -50,15 +50,10 @@ public class TableCellsSelectDialog extends TitleAreaDialog {
 		super(shell);
 		this.dbkey = dbkey;
 		this.tablename = table;
-		Map<String, Map<String, String>> rm = Configuration.getConfig();
-		Set<String> k = rm.keySet();
-		Iterator<String> it = k.iterator();
-		String[] dbkeys = new String[k.size()];
-		int i = 0;
-		while (it.hasNext()) {
-			String key = (String) it.next();
-			dbkeys[i] = key;
-			i++;
+		IDBConfig[] dbConfigs = DBConfigManager.getDBConfigs();
+		String[] dbkeys = new String[dbConfigs.length];
+		for (int i = 0; i < dbConfigs.length; i++) {
+			dbkeys[i] = dbConfigs[i].getDbName();
 		}
 		items = dbkeys;
 	}

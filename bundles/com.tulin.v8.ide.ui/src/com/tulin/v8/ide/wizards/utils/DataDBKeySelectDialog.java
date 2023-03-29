@@ -1,9 +1,5 @@
 package com.tulin.v8.ide.wizards.utils;
 
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.TitleAreaDialog;
 import org.eclipse.swt.SWT;
@@ -16,7 +12,8 @@ import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.List;
 import org.eclipse.swt.widgets.Shell;
 
-import com.tulin.v8.core.Configuration;
+import zigen.plugin.db.core.DBConfigManager;
+import zigen.plugin.db.core.IDBConfig;
 
 public class DataDBKeySelectDialog extends TitleAreaDialog {
 	/*
@@ -28,15 +25,10 @@ public class DataDBKeySelectDialog extends TitleAreaDialog {
 
 	public DataDBKeySelectDialog(Shell shell) {
 		super(shell);
-		Map<String, Map<String, String>> rm = Configuration.getConfig();
-		Set<String> k = rm.keySet();
-		Iterator<String> it = k.iterator();
-		String[] dbkeys = new String[k.size()];
-		int i = 0;
-		while (it.hasNext()) {
-			String key = (String) it.next();
-			dbkeys[i] = key;
-			i++;
+		IDBConfig[] dbConfigs = DBConfigManager.getDBConfigs();
+		String[] dbkeys = new String[dbConfigs.length];
+		for (int i = 0; i < dbConfigs.length; i++) {
+			dbkeys[i] = dbConfigs[i].getDbName();
 		}
 		items = dbkeys;
 	}
