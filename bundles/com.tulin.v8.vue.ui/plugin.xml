@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<plugin>
+
+	<extension point="org.eclipse.ui.newWizards">
+         <wizard
+            name="%vue.wizard.name"
+            icon="icons/vueico.png"
+            category="TuLin"
+            class="com.tulin.v8.vue.wizards.NewVueWizard"
+            id="com.tulin.v8.vue.wizards.NewVueWizard">
+      	</wizard>
+    </extension>
+	
+</plugin>
