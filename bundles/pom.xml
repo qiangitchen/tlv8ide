@@ -32,6 +32,7 @@
 		<module>com.tulin.v8.ureport.server</module>
 		<module>com.tulin.v8.ureport.ui</module>
 		<module>com.tulin.v8.markdown.editor</module>
+		<module>com.tulin.v8.editors.vue</module>
     </modules>
 	
 </project>

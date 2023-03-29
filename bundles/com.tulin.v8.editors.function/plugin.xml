@@ -10,7 +10,22 @@
             icon="icons/F.gif"
             id="com.tulin.v8.function.editors.FunctionEditor"
             name="%editor.name.function">
+         <contentTypeBinding
+               contentTypeId="com.tulin.v8.editors.fun.contenttype">
+         </contentTypeBinding>
       </editor>
+   </extension>
+   
+   <extension
+       point="org.eclipse.core.contenttype.contentTypes">
+	    <content-type
+           base-type="org.eclipse.core.runtime.xml"
+           file-extensions="fun,xml"
+           file-patterns="*.fun,*.fun.xml"
+           id="com.tulin.v8.editors.fun.contenttype"
+           name="Fn"
+           priority="normal">
+	    </content-type>
    </extension>
 
 </plugin>
