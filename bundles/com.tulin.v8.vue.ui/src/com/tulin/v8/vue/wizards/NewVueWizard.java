@@ -8,7 +8,7 @@ import org.eclipse.ui.IWorkbench;
 
 public class NewVueWizard extends Wizard implements INewWizard {
 	ISelection selection;
-	
+
 	ProjectSelectPage projctPage;
 
 	public NewVueWizard() {
@@ -18,6 +18,7 @@ public class NewVueWizard extends Wizard implements INewWizard {
 	public NewVueWizard(ISelection selection) {
 		super();
 		this.selection = selection;
+		setWindowTitle(Messages.getString("wizards.vue.title"));
 	}
 
 	@Override

@@ -10,5 +10,20 @@
             id="com.tulin.v8.vue.wizards.NewVueWizard">
       	</wizard>
     </extension>
+    
+    <extension point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            objectClass="org.eclipse.core.resources.IResource"
+            id="com.tulin.v8.ide.wizards.contribution">
+         <action
+               label="%wizards.vue.title"
+               class="com.tulin.v8.vue.popup.actions.NewVueFileAction"
+               icon="icons/vueico.png"
+               menubarPath="Menu1/Group1"
+               enablesFor="1"
+               id="com.tulin.v8.ide.actions.NewVueFileAction">
+         </action>
+      </objectContribution>
+    </extension>
 	
 </plugin>

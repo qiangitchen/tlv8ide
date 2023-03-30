@@ -78,7 +78,10 @@ public class AppConfig {
 		if (dsource == null || !dsource.exists()) {
 			dsource = project.findMember("src");
 		}
-		return dsource.getLocation().toString();
+		if(dsource!=null) {
+			return dsource.getLocation().toString();
+		}
+		return project.getLocation().toString();
 	}
 
 	/**

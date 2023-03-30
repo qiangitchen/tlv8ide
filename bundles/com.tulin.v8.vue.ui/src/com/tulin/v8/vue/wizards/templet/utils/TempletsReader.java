@@ -38,8 +38,7 @@ public class TempletsReader {
 			Document doc = DocumentHelper.parseText(fileStr);
 			root = doc.getRootElement();
 		} catch (Exception e) {
-			Document doc = DocumentHelper.parseText(TempletConfig.config);
-			root = doc.getRootElement();
+			e.printStackTrace();
 		}
 		return root;
 	}

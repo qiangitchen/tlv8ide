@@ -57,6 +57,8 @@ public class RelEngPerspective implements IPerspectiveFactory {
 		//File Folder
 		factory.addNewWizardShortcut("org.eclipse.ui.wizards.new.folder");// NON-NLS-1
 		factory.addNewWizardShortcut("org.eclipse.ui.wizards.new.file");// NON-NLS-1
+		//vue
+		factory.addNewWizardShortcut("com.tulin.v8.vue.wizards.NewVueWizard");// NON-NLS-1
 		// factory.addNewWizardShortcut("org.eclipse.jst.jsp.ui.internal.wizard.NewJSPWizard");//
 		// NON-NLS-1
 		factory.addNewWizardShortcut("com.tulin.v8.webtools.wizards.JSPNewWizard");// NON-NLS-1

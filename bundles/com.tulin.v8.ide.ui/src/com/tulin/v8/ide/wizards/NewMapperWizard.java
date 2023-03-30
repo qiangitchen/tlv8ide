@@ -29,6 +29,7 @@ public class NewMapperWizard extends Wizard implements INewWizard {
 		this.selection = selection;
 		setNeedsProgressMonitor(true);
 		setHelpAvailable(false);
+		setWindowTitle(Messages.getString("wizards.newmapper.title"));
 	}
 
 	@Override

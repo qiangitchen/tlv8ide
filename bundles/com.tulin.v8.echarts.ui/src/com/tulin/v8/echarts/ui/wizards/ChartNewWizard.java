@@ -38,18 +38,19 @@ public class ChartNewWizard extends Wizard implements INewWizard {
 	private ChartOptionPage chartoptionpage;
 	private ChartModlePage chartmodlepage;
 	private ChartFilePage chartfilepage;
-	
+
 	public ChartNewWizard() {
 		super();
 		setNeedsProgressMonitor(true);
 		setHelpAvailable(false);
 	}
-	
+
 	public ChartNewWizard(ISelection selection) {
 		super();
 		this.selection = selection;
 		setNeedsProgressMonitor(true);
 		setHelpAvailable(false);
+		setWindowTitle(Messages.getString("wizards.echart.title"));
 	}
 
 	@Override

@@ -2,11 +2,13 @@ package com.tulin.v8.vue;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 public class Activator extends AbstractUIPlugin {
-	public static final String PLUGIN_ID = "com.tulin.v8.vue";
+	public static final String PLUGIN_ID = "com.tulin.v8.vue.ui";
 	private static Activator plugin;
 
 	public static String getPluginId() {
@@ -40,5 +42,9 @@ public class Activator extends AbstractUIPlugin {
 
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
+	}
+	
+	public static Shell getShell() {
+		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	}
 }
