@@ -30,12 +30,14 @@
 		<item label="列表多选对话框" img="image/gridCheckDialog.jpg"
 			templet="gridCheckDialogTemplet" />
 	</item>
+	<!-- 
 	<item label="流程">
 		<item label="单表流程" img="image/simpleFlow.png"
 			templet="simpleFlow" />
 		<item label="主从流程" img="image/directFlow.png"
 			templet="directFlow" />
 	</item>
+	 -->
 	<item label="其他">
 		<item label="空白页面" img="" templet="BlankPage" />
 	</item>

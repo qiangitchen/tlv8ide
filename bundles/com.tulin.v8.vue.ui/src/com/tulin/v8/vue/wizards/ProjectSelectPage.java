@@ -1,6 +1,7 @@
 package com.tulin.v8.vue.wizards;
 
 import org.dom4j.Element;
+import org.eclipse.jface.wizard.IWizardPage;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.SashForm;
@@ -80,9 +81,19 @@ public class ProjectSelectPage extends WizardPage {
 			}
 		}
 		imageLabel.setText("");
-		System.out.println(imagePath);
 		imageLabel.setImage(Activator.getDefault().getImage(imagePath));
 		imageLabel.setVisible(true);
+	}
+
+	@Override
+	public IWizardPage getNextPage() {
+		if (projectType == null)
+			return super.getNextPage();
+		if ("BlankPage".equals(templet)) {
+			return getWizard().getPage("SampleNewPage");
+		} else {
+			return getWizard().getPage("dataSelectPage");
+		}
 	}
 
 	public String getPojectType() {

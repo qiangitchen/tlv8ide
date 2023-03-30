@@ -346,10 +346,8 @@ public class TableListPageLayoutPage extends WizardPage {
 
 	public IWizardPage getNextPage() {
 		dbkey = dataSelectPage.getDbkey();
-		tvName = dataSelectPage.getProjectName();
+		tvName = dataSelectPage.getTvName();
 		if (tvName != null) {
-			// labeltable.setText(Messages.getString("wizardsaction.dataselect.message.delectedtableview")
-			// + tvName);
 			if (!dbkey.equals(bfdbkey) || !tvName.equals(bftvName)) {
 				initData();
 				bfdbkey = dbkey;
@@ -358,7 +356,7 @@ public class TableListPageLayoutPage extends WizardPage {
 		}
 		setMessage(Messages.getString("wizardsaction.dataselect.message.delectedDatasource") + dbkey
 				+ Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + ".");
-		return getWizard().getPage("sampleListPageEnd");
+		return getWizard().getPage("tableListPageEnd");
 	}
 
 	private void initData() {

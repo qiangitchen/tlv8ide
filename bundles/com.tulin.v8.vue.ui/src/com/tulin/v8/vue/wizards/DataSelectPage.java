@@ -39,7 +39,7 @@ import zigen.plugin.db.core.IDBConfig;
 public class DataSelectPage extends WizardPage {
 	public Map<String, IDBConfig> DBConfig = new HashMap<String, IDBConfig>();
 	private String dbkey = null;
-	private String projectName = null;
+	private String tvName = null;
 	private Tree tree = null;
 	private ProjectSelectPage prevPage = null;
 
@@ -189,9 +189,8 @@ public class DataSelectPage extends WizardPage {
 						}
 						setMessage(Messages.getString("wizards.dataselect.message.selectLbale")
 								+ item.getParentItem().getText() + "-" + item.getText());
-						setProjectName(item.getText());
+						tvName = item.getText();
 						setPageComplete(true);
-						getWizard().getPage("samplelistPageLayout").getNextPage();
 					} catch (Exception e1) {
 						setMessage(e1.toString());
 					}
@@ -322,11 +321,12 @@ public class DataSelectPage extends WizardPage {
 		return dbkey;
 	}
 
-	public void setProjectName(String projectName) {
-		this.projectName = projectName;
+	public String getTvName() {
+		return tvName;
 	}
 
-	public String getProjectName() {
-		return projectName;
+	public void setTvName(String tvName) {
+		this.tvName = tvName;
 	}
+
 }

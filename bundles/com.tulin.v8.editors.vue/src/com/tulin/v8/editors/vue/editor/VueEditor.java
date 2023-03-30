@@ -8,6 +8,8 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 public class VueEditor extends StructuredTextEditor {
+	public static final String ID = "com.tulin.v8.editors.vueEditor";
+
 	public VueEditor() {
 		super();
 	}

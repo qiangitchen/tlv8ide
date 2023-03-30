@@ -31,6 +31,7 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.wst.css.ui,
  org.eclipse.wst.css.ui,
  com.tulin.v8.core,
- com.tulin.v8.dbviewer
+ com.tulin.v8.dbviewer,
+ com.tulin.v8.editors.vue
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.tulin.v8.vue.Activator
