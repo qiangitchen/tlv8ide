@@ -1,4 +1,4 @@
-package com.tulin.v8.ide.utils;
+package com.tulin.v8.core.utils;
 
 import com.tulin.v8.core.DBUtils;
 

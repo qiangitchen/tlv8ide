@@ -17,7 +17,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 
 import com.tulin.v8.core.DBUtils;
-import com.tulin.v8.ide.utils.DataType;
+import com.tulin.v8.core.utils.DataType;
 import com.tulin.v8.ide.utils.StudioUtil;
 
 public class AddcolumnDialog extends Dialog {

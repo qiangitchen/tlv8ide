@@ -13,7 +13,7 @@ import org.eclipse.swt.widgets.Text;
 
 import com.tulin.v8.core.DBUtils;
 import com.tulin.v8.core.Sys;
-import com.tulin.v8.ide.utils.DataType;
+import com.tulin.v8.core.utils.DataType;
 import com.tulin.v8.ide.wizards.Messages;
 
 public class CreateTableEndPage extends WizardPage {

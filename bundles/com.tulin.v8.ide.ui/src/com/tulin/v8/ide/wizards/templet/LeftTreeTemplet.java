@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.tulin.v8.core.StringArray;
 import com.tulin.v8.core.utils.CommonUtil;
-import com.tulin.v8.ide.utils.DataType;
+import com.tulin.v8.core.utils.DataType;
 import com.tulin.v8.ide.wizards.templet.utils.TempletsReader;
 
 public class LeftTreeTemplet extends TempletsReader {

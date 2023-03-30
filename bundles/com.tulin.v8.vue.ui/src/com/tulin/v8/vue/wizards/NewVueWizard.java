@@ -10,6 +10,7 @@ public class NewVueWizard extends Wizard implements INewWizard {
 	ISelection selection;
 
 	ProjectSelectPage projctPage;
+	DataSelectPage dataSelectPage;
 
 	public NewVueWizard() {
 		super();
@@ -31,6 +32,8 @@ public class NewVueWizard extends Wizard implements INewWizard {
 	public void addPages() {
 		projctPage = new ProjectSelectPage();
 		addPage(projctPage);
+		dataSelectPage = new DataSelectPage(projctPage);
+		addPage(dataSelectPage);
 	}
 
 	@Override

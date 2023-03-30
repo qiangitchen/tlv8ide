@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
 import com.tulin.v8.core.utils.CommonUtil;
-import com.tulin.v8.ide.utils.DataType;
+import com.tulin.v8.core.utils.DataType;
 import com.tulin.v8.ide.wizards.DataSelectPage;
 import com.tulin.v8.ide.wizards.Messages;
 

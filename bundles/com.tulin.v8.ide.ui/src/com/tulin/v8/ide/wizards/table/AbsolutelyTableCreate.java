@@ -30,9 +30,9 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 
+import com.tulin.v8.core.utils.DataType;
 import com.tulin.v8.ide.StudioPlugin;
 import com.tulin.v8.ide.dialog.TableCellsSelectDialog;
-import com.tulin.v8.ide.utils.DataType;
 import com.tulin.v8.ide.wizards.Messages;
 
 public class AbsolutelyTableCreate extends WizardPage {

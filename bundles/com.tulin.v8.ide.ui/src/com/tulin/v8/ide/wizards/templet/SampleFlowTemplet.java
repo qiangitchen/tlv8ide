@@ -4,7 +4,7 @@ import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 
 import com.tulin.v8.core.StringArray;
-import com.tulin.v8.ide.utils.DataType;
+import com.tulin.v8.core.utils.DataType;
 import com.tulin.v8.ide.wizards.templet.utils.TempletsReader;
 
 public class SampleFlowTemplet extends TempletsReader {
