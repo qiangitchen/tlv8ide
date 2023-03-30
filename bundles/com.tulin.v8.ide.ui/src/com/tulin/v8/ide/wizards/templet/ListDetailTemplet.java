@@ -21,7 +21,7 @@ public class ListDetailTemplet extends TempletsReader {
 			String datatype = dedatatypesText.get(i);
 			dataItem.append("<label class=\"layui-form-label\">" + label + "</label>");
 			dataItem.append("<div class=\"layui-input-inline\">");
-			dataItem.append("<input type=\"text\" id=\"" + column + "\" name=\"" + column
+			dataItem.append("<input id=\"" + column + "\" name=\"" + column
 					+ "\" " + DataType.getItemBydataType(datatype) + "/>");
 			dataItem.append("</div>");
 			dataItem.append("</div>");

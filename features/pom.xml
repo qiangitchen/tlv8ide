@@ -24,6 +24,7 @@
 		<module>com.tulin.v8.ureport.feature</module>
 		<module>com.tulin.v8.markdown.feature</module>
 		<module>com.tulin.v8.editors.vue.feature</module>
+		<module>com.tulin.v8.vue.ui.feature</module>
     </modules>
 	
 </project>

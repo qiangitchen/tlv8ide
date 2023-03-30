@@ -14,64 +14,52 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
+import org.json.JSONArray;
+import org.json.JSONObject;
 
-import com.tulin.v8.core.StringArray;
-import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.vue.wizards.Messages;
 import com.tulin.v8.vue.wizards.templet.TableListTemplet;
-import com.tulin.v8.vue.wizards.utils.FilePathUtils;
 
 public class WriteTableList {
 	private String dbkey = null;
 	private String tableName = null;
+	private String keyField = "fid";
+	private String dataOrder = "";
 	private List<String> columns = null;
 	private Map<String, String> labels = null;
 	private Map<String, String> widths = null;
-	private Map<String, String> datatypes = null;
 	private String containername = null;
 	private String filename = null;
 
-	public WriteTableList(TableListPageLayoutPage setter, TableListPageEndPage endpage) {
+	public WriteTableList(TableListLayoutPage setter, TableListEndPage endpage) {
 		dbkey = setter.getDbkey();
 		tableName = setter.getTvName();
 		columns = setter.getColumns();
 		labels = setter.getLabels();
 		widths = setter.getWidths();
-		datatypes = setter.getDatatypes();
 		containername = endpage.getContainerName();
 		filename = endpage.getFileName();
 	}
 
 	public IFile writePage() throws Exception {
-		StringArray columnsText = new StringArray();
-		StringArray labelsText = new StringArray();
-		StringArray widthsText = new StringArray();
-		StringArray datatypesText = new StringArray();
+		JSONArray jsona = new JSONArray();
+		JSONArray searchColumns = new JSONArray();
 		for (int i = 0; i < columns.size(); i++) {
+			JSONObject json = new JSONObject();
 			String column = columns.get(i);
-			columnsText.push(column);
-			labelsText
-					.push((null == labels.get(column) || "".equals(labels.get(column))) ? column : labels.get(column));
-			widthsText.push(widths.get(column));
-			datatypesText.push(datatypes.get(column));
+			json.put("dataIndex", column);
+			json.put("key", column);
+			String title = (null == labels.get(column) || "".equals(labels.get(column))) ? column : labels.get(column);
+			json.put("title", title);
+			json.put("width", widths.get(column));
+			jsona.put(json);
+			searchColumns.put(column);
 		}
-		String pageText = TableListTemplet.getPageContext(dbkey, tableName, columnsText.join(","), labelsText.join(","),
-				widthsText.join(","), datatypesText.join(","), filename);
+		String pageText = TableListTemplet.getPageContext(dbkey, tableName, keyField, dataOrder, jsona, searchColumns);
 
 		if (filename.indexOf(".") < 0) {
 			filename = filename + ".vue";
 		}
-
-		String PHANTOM_PROJECT_NAME = TuLinPlugin.getCurrentProjectName();
-		String containerPath = FilePathUtils.getContainerPath(containername);
-		String rootpath = "";
-		if (!"".equals(containerPath)) {
-			String[] dotns = containerPath.split("/");
-			for (int i = 0; i < dotns.length; i++) {
-				rootpath += "../";
-			}
-		}
-		pageText = pageText.replace("/" + PHANTOM_PROJECT_NAME + "/", rootpath);
 
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IResource resource = root.findMember(new Path(containername));

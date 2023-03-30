@@ -22,8 +22,11 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
 import com.tulin.v8.editors.vue.editor.VueEditor;
-import com.tulin.v8.vue.wizards.tableList.TableListPageEndPage;
-import com.tulin.v8.vue.wizards.tableList.TableListPageLayoutPage;
+import com.tulin.v8.vue.wizards.baseForm.BaseFormEndPage;
+import com.tulin.v8.vue.wizards.baseForm.BaseFormPage;
+import com.tulin.v8.vue.wizards.baseForm.WriteBaseForm;
+import com.tulin.v8.vue.wizards.tableList.TableListEndPage;
+import com.tulin.v8.vue.wizards.tableList.TableListLayoutPage;
 import com.tulin.v8.vue.wizards.tableList.WriteTableList;
 
 public class NewVueWizard extends Wizard implements INewWizard {
@@ -31,8 +34,12 @@ public class NewVueWizard extends Wizard implements INewWizard {
 
 	ProjectSelectPage projctPage;
 	DataSelectPage dataSelectPage;
-	TableListPageLayoutPage tableListPageLayoutPage;
-	TableListPageEndPage tableListPageEndPage;
+
+	TableListLayoutPage tableListPageLayoutPage;
+	TableListEndPage tableListPageEndPage;
+
+	BaseFormPage baseFormPage;
+	BaseFormEndPage baseFormEndPage;
 
 	public NewVueWizard() {
 		super();
@@ -56,10 +63,16 @@ public class NewVueWizard extends Wizard implements INewWizard {
 		addPage(projctPage);
 		dataSelectPage = new DataSelectPage(projctPage);
 		addPage(dataSelectPage);
-		tableListPageLayoutPage = new TableListPageLayoutPage(dataSelectPage);
+
+		tableListPageLayoutPage = new TableListLayoutPage(dataSelectPage);
 		addPage(tableListPageLayoutPage);
-		tableListPageEndPage = new TableListPageEndPage(selection);
+		tableListPageEndPage = new TableListEndPage(selection);
 		addPage(tableListPageEndPage);
+
+		baseFormPage = new BaseFormPage(dataSelectPage);
+		addPage(baseFormPage);
+		baseFormEndPage = new BaseFormEndPage(selection);
+		addPage(baseFormEndPage);
 	}
 
 	@Override
@@ -97,10 +110,19 @@ public class NewVueWizard extends Wizard implements INewWizard {
 	private void doFinish(IProgressMonitor monitor) throws Exception {
 		IWizardPage currentPage = getContainer().getCurrentPage();
 		IFile files = null;
-		if (currentPage instanceof TableListPageEndPage) {// 表格列表
+		if (currentPage instanceof TableListEndPage) {// 表格列表
 			try {
-				files = new WriteTableList((TableListPageLayoutPage) getPage("tableListPageLayout"),
-						(TableListPageEndPage) getPage("tableListPageEnd")).writePage();
+				files = new WriteTableList((TableListLayoutPage) getPage("tableListPageLayout"),
+						(TableListEndPage) getPage("tableListPageEnd")).writePage();
+			} catch (Exception e) {
+				e.printStackTrace();
+				throwCoreException(Messages.getString("wizards.message.writefileErr") + e.toString());
+			}
+		}
+		if (currentPage instanceof BaseFormEndPage) {// 基础表单
+			try {
+				files = new WriteBaseForm((BaseFormPage) getPage("baseFormPage"),
+						(BaseFormEndPage) getPage("baseFormEnd")).writePage();
 			} catch (Exception e) {
 				e.printStackTrace();
 				throwCoreException(Messages.getString("wizards.message.writefileErr") + e.toString());

@@ -11,18 +11,10 @@
 			templet="simpleList" />
 	</item>
 	<item label="表单">
-		<item label="基础单表" img="image/simpleDetail.png"
-			templet="simpleDetail" />
-		<item label="主从详细" img="image/simpleDirct.png"
-			templet="simpleDirct" />
-	</item>
-	<item label="树">
-		<item label="简单树形" img="image/treeTemplet.png"
-			templet="treeTemplet" />
-		<item label="左边树形" img="image/LeftTreeRightList.png"
-			templet="LefttreeTemplet" />
-		<item label="树形列表" img="image/treeGrid.jpg"
-			templet="treeGridTemplet" />
+		<item label="基础单表" img="image/form/baseForm.png"
+			templet="baseForm" />
+		<item label="主子表单" img="image/form/subForm.png"
+			templet="dirctForm" />
 	</item>
 	<item label="对话框">
 		<item label="列表单选对话框" img="image/gridSelectDialog.jpg"
@@ -31,6 +23,14 @@
 			templet="gridCheckDialogTemplet" />
 	</item>
 	<!-- 
+	<item label="树">
+		<item label="简单树形" img="image/treeTemplet.png"
+			templet="treeTemplet" />
+		<item label="左边树形" img="image/LeftTreeRightList.png"
+			templet="LefttreeTemplet" />
+		<item label="树形列表" img="image/treeGrid.jpg"
+			templet="treeGridTemplet" />
+	</item>
 	<item label="流程">
 		<item label="单表流程" img="image/simpleFlow.png"
 			templet="simpleFlow" />

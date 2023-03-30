@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.tulin.v8.ide.feature"
-      label="TuLin IDE"
-      version="3.0.0.qualifier"
+      id="com.tulin.v8.vue.ui.feature"
+      label="TuLin Vue Plug-in"
+      version="1.0.0.qualifier"
       provider-name="TuLin"
-      plugin="com.tulin.v8.ide.ui">
+      plugin="com.tulin.v8.vue.ui">
 
    <description>
-      TuLinv8 IDE
+      TuLin Vue Plug-in
    </description>
 
-   <copyright url="https://www.tlv8.com">
-      https://www.tlv8.com
+   <copyright>
+      www.tlv8.com
    </copyright>
 
    <license url="https://gitee.com/qianpou/tlv8ide/blob/master/LICENSE">
@@ -295,102 +295,11 @@ version(s), and exceptions or additional permissions here}.&quot;
    </license>
 
    <includes
-         id="com.tulin.v8.echarts.ui.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.editors.fn.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.editors.function.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.editors.page.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.flowdesigner.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.ureport.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.dbviewer.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.js.ui.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.easylook.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.markdown.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.tomcat.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
          id="com.tulin.v8.editors.vue.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.vue.ui.feature"
-         version="0.0.0"
-         optional="true"/>
+         version="0.0.0"/>
 
    <plugin
-         id="com.tulin.v8.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.tulin.v8.imageviewer"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.tulin.v8.platform"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.tulin.v8.ide.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.tulin.v8.xml"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
-
-   <plugin
-         id="com.tulin.v8.generator"
+         id="com.tulin.v8.vue.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"

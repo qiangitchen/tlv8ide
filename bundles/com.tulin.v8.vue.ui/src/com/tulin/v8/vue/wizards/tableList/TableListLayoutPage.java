@@ -36,7 +36,7 @@ import com.tulin.v8.core.utils.DataType;
 import com.tulin.v8.vue.wizards.DataSelectPage;
 import com.tulin.v8.vue.wizards.Messages;
 
-public class TableListPageLayoutPage extends WizardPage {
+public class TableListLayoutPage extends WizardPage {
 	private DataSelectPage dataSelectPage;
 	private String dbkey = null;
 	private String tvName = null;
@@ -50,7 +50,7 @@ public class TableListPageLayoutPage extends WizardPage {
 	private Table table = null;
 	private Table tablegrid = null;
 
-	public TableListPageLayoutPage(DataSelectPage Page) {
+	public TableListLayoutPage(DataSelectPage Page) {
 		super("tableListPageLayout");
 		setTitle("表格列表");
 		setDescription("配置列表详细参数.");

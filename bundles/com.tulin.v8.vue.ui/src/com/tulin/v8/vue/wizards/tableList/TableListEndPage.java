@@ -28,14 +28,14 @@ import com.tulin.v8.vue.wizards.Messages;
 
 import zigen.plugin.db.ui.internal.TreeNode;
 
-public class TableListPageEndPage extends WizardPage {
+public class TableListEndPage extends WizardPage {
 	private Text containerText;
 	private Text fileText;
 	private ISelection selection;
 	private String containerName;
 	private String fileName;
 
-	public TableListPageEndPage(ISelection selection) {
+	public TableListEndPage(ISelection selection) {
 		super("tableListPageEnd");
 		setTitle("表格列表");
 		setDescription("表格列表生成路径和文件名配置.");

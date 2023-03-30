@@ -20,7 +20,7 @@ public class MobileSampleDetailTemplet extends TempletsReader {
 			dataItem.append(
 					"<div class=\"mui-input-row\" data-filtered=\"filtered\">\n\t<label data-filtered=\"filtered\">"
 							+ label
-							+ "</label>\n\t<input type=\"text\" placeholder=\"普通输入框\" data-filtered=\"filtered\" id=\""
+							+ "</label>\n\t<input placeholder=\"普通输入框\" data-filtered=\"filtered\" id=\""
 							+ column + "\" name=\"" + column + "\" " + DataType.getItemBydataType(datatype)
 							+ "/>\n</div>\n");
 		}
