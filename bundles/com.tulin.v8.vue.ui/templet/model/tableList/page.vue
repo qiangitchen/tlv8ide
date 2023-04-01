@@ -38,6 +38,7 @@ export default {
 
     /// 数据来源
     const fetch = async (param) => {
+	  let that = this;
       return new Promise((resolve) => {
         queryDataList({
           tableName: "${tableName}",
@@ -45,9 +46,9 @@ export default {
           dataOrder: "${dataOrder}",
           searchValue: this.searchValue,
           columns: ${searchColumns},//快速查询的列
-          pagination: param.pagination
+          pagination: {pageSize: param.pageSize, pageNum: param.pageNum}
         }).then(res => {
-          console.log(res);
+		  that.pagination.current = res.data.pageNum;
           resolve({
             total: res.data.total,
             data: res.data.data
@@ -60,7 +61,7 @@ export default {
     const confirmLoading = false;
 
     return {
-      pagination: {current: 1, pageSize: 20}, // 分页配置
+      pagination: {current: 1, pageSize: 10}, // 分页配置
       fetch: fetch, // 数据回调
       table,
       columns: columns, // 列配置
