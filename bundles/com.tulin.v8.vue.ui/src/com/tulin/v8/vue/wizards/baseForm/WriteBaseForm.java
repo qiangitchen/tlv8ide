@@ -35,6 +35,7 @@ public class WriteBaseForm {
 	public WriteBaseForm(BaseFormPage setter, BaseFormEndPage endpage) {
 		dbkey = setter.getDbkey();
 		tableName = setter.getTvName();
+		keyField = setter.getKeyField();
 		columns = setter.getColumns();
 		labels = setter.getLabels();
 		dedatatypes = setter.getDedatatypes();

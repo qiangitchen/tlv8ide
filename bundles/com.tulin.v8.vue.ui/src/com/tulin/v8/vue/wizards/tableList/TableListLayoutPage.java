@@ -40,13 +40,14 @@ public class TableListLayoutPage extends WizardPage {
 	private DataSelectPage dataSelectPage;
 	private String dbkey = null;
 	private String tvName = null;
+	private String keyField = null;
 	private String bfdbkey = null;
 	private String bftvName = null;
 	private List<String> columns = new ArrayList<String>();
 	private Map<String, String> labels = new HashMap<String, String>();
 	private Map<String, String> widths = new HashMap<String, String>();
 	private Map<String, String> datatypes = new HashMap<String, String>();
-	// private Label labeltable = null;
+	private Map<String, String> expands = new HashMap<String, String>();
 	private Table table = null;
 	private Table tablegrid = null;
 
@@ -108,17 +109,17 @@ public class TableListLayoutPage extends WizardPage {
 		tablegrid.setLinesVisible(true);
 		tablegrid.setEnabled(true);
 		TableColumn tablegridcolumn1 = new TableColumn(tablegrid, SWT.NONE);
-		tablegridcolumn1.setWidth(80);
+		tablegridcolumn1.setWidth(120);
 		tablegridcolumn1.setText(Messages.getString("wizards.dataselect.message.dataclumn"));
 		TableColumn tablegridcolumn2 = new TableColumn(tablegrid, SWT.NONE);
-		tablegridcolumn2.setWidth(90);
+		tablegridcolumn2.setWidth(120);
 		tablegridcolumn2.setText(Messages.getString("wizards.dataselect.message.datatdesc"));
 		TableColumn tablegridcolumn3 = new TableColumn(tablegrid, SWT.NONE);
 		tablegridcolumn3.setWidth(100);
-		tablegridcolumn3.setText(Messages.getString("wizardsaction.dataselect.message.width"));
+		tablegridcolumn3.setText(Messages.getString("wizards.dataselect.message.datatype"));
 		TableColumn tablegridcolumn4 = new TableColumn(tablegrid, SWT.NONE);
 		tablegridcolumn4.setWidth(100);
-		tablegridcolumn4.setText(Messages.getString("wizards.dataselect.message.datatype"));
+		tablegridcolumn4.setText(Messages.getString("wizards.dataselect.message.expand"));
 		final TableEditor editor = new TableEditor(tablegrid);
 		editor.horizontalAlignment = SWT.LEFT;
 		editor.grabHorizontal = true;
@@ -162,13 +163,13 @@ public class TableListLayoutPage extends WizardPage {
 				}
 				if (item.getChecked()) {
 					if (chIdIndex < 0) {
-						String dataType = DataType.getDataTypeBydatabase(item.getText(1).toUpperCase());
 						TableItem tableitem = new TableItem(tablegrid, SWT.NONE);
-						tableitem.setText(new String[] { item.getText(0), item.getText(2), "80", dataType });
+						tableitem.setText(new String[] { item.getText(0), item.getText(2), "input" });
 						columns.add(item.getText(0));
 						labels.put(item.getText(0), item.getText(2));
 						widths.put(item.getText(0), "80");
-						datatypes.put(item.getText(0), dataType);
+						datatypes.put(item.getText(0), "input");
+						expands.put(item.getText(0), "");
 					}
 				} else {
 					if (chIdIndex > -1) {
@@ -177,6 +178,7 @@ public class TableListLayoutPage extends WizardPage {
 						labels.remove(item.getText(0));
 						widths.remove(item.getText(0));
 						datatypes.remove(item.getText(0));
+						expands.remove(item.getText(0));
 					}
 				}
 			}
@@ -190,9 +192,8 @@ public class TableListLayoutPage extends WizardPage {
 				for (int i = 0; i < items.length; i++) {
 					items[i].setChecked(true);
 					TableItem item = items[i];
-					String dataType = DataType.getDataTypeBydatabase(item.getText(1).toUpperCase());
 					TableItem tableitem = new TableItem(tablegrid, SWT.NONE);
-					tableitem.setText(new String[] { item.getText(0), item.getText(2), "80", dataType });
+					tableitem.setText(new String[] { item.getText(0), item.getText(2), "input" });
 					columns.add(item.getText(0));
 					labels.put(item.getText(0), item.getText(2));
 					widths.put(item.getText(0), "80");
@@ -229,7 +230,7 @@ public class TableListLayoutPage extends WizardPage {
 					final TableItem item = tablegrid.getItem(index);
 					for (int i = 1; i < tablegrid.getColumnCount(); i++) {
 						Rectangle rectangle = item.getBounds(i);
-						if (rectangle.contains(point) && i != 3) {
+						if (rectangle.contains(point) && i != 2) {
 							final int column = i;
 							final Text text = new Text(tablegrid, SWT.NONE);
 							Listener textListener = new Listener() {
@@ -239,8 +240,9 @@ public class TableListLayoutPage extends WizardPage {
 										item.setText(column, text.getText());
 										if (column == 1) {
 											labels.put(item.getText(0), text.getText());
-										} else if (column == 2) {
-											widths.put(item.getText(0), text.getText());
+										}
+										if (column == 3) {
+											expands.put(item.getText(0), text.getText());
 										}
 										text.dispose();
 										break;
@@ -250,8 +252,9 @@ public class TableListLayoutPage extends WizardPage {
 											item.setText(column, text.getText());
 											if (column == 1) {
 												labels.put(item.getText(0), text.getText());
-											} else if (column == 2) {
-												widths.put(item.getText(0), text.getText());
+											}
+											if (column == 3) {
+												expands.put(item.getText(0), text.getText());
 											}
 										case SWT.TRAVERSE_ESCAPE:
 											text.dispose();
@@ -268,21 +271,21 @@ public class TableListLayoutPage extends WizardPage {
 							text.selectAll();
 							text.setFocus();
 							return;
-						} else if (rectangle.contains(point) && i == 3) {
+						} else if (rectangle.contains(point) && i == 2) {
 							final Combo combo = new Combo(tablegrid, SWT.DROP_DOWN);
-							combo.setItems(DataType.gridDataType);
+							combo.setItems(DataType.detailDataType);
 							Listener comboListener = new Listener() {
 								public void handleEvent(final Event event) {
 									switch (event.type) {
 									case SWT.FocusOut:
-										item.setText(3, combo.getText());
+										item.setText(2, combo.getText());
 										datatypes.put(item.getText(0), combo.getText());
 										combo.dispose();
 										break;
 									case SWT.Traverse:
 										switch (event.detail) {
 										case SWT.TRAVERSE_RETURN:
-											item.setText(3, combo.getText());
+											item.setText(2, combo.getText());
 											datatypes.put(item.getText(0), combo.getText());
 										case SWT.TRAVERSE_ESCAPE:
 											combo.dispose();
@@ -295,18 +298,19 @@ public class TableListLayoutPage extends WizardPage {
 							combo.addListener(SWT.FocusOut, comboListener);
 							combo.addListener(SWT.Traverse, comboListener);
 							combo.addSelectionListener(new SelectionListener() {
+
 								public void widgetDefaultSelected(SelectionEvent e) {
 								}
 
 								public void widgetSelected(SelectionEvent e) {
 									Combo cb = (Combo) e.getSource();
 									String val = cb.getText();
-									item.setText(3, val);
+									item.setText(2, val);
 									datatypes.put(item.getText(0), val);
 								}
 							});
-							editor.setEditor(combo, item, 3);
-							combo.setText(item.getText(3));
+							editor.setEditor(combo, item, 2);
+							combo.setText(item.getText(2));
 							combo.setFocus();
 							return;
 						}
@@ -347,6 +351,7 @@ public class TableListLayoutPage extends WizardPage {
 	public IWizardPage getNextPage() {
 		dbkey = dataSelectPage.getDbkey();
 		tvName = dataSelectPage.getTvName();
+		keyField = dataSelectPage.getKeyField();
 		if (tvName != null) {
 			if (!dbkey.equals(bfdbkey) || !tvName.equals(bftvName)) {
 				initData();
@@ -355,7 +360,8 @@ public class TableListLayoutPage extends WizardPage {
 			}
 		}
 		setMessage(Messages.getString("wizardsaction.dataselect.message.delectedDatasource") + dbkey
-				+ Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + ".");
+				+ Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + " keyField:"
+				+ keyField + ".");
 		return getWizard().getPage("tableListPageEnd");
 	}
 
@@ -425,6 +431,22 @@ public class TableListLayoutPage extends WizardPage {
 
 	public Table getTablegrid() {
 		return this.tablegrid;
+	}
+
+	public String getKeyField() {
+		return keyField;
+	}
+
+	public void setKeyField(String keyField) {
+		this.keyField = keyField;
+	}
+
+	public Map<String, String> getExpands() {
+		return expands;
+	}
+
+	public void setExpands(Map<String, String> expands) {
+		this.expands = expands;
 	}
 
 }

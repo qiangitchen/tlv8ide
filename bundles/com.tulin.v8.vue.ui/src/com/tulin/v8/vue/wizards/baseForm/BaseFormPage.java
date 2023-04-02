@@ -40,6 +40,7 @@ public class BaseFormPage extends WizardPage {
 	private DataSelectPage dataSelectPage;
 	private String dbkey = null;
 	private String tvName = null;
+	private String keyField = null;
 	private String bfdbkey = null;
 	private String bftvName = null;
 	private List<String> columns = new ArrayList<String>();
@@ -320,6 +321,7 @@ public class BaseFormPage extends WizardPage {
 	public IWizardPage getNextPage() {
 		dbkey = dataSelectPage.getDbkey();
 		tvName = dataSelectPage.getTvName();
+		keyField = dataSelectPage.getKeyField();
 		if (tvName != null) {
 			if (!dbkey.equals(bfdbkey) || !tvName.equals(bftvName)) {
 				initData();
@@ -328,7 +330,8 @@ public class BaseFormPage extends WizardPage {
 			}
 		}
 		setMessage(Messages.getString("wizardsaction.dataselect.message.delectedDatasource") + dbkey
-				+ Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + ".");
+				+ Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + " keyField:"
+				+ keyField + ".");
 		return getWizard().getPage("baseFormEnd");
 	}
 
@@ -397,6 +400,14 @@ public class BaseFormPage extends WizardPage {
 
 	public void setExpands(Map<String, String> expands) {
 		this.expands = expands;
+	}
+
+	public String getKeyField() {
+		return keyField;
+	}
+
+	public void setKeyField(String keyField) {
+		this.keyField = keyField;
 	}
 
 }

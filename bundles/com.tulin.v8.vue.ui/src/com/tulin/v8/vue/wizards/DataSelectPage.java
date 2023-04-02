@@ -40,6 +40,7 @@ public class DataSelectPage extends WizardPage {
 	public Map<String, IDBConfig> DBConfig = new HashMap<String, IDBConfig>();
 	private String dbkey = null;
 	private String tvName = null;
+	private String keyField = null;
 	private Tree tree = null;
 	private ProjectSelectPage prevPage = null;
 
@@ -126,7 +127,8 @@ public class DataSelectPage extends WizardPage {
 		compos2.setLayout(new GridLayout());
 
 		label = new Label(compos2, SWT.NONE);
-		label.setText(Messages.getString("wizards.dataselect.message.proptype"));
+		label.setText(Messages.getString("wizards.dataselect.message.proptype")
+				+ Messages.getString("wizards.dataselect.message.selkeyColumn"));
 
 		final Table table = new Table(compos2, SWT.BORDER | SWT.FULL_SELECTION);
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
@@ -168,6 +170,7 @@ public class DataSelectPage extends WizardPage {
 						treeitem.setImage(
 								PlatformUI.getWorkbench().getSharedImages().getImage(ISharedImages.IMG_OBJ_FILE));
 					}
+					setPageComplete(false);
 				} catch (Exception e1) {
 					setMessage(e1.toString());
 				}
@@ -190,7 +193,7 @@ public class DataSelectPage extends WizardPage {
 						setMessage(Messages.getString("wizards.dataselect.message.selectLbale")
 								+ item.getParentItem().getText() + "-" + item.getText());
 						tvName = item.getText();
-						setPageComplete(true);
+						setPageComplete(false);
 					} catch (Exception e1) {
 						setMessage(e1.toString());
 					}
@@ -259,6 +262,18 @@ public class DataSelectPage extends WizardPage {
 				}
 			}
 		});
+
+		table.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				TableItem item = (TableItem) e.item;
+				keyField = item.getText();
+				setMessage(Messages.getString("wizards.dataselect.message.selectLbale") + dbkey + "-" + tvName + " key:"
+						+ keyField);
+				setPageComplete(true);
+			}
+		});
+
 		setPageComplete(false);
 		setControl(composite);
 	}
@@ -327,6 +342,14 @@ public class DataSelectPage extends WizardPage {
 
 	public void setTvName(String tvName) {
 		this.tvName = tvName;
+	}
+
+	public String getKeyField() {
+		return keyField;
+	}
+
+	public void setKeyField(String keyField) {
+		this.keyField = keyField;
 	}
 
 }
