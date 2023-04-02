@@ -1,4 +1,4 @@
-package com.tulin.v8.vue.wizards.cardList;
+package com.tulin.v8.vue.wizards.imageList;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,7 +20,7 @@ import com.tulin.v8.ide.wizards.utils.TablecellSelectDialog;
 import com.tulin.v8.vue.wizards.DataSelectPage;
 import com.tulin.v8.vue.wizards.Messages;
 
-public class CardListPage extends WizardPage {
+public class ImageListPage extends WizardPage {
 	private DataSelectPage dataSelectPage;
 	private String dbkey = null;
 	private String tvName = null;
@@ -28,15 +28,16 @@ public class CardListPage extends WizardPage {
 
 	private String title;
 	private String description;
+	private String content;
 	private String previewImage;
 	private String smallIcon;
 	private String dataOrder = "";
 
 	List<String[]> columnlist = new ArrayList<>();
 
-	public CardListPage(DataSelectPage Page) {
-		super("cardListPage");
-		setTitle("卡片列表");
+	public ImageListPage(DataSelectPage Page) {
+		super("imageListPage");
+		setTitle("图文列表");
 		setDescription("配置列表详细参数.");
 		dataSelectPage = Page;
 		dbkey = dataSelectPage.getDbkey();
@@ -97,6 +98,28 @@ public class CardListPage extends WizardPage {
 			}
 		});
 
+		Label label2_1 = new Label(composite, SWT.NONE);
+		label2_1.setText("Content(*)");
+		label2_1.setLayoutData(gridl1);
+		final Text text2_1 = new Text(composite, SWT.BORDER | SWT.FILL);
+		text2_1.setEditable(false);
+		text2_1.setToolTipText("列表的内容字段");
+		text2_1.setLayoutData(gridt1);
+		Button button2_1 = new Button(composite, SWT.NONE);
+		button2_1.setText("...");
+		button2_1.setLayoutData(gridb1);
+
+		button2_1.addListener(SWT.Selection, new Listener() {
+			public void handleEvent(Event e) {
+				TablecellSelectDialog dialog = new TablecellSelectDialog(getShell(), dbkey, tvName);
+				int result = dialog.open();
+				if (IDialogConstants.OK_ID == result) {
+					text2_1.setText(dialog.getItemsToOpen());
+					content = text2_1.getText();
+				}
+			}
+		});
+
 		Label label3 = new Label(composite, SWT.NONE);
 		label3.setText("PreviewImage(*)");
 		label3.setLayoutData(gridl1);
@@ -120,7 +143,7 @@ public class CardListPage extends WizardPage {
 		});
 
 		Label label4 = new Label(composite, SWT.NONE);
-		label4.setText("SmallIcon(*)");
+		label4.setText("Avatar(*)");
 		label4.setLayoutData(gridl1);
 		final Text text4 = new Text(composite, SWT.BORDER | SWT.FILL);
 		text4.setEditable(false);
@@ -177,12 +200,12 @@ public class CardListPage extends WizardPage {
 				+ Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + ", keyField:"
 				+ keyField + ".");
 
-		return getWizard().getPage("cardListEnd");
+		return getWizard().getPage("imageListEnd");
 	}
 
 	@Override
 	public boolean canFlipToNextPage() {
-		if (title == null || description == null || previewImage == null || smallIcon == null) {
+		if (title == null || description == null || previewImage == null || smallIcon == null || content == null) {
 			return false;
 		}
 		return super.canFlipToNextPage();
@@ -250,6 +273,14 @@ public class CardListPage extends WizardPage {
 
 	public void setPreviewImage(String previewImage) {
 		this.previewImage = previewImage;
+	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
 	}
 
 }

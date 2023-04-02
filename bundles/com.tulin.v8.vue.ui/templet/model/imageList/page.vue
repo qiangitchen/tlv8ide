@@ -16,7 +16,7 @@
             <div><b>ant design vue</b> footer part</div>
           </template>
           <template v-slot:renderItem="{ item }">
-            <a-list-item key="item.title">
+            <a-list-item key="item[title]">
               <template v-slot:actions>
                 <span v-for="{ type, text } in actions" :key="type">
                   <component v-bind:is="type" style="margin-right: 8px" />
@@ -27,18 +27,18 @@
                 <img
                   width="272"
                   alt="logo"
-                  src="https://gw.alipayobjects.com/zos/rmsportal/mqaQswcyDLcXyDKnZfES.png"
+                  :src="item[previewImage]"
                 />
               </template>
-              <a-list-item-meta :description="item.description">
+              <a-list-item-meta :description="item[description]">
                 <template v-slot:title>
-                  <a :href="item.href">{{ item.title }}</a>
+                  <a href="javascript:void(0);">{{ item[title] }}</a>
                 </template>
                 <template v-slot:avatar
-                  ><a-avatar :src="item.avatar"
+                  ><a-avatar :src="item[smallIcon]"
                 /></template>
               </a-list-item-meta>
-              {{ item.content }}
+              {{ item[content] }}
             </a-list-item>
           </template>
         </a-list>
@@ -53,18 +53,7 @@ import {
   LikeOutlined,
   MessageOutlined,
 } from "@ant-design/icons-vue";
-const listData = [];
-for (let i = 0; i < 23; i++) {
-  listData.push({
-    href: "https://www.antdv.com/",
-    title: `ant design vue part ${i}`,
-    avatar: "https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png",
-    description:
-      "Ant Design, a design language for background applications, is refined by Ant UED Team.",
-    content:
-      "We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure), to help people create their product prototypes beautifully and efficiently.",
-  });
-}
+import {queryDataList} from "/src/api/module/common";
 
 export default {
   components: {
@@ -73,11 +62,23 @@ export default {
     MessageOutlined,
   },
   data() {
+    const listData = [];
+    queryDataList({
+      tableName: "${tableName}",
+      keyField: "${keyField}",
+      dataOrder: "${dataOrder}",
+      searchValue: "",
+      columns: [],
+      pagination: {pageSize: 3, pageNum: 1}
+    }).then(res => {
+      listData.value = res.data.data;
+    });
     return {
       listData,
       pagination: {
         onChange: (page) => {
           console.log(page);
+          loadData(page);
         },
         pageSize: 3,
       },
@@ -86,8 +87,28 @@ export default {
         { type: "LikeOutlined", text: "156" },
         { type: "MessageOutlined", text: "2" },
       ],
+      title: "${title}",
+      description: "${description}",
+      content: "${content}",
+      previewImage: "${previewImage}",
+      smallIcon: "${smallIcon}",
     };
   },
+  methods: {
+  	loadData(param) {
+  		const that = this;
+  		queryDataList({
+	      tableName: "${tableName}",
+	      keyField: "${keyField}",
+	      dataOrder: "${dataOrder}",
+	      searchValue: "",
+	      columns: [],
+	      pagination: {pageSize: param.pageSize, pageNum: param.pageNum}
+	    }).then(res => {
+	      that.listData = res.data.data;
+	    });
+  	}
+  }
 };
 </script>
 <style></style>
