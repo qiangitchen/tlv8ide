@@ -93,7 +93,7 @@ public class ActionUtils {
 				IDBConfig dbconfig = configs[i];
 				DataBase db = new DataBase(dbconfig);
 				db.setTvtype("dbkey");
-				db.setUsername(dbconfig.getDbName());
+				db.setUsername(dbconfig.getUserId());
 				DATA.addChild(db);
 			}
 		} catch (Exception e) {
