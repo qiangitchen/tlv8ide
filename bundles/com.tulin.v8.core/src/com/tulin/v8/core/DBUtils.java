@@ -685,7 +685,7 @@ public class DBUtils {
 	 * @param stm
 	 * @param rs
 	 */
-	public static void CloseConn(Connection conn, Statement stm, ResultSet rs) {
+	public static void closeConn(Connection conn, Statement stm, ResultSet rs) {
 		try {
 			if (rs != null)
 				rs.close();
@@ -701,6 +701,10 @@ public class DBUtils {
 				conn.close();
 		} catch (Exception e) {
 		}
+	}
+
+	public static void CloseConn(Connection conn, Statement stm, ResultSet rs) {
+		closeConn(conn, stm, rs);
 	}
 
 }

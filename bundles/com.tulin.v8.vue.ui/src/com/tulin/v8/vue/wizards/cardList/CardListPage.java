@@ -133,7 +133,6 @@ public class CardListPage extends WizardPage {
 				if (IDialogConstants.OK_ID == result) {
 					text4.setText(dialog.getItemsToOpen());
 					smallIcon = text4.getText();
-					setPageComplete(true);
 				}
 			}
 		});
@@ -159,20 +158,29 @@ public class CardListPage extends WizardPage {
 			}
 		});
 
-		setPageComplete(false);
 		setControl(composite);
+		setPageComplete(true);
 	}
 
+	@Override
 	public IWizardPage getNextPage() {
 		dbkey = dataSelectPage.getDbkey();
 		tvName = dataSelectPage.getTvName();
 		keyField = dataSelectPage.getKeyField();
 
 		setMessage(Messages.getString("wizardsaction.dataselect.message.delectedDatasource") + dbkey
-				+ Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + " keyField:"
+				+ Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + ", keyField:"
 				+ keyField + ".");
 
 		return getWizard().getPage("cardListEnd");
+	}
+
+	@Override
+	public boolean canFlipToNextPage() {
+		if (title == null || description == null || previewImage == null || smallIcon == null) {
+			return false;
+		}
+		return super.canFlipToNextPage();
 	}
 
 	public String getDbkey() {

@@ -146,7 +146,6 @@ public class TuLinPlugin extends AbstractUIPlugin {
 		if (project == null || !project.exists()) {
 			project = getProject("tlv8-common");
 		}
-		System.out.println(project);
 		return project;
 	}
 

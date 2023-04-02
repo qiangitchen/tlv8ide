@@ -360,7 +360,7 @@ public class TableListLayoutPage extends WizardPage {
 			}
 		}
 		setMessage(Messages.getString("wizardsaction.dataselect.message.delectedDatasource") + dbkey
-				+ Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + " keyField:"
+				+ Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + ", keyField:"
 				+ keyField + ".");
 		return getWizard().getPage("tableListPageEnd");
 	}

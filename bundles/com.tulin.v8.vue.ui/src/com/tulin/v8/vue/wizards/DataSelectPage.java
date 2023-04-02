@@ -127,7 +127,7 @@ public class DataSelectPage extends WizardPage {
 		compos2.setLayout(new GridLayout());
 
 		label = new Label(compos2, SWT.NONE);
-		label.setText(Messages.getString("wizards.dataselect.message.proptype")
+		label.setText(Messages.getString("wizards.dataselect.message.proptype") + " "
 				+ Messages.getString("wizards.dataselect.message.selkeyColumn"));
 
 		final Table table = new Table(compos2, SWT.BORDER | SWT.FULL_SELECTION);
@@ -268,8 +268,8 @@ public class DataSelectPage extends WizardPage {
 			public void widgetSelected(SelectionEvent e) {
 				TableItem item = (TableItem) e.item;
 				keyField = item.getText();
-				setMessage(Messages.getString("wizards.dataselect.message.selectLbale") + dbkey + "-" + tvName + " key:"
-						+ keyField);
+				setMessage(Messages.getString("wizards.dataselect.message.selectLbale") + dbkey + "-" + tvName
+						+ ", keyField:" + keyField);
 				setPageComplete(true);
 			}
 		});

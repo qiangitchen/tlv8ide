@@ -74,7 +74,7 @@ export default {
 
     /// 数据来源
     const fetch = async (param) => {
-	  let that = this;
+	  const that = this;
       return new Promise((resolve) => {
         queryDataList({
           tableName: "${tableName}",
@@ -223,7 +223,7 @@ export default {
         return;
       }
       const table = this.$refs.table;
-      let rowids = this.selectedRowKeys.join(',');
+      const rowids = this.selectedRowKeys.join(',');
       Modal.confirm({
         title: '确认',
         icon: createVNode(ExclamationCircleOutlined),

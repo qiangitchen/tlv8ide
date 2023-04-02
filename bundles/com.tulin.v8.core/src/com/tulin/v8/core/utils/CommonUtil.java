@@ -224,18 +224,18 @@ public class CommonUtil {
 		ResultSet rs = null;
 		try {
 			conn = DBUtils.getAppConn(dbkey);
+			DatabaseMetaData objMet = conn.getMetaData();
 			String catalog = null;
 			if (DBUtils.IsPostgreSQL(dbkey)) {
 				catalog = conn.getCatalog();
 				schemaPattern = "public";
 			}
 			if (DBUtils.IsOracleDB(dbkey)) {
-				schemaPattern = conn.getMetaData().getUserName();
+				schemaPattern = objMet.getUserName();
 			}
 			if (DBUtils.IsMySQLDB(dbkey)) {
 				schemaPattern = conn.getCatalog();
 			}
-			DatabaseMetaData objMet = conn.getMetaData();
 			if (schemaPattern != null) {
 				rs = objMet.getTables(catalog, schemaPattern, "%", new String[] { "TABLE" }); //$NON-NLS-1$
 			} else {
@@ -332,18 +332,18 @@ public class CommonUtil {
 		ResultSet rs = null;
 		try {
 			conn = DBUtils.getAppConn(dbkey);
+			DatabaseMetaData objMet = conn.getMetaData();
 			String catalog = null;
 			if (DBUtils.IsPostgreSQL(dbkey)) {
 				catalog = conn.getCatalog();
 				schemaPattern = "public";
 			}
 			if (DBUtils.IsOracleDB(dbkey)) {
-				schemaPattern = conn.getMetaData().getUserName();
+				schemaPattern = objMet.getUserName();
 			}
 			if (DBUtils.IsMySQLDB(dbkey)) {
 				schemaPattern = conn.getCatalog();
 			}
-			DatabaseMetaData objMet = conn.getMetaData();
 			if (schemaPattern != null) {
 				rs = objMet.getTables(catalog, schemaPattern, tablename, types); // $NON-NLS-1$
 			} else {
@@ -469,20 +469,20 @@ public class CommonUtil {
 		ResultSet rs = null;
 		try {
 			conn = DBUtils.getAppConn(dbkey);
+			DatabaseMetaData objMet = conn.getMetaData();
 			String catalog = null;
 			if (DBUtils.IsPostgreSQL(dbkey)) {
 				catalog = conn.getCatalog();
 				schemaPattern = "public";
 			}
-			if (DBUtils.IsOracleDB(dbkey)) {
-				schemaPattern = conn.getMetaData().getUserName();
-			}
 			if (DBUtils.IsMySQLDB(dbkey)) {
 				schemaPattern = conn.getCatalog();
 			}
-			DatabaseMetaData objMet = conn.getMetaData();
+			if (DBUtils.IsOracleDB(dbkey)) {
+				schemaPattern = objMet.getUserName();
+			}
 			if (schemaPattern != null) {
-				rs = objMet.getColumns(catalog, schemaPattern, tableName, null); //$NON-NLS-1$
+				rs = objMet.getColumns(catalog, schemaPattern, tableName, null); // $NON-NLS-1$
 			} else {
 				rs = objMet.getColumns(catalog, "%", tableName, null); //$NON-NLS-1$ //$NON-NLS-2$
 			}
