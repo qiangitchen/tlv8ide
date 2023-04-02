@@ -1,5 +1,6 @@
 package com.tulin.v8.ide.wizards.utils;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -19,36 +20,34 @@ import org.eclipse.swt.widgets.TableItem;
 import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.ide.wizards.Messages;
 
-import zigen.plugin.db.core.DBConfigManager;
-import zigen.plugin.db.core.IDBConfig;
-
 public class TablecellSelectDialog extends TitleAreaDialog {
 	/*
-	 * 库表选择对话框
+	 * 库表字段选择对话框
 	 */
 	private Table table = null;
 	String dbkey;
 	String tablename;
-	String[] items;
 	String itemsToOpen;
+
+	List<String[]> columnlist = new ArrayList<String[]>();
 
 	public TablecellSelectDialog(Shell shell, String dbkey, String table) {
 		super(shell);
 		this.dbkey = dbkey;
 		this.tablename = table;
-		IDBConfig[] dbConfigs = DBConfigManager.getDBConfigs();
-		String[] dbkeys = new String[dbConfigs.length];
-		for (int i = 0; i < dbConfigs.length; i++) {
-			dbkeys[i] = dbConfigs[i].getDbName();
+		try {
+			columnlist = CommonUtil.getTableColumn(dbkey, tablename);
+		} catch (Exception e) {
+			e.printStackTrace();
+			setMessage(e.toString());
 		}
-		items = dbkeys;
 	}
 
 	public void create() {
 		super.create();
 		getShell().setText("TuLin Studio");
 		setTitle(Messages.getString("wizards.dataselect.message.title"));
-		setMessage(Messages.getString("wizards.dataselect.message.unselectedTable"));
+		setMessage(Messages.getString("wizards.dataselect.message.unselectedColumn"));
 	}
 
 	protected int getShellStyle() {
@@ -84,9 +83,7 @@ public class TablecellSelectDialog extends TitleAreaDialog {
 		gridData.widthHint = 460;
 		gridData.heightHint = 200;
 		table.setLayoutData(gridData);
-		List<String[]> columnlist;
 		try {
-			columnlist = CommonUtil.getTableColumn(dbkey, tablename);
 			for (int i = 0; i < columnlist.size(); i++) {
 				TableItem tableitem = new TableItem(table, SWT.NONE);
 				tableitem.setText(columnlist.get(i));

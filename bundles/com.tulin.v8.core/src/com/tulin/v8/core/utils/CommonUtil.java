@@ -224,11 +224,22 @@ public class CommonUtil {
 		ResultSet rs = null;
 		try {
 			conn = DBUtils.getAppConn(dbkey);
+			String catalog = null;
+			if (DBUtils.IsPostgreSQL(dbkey)) {
+				catalog = conn.getCatalog();
+				schemaPattern = "public";
+			}
+			if (DBUtils.IsOracleDB(dbkey)) {
+				schemaPattern = conn.getMetaData().getUserName();
+			}
+			if (DBUtils.IsMySQLDB(dbkey)) {
+				schemaPattern = conn.getCatalog();
+			}
 			DatabaseMetaData objMet = conn.getMetaData();
 			if (schemaPattern != null) {
-				rs = objMet.getTables(null, schemaPattern, "%", new String[] { "TABLE" }); //$NON-NLS-1$
+				rs = objMet.getTables(catalog, schemaPattern, "%", new String[] { "TABLE" }); //$NON-NLS-1$
 			} else {
-				rs = objMet.getTables(null, "%", "%", new String[] { "TABLE" }); //$NON-NLS-1$ //$NON-NLS-2$
+				rs = objMet.getTables(catalog, "%", "%", new String[] { "TABLE" }); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			List<String> li = new ArrayList<String>();
 			while (rs.next()) {
@@ -237,9 +248,9 @@ public class CommonUtil {
 			}
 			map.put("TABLE", li);
 			if (schemaPattern != null) {
-				rs = objMet.getTables(null, schemaPattern, "%", new String[] { "VIEW" }); //$NON-NLS-1$
+				rs = objMet.getTables(catalog, schemaPattern, "%", new String[] { "VIEW" }); //$NON-NLS-1$
 			} else {
-				rs = objMet.getTables(null, "%", "%", new String[] { "VIEW" }); //$NON-NLS-1$ //$NON-NLS-2$
+				rs = objMet.getTables(catalog, "%", "%", new String[] { "VIEW" }); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			List<String> liv = new ArrayList<String>();
 			while (rs.next()) {
@@ -280,7 +291,8 @@ public class CommonUtil {
 		} else if (DBUtils.IsPostgreSQL(dbkey)) {
 			sql = "select a.relname AS TABLE_NAME,b.description AS TABLE_COMMENT "
 					+ " FROM pg_class a LEFT OUTER JOIN pg_description b "
-					+ " ON b.objsubid=0 AND a.oid = b.objoid WHERE a.relname='" + tablename.toLowerCase() + "' AND a.relkind='r'";
+					+ " ON b.objsubid=0 AND a.oid = b.objoid WHERE a.relname='" + tablename.toLowerCase()
+					+ "' AND a.relkind='r'";
 		}
 		Connection conn = null;
 		Statement stm = null;
@@ -320,11 +332,22 @@ public class CommonUtil {
 		ResultSet rs = null;
 		try {
 			conn = DBUtils.getAppConn(dbkey);
+			String catalog = null;
+			if (DBUtils.IsPostgreSQL(dbkey)) {
+				catalog = conn.getCatalog();
+				schemaPattern = "public";
+			}
+			if (DBUtils.IsOracleDB(dbkey)) {
+				schemaPattern = conn.getMetaData().getUserName();
+			}
+			if (DBUtils.IsMySQLDB(dbkey)) {
+				schemaPattern = conn.getCatalog();
+			}
 			DatabaseMetaData objMet = conn.getMetaData();
 			if (schemaPattern != null) {
-				rs = objMet.getTables(null, schemaPattern, tablename, types); // $NON-NLS-1$
+				rs = objMet.getTables(catalog, schemaPattern, tablename, types); // $NON-NLS-1$
 			} else {
-				rs = objMet.getTables(null, "%", tablename, types); //$NON-NLS-1$ //$NON-NLS-2$
+				rs = objMet.getTables(catalog, "%", tablename, types); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			if (rs.next()) {
 				cm = rs.getString("REMARKS");
@@ -446,11 +469,22 @@ public class CommonUtil {
 		ResultSet rs = null;
 		try {
 			conn = DBUtils.getAppConn(dbkey);
+			String catalog = null;
+			if (DBUtils.IsPostgreSQL(dbkey)) {
+				catalog = conn.getCatalog();
+				schemaPattern = "public";
+			}
+			if (DBUtils.IsOracleDB(dbkey)) {
+				schemaPattern = conn.getMetaData().getUserName();
+			}
+			if (DBUtils.IsMySQLDB(dbkey)) {
+				schemaPattern = conn.getCatalog();
+			}
 			DatabaseMetaData objMet = conn.getMetaData();
 			if (schemaPattern != null) {
-				rs = objMet.getColumns(null, schemaPattern, tableName, "%"); //$NON-NLS-1$
+				rs = objMet.getColumns(catalog, schemaPattern, tableName, null); //$NON-NLS-1$
 			} else {
-				rs = objMet.getColumns(null, "%", tableName, "%"); //$NON-NLS-1$ //$NON-NLS-2$
+				rs = objMet.getColumns(catalog, "%", tableName, null); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			while (rs.next()) {
 				String[] item = new String[6];
@@ -581,11 +615,22 @@ public class CommonUtil {
 		ResultSet rs = null;
 		try {
 			conn = DBUtils.getAppConn(dbkey);
+			String catalog = null;
+			if (DBUtils.IsPostgreSQL(dbkey)) {
+				catalog = conn.getCatalog();
+				schemaPattern = "public";
+			}
+			if (DBUtils.IsOracleDB(dbkey)) {
+				schemaPattern = conn.getMetaData().getUserName();
+			}
+			if (DBUtils.IsMySQLDB(dbkey)) {
+				schemaPattern = conn.getCatalog();
+			}
 			DatabaseMetaData objMet = conn.getMetaData();
 			if (schemaPattern != null) {
-				rs = objMet.getColumns(null, schemaPattern, tableName, columnName); // $NON-NLS-1$
+				rs = objMet.getColumns(catalog, schemaPattern, tableName, columnName); // $NON-NLS-1$
 			} else {
-				rs = objMet.getColumns(null, "%", tableName, columnName); //$NON-NLS-1$ //$NON-NLS-2$
+				rs = objMet.getColumns(catalog, "%", tableName, columnName); //$NON-NLS-1$ //$NON-NLS-2$
 			}
 			if (rs.next()) {
 				r = rs.getInt(NULLABLE);

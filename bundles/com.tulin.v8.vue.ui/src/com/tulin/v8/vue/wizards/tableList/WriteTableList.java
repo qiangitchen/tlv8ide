@@ -11,18 +11,16 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.Status;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
 import com.tulin.v8.core.StringArray;
 import com.tulin.v8.vue.wizards.Messages;
+import com.tulin.v8.vue.wizards.WritePage;
 import com.tulin.v8.vue.wizards.templet.TableListTemplet;
 
-public class WriteTableList {
+public class WriteTableList extends WritePage{
 	private String dbkey = null;
 	private String tableName = null;
 	private String keyField = "fid";
@@ -141,11 +139,6 @@ public class WriteTableList {
 		} catch (Exception e) {
 		}
 		return file;
-	}
-
-	void throwCoreException(String message) throws CoreException {
-		IStatus status = new Status(IStatus.ERROR, "TuLin Studio", IStatus.OK, message, null);
-		throw new CoreException(status);
 	}
 
 }

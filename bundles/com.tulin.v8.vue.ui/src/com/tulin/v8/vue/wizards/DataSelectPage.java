@@ -318,12 +318,14 @@ public class DataSelectPage extends WizardPage {
 		String templet = prevPage.getTemplet();
 		if ("tableList".equals(templet)) {// 表格列表
 			return getWizard().getPage("tableListPageLayout");
+		} else if ("cardList".equals(templet)) {// 卡片列表
+			return getWizard().getPage("cardListPage");
+		} else if ("imageList".equals(templet)) {// 图文列表
+			return getWizard().getPage("imageListPage");
+		} else if ("simpleList".equals(templet)) {// 基础列表
+			return getWizard().getPage("simpleListPage");
 		} else if ("baseForm".equals(templet)) {// 基础表单
 			return getWizard().getPage("baseFormPage");
-		} else if ("simpleFlow".equals(templet)) {// "单表流程".equals(proType)
-			return getWizard().getPage("sampleFlowPage");
-		} else if ("mobilesimpleForm".equals(templet) || "mobileFlow".equals(templet)) {// "手机版表单".equals(proType)
-			return getWizard().getPage("mobilesampleDeatailPage");
 		}
 		return null;
 	}

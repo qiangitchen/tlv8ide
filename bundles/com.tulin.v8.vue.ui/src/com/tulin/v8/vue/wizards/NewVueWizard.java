@@ -25,6 +25,9 @@ import com.tulin.v8.editors.vue.editor.VueEditor;
 import com.tulin.v8.vue.wizards.baseForm.BaseFormEndPage;
 import com.tulin.v8.vue.wizards.baseForm.BaseFormPage;
 import com.tulin.v8.vue.wizards.baseForm.WriteBaseForm;
+import com.tulin.v8.vue.wizards.cardList.CardListEndPage;
+import com.tulin.v8.vue.wizards.cardList.CardListPage;
+import com.tulin.v8.vue.wizards.cardList.WriteCardList;
 import com.tulin.v8.vue.wizards.tableList.TableListEndPage;
 import com.tulin.v8.vue.wizards.tableList.TableListLayoutPage;
 import com.tulin.v8.vue.wizards.tableList.WriteTableList;
@@ -73,6 +76,11 @@ public class NewVueWizard extends Wizard implements INewWizard {
 		addPage(baseFormPage);
 		baseFormEndPage = new BaseFormEndPage(selection);
 		addPage(baseFormEndPage);
+
+		addPage(new CardListPage(dataSelectPage));
+		addPage(new CardListEndPage(selection));
+
+		addPage(new EndPage(selection));
 	}
 
 	@Override
@@ -114,6 +122,15 @@ public class NewVueWizard extends Wizard implements INewWizard {
 			try {
 				files = new WriteTableList((TableListLayoutPage) getPage("tableListPageLayout"),
 						(TableListEndPage) getPage("tableListPageEnd")).writePage();
+			} catch (Exception e) {
+				e.printStackTrace();
+				throwCoreException(Messages.getString("wizards.message.writefileErr") + e.toString());
+			}
+		}
+		if (currentPage instanceof CardListEndPage) {// 卡片列表
+			try {
+				files = new WriteCardList((CardListPage) getPage("cardListPage"),
+						(CardListEndPage) getPage("cardListEnd")).writePage();
 			} catch (Exception e) {
 				e.printStackTrace();
 				throwCoreException(Messages.getString("wizards.message.writefileErr") + e.toString());
