@@ -5,7 +5,6 @@
 		<editor
 	        contributorClass="org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditorActionContributor"
             class="org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditor"
-	        default="true"
 	        extensions="js"
 	        icon="icons/js.gif"
 	        id="com.tulin.v8.ide.ui.editors.javascript.JavaScriptEditor"

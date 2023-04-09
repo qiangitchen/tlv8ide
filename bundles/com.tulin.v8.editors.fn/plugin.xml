@@ -7,7 +7,6 @@
             class="com.tulin.v8.fn.FnEditor"
             contributorClass="com.tulin.v8.fn.XMLMultiPageEditorContributor"
             extensions="fn,fn.xml"
-            default="true"
             icon="icons/fun.gif"
             id="com.tulin.v8.fn.FnEditor"
             name="%editor.name.fn">

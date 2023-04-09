@@ -30,7 +30,6 @@
       <editor
             class="com.tulin.v8.editors.vue.editor.VueEditor"
             contributorClass="com.tulin.v8.editors.vue.editor.VueEditorContributor"
-            default="true"
             extensions="vue"
             icon="icons/vueico.png"
             id="com.tulin.v8.editors.vueEditor"
