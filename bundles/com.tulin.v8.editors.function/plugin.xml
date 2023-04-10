@@ -23,7 +23,7 @@
            file-extensions="fun,xml"
            file-patterns="*.fun,*.fun.xml"
            id="com.tulin.v8.editors.fun.contenttype"
-           name="Fn"
+           name="fun"
            priority="normal">
 	    </content-type>
    </extension>
