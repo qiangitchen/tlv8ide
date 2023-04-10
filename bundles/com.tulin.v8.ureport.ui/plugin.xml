@@ -3,13 +3,24 @@
 <plugin>
    <extension
          point="org.eclipse.ui.editors">
+      <!-- ureport文件专用编辑器配置 -->
       <editor
             class="com.tulin.v8.ureport.ui.editors.designer.UReportEditor"
             contributorClass="com.tulin.v8.ureport.ui.contributor.MultiPageEditorContributor"
-            extensions="ureport,ureport.xml,xml"
-            filenames="*.ureport,*.ureport.xml"
+            default="true"
+            extensions="ureport"
             icon="icons/ureport.gif"
             id="com.tulin.v8.ureport.ui.editors.designer.UReportEditor"
+            name="%editor.name">
+      </editor>
+      <!-- XML文件兼容配置 -->
+      <editor
+            class="com.tulin.v8.ureport.ui.editors.designer.UReportEditor"
+            contributorClass="com.tulin.v8.ureport.ui.contributor.MultiPageEditorContributor"
+            default="false"
+            extensions="ureport.xml,xml"
+            icon="icons/ureport.gif"
+            id="com.tulin.v8.ureport.ui.editors.designer.UReportEditorExt"
             name="%editor.name">
       </editor>
    </extension>
@@ -21,7 +32,7 @@
            file-patterns="*.ureport,*.ureport.xml"
            id="com.tulin.v8.editors.ureport.contenttype"
            name="UReport"
-           priority="normal">
+           priority="high">
 	    </content-type>
    </extension>
    <extension

@@ -3,12 +3,27 @@
 <plugin>
    <extension
          point="org.eclipse.ui.editors">
+      <!-- fun文件专用编辑器配置 -->
       <editor
             class="com.tulin.v8.function.editors.FunctionEditor"
             contributorClass="com.tulin.v8.function.editors.XMLMultiPageEditorContributor"
-            extensions="fun,fun.xml"
+            default="true"
+            extensions="fun"
             icon="icons/F.gif"
             id="com.tulin.v8.function.editors.FunctionEditor"
+            name="%editor.name.function">
+         <contentTypeBinding
+               contentTypeId="com.tulin.v8.editors.fun.contenttype">
+         </contentTypeBinding>
+      </editor>
+      <!-- 兼容XML文件配置 -->
+      <editor
+            class="com.tulin.v8.function.editors.FunctionEditor"
+            contributorClass="com.tulin.v8.function.editors.XMLMultiPageEditorContributor"
+            default="false"
+            extensions="fun.xml,xml"
+            icon="icons/F.gif"
+            id="com.tulin.v8.function.editors.FunctionEditorExt"
             name="%editor.name.function">
          <contentTypeBinding
                contentTypeId="com.tulin.v8.editors.fun.contenttype">
@@ -20,7 +35,7 @@
        point="org.eclipse.core.contenttype.contentTypes">
 	    <content-type
            base-type="org.eclipse.core.runtime.xml"
-           file-extensions="fun,xml"
+           file-extensions="fun"
            file-patterns="*.fun,*.fun.xml"
            id="com.tulin.v8.editors.fun.contenttype"
            name="fun"

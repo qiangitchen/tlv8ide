@@ -3,12 +3,27 @@
 <plugin>
    <extension
          point="org.eclipse.ui.editors">
+      <!-- fn文件专用编辑器配置 -->
       <editor
             class="com.tulin.v8.fn.FnEditor"
             contributorClass="com.tulin.v8.fn.XMLMultiPageEditorContributor"
-            extensions="fn,fn.xml"
+            default="true"
+            extensions="fn"
             icon="icons/fun.gif"
             id="com.tulin.v8.fn.FnEditor"
+            name="%editor.name.fn">
+         <contentTypeBinding
+               contentTypeId="com.tulin.v8.editors.fn.contenttype">
+         </contentTypeBinding>
+      </editor>
+      <!-- 兼容XML文件配置 -->
+      <editor
+            class="com.tulin.v8.fn.FnEditor"
+            contributorClass="com.tulin.v8.fn.XMLMultiPageEditorContributor"
+            default="false"
+            extensions="fn.xml,xml"
+            icon="icons/fun.gif"
+            id="com.tulin.v8.fn.FnEditorExt"
             name="%editor.name.fn">
          <contentTypeBinding
                contentTypeId="com.tulin.v8.editors.fn.contenttype">
@@ -20,7 +35,7 @@
        point="org.eclipse.core.contenttype.contentTypes">
 	    <content-type
            base-type="org.eclipse.core.runtime.xml"
-           file-extensions="fn,xml"
+           file-extensions="fn"
            file-patterns="*.fn,*.fn.xml"
            id="com.tulin.v8.editors.fn.contenttype"
            name="Fn"
