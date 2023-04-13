@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: TuLin Ureport Server
 Bundle-Vendor: TuLin
 Bundle-SymbolicName: com.tulin.v8.ureport.server;singleton:=true
-Bundle-Version: 2.3.0.qualifier
+Bundle-Version: 2.3.1.qualifier
 Bundle-Activator: com.tulin.v8.ureport.server.Activator
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
@@ -26,7 +26,6 @@ Bundle-ClassPath: .,
  lib/spring-aop-4.1.2.RELEASE.jar,
  lib/spring-beans-4.1.2.RELEASE.jar,
  lib/spring-context-4.1.2.RELEASE.jar,
- lib/spring-core-4.1.2.RELEASE.jar,
  lib/spring-expression-4.1.2.RELEASE.jar,
  lib/spring-jdbc-4.1.2.RELEASE.jar,
  lib/spring-tx-4.1.2.RELEASE.jar,

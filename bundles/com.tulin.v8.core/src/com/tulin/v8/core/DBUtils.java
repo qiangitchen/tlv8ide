@@ -287,7 +287,11 @@ public class DBUtils {
 			if (IsOracleDB(key)) {
 				result = url.substring(url.lastIndexOf(":") + 1);
 			} else if (IsMySQLDB(key)) {
-				result = url.substring(url.lastIndexOf("/") + 1, url.indexOf("?"));
+				if (url.indexOf("?") > 0) {
+					result = url.substring(url.lastIndexOf("/") + 1, url.indexOf("?"));
+				} else {
+					result = url.substring(url.lastIndexOf("/") + 1);
+				}
 			} else {
 				result = url.substring(url.lastIndexOf("/") + 1);
 			}
@@ -329,7 +333,11 @@ public class DBUtils {
 		if (IsOracleDB(springData)) {
 			result = url.substring(url.lastIndexOf(":") + 1);
 		} else if (IsMySQLDB(springData)) {
-			result = url.substring(url.lastIndexOf("/") + 1, url.indexOf("?"));
+			if (url.indexOf("?") > 0) {
+				result = url.substring(url.lastIndexOf("/") + 1, url.indexOf("?"));
+			} else {
+				result = url.substring(url.lastIndexOf("/") + 1);
+			}
 		} else {
 			result = url.substring(url.lastIndexOf("/") + 1);
 		}

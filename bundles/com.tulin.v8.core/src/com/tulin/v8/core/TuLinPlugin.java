@@ -146,6 +146,12 @@ public class TuLinPlugin extends AbstractUIPlugin {
 		if (project == null || !project.exists()) {
 			project = getProject("tlv8-common");
 		}
+		if (project == null || !project.exists()) {
+			IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+			if (projects.length > 0) {
+				project = projects[0];
+			}
+		}
 		return project;
 	}
 

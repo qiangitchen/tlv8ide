@@ -2,10 +2,14 @@ package com.tulin.v8.core.config;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.Properties;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.springframework.core.io.FileSystemResource;
+import org.springframework.core.io.Resource;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
@@ -74,14 +78,17 @@ public class AppConfig {
 		if (project == null || !project.exists()) {
 			project = TuLinPlugin.getCurrentProject();
 		}
-		IResource dsource = project.findMember("src/main/resources");
-		if (dsource == null || !dsource.exists()) {
-			dsource = project.findMember("src");
+		if (project != null) {
+			IResource dsource = project.findMember("src/main/resources");
+			if (dsource == null || !dsource.exists()) {
+				dsource = project.findMember("src");
+			}
+			if (dsource != null) {
+				return dsource.getLocation().toString();
+			}
+			return project.getLocation().toString();
 		}
-		if(dsource!=null) {
-			return dsource.getLocation().toString();
-		}
-		return project.getLocation().toString();
+		return ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
 	}
 
 	/**
@@ -95,13 +102,18 @@ public class AppConfig {
 		if (project == null || !project.exists()) {
 			project = TuLinPlugin.getCurrentProject();
 		}
-		IResource resource = project.findMember("src/main/resources/application-druid.yml");
-		if (resource != null && resource.exists()) {
-			return loadSpringDatasource(resource.getLocation().toFile());
-		} else {
+		if (project != null) {
+			IResource resource = project.findMember("src/main/resources/application-druid.yml");
+			if (resource != null && resource.exists()) {
+				return loadSpringDatasource(resource.getLocation().toFile());
+			}
 			resource = project.findMember("src/main/resources/application.yml");
 			if (resource != null && resource.exists()) {
 				return loadSpringDatasource(resource.getLocation().toFile());
+			}
+			resource = project.findMember("src/main/resources/application.properties");
+			if (resource != null && resource.exists()) {
+				return ReadProperties(resource.getLocation().toFile());
 			}
 		}
 		return null;
@@ -111,7 +123,7 @@ public class AppConfig {
 	 * 加载指定配置文件的数据源配置
 	 * 
 	 * @param file
-	 * @return SpringDatasource
+	 * @return com.tulin.v8.core.entity.SpringDatasource
 	 */
 	public static SpringDatasource loadSpringDatasource(File file) {
 		try {
@@ -123,4 +135,27 @@ public class AppConfig {
 		}
 		return null;
 	}
+
+	/**
+	 * 加载properties文件里的数据源配置
+	 * 
+	 * @param file
+	 * @return com.tulin.v8.core.entity.SpringDatasource
+	 */
+	public static SpringDatasource ReadProperties(File file) {
+		try {
+			Resource resource = new FileSystemResource(file);
+			Properties properties = PropertiesLoaderUtils.loadProperties(resource);
+			SpringDatasource springDatasource = new SpringDatasource();
+			springDatasource.setDriverClassName(properties.getProperty("spring.datasource.driverClassName"));
+			springDatasource.setUrl(properties.getProperty("spring.datasource.url"));
+			springDatasource.setUsername(properties.getProperty("spring.datasource.username"));
+			springDatasource.setPassword(properties.getProperty("spring.datasource.password"));
+			return springDatasource;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
+
 }
