@@ -7,6 +7,7 @@ import java.util.Properties;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
@@ -131,9 +132,11 @@ public class AppConfig {
 			Spring spring = yaml.load(new FileInputStream(file));
 			return spring.getSpring().getDatasource();
 		} catch (Exception e) {
-			e.printStackTrace();
+			YamlPropertiesFactoryBean yaml = new YamlPropertiesFactoryBean();
+			yaml.setResources(new FileSystemResource(file));
+			Properties properties = yaml.getObject();
+			return new SpringDatasource(properties);
 		}
-		return null;
 	}
 
 	/**
@@ -143,19 +146,15 @@ public class AppConfig {
 	 * @return com.tulin.v8.core.entity.SpringDatasource
 	 */
 	public static SpringDatasource ReadProperties(File file) {
+		SpringDatasource springDatasource = null;
 		try {
 			Resource resource = new FileSystemResource(file);
 			Properties properties = PropertiesLoaderUtils.loadProperties(resource);
-			SpringDatasource springDatasource = new SpringDatasource();
-			springDatasource.setDriverClassName(properties.getProperty("spring.datasource.driverClassName"));
-			springDatasource.setUrl(properties.getProperty("spring.datasource.url"));
-			springDatasource.setUsername(properties.getProperty("spring.datasource.username"));
-			springDatasource.setPassword(properties.getProperty("spring.datasource.password"));
-			return springDatasource;
+			springDatasource = new SpringDatasource(properties);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return null;
+		return springDatasource;
 	}
 
 }

@@ -24,7 +24,6 @@ Export-Package: com.bstek.ureport.console.designer,
  com.tulin.v8.ureport.server.utils
 Bundle-ClassPath: .,
  lib/spring-aop-4.1.2.RELEASE.jar,
- lib/spring-beans-4.1.2.RELEASE.jar,
  lib/spring-context-4.1.2.RELEASE.jar,
  lib/spring-expression-4.1.2.RELEASE.jar,
  lib/spring-jdbc-4.1.2.RELEASE.jar,

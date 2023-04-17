@@ -1,6 +1,7 @@
 package com.tulin.v8.core.entity;
 
 import java.util.Map;
+import java.util.Properties;
 
 public class SpringDatasource {
 	private String type;
@@ -22,6 +23,18 @@ public class SpringDatasource {
 	private Map<String, Object> webStatFilter;
 	private Map<String, Object> statViewServlet;
 	private Map<String, Map<String, Object>> filter;
+
+	public SpringDatasource() {
+	}
+
+	public SpringDatasource(Properties properties) {
+		this.type = properties.getProperty("spring.datasource.type");
+		this.driverClassName = properties.getProperty("spring.datasource.driverClassName");
+		this.url = properties.getProperty("spring.datasource.url");
+		this.username = properties.getProperty("spring.datasource.username");
+		this.password = properties.getProperty("spring.datasource.password");
+		this.validationQuery = properties.getProperty("spring.datasource.validationQuery");
+	}
 
 	public String getType() {
 		return type;
