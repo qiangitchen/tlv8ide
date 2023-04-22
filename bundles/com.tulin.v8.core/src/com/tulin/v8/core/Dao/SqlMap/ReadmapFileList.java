@@ -6,6 +6,12 @@ import java.util.List;
 
 import com.tulin.v8.core.config.AppConfig;
 
+/**
+ * *.mybatis.xml配置文件读取
+ * 
+ * @author 陈乾
+ *
+ */
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class ReadmapFileList {
 	private List fileList;

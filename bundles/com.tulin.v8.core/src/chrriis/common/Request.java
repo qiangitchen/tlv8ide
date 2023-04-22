@@ -3,6 +3,12 @@ package chrriis.common;
 import java.util.Enumeration;
 import java.util.Map;
 
+/**
+ * http请求request接口
+ * 
+ * @author 陈乾
+ *
+ */
 public interface Request {
 	public void setURLPath(String urlPath);
 

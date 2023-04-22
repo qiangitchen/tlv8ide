@@ -12,6 +12,12 @@ import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
 
+/**
+ * 处理mybatis的数据配置
+ * 
+ * @author 陈乾
+ *
+ */
 @SuppressWarnings({ "unchecked", "rawtypes" })
 public class GetSqlMapByKey {
 	private static Map keyMap = new HashMap();

@@ -3,6 +3,12 @@ package chrriis.common;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 
+/**
+ * web服务返回内容封装
+ * 
+ * @author 陈乾
+ *
+ */
 public abstract class WebServerContent {
 
 	private static final String MIME_APPLICATION_OCTET_STREAM = "application/octet-stream";

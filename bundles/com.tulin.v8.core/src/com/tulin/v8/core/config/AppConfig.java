@@ -19,6 +19,12 @@ import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.core.entity.Spring;
 import com.tulin.v8.core.entity.SpringDatasource;
 
+/**
+ * 公用基础配置
+ * 
+ * @author 陈乾
+ *
+ */
 public class AppConfig {
 	private static AppConfig a = null;
 

@@ -3,6 +3,12 @@ package com.tulin.v8.core.entity;
 import java.util.Map;
 import java.util.Properties;
 
+/**
+ * spring数据库配置详情
+ * 
+ * @author 陈乾
+ *
+ */
 public class SpringDatasource {
 	private String type;
 	private String driverClassName;

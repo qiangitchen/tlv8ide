@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.tulin.v8.core
-Bundle-Version: 3.0.1.qualifier
+Bundle-Version: 3.0.2.qualifier
 Bundle-Vendor: TuLin
 Bundle-ClassPath: .,
  lib/jtds-1.3.1.jar,
@@ -148,6 +148,7 @@ Export-Package: chrriis.common,
  org.apache.commons.logging,
  org.apache.commons.logging.impl,
  org.apache.html.dom,
+ org.apache.ibatis.jdbc,
  org.apache.wml,
  org.apache.wml.dom,
  org.apache.xerces.dom,

@@ -1,5 +1,11 @@
 package com.tulin.v8.core.entity;
 
+/**
+ * spring配置
+ * 
+ * @author 陈乾
+ *
+ */
 public class Spring {
 	private Datasource spring;
 

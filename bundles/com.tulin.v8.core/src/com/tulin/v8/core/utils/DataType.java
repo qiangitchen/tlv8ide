@@ -2,6 +2,12 @@ package com.tulin.v8.core.utils;
 
 import com.tulin.v8.core.DBUtils;
 
+/**
+ * 数据类型配置及选择 数据库字段类型与业务字段类型匹配选择
+ * 
+ * @author 陈乾
+ *
+ */
 public class DataType {
 	public static String[] dataType = { "string", "number", "date", "datetime", "text", "blob" };
 	public static String[] gridDataType = { "ro", "string", "number", "date", "datetime", "year", "month", "yearmont",
@@ -9,6 +15,12 @@ public class DataType {
 	public static String[] detailDataType = { "input", "output", "date", "datetime", "year", "month", "yearmont",
 			"select", "switch", "checkbox", "radio", "textarea" };
 
+	/**
+	 * 获取数据库字段类型对应的业务字段类型
+	 * 
+	 * @param dat
+	 * @return
+	 */
 	public static String getDataTypeBydatabase(String dat) {
 		if (dat.indexOf("VARCHAR") > -1) {
 			return "string";
@@ -24,6 +36,12 @@ public class DataType {
 		return "string";
 	}
 
+	/**
+	 * 根据数据类型获取表单的字段信息
+	 * 
+	 * @param dataType
+	 * @return
+	 */
 	public static String getItemBydataType(String dataType) {
 		if (dataType.equals("input")) {
 			return "type=\"text\" class=\"layui-input\"";
@@ -53,6 +71,14 @@ public class DataType {
 		return "class=\"layui-input\"";
 	}
 
+	/**
+	 * 数据类型转换
+	 * 
+	 * @param dbkey
+	 * @param dataType 业务数据类型
+	 * @param length   字段长度（字符）
+	 * @return
+	 */
 	public static String dataTypeTranse(String dbkey, String dataType, String length) {
 		String datatype = "";
 		if (DBUtils.IsOracleDB(dbkey)) {
