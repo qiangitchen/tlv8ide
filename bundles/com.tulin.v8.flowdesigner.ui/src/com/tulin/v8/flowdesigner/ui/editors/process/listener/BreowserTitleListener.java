@@ -78,7 +78,6 @@ public class BreowserTitleListener implements TitleListener {
 				}
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 
@@ -104,7 +103,6 @@ public class BreowserTitleListener implements TitleListener {
 				editor.setElementItem(jon.getString("id"), item);
 			}
 		} catch (Exception e) {
-			e.printStackTrace();
 		}
 	}
 

@@ -203,6 +203,9 @@ public class TuLinPlugin extends AbstractUIPlugin {
 		if (resource == null || !resource.exists()) {
 			resource = project.findMember("src/main/webapp");
 		}
+		if (resource == null || !resource.exists()) {
+			resource = project.findMember("src/main/resources/static");
+		}
 		return resource;
 	}
 

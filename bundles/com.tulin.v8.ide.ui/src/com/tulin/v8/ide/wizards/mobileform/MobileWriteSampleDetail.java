@@ -16,10 +16,10 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
 
 import com.tulin.v8.core.StringArray;
-import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.ide.wizards.Messages;
 import com.tulin.v8.ide.wizards.ProjectSelectPage;
 import com.tulin.v8.ide.wizards.templet.MobileSampleDetailTemplet;
+import com.tulin.v8.ide.wizards.templet.utils.TempletsReader;
 import com.tulin.v8.ide.wizards.utils.FilePathUtils;
 
 public class MobileWriteSampleDetail {
@@ -65,7 +65,6 @@ public class MobileWriteSampleDetail {
 			filename = filename + ".html";
 		}
 
-		String PHANTOM_PROJECT_NAME = TuLinPlugin.getCurrentProjectName();
 		String containerPath = FilePathUtils.getContainerPath(containername);
 		String rootpath = "";
 		if (!"".equals(containerPath)) {
@@ -74,7 +73,7 @@ public class MobileWriteSampleDetail {
 				rootpath += "../";
 			}
 		}
-		pageText = pageText.replace("/" + PHANTOM_PROJECT_NAME + "/", rootpath);
+		pageText = pageText.replace("/" + TempletsReader.PHANTOM_PROJECT_NAME + "/", rootpath);
 
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IResource resource = root.findMember(new Path(containername));

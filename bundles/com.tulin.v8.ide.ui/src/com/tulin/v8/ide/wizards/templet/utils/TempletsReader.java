@@ -21,6 +21,10 @@ import com.tulin.v8.core.FileAndString;
  */
 @SuppressWarnings("rawtypes")
 public class TempletsReader {
+	/**
+	 * 模板中预设的项目名称 /tlv8/...
+	 */
+	public static final String PHANTOM_PROJECT_NAME = "tlv8";
 	public static String pageName = "page.html";
 	public static String jsName = "page.js";
 
