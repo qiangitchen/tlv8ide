@@ -27,6 +27,12 @@ import com.tulin.v8.core.Sys;
 
 import zigen.plugin.db.ui.internal.TreeNode;
 
+/**
+ * 向导结束页 用于配置文件位置和文件名
+ * 
+ * @author chenqian
+ *
+ */
 public class EndPage extends WizardPage {
 	protected Text containerText;
 	protected Text fileText;

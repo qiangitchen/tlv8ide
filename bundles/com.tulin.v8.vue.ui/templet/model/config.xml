@@ -7,20 +7,26 @@
 			templet="cardList" />
 		<item label="图文列表" img="image/list/imagelist.png"
 			templet="imageList" />
+		<!-- 
 		<item label="基础列表" img="image/list/list.png"
 			templet="simpleList" />
+		 -->
 	</item>
 	<item label="表单">
 		<item label="基础单表" img="image/form/baseForm.png"
 			templet="baseForm" />
+		<!-- 
 		<item label="主子表单" img="image/form/subForm.png"
 			templet="dirctForm" />
+		 -->
 	</item>
 	<item label="对话框">
+		<!-- 
 		<item label="列表单选对话框" img="image/gridSelectDialog.jpg"
-			templet="gridSelectDialogTemplet" />
-		<item label="列表多选对话框" img="image/gridCheckDialog.jpg"
-			templet="gridCheckDialogTemplet" />
+			templet="gridSelectDialog" />
+		 -->
+		<item label="列表多选对话框" img="image/dialog/vuecheckDialog.png"
+			templet="gridCheckDialog" />
 	</item>
 	<!-- 
 	<item label="树">

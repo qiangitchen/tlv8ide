@@ -28,6 +28,9 @@ import com.tulin.v8.vue.wizards.baseForm.WriteBaseForm;
 import com.tulin.v8.vue.wizards.cardList.CardListEndPage;
 import com.tulin.v8.vue.wizards.cardList.CardListPage;
 import com.tulin.v8.vue.wizards.cardList.WriteCardList;
+import com.tulin.v8.vue.wizards.gridCheckDialog.GridCheckDialogEndPage;
+import com.tulin.v8.vue.wizards.gridCheckDialog.GridCheckDialogLayoutPage;
+import com.tulin.v8.vue.wizards.gridCheckDialog.WriteGridCheckDialog;
 import com.tulin.v8.vue.wizards.imageList.ImageListEndPage;
 import com.tulin.v8.vue.wizards.imageList.ImageListPage;
 import com.tulin.v8.vue.wizards.imageList.WriteImageList;
@@ -35,6 +38,12 @@ import com.tulin.v8.vue.wizards.tableList.TableListEndPage;
 import com.tulin.v8.vue.wizards.tableList.TableListLayoutPage;
 import com.tulin.v8.vue.wizards.tableList.WriteTableList;
 
+/**
+ * VUE文件新建向导
+ * 
+ * @author chenqian
+ *
+ */
 public class NewVueWizard extends Wizard implements INewWizard {
 	ISelection selection;
 
@@ -75,16 +84,19 @@ public class NewVueWizard extends Wizard implements INewWizard {
 		tableListPageEndPage = new TableListEndPage(selection);
 		addPage(tableListPageEndPage);
 
-		baseFormPage = new BaseFormPage(dataSelectPage);
-		addPage(baseFormPage);
-		baseFormEndPage = new BaseFormEndPage(selection);
-		addPage(baseFormEndPage);
-
 		addPage(new CardListPage(dataSelectPage));
 		addPage(new CardListEndPage(selection));
 
 		addPage(new ImageListPage(dataSelectPage));
 		addPage(new ImageListEndPage(selection));
+
+		baseFormPage = new BaseFormPage(dataSelectPage);
+		addPage(baseFormPage);
+		baseFormEndPage = new BaseFormEndPage(selection);
+		addPage(baseFormEndPage);
+
+		addPage(new GridCheckDialogLayoutPage(dataSelectPage));
+		addPage(new GridCheckDialogEndPage(selection));
 
 		addPage(new EndPage(selection));
 	}
@@ -155,6 +167,15 @@ public class NewVueWizard extends Wizard implements INewWizard {
 			try {
 				files = new WriteBaseForm((BaseFormPage) getPage("baseFormPage"),
 						(BaseFormEndPage) getPage("baseFormEnd")).writePage();
+			} catch (Exception e) {
+				e.printStackTrace();
+				throwCoreException(Messages.getString("wizards.message.writefileErr") + e.toString());
+			}
+		}
+		if (currentPage instanceof GridCheckDialogEndPage) {// 列表多选对话框
+			try {
+				files = new WriteGridCheckDialog((GridCheckDialogLayoutPage) getPage("gridCheckDialogPageLayout"),
+						(GridCheckDialogEndPage) getPage("gridCheckDialogPageEnd")).writePage();
 			} catch (Exception e) {
 				e.printStackTrace();
 				throwCoreException(Messages.getString("wizards.message.writefileErr") + e.toString());

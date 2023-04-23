@@ -326,6 +326,8 @@ public class DataSelectPage extends WizardPage {
 			return getWizard().getPage("simpleListPage");
 		} else if ("baseForm".equals(templet)) {// 基础表单
 			return getWizard().getPage("baseFormPage");
+		} else if ("gridCheckDialog".equals(templet)) {// 列表多选对话框
+			return getWizard().getPage("gridCheckDialogPageLayout");
 		}
 		return null;
 	}
