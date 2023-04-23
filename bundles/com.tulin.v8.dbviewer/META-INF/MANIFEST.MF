@@ -5,7 +5,7 @@ Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.tulin.v8.dbviewer;singleton:=true
 Bundle-Version: 1.2.0.qualifier
 Bundle-Vendor: TuLin
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Encoding: UTF-8
 Bundle-ClassPath: .,
  lib/blancosqlformatter-0.0.3.jar,

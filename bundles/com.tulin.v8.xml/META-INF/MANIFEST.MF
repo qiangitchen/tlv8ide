@@ -21,7 +21,7 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.debug.ui;resolution:=optional,
  org.eclipse.emf.common;resolution:=optional
 Bundle-ActivationPolicy: lazy
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ClassPath: .
 Import-Package: org.eclipse.core.resources,
  org.eclipse.jdt.core,

@@ -31,7 +31,7 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.wst.css.ui,
  com.tulin.v8.core,
  com.tulin.v8.editors.page.server
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: com.tulin.v8.editors.page
 Bundle-ActivationPolicy: lazy
 Export-Package: com.tulin.v8.editors.page

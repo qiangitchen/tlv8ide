@@ -17,7 +17,7 @@ Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.text,
  com.tulin.v8.core,
  com.tulin.v8.xml
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: com.tulin.v8.fn
 Bundle-ActivationPolicy: lazy
 Export-Package: com.tulin.v8.fn

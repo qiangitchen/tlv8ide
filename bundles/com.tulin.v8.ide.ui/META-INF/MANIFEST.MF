@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.tulin.v8.ide.ui;singleton:=true
-Bundle-Version: 3.0.0.qualifier
+Bundle-Version: 3.0.1.qualifier
 Export-Package: com.tulin.v8.ide.dialog,
  com.tulin.v8.ide.utils,
  com.tulin.v8.ide.wizards.utils
@@ -10,7 +10,7 @@ Bundle-Vendor: TuLin
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
 Automatic-Module-Name: com.tulin.v8.ide.ui
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Require-Bundle: org.eclipse.jface,
  org.eclipse.jface.text,
  org.eclipse.core.resources,

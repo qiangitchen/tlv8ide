@@ -357,7 +357,7 @@ Require-Bundle: org.eclipse.swt,
  org.eclipse.jdt.core,
  org.eclipse.ui.console,
  org.eclipse.gef;resolution:=optional
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
 Automatic-Module-Name: com.tulin.v8.core
