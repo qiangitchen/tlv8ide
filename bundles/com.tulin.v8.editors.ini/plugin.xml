@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="org.eclipse.ui.editors">
+      <!-- ini文件专用编辑器配置 -->
+      <editor
+            class="com.tulin.v8.editors.ini.editors.InitializationFileEditor"
+            contributorClass="org.eclipse.ui.texteditor.BasicTextEditorActionContributor"
+            default="true"
+            extensions="ini"
+            icon="icons/ini.png"
+            id="com.tulin.v8.ini.Editor"
+            name="%editor.name.ini">
+      </editor>
+   </extension>
+
+</plugin>

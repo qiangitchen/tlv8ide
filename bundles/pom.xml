@@ -17,6 +17,7 @@
 		<module>com.tulin.v8.tomcat</module>
         <module>com.tulin.v8.echarts.ui</module>
         <module>com.tulin.v8.editors.fn</module>
+        <module>com.tulin.v8.editors.ini</module>
         <module>com.tulin.v8.editors.function</module>
 		<module>com.tulin.v8.editors.page.server</module>
         <module>com.tulin.v8.editors.page</module>
