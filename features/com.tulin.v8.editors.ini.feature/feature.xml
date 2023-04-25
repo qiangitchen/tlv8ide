@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.editors.ini.feature"
       label="TuLin Initialization File Editor"
-      version="1.2.1.qualifier"
+      version="1.0.0.qualifier"
       provider-name="TuLin"
       plugin="com.tulin.v8.editors.ini">
 
