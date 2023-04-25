@@ -14,177 +14,177 @@ public class InitializationDocument extends Document implements ISynchronizable 
 	private Object fLockObject;
 
 	public boolean isReading() {
-		/* 27 */ Activator a = Activator.getDefault();
-		/* 28 */ return (a != null) && (a.isReadingPropertiesDocument());
+		Activator a = Activator.getDefault();
+		return (a != null) && (a.isReadingPropertiesDocument());
 	}
 
 	public boolean isSaving() {
-		/* 33 */ return this.saving;
+		return this.saving;
 	}
 
 	public void setSaving(boolean saving) {
-		/* 38 */ this.saving = saving;
+		this.saving = saving;
 	}
 
 	protected String get2() {
-		/* 43 */ String result = super.get();
-		/* 44 */ if ((isSaving()) && (result != null)) {
-			/* 46 */ result = InitializationFileContentHandler.getInstance().fromText(result);
+		String result = super.get();
+		if ((isSaving()) && (result != null)) {
+			result = InitializationFileContentHandler.getInstance().fromText(result);
 		}
-		/* 48 */ return result;
+		return result;
 	}
 
 	protected void set2(String content, long modificationStamp) {
-		/* 53 */ if ((isReading()) && (content != null)) {
-			/* 55 */ content = InitializationFileContentHandler.getInstance().fromBinary(content);
+		if ((isReading()) && (content != null)) {
+			content = InitializationFileContentHandler.getInstance().fromBinary(content);
 		}
-		/* 57 */ super.set(content, modificationStamp);
+		super.set(content, modificationStamp);
 	}
 
 	public synchronized void setLockObject(Object lockObject) {
-		/* 68 */ this.fLockObject = lockObject;
+		this.fLockObject = lockObject;
 	}
 
 	public synchronized Object getLockObject() {
-		/* 76 */ return this.fLockObject;
+		return this.fLockObject;
 	}
 
 	public void startSequentialRewrite(boolean normalized) {
-		/* 84 */ Object lockObject = getLockObject();
-		/* 85 */ if (lockObject == null) {
-			/* 86 */ super.startSequentialRewrite(normalized);
-			/* 87 */ return;
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			super.startSequentialRewrite(normalized);
+			return;
 		}
-		/* 89 */ synchronized (lockObject) {
-			/* 90 */ super.startSequentialRewrite(normalized);
+		synchronized (lockObject) {
+			super.startSequentialRewrite(normalized);
 		}
 	}
 
 	public void stopSequentialRewrite() {
-		/* 99 */ Object lockObject = getLockObject();
-		/* 100 */ if (lockObject == null) {
-			/* 101 */ super.stopSequentialRewrite();
-			/* 102 */ return;
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			super.stopSequentialRewrite();
+			return;
 		}
-		/* 104 */ synchronized (lockObject) {
-			/* 105 */ super.stopSequentialRewrite();
+		synchronized (lockObject) {
+			super.stopSequentialRewrite();
 		}
 	}
 
 	public String get() {
-		/* 114 */ Object lockObject = getLockObject();
-		/* 115 */ if (lockObject == null) {
-			/* 116 */ return get2();
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			return get2();
 		}
-		/* 118 */ synchronized (lockObject) {
-			/* 119 */ return get2();
+		synchronized (lockObject) {
+			return get2();
 		}
 	}
 
 	public String get(int offset, int length) throws BadLocationException {
-		/* 128 */ Object lockObject = getLockObject();
-		/* 129 */ if (lockObject == null) {
-			/* 130 */ return super.get(offset, length);
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			return super.get(offset, length);
 		}
-		/* 132 */ synchronized (lockObject) {
-			/* 133 */ return super.get(offset, length);
+		synchronized (lockObject) {
+			return super.get(offset, length);
 		}
 	}
 
 	public char getChar(int offset) throws BadLocationException {
-		/* 142 */ Object lockObject = getLockObject();
-		/* 143 */ if (lockObject == null) {
-			/* 144 */ return super.getChar(offset);
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			return super.getChar(offset);
 		}
-		/* 146 */ synchronized (lockObject) {
-			/* 147 */ return super.getChar(offset);
+		synchronized (lockObject) {
+			return super.getChar(offset);
 		}
 	}
 
 	public long getModificationStamp() {
-		/* 157 */ Object lockObject = getLockObject();
-		/* 158 */ if (lockObject == null) {
-			/* 159 */ return super.getModificationStamp();
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			return super.getModificationStamp();
 		}
-		/* 161 */ synchronized (lockObject) {
-			/* 162 */ return super.getModificationStamp();
+		synchronized (lockObject) {
+			return super.getModificationStamp();
 		}
 	}
 
 	public void replace(int offset, int length, String text) throws BadLocationException {
-		/* 172 */ Object lockObject = getLockObject();
-		/* 173 */ if (lockObject == null) {
-			/* 174 */ super.replace(offset, length, text);
-			/* 175 */ return;
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			super.replace(offset, length, text);
+			return;
 		}
-		/* 177 */ synchronized (lockObject) {
-			/* 178 */ super.replace(offset, length, text);
+		synchronized (lockObject) {
+			super.replace(offset, length, text);
 		}
 	}
 
 	public void replace(int offset, int length, String text, long modificationStamp) throws BadLocationException {
-		/* 188 */ Object lockObject = getLockObject();
-		/* 189 */ if (lockObject == null) {
-			/* 190 */ super.replace(offset, length, text, modificationStamp);
-			/* 191 */ return;
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			super.replace(offset, length, text, modificationStamp);
+			return;
 		}
-		/* 193 */ synchronized (lockObject) {
-			/* 194 */ super.replace(offset, length, text, modificationStamp);
+		synchronized (lockObject) {
+			super.replace(offset, length, text, modificationStamp);
 		}
 	}
 
 	public void set(String text) {
-		/* 203 */ Object lockObject = getLockObject();
-		/* 204 */ if (lockObject == null) {
-			/* 205 */ super.set(text);
-			/* 206 */ return;
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			super.set(text);
+			return;
 		}
-		/* 208 */ synchronized (lockObject) {
-			/* 209 */ super.set(text);
+		synchronized (lockObject) {
+			super.set(text);
 		}
 	}
 
 	public void set(String text, long modificationStamp) {
-		/* 218 */ Object lockObject = getLockObject();
-		/* 219 */ if (lockObject == null) {
-			/* 220 */ set2(text, modificationStamp);
-			/* 221 */ return;
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			set2(text, modificationStamp);
+			return;
 		}
-		/* 223 */ synchronized (lockObject) {
-			/* 224 */ set2(text, modificationStamp);
+		synchronized (lockObject) {
+			set2(text, modificationStamp);
 		}
 	}
 
 	public void addPosition(String category, Position position)
 			throws BadLocationException, BadPositionCategoryException {
-		/* 234 */ Object lockObject = getLockObject();
-		/* 235 */ if (lockObject == null) {
-			/* 236 */ super.addPosition(category, position);
-			/* 237 */ return;
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			super.addPosition(category, position);
+			return;
 		}
-		/* 239 */ synchronized (lockObject) {
-			/* 240 */ super.addPosition(category, position);
+		synchronized (lockObject) {
+			super.addPosition(category, position);
 		}
 	}
 
 	public void removePosition(String category, Position position) throws BadPositionCategoryException {
-		/* 250 */ Object lockObject = getLockObject();
-		/* 251 */ if (lockObject == null) {
-			/* 252 */ super.removePosition(category, position);
-			/* 253 */ return;
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			super.removePosition(category, position);
+			return;
 		}
-		/* 255 */ synchronized (lockObject) {
-			/* 256 */ super.removePosition(category, position);
+		synchronized (lockObject) {
+			super.removePosition(category, position);
 		}
 	}
 
 	public Position[] getPositions(String category) throws BadPositionCategoryException {
-		/* 266 */ Object lockObject = getLockObject();
-		/* 267 */ if (lockObject == null) {
-			/* 268 */ return super.getPositions(category);
+		Object lockObject = getLockObject();
+		if (lockObject == null) {
+			return super.getPositions(category);
 		}
-		/* 270 */ synchronized (lockObject) {
-			/* 271 */ return super.getPositions(category);
+		synchronized (lockObject) {
+			return super.getPositions(category);
 		}
 	}
 }

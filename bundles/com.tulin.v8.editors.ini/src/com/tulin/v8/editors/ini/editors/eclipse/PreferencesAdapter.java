@@ -74,92 +74,92 @@ public class PreferencesAdapter implements IPreferenceStore {
 	}
 
 	public double getDouble(String name) {
-		/* 187 */ return this.fPreferences.getDouble(name);
+		return this.fPreferences.getDouble(name);
 	}
 
 	public float getFloat(String name) {
-		/* 194 */ return this.fPreferences.getFloat(name);
+		return this.fPreferences.getFloat(name);
 	}
 
 	public int getInt(String name) {
-		/* 201 */ return this.fPreferences.getInt(name);
+		return this.fPreferences.getInt(name);
 	}
 
 	public long getLong(String name) {
-		/* 208 */ return this.fPreferences.getLong(name);
+		return this.fPreferences.getLong(name);
 	}
 
 	public String getString(String name) {
-		/* 215 */ return this.fPreferences.getString(name);
+		return this.fPreferences.getString(name);
 	}
 
 	public boolean isDefault(String name) {
-		/* 222 */ return this.fPreferences.isDefault(name);
+		return this.fPreferences.isDefault(name);
 	}
 
 	public boolean needsSaving() {
-		/* 229 */ return this.fPreferences.needsSaving();
+		return this.fPreferences.needsSaving();
 	}
 
 	public void putValue(String name, String value) {
 		try {
-			/* 237 */ this.fSilent = true;
-			/* 238 */ this.fPreferences.setValue(name, value);
+			this.fSilent = true;
+			this.fPreferences.setValue(name, value);
 		} finally {
-			/* 240 */ this.fSilent = false;
+			this.fSilent = false;
 		}
 	}
 
 	public void setDefault(String name, double value) {
-		/* 248 */ this.fPreferences.setDefault(name, value);
+		this.fPreferences.setDefault(name, value);
 	}
 
 	public void setDefault(String name, float value) {
-		/* 255 */ this.fPreferences.setDefault(name, value);
+		this.fPreferences.setDefault(name, value);
 	}
 
 	public void setDefault(String name, int value) {
-		/* 262 */ this.fPreferences.setDefault(name, value);
+		this.fPreferences.setDefault(name, value);
 	}
 
 	public void setDefault(String name, long value) {
-		/* 269 */ this.fPreferences.setDefault(name, value);
+		this.fPreferences.setDefault(name, value);
 	}
 
 	public void setDefault(String name, String defaultObject) {
-		/* 276 */ this.fPreferences.setDefault(name, defaultObject);
+		this.fPreferences.setDefault(name, defaultObject);
 	}
 
 	public void setDefault(String name, boolean value) {
-		/* 283 */ this.fPreferences.setDefault(name, value);
+		this.fPreferences.setDefault(name, value);
 	}
 
 	public void setToDefault(String name) {
-		/* 290 */ this.fPreferences.setToDefault(name);
+		this.fPreferences.setToDefault(name);
 	}
 
 	public void setValue(String name, double value) {
-		/* 297 */ this.fPreferences.setValue(name, value);
+		this.fPreferences.setValue(name, value);
 	}
 
 	public void setValue(String name, float value) {
-		/* 304 */ this.fPreferences.setValue(name, value);
+		this.fPreferences.setValue(name, value);
 	}
 
 	public void setValue(String name, int value) {
-		/* 311 */ this.fPreferences.setValue(name, value);
+		this.fPreferences.setValue(name, value);
 	}
 
 	public void setValue(String name, long value) {
-		/* 318 */ this.fPreferences.setValue(name, value);
+		this.fPreferences.setValue(name, value);
 	}
 
 	public void setValue(String name, String value) {
-		/* 325 */ this.fPreferences.setValue(name, value);
+		this.fPreferences.setValue(name, value);
 	}
 
 	public void setValue(String name, boolean value) {
-		/* 332 */ this.fPreferences.setValue(name, value);
+		this.fPreferences.setValue(name, value);
 	}
 
 	private class PropertyChangeListener implements Preferences.IPropertyChangeListener {
@@ -167,7 +167,7 @@ public class PreferencesAdapter implements IPreferenceStore {
 		}
 
 		public void propertyChange(Preferences.PropertyChangeEvent event) {
-			/* 43 */ PreferencesAdapter.this.firePropertyChangeEvent(event.getProperty(), event.getOldValue(),
+			PreferencesAdapter.this.firePropertyChangeEvent(event.getProperty(), event.getOldValue(),
 					event.getNewValue());
 		}
 	}

@@ -1,24 +1,26 @@
 package com.tulin.v8.editors.ini.editors;
 
-import org.eclipse.jdt.ui.text.JavaTextTools;
+import org.eclipse.jdt.internal.ui.propertiesfileeditor.PropertiesFileEditor;
+//import org.eclipse.jdt.ui.text.JavaTextTools;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.part.IShowInTargetList;
 
 import com.tulin.v8.editors.ini.Activator;
 
-public class InitializationFileEditor extends TextEditor {
+@SuppressWarnings("restriction")
+public class InitializationFileEditor extends PropertiesFileEditor {
 	public InitializationFileEditor() {
+		super();
 		setDocumentProvider(new DocumentProvider());
 
 		IPreferenceStore store = Activator.getDefault().getCombinedPreferenceStore();
 		setPreferenceStore(store);
 
-		JavaTextTools textTools = Activator.getDefault().getJavaTextTools();
-		setSourceViewerConfiguration(
-				new InitializationConfiguration(this, store, textTools.getColorManager(), "___pf_partitioning"));
+//		JavaTextTools textTools = Activator.getDefault().getJavaTextTools();
+//		setSourceViewerConfiguration(
+//				new InitializationConfiguration(this, store, textTools.getColorManager(), "___pf_partitioning"));
 	}
 
 	protected String[] collectContextMenuPreferencePages() {
@@ -57,10 +59,6 @@ public class InitializationFileEditor extends TextEditor {
 			};
 		}
 		return super.getAdapter(adapter);
-	}
-
-	public int getOrientation() {
-		return 33554432;
 	}
 
 	protected void updateStatusField(String category) {
