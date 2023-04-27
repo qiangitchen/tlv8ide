@@ -11,6 +11,8 @@
 			      ref="table"
 			      :fetch="fetch"
 			      :value="obj"
+			      :toolbar="toolbar"
+			      :operate="operate"
 			      :columns="columns"
 			      :pagination="pagination"
 			      :row-selection="{ selectedRowKeys: selectedRowKeys, onChange: onSelectChange }"

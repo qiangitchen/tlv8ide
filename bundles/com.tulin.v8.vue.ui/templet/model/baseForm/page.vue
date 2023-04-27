@@ -16,6 +16,8 @@
               :wrapper-col="wrapperCol"
             >
               ${formInfo}
+              <a-button type="primary" @click="onSubmit">提交</a-button>
+              <a-button style="margin-left: 10px" @click="resetForm">重置</a-button>
             </a-form>
           </a-col>
         </a-row>
