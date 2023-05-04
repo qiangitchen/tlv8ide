@@ -11,10 +11,12 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.swt.SWT;
 
 import zigen.plugin.db.DbPlugin;
+import zigen.plugin.db.core.DBConfigManager;
 import zigen.plugin.db.core.DBType;
 import zigen.plugin.db.ui.internal.DataBase;
 import zigen.plugin.db.ui.internal.Folder;
 import zigen.plugin.db.ui.internal.ITable;
+import zigen.plugin.db.ui.internal.Root;
 import zigen.plugin.db.ui.internal.Schema;
 import zigen.plugin.db.ui.jobs.ConnectDBJob;
 import zigen.plugin.db.ui.jobs.OracleSequeceSearchJob;
@@ -22,6 +24,7 @@ import zigen.plugin.db.ui.jobs.OracleSourceSearchJob;
 import zigen.plugin.db.ui.jobs.RefreshFolderJob;
 import zigen.plugin.db.ui.jobs.RefreshTableJob;
 import zigen.plugin.db.ui.jobs.TableTypeSearchJob;
+import zigen.plugin.db.ui.views.TreeContentProvider;
 
 public class RefreshAction extends Action {
 
@@ -110,6 +113,13 @@ public class RefreshAction extends Action {
 				job.setUser(showDialog);
 				job.schedule();
 
+			} else if (element instanceof Root) {
+				System.out.println("刷新数据源配置");
+				DBConfigManager.refreshConfig();// 刷新数据源配置
+				TreeContentProvider provider = (TreeContentProvider) viewer.getContentProvider();
+				provider.getRoot().removeChildAll();// 清空数据库节点
+				provider.createDataBase(); // 重建数据库节点
+				viewer.refresh();
 			}
 
 		} catch (Exception e) {

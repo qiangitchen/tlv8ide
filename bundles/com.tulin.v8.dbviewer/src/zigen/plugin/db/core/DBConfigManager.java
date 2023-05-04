@@ -59,6 +59,7 @@ public class DBConfigManager {
 	public static final String KEY_FILTER_PATTERN = "KEY_FILTER_PATTERN"; //$NON-NLS-1$
 
 	public static void refreshConfig() {
+		DbPlugin.getDefault().setConfigischange(true);
 		setting = DbPlugin.getDefault().getDBDialogSettings();
 	}
 

@@ -1,9 +1,6 @@
 package com.tulin.v8.ide.views.navigator.action;
 
 import java.io.File;
-import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.Path;
@@ -13,7 +10,6 @@ import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 
-import com.tulin.v8.core.Configuration;
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.ide.StudioPlugin;
@@ -128,26 +124,19 @@ public class RefreshAction extends Action implements Runnable {
 			} else if (element instanceof Root) {
 				Root data = (Root) element;
 				if (data.getName().equals("DATA")) {
+					DBConfigManager.refreshConfig();// 刷新数据源配置
+					IDBConfig[] configs = DBConfigManager.getDBConfigs();
 					data.removeChildAll();
-					try {
-						Map<String, Map<String, String>> rm = Configuration.getConfig();
-						Set<String> k = rm.keySet();
-						Iterator<String> it = k.iterator();
-						while (it.hasNext()) {
-							try {
-								Thread.sleep(5);
-							} catch (InterruptedException e) {
-							}
-							String key = (String) it.next();
-							Map<String, String> m = rm.get(key);
-							IDBConfig dbconfig = DBConfigManager.getDBConfig(key);
-							DataBase db = new DataBase(dbconfig);
-							db.setTvtype("dbkey");
-							db.setUsername(m.get("username"));
-							data.addChild(db);
+					for (int i = 0; i < configs.length; i++) {
+						try {
+							Thread.sleep(5);
+						} catch (InterruptedException e) {
 						}
-					} catch (Exception e) {
-						e.printStackTrace();
+						IDBConfig dbconfig = configs[i];
+						DataBase db = new DataBase(dbconfig);
+						db.setTvtype("dbkey");
+						db.setUsername(dbconfig.getUserId());
+						data.addChild(db);
 					}
 				}
 			}

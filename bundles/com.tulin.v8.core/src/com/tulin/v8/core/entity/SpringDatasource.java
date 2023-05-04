@@ -3,18 +3,17 @@ package com.tulin.v8.core.entity;
 import java.util.Map;
 import java.util.Properties;
 
+import org.springframework.util.StringUtils;
+
 /**
  * spring数据库配置详情
  * 
  * @author 陈乾
  *
  */
-public class SpringDatasource {
+public class SpringDatasource extends AbsDataSource {
 	private String type;
 	private String driverClassName;
-	private String url;
-	private String username;
-	private String password;
 	private int initialSize = 5;
 	private int minIdle = 10;
 	private int maxActive = 20;
@@ -40,6 +39,29 @@ public class SpringDatasource {
 		this.username = properties.getProperty("spring.datasource.username");
 		this.password = properties.getProperty("spring.datasource.password");
 		this.validationQuery = properties.getProperty("spring.datasource.validationQuery");
+		if (StringUtils.isEmpty(this.url)) {
+			this.url = properties.getProperty("spring.datasource.druid.url");
+			this.username = properties.getProperty("spring.datasource.druid.username");
+			this.password = properties.getProperty("spring.datasource.druid.password");
+		}
+		if (StringUtils.isEmpty(this.url)) {
+			this.url = properties.getProperty("spring.datasource.druid.master.url");
+			this.username = properties.getProperty("spring.datasource.druid.master.username");
+			this.password = properties.getProperty("spring.datasource.druid.master.password");
+		}
+		if (StringUtils.isEmpty(this.url)) {
+			this.driverClassName = properties.getProperty("spring.datasource.datasource.master.driver-class-name");
+			this.url = properties.getProperty("spring.datasource.datasource.master.url");
+			this.username = properties.getProperty("spring.datasource.datasource.master.username");
+			this.password = properties.getProperty("spring.datasource.datasource.master.password");
+		}
+		if (StringUtils.isEmpty(this.url)) {
+			this.driverClassName = properties
+					.getProperty("spring.datasource.dynamic.datasource.master.driverClassName");
+			this.url = properties.getProperty("spring.datasource.dynamic.datasource.master.url");
+			this.username = properties.getProperty("spring.datasource.dynamic.datasource.master.username");
+			this.password = properties.getProperty("spring.datasource.dynamic.datasource.master.password");
+		}
 	}
 
 	public String getType() {
@@ -56,30 +78,6 @@ public class SpringDatasource {
 
 	public void setDriverClassName(String driverClassName) {
 		this.driverClassName = driverClassName;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
 	}
 
 	public int getInitialSize() {
@@ -192,6 +190,11 @@ public class SpringDatasource {
 
 	public void setFilter(Map<String, Map<String, Object>> filter) {
 		this.filter = filter;
+	}
+
+	@Override
+	public String getDriver() {
+		return driverClassName;
 	}
 
 }

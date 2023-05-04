@@ -244,6 +244,8 @@ public class TreeView extends AbstractTreeView {
 			manager.add(registDBAction);
 			manager.add(removeDBAction);
 			manager.add(new Separator());
+			manager.add(refreshAction);
+			manager.add(new Separator());
 			manager.add(importDBConfigAction);
 			manager.add(exportDBConfigAction);
 			manager.add(new Separator());

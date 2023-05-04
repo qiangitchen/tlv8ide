@@ -11,11 +11,13 @@ import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PropertiesLoaderUtils;
+import org.springframework.util.StringUtils;
 import org.yaml.snakeyaml.LoaderOptions;
 import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 import com.tulin.v8.core.TuLinPlugin;
+import com.tulin.v8.core.entity.JdbcDatasource;
 import com.tulin.v8.core.entity.Spring;
 import com.tulin.v8.core.entity.SpringDatasource;
 
@@ -114,13 +116,25 @@ public class AppConfig {
 			if (resource != null && resource.exists()) {
 				return loadSpringDatasource(resource.getLocation().toFile());
 			}
+			resource = project.findMember("src/main/resources/application-dev.yml");
+			if (resource != null && resource.exists()) {
+				return loadSpringDatasource(resource.getLocation().toFile());
+			}
+			resource = project.findMember("src/main/resources/application-prod.yml");
+			if (resource != null && resource.exists()) {
+				return loadSpringDatasource(resource.getLocation().toFile());
+			}
+			resource = project.findMember("src/main/resources/application-local.yml");
+			if (resource != null && resource.exists()) {
+				return loadSpringDatasource(resource.getLocation().toFile());
+			}
 			resource = project.findMember("src/main/resources/application.yml");
 			if (resource != null && resource.exists()) {
 				return loadSpringDatasource(resource.getLocation().toFile());
 			}
 			resource = project.findMember("src/main/resources/application.properties");
 			if (resource != null && resource.exists()) {
-				return ReadProperties(resource.getLocation().toFile());
+				return readProperties(resource.getLocation().toFile());
 			}
 		}
 		return null;
@@ -151,7 +165,7 @@ public class AppConfig {
 	 * @param file
 	 * @return com.tulin.v8.core.entity.SpringDatasource
 	 */
-	public static SpringDatasource ReadProperties(File file) {
+	public static SpringDatasource readProperties(File file) {
 		SpringDatasource springDatasource = null;
 		try {
 			Resource resource = new FileSystemResource(file);
@@ -160,7 +174,55 @@ public class AppConfig {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		return springDatasource;
+		if (!StringUtils.isEmpty(springDatasource.getUrl())) {
+			return springDatasource;
+		}
+		return null;
+	}
+
+	/**
+	 * 加载jdbc数据源
+	 * 
+	 * @param file
+	 * @return
+	 */
+	public static JdbcDatasource readJdbcProperties(File file) {
+		JdbcDatasource jdbcDatasource = null;
+		try {
+			Resource resource = new FileSystemResource(file);
+			Properties properties = PropertiesLoaderUtils.loadProperties(resource);
+			jdbcDatasource = new JdbcDatasource(properties);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		if (!StringUtils.isEmpty(jdbcDatasource.getUrl())) {
+			return jdbcDatasource;
+		}
+		return null;
+	}
+
+	/**
+	 * 获取spring boot 数据源配置
+	 * 
+	 * @return SpringDatasource
+	 */
+	public static JdbcDatasource getJdbcDatasource() {
+		IProject project = TuLinPlugin.getProject("tlv8-web");
+		// 优先获取tlv8-main项目没有则获取当前项目
+		if (project == null || !project.exists()) {
+			project = TuLinPlugin.getCurrentProject();
+		}
+		if (project != null) {
+			IResource resource = project.findMember("src/main/resources/jdbc.properties");
+			if (resource != null && resource.exists()) {
+				return readJdbcProperties(resource.getLocation().toFile());
+			}
+			resource = project.findMember("src/jdbc.properties");
+			if (resource != null && resource.exists()) {
+				return readJdbcProperties(resource.getLocation().toFile());
+			}
+		}
+		return null;
 	}
 
 }
