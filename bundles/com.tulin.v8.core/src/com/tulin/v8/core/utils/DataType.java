@@ -9,7 +9,8 @@ import com.tulin.v8.core.DBUtils;
  *
  */
 public class DataType {
-	public static String[] dataType = { "string", "number", "date", "datetime", "text", "blob" };
+	public static String[] dataType = { "string", "number", "int", "bigint", "float", "decimal", "date", "datetime",
+			"timestamp", "text", "longtext", "clob", "blob" };
 	public static String[] gridDataType = { "ro", "string", "number", "date", "datetime", "year", "month", "yearmont",
 			"html:reader", "select:id", "button:action", "checkBox:map", "radio:map", "textarea" };
 	public static String[] detailDataType = { "input", "output", "date", "datetime", "year", "month", "yearmont",
@@ -95,9 +96,10 @@ public class DataType {
 			}
 		} else {
 			if (dataType.toLowerCase().equals("string")) {
-				datatype = "VARCHAR(" + length + ")";
-			} else {
-				datatype = dataType.toUpperCase();
+				datatype = "varchar(" + length + ")";
+			}
+			if (dataType.contains("varchar") && dataType.indexOf("(") < 0) {
+				datatype = dataType + "(" + length + ")";
 			}
 		}
 		return datatype;

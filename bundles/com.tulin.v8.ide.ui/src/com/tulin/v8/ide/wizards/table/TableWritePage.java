@@ -26,7 +26,12 @@ public class TableWritePage extends AbsolutelyTableCreate {
 		ensureAction = new Action() {
 			public void run() {
 				TableItem item = new TableItem(celltable, SWT.NONE);
-				item.setText(new String[] { "", name, datatype, "100", text });
+				if ("string".equalsIgnoreCase(datatype) || "varchar".equalsIgnoreCase(datatype)
+						|| datatype.contains("varchar")) {
+					item.setText(new String[] { "", name, datatype, "100", text });
+				} else {
+					item.setText(new String[] { "", name, datatype, "", text });
+				}
 				changeComplete();
 			}
 		};
