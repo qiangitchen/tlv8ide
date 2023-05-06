@@ -1,17 +1,18 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-    <modelVersion>4.0.0</modelVersion>
-    <groupId>com.tulin.v8.ide</groupId>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.tulin.v8.ide</groupId>
 	<artifactId>com.tulin.v8.ide.root</artifactId>
 	<version>3.0.0-SNAPSHOT</version>
-    <packaging>pom</packaging>
-	
+	<packaging>pom</packaging>
+
 	<properties>
 		<java.version>1.8</java.version>
 		<tycho.version>1.4.0</tycho.version>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
-	
+
 	<repositories>
 		<repository>
 			<id>eclipse</id>
@@ -26,76 +27,98 @@
 	</repositories>
 
 	<build>
-	  <plugins>
-	   <plugin>
-		<groupId>org.eclipse.tycho</groupId>
-		<artifactId>tycho-maven-plugin</artifactId>
-		<version>${tycho.version}</version>
-		<extensions>true</extensions>
-	   </plugin>
+		<plugins>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-maven-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<extensions>true</extensions>
+			</plugin>
 
-	   <plugin>
-		<groupId>org.eclipse.tycho</groupId>
-      	<artifactId>target-platform-configuration</artifactId>
-		<version>${tycho.version}</version>
-		<configuration>
-			<resolver>p2</resolver>
-			<environments>
-				<environment>
-					<os>win32</os>
-					<ws>win32</ws>
-					<arch>x86_64</arch>
-				</environment>
-				<environment>
-					<os>win32</os>
-					<ws>win32</ws>
-					<arch>x86</arch>
-				</environment>
-				<environment>
-					<os>linux</os>
-					<ws>gtk</ws>
-					<arch>x86_64</arch>
-				</environment>
-				<environment>
-					<os>linux</os>
-					<ws>gtk</ws>
-					<arch>x86</arch>
-				</environment>
-				<environment>
-					<os>linux</os>
-					<ws>gtk</ws>
-					<arch>aarch64</arch>
-				</environment>
-				<environment>
-					<os>macosx</os>
-					<ws>cocoa</ws>
-					<arch>x86_64</arch>
-				</environment>
-				<environment>
-					<os>macosx</os>
-					<ws>cocoa</ws>
-					<arch>aarch64</arch>
-				</environment>
-			</environments>
-		</configuration>
-	   </plugin>
-	   
-	   <plugin>
-		   <groupId>org.eclipse.tycho</groupId>
-		   <artifactId>tycho-compiler-plugin</artifactId>
-		   <version>${tycho.version}</version>
-		   <configuration>
-			   <source>${java.version}</source>
-			   <target>${java.version}</target>
-		   </configuration>
-	   </plugin>
-			
-	  </plugins>
-	 </build>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>target-platform-configuration</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<resolver>p2</resolver>
+					<environments>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>x86</arch>
+						</environment>
+						<environment>
+							<os>linux</os>
+							<ws>gtk</ws>
+							<arch>aarch64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>x86_64</arch>
+						</environment>
+						<environment>
+							<os>macosx</os>
+							<ws>cocoa</ws>
+							<arch>aarch64</arch>
+						</environment>
+					</environments>
+				</configuration>
+			</plugin>
 
-    <modules>
-        <module>bundles</module>
-        <module>features</module>
-        <module>releng</module>
-    </modules>
+			<plugin>
+				<groupId>org.eclipse.tycho</groupId>
+				<artifactId>tycho-compiler-plugin</artifactId>
+				<version>${tycho.version}</version>
+				<configuration>
+					<source>${java.version}</source>
+					<target>${java.version}</target>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jarsigner-plugin</artifactId>
+				<version>1.2</version>
+				<executions>
+					<execution>
+						<id>sign</id>
+						<goals>
+							<goal>sign</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<keystore>${sign.keystore}</keystore>
+					<alias>${sign.alias}</alias>
+					<storepass>${sign.storepass}</storepass>
+					<keypass>${sign.keypass}</keypass>
+					<verbose>true</verbose>
+				</configuration>
+			</plugin>
+
+		</plugins>
+	</build>
+
+	<modules>
+		<module>bundles</module>
+		<module>features</module>
+		<module>releng</module>
+	</modules>
+
 </project>
