@@ -105,10 +105,10 @@
 				</executions>
 				<configuration>
 					<keystore>${sign.keystore}</keystore>
+					<storetype>${sign.storetype}</storetype>
 					<alias>${sign.alias}</alias>
 					<storepass>${sign.storepass}</storepass>
 					<keypass>${sign.keypass}</keypass>
-					<verbose>true</verbose>
 				</configuration>
 			</plugin>
 
