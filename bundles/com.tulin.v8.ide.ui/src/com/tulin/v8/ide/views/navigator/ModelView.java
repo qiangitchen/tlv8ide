@@ -99,8 +99,10 @@ import zigen.plugin.db.ui.internal.DataBase;
 import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.internal.OracleSequence;
 import zigen.plugin.db.ui.internal.OracleSource;
+import zigen.plugin.db.ui.internal.Schema;
 import zigen.plugin.db.ui.internal.Table;
 import zigen.plugin.db.ui.internal.TreeNode;
+import zigen.plugin.db.ui.internal.View;
 import zigen.plugin.db.ui.jobs.RefreshOracleSourceJob;
 import zigen.plugin.db.ui.jobs.RefreshTableJob;
 import zigen.plugin.db.ui.views.TreeView;
@@ -318,6 +320,9 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 				connectDBAction.setEnabled(false);
 				closeDBAction.setEnabled(false);
 			}
+		} else if (obj instanceof Schema) {
+			manager.add(exportDataDictionary);
+			manager.add(new Separator());
 		} else if (obj instanceof ITable) {
 			opentableviewfileaction = new OpenTableViewFileAction(this.viewer);
 			Action openaction = new Action() {
@@ -341,6 +346,10 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 			manager.add(new GroupMarker("group.copy.statement"));
 			// 可以删除表和视图 View是Table的子类
 			if (obj instanceof Table) {
+				if (!(obj instanceof View)) {// 视图不做数据字典
+					manager.add(new Separator());
+					manager.add(exportDataDictionary);
+				}
 				manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 				manager.add(DeleteAction);
 				DeleteAction.setEnabled(true);

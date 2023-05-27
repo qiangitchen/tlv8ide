@@ -19,6 +19,10 @@ import com.tulin.v8.core.utils.CommonUtil;
 
 import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.ui.internal.DataBase;
+import zigen.plugin.db.ui.internal.ITable;
+import zigen.plugin.db.ui.internal.Schema;
+import zigen.plugin.db.ui.internal.Table;
+import zigen.plugin.db.ui.internal.View;
 import zigen.plugin.db.ui.jobs.AbstractJob;
 
 public class ExportDataDictionary extends Action implements Runnable {
@@ -26,8 +30,8 @@ public class ExportDataDictionary extends Action implements Runnable {
 
 	public ExportDataDictionary(TreeViewer viewer) {
 		this.viewer = viewer;
-		setText("导出数据字典");
-		setToolTipText("当前数据库导出数据字典到文件");
+		setText(Messages.getString("View.Action.ExportDic.1"));
+		setToolTipText(Messages.getString("View.Action.ExportDic.2"));
 	}
 
 	public void run() {
@@ -38,27 +42,57 @@ public class ExportDataDictionary extends Action implements Runnable {
 				AbstractJob job = new AbstractJob("正在导出数据字典") {
 					@Override
 					protected IStatus run(IProgressMonitor monitor) {
-						export(db.getDbConfig(), monitor);
+						export(db.getDbConfig(), monitor, null, null);
 						return Status.OK_STATUS;
 					}
 				};
 				job.schedule();
+			} else if (element instanceof Schema) {
+				Schema schema = (Schema) element;
+				AbstractJob job = new AbstractJob("正在导出数据字典") {
+					@Override
+					protected IStatus run(IProgressMonitor monitor) {
+						export(schema.getDbConfig(), monitor, null, schema.getName());
+						return Status.OK_STATUS;
+					}
+				};
+				job.schedule();
+			} else if (element instanceof ITable) {
+				ITable table = (ITable) element;
+				if (!(table instanceof View) && table instanceof Table) {
+					AbstractJob job = new AbstractJob("正在导出数据字典") {
+						@Override
+						protected IStatus run(IProgressMonitor monitor) {
+							export(table.getDbConfig(), monitor, (Table) table, null);
+							return Status.OK_STATUS;
+						}
+					};
+					job.schedule();
+				}
 			}
 		} catch (Exception e) {
 		}
 	}
 
-	private void export(IDBConfig dbConfig, IProgressMonitor monitor) {
+	private void export(IDBConfig dbConfig, IProgressMonitor monitor, Table table, String schemaPattern) {
 		String tmp = FileAndString
 				.FileToString(ExportDataDictionary.class.getResourceAsStream("/wordtmp/data_tables.html"));
 		tmp = tmp.replace("${dataBase}", dbConfig.getDbName());
-		tmp = tmp.replace("${tableList}", loadTableList(dbConfig, monitor));
+		if (table == null) {
+			tmp = tmp.replace("${tableList}", loadTableList(dbConfig, monitor, schemaPattern));
+		} else {
+			tmp = tmp.replace("${tableList}", loadTable(dbConfig, monitor, table));
+		}
 		final String filetext = tmp;
 		viewer.getControl().getDisplay().asyncExec(new Runnable() {
 			@Override
 			public void run() {
 				FileDialog dlg = new FileDialog(viewer.getControl().getShell(), SWT.SAVE);
-				dlg.setFileName(dbConfig.getDbName() + "数据字典.docx");
+				if (table == null) {
+					dlg.setFileName(dbConfig.getDbName() + "数据字典.docx");
+				} else {
+					dlg.setFileName(table.getName() + "数据字典.docx");
+				}
 				dlg.setFilterNames(new String[] { "Word Files (*.docx)", "All Files (*.*)" });
 				dlg.setFilterExtensions(new String[] { "*.docx", "*.*" });
 				boolean done = false;
@@ -69,7 +103,7 @@ public class ExportDataDictionary extends Action implements Runnable {
 					if (saveFileName == null) {
 						// User has cancelled, so quit and return
 						MessageBox mg = new MessageBox(dlg.getParent(), SWT.ICON_WARNING | SWT.YES);
-						mg.setText("Tips");
+						mg.setText("信息");
 						mg.setMessage("你取消了保存文件");
 						done = mg.open() == SWT.YES;
 						done = true;
@@ -79,7 +113,7 @@ public class ExportDataDictionary extends Action implements Runnable {
 						if (file.exists()) {
 							// The file already exists; asks for confirmation
 							MessageBox mb = new MessageBox(dlg.getParent(), SWT.ICON_WARNING | SWT.YES | SWT.NO);
-							mb.setText("Tips");
+							mb.setText("确认");
 							mb.setMessage(saveFileName + " 已经存在，是否要替换它?");
 							// If they click Yes, drop out. If they click No,
 							// redisplay the File Dialog
@@ -98,11 +132,11 @@ public class ExportDataDictionary extends Action implements Runnable {
 		});
 	}
 
-	private String loadTableList(IDBConfig dbConfig, IProgressMonitor monitor) {
+	private String loadTableList(IDBConfig dbConfig, IProgressMonitor monitor, String schemaPattern) {
 		StringBuffer tsrbf = new StringBuffer();
 		try {
 			String dbkey = dbConfig.getDbName();
-			Map<String, List<String>> tv = CommonUtil.getDataObject(dbkey, null);
+			Map<String, List<String>> tv = CommonUtil.getDataObject(dbkey, schemaPattern);
 			List<String> tanles = tv.get("TABLE");
 			String tableTmp = FileAndString
 					.FileToString(ExportDataDictionary.class.getResourceAsStream("/wordtmp/table_remark.html"));
@@ -144,6 +178,52 @@ public class ExportDataDictionary extends Action implements Runnable {
 				num++;
 				monitor.worked(1);
 			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return tsrbf.toString();
+	}
+
+	private String loadTable(IDBConfig dbConfig, IProgressMonitor monitor, Table table) {
+		StringBuffer tsrbf = new StringBuffer();
+		try {
+			String dbkey = dbConfig.getDbName();
+			String tableTmp = FileAndString
+					.FileToString(ExportDataDictionary.class.getResourceAsStream("/wordtmp/table_remark.html"));
+			String columnTmp = FileAndString
+					.FileToString(ExportDataDictionary.class.getResourceAsStream("/wordtmp/table_column.html"));
+			int num = 1;
+			String tmark = tableTmp.replace("${num}", num + "");
+			tmark = tmark.replace("${tableName}", table.getName());
+			tmark = tmark.replace("${tableMark}", table.getRemarks());
+			List<String[]> list = CommonUtil.getTableColumn(dbkey, table.getName());
+			StringBuffer colbf = new StringBuffer();
+			monitor.beginTask("导出数据字典...", list.size());
+			for (int i = 0; i < list.size(); i++) {
+				String[] column = list.get(i);
+				String cmark = columnTmp.replace("${fieldName}", column[0]);
+				cmark = cmark.replace("${fieldType}", column[1]);
+				if (column[3] != null) {
+					cmark = cmark.replace("${fieldLen}", column[3]);
+				} else {
+					cmark = cmark.replace("${fieldLen}", "");
+				}
+				if (column[5] != null) {
+					cmark = cmark.replace("${fieldDefault}", column[5]);
+				} else {
+					cmark = cmark.replace("${fieldDefault}", "");
+				}
+				if (column[2] != null) {
+					cmark = cmark.replace("${fieldMark}", column[2]);
+				} else {
+					cmark = cmark.replace("${fieldMark}", "");
+				}
+				colbf.append(cmark);
+				monitor.worked(1);
+			}
+			tmark = tmark.replace("${tableColumn}", colbf.toString());
+			tsrbf.append(tmark);
+			num++;
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
