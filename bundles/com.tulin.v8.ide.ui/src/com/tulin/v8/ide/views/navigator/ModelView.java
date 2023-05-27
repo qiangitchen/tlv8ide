@@ -74,6 +74,7 @@ import com.tulin.v8.ide.internal.TreeContentProvider;
 import com.tulin.v8.ide.utils.SelectionUtil;
 import com.tulin.v8.ide.views.navigator.action.CollapseAllAction;
 import com.tulin.v8.ide.views.navigator.action.DeleteObjAction;
+import com.tulin.v8.ide.views.navigator.action.ExportDataDictionary;
 import com.tulin.v8.ide.views.navigator.action.NewFlowDrawAction;
 import com.tulin.v8.ide.views.navigator.action.NewFlowFolderAction;
 import com.tulin.v8.ide.views.navigator.action.NewMapperAction;
@@ -133,6 +134,7 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 	private RenameAction reNameAction;
 	private DeleteObjAction DeleteAction;
 	private NewMapperAction newMapperAction;
+	private ExportDataDictionary exportDataDictionary;
 
 	public ModelView() {
 		this.fDialogSettings = StudioPlugin.getDefault().getDialogSettingsSection(getClass().getName());
@@ -302,6 +304,8 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 			manager.add(connectDBAction);
 			manager.add(closeDBAction);
 			manager.add(new Separator());
+			manager.add(exportDataDictionary);
+			manager.add(new Separator());
 			if (db.isEnabled()) {
 				if (db.isConnected()) {
 					connectDBAction.setEnabled(false);
@@ -464,6 +468,7 @@ public class ModelView extends TreeView implements IStatusChangeListener, IViewP
 		copyTableNameAction = new CopyTableNameAction(viewer);
 		copyTableNameWithRemarksAction = new CopyTableNameWithRemarksAction(viewer);
 		copyColumnNameAction = new CopyColumnNameAction(viewer);
+		exportDataDictionary = new ExportDataDictionary(viewer);
 	}
 
 	protected void hookDoubleClickAction() {
