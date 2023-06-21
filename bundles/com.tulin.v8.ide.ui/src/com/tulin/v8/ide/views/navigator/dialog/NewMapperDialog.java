@@ -6,6 +6,7 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
+import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
 import org.eclipse.swt.widgets.Label;
@@ -24,8 +25,10 @@ public class NewMapperDialog extends Dialog {
 
 	Text tableName;
 	Text keyField;
+	Button isAutoincrementKey;
 	Text packgeName;
 	Text modelName;
+	Button createController;
 
 	public NewMapperDialog(Shell parentShell, ITable table) {
 		super(parentShell);
@@ -38,6 +41,7 @@ public class NewMapperDialog extends Dialog {
 		container.setLayout(new FillLayout());
 		Composite composite = new Composite(container, SWT.FILL);
 		composite.setLayout(new GridLayout(2, false));
+
 		Label code = new Label(composite, SWT.NONE);
 		code.setText(Messages.getString("View.Action.NewMapper.tname"));
 		code.setLayoutData(new GridData(SWT.NONE));
@@ -47,11 +51,19 @@ public class NewMapperDialog extends Dialog {
 		ttlay.minimumWidth = 200;
 		ttlay.heightHint = 25;
 		tableName.setLayoutData(ttlay);
+
 		Label name = new Label(composite, SWT.NONE);
 		name.setText(Messages.getString("View.Action.NewMapper.keyfield"));
 		name.setLayoutData(new GridData(SWT.NONE));
 		keyField = new Text(composite, SWT.FILL | SWT.BORDER);
 		keyField.setLayoutData(ttlay);
+
+		Label autocl = new Label(composite, SWT.NONE);
+		autocl.setText(Messages.getString("View.Action.NewMapper.isAutoincrementKey"));
+		autocl.setLayoutData(new GridData(SWT.NONE));
+		isAutoincrementKey = new Button(composite, SWT.CHECK);
+		isAutoincrementKey.setLayoutData(ttlay);
+
 		Label packgeNameLable = new Label(composite, SWT.NONE);
 		packgeNameLable.setText(Messages.getString("View.Action.NewMapper.pname"));
 		packgeNameLable.setLayoutData(new GridData(SWT.NONE));
@@ -63,6 +75,13 @@ public class NewMapperDialog extends Dialog {
 		modelNameLable.setLayoutData(new GridData(SWT.NONE));
 		modelName = new Text(composite, SWT.FILL | SWT.BORDER);
 		modelName.setLayoutData(ttlay);
+
+		Label createCtl = new Label(composite, SWT.NONE);
+		createCtl.setText(Messages.getString("View.Action.NewMapper.createController"));
+		createCtl.setLayoutData(new GridData(SWT.NONE));
+		createController = new Button(composite, SWT.CHECK);
+		createController.setLayoutData(ttlay);
+		createController.setSelection(true);
 
 		tableName.setText(table.getName());
 		tableName.setEnabled(false);
@@ -90,7 +109,8 @@ public class NewMapperDialog extends Dialog {
 			try {
 				CodeGenerator codeGenerator = new CodeGenerator(table.getDataBase(), packgeName.getText(),
 						keyField.getText());
-				codeGenerator.genCodeByCustomModelName(tableName.getText(), modelName.getText());
+				codeGenerator.genCodeByCustomModelName(tableName.getText(), modelName.getText(),
+						isAutoincrementKey.getSelection(), createController.getSelection());
 			} catch (Exception e) {
 				Sys.printErrMsg(e);
 			}

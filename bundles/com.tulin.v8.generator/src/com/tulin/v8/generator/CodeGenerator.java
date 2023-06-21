@@ -119,7 +119,7 @@ public class CodeGenerator {
 	 */
 	public void genCode(String... tableNames) {
 		for (String tableName : tableNames) {
-			genCodeByCustomModelName(tableName, null);
+			genCodeByCustomModelName(tableName, null, false, true);
 		}
 	}
 
@@ -127,16 +127,20 @@ public class CodeGenerator {
 	 * 通过数据表名称，和自定义的 Model 名称生成代码 如输入表名称 "t_user_detail" 和自定义的 Model 名称 "User" 将生成
 	 * User、UserMapper、UserService ...
 	 *
-	 * @param tableName 数据表名称
-	 * @param modelName 自定义的 Model 名称
+	 * @param tableName          数据表名称
+	 * @param modelName          自定义的 Model 名称
+	 * @param isAutoincrementKey 是否自增主键
 	 */
-	public void genCodeByCustomModelName(String tableName, String modelName) {
-		genModelAndMapper(tableName, modelName);
+	public void genCodeByCustomModelName(String tableName, String modelName, boolean isAutoincrementKey,
+			boolean createController) {
+		genModelAndMapper(tableName, modelName, isAutoincrementKey);
 		genService(tableName, modelName);
-		genController(tableName, modelName);
+		if (createController) {
+			genController(tableName, modelName);
+		}
 	}
 
-	public void genModelAndMapper(String tableName, String modelName) {
+	public void genModelAndMapper(String tableName, String modelName, boolean isAutoincrementKey) {
 		Context context = new Context(ModelType.FLAT);
 		context.setId("Potato");
 		context.setTargetRuntime("MyBatis3Simple");
@@ -182,7 +186,9 @@ public class CodeGenerator {
 		tableConfiguration.setTableName(tableName);
 		if (StringUtils.isNotEmpty(modelName))
 			tableConfiguration.setDomainObjectName(modelName);
-		tableConfiguration.setGeneratedKey(new GeneratedKey(keyField, "JDBC", false, null));
+		if (isAutoincrementKey) {
+			tableConfiguration.setGeneratedKey(new GeneratedKey(keyField, "JDBC", false, null));
+		}
 		context.addTableConfiguration(tableConfiguration);
 
 		List<String> warnings;
