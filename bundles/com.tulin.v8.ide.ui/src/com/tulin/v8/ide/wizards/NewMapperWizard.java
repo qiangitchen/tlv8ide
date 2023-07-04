@@ -6,6 +6,7 @@ import org.eclipse.jface.wizard.Wizard;
 import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 
+import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.ide.wizards.mapper.NewMapperPage;
 
 /**
@@ -30,12 +31,14 @@ public class NewMapperWizard extends Wizard implements INewWizard {
 		setNeedsProgressMonitor(true);
 		setHelpAvailable(false);
 		setWindowTitle(Messages.getString("wizards.newmapper.title"));
+		TuLinPlugin.setSelection(selection);
 	}
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		setWindowTitle(Messages.getString("wizards.newmapper.title"));
+		TuLinPlugin.setSelection(selection);
 	}
 
 	@Override

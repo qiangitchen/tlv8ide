@@ -6,6 +6,7 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
+import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.vue.Activator;
 import com.tulin.v8.vue.wizards.NewVueWizard;
 
@@ -23,6 +24,7 @@ public class NewVueFileAction implements IObjectActionDelegate {
 	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		this.selection = selection;
+		TuLinPlugin.setSelection(selection);
 	}
 
 	@Override

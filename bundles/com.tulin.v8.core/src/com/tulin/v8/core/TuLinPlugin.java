@@ -91,6 +91,21 @@ public class TuLinPlugin extends AbstractUIPlugin {
 		return window.getActivePage();
 	}
 
+	static ISelection selection = null;
+
+	public static void setSelection(ISelection selection) {
+		TuLinPlugin.selection = selection;
+	}
+
+	public static ISelection getSelection() {
+		if (TuLinPlugin.selection != null) {
+			return TuLinPlugin.selection;
+		}
+		ISelectionService selectionService = Workbench.getInstance().getActiveWorkbenchWindow().getSelectionService();
+		ISelection selection = selectionService.getSelection();
+		return selection;
+	}
+
 	static IProject project = null;
 
 	/**
@@ -101,23 +116,8 @@ public class TuLinPlugin extends AbstractUIPlugin {
 	public static IProject getCurrentProject() {
 		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 			public void run() {
-				// 1.根据当前编辑器获取工程
-				IEditorPart part = getActiveEditor();
-				if (part != null) {
-					Object object = part.getEditorInput().getAdapter(IFile.class);
-					if (object != null) {
-						project = ((IFile) object).getProject();
-					} else {
-						project = null;
-					}
-				} else {
-					project = null;
-				}
-				if (project == null || !project.exists()) {
-					// 没有单开编辑器时 获取当前选中的项目
-					ISelectionService selectionService = Workbench.getInstance().getActiveWorkbenchWindow()
-							.getSelectionService();
-					ISelection selection = selectionService.getSelection();
+				ISelection selection = getSelection();
+				if (selection != null) {
 					if (selection instanceof IStructuredSelection) {
 						Object element = ((IStructuredSelection) selection).getFirstElement();
 						if (element instanceof IResource) {
@@ -133,6 +133,20 @@ public class TuLinPlugin extends AbstractUIPlugin {
 									.getEditorPart().getEditorInput().getAdapter(IFile.class);
 							project = file.getProject();
 						}
+					}
+				}
+				if (project == null) {
+					// 1.根据当前编辑器获取工程
+					IEditorPart part = getActiveEditor();
+					if (part != null) {
+						Object object = part.getEditorInput().getAdapter(IFile.class);
+						if (object != null) {
+							project = ((IFile) object).getProject();
+						} else {
+							project = null;
+						}
+					} else {
+						project = null;
 					}
 				}
 			}

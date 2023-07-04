@@ -21,6 +21,7 @@ import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.ide.IDE;
 
 import com.tulin.v8.core.Sys;
+import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.ide.StructureComposition;
 import com.tulin.v8.ide.StudioPlugin;
 import com.tulin.v8.ide.editors.data.DataEditor;
@@ -55,8 +56,10 @@ public class CreateTableWizard extends Wizard implements INewWizard {
 
 		setNeedsProgressMonitor(true);
 		setHelpAvailable(false);
+		
+		TuLinPlugin.setSelection(selection);
 	}
-
+	
 	public CreateTableWizard(String dbkey, String owner, ModelView viewer) {
 		super();
 

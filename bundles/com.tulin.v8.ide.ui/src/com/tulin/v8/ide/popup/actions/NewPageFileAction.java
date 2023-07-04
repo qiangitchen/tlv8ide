@@ -6,6 +6,7 @@ import org.eclipse.jface.wizard.WizardDialog;
 import org.eclipse.ui.IObjectActionDelegate;
 import org.eclipse.ui.IWorkbenchPart;
 
+import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.ide.StudioPlugin;
 import com.tulin.v8.ide.wizards.SampleNewWizard;
 
@@ -22,6 +23,7 @@ public class NewPageFileAction implements IObjectActionDelegate {
 	@Override
 	public void selectionChanged(IAction action, ISelection selection) {
 		this.selection = selection;
+		TuLinPlugin.setSelection(selection);
 	}
 
 	@Override

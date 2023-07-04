@@ -26,6 +26,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
+import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.echarts.ui.wizards.chart.ChartFilePage;
 import com.tulin.v8.echarts.ui.wizards.chart.ChartModlePage;
 import com.tulin.v8.echarts.ui.wizards.chart.ChartOptionPage;
@@ -51,6 +52,7 @@ public class ChartNewWizard extends Wizard implements INewWizard {
 		setNeedsProgressMonitor(true);
 		setHelpAvailable(false);
 		setWindowTitle(Messages.getString("wizards.echart.title"));
+		TuLinPlugin.setSelection(selection);
 	}
 
 	@Override
@@ -59,6 +61,8 @@ public class ChartNewWizard extends Wizard implements INewWizard {
 
 		setNeedsProgressMonitor(true);
 		setHelpAvailable(false);
+		
+		TuLinPlugin.setSelection(selection);
 	}
 
 	public void addPages() {

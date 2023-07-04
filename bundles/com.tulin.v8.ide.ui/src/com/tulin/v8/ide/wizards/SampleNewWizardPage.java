@@ -20,6 +20,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ContainerSelectionDialog;
 
+import com.tulin.v8.core.TuLinPlugin;
+
 /**
  * The "New" wizard page allows setting the container for the new file as well
  * as the file name. The page will only accept file name without the extension
@@ -43,6 +45,7 @@ public class SampleNewWizardPage extends WizardPage {
 		setTitle(Messages.getString("wizards.message.titleLable"));
 		setDescription(Messages.getString("wizards.message.titleDescription"));
 		this.selection = selection;
+		TuLinPlugin.setSelection(selection);
 	}
 
 	/**

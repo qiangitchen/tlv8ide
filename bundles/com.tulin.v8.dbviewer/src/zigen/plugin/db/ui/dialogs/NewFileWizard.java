@@ -6,6 +6,8 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
+import com.tulin.v8.core.TuLinPlugin;
+
 public class NewFileWizard extends Wizard implements INewWizard {
 
 	private WizardNewFileCreationPage page;
@@ -19,6 +21,7 @@ public class NewFileWizard extends Wizard implements INewWizard {
 
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
+		TuLinPlugin.setSelection(selection);
 	}
 
 	public void addPages() {

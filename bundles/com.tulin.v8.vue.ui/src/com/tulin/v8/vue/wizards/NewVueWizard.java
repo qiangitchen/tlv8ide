@@ -21,6 +21,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
+import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.editors.vue.editor.VueEditor;
 import com.tulin.v8.vue.wizards.baseForm.BaseFormEndPage;
 import com.tulin.v8.vue.wizards.baseForm.BaseFormPage;
@@ -64,12 +65,14 @@ public class NewVueWizard extends Wizard implements INewWizard {
 		super();
 		this.selection = selection;
 		setWindowTitle(Messages.getString("wizards.vue.title"));
+		TuLinPlugin.setSelection(selection);
 	}
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		setWindowTitle(Messages.getString("wizards.vue.title"));
+		TuLinPlugin.setSelection(selection);
 	}
 
 	@Override

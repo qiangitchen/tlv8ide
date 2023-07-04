@@ -25,6 +25,8 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
+import com.tulin.v8.core.TuLinPlugin;
+
 public class UReportFileNewWizard extends Wizard implements INewWizard {
 	private ISelection selection;
 	NewUReportFilePage newfilepage;
@@ -37,17 +39,20 @@ public class UReportFileNewWizard extends Wizard implements INewWizard {
 	public UReportFileNewWizard(ISelection selection) {
 		super();
 		this.selection = selection;
+		TuLinPlugin.setSelection(selection);
 	}
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
+		TuLinPlugin.setSelection(selection);
 	}
 
 	public void addPages() {
 		newfilepage = new NewUReportFilePage("newureportfile", selection);
 		addPage(newfilepage);
 		setWindowTitle(Messages.getString("wizards.message.title"));
+		TuLinPlugin.setSelection(selection);
 	}
 
 	@Override

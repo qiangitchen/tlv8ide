@@ -27,6 +27,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 
+import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.editors.page.WebPageEditor;
 import com.tulin.v8.ide.wizards.LeftTree.LeftTreePageEnd;
 import com.tulin.v8.ide.wizards.LeftTree.LeftTreedataPermision;
@@ -94,12 +95,14 @@ public class SampleNewWizard extends Wizard implements INewWizard {
 		setNeedsProgressMonitor(true);
 		setHelpAvailable(false);
 		setWindowTitle(Messages.getString("wizards.message.title"));
+		TuLinPlugin.setSelection(selection);
 	}
 
 	@Override
 	public void init(IWorkbench workbench, IStructuredSelection selection) {
 		this.selection = selection;
 		setWindowTitle(Messages.getString("wizards.message.title"));
+		TuLinPlugin.setSelection(selection);
 	}
 
 	@Override
