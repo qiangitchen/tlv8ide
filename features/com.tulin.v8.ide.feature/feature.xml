@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.ide.feature"
       label="TuLin IDE"
-      version="3.0.4.qualifier"
+      version="3.0.5.qualifier"
       provider-name="TuLin"
       plugin="com.tulin.v8.ide.ui">
 

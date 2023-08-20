@@ -147,8 +147,9 @@ public class ExportDataDictionary extends Action implements Runnable {
 			for (String tablename : tanles) {
 				String tmark = tableTmp.replace("${num}", num + "");
 				tmark = tmark.replace("${tableName}", tablename);
-				tmark = tmark.replace("${tableMark}", CommonUtil.getTableComments(dbkey, tablename));
-				List<String[]> list = CommonUtil.getTableColumn(dbkey, tablename);
+				tmark = tmark.replace("${tableMark}",
+						CommonUtil.getTableComments(dbkey, schemaPattern, tablename, new String[] { "TABLE" }));
+				List<String[]> list = CommonUtil.getTableColumn(dbkey, schemaPattern, tablename);
 				StringBuffer colbf = new StringBuffer();
 				for (int i = 0; i < list.size(); i++) {
 					String[] column = list.get(i);
@@ -196,7 +197,7 @@ public class ExportDataDictionary extends Action implements Runnable {
 			String tmark = tableTmp.replace("${num}", num + "");
 			tmark = tmark.replace("${tableName}", table.getName());
 			tmark = tmark.replace("${tableMark}", table.getRemarks());
-			List<String[]> list = CommonUtil.getTableColumn(dbkey, table.getName());
+			List<String[]> list = CommonUtil.getTableColumn(dbkey, dbConfig.getSchema(), table.getName());
 			StringBuffer colbf = new StringBuffer();
 			monitor.beginTask("导出数据字典...", list.size());
 			for (int i = 0; i < list.size(); i++) {

@@ -139,7 +139,7 @@ public class TableCellsSelectDialog extends TitleAreaDialog {
 		table.setLayoutData(gridData);
 		List<String[]> columnlist;
 		try {
-			columnlist = CommonUtil.getTableColumn(dbkey, tablename);
+			columnlist = CommonUtil.getTableColumn(dbkey, null, tablename);
 			for (int i = 0; i < columnlist.size(); i++) {
 				TableItem tableitem = new TableItem(table, SWT.NONE);
 				tableitem.setText(columnlist.get(i));
@@ -222,13 +222,13 @@ public class TableCellsSelectDialog extends TitleAreaDialog {
 		List<String[]> columnlist = new ArrayList<String[]>();
 		if ("".equals(str)) {
 			try {
-				columnlist = CommonUtil.getTableColumn(dbkey, tablename);
+				columnlist = CommonUtil.getTableColumn(dbkey, null, tablename);
 			} catch (Exception e1) {
 				setMessage(e1.toString());
 			}
 		} else {
 			try {
-				columnlist = DataSelectPage.getTableColumn(dbkey, tablename, str);
+				columnlist = DataSelectPage.getTableColumn(dbkey, null, tablename, str);
 			} catch (Exception e1) {
 				setMessage(e1.toString());
 			}

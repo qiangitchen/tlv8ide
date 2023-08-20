@@ -340,7 +340,7 @@ public class BaseFormPage extends WizardPage {
 		table.removeAll();
 		tablegrid.removeAll();
 		try {
-			columnlist = CommonUtil.getTableColumn(dbkey, tvName);
+			columnlist = CommonUtil.getTableColumn(dbkey, dataSelectPage.DBConfig.get(dbkey).getSchema(), tvName);
 			for (int i = 0; i < columnlist.size(); i++) {
 				TableItem tableitem = new TableItem(table, SWT.NONE);
 				tableitem.setText(columnlist.get(i));

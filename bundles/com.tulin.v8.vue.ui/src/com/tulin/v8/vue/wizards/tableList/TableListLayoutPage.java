@@ -132,7 +132,7 @@ public class TableListLayoutPage extends WizardPage {
 				if (event.keyCode == 13) {
 					List<String[]> columnlist;
 					try {
-						columnlist = DataSelectPage.getTableColumn(dbkey, tvName, searchText.getText());
+						columnlist = dataSelectPage.getTableColumn(dbkey, tvName, searchText.getText());
 						table.removeAll();
 						tablegrid.removeAll();
 						for (int i = 0; i < columnlist.size(); i++) {
@@ -368,7 +368,7 @@ public class TableListLayoutPage extends WizardPage {
 	private void initData() {
 		List<String[]> columnlist;
 		try {
-			columnlist = CommonUtil.getTableColumn(dbkey, tvName);
+			columnlist = CommonUtil.getTableColumn(dbkey, dataSelectPage.DBConfig.get(dbkey).getSchema(), tvName);
 			table.removeAll();
 			tablegrid.removeAll();
 			for (int i = 0; i < columnlist.size(); i++) {

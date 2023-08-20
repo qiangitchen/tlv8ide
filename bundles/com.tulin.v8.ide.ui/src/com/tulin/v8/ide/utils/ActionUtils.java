@@ -373,7 +373,7 @@ public class ActionUtils {
 	public static void adddataTableview(TreeNode treeparent, String dbkey) {
 		Map<String, List<String>> TreeitemData;
 		try {
-			TreeitemData = CommonUtil.getDataObject(dbkey);
+			TreeitemData = CommonUtil.getDataObject(dbkey, null);
 			List<String> litable = TreeitemData.get("TABLE");
 			for (int i = 0; i < litable.size(); i++) {
 				Table treeitem = new Table(litable.get(i));
@@ -389,7 +389,7 @@ public class ActionUtils {
 	public static void adddataViewview(TreeNode treeparent, String dbkey) {
 		Map<String, List<String>> TreeitemData;
 		try {
-			TreeitemData = CommonUtil.getDataObject(dbkey);
+			TreeitemData = CommonUtil.getDataObject(dbkey, null);
 			List<String> liview = TreeitemData.get("VIEW");
 			for (int i = 0; i < liview.size(); i++) {
 				View treeitem = new View(liview.get(i));

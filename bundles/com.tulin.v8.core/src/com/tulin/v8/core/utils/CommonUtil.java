@@ -152,7 +152,9 @@ public class CommonUtil {
 	 * @param dbkey
 	 * @return {@link java.util.Map}
 	 * @throws Exception
+	 * @see getDataObject(String dbkey, String schemaPattern)
 	 */
+	@Deprecated
 	public static Map<String, List<String>> getDataObject(String dbkey) throws Exception {
 		Map map = new HashMap<String, List<String>>();
 		map = getDataObject(dbkey, null);
@@ -161,24 +163,18 @@ public class CommonUtil {
 		}
 		String dataName = DBUtils.getDataName(dbkey);
 		String userName = DBUtils.getUserName(dbkey);
-//		String tsql = "select TABLE_NAME from user_tables t";
 		SQL tSql = new SQL();
 		tSql.SELECT("TABLE_NAME");
 		tSql.FROM("user_tables t");
 		if (DBUtils.IsMSSQLDB(dbkey)) {
-//			tsql = "select name as TABLE_NAME from dbo.sysobjects where xtype = 'U'";
 			tSql = new SQL().SELECT("name as TABLE_NAME");
 			tSql.FROM("dbo.sysobjects");
 			tSql.WHERE("xtype = 'U'");
 		} else if (DBUtils.IsMySQLDB(dbkey)) {
-//			tsql = "select TABLE_NAME from information_schema.TABLES where TABLE_SCHEMA='" + dataName + "'";
 			tSql = new SQL().SELECT("TABLE_NAME");
 			tSql.FROM("information_schema.TABLES");
 			tSql.WHERE("TABLE_SCHEMA = '" + dataName + "'");
 		} else if (DBUtils.IsPostgreSQL(dbkey)) {
-//			tsql = "select a.relname AS TABLE_NAME FROM pg_class a where a.relkind='r' "
-//					+ " and a.relnamespace in (SELECT oid FROM pg_namespace WHERE nspname='public' or nspname='"
-//					+ userName + "')";
 			tSql = new SQL().SELECT("a.relname AS TABLE_NAME");
 			tSql.FROM("pg_class a");
 			tSql.WHERE("a.relkind='r'");
@@ -196,22 +192,16 @@ public class CommonUtil {
 		}
 		map.put("TABLE", lit);
 		DBUtils.CloseConn(null, pstmt1, rs);
-//		String vsql = "select VIEW_NAME from user_views t";
 		SQL vSql = new SQL().SELECT("VIEW_NAME").FROM("user_views t");
 		if (DBUtils.IsMSSQLDB(dbkey)) {
-//			vsql = "select name as VIEW_NAME from dbo.sysobjects where xtype = 'V'";
 			vSql = new SQL().SELECT("name as VIEW_NAME");
 			vSql.FROM("dbo.sysobjects");
 			vSql.WHERE("xtype = 'V'");
 		} else if (DBUtils.IsMySQLDB(dbkey)) {
-//			vsql = "select TABLE_NAME as VIEW_NAME from information_schema.VIEWS where TABLE_SCHEMA='" + dataName + "'";
 			vSql = new SQL().SELECT("TABLE_NAME as VIEW_NAME");
 			vSql.FROM("information_schema.VIEWS");
 			vSql.WHERE("TABLE_SCHEMA = '" + dataName + "'");
 		} else if (DBUtils.IsPostgreSQL(dbkey)) {
-//			vsql = "select a.relname AS VIEW_NAME FROM pg_class a where a.relkind='v' "
-//					+ " and a.relnamespace in (SELECT oid FROM pg_namespace WHERE nspname='public' or nspname='"
-//					+ userName + "')";
 			vSql = new SQL().SELECT("a.relname AS VIEW_NAME");
 			vSql.FROM("pg_class a").WHERE("a.relkind='v'");
 			SQL vSqls = new SQL().SELECT("oid");
@@ -246,21 +236,11 @@ public class CommonUtil {
 		try {
 			conn = DBUtils.getAppConn(dbkey);
 			DatabaseMetaData objMet = conn.getMetaData();
-			String catalog = null;
-			if (DBUtils.IsPostgreSQL(dbkey)) {
-				catalog = conn.getCatalog();
-				schemaPattern = "public";
-			}
-			if (DBUtils.IsOracleDB(dbkey)) {
-				schemaPattern = objMet.getUserName();
-			}
-			if (DBUtils.IsMySQLDB(dbkey)) {
-				schemaPattern = conn.getCatalog();
-			}
+			String catalog = conn.getCatalog();
 			if (schemaPattern != null) {
-				rs = objMet.getTables(catalog, schemaPattern, "%", new String[] { "TABLE" }); //$NON-NLS-1$
+				rs = objMet.getTables(catalog, schemaPattern, "%", new String[] { "TABLE" });
 			} else {
-				rs = objMet.getTables(catalog, "%", "%", new String[] { "TABLE" }); //$NON-NLS-1$ //$NON-NLS-2$
+				rs = objMet.getTables(catalog, "%", "%", new String[] { "TABLE" });
 			}
 			List<String> li = new ArrayList<String>();
 			while (rs.next()) {
@@ -269,9 +249,9 @@ public class CommonUtil {
 			}
 			map.put("TABLE", li);
 			if (schemaPattern != null) {
-				rs = objMet.getTables(catalog, schemaPattern, "%", new String[] { "VIEW" }); //$NON-NLS-1$
+				rs = objMet.getTables(catalog, schemaPattern, "%", new String[] { "VIEW" });
 			} else {
-				rs = objMet.getTables(catalog, "%", "%", new String[] { "VIEW" }); //$NON-NLS-1$ //$NON-NLS-2$
+				rs = objMet.getTables(catalog, "%", "%", new String[] { "VIEW" });
 			}
 			List<String> liv = new ArrayList<String>();
 			while (rs.next()) {
@@ -293,38 +273,30 @@ public class CommonUtil {
 	 * @param dbkey
 	 * @param tablename
 	 * @return String
+	 * @see getTableComments(String dbkey, String schemaPattern, String tablename,
+	 *      String[] types)
 	 */
+	@Deprecated
 	public static String getTableComments(String dbkey, String tablename) {
 		String coms = getTableComments(dbkey, null, tablename, new String[] { "TABLE", "VIEW" });
 		if (coms != null) {
 			return coms;
 		}
 		String result = "";
-//		String sql = "select t.table_name TABLE_NAME,t.comments TABLE_COMMENT "
-//				+ " from user_tab_comments t where t.table_name = '" + tablename + "'";
 		SQL sql = new SQL();
 		sql.SELECT("t.table_name TABLE_NAME,t.comments TABLE_COMMENT");
 		sql.FROM("user_tab_comments t");
 		sql.WHERE("t.table_name = '" + tablename + "'");
 		if (DBUtils.IsMSSQLDB(dbkey)) {
-//			sql = "select a.name TABLE_NAME, isnull(g.value,'') TABLE_COMMENT from"
-//					+ " sys.tables a left join sys.extended_properties g "
-//					+ " on (a.object_id = g.major_id AND g.minor_id = 0) where a.name  = '" + tablename + "'";
 			sql = new SQL().SELECT("a.name TABLE_NAME, isnull(g.value,'') TABLE_COMMENT");
 			sql.FROM("sys.tables a");
 			sql.LEFT_OUTER_JOIN("sys.extended_properties g on (a.object_id = g.major_id AND g.minor_id = 0)");
 			sql.WHERE("a.name  = '" + tablename + "'");
 		} else if (DBUtils.IsMySQLDB(dbkey)) {
-//			sql = "select TABLE_NAME,TABLE_COMMENT from INFORMATION_SCHEMA.TABLES where TABLE_NAME = '" + tablename
-//					+ "'";
 			sql = new SQL().SELECT("TABLE_NAME,TABLE_COMMENT");
 			sql.FROM("INFORMATION_SCHEMA.TABLES");
 			sql.WHERE("TABLE_NAME='" + tablename + "'");
 		} else if (DBUtils.IsPostgreSQL(dbkey)) {
-//			sql = "select a.relname AS TABLE_NAME,b.description AS TABLE_COMMENT "
-//					+ " FROM pg_class a LEFT OUTER JOIN pg_description b "
-//					+ " ON b.objsubid=0 AND a.oid = b.objoid WHERE a.relname='" + tablename.toLowerCase()
-//					+ "' AND a.relkind='r'";
 			sql = new SQL();
 			sql.SELECT("a.relname AS TABLE_NAME,b.description AS TABLE_COMMENT");
 			sql.FROM("pg_class a");
@@ -402,16 +374,15 @@ public class CommonUtil {
 	 * @param tableName
 	 * @return {@link java.util.List}
 	 * @throws Exception
+	 * @see getTableColumn(String dbkey, String schemaPattern, String tableName)
 	 */
+	@Deprecated
 	public static List<String[]> getTableColumn(String dbkey, String tableName) throws Exception {
 		List<String[]> rlist = getTableColumn(dbkey, null, tableName);
 		if (rlist.size() > 0) {
 			return rlist;
 		}
 		rlist = new ArrayList<String[]>();
-//		String sql = "select t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH,t1.DATA_DEFAULT AS COLUMN_DEF "
-//				+ "from user_tab_columns t1  left join " + "user_col_comments t2 on t1.TABLE_NAME = t2.table_name "
-//				+ "and t1.COLUMN_NAME = t2.column_name";
 		SQL sql = new SQL();
 		sql.SELECT("t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE");
 		sql.SELECT("t2.COMMENTS,t1.CHAR_LENGTH,t1.DATA_DEFAULT AS COLUMN_DEF");
@@ -420,11 +391,6 @@ public class CommonUtil {
 				"user_col_comments t2 on t1.TABLE_NAME = t2.table_name and t1.COLUMN_NAME = t2.column_name");
 		if (tableName == null || "".equals(tableName)) {
 			if (DBUtils.IsMSSQLDB(dbkey)) {
-//				sql = "select b.name as TABLE_NAME,a.name as COLUMN_NAME,c.name as DATA_TYPE,"
-//						+ "d.value as COMMENTS,a.prec as CHAR_LENGTH,a.text as COLUMN_DEF "
-//						+ "from dbo.syscolumns as a " + "inner join dbo.sysobjects as b on b.id = a.id "
-//						+ "inner join dbo.systypes as c on a.xtype = c.xtype and c.xusertype = c.xtype "
-//						+ "left join sys.extended_properties d on d.major_id = a.id and d.minor_id = a.colid";
 				sql = new SQL();
 				sql.SELECT("b.name as TABLE_NAME,a.name as COLUMN_NAME,c.name as DATA_TYPE");
 				sql.SELECT("d.value as COMMENTS,a.prec as CHAR_LENGTH,a.text as COLUMN_DEF");
@@ -433,20 +399,11 @@ public class CommonUtil {
 				sql.INNER_JOIN("dbo.systypes as c on a.xtype = c.xtype and c.xusertype = c.xtype");
 				sql.LEFT_OUTER_JOIN("sys.extended_properties d on d.major_id = a.id and d.minor_id = a.colid");
 			} else if (DBUtils.IsMySQLDB(dbkey)) {
-//				sql = "select TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS,character_maximum_length as CHAR_LENGTH,COLUMN_TYPE,COLUMN_DEFAULT AS COLUMN_DEF "
-//						+ " from information_schema.columns";
 				sql = new SQL();
 				sql.SELECT("TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS");
 				sql.SELECT("character_maximum_length as CHAR_LENGTH,COLUMN_TYPE,COLUMN_DEFAULT AS COLUMN_DEF");
 				sql.FROM("information_schema.columns");
 			} else if (DBUtils.IsPostgreSQL(dbkey)) {
-//				sql = "select a.attnum,a.attname AS COLUMN_NAME,t.typname AS DATA_TYPE,"
-//						+ "a.attlen AS length,a.atttypmod AS CHAR_LENGTH,"
-//						+ "a.attnotnull AS notnull,b.description AS COMMENTS,d.adsrc as COLUMN_DEF  "
-//						+ "FROM pg_class c left join pg_attribute a on a.attrelid = c.oid "
-//						+ " LEFT OUTER JOIN pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid "
-//						+ " left join pg_type t on a.atttypid = t.oid "
-//						+ " left join pg_attrdef d on d.adrelid=a.attrelid and d.adnum=a.attnum WHERE a.attnum > 0";
 				sql = new SQL();
 				sql.SELECT("a.attnum,a.attname AS COLUMN_NAME,t.typname AS DATA_TYPE");
 				sql.SELECT("a.attlen AS length,a.atttypmod AS CHAR_LENGTH");
@@ -458,9 +415,6 @@ public class CommonUtil {
 				sql.WHERE("a.attnum > 0");
 			}
 		} else {
-//			sql = "select t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH,t1.DATA_DEFAULT AS COLUMN_DEF "
-//					+ "from user_tab_columns t1  left join " + "user_col_comments t2 on t1.TABLE_NAME = t2.table_name "
-//					+ "and t1.COLUMN_NAME = t2.column_name " + "where t2.table_name = '" + tableName + "'";
 			sql = new SQL();
 			sql.SELECT(
 					"t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH,t1.DATA_DEFAULT AS COLUMN_DEF");
@@ -469,12 +423,6 @@ public class CommonUtil {
 					"user_col_comments t2 on t1.TABLE_NAME = t2.table_name and t1.COLUMN_NAME = t2.column_name");
 			sql.WHERE("t2.table_name = '" + tableName + "'");
 			if (DBUtils.IsMSSQLDB(dbkey)) {
-//				sql = "select b.name as TABLE_NAME,a.name as COLUMN_NAME,c.name as DATA_TYPE,"
-//						+ "d.value as COMMENTS,a.prec as CHAR_LENGTH,a.text as COLUMN_DEF "
-//						+ "from dbo.syscolumns as a " + "inner join dbo.sysobjects as b on b.id = a.id "
-//						+ "inner join dbo.systypes as c on a.xtype = c.xtype and c.xusertype = c.xtype "
-//						+ "left join sys.extended_properties d on d.major_id = a.id and d.minor_id = a.colid "
-//						+ "where b.name = '" + tableName + "'";
 				sql = new SQL();
 				sql.SELECT("b.name as TABLE_NAME,a.name as COLUMN_NAME,c.name as DATA_TYPE");
 				sql.SELECT("d.value as COMMENTS,a.prec as CHAR_LENGTH,a.text as COLUMN_DEF");
@@ -484,22 +432,12 @@ public class CommonUtil {
 				sql.LEFT_OUTER_JOIN("sys.extended_properties d on d.major_id = a.id and d.minor_id = a.colid");
 				sql.WHERE("b.name = '" + tableName + "'");
 			} else if (DBUtils.IsMySQLDB(dbkey)) {
-//				sql = "select TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS,character_maximum_length as CHAR_LENGTH,COLUMN_TYPE,COLUMN_DEFAULT AS COLUMN_DEF "
-//						+ " from information_schema.columns where table_name='" + tableName + "'";
 				sql = new SQL();
 				sql.SELECT("TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS");
 				sql.SELECT("character_maximum_length as CHAR_LENGTH,COLUMN_TYPE,COLUMN_DEFAULT AS COLUMN_DEF");
 				sql.FROM("information_schema.columns");
 				sql.WHERE("table_name='" + tableName + "'");
 			} else if (DBUtils.IsPostgreSQL(dbkey)) {
-//				sql = "SELECT A.attnum,A.attname AS COLUMN_NAME,T.typname AS DATA_TYPE,A.attlen AS LENGTH,"
-//						+ "	A.atttypmod AS CHAR_LENGTH,A.attnotnull AS NOTNULL,"
-//						+ "	b.description AS COMMENTS,d.adsrc AS COLUMN_DEF FROM "
-//						+ "	pg_class C LEFT JOIN pg_attribute A ON A.attrelid = C.oid"
-//						+ "	LEFT OUTER JOIN pg_description b ON A.attrelid = b.objoid "
-//						+ "	AND A.attnum = b.objsubid LEFT JOIN pg_type T ON A.atttypid = T.oid"
-//						+ "	LEFT JOIN pg_attrdef d ON d.adrelid = A.attrelid AND d.adnum = A.attnum "
-//						+ " WHERE C.relname = '" + tableName.toLowerCase() + "' and a.attnum > 0";
 				sql = new SQL();
 				sql.SELECT("A.attnum,A.attname AS COLUMN_NAME,T.typname AS DATA_TYPE,A.attlen AS LENGTH");
 				sql.SELECT("A.atttypmod AS CHAR_LENGTH,A.attnotnull AS NOTNULL");
@@ -560,21 +498,11 @@ public class CommonUtil {
 		try {
 			conn = DBUtils.getAppConn(dbkey);
 			DatabaseMetaData objMet = conn.getMetaData();
-			String catalog = null;
-			if (DBUtils.IsPostgreSQL(dbkey)) {
-				catalog = conn.getCatalog();
-				schemaPattern = "public";
-			}
-			if (DBUtils.IsMySQLDB(dbkey)) {
-				schemaPattern = conn.getCatalog();
-			}
-			if (DBUtils.IsOracleDB(dbkey)) {
-				schemaPattern = objMet.getUserName();
-			}
+			String catalog = conn.getCatalog();
 			if (schemaPattern != null) {
-				rs = objMet.getColumns(catalog, schemaPattern, tableName, null); // $NON-NLS-1$
+				rs = objMet.getColumns(catalog, schemaPattern, tableName, null);
 			} else {
-				rs = objMet.getColumns(catalog, "%", tableName, null); //$NON-NLS-1$ //$NON-NLS-2$
+				rs = objMet.getColumns(catalog, "%", tableName, null);
 			}
 			while (rs.next()) {
 				String[] item = new String[6];
@@ -619,12 +547,13 @@ public class CommonUtil {
 	 */
 	public static String getColumnType(String dbkey, String schemaPattern, String tableName, String columnName) {
 		String result = "";
-//		String sql = "select COLUMN_TYPE from information_schema.columns where table_name='" + tableName
-//				+ "' and COLUMN_NAME ='" + columnName + "'";
 		SQL sql = new SQL().SELECT("COLUMN_TYPE");
 		sql.FROM("information_schema.columns");
 		sql.WHERE("table_name=?");
-		sql.WHERE("COLUMN_NAME =?");
+		sql.WHERE("COLUMN_NAME=?");
+		if (schemaPattern != null) {
+			sql.WHERE("TABLE_SCHEMA=?");
+		}
 		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
@@ -633,6 +562,9 @@ public class CommonUtil {
 			ps = conn.prepareStatement(sql.toString());
 			ps.setString(1, tableName);
 			ps.setString(2, columnName);
+			if (schemaPattern != null) {
+				ps.setString(3, schemaPattern);
+			}
 			rs = ps.executeQuery();
 			if (rs.next()) {
 				result = rs.getString(1);
@@ -658,20 +590,12 @@ public class CommonUtil {
 		if (n != -1) {
 			return n == DatabaseMetaData.columnNullable;
 		}
-//		String sql = "select t1.nullable as IS_NULLABLE " + "from user_tab_columns t1  left join "
-//				+ "user_col_comments t2 on t1.TABLE_NAME = t2.table_name " + "and t1.COLUMN_NAME = t2.column_name "
-//				+ "where t2.table_name = '" + tableName + "' and t1.COLUMN_NAME = '" + columnName + "'";
 		SQL sql = new SQL().SELECT("t1.nullable as IS_NULLABLE");
 		sql.FROM("user_tab_columns t1");
 		sql.LEFT_OUTER_JOIN(
 				"user_col_comments t2 on t1.TABLE_NAME = t2.table_name and t1.COLUMN_NAME = t2.column_name");
 		sql.WHERE("t2.table_name = ? and t1.COLUMN_NAME = ?");
 		if (DBUtils.IsMSSQLDB(dbkey)) {
-//			sql = "select a.isnullable as IS_NULLABLE from dbo.syscolumns as a "
-//					+ "inner join dbo.sysobjects as b on b.id = a.id "
-//					+ "inner join dbo.systypes as c on a.xtype = c.xtype and c.xusertype = c.xtype "
-//					+ "left join sys.extended_properties d on d.major_id = a.id and d.minor_id = a.colid "
-//					+ "where b.name = '" + tableName + "' and a.name = '" + columnName + "'";
 			sql = new SQL().SELECT("a.isnullable as IS_NULLABLE");
 			sql.FROM("dbo.syscolumns as a");
 			sql.INNER_JOIN("dbo.sysobjects as b on b.id = a.id");
@@ -679,8 +603,6 @@ public class CommonUtil {
 			sql.LEFT_OUTER_JOIN("sys.extended_properties d on d.major_id = a.id and d.minor_id = a.colid");
 			sql.WHERE("b.name = ? and a.name = ?");
 		} else if (DBUtils.IsMySQLDB(dbkey) || DBUtils.IsPostgreSQL(dbkey)) {
-//			sql = "select IS_NULLABLE " + "from information_schema.columns where table_name='" + tableName
-//					+ "' and COLUMN_NAME='" + columnName + "'";
 			sql = new SQL().SELECT("IS_NULLABLE");
 			sql.FROM("information_schema.columns");
 			sql.WHERE("table_name=? and COLUMN_NAME=?");
@@ -724,22 +646,12 @@ public class CommonUtil {
 		ResultSet rs = null;
 		try {
 			conn = DBUtils.getAppConn(dbkey);
-			String catalog = null;
-			if (DBUtils.IsPostgreSQL(dbkey)) {
-				catalog = conn.getCatalog();
-				schemaPattern = "public";
-			}
-			if (DBUtils.IsOracleDB(dbkey)) {
-				schemaPattern = conn.getMetaData().getUserName();
-			}
-			if (DBUtils.IsMySQLDB(dbkey)) {
-				schemaPattern = conn.getCatalog();
-			}
 			DatabaseMetaData objMet = conn.getMetaData();
+			String catalog = conn.getCatalog();
 			if (schemaPattern != null) {
-				rs = objMet.getColumns(catalog, schemaPattern, tableName, columnName); // $NON-NLS-1$
+				rs = objMet.getColumns(catalog, schemaPattern, tableName, columnName);
 			} else {
-				rs = objMet.getColumns(catalog, "%", tableName, columnName); //$NON-NLS-1$ //$NON-NLS-2$
+				rs = objMet.getColumns(catalog, "%", tableName, columnName);
 			}
 			if (rs.next()) {
 				r = rs.getInt(NULLABLE);

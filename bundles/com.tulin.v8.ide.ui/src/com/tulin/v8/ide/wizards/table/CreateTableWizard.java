@@ -25,13 +25,17 @@ import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.ide.StructureComposition;
 import com.tulin.v8.ide.StudioPlugin;
 import com.tulin.v8.ide.editors.data.DataEditor;
+import com.tulin.v8.ide.editors.data.TableViewEditorInput;
 import com.tulin.v8.ide.utils.StudioConfig;
 import com.tulin.v8.ide.views.navigator.ModelView;
 import com.tulin.v8.ide.wizards.Messages;
 
+import zigen.plugin.db.core.IDBConfig;
+
 @SuppressWarnings({ "unused", "restriction" })
 public class CreateTableWizard extends Wizard implements INewWizard {
 	public static String ID = "TuLin.wizards.table.CreateTableWizard";
+	private IDBConfig dbConfig;
 	private String dbkey;
 	private String owner;
 	private ModelView viewer;
@@ -56,13 +60,14 @@ public class CreateTableWizard extends Wizard implements INewWizard {
 
 		setNeedsProgressMonitor(true);
 		setHelpAvailable(false);
-		
+
 		TuLinPlugin.setSelection(selection);
 	}
-	
-	public CreateTableWizard(String dbkey, String owner, ModelView viewer) {
+
+	public CreateTableWizard(IDBConfig dbConfig, String dbkey, String owner, ModelView viewer) {
 		super();
 
+		this.dbConfig = dbConfig;
 		this.dbkey = dbkey;
 		this.owner = owner;
 		this.viewer = viewer;
@@ -104,14 +109,8 @@ public class CreateTableWizard extends Wizard implements INewWizard {
 				public void run() {
 					IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 					try {
-						File nf = StructureComposition.getTablePermision(cdbkey, tablename, "TABLE");;
-						if (nf.exists()) {
-							LocalFile localLocalFile = new LocalFile(nf);
-							FileStoreEditorInput localFileStoreEditorInput = new FileStoreEditorInput(localLocalFile);
-							IDE.openEditor(page, localFileStoreEditorInput, DataEditor.ID);
-						} else {
-							showMessage("无法打开的文件类型，或文件不存在！path:" + nf.getAbsolutePath());
-						}
+						TableViewEditorInput editorinput = new TableViewEditorInput(dbConfig, tablename, "TABLE");
+						IDE.openEditor(page, editorinput, DataEditor.ID);
 					} catch (Exception e) {
 						showMessage(e.toString());
 					}

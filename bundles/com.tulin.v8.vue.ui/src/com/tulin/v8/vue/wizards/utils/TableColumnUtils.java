@@ -7,9 +7,20 @@ import com.tulin.v8.core.utils.CommonUtil;
 
 public class TableColumnUtils {
 
-	public static List<String[]> getTableColumn(String dbkey, String tableName, String search) throws Exception {
+	/**
+	 * 获取指定表的字段信息
+	 * 
+	 * @param dbkey
+	 * @param schemaPattern
+	 * @param tableName
+	 * @param search
+	 * @return
+	 * @throws Exception
+	 */
+	public static List<String[]> getTableColumn(String dbkey, String schemaPattern, String tableName, String search)
+			throws Exception {
 		List<String[]> rlist = new ArrayList<String[]>();
-		List<String[]> list = CommonUtil.getTableColumn(dbkey, tableName);
+		List<String[]> list = CommonUtil.getTableColumn(dbkey, schemaPattern, tableName);
 		for (String[] row : list) {
 			if (row[0].toUpperCase().indexOf(search.toUpperCase()) > -1
 					|| row[1].toUpperCase().indexOf(search.toUpperCase()) > -1

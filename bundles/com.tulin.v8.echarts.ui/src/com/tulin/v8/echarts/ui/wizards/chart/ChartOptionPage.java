@@ -50,7 +50,7 @@ import zigen.plugin.db.core.IDBConfig;
 
 public class ChartOptionPage extends WizardPage {
 	private String dbkey = null;
-
+	public Map<String, IDBConfig> DBConfig = new HashMap<String, IDBConfig>();
 	Group data;
 	Tree tableview;
 	TreeItem root1;
@@ -81,6 +81,7 @@ public class ChartOptionPage extends WizardPage {
 		String[] dbkeys = new String[dbConfigs.length];
 		for (int i = 0; i < dbConfigs.length; i++) {
 			dbkeys[i] = dbConfigs[i].getDbName();
+			DBConfig.put(dbkeys[i], dbConfigs[i]);
 		}
 		dbkeyCombo.setItems(dbkeys);
 		dbkeyCombo.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
@@ -114,7 +115,8 @@ public class ChartOptionPage extends WizardPage {
 			public void widgetSelected(SelectionEvent e) {
 				setDbkey(dbkeyCombo.getText());
 				try {
-					Map<String, List<String>> TreeitemData = CommonUtil.getDataObject(dbkeyCombo.getText());
+					Map<String, List<String>> TreeitemData = CommonUtil.getDataObject(dbkeyCombo.getText(),
+							DBConfig.get(dbkeyCombo.getText()).getSchema());
 					loadTreeItem(TreeitemData);
 					setMessage(getDbkey());
 				} catch (Exception e1) {
@@ -214,7 +216,8 @@ public class ChartOptionPage extends WizardPage {
 				if (item.getItemCount() < 1) {
 					try {
 						String dbkey = getDbkey();
-						List<String[]> columnlist = CommonUtil.getTableColumn(dbkey, item.getText());
+						List<String[]> columnlist = CommonUtil.getTableColumn(dbkey, DBConfig.get(dbkey).getSchema(),
+								item.getText());
 						for (int i = 0; i < columnlist.size(); i++) {
 							TreeItem cellitem = new TreeItem(item, SWT.NONE);
 							cellitem.setText(columnlist.get(i));
@@ -347,9 +350,9 @@ public class ChartOptionPage extends WizardPage {
 		changeSate(!isEmpty(getSQL()));
 	}
 
-	public static Map<String, List<String>> getDataObject(String dbkey, String search) throws Exception {
+	public Map<String, List<String>> getDataObject(String dbkey, String search) throws Exception {
 		Map<String, List<String>> rmap = new HashMap<String, List<String>>();
-		Map<String, List<String>> map = CommonUtil.getDataObject(dbkey);
+		Map<String, List<String>> map = CommonUtil.getDataObject(dbkey, DBConfig.get(dbkey).getSchema());
 		List<String> rtable = new ArrayList<String>();
 		List<String> table = map.get("TABLE");
 		for (String t : table) {

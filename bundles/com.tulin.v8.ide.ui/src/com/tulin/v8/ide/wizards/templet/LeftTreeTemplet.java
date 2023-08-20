@@ -47,7 +47,7 @@ public class LeftTreeTemplet extends TempletsReader {
 			}
 		}
 		context = context.replace("R_ListIDS", YJTemplet_cellsListIDS.join(","));
-		List<String[]> columnlist = CommonUtil.getTableColumn(dbkey, tableName);
+		List<String[]> columnlist = CommonUtil.getTableColumn(dbkey, null, tableName);
 		StringArray YJTemplet_cellsListListLBS = new StringArray();
 		StringArray YJTemplet_cellsListWDs = new StringArray();
 		StringArray YJTemplet_cellsListTPs = new StringArray();
@@ -66,7 +66,7 @@ public class LeftTreeTemplet extends TempletsReader {
 		String rlable = "";
 		for (String[] row : columnlist) {
 			if (row[0].equals(cellname)) {
-				rlable = (row[2]==null||"".equals(row[2])) ? cellname : row[2];
+				rlable = (row[2] == null || "".equals(row[2])) ? cellname : row[2];
 			}
 		}
 		return rlable;

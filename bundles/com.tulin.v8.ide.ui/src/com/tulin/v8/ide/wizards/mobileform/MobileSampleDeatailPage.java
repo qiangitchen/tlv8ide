@@ -329,7 +329,7 @@ public class MobileSampleDeatailPage extends WizardPage {
 		table.removeAll();
 		tablegrid.removeAll();
 		try {
-			columnlist = CommonUtil.getTableColumn(dbkey, tvName);
+			columnlist = CommonUtil.getTableColumn(dbkey, null, tvName);
 			for (int i = 0; i < columnlist.size(); i++) {
 				TableItem tableitem = new TableItem(table, SWT.NONE);
 				tableitem.setText(columnlist.get(i));

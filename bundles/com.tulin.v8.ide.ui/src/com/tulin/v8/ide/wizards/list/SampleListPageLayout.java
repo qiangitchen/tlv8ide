@@ -71,8 +71,7 @@ public class SampleListPageLayout extends WizardPage {
 
 		// labeltable = new Label(composite, SWT.NONE);
 		// labeltable.setText(Messages.getString("wizardsaction.dataselect.message.delectedtableview"));
-		ToolBar toolbar = new ToolBar(composite, SWT.FLAT | SWT.WRAP
-				| SWT.RIGHT);
+		ToolBar toolbar = new ToolBar(composite, SWT.FLAT | SWT.WRAP | SWT.RIGHT);
 		GridData toolbarcl = new GridData(SWT.FILL);
 		toolbar.setLayoutData(toolbarcl);
 		ToolItem selectallitem = new ToolItem(toolbar, SWT.PUSH | SWT.BORDER);
@@ -83,8 +82,7 @@ public class SampleListPageLayout extends WizardPage {
 		final Text searchText = new Text(composite, SWT.BORDER);
 		searchText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 
-		table = new Table(composite, SWT.BORDER | SWT.V_SCROLL
-				| SWT.FULL_SELECTION | SWT.CHECK);
+		table = new Table(composite, SWT.BORDER | SWT.V_SCROLL | SWT.FULL_SELECTION | SWT.CHECK);
 		table.setLayoutData(new GridData(GridData.FILL_BOTH));
 		table.setHeaderVisible(true);
 		table.setLinesVisible(true);
@@ -104,8 +102,7 @@ public class SampleListPageLayout extends WizardPage {
 		Label label = new Label(compos, SWT.NONE);
 		label.setText("&列表详细配置:");
 
-		tablegrid = new Table(compos, SWT.BORDER | SWT.V_SCROLL
-				| SWT.FULL_SELECTION);
+		tablegrid = new Table(compos, SWT.BORDER | SWT.V_SCROLL | SWT.FULL_SELECTION);
 		tablegrid.setLayoutData(new GridData(GridData.FILL_BOTH));
 		tablegrid.setHeaderVisible(true);
 		tablegrid.setLinesVisible(true);
@@ -135,7 +132,7 @@ public class SampleListPageLayout extends WizardPage {
 					List<String[]> columnlist;
 					try {
 						columnlist = DataSelectPage.getTableColumn(dbkey,
-								tvName, searchText.getText());
+								dataSelectPage.DBConfig.get(dbkey).getSchema(), tvName, searchText.getText());
 						table.removeAll();
 						tablegrid.removeAll();
 						for (int i = 0; i < columnlist.size(); i++) {
@@ -166,11 +163,9 @@ public class SampleListPageLayout extends WizardPage {
 				}
 				if (item.getChecked()) {
 					if (chIdIndex < 0) {
-						String dataType = DataType.getDataTypeBydatabase(item
-								.getText(1).toUpperCase());
+						String dataType = DataType.getDataTypeBydatabase(item.getText(1).toUpperCase());
 						TableItem tableitem = new TableItem(tablegrid, SWT.NONE);
-						tableitem.setText(new String[] { item.getText(0),
-								item.getText(2), "80", dataType });
+						tableitem.setText(new String[] { item.getText(0), item.getText(2), "80", dataType });
 						columns.add(item.getText(0));
 						labels.put(item.getText(0), item.getText(2));
 						widths.put(item.getText(0), "80");
@@ -196,11 +191,9 @@ public class SampleListPageLayout extends WizardPage {
 				for (int i = 0; i < items.length; i++) {
 					items[i].setChecked(true);
 					TableItem item = items[i];
-					String dataType = DataType.getDataTypeBydatabase(item
-							.getText(1).toUpperCase());
+					String dataType = DataType.getDataTypeBydatabase(item.getText(1).toUpperCase());
 					TableItem tableitem = new TableItem(tablegrid, SWT.NONE);
-					tableitem.setText(new String[] { item.getText(0),
-							item.getText(2), "80", dataType });
+					tableitem.setText(new String[] { item.getText(0), item.getText(2), "80", dataType });
 					columns.add(item.getText(0));
 					labels.put(item.getText(0), item.getText(2));
 					widths.put(item.getText(0), "80");
@@ -246,11 +239,9 @@ public class SampleListPageLayout extends WizardPage {
 									case SWT.FocusOut:
 										item.setText(column, text.getText());
 										if (column == 1) {
-											labels.put(item.getText(0),
-													text.getText());
+											labels.put(item.getText(0), text.getText());
 										} else if (column == 2) {
-											widths.put(item.getText(0),
-													text.getText());
+											widths.put(item.getText(0), text.getText());
 										}
 										text.dispose();
 										break;
@@ -259,11 +250,9 @@ public class SampleListPageLayout extends WizardPage {
 										case SWT.TRAVERSE_RETURN:
 											item.setText(column, text.getText());
 											if (column == 1) {
-												labels.put(item.getText(0),
-														text.getText());
+												labels.put(item.getText(0), text.getText());
 											} else if (column == 2) {
-												widths.put(item.getText(0),
-														text.getText());
+												widths.put(item.getText(0), text.getText());
 											}
 										case SWT.TRAVERSE_ESCAPE:
 											text.dispose();
@@ -281,24 +270,21 @@ public class SampleListPageLayout extends WizardPage {
 							text.setFocus();
 							return;
 						} else if (rectangle.contains(point) && i == 3) {
-							final Combo combo = new Combo(tablegrid,
-									SWT.DROP_DOWN);
+							final Combo combo = new Combo(tablegrid, SWT.DROP_DOWN);
 							combo.setItems(DataType.gridDataType);
 							Listener comboListener = new Listener() {
 								public void handleEvent(final Event event) {
 									switch (event.type) {
 									case SWT.FocusOut:
 										item.setText(3, combo.getText());
-										datatypes.put(item.getText(0),
-												combo.getText());
+										datatypes.put(item.getText(0), combo.getText());
 										combo.dispose();
 										break;
 									case SWT.Traverse:
 										switch (event.detail) {
 										case SWT.TRAVERSE_RETURN:
 											item.setText(3, combo.getText());
-											datatypes.put(item.getText(0),
-													combo.getText());
+											datatypes.put(item.getText(0), combo.getText());
 										case SWT.TRAVERSE_ESCAPE:
 											combo.dispose();
 											event.doit = false;
@@ -310,8 +296,7 @@ public class SampleListPageLayout extends WizardPage {
 							combo.addListener(SWT.FocusOut, comboListener);
 							combo.addListener(SWT.Traverse, comboListener);
 							combo.addSelectionListener(new SelectionListener() {
-								public void widgetDefaultSelected(
-										SelectionEvent e) {
+								public void widgetDefaultSelected(SelectionEvent e) {
 								}
 
 								public void widgetSelected(SelectionEvent e) {
@@ -364,21 +349,23 @@ public class SampleListPageLayout extends WizardPage {
 		dbkey = dataSelectPage.getDbkey();
 		tvName = dataSelectPage.getProjectName();
 		if (tvName != null) {
-			// labeltable.setText(Messages.getString("wizardsaction.dataselect.message.delectedtableview") + tvName);
+			// labeltable.setText(Messages.getString("wizardsaction.dataselect.message.delectedtableview")
+			// + tvName);
 			if (!dbkey.equals(bfdbkey) || !tvName.equals(bftvName)) {
 				initData();
 				bfdbkey = dbkey;
 				bftvName = tvName;
 			}
 		}
-		setMessage(Messages.getString("wizardsaction.dataselect.message.delectedDatasource") + dbkey + Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + ".");
+		setMessage(Messages.getString("wizardsaction.dataselect.message.delectedDatasource") + dbkey
+				+ Messages.getString("wizardsaction.dataselect.message.delectedTable") + tvName + ".");
 		return getWizard().getPage("sampleListPageEnd");
 	}
 
 	private void initData() {
 		List<String[]> columnlist;
 		try {
-			columnlist = CommonUtil.getTableColumn(dbkey, tvName);
+			columnlist = CommonUtil.getTableColumn(dbkey, null, tvName);
 			table.removeAll();
 			tablegrid.removeAll();
 			for (int i = 0; i < columnlist.size(); i++) {

@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.vue.ui.feature"
       label="TuLin Vue Plug-in"
-      version="1.0.2.qualifier"
+      version="1.0.3.qualifier"
       provider-name="TuLin"
       plugin="com.tulin.v8.vue.ui">
 

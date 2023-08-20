@@ -46,7 +46,7 @@ public class TreeGridTemplet extends TempletsReader {
 			}
 		}
 
-		List<String[]> columnlist = CommonUtil.getTableColumn(dbkey, tableName);
+		List<String[]> columnlist = CommonUtil.getTableColumn(dbkey, null, tableName);
 		List<Map<String, String>> YJTemplet_GridColumns = new ArrayList<Map<String, String>>();
 		for (int i = 0; i < YJTemplet_cellsListIDS.getLength(); i++) {
 			Map<String, String> m = new HashMap<String, String>();

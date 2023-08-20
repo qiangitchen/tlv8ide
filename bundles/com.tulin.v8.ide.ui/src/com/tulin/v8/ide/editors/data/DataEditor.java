@@ -1,6 +1,5 @@
 package com.tulin.v8.ide.editors.data;
 
-import java.io.File;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,13 +11,9 @@ import java.util.Map;
 import org.dom4j.Document;
 import org.dom4j.DocumentHelper;
 import org.dom4j.Element;
-import org.eclipse.core.filesystem.EFS;
-import org.eclipse.core.filesystem.IFileStore;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.Path;
-import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.ITextViewerExtension2;
@@ -53,28 +48,21 @@ import org.eclipse.swt.widgets.ToolBar;
 import org.eclipse.swt.widgets.ToolItem;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.ide.FileStoreEditorInput;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 import com.tulin.v8.core.DBUtils;
-import com.tulin.v8.core.FileAndString;
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.core.TuLinPlugin;
-import com.tulin.v8.core.XMLFormator;
 import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.ide.StudioPlugin;
 import com.tulin.v8.ide.editors.Messages;
 import com.tulin.v8.ide.editors.data.dialog.TableColumnDialog;
 import com.tulin.v8.ide.editors.data.dialog.UpdateSqlDialog;
 import com.tulin.v8.ide.editors.data.job.RefreshColumnUnViewJob;
-import com.tulin.v8.ide.utils.StudioConfig;
 import com.tulin.v8.ide.views.navigator.IStatusChangeListener;
 
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.preference.SQLEditorPreferencePage;
 import zigen.plugin.db.ui.editors.TableViewEditorFor31;
-import zigen.plugin.db.ui.editors.TableViewEditorInput;
 import zigen.plugin.db.ui.internal.ITable;
 import zigen.plugin.db.ui.util.LineNumberRulerColumnUtil;
 import zigen.plugin.db.ui.util.StyledTextUtil;
@@ -86,13 +74,14 @@ import zigen.plugin.db.ui.views.internal.SQLSourceViewer;
 
 /**
  * 表&视图编辑器
+ * 
  * @author 陈乾
  *
  */
 @SuppressWarnings("rawtypes")
 public class DataEditor extends TableViewEditorFor31 implements IResourceChangeListener, IStatusChangeListener {
 	public static String ID = "com.tulin.v8.ide.editors.data.DataEditor";
-	private StructuredTextEditor editor;
+//	private StructuredTextEditor editor;
 	private String tableName;
 	private TableItem itemdata;
 	private Table ColumnTable;
@@ -101,7 +90,6 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 	private Document TableDocument;
 	private Map<String, String> sqlMap = new HashMap<String, String>();
 	private ISelection selection;
-	private String filename;
 	protected SQLSourceViewer ddlViewer; // DDL View
 	private Button updatebtn;
 
@@ -110,46 +98,34 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 		StudioPlugin.addStatusChangeListener(this);
 	}
 
-	void createPage0() {
-		try {
-			editor = new StructuredTextEditor();
-			IEditorInput editorInput = getEditorInput();
-			int index;
-			if (editorInput instanceof TableViewEditorInput) {
-				String dataPath = StudioConfig.getUIPath() + "/.data";
-				TableViewEditorInput input = (TableViewEditorInput) editorInput;
-				String dbkey = input.getConfig().getDbName();
-				tableName = input.getTable().getName();
-				filename = dbkey;
-				filename += "_" + tableName;
-				filename += ".xml";
-				File nf = new File(dataPath + "/" + filename);
-				IFileStore fileStore = EFS.getLocalFileSystem().getStore(new Path(nf.getAbsolutePath()));
-				FileStoreEditorInput nleStoreEditorInput = new FileStoreEditorInput(fileStore);
-				index = addPage(editor, nleStoreEditorInput);
-			} else {
-				filename = getEditorInput().getName();
-				if (filename.indexOf("/") > 0) {
-					filename = filename.substring(filename.lastIndexOf("/") + 1);
-				}
-				String name = filename;
-				name = name.substring(name.indexOf("_") + 1);
-				name = name.replace(".xml", "");
-				tableName = name;
-				index = addPage(editor, getEditorInput());
-			}
-			setPageText(index, Messages.getString("TLEditor.pageEditor.1"));
-		} catch (PartInitException e) {
-			Sys.packErrMsg(e.toString());
-			ErrorDialog.openError(getSite().getShell(), "Error creating nested text editor", null, e.getStatus());
-			e.printStackTrace();
-		}
-	}
+//	void createPage0() {
+//		try {
+//			editor = new StructuredTextEditor();
+//			IEditorInput editorInput = getEditorInput();
+//			int index;
+//			if (editorInput instanceof TableViewEditorInput) {
+//				TableViewEditorInput input = (TableViewEditorInput) editorInput;
+//				tableName = input.getTable().getName();
+//				index = addPage(editor, input);
+//				setPageText(index, Messages.getString("TLEditor.pageEditor.1"));
+//			}
+//		} catch (PartInitException e) {
+//			Sys.packErrMsg(e.toString());
+//			ErrorDialog.openError(getSite().getShell(), "Error creating nested text editor", null, e.getStatus());
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * Creates page 1 设计视图.
 	 */
 	void createPage1() {
+		IEditorInput editorInput = getEditorInput();
+		if (editorInput instanceof TableViewEditorInput) {
+			TableViewEditorInput input = (TableViewEditorInput) editorInput;
+			tableName = input.getTable().getName();
+			setPartName(input.getName());
+		}
 		SashForm sashForm = new SashForm(getContainer(), SWT.NONE);
 		FormData formData = new FormData();
 		formData.left = new FormAttachment(0, 3);
@@ -498,12 +474,13 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 	}
 
 	protected void createPages() {
-		createPage0();
+//		createPage0();
 		initTable();// 初始化文本
 		createPage1();// 设计
+		
 		createDDLPage();// 建表语句
 
-		setActivePage(1);
+		//setActivePage(1);
 
 		setSelection(StudioPlugin.getSelection());
 	}
@@ -533,10 +510,10 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 
 	protected void pageChange(int newPageIndex) {
 		super.pageChange(newPageIndex);
-		if (newPageIndex == 0) {
-			initTable();
-			initColumn();
-		}
+		// if (newPageIndex == 0) {
+		// initTable();
+		// initColumn();
+		// }
 		if (newPageIndex == 1) {
 			setDDLString();
 		}
@@ -565,9 +542,9 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 		}
 	}
 
-	public StructuredTextEditor getXMLEditor() {
-		return editor;
-	}
+//	public StructuredTextEditor getXMLEditor() {
+//		return editor;
+//	}
 
 	private Document TxtToXmlDom(String txt) throws Exception {
 		Document doc;
@@ -577,14 +554,11 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 
 	private void initTable() {
 		String text = null;
-		try {
-			text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
-		} catch (Exception e) {
-		}
-		if (text == null || "".equals(text)) {
-			String dataPath = StudioConfig.getUIPath() + "/.data";
-			File nf = new File(dataPath + "/" + filename);
-			text = FileAndString.file2String(nf, "UTF-8");
+		IEditorInput editorInput = getEditorInput();
+		if (editorInput instanceof TableViewEditorInput) {
+			TableViewEditorInput input = (TableViewEditorInput) editorInput;
+			tableNode = input.getTable();
+			text = input.getText();
 		}
 		try {
 			TableDocument = TxtToXmlDom(text);
@@ -611,11 +585,11 @@ public class DataEditor extends TableViewEditorFor31 implements IResourceChangeL
 	}
 
 	private void setDataText() {
-		String domtext = XMLFormator.formatXML(TableDocument);
-		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
-		if (!domtext.equals(text)) {
-			editor.getDocumentProvider().getDocument(editor.getEditorInput()).set(domtext);
-		}
+//		String domtext = XMLFormator.formatXML(TableDocument);
+//		String text = editor.getDocumentProvider().getDocument(editor.getEditorInput()).get();
+//		if (!domtext.equals(text)) {
+//			editor.getDocumentProvider().getDocument(editor.getEditorInput()).set(domtext);
+//		}
 	}
 
 	private void changedText(String tableName, TableItem item, String text) {

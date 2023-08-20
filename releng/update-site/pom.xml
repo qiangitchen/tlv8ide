@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.tulin.v8.ide</groupId>
         <artifactId>com.tulin.v8.ide.releng</artifactId>
-        <version>3.0.4-SNAPSHOT</version>
+        <version>3.0.5-SNAPSHOT</version>
     </parent>
     
 </project>

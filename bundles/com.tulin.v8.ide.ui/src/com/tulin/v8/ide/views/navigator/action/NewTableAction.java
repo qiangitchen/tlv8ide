@@ -35,7 +35,8 @@ public class NewTableAction extends Action implements Runnable {
 		TreeNode trp = (TreeNode) obj;
 		if ("dbtype".equals(trp.getTvtype()) && "TABLE".equals(trp.getName())) {
 			Shell shell = StudioPlugin.getShell();
-			CreateTableWizard wizard = new CreateTableWizard(trp.getDbkey(), DBUtils.getUserName(trp.getDbkey()), view);
+			CreateTableWizard wizard = new CreateTableWizard(trp.getDbConfig(), trp.getDbkey(),
+					DBUtils.getUserName(trp.getDbkey()), view);
 			WizardDialog dialog = new WizardDialog(shell, wizard);
 			int ret = dialog.open();
 			if (ret == IDialogConstants.OK_ID) {

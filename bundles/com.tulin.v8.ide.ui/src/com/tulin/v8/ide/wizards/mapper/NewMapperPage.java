@@ -116,7 +116,8 @@ public class NewMapperPage extends WizardPage {
 			public void widgetSelected(SelectionEvent e) {
 				dbkey = dbkeyCombo.getText();
 				try {
-					Map<String, List<String>> TreeitemData = CommonUtil.getDataObject(dbkeyCombo.getText());
+					Map<String, List<String>> TreeitemData = CommonUtil.getDataObject(dbkeyCombo.getText(),
+							DBConfig.get(dbkey).getSchema());
 					List<String> litable = TreeitemData.get("TABLE");
 					tree.removeAll();
 					for (int i = 0; i < litable.size(); i++) {
@@ -197,7 +198,7 @@ public class NewMapperPage extends WizardPage {
 
 	public static Map<String, List<String>> getDataObject(String dbkey, String search) throws Exception {
 		Map<String, List<String>> rmap = new HashMap<String, List<String>>();
-		Map<String, List<String>> map = CommonUtil.getDataObject(dbkey);
+		Map<String, List<String>> map = CommonUtil.getDataObject(dbkey, null);
 		List<String> rtable = new ArrayList<String>();
 		List<String> table = map.get("TABLE");
 		for (String t : table) {

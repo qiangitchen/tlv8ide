@@ -1,5 +1,6 @@
 package com.tulin.v8.ide.wizards.utils;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import org.eclipse.jface.dialogs.IDialogConstants;
@@ -33,6 +34,7 @@ public class TableSelectDialog extends TitleAreaDialog {
 	 * 库表选择对话框
 	 */
 	private Tree tree = null;
+	public Map<String, IDBConfig> DBConfig = new HashMap<String, IDBConfig>();
 	String dbkey;
 	String[] items;
 	String itemsToOpen;
@@ -47,6 +49,7 @@ public class TableSelectDialog extends TitleAreaDialog {
 		String[] dbkeys = new String[dbConfigs.length];
 		for (int i = 0; i < dbConfigs.length; i++) {
 			dbkeys[i] = dbConfigs[i].getDbName();
+			DBConfig.put(dbkeys[i], dbConfigs[i]);
 		}
 		items = dbkeys;
 	}
@@ -101,7 +104,7 @@ public class TableSelectDialog extends TitleAreaDialog {
 
 		Map<String, java.util.List<String>> TreeitemData;
 		try {
-			TreeitemData = CommonUtil.getDataObject(dbkey);
+			TreeitemData = CommonUtil.getDataObject(dbkey, DBConfig.get(dbkey).getSchema());
 			java.util.List<String> litable = TreeitemData.get("TABLE");
 			root1.removeAll();
 			for (int i = 0; i < litable.size(); i++) {
@@ -149,7 +152,7 @@ public class TableSelectDialog extends TitleAreaDialog {
 		String str = searchtext.getText();
 		Map<String, java.util.List<String>> TreeitemData;
 		try {
-			TreeitemData = DataSelectPage.getDataObject(dbkey, str);
+			TreeitemData = DataSelectPage.getDataObject(dbkey, DBConfig.get(dbkey).getSchema(), str);
 			java.util.List<String> litable = TreeitemData.get("TABLE");
 			root1.removeAll();
 			for (int i = 0; i < litable.size(); i++) {

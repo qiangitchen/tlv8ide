@@ -151,7 +151,8 @@ public class DataSelectPage extends WizardPage {
 				setDbkey(dbkeyCombo.getText());
 				Map<String, List<String>> TreeitemData;
 				try {
-					TreeitemData = CommonUtil.getDataObject(dbkeyCombo.getText());
+					TreeitemData = CommonUtil.getDataObject(dbkeyCombo.getText(),
+							DBConfig.get(dbkeyCombo.getText()).getSchema());
 					List<String> litable = TreeitemData.get("TABLE");
 					root1.removeAll();
 					for (int i = 0; i < litable.size(); i++) {
@@ -182,7 +183,7 @@ public class DataSelectPage extends WizardPage {
 				if (item.getItems().length == 0) {
 					List<String[]> columnlist;
 					try {
-						columnlist = CommonUtil.getTableColumn(dbkey, item.getText());
+						columnlist = CommonUtil.getTableColumn(dbkey, DBConfig.get(dbkey).getSchema(), item.getText());
 						for (int i = 0; i < columnlist.size(); i++) {
 							TableItem tableitem = new TableItem(table, SWT.NONE);
 							tableitem.setText(columnlist.get(i));
@@ -208,7 +209,8 @@ public class DataSelectPage extends WizardPage {
 					setDbkey(dbkeyCombo.getText());
 					Map<String, List<String>> TreeitemData;
 					try {
-						TreeitemData = getDataObject(dbkeyCombo.getText(), searchText.getText());
+						TreeitemData = getDataObject(dbkeyCombo.getText(),
+								DBConfig.get(dbkeyCombo.getText()).getSchema(), searchText.getText());
 						List<String> litable = TreeitemData.get("TABLE");
 						root1.removeAll();
 						for (int i = 0; i < litable.size(); i++) {
@@ -238,7 +240,8 @@ public class DataSelectPage extends WizardPage {
 				setDbkey(dbkeyCombo.getText());
 				Map<String, List<String>> TreeitemData;
 				try {
-					TreeitemData = getDataObject(dbkeyCombo.getText(), searchText.getText());
+					TreeitemData = getDataObject(dbkeyCombo.getText(), DBConfig.get(dbkeyCombo.getText()).getSchema(),
+							searchText.getText());
 					List<String> litable = TreeitemData.get("TABLE");
 					root1.removeAll();
 					for (int i = 0; i < litable.size(); i++) {
@@ -264,9 +267,10 @@ public class DataSelectPage extends WizardPage {
 		setControl(composite);
 	}
 
-	public static Map<String, List<String>> getDataObject(String dbkey, String search) throws Exception {
+	public static Map<String, List<String>> getDataObject(String dbkey, String schemaPattern, String search)
+			throws Exception {
 		Map<String, List<String>> rmap = new HashMap<String, List<String>>();
-		Map<String, List<String>> map = CommonUtil.getDataObject(dbkey);
+		Map<String, List<String>> map = CommonUtil.getDataObject(dbkey, schemaPattern);
 		List<String> rtable = new ArrayList<String>();
 		List<String> table = map.get("TABLE");
 		for (String t : table) {
@@ -286,9 +290,10 @@ public class DataSelectPage extends WizardPage {
 		return rmap;
 	}
 
-	public static List<String[]> getTableColumn(String dbkey, String tableName, String search) throws Exception {
+	public static List<String[]> getTableColumn(String dbkey, String schemaPattern, String tableName, String search)
+			throws Exception {
 		List<String[]> rlist = new ArrayList<String[]>();
-		List<String[]> list = CommonUtil.getTableColumn(dbkey, tableName);
+		List<String[]> list = CommonUtil.getTableColumn(dbkey, schemaPattern, tableName);
 		for (String[] row : list) {
 			if (row[0].toUpperCase().indexOf(search.toUpperCase()) > -1
 					|| row[1].toUpperCase().indexOf(search.toUpperCase()) > -1

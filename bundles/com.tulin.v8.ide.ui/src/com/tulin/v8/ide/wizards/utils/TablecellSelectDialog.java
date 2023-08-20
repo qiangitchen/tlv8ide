@@ -36,7 +36,7 @@ public class TablecellSelectDialog extends TitleAreaDialog {
 		this.dbkey = dbkey;
 		this.tablename = table;
 		try {
-			columnlist = CommonUtil.getTableColumn(dbkey, tablename);
+			columnlist = CommonUtil.getTableColumn(dbkey, null, tablename);
 		} catch (Exception e) {
 			e.printStackTrace();
 			setMessage(e.toString());
