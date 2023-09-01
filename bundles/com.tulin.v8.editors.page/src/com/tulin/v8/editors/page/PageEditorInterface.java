@@ -2,11 +2,12 @@ package com.tulin.v8.editors.page;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor;
 import org.eclipse.ui.texteditor.AbstractDecoratedTextEditor;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 import com.tulin.v8.editors.page.design.WEBDesignEditorInterface;
 
+@SuppressWarnings("restriction")
 public interface PageEditorInterface {
 	public WEBDesignEditorInterface getDesignEditor();
 
@@ -14,7 +15,7 @@ public interface PageEditorInterface {
 
 	public void activhtmlEditor();
 
-	public StructuredTextEditor getSourceEditor();
+	public ExtensionBasedTextEditor getSourceEditor();
 
 	public int getDesignerMode();
 
@@ -37,7 +38,5 @@ public interface PageEditorInterface {
 	public boolean isSaveAsAllowed();
 
 	public IEditorInput getEditorInput();
-
-	public StructuredTextEditor getTextEditor();
 
 }

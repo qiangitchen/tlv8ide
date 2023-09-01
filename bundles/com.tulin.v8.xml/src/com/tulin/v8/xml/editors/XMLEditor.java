@@ -1029,9 +1029,9 @@ public class XMLEditor extends TextEditor {
 	private static final String UNDO_ACTION_TEXT_DEFAULT = SSEUIMessages._Undo_Text_Change__Ctrl_Z_UI_; // $NON-NLS-1$ =
 																										// "&Undo Text
 	public static final String SHOW_UNKNOWN_CONTENT_TYPE_MSG = "showUnknownContentTypeMsg"; //$NON-NLS-1$
-	
+
 	public final static String MATCHING_BRACKETS = "matchingBrackets";
-	public final static String MATCHING_BRACKETS_COLOR = "matchingBracketsColor";																								// Change
+	public final static String MATCHING_BRACKETS_COLOR = "matchingBracketsColor"; // Change
 	public static final String EVALUATE_TEMPORARY_PROBLEMS = "evaluateTemporaryProblems";
 
 	public final static String CODEASSIST_PARAMETERS_FOREGROUND = "content_assist_parameters_foreground"; //$NON-NLS-1$
@@ -1069,8 +1069,7 @@ public class XMLEditor extends TextEditor {
 	/** The ruler context menu manager to be disposed. */
 	private MenuManager fRulerContextMenuManager;
 
-	String[] fShowInTargetIds = new String[] { IPageLayout.ID_RES_NAV, IPageLayout.ID_PROJECT_EXPLORER,
-			IPageLayout.ID_OUTLINE };
+	String[] fShowInTargetIds = new String[] { IPageLayout.ID_PROJECT_EXPLORER, IPageLayout.ID_OUTLINE };
 
 	private IAction fShowPropertiesAction = null;
 	private IStructuredModel fStructuredModel;
@@ -1319,8 +1318,7 @@ public class XMLEditor extends TextEditor {
 	 */
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
 		support.setCharacterPairMatcher(createCharacterPairMatcher());
-		support.setMatchingCharacterPainterPreferenceKeys(MATCHING_BRACKETS,
-				MATCHING_BRACKETS_COLOR);
+		support.setMatchingCharacterPainterPreferenceKeys(MATCHING_BRACKETS, MATCHING_BRACKETS_COLOR);
 
 		super.configureSourceViewerDecorationSupport(support);
 	}
@@ -1565,8 +1563,7 @@ public class XMLEditor extends TextEditor {
 			if (viewID != null) {
 				// make sure the specified view ID is known
 				if (PlatformUI.getWorkbench().getViewRegistry().find(viewID) != null) {
-					fShowInTargetIds = new String[] { viewID, IPageLayout.ID_PROJECT_EXPLORER, IPageLayout.ID_RES_NAV,
-							IPageLayout.ID_OUTLINE };
+					fShowInTargetIds = new String[] { viewID, IPageLayout.ID_PROJECT_EXPLORER, IPageLayout.ID_OUTLINE };
 				}
 			}
 		}
@@ -1609,9 +1606,6 @@ public class XMLEditor extends TextEditor {
 			}
 		}
 
-		if (!allIds.contains(IPageLayout.ID_RES_NAV)) {
-			allIds.add(IPageLayout.ID_RES_NAV);
-		}
 		if (!allIds.contains(IPageLayout.ID_PROJECT_EXPLORER)) {
 			allIds.add(IPageLayout.ID_PROJECT_EXPLORER);
 		}
@@ -1960,13 +1954,11 @@ public class XMLEditor extends TextEditor {
 		 * if could not get the model prompt user to update content type if preferences
 		 * allow, then try to get model again
 		 */
-		if (model == null && SSEUIPlugin.getDefault().getPreferenceStore()
-				.getBoolean(SHOW_UNKNOWN_CONTENT_TYPE_MSG)) {
+		if (model == null && SSEUIPlugin.getDefault().getPreferenceStore().getBoolean(SHOW_UNKNOWN_CONTENT_TYPE_MSG)) {
 			// display a dialog informing user of unknown content type giving
 			// them chance to update preferences
 			UnknownContentTypeDialog dialog = new UnknownContentTypeDialog(getSite().getShell(),
-					SSEUIPlugin.getDefault().getPreferenceStore(),
-					SHOW_UNKNOWN_CONTENT_TYPE_MSG);
+					SSEUIPlugin.getDefault().getPreferenceStore(), SHOW_UNKNOWN_CONTENT_TYPE_MSG);
 			dialog.open();
 
 			// try to get model again in hopes user updated preferences
@@ -2556,8 +2548,7 @@ public class XMLEditor extends TextEditor {
 					IContentAssistant contentAssistant = configuration.getContentAssistant(sourceViewer);
 					if (contentAssistant instanceof ContentAssistant) {
 						ContentAssistant assistant = (ContentAssistant) contentAssistant;
-						RGB rgb = PreferenceConverter.getColor(getPreferenceStore(),
-								CODEASSIST_PROPOSALS_BACKGROUND);
+						RGB rgb = PreferenceConverter.getColor(getPreferenceStore(), CODEASSIST_PROPOSALS_BACKGROUND);
 						Color color = EditorUtility.getColor(rgb);
 						assistant.setProposalSelectorBackground(color);
 					}
@@ -2574,8 +2565,7 @@ public class XMLEditor extends TextEditor {
 					IContentAssistant contentAssistant = configuration.getContentAssistant(sourceViewer);
 					if (contentAssistant instanceof ContentAssistant) {
 						ContentAssistant assistant = (ContentAssistant) contentAssistant;
-						RGB rgb = PreferenceConverter.getColor(getPreferenceStore(),
-								CODEASSIST_PROPOSALS_FOREGROUND);
+						RGB rgb = PreferenceConverter.getColor(getPreferenceStore(), CODEASSIST_PROPOSALS_FOREGROUND);
 						Color color = EditorUtility.getColor(rgb);
 						assistant.setProposalSelectorForeground(color);
 					}
@@ -2592,8 +2582,7 @@ public class XMLEditor extends TextEditor {
 					IContentAssistant contentAssistant = configuration.getContentAssistant(sourceViewer);
 					if (contentAssistant instanceof ContentAssistant) {
 						ContentAssistant assistant = (ContentAssistant) contentAssistant;
-						RGB rgb = PreferenceConverter.getColor(getPreferenceStore(),
-								CODEASSIST_PARAMETERS_BACKGROUND);
+						RGB rgb = PreferenceConverter.getColor(getPreferenceStore(), CODEASSIST_PARAMETERS_BACKGROUND);
 						Color color = EditorUtility.getColor(rgb);
 						assistant.setContextInformationPopupBackground(color);
 						assistant.setContextSelectorBackground(color);
@@ -2611,8 +2600,7 @@ public class XMLEditor extends TextEditor {
 					IContentAssistant contentAssistant = configuration.getContentAssistant(sourceViewer);
 					if (contentAssistant instanceof ContentAssistant) {
 						ContentAssistant assistant = (ContentAssistant) contentAssistant;
-						RGB rgb = PreferenceConverter.getColor(getPreferenceStore(),
-								CODEASSIST_PARAMETERS_FOREGROUND);
+						RGB rgb = PreferenceConverter.getColor(getPreferenceStore(), CODEASSIST_PARAMETERS_FOREGROUND);
 						Color color = EditorUtility.getColor(rgb);
 						assistant.setContextInformationPopupForeground(color);
 						assistant.setContextSelectorForeground(color);

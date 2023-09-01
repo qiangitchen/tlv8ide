@@ -52,8 +52,8 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.editor.FormPage;
+import org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor;
 import org.eclipse.ui.part.FileEditorInput;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -87,9 +87,9 @@ import com.tulin.v8.editors.page.server.utils.WebappManager;
  * @author 陈乾
  * @update 2021-7-25
  */
-@SuppressWarnings({ "deprecation" })
+@SuppressWarnings({ "deprecation", "restriction" })
 public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterface {
-	protected StructuredTextEditor editor;
+	protected ExtensionBasedTextEditor editor;
 	protected PageEditorInterface editorpart;
 
 	protected Tree tree;
@@ -119,7 +119,7 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 	private Table etable;
 	private ToolItem addparam;
 
-	public WEBDesignEditor(StructuredTextEditor editor, PageEditorInterface editorpart) {
+	public WEBDesignEditor(ExtensionBasedTextEditor editor, PageEditorInterface editorpart) {
 		super("webDesign", Messages.getString("TLEditor.pageEditor.3"));
 		this.editor = editor;
 		this.editorpart = editorpart;
@@ -843,11 +843,6 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 	}
 
 	@Override
-	public StructuredTextEditor getTextEditor() {
-		return editor;
-	}
-
-	@Override
 	public int getDesignerMode() {
 		return editorpart.getDesignerMode();
 	}
@@ -863,7 +858,7 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 	}
 
 	@Override
-	public StructuredTextEditor getSourceEditor() {
+	public ExtensionBasedTextEditor getSourceEditor() {
 		return editor;
 	}
 

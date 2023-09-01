@@ -9,11 +9,12 @@ import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
 import org.eclipse.swt.widgets.TreeItem;
 import org.eclipse.ui.IEditorPart;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
+import org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor;
 import org.jsoup.nodes.Document;
 
 import com.tulin.v8.editors.page.PageEditorInterface;
 
+@SuppressWarnings("restriction")
 public interface WEBDesignEditorInterface {
 
 	public abstract void fillContextMenu(IMenuManager manager);
@@ -50,8 +51,6 @@ public interface WEBDesignEditorInterface {
 	public IEditorPart getActiveEditors();
 
 //	public IStructuredModel getModel();
-
-	public StructuredTextEditor getTextEditor();
 
 	public WEBDesignEditorInterface getHTMLEditor();
 
@@ -105,6 +104,6 @@ public interface WEBDesignEditorInterface {
 
 	public abstract void activhtmlEditor();
 
-	public abstract StructuredTextEditor getSourceEditor();
+	public abstract ExtensionBasedTextEditor getSourceEditor();
 
 }

@@ -43,13 +43,13 @@ import org.jsoup.nodes.Element;
 import com.tulin.v8.core.FileAndString;
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.editors.css.CSSEditor;
-import com.tulin.v8.editors.html.HTMLSourceEditor;
 import com.tulin.v8.editors.page.design.LinkHref;
 import com.tulin.v8.editors.page.design.WEBDesignEditor;
 import com.tulin.v8.editors.page.design.WEBDesignEditorInterface;
 
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor;
 
 /**
  * An example showing how to create a multi-page editor. This example has 3
@@ -65,7 +65,7 @@ import org.eclipse.ui.ide.IDE;
 @SuppressWarnings({ "unused", "restriction" })
 public class WebPageEditor extends MultiPageEditorPart implements PageEditorInterface, IResourceChangeListener {
 	public final static String ID = "com.tulin.v8.editors.page.WebPageEditor";
-	private HTMLSourceEditor editor;
+	private ExtensionBasedTextEditor editor;
 	public WEBDesignEditorInterface _designViewer;
 	private CompilationUnitEditor jseditor;
 	public CSSEditor csseditor;
@@ -83,7 +83,7 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	 */
 	void createPage0() {
 		try {
-			editor = new HTMLSourceEditor();
+			editor = new ExtensionBasedTextEditor();
 			int index = addPage(editor, getEditorInput());
 			setPageText(index, Messages.getString("TLEditor.pageEditor.1"));
 		} catch (PartInitException e) {
@@ -415,7 +415,7 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	}
 
 	@Override
-	public HTMLSourceEditor getSourceEditor() {
+	public ExtensionBasedTextEditor getSourceEditor() {
 		return editor;
 	}
 
@@ -459,11 +459,6 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	@Override
 	public void setJSEditorPageText(String text) {
 		jseditor.getDocumentProvider().getDocument(jseditor.getEditorInput()).set(text);
-	}
-
-	@Override
-	public HTMLSourceEditor getTextEditor() {
-		return editor;
 	}
 
 	@Override

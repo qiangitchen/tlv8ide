@@ -7,7 +7,24 @@ Bundle-Activator: com.tulin.v8.editors.page.Activator
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
 Bundle-Vendor: TuLin
-Require-Bundle: org.eclipse.jface.text,
+Require-Bundle: org.eclipse.ui,
+ org.eclipse.core.runtime,
+ org.eclipse.jface.text,
+ org.eclipse.ui.editors,
+ org.eclipse.ui.workbench.texteditor,
+ org.eclipse.core.resources,
+ org.eclipse.ui.ide,
+ org.eclipse.ui.views,
+ org.eclipse.jdt.core,
+ org.eclipse.gef;resolution:=optional,
+ org.eclipse.jdt.ui,
+ org.eclipse.debug.core,
+ org.eclipse.debug.ui,
+ org.eclipse.jdt.debug,
+ org.eclipse.jdt.debug.ui,
+ org.eclipse.jdt.launching,
+ org.eclipse.help,
+ org.eclipse.jface.text,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.core.expressions,
@@ -30,7 +47,8 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.wst.css.ui,
  org.eclipse.wst.css.ui,
  com.tulin.v8.core,
- com.tulin.v8.editors.page.server
+ com.tulin.v8.editors.page.server,
+ org.eclipse.ui.genericeditor
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: com.tulin.v8.editors.page
 Bundle-ActivationPolicy: lazy
