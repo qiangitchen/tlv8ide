@@ -19,17 +19,23 @@ public class MutiPageContentOutlinePage extends Page implements IContentOutlineP
 	}
 
 	public void createControl(Composite paramComposite) {
-		this.jdField_a_of_type_OrgEclipseUiPartPageBook = new PageBook(paramComposite, 0);
-		if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
-			setPageActive(this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage);
+		try {
+			this.jdField_a_of_type_OrgEclipseUiPartPageBook = new PageBook(paramComposite, 0);
+			if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
+				setPageActive(this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage);
+		} catch (Exception e) {
+		}
 	}
 
 	public void dispose() {
-		if ((this.jdField_a_of_type_OrgEclipseUiPartPageBook != null)
-				&& (!this.jdField_a_of_type_OrgEclipseUiPartPageBook.isDisposed()))
-			this.jdField_a_of_type_OrgEclipseUiPartPageBook.dispose();
-		this.jdField_a_of_type_OrgEclipseUiPartPageBook = null;
-		this.jdField_a_of_type_Boolean = true;
+		try {
+			if ((this.jdField_a_of_type_OrgEclipseUiPartPageBook != null)
+					&& (!this.jdField_a_of_type_OrgEclipseUiPartPageBook.isDisposed()))
+				this.jdField_a_of_type_OrgEclipseUiPartPageBook.dispose();
+			this.jdField_a_of_type_OrgEclipseUiPartPageBook = null;
+			this.jdField_a_of_type_Boolean = true;
+		} catch (Exception e) {
+		}
 	}
 
 	public boolean isDisposed() {
@@ -44,31 +50,49 @@ public class MutiPageContentOutlinePage extends Page implements IContentOutlineP
 	}
 
 	public void setFocus() {
-		if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
-			this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage.setFocus();
+		try {
+			if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
+				this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage.setFocus();
+		} catch (Exception e) {
+		}
 	}
 
 	public void addSelectionChangedListener(ISelectionChangedListener paramISelectionChangedListener) {
-		if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
-			this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage
-					.addSelectionChangedListener(paramISelectionChangedListener);
+		try {
+			if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
+				this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage
+						.addSelectionChangedListener(paramISelectionChangedListener);
+		} catch (Exception e) {
+		}
 	}
 
 	public ISelection getSelection() {
-		return this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null
-				? this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage.getSelection()
-				: null;
+		try {
+			return this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null
+					? this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage.getSelection()
+					: null;
+		} catch (Exception e) {
+		}
+		return null;
 	}
 
 	public void removeSelectionChangedListener(ISelectionChangedListener paramISelectionChangedListener) {
-		if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
-			this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage
-					.removeSelectionChangedListener(paramISelectionChangedListener);
+		try {
+			if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null) {
+				this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage
+						.removeSelectionChangedListener(paramISelectionChangedListener);
+			}
+		} catch (Exception e) {
+		}
 	}
 
 	public void setSelection(ISelection paramISelection) {
-		if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null)
-			this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage.setSelection(paramISelection);
+		try {
+			if (this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage != null) {
+				this.jdField_a_of_type_OrgEclipseUiViewsContentoutlineIContentOutlinePage.setSelection(paramISelection);
+			}
+		} catch (Exception e) {
+		}
 	}
 
 	public void setPageActive(IContentOutlinePage paramIContentOutlinePage) {

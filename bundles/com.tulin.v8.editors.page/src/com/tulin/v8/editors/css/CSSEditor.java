@@ -4,10 +4,11 @@ import java.io.File;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor;
 import org.eclipse.ui.part.FileEditorInput;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
-public class CSSEditor extends StructuredTextEditor {
+@SuppressWarnings("restriction")
+public class CSSEditor extends ExtensionBasedTextEditor {
 	public CSSEditor() {
 		super();
 	}
