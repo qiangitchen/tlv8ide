@@ -39,6 +39,9 @@ public class SpringDatasource extends AbsDataSource {
 		this.username = properties.getProperty("spring.datasource.username");
 		this.password = properties.getProperty("spring.datasource.password");
 		this.validationQuery = properties.getProperty("spring.datasource.validationQuery");
+		if (StringUtils.isEmpty(this.driverClassName)) {
+			this.driverClassName = properties.getProperty("spring.datasource.driver-class-name");
+		}
 		if (StringUtils.isEmpty(this.url)) {
 			this.url = properties.getProperty("spring.datasource.druid.url");
 			this.username = properties.getProperty("spring.datasource.druid.username");
@@ -49,13 +52,13 @@ public class SpringDatasource extends AbsDataSource {
 			this.username = properties.getProperty("spring.datasource.druid.master.username");
 			this.password = properties.getProperty("spring.datasource.druid.master.password");
 		}
-		if (StringUtils.isEmpty(this.url)) {
+		if (StringUtils.isEmpty(this.url) || StringUtils.isEmpty(this.driverClassName)) {
 			this.driverClassName = properties.getProperty("spring.datasource.datasource.master.driver-class-name");
 			this.url = properties.getProperty("spring.datasource.datasource.master.url");
 			this.username = properties.getProperty("spring.datasource.datasource.master.username");
 			this.password = properties.getProperty("spring.datasource.datasource.master.password");
 		}
-		if (StringUtils.isEmpty(this.url)) {
+		if (StringUtils.isEmpty(this.url) || StringUtils.isEmpty(this.driverClassName)) {
 			this.driverClassName = properties
 					.getProperty("spring.datasource.dynamic.datasource.master.driverClassName");
 			this.url = properties.getProperty("spring.datasource.dynamic.datasource.master.url");
