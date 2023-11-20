@@ -39,24 +39,35 @@ public class SpringDatasource extends AbsDataSource {
 		this.username = properties.getProperty("spring.datasource.username");
 		this.password = properties.getProperty("spring.datasource.password");
 		this.validationQuery = properties.getProperty("spring.datasource.validationQuery");
-		if (StringUtils.isEmpty(this.driverClassName)) {
+		if (!StringUtils.isEmpty(this.url) && StringUtils.isEmpty(this.driverClassName)) {
 			this.driverClassName = properties.getProperty("spring.datasource.driver-class-name");
 		}
 		if (StringUtils.isEmpty(this.url)) {
+			this.driverClassName = properties.getProperty("spring.datasource.druid.driverClassName");
 			this.url = properties.getProperty("spring.datasource.druid.url");
 			this.username = properties.getProperty("spring.datasource.druid.username");
 			this.password = properties.getProperty("spring.datasource.druid.password");
+			if (!StringUtils.isEmpty(this.url) && StringUtils.isEmpty(this.driverClassName)) {
+				this.driverClassName = properties.getProperty("spring.datasource.druid.driver-class-name");
+			}
 		}
 		if (StringUtils.isEmpty(this.url)) {
+			this.driverClassName = properties.getProperty("spring.datasource.druid.master.driverClassName");
 			this.url = properties.getProperty("spring.datasource.druid.master.url");
 			this.username = properties.getProperty("spring.datasource.druid.master.username");
 			this.password = properties.getProperty("spring.datasource.druid.master.password");
+			if (!StringUtils.isEmpty(this.url) && StringUtils.isEmpty(this.driverClassName)) {
+				this.driverClassName = properties.getProperty("spring.datasource.druid.master.driver-class-name");
+			}
 		}
 		if (StringUtils.isEmpty(this.url) || StringUtils.isEmpty(this.driverClassName)) {
-			this.driverClassName = properties.getProperty("spring.datasource.datasource.master.driver-class-name");
+			this.driverClassName = properties.getProperty("spring.datasource.datasource.master.driverClassName");
 			this.url = properties.getProperty("spring.datasource.datasource.master.url");
 			this.username = properties.getProperty("spring.datasource.datasource.master.username");
 			this.password = properties.getProperty("spring.datasource.datasource.master.password");
+			if (!StringUtils.isEmpty(this.url) && StringUtils.isEmpty(this.driverClassName)) {
+				this.driverClassName = properties.getProperty("spring.datasource.datasource.master.driver-class-name");
+			}
 		}
 		if (StringUtils.isEmpty(this.url) || StringUtils.isEmpty(this.driverClassName)) {
 			this.driverClassName = properties
@@ -64,7 +75,61 @@ public class SpringDatasource extends AbsDataSource {
 			this.url = properties.getProperty("spring.datasource.dynamic.datasource.master.url");
 			this.username = properties.getProperty("spring.datasource.dynamic.datasource.master.username");
 			this.password = properties.getProperty("spring.datasource.dynamic.datasource.master.password");
+			if (!StringUtils.isEmpty(this.url) && StringUtils.isEmpty(this.driverClassName)) {
+				this.driverClassName = properties
+						.getProperty("spring.datasource.dynamic.datasource.master.driver-class-name");
+			}
 		}
+		if (StringUtils.isEmpty(this.driverClassName)) {
+			this.driverClassName = findDriverClassName(properties);
+		}
+		if (StringUtils.isEmpty(this.url)) {
+			this.url = findUrl(properties);
+		}
+		if (StringUtils.isEmpty(this.username)) {
+			this.username = findUserName(properties);
+		}
+		if (StringUtils.isEmpty(this.password)) {
+			this.password = findPassWord(properties);
+		}
+	}
+
+	private String findDriverClassName(Properties properties) {
+		String driverClassName = findProperties(properties, "driverClassName");
+		if (driverClassName == null) {
+			driverClassName = findProperties(properties, "driver-class-name");
+		}
+		return driverClassName;
+	}
+
+	private String findUrl(Properties properties) {
+		return findProperties(properties, "url", "datasource");
+	}
+
+	private String findUserName(Properties properties) {
+		return findProperties(properties, "username", "datasource");
+	}
+
+	private String findPassWord(Properties properties) {
+		return findProperties(properties, "password", "datasource");
+	}
+
+	private String findProperties(Properties properties, String name) {
+		for (String key : properties.stringPropertyNames()) {
+			if (key.contains(name)) {
+				return properties.getProperty(key);
+			}
+		}
+		return null;
+	}
+
+	private String findProperties(Properties properties, String name, String pname) {
+		for (String key : properties.stringPropertyNames()) {
+			if (key.contains(name) && key.contains(pname)) {
+				return properties.getProperty(key);
+			}
+		}
+		return "";
 	}
 
 	public String getType() {
