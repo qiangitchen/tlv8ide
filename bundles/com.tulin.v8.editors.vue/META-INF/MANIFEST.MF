@@ -31,7 +31,6 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.wst.css.core,
  org.eclipse.wst.css.ui,
  org.eclipse.wst.css.ui,
- org.eclipse.wildwebdeveloper,
- org.eclipse.tm.terminal.connector.local
+ org.eclipse.wildwebdeveloper
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.tulin.v8.editors.vue.VuePlugin
