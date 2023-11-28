@@ -115,7 +115,7 @@ public class TableViewEditorInput implements IEditorInput {
 	}
 
 	public String getText() {
-		return StructureComposition.writeTablePermision(config, schemaName, name, tbtype);
+		return StructureComposition.writeTablePermision(config, config.getDbName(), name, tbtype);
 	}
 
 }

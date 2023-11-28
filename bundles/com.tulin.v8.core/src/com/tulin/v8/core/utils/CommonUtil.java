@@ -161,6 +161,12 @@ public class CommonUtil {
 		if (map.isEmpty()) {
 			return map;
 		}
+		map.put("TABLE", getDataTables(dbkey));
+		map.put("VIEW", getDataViews(dbkey));
+		return map;
+	}
+
+	public static List<String> getDataTables(String dbkey) throws Exception {
 		String dataName = DBUtils.getDataName(dbkey);
 		String userName = DBUtils.getUserName(dbkey);
 		SQL tSql = new SQL();
@@ -183,15 +189,26 @@ public class CommonUtil {
 			tSqls.WHERE("nspname='public' or nspname='" + userName + "'");
 			tSql.WHERE("a.relnamespace in (" + tSqls.toString() + ")");
 		}
-		Connection conn = DBUtils.getAppConn(dbkey);
-		PreparedStatement pstmt1 = conn.prepareStatement(tSql.toString());
-		ResultSet rs = pstmt1.executeQuery();
 		List<String> lit = new ArrayList<String>();
-		while (rs.next()) {
-			lit.add(rs.getString(1));
+		Connection conn = null;
+		PreparedStatement pstmt1 = null;
+		ResultSet rs = null;
+		try {
+			conn = DBUtils.getAppConn(dbkey);
+			pstmt1 = conn.prepareStatement(tSql.toString());
+			rs = pstmt1.executeQuery();
+			while (rs.next()) {
+				lit.add(rs.getString(1));
+			}
+		} finally {
+			DBUtils.CloseConn(conn, pstmt1, rs);
 		}
-		map.put("TABLE", lit);
-		DBUtils.CloseConn(null, pstmt1, rs);
+		return lit;
+	}
+
+	public static List<String> getDataViews(String dbkey) throws Exception {
+		String dataName = DBUtils.getDataName(dbkey);
+		String userName = DBUtils.getUserName(dbkey);
 		SQL vSql = new SQL().SELECT("VIEW_NAME").FROM("user_views t");
 		if (DBUtils.IsMSSQLDB(dbkey)) {
 			vSql = new SQL().SELECT("name as VIEW_NAME");
@@ -209,15 +226,21 @@ public class CommonUtil {
 			vSqls.WHERE("nspname='public' or nspname='" + userName + "'");
 			vSql.WHERE("a.relnamespace in (" + vSqls.toString() + ")");
 		}
-		PreparedStatement pstmt2 = conn.prepareStatement(vSql.toString());
-		ResultSet rs2 = pstmt2.executeQuery();
 		List<String> liv = new ArrayList<String>();
-		while (rs2.next()) {
-			liv.add(rs2.getString(1));
+		Connection conn = null;
+		PreparedStatement pstmt2 = null;
+		ResultSet rs2 = null;
+		try {
+			conn = DBUtils.getAppConn(dbkey);
+			pstmt2 = conn.prepareStatement(vSql.toString());
+			rs2 = pstmt2.executeQuery();
+			while (rs2.next()) {
+				liv.add(rs2.getString(1));
+			}
+		} finally {
+			DBUtils.CloseConn(conn, pstmt2, rs2);
 		}
-		map.put("VIEW", liv);
-		DBUtils.CloseConn(conn, pstmt2, rs2);
-		return map;
+		return liv;
 	}
 
 	/**
@@ -236,7 +259,17 @@ public class CommonUtil {
 		try {
 			conn = DBUtils.getAppConn(dbkey);
 			DatabaseMetaData objMet = conn.getMetaData();
-			String catalog = conn.getCatalog();
+			String catalog = null;
+			if (DBUtils.IsPostgreSQL(dbkey)) {
+				catalog = conn.getCatalog();
+				schemaPattern = "public";
+			}
+			if (DBUtils.IsOracleDB(dbkey)) {
+				schemaPattern = objMet.getUserName();
+			}
+			if (DBUtils.IsMySQLDB(dbkey)) {
+				schemaPattern = conn.getCatalog();
+			}
 			if (schemaPattern != null) {
 				rs = objMet.getTables(catalog, schemaPattern, "%", new String[] { "TABLE" });
 			} else {
@@ -246,6 +279,9 @@ public class CommonUtil {
 			while (rs.next()) {
 				String tableName = rs.getString("TABLE_NAME");
 				li.add(tableName);
+			}
+			if (li.size() < 1) {
+				li = getDataTables(dbkey);
 			}
 			map.put("TABLE", li);
 			if (schemaPattern != null) {
@@ -257,6 +293,9 @@ public class CommonUtil {
 			while (rs.next()) {
 				String tableName = rs.getString("TABLE_NAME");
 				liv.add(tableName);
+			}
+			if (liv.size() < 1) {
+				liv = getDataViews(dbkey);
 			}
 			map.put("VIEW", liv);
 		} catch (Exception e) {
@@ -282,6 +321,10 @@ public class CommonUtil {
 		if (coms != null) {
 			return coms;
 		}
+		return getTableCommentsBySql(dbkey, tablename);
+	}
+
+	static String getTableCommentsBySql(String dbkey, String tablename) {
 		String result = "";
 		SQL sql = new SQL();
 		sql.SELECT("t.table_name TABLE_NAME,t.comments TABLE_COMMENT");
@@ -333,7 +376,7 @@ public class CommonUtil {
 	 * @return String
 	 */
 	public static String getTableComments(String dbkey, String schemaPattern, String tablename, String[] types) {
-		String cm = null;
+		String cm = "";
 		Connection conn = null;
 		Statement stm = null;
 		ResultSet rs = null;
@@ -358,6 +401,9 @@ public class CommonUtil {
 			}
 			if (rs.next()) {
 				cm = rs.getString("REMARKS");
+			}
+			if (StringUtils.isEmpty(cm)) {
+				cm = getTableCommentsBySql(dbkey, tablename);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -483,6 +529,108 @@ public class CommonUtil {
 	}
 
 	/**
+	 * 获取字段注释
+	 * 
+	 * @param dbkey
+	 * @param conn
+	 * @param tableName
+	 * @param columnName
+	 * @return
+	 */
+	static String getTableColumnRemarks(String dbkey, Connection conn, String tableName, String columnName) {
+		String res = "";
+		SQL sql = new SQL();
+		sql.SELECT("t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE");
+		sql.SELECT("t2.COMMENTS,t1.CHAR_LENGTH,t1.DATA_DEFAULT AS COLUMN_DEF");
+		sql.FROM("user_tab_columns t1");
+		sql.LEFT_OUTER_JOIN(
+				"user_col_comments t2 on t1.TABLE_NAME = t2.table_name and t1.COLUMN_NAME = t2.column_name");
+		sql.WHERE("t1.COLUMN_NAME='" + columnName + "'");
+		if (tableName == null || "".equals(tableName)) {
+			if (DBUtils.IsMSSQLDB(dbkey)) {
+				sql = new SQL();
+				sql.SELECT("b.name as TABLE_NAME,a.name as COLUMN_NAME,c.name as DATA_TYPE");
+				sql.SELECT("d.value as COMMENTS,a.prec as CHAR_LENGTH,a.text as COLUMN_DEF");
+				sql.FROM("dbo.syscolumns as a");
+				sql.INNER_JOIN("dbo.sysobjects as b on b.id = a.id");
+				sql.INNER_JOIN("dbo.systypes as c on a.xtype = c.xtype and c.xusertype = c.xtype");
+				sql.LEFT_OUTER_JOIN("sys.extended_properties d on d.major_id = a.id and d.minor_id = a.colid");
+				sql.WHERE("a.name='" + columnName + "'");
+			} else if (DBUtils.IsMySQLDB(dbkey)) {
+				sql = new SQL();
+				sql.SELECT("TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS");
+				sql.SELECT("character_maximum_length as CHAR_LENGTH,COLUMN_TYPE,COLUMN_DEFAULT AS COLUMN_DEF");
+				sql.FROM("information_schema.columns");
+				sql.WHERE("column_name='" + columnName + "'");
+			} else if (DBUtils.IsPostgreSQL(dbkey)) {
+				sql = new SQL();
+				sql.SELECT("a.attnum,a.attname AS COLUMN_NAME,t.typname AS DATA_TYPE");
+				sql.SELECT("a.attlen AS length,a.atttypmod AS CHAR_LENGTH");
+				sql.SELECT("a.attnotnull AS notnull,b.description AS COMMENTS,d.adsrc as COLUMN_DEF");
+				sql.FROM(" pg_class c").LEFT_OUTER_JOIN("pg_attribute a on a.attrelid = c.oid");
+				sql.LEFT_OUTER_JOIN("pg_description b ON a.attrelid=b.objoid AND a.attnum = b.objsubid");
+				sql.LEFT_OUTER_JOIN("pg_type t on a.atttypid = t.oid");
+				sql.LEFT_OUTER_JOIN("join pg_attrdef d on d.adrelid=a.attrelid and d.adnum=a.attnum");
+				sql.WHERE("a.attnum > 0");
+				sql.WHERE("a.attname='" + columnName.toLowerCase() + "'");
+			}
+		} else {
+			sql = new SQL();
+			sql.SELECT(
+					"t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH,t1.DATA_DEFAULT AS COLUMN_DEF");
+			sql.FROM("user_tab_columns t1");
+			sql.LEFT_OUTER_JOIN(
+					"user_col_comments t2 on t1.TABLE_NAME = t2.table_name and t1.COLUMN_NAME = t2.column_name");
+			sql.WHERE("t2.table_name = '" + tableName + "'");
+			sql.WHERE("t1.COLUMN_NAME='" + columnName + "'");
+			if (DBUtils.IsMSSQLDB(dbkey)) {
+				sql = new SQL();
+				sql.SELECT("b.name as TABLE_NAME,a.name as COLUMN_NAME,c.name as DATA_TYPE");
+				sql.SELECT("d.value as COMMENTS,a.prec as CHAR_LENGTH,a.text as COLUMN_DEF");
+				sql.FROM("dbo.syscolumns as a");
+				sql.INNER_JOIN("dbo.sysobjects as b on b.id = a.id");
+				sql.INNER_JOIN("join dbo.systypes as c on a.xtype = c.xtype and c.xusertype = c.xtype");
+				sql.LEFT_OUTER_JOIN("sys.extended_properties d on d.major_id = a.id and d.minor_id = a.colid");
+				sql.WHERE("b.name = '" + tableName + "'");
+				sql.WHERE("a.name='" + columnName + "'");
+			} else if (DBUtils.IsMySQLDB(dbkey)) {
+				sql = new SQL();
+				sql.SELECT("TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS");
+				sql.SELECT("character_maximum_length as CHAR_LENGTH,COLUMN_TYPE,COLUMN_DEFAULT AS COLUMN_DEF");
+				sql.FROM("information_schema.columns");
+				sql.WHERE("table_name='" + tableName + "'");
+				sql.WHERE("column_name='" + columnName + "'");
+			} else if (DBUtils.IsPostgreSQL(dbkey)) {
+				sql = new SQL();
+				sql.SELECT("A.attnum,A.attname AS COLUMN_NAME,T.typname AS DATA_TYPE,A.attlen AS LENGTH");
+				sql.SELECT("A.atttypmod AS CHAR_LENGTH,A.attnotnull AS NOTNULL");
+				sql.SELECT("b.description AS COMMENTS,d.adsrc AS COLUMN_DEF");
+				sql.FROM("pg_class C").LEFT_OUTER_JOIN("pg_attribute A ON A.attrelid = C.oid");
+				sql.LEFT_OUTER_JOIN("pg_description b ON A.attrelid = b.objoid AND A.attnum = b.objsubid");
+				sql.LEFT_OUTER_JOIN("pg_type T ON A.atttypid = T.oid");
+				sql.LEFT_OUTER_JOIN("pg_attrdef d ON d.adrelid = A.attrelid AND d.adnum = A.attnum");
+				sql.WHERE("C.relname = '" + tableName.toLowerCase() + "' and a.attnum > 0");
+				sql.WHERE("a.attname='" + columnName.toLowerCase() + "'");
+			}
+		}
+		Statement stm = null;
+		ResultSet rs = null;
+		try {
+			stm = conn.createStatement();
+			rs = stm.executeQuery(sql.toString());
+			if (rs.next()) {
+				res = rs.getString("COMMENTS");
+			}
+		} catch (Exception e) {
+			System.err.println(sql);
+			e.printStackTrace();
+		} finally {
+			DBUtils.CloseConn(null, stm, rs);
+		}
+		return res;
+	}
+
+	/**
 	 * 获取表的字段信息【JDBC】
 	 * 
 	 * @param dbkey
@@ -493,22 +641,34 @@ public class CommonUtil {
 	public static List<String[]> getTableColumn(String dbkey, String schemaPattern, String tableName) throws Exception {
 		List<String[]> rlist = new ArrayList<String[]>();
 		Connection conn = null;
-		Statement stm = null;
 		ResultSet rs = null;
 		try {
 			conn = DBUtils.getAppConn(dbkey);
 			DatabaseMetaData objMet = conn.getMetaData();
-			String catalog = conn.getCatalog();
+			String catalog = null;
+			if (DBUtils.IsPostgreSQL(dbkey)) {
+				catalog = conn.getCatalog();
+				schemaPattern = "public";
+			}
+			if (DBUtils.IsOracleDB(dbkey)) {
+				schemaPattern = objMet.getUserName();
+			}
+			if (DBUtils.IsMySQLDB(dbkey)) {
+				schemaPattern = conn.getCatalog();
+			}
 			if (schemaPattern != null) {
 				rs = objMet.getColumns(catalog, schemaPattern, tableName, null);
 			} else {
-				rs = objMet.getColumns(catalog, "%", tableName, null);
+				rs = objMet.getColumns(catalog, null, tableName, null);
 			}
 			while (rs.next()) {
 				String[] item = new String[6];
 				item[0] = rs.getString("COLUMN_NAME");
 				item[1] = rs.getString("TYPE_NAME");
 				item[2] = rs.getString("REMARKS");
+				if (StringUtils.isEmpty(item[2])) {
+					item[2] = getTableColumnRemarks(dbkey, conn, tableName, item[0]);
+				}
 				item[3] = rs.getString("COLUMN_SIZE");
 				if (item[3] == null || Integer.parseInt(item[3]) < 1) {
 					item[3] = "";
@@ -521,31 +681,101 @@ public class CommonUtil {
 					item[3] = "";
 				}
 				if (DBUtils.IsMySQLDB(dbkey)) {
-					item[4] = getColumnType(dbkey, schemaPattern, tableName, item[0]);
+					item[4] = getColumnType(dbkey, conn, schemaPattern, tableName, item[0]);
 				} else {
 					item[4] = "";
 				}
-				item[5] = rs.getString("COLUMN_DEF");
+				try {
+					item[5] = rs.getString("COLUMN_DEF");
+				} catch (Exception e) {
+					item[5] = getColumnDefault(dbkey, conn, tableName, item[0]);
+				}
 				rlist.add(item);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBUtils.CloseConn(conn, stm, rs);
+			DBUtils.CloseConn(conn, null, rs);
 		}
 		return rlist;
+	}
+
+	/**
+	 * 获取字段默认值
+	 * 
+	 * @param dbkey
+	 * @param conn
+	 * @param tableName
+	 * @param columnName
+	 * @return
+	 */
+	static String getColumnDefault(String dbkey, Connection conn, String tableName, String columnName) {
+		String res = "";
+		Statement stm = null;
+		ResultSet rs = null;
+		try {
+			SQL sql = new SQL();
+			sql.SELECT(
+					"t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH,t1.DATA_DEFAULT AS COLUMN_DEF");
+			sql.FROM("user_tab_columns t1");
+			sql.LEFT_OUTER_JOIN(
+					"user_col_comments t2 on t1.TABLE_NAME = t2.table_name and t1.COLUMN_NAME = t2.column_name");
+			sql.WHERE("t2.table_name = '" + tableName + "'");
+			sql.WHERE("t1.COLUMN_NAME='" + columnName + "'");
+			if (DBUtils.IsMSSQLDB(dbkey)) {
+				sql = new SQL();
+				sql.SELECT("b.name as TABLE_NAME,a.name as COLUMN_NAME,c.name as DATA_TYPE");
+				sql.SELECT("d.value as COMMENTS,a.prec as CHAR_LENGTH,a.text as COLUMN_DEF");
+				sql.FROM("dbo.syscolumns as a");
+				sql.INNER_JOIN("dbo.sysobjects as b on b.id = a.id");
+				sql.INNER_JOIN("join dbo.systypes as c on a.xtype = c.xtype and c.xusertype = c.xtype");
+				sql.LEFT_OUTER_JOIN("sys.extended_properties d on d.major_id = a.id and d.minor_id = a.colid");
+				sql.WHERE("b.name = '" + tableName + "'");
+				sql.WHERE("a.name='" + columnName + "'");
+			} else if (DBUtils.IsMySQLDB(dbkey)) {
+				sql = new SQL();
+				sql.SELECT("TABLE_NAME,COLUMN_NAME,DATA_TYPE,column_comment as COMMENTS");
+				sql.SELECT("character_maximum_length as CHAR_LENGTH,COLUMN_TYPE,COLUMN_DEFAULT AS COLUMN_DEF");
+				sql.FROM("information_schema.columns");
+				sql.WHERE("table_name='" + tableName + "'");
+				sql.WHERE("column_name='" + columnName + "'");
+			} else if (DBUtils.IsPostgreSQL(dbkey)) {
+				sql = new SQL();
+				sql.SELECT("A.attnum,A.attname AS COLUMN_NAME,T.typname AS DATA_TYPE,A.attlen AS LENGTH");
+				sql.SELECT("A.atttypmod AS CHAR_LENGTH,A.attnotnull AS NOTNULL");
+				sql.SELECT("b.description AS COMMENTS,d.adsrc AS COLUMN_DEF");
+				sql.FROM("pg_class C").LEFT_OUTER_JOIN("pg_attribute A ON A.attrelid = C.oid");
+				sql.LEFT_OUTER_JOIN("pg_description b ON A.attrelid = b.objoid AND A.attnum = b.objsubid");
+				sql.LEFT_OUTER_JOIN("pg_type T ON A.atttypid = T.oid");
+				sql.LEFT_OUTER_JOIN("pg_attrdef d ON d.adrelid = A.attrelid AND d.adnum = A.attnum");
+				sql.WHERE("C.relname = '" + tableName.toLowerCase() + "' and a.attnum > 0");
+				sql.WHERE("a.attname='" + columnName.toLowerCase() + "'");
+			}
+			stm = conn.createStatement();
+			rs = stm.executeQuery(sql.toString());
+			if (rs.next()) {
+				res = rs.getString("COLUMN_DEF");
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			DBUtils.closeConn(null, stm, rs);
+		}
+		return res;
 	}
 
 	/**
 	 * 获取字段类型
 	 * 
 	 * @param dbkey
+	 * @param conn
 	 * @param schemaPattern
 	 * @param tableName
 	 * @param columnName
 	 * @return String
 	 */
-	public static String getColumnType(String dbkey, String schemaPattern, String tableName, String columnName) {
+	static String getColumnType(String dbkey, Connection conn, String schemaPattern, String tableName,
+			String columnName) {
 		String result = "";
 		SQL sql = new SQL().SELECT("COLUMN_TYPE");
 		sql.FROM("information_schema.columns");
@@ -554,11 +784,9 @@ public class CommonUtil {
 		if (schemaPattern != null) {
 			sql.WHERE("TABLE_SCHEMA=?");
 		}
-		Connection conn = null;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 		try {
-			conn = DBUtils.getAppConn(dbkey);
 			ps = conn.prepareStatement(sql.toString());
 			ps.setString(1, tableName);
 			ps.setString(2, columnName);
@@ -572,7 +800,7 @@ public class CommonUtil {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			DBUtils.CloseConn(conn, ps, rs);
+			DBUtils.CloseConn(null, ps, rs);
 		}
 		return result;
 	}
@@ -647,7 +875,17 @@ public class CommonUtil {
 		try {
 			conn = DBUtils.getAppConn(dbkey);
 			DatabaseMetaData objMet = conn.getMetaData();
-			String catalog = conn.getCatalog();
+			String catalog = null;
+			if (DBUtils.IsPostgreSQL(dbkey)) {
+				catalog = conn.getCatalog();
+				schemaPattern = "public";
+			}
+			if (DBUtils.IsOracleDB(dbkey)) {
+				schemaPattern = objMet.getUserName();
+			}
+			if (DBUtils.IsMySQLDB(dbkey)) {
+				schemaPattern = conn.getCatalog();
+			}
 			if (schemaPattern != null) {
 				rs = objMet.getColumns(catalog, schemaPattern, tableName, columnName);
 			} else {

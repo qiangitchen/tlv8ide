@@ -39,6 +39,7 @@ public class StructureComposition {
 	/**
 	 * 生成配置文件
 	 * 
+	 * @param dbConfig
 	 * @param dbkey
 	 * @param tablename
 	 * @param tbtype
