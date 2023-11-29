@@ -11,6 +11,7 @@
     </parent>
 
     <modules>
+        <module>com.tulin.v8.core.feature</module>
         <module>com.tulin.v8.dbviewer.feature</module>
         <module>com.tulin.v8.easylook.feature</module>
         <module>com.tulin.v8.echarts.ui.feature</module>
