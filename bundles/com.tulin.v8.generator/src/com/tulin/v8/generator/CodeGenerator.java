@@ -173,7 +173,7 @@ public class CodeGenerator {
 			dir.mkdirs();
 		}
 		sqlMapGeneratorConfiguration.setTargetProject(PROJECT_PATH + RESOURCES_PATH);
-		sqlMapGeneratorConfiguration.setTargetPackage("mapper");
+		sqlMapGeneratorConfiguration.setTargetPackage("mapper." + BASE_PACKAGE);
 		context.setSqlMapGeneratorConfiguration(sqlMapGeneratorConfiguration);
 
 		JavaClientGeneratorConfiguration javaClientGeneratorConfiguration = new JavaClientGeneratorConfiguration();
