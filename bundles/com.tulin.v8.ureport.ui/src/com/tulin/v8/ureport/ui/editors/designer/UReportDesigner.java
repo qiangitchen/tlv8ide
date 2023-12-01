@@ -14,8 +14,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.forms.editor.FormPage;
 
-import com.tulin.v8.swt.chromium.Browser;
-import com.tulin.v8.swt.chromium.BrowserFunction;
+import com.equo.chromium.swt.Browser;
+import com.equo.chromium.swt.BrowserFunction;
 import com.tulin.v8.ureport.ui.editors.designer.action.BackAction;
 import com.tulin.v8.ureport.ui.editors.designer.action.CatAction;
 import com.tulin.v8.ureport.ui.editors.designer.action.CopyAction;

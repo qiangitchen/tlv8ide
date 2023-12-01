@@ -14,6 +14,8 @@ import org.eclipse.swt.widgets.Menu;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.forms.editor.FormPage;
 
+import com.equo.chromium.swt.Browser;
+import com.equo.chromium.swt.BrowserFunction;
 import com.tulin.v8.ureport.ui.editors.designer.action.BackAction;
 import com.tulin.v8.ureport.ui.editors.designer.action.CatAction;
 import com.tulin.v8.ureport.ui.editors.designer.action.CopyAction;
@@ -34,7 +36,7 @@ import com.tulin.v8.ureport.ui.editors.designer.call.SaveReportFile;
 public class UReportPreview extends FormPage {
 	UReportEditor meditor;
 
-	private com.tulin.v8.swt.chromium.Browser browser = null;
+	private Browser browser = null;
 
 	private CatAction catAction;
 	private CopyAction copyAction;
@@ -69,10 +71,10 @@ public class UReportPreview extends FormPage {
 	public void createPartControl(Composite parent) {
 		Composite composite = new Composite(parent, SWT.FILL);
 		composite.setLayout(new FillLayout());
-		browser = new com.tulin.v8.swt.chromium.Browser(composite, SWT.NONE);
+		browser = new Browser(composite, SWT.NONE);
 		browser.setJavascriptEnabled(true);
 		new LoadReport(meditor, browser, "callLoadReport");
-		new com.tulin.v8.swt.chromium.BrowserFunction(browser, "callPreviewReport") {
+		new BrowserFunction(browser, "callPreviewReport") {
 			@Override
 			public Object function(Object[] arguments) {
 				meditor.setActivePages(2);
