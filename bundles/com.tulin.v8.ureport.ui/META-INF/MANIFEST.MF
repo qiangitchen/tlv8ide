@@ -21,7 +21,7 @@ Require-Bundle: org.eclipse.jface.text,
  com.tulin.v8.xml,
  com.tulin.v8.ureport.core,
  com.tulin.v8.ureport.server,
- com.equo.chromium;bundle-version="116.0.0"
+ com.tulin.v8.swt.chromium
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: com.tulin.v8.ureport.ui
 Bundle-ActivationPolicy: lazy

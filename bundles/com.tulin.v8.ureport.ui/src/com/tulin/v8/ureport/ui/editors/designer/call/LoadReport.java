@@ -12,8 +12,8 @@ import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
 import com.bstek.ureport.console.designer.ReportDefinitionWrapper;
 import com.bstek.ureport.definition.ReportDefinition;
 import com.bstek.ureport.parser.ReportParser;
-import com.equo.chromium.swt.Browser;
-import com.equo.chromium.swt.BrowserFunction;
+import com.tulin.v8.swt.chromium.Browser;
+import com.tulin.v8.swt.chromium.BrowserFunction;
 import com.tulin.v8.ureport.ui.editors.designer.UReportEditor;
 
 public class LoadReport extends BrowserFunction {

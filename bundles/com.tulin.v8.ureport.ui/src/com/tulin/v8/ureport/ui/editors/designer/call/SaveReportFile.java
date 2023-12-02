@@ -2,8 +2,8 @@ package com.tulin.v8.ureport.ui.editors.designer.call;
 
 import java.net.URLDecoder;
 
-import com.equo.chromium.swt.Browser;
-import com.equo.chromium.swt.BrowserFunction;
+import com.tulin.v8.swt.chromium.Browser;
+import com.tulin.v8.swt.chromium.BrowserFunction;
 import com.tulin.v8.core.XMLFormator;
 import com.tulin.v8.ureport.ui.editors.designer.UReportEditor;
 
