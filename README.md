@@ -57,7 +57,6 @@ marketplace：eclipse|myeclipse-Help-Eclipse Marketplace-Search输入tlv8,点击
 3.  报表设计器不支持IE环境，所以在Windows环境下需要CEF.
 4.  Win64系统安装[CEF](https://gitee.com/qianpou/chromium-swt)，v2.2.1+不需要单独安装。
 
- _由于cef版本更新问题，放弃维护chromium-swt项目，报表设计器依赖的浏览器插件选用https://github.com/equodev/chromium，eclipse编辑本地项目之前需要先安装Equo Chromium Usage (Oss)；安装地址：https://dl.equo.dev/chromium-swt-ce/oss/p2/116_ 
 
 
 #### 展示
