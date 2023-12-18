@@ -97,9 +97,10 @@ public class DataType {
 		} else {
 			if (dataType.toLowerCase().equals("string")) {
 				datatype = "varchar(" + length + ")";
-			}
-			if (dataType.contains("varchar") && dataType.indexOf("(") < 0) {
+			} else if (dataType.contains("varchar") && dataType.indexOf("(") < 0) {
 				datatype = dataType + "(" + length + ")";
+			} else {
+				datatype = dataType;
 			}
 		}
 		return datatype;
