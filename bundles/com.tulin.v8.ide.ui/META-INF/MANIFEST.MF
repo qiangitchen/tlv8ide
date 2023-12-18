@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.tulin.v8.ide.ui;singleton:=true
-Bundle-Version: 3.0.8.qualifier
+Bundle-Version: 3.0.9.qualifier
 Export-Package: com.tulin.v8.ide.dialog,
  com.tulin.v8.ide.utils,
  com.tulin.v8.ide.wizards.utils

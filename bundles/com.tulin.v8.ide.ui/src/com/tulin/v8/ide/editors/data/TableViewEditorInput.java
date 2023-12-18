@@ -45,6 +45,8 @@ public class TableViewEditorInput implements IEditorInput {
 		super();
 		this.config = config;
 		this.schemaName = config.getSchema();
+		this.table = new Table(tableName);
+		this.table.setDbConfig(config);
 		this.name = tableName;
 		this.tbtype = tbtype;
 		this.tooltip = tableName + " [" + config.getUserId() + " : " + config.getDbName() + "]";

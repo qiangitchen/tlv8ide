@@ -11,4 +11,16 @@ public class FilePathUtils {
 		return containerPath;
 	}
 
+	public static String getRootPath(String containername) {
+		String containerPath = FilePathUtils.getContainerPath(containername);
+		String rootpath = "";
+		if (!"".equals(containerPath)) {
+			String[] dotns = containerPath.split("/");
+			for (int i = 0; i < dotns.length; i++) {
+				rootpath += "../";
+			}
+		}
+		return rootpath;
+	}
+
 }

@@ -44,21 +44,11 @@ public class WriteMobileListPage {
 	public IFile writePage() throws Exception {
 		String pageText = MobileListTemplet.getPageContext("mobileList", filename);
 		String jsText = MobileListTemplet.getJsContext("mobileList", dbkey, tableName, ID, title, text, ellip, filter);
-
 		if (filename.indexOf(".") < 0) {
 			filename = filename + ".html";
 		}
-
-		String containerPath = FilePathUtils.getContainerPath(containername);
-		String rootpath = "";
-		if (!"".equals(containerPath)) {
-			String[] dotns = containerPath.split("/");
-			for (int i = 0; i < dotns.length; i++) {
-				rootpath += "../";
-			}
-		}
+		String rootpath = FilePathUtils.getRootPath(containername);
 		pageText = pageText.replace("/" + TempletsReader.PHANTOM_PROJECT_NAME + "/", rootpath);
-
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IResource resource = root.findMember(new Path(containername));
 		if (!resource.exists() || !(resource instanceof IContainer)) {

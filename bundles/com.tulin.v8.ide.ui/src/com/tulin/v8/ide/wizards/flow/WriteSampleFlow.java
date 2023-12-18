@@ -56,21 +56,11 @@ public class WriteSampleFlow {
 		String pageText = SampleFlowTemplet.getPageContext("simpleFlow", filename, columnsText, labelsText,
 				dedatatypesText, iscreateinfo);
 		String jsText = SampleFlowTemplet.getJsContext("simpleFlow", dbkey, tableName, iscreateinfo);
-
 		if (filename.indexOf(".") < 0) {
 			filename = filename + ".html";
 		}
-
-		String containerPath = FilePathUtils.getContainerPath(containername);
-		String rootpath = "";
-		if (!"".equals(containerPath)) {
-			String[] dotns = containerPath.split("/");
-			for (int i = 0; i < dotns.length; i++) {
-				rootpath += "../";
-			}
-		}
+		String rootpath = FilePathUtils.getRootPath(containername);
 		pageText = pageText.replace("/" + TempletsReader.PHANTOM_PROJECT_NAME + "/", rootpath);
-
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IResource resource = root.findMember(new Path(containername));
 		if (!resource.exists() || !(resource instanceof IContainer)) {

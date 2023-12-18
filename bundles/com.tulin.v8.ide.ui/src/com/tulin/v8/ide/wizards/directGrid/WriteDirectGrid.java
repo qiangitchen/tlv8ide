@@ -89,21 +89,11 @@ public class WriteDirectGrid {
 		String jsText = DirectGridTemplet.getJsContext("directGrid", dbkey, tableName, subtable, subdirect,
 				columnsText.join(","), labelsText.join(","), widthsText.join(","), datatypesText.join(","),
 				subcolumnsText.join(","), sublabelsText.join(","), subwidthsText.join(","), subdatatypesText.join(","));
-
 		if (filename.indexOf(".") < 0) {
 			filename = filename + ".html";
 		}
-
-		String containerPath = FilePathUtils.getContainerPath(containername);
-		String rootpath = "";
-		if (!"".equals(containerPath)) {
-			String[] dotns = containerPath.split("/");
-			for (int i = 0; i < dotns.length; i++) {
-				rootpath += "../";
-			}
-		}
+		String rootpath = FilePathUtils.getRootPath(containername);
 		pageText = pageText.replace("/" + TempletsReader.PHANTOM_PROJECT_NAME + "/", rootpath);
-
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IResource resource = root.findMember(new Path(containername));
 		if (!resource.exists() || !(resource instanceof IContainer)) {

@@ -82,26 +82,16 @@ public class WriteListDetailPortal {
 			dedatatypesText.push(dedatatypes.get(column));
 		}
 		String ListpageText = ListDeatailPortalTemplet.getListPageContext("listDetailportal", filename);
-
 		String containerPath = FilePathUtils.getContainerPath(containername);
-
 		String ListjsText = ListDeatailPortalTemplet.getListJsContext("listDetailportal", dbkey, tableName,
 				columnsText.join(","), labelsText.join(","), widthsText.join(","), datatypesText.join(","),
 				"/" + containerPath + "/" + detailFilename);
 		String DetailpageText = ListDeatailPortalTemplet.getDetailPageContext("listDetailportal", detailFilename,
 				decolumnsText, delabelsText, dedatatypesText);
 		String DetailjsText = ListDeatailPortalTemplet.getDetailJsContext("listDetailportal", dbkey, tableName);
-
-		String rootpath = "";
-		if (!"".equals(containerPath)) {
-			String[] dotns = containerPath.split("/");
-			for (int i = 0; i < dotns.length; i++) {
-				rootpath += "../";
-			}
-		}
+		String rootpath = FilePathUtils.getRootPath(containername);
 		ListpageText = ListpageText.replace("/" + TempletsReader.PHANTOM_PROJECT_NAME + "/", rootpath);
 		DetailpageText = DetailpageText.replace("/" + TempletsReader.PHANTOM_PROJECT_NAME + "/", rootpath);
-
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IResource resource = root.findMember(new Path(containername));
 		if (!resource.exists() || !(resource instanceof IContainer)) {

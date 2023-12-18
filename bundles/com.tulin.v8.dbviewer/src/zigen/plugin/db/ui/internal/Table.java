@@ -17,20 +17,16 @@ import zigen.plugin.db.core.TablePKColumn;
 
 @SuppressWarnings({"rawtypes","unchecked"})
 public class Table extends TreeNode implements ITable {
-
 	private static final long serialVersionUID = 1L;
 
 	String remarks;
-
 	TablePKColumn[] tablePKColumns = null;
-
 	TableFKColumn[] tableFKColumns = null;
-
 	TableConstraintColumn[] tableConstraintColumns = null;
-
 	TableIDXColumn[] tableUIDXColumns = null;
-
 	TableIDXColumn[] tableNonUIDXColumns = null;
+	IDBConfig dbConfig = null;
+	DataBase dataBase = null;
 
 	public Table(String name, String remarks) {
 		super(name);
@@ -70,6 +66,30 @@ public class Table extends TreeNode implements ITable {
 
 	public void setRemarks(String remarks) {
 		this.remarks = remarks;
+	}
+	
+	@Override
+	public IDBConfig getDbConfig() {
+		if (dbConfig != null) {
+			return dbConfig;
+		}
+		return super.getDbConfig();
+	}
+
+	public void setDbConfig(IDBConfig dbConfig) {
+		this.dbConfig = dbConfig;
+	}
+
+	@Override
+	public DataBase getDataBase() {
+		if (dataBase != null) {
+			return dataBase;
+		}
+		if (dbConfig != null) {
+			dataBase = new DataBase(dbConfig);
+			return dataBase;
+		}
+		return super.getDataBase();
 	}
 
 	protected Column[] convertColumns(TreeLeaf[] leafs) {
