@@ -49,6 +49,14 @@ public class NewMapperPage extends WizardPage {
 
 	private String dbkey;
 
+	private Text keyField;
+
+	private Button isAutoincrementKey;
+
+	private Button createController;
+
+	private Button createService;
+
 	public NewMapperPage(ISelection selection) {
 		super("newMapperPage");
 		this.selection = selection;
@@ -61,15 +69,11 @@ public class NewMapperPage extends WizardPage {
 		parent.getShell().setText(Messages.getString("wizards.newmapper.title"));
 		Composite container = new Composite(parent, SWT.FILL);
 		container.setLayout(new GridLayout(2, false));
-		Label packgeNameLable = new Label(container, SWT.NONE);
-		packgeNameLable.setText(Messages.getString("wizards.newmapper.pname"));
-		packgeNameLable.setLayoutData(new GridData(SWT.NONE));
-		packgeName = new Text(container, SWT.FILL | SWT.BORDER);
+
 		GridData ttlay = new GridData(GridData.FILL_HORIZONTAL);
 		ttlay.grabExcessHorizontalSpace = true;
 		ttlay.minimumWidth = 200;
 		ttlay.heightHint = 25;
-		packgeName.setLayoutData(ttlay);
 
 		Label label = new Label(container, SWT.NONE);
 		label.setText(Messages.getString("wizards.dataselect.message.dataSource"));
@@ -81,26 +85,27 @@ public class NewMapperPage extends WizardPage {
 		final Combo dbkeyCombo = new Combo(container, SWT.DROP_DOWN);
 		dbkeyCombo.setLayoutData(ttlay);
 
-		Composite composite = new Composite(container, SWT.FILL);
-		GridData fillgrid = new GridData(GridData.FILL_BOTH);
-		fillgrid.grabExcessHorizontalSpace = true;
-		fillgrid.horizontalSpan = 2;
-		composite.setLayoutData(fillgrid);
-		composite.setLayout(new GridLayout(3, false));
+		Label labels = new Label(container, SWT.NONE);
+		labels.setText(Messages.getString("wizards.dataselect.message.Tableview"));
+		labels.setLayoutData(new GridData(SWT.NONE));
 
-		label = new Label(composite, SWT.NONE);
-		label.setText(Messages.getString("wizards.dataselect.message.Tableview"));
-		label.setLayoutData(new GridData(SWT.NONE));
+		Composite composite = new Composite(container, SWT.FILL);
+		GridData ttlays = new GridData(GridData.FILL_HORIZONTAL);
+		ttlays.grabExcessHorizontalSpace = true;
+		ttlays.minimumWidth = 200;
+		composite.setLayoutData(ttlays);
+		composite.setLayout(new GridLayout(2, false));
+
 		final Text searchText = new Text(composite, SWT.BORDER);
 		searchText.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
 		Button button = new Button(composite, SWT.PUSH);
 		button.setText(Messages.getString("wizards.dataselect.message.search"));
 		button.setLayoutData(new GridData(SWT.NONE));
 
-		tree = new Tree(composite, SWT.CHECK | SWT.BORDER | SWT.V_SCROLL);
+		tree = new Tree(container, SWT.CHECK | SWT.BORDER | SWT.V_SCROLL);
 		GridData treelay = new GridData(GridData.FILL_BOTH);
 		treelay.grabExcessHorizontalSpace = true;
-		treelay.horizontalSpan = 3;
+		treelay.horizontalSpan = 2;
 		tree.setLayoutData(treelay);
 
 		IDBConfig[] dbConfigs = DBConfigManager.getDBConfigs();
@@ -178,9 +183,42 @@ public class NewMapperPage extends WizardPage {
 			}
 		});
 
+		Label packgeNameLable = new Label(container, SWT.NONE);
+		packgeNameLable.setText(Messages.getString("wizards.newmapper.pname"));
+		packgeNameLable.setLayoutData(new GridData(SWT.NONE));
+		packgeName = new Text(container, SWT.FILL | SWT.BORDER);
+		packgeName.setLayoutData(ttlay);
+
+		Label name = new Label(container, SWT.NONE);
+		name.setText(Messages.getString("View.Action.NewMapper.keyfield"));
+		name.setLayoutData(new GridData(SWT.NONE));
+		keyField = new Text(container, SWT.FILL | SWT.BORDER);
+		keyField.setLayoutData(ttlay);
+
+		Label autocl = new Label(container, SWT.NONE);
+		autocl.setText(Messages.getString("View.Action.NewMapper.isAutoincrementKey"));
+		autocl.setLayoutData(new GridData(SWT.NONE));
+		isAutoincrementKey = new Button(container, SWT.CHECK);
+		isAutoincrementKey.setLayoutData(ttlay);
+
+		Label createSvc = new Label(container, SWT.NONE);
+		createSvc.setText(Messages.getString("View.Action.NewMapper.createService"));
+		createSvc.setLayoutData(new GridData(SWT.NONE));
+		createService = new Button(container, SWT.CHECK);
+		createService.setLayoutData(ttlay);
+		createService.setSelection(true);
+
+		Label createCtl = new Label(container, SWT.NONE);
+		createCtl.setText(Messages.getString("View.Action.NewMapper.createController"));
+		createCtl.setLayoutData(new GridData(SWT.NONE));
+		createController = new Button(container, SWT.CHECK);
+		createController.setLayoutData(ttlay);
+		createController.setSelection(true);
+
 		setControl(container);
 
 		packgeName.setText("com.tlv8");
+		keyField.setText("fid");
 
 		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ssel = (IStructuredSelection) selection;
@@ -229,9 +267,11 @@ public class NewMapperPage extends WizardPage {
 	 * @throws Exception
 	 */
 	public void doFinish() throws Exception {
-		CodeGenerator codegener = new CodeGenerator(dbkey, packgeName.getText(), "fid", projectPath);
+		CodeGenerator codegener = new CodeGenerator(dbkey, packgeName.getText(), keyField.getText(), projectPath);
 		for (String tablename : checkedItem.keySet()) {
-			codegener.genCode(tablename);
+			// codegener.genCode(tablename);
+			codegener.genCodeByCustomModelName(tablename, null, isAutoincrementKey.getSelection(),
+					createService.getSelection(), createController.getSelection());
 		}
 	}
 

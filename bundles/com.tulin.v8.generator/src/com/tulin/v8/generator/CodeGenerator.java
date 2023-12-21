@@ -133,8 +133,23 @@ public class CodeGenerator {
 	 */
 	public void genCodeByCustomModelName(String tableName, String modelName, boolean isAutoincrementKey,
 			boolean createController) {
+		genCodeByCustomModelName(tableName, modelName, isAutoincrementKey, true, createController);
+	}
+
+	/**
+	 * 
+	 * @param tableName          数据表名称
+	 * @param modelName          自定义的 Model 名称
+	 * @param isAutoincrementKey 是否自增主键
+	 * @param createService      是否创建Service
+	 * @param createController   是否创建Controller
+	 */
+	public void genCodeByCustomModelName(String tableName, String modelName, boolean isAutoincrementKey,
+			boolean createService, boolean createController) {
 		genModelAndMapper(tableName, modelName, isAutoincrementKey);
-		genService(tableName, modelName);
+		if (createService) {
+			genService(tableName, modelName);
+		}
 		if (createController) {
 			genController(tableName, modelName);
 		}

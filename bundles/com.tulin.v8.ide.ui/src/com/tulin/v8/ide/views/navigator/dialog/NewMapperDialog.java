@@ -30,6 +30,8 @@ public class NewMapperDialog extends Dialog {
 	Text modelName;
 	Button createController;
 
+	private Button createService;
+
 	public NewMapperDialog(Shell parentShell, ITable table) {
 		super(parentShell);
 		this.table = table;
@@ -76,6 +78,13 @@ public class NewMapperDialog extends Dialog {
 		modelName = new Text(composite, SWT.FILL | SWT.BORDER);
 		modelName.setLayoutData(ttlay);
 
+		Label createSvc = new Label(composite, SWT.NONE);
+		createSvc.setText(Messages.getString("View.Action.NewMapper.createService"));
+		createSvc.setLayoutData(new GridData(SWT.NONE));
+		createService = new Button(composite, SWT.CHECK);
+		createService.setLayoutData(ttlay);
+		createService.setSelection(true);
+
 		Label createCtl = new Label(composite, SWT.NONE);
 		createCtl.setText(Messages.getString("View.Action.NewMapper.createController"));
 		createCtl.setLayoutData(new GridData(SWT.NONE));
@@ -110,7 +119,8 @@ public class NewMapperDialog extends Dialog {
 				CodeGenerator codeGenerator = new CodeGenerator(table.getDataBase(), packgeName.getText(),
 						keyField.getText());
 				codeGenerator.genCodeByCustomModelName(tableName.getText(), modelName.getText(),
-						isAutoincrementKey.getSelection(), createController.getSelection());
+						isAutoincrementKey.getSelection(), createService.getSelection(),
+						createController.getSelection());
 			} catch (Exception e) {
 				Sys.printErrMsg(e);
 			}
