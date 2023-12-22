@@ -3,11 +3,15 @@ package com.tulin.v8.editors.vue.editor;
 import java.io.File;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor;
 import org.eclipse.ui.part.FileEditorInput;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
-public class VueEditor extends StructuredTextEditor {
+import com.tulin.v8.editors.vue.VuePlugin;
+
+@SuppressWarnings("restriction")
+public class VueEditor extends ExtensionBasedTextEditor {
 	public static final String ID = "com.tulin.v8.editors.vueEditor";
 
 	public VueEditor() {
@@ -36,5 +40,10 @@ public class VueEditor extends StructuredTextEditor {
 			return fle;
 		}
 
+	}
+
+	@Override
+	public Image getTitleImage() {
+		return VuePlugin.getDefault().getImage("/icons/vueico.png");
 	}
 }
