@@ -32,6 +32,11 @@ public class Table extends TreeNode implements ITable {
 		super(name);
 		this.remarks = remarks;
 	}
+	
+	public Table(String name, IDBConfig dbConfig) {
+		super(name);
+		this.dbConfig = dbConfig;
+	}
 
 	public Table(String name) {
 		super(name);

@@ -14,15 +14,10 @@ import zigen.plugin.db.core.IDBConfig;
 import zigen.plugin.db.ui.internal.ITable;
 
 public class TableViewEditorInput implements IEditorInput {
-
 	private String tooltip;
-
 	private String name;
-
 	private IDBConfig config;
-
 	private String schemaName;
-
 	private ITable table;
 
 	public TableViewEditorInput(IDBConfig config, ITable table) {
@@ -31,8 +26,7 @@ public class TableViewEditorInput implements IEditorInput {
 		this.schemaName = table.getSchemaName();
 		this.table = table;
 		this.name = table.getName();
-		this.tooltip = table.getName() + " [" + config.getUserId() + " : " + config.getDbName() + "]"; 
-
+		this.tooltip = table.getName() + " [" + config.getUserId() + " : " + config.getDbName() + "]";
 
 		StringBuffer sb = new StringBuffer();
 		sb.append("[");
@@ -82,7 +76,8 @@ public class TableViewEditorInput implements IEditorInput {
 			TableViewEditorInput input = (TableViewEditorInput) o;
 
 			if (schemaName != null && input.schemaName != null) {
-				b = (config.equals(input.config) && schemaName.equals(input.schemaName) && name.equals(input.name) && table.getClass() == input.table.getClass());
+				b = (config.equals(input.config) && schemaName.equals(input.schemaName) && name.equals(input.name)
+						&& table.getClass() == input.table.getClass());
 				return b;
 			} else if (schemaName == null && input.schemaName == null) {
 				b = (config.equals(input.config) && name.equals(input.name));
