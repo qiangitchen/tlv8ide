@@ -24,11 +24,6 @@
 			<url>https://download.eclipse.org/eclipse/updates/4.20</url>
 			<layout>p2</layout>
 		</repository>
-		<repository>
-	        <id>Equo-Chromium</id>
-	        <url>https://dl.equo.dev/chromium-swt-ce/oss/p2/116</url>
-	        <layout>p2</layout>
-	    </repository>
 	</repositories>
 
 	<build>
