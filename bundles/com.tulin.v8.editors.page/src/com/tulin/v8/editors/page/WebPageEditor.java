@@ -43,6 +43,7 @@ import org.jsoup.nodes.Element;
 import com.tulin.v8.core.FileAndString;
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.editors.css.CSSEditor;
+import com.tulin.v8.editors.html.HTMLEditor;
 import com.tulin.v8.editors.page.design.LinkHref;
 import com.tulin.v8.editors.page.design.WEBDesignEditor;
 import com.tulin.v8.editors.page.design.WEBDesignEditorInterface;
@@ -65,7 +66,7 @@ import org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor;
 @SuppressWarnings({ "unused", "restriction" })
 public class WebPageEditor extends MultiPageEditorPart implements PageEditorInterface, IResourceChangeListener {
 	public final static String ID = "com.tulin.v8.editors.page.WebPageEditor";
-	private ExtensionBasedTextEditor editor;
+	private HTMLEditor editor;
 	public WEBDesignEditorInterface _designViewer;
 	private CompilationUnitEditor jseditor;
 	public CSSEditor csseditor;
@@ -83,7 +84,7 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	 */
 	void createPage0() {
 		try {
-			editor = new ExtensionBasedTextEditor();
+			editor = new HTMLEditor();
 			int index = addPage(editor, getEditorInput());
 			setPageText(index, Messages.getString("TLEditor.pageEditor.1"));
 		} catch (PartInitException e) {
@@ -415,7 +416,7 @@ public class WebPageEditor extends MultiPageEditorPart implements PageEditorInte
 	}
 
 	@Override
-	public ExtensionBasedTextEditor getSourceEditor() {
+	public HTMLEditor getSourceEditor() {
 		return editor;
 	}
 

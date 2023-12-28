@@ -48,7 +48,7 @@ public class HeadAddResourseAction extends Action {
 	}
 
 	private void addSourse(String filename) {
-		String fielName = PageResourse.transeFile(editor.getHTMLEditor().getFile().toURI().toString(), filename.trim());
+		String fielName = PageResourse.transeFile(editor.getFile().toURI().toString(), filename.trim());
 		if (fielName.toLowerCase().endsWith(".js")) {
 //			ElementStyleImpl newnode = new ElementStyleImpl() {
 //				@Override

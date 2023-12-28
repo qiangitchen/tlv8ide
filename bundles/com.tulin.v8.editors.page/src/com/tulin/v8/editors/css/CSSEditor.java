@@ -4,11 +4,13 @@ import java.io.File;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
-@SuppressWarnings("restriction")
-public class CSSEditor extends ExtensionBasedTextEditor {
+/**
+ * 多页面编辑器中的CSS文件编辑
+ */
+public class CSSEditor extends StructuredTextEditor {
 	public CSSEditor() {
 		super();
 	}
@@ -22,7 +24,6 @@ public class CSSEditor extends ExtensionBasedTextEditor {
 
 	public File getTempFile() {
 		IFile file = ((FileEditorInput) this.getEditorInput()).getFile();
-		return new File(file.getLocation().makeAbsolute().toFile()
-				.getParentFile(), "." + file.getName());
+		return new File(file.getLocation().makeAbsolute().toFile().getParentFile(), "." + file.getName());
 	}
 }

@@ -53,7 +53,7 @@ public class AddResourseAction extends Action {
 	}
 
 	private void addSourse(String filename) {
-		String fielName = PageResourse.transeFile(editor.getHTMLEditor().getFile().toURI().toString(), filename.trim());
+		String fielName = PageResourse.transeFile(editor.getFile().toURI().toString(), filename.trim());
 		Element element = (Element) selectItem.getData();
 		if (fielName.toLowerCase().endsWith(".js")) {
 			Element newele = element.appendElement("script");
@@ -72,7 +72,7 @@ public class AddResourseAction extends Action {
 			newitem.setImage(TuLinPlugin.getIcon("brkp_obj.gif"));
 			newitem.setData(newele);
 		}
-		editor.getEditorpart().setSourcePageText(editor.getHTMLEditor().getPageDom().html());
+		editor.getEditorpart().setSourcePageText(editor.getPageDom().html());
 	}
 
 }

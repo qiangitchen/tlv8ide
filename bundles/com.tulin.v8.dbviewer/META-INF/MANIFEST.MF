@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Automatic-Module-Name: com.tulin.v8.dbviewer
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.tulin.v8.dbviewer;singleton:=true
-Bundle-Version: 1.2.6.qualifier
+Bundle-Version: 1.2.7.qualifier
 Bundle-Vendor: TuLin
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Encoding: UTF-8

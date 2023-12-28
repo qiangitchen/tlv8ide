@@ -2,6 +2,28 @@
 <?eclipse version="3.4"?>
 <plugin>
 
+	<extension
+       point="org.eclipse.core.contenttype.contentTypes">
+	    <content-type
+           base-type="org.eclipse.wst.html.core.htmlsource"
+           file-extensions="htm,html,xhtml"
+           id="com.tulin.v8.editors.html.contenttype"
+           name="HTML"
+           priority="normal">
+	    </content-type>
+   </extension>
+   
+   <extension
+       point="org.eclipse.core.contenttype.contentTypes">
+	    <content-type
+           base-type="org.eclipse.wst.css.core.csssource"
+           file-extensions="css"
+           id="com.tulin.v8.editors.css.contenttype"
+           name="CSS"
+           priority="normal">
+	    </content-type>
+   </extension>
+
    <extension
          point="org.eclipse.ui.editors">
       <editor

@@ -52,7 +52,6 @@ import org.eclipse.ui.ISharedImages;
 import org.eclipse.ui.IWorkbenchActionConstants;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.editor.FormPage;
-import org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor;
 import org.eclipse.ui.part.FileEditorInput;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -60,6 +59,7 @@ import org.jsoup.nodes.Element;
 
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.core.TuLinPlugin;
+import com.tulin.v8.editors.html.HTMLEditor;
 import com.tulin.v8.editors.page.AttributeTab;
 import com.tulin.v8.editors.page.Messages;
 import com.tulin.v8.editors.page.PageEditorInterface;
@@ -87,9 +87,9 @@ import com.tulin.v8.editors.page.server.utils.WebappManager;
  * @author 陈乾
  * @update 2021-7-25
  */
-@SuppressWarnings({ "deprecation", "restriction" })
+@SuppressWarnings({ "deprecation" })
 public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterface {
-	protected ExtensionBasedTextEditor editor;
+	protected HTMLEditor editor;
 	protected PageEditorInterface editorpart;
 
 	protected Tree tree;
@@ -119,7 +119,7 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 	private Table etable;
 	private ToolItem addparam;
 
-	public WEBDesignEditor(ExtensionBasedTextEditor editor, PageEditorInterface editorpart) {
+	public WEBDesignEditor(HTMLEditor editor, PageEditorInterface editorpart) {
 		super("webDesign", Messages.getString("TLEditor.pageEditor.3"));
 		this.editor = editor;
 		this.editorpart = editorpart;
@@ -833,11 +833,6 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 	}
 
 	@Override
-	public WEBDesignEditorInterface getHTMLEditor() {
-		return this;
-	}
-
-	@Override
 	public PageEditorInterface getEditorpart() {
 		return editorpart;
 	}
@@ -858,7 +853,7 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 	}
 
 	@Override
-	public ExtensionBasedTextEditor getSourceEditor() {
+	public HTMLEditor getSourceEditor() {
 		return editor;
 	}
 
