@@ -299,11 +299,7 @@ version(s), and exceptions or additional permissions here}.&quot;
          version="0.0.0"/>
 
    <includes
-         id="com.equo.chromium.cef.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.equo.chromium.feature"
+         id="com.tulin.v8.swt.chromium.feature"
          version="0.0.0"/>
 
    <plugin
