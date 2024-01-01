@@ -9,6 +9,8 @@ import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 /**
  * 多页面编辑器中的CSS文件编辑
+ * 
+ * @see org.eclipse.wst.sse.ui.StructuredTextEditor
  */
 public class CSSEditor extends StructuredTextEditor {
 	public CSSEditor() {
