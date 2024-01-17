@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.editors.fn.feature"
       label="TuLin Expression Editor"
-      version="1.2.1.qualifier"
+      version="3.2.0.qualifier"
       provider-name="TuLin"
       plugin="com.tulin.v8.editors.fn">
 
@@ -296,16 +296,10 @@ version(s), and exceptions or additional permissions here}.&quot;
 
    <plugin
          id="com.tulin.v8.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="com.tulin.v8.editors.fn"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>

@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.tulin.v8.editors.vue;singleton:=true
-Bundle-Version: 2.0.0.qualifier
+Bundle-Version: 3.2.0.qualifier
 Export-Package: com.tulin.v8.editors.vue.editor
 Bundle-Vendor: TuLin
 Bundle-Encoding: UTF-8
@@ -21,17 +21,6 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.ui.views,
  org.eclipse.ui.views.properties.tabbed,
  org.eclipse.ui.forms,
- org.eclipse.wst.jsdt.core,
- org.eclipse.wst.jsdt.ui,
- org.eclipse.wst.jsdt.web.core,
- org.eclipse.wst.jsdt.web.ui,
- org.eclipse.wst.sse.ui,
- org.eclipse.wst.html.core,
- org.eclipse.wst.html.ui,
- org.eclipse.wst.css.core,
- org.eclipse.wst.css.ui,
- org.eclipse.wst.css.ui,
- org.eclipse.wildwebdeveloper,
  org.eclipse.ui.genericeditor
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: com.tulin.v8.editors.vue.VuePlugin

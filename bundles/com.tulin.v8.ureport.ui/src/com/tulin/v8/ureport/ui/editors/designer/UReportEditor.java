@@ -25,12 +25,12 @@ import org.eclipse.ui.part.MultiPageEditorPart;
 import com.tulin.v8.core.Sys;
 import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.core.utils.LocalBrowser;
-import com.tulin.v8.xml.editors.XMLEditor;
 import com.tulin.v8.ureport.server.utils.UreportWebappManager;
 import com.tulin.v8.ureport.ui.Messages;
 import com.tulin.v8.ureport.ui.editors.designer.call.SWTImportExcelReportFile;
 import com.tulin.v8.ureport.ui.editors.designer.call.SWTLoadReport;
 import com.tulin.v8.ureport.ui.editors.designer.call.SWTSaveReportFile;
+import com.tulin.v8.webtools.ide.xml.editors.XMLEditor;
 
 /**
  * 报表设计器

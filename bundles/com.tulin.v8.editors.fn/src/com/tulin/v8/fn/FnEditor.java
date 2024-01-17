@@ -57,7 +57,7 @@ import org.eclipse.ui.forms.widgets.Section;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 
 import com.tulin.v8.core.TuLinPlugin;
-import com.tulin.v8.xml.editors.XMLEditor;
+import com.tulin.v8.webtools.ide.xml.editors.XMLEditor;
 
 /**
  * 表达式编辑器

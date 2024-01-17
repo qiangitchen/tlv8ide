@@ -12,9 +12,6 @@
    <feature id="com.tulin.v8.editors.page.feature">
       <category name="TLv8_Editors"/>
    </feature>
-   <feature id="com.tulin.v8.js.ui.feature">
-      <category name="TLv8_Editors"/>
-   </feature>
    <feature id="com.tulin.v8.flowdesigner.feature">
       <category name="TLv8_Flow"/>
    </feature>
@@ -50,6 +47,9 @@
    </feature>
    <feature id="com.tulin.v8.swt.chromium.feature">
       <category name="TLv8 Chromium"/>
+   </feature>
+   <feature id="com.tulin.v8.webtools.feature">
+      <category name="TLv8_IDE"/>
    </feature>
    <category-def name="TLv8_IDE" label="TLv8 IDE"/>
    <category-def name="TLv8_Editors" label="TLv8 Editors"/>

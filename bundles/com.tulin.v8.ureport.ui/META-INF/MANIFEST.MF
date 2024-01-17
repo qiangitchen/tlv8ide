@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-Vendor: TuLin
 Bundle-SymbolicName: com.tulin.v8.ureport.ui;singleton:=true
-Bundle-Version: 2.3.2.qualifier
+Bundle-Version: 3.2.0.qualifier
 Bundle-Activator: com.tulin.v8.ureport.Activator
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
@@ -18,10 +18,10 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.ui.forms,
  org.eclipse.swt,
  com.tulin.v8.core,
- com.tulin.v8.xml,
  com.tulin.v8.ureport.core,
  com.tulin.v8.ureport.server,
- com.tulin.v8.swt.chromium
+ com.tulin.v8.swt.chromium,
+ com.tulin.v8.webtools.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: com.tulin.v8.ureport.ui
 Bundle-ActivationPolicy: lazy

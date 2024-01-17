@@ -5,14 +5,14 @@ import java.io.File;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.part.FileEditorInput;
-import org.eclipse.wst.sse.ui.StructuredTextEditor;
 
 /**
  * 多页面编辑器中的CSS文件编辑
  * 
  * @see org.eclipse.wst.sse.ui.StructuredTextEditor
+ * @see com.tulin.v8.webtools.ide.css.editors.CSSEditor
  */
-public class CSSEditor extends StructuredTextEditor {
+public class CSSEditor extends com.tulin.v8.webtools.ide.css.editors.CSSEditor{// StructuredTextEditor {
 	public CSSEditor() {
 		super();
 	}

@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.echarts.ui.feature"
       label="TuLin ECharts plugin"
-      version="1.3.2.qualifier"
+      version="3.2.0.qualifier"
       provider-name="TuLin"
       plugin="com.tulin.v8.echarts.ui">
 
@@ -300,16 +300,10 @@ version(s), and exceptions or additional permissions here}.&quot;
 
    <plugin
          id="com.tulin.v8.core"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
    <plugin
          id="com.tulin.v8.echarts.ui"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>

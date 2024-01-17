@@ -62,10 +62,13 @@ class ModelManage {
 			for (int i = 0; i < items.size(); i++) {
 				Element item = (Element) items.get(i);
 				TreeItem treeitem = new TreeItem(tree, SWT.NONE);
-				treeitem.setText(item.attributeValue("id"));// name
-				treeitem.setImage(TuLinPlugin.getIcon("folder.gif"));
-				treeitem.setData(item);
-				loadChildren(item, treeitem);
+				String id = item.attributeValue("id");
+				if (id != null) {
+					treeitem.setText(id);// name
+					treeitem.setImage(TuLinPlugin.getIcon("folder.gif"));
+					treeitem.setData(item);
+					loadChildren(item, treeitem);
+				}
 			}
 		}
 	}

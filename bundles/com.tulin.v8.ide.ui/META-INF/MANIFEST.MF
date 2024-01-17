@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.tulin.v8.ide.ui;singleton:=true
-Bundle-Version: 3.0.11.qualifier
+Bundle-Version: 3.2.0.qualifier
 Export-Package: com.tulin.v8.ide.dialog,
  com.tulin.v8.ide.utils,
  com.tulin.v8.ide.wizards.utils
@@ -27,8 +27,6 @@ Require-Bundle: org.eclipse.jface,
  org.eclipse.ui.navigator.resources,
  org.eclipse.text,
  org.eclipse.team.core,
- org.eclipse.wst.sse.ui,
- org.eclipse.gef;resolution:=optional,
  com.tulin.v8.core,
  com.tulin.v8.dbviewer,
  com.tulin.v8.editors.fn,

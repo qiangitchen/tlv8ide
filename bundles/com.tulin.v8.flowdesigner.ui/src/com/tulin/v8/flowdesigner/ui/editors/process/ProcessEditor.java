@@ -9,15 +9,14 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.MultiPageEditorPart;
-import org.eclipse.wst.jsdt.internal.ui.javaeditor.CompilationUnitEditor;
 
 import com.tulin.v8.flowdesigner.ui.editors.Messages;
+import com.tulin.v8.webtools.ide.js.editors.JavaScriptEditor;
 
-@SuppressWarnings("restriction")
 public class ProcessEditor extends MultiPageEditorPart implements IResourceChangeListener {// IStatusChangeListener
 	public static String ID = "com.tulin.v8.flowdesigner.ui.editors.process.ProcessEditor";
 
-	private CompilationUnitEditor sourceEditor;
+	private JavaScriptEditor sourceEditor;
 	private FlowDesignEditor designEditor;
 
 //	private ISelection selection;
@@ -37,7 +36,7 @@ public class ProcessEditor extends MultiPageEditorPart implements IResourceChang
 
 	private void createPage0() {
 		if (getEditorInput() instanceof IFileEditorInput) {
-			sourceEditor = new CompilationUnitEditor();
+			sourceEditor = new JavaScriptEditor();
 			try {
 				int deindex = addPage(sourceEditor, getEditorInput());
 				setPageText(deindex, Messages.getString("TLEditor.pageEditor.1"));

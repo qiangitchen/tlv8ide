@@ -51,7 +51,7 @@ import org.w3c.dom.Element;
 
 import com.tulin.v8.core.TuLinPlugin;
 import com.tulin.v8.function.editors.dialog.SelectFunctionDialog;
-import com.tulin.v8.xml.editors.XMLEditor;
+import com.tulin.v8.webtools.ide.xml.editors.XMLEditor;
 
 /**
  * 功能树（配置）编辑器

@@ -15,7 +15,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.forms.editor.FormEditor;
 
-import com.tulin.v8.xml.editors.XMLEditor;
+import com.tulin.v8.webtools.ide.xml.editors.XMLEditor;
 
 public class EchartsEditor extends FormEditor implements IResourceChangeListener {
 	public static String ID = "com.tulin.v8.echarts.ui.editors.echt.EchartsEditor";

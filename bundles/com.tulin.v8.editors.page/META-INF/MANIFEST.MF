@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.tulin.v8.editors.page;singleton:=true
-Bundle-Version: 3.0.11.qualifier
+Bundle-Version: 3.2.0.qualifier
 Bundle-Activator: com.tulin.v8.editors.page.Activator
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
@@ -16,7 +16,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.ide,
  org.eclipse.ui.views,
  org.eclipse.jdt.core,
- org.eclipse.gef;resolution:=optional,
  org.eclipse.jdt.ui,
  org.eclipse.debug.core,
  org.eclipse.debug.ui,
@@ -36,19 +35,10 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.views,
  org.eclipse.ui.views.properties.tabbed,
  org.eclipse.ui.forms,
- org.eclipse.wst.jsdt.core,
- org.eclipse.wst.jsdt.ui,
- org.eclipse.wst.jsdt.web.core,
- org.eclipse.wst.jsdt.web.ui,
- org.eclipse.wst.sse.ui,
- org.eclipse.wst.html.core,
- org.eclipse.wst.html.ui,
- org.eclipse.wst.css.core,
- org.eclipse.wst.css.ui,
- org.eclipse.wst.css.ui,
  com.tulin.v8.core,
  com.tulin.v8.editors.page.server,
- org.eclipse.ui.genericeditor
+ org.eclipse.ui.genericeditor,
+ com.tulin.v8.webtools.ide
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: com.tulin.v8.editors.page
 Bundle-ActivationPolicy: lazy

@@ -7,7 +7,7 @@
     <parent>
         <groupId>com.tulin.v8.ide</groupId>
         <artifactId>com.tulin.v8.ide.root</artifactId>
-        <version>3.1.0-SNAPSHOT</version>
+        <version>3.2.0-SNAPSHOT</version>
     </parent>
 
     <modules>
@@ -21,7 +21,6 @@
 		<module>com.tulin.v8.editors.page.feature</module>
 		<module>com.tulin.v8.flowdesigner.feature</module>
 		<module>com.tulin.v8.ide.feature</module>
-		<module>com.tulin.v8.js.ui.feature</module>
 		<module>com.tulin.v8.tomcat.feature</module>
 		<module>com.tulin.v8.ureport.feature</module>
 		<module>com.tulin.v8.markdown.feature</module>

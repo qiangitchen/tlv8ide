@@ -4,8 +4,8 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.gef.DefaultEditDomain;
-import org.eclipse.gef.EditPart;
+//import org.eclipse.gef.DefaultEditDomain;
+//import org.eclipse.gef.EditPart;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.internal.ui.packageview.PackageFragmentRootContainer;
@@ -128,11 +128,12 @@ public class TuLinPlugin extends AbstractUIPlugin {
 						} else if (element instanceof IJavaElement) {
 							IJavaProject jProject = ((IJavaElement) element).getJavaProject();
 							project = jProject.getProject();
-						} else if (element instanceof EditPart) {
-							IFile file = (IFile) ((DefaultEditDomain) ((EditPart) element).getViewer().getEditDomain())
-									.getEditorPart().getEditorInput().getAdapter(IFile.class);
-							project = file.getProject();
-						}
+						} /*
+							 * else if (element instanceof EditPart) { IFile file = (IFile)
+							 * ((DefaultEditDomain) ((EditPart) element).getViewer().getEditDomain())
+							 * .getEditorPart().getEditorInput().getAdapter(IFile.class); project =
+							 * file.getProject(); }
+							 */
 					}
 				}
 				if (project == null) {
