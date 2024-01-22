@@ -10,6 +10,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.internal.ui.packageview.PackageFragmentRootContainer;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.text.TextSelection;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.swt.graphics.Image;
@@ -21,6 +22,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.internal.Workbench;
+import org.eclipse.ui.part.MultiPageEditorPart;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -128,12 +130,30 @@ public class TuLinPlugin extends AbstractUIPlugin {
 						} else if (element instanceof IJavaElement) {
 							IJavaProject jProject = ((IJavaElement) element).getJavaProject();
 							project = jProject.getProject();
+						} else if (element instanceof MultiPageEditorPart) {
+							MultiPageEditorPart meditor = (MultiPageEditorPart) element;
+							if (meditor.getSelectedPage() instanceof IEditorPart) {
+								IEditorPart part = (IEditorPart) meditor.getSelectedPage();
+								Object object = part.getEditorInput().getAdapter(IFile.class);
+								if (object != null) {
+									project = ((IFile) object).getProject();
+								}
+							}
+						} else if (element instanceof IEditorPart) {
+							IEditorPart part = (IEditorPart) element;
+							Object object = part.getEditorInput().getAdapter(IFile.class);
+							if (object != null) {
+								project = ((IFile) object).getProject();
+							}
 						} /*
 							 * else if (element instanceof EditPart) { IFile file = (IFile)
 							 * ((DefaultEditDomain) ((EditPart) element).getViewer().getEditDomain())
 							 * .getEditorPart().getEditorInput().getAdapter(IFile.class); project =
 							 * file.getProject(); }
 							 */
+					} else if (selection instanceof TextSelection) {
+						TextSelection sel = (TextSelection) selection;
+						System.out.println(sel);
 					}
 				}
 				if (project == null) {
@@ -243,5 +263,42 @@ public class TuLinPlugin extends AbstractUIPlugin {
 	 */
 	public static String getProjectWebFolderPath(IProject project) {
 		return getProjectWebFolder(project).getLocation().toFile().getAbsolutePath();
+	}
+
+	/**
+	 * 获取项目字符编码
+	 * 
+	 * @param project
+	 * @return String
+	 */
+	public static String getProjectCharset(IProject project) {
+		try {
+			String charset = project.getDefaultCharset();
+			if (charset.equals("MS932")) {
+				charset = "Windows-31J";
+			}
+			return charset;
+		} catch (Exception ex) {
+		}
+		return null;
+	}
+
+	/**
+	 * 获取IFile所属项目的字符编码
+	 * 
+	 * @param ifile
+	 * @return String
+	 */
+	public static String getIFileCharset(IFile ifile) {
+		return getProjectCharset(ifile.getProject());
+	}
+
+	/**
+	 * 获取当前项目的字符编码
+	 * 
+	 * @return String
+	 */
+	public static String getCurrentProjectCharset() {
+		return getProjectCharset(getCurrentProject());
 	}
 }

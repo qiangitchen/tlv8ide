@@ -11,11 +11,49 @@ import java.io.InputStreamReader;
 import java.io.StringReader;
 import java.io.StringWriter;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
+
 public class FileAndString {
+
+	/**
+	 * IFile to String
+	 * 
+	 * @param ifile
+	 * @return String
+	 * @throws CoreException
+	 */
+	public static String IFileToString(IFile ifile) throws CoreException {
+		String charset = null;
+		try {
+			charset = ifile.getCharset();
+		} catch (Exception e) {
+			charset = TuLinPlugin.getIFileCharset(ifile);
+		}
+		return FileToString(ifile.getContents(), charset);
+	}
+
+	/**
+	 * InputStream to String
+	 * 
+	 * @param input
+	 * @return String
+	 */
 	public static String FileToString(InputStream input) {
+		return FileToString(input, TuLinPlugin.getCurrentProjectCharset());
+	}
+
+	/**
+	 * InputStream to String
+	 * 
+	 * @param input
+	 * @param encoding
+	 * @return String
+	 */
+	public static String FileToString(InputStream input, String encoding) {
 		String fileStr = "";
 		try {
-			BufferedReader Strreader = new BufferedReader(new InputStreamReader(input, "UTF-8"));
+			BufferedReader Strreader = new BufferedReader(new InputStreamReader(input, encoding));
 			StringBuffer fileText = new StringBuffer();
 			while ((fileStr = Strreader.readLine()) != null) {
 				fileText.append(fileStr + "\n");
@@ -28,20 +66,7 @@ public class FileAndString {
 	}
 
 	public static String FileToString(File file) {
-		String fileStr = "";
-		try {
-			FileInputStream fileiptstream = new FileInputStream(file);
-			BufferedReader Strreader = new BufferedReader(new InputStreamReader(fileiptstream, "UTF-8"));
-			StringBuffer fileText = new StringBuffer();
-			while ((fileStr = Strreader.readLine()) != null) {
-				fileText.append(fileStr + "\n");
-			}
-			fileiptstream.close();
-			fileStr = fileText.toString().trim();
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		return fileStr;
+		return file2String(file, "UTF-8");
 	}
 
 	public static StringBuffer FileToStringBuffer(File file) {

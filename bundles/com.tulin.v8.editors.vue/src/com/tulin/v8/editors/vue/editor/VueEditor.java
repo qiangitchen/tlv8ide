@@ -1,45 +1,63 @@
 package com.tulin.v8.editors.vue.editor;
 
-import java.io.File;
-
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.IFileEditorInput;
-import org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor;
-import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 
 import com.tulin.v8.editors.vue.VuePlugin;
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
+import com.tulin.v8.webtools.ide.html.editors.HTMLSourceEditor;
 
-@SuppressWarnings("restriction")
-public class VueEditor extends ExtensionBasedTextEditor {
+/**
+ * VUE文件编辑器
+ * 
+ * @author chenqian
+ * @see org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor
+ * @see com.tulin.v8.webtools.ide.html.editors.HTMLSourceEditor
+ */
+public class VueEditor extends HTMLSourceEditor {// ExtensionBasedTextEditor {
 	public static final String ID = "com.tulin.v8.editors.vueEditor";
 
 	public VueEditor() {
 		super();
+		configuration = new VUEConfiguration(this, WebToolsPlugin.getDefault().getColorProvider());
+		setSourceViewerConfiguration(configuration);
 	}
 
-	public boolean isFileEditorInput() {
-		if (getEditorInput() instanceof IFileEditorInput) {
-			return true;
-		}
-		return false;
+	@Override
+	protected void addContextMenuActions(IMenuManager menu) {
+		menu.appendToGroup(ITextEditorActionConstants.GROUP_EDIT, new MenuManager(
+				WebToolsPlugin.getResourceString("SourceEditor.Menu.Source"), WebToolsPlugin.GROUP_SOURCE));
+		addAction(menu, WebToolsPlugin.GROUP_SOURCE, ACTION_COMMENT);
+		addAction(menu, WebToolsPlugin.GROUP_SOURCE, ACTION_FORMAT);
 	}
 
-	public File getTempFile() {
-		IFile file = ((FileEditorInput) this.getEditorInput()).getFile();
-		return new File(file.getLocation().makeAbsolute().toFile().getParentFile(), "." + file.getName());
-	}
+	@Override
+	protected void doValidate() {
+		new Job("VUE Validation") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				try {
+					IFileEditorInput input = (IFileEditorInput) getEditorInput();
+					IFile file = input.getFile();
+					file.deleteMarkers(IMarker.PROBLEM, false, 0);
 
-	public File getFile() {
-		if (this.getEditorInput() instanceof FileEditorInput) {
-			FileEditorInput fileeditorinput = (FileEditorInput) this.getEditorInput();
-			IFile file = fileeditorinput.getFile();
-			return file.getLocation().makeAbsolute().toFile();
-		} else {
-			File fle = new File(this.getEditorInput().getToolTipText());
-			return fle;
-		}
+					new ValidateVueCode(input.getFile()).doValidate();
+				} catch (Exception ex) {
+					// WebToolsPlugin.logException(ex);
+				}
 
+				return Status.OK_STATUS;
+			}
+		}.schedule();
 	}
 
 	@Override
