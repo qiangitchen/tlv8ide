@@ -1,12 +1,14 @@
 package com.tulin.v8.editors.vue.editor;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IMarker;
 
 import com.tulin.v8.core.FileAndString;
+import com.tulin.v8.webtools.ide.html.HTMLUtil;
 
+/**
+ * 验证VUE文件内容
+ */
 public class ValidateVueCode {
 	private IFile file;
 
@@ -16,32 +18,28 @@ public class ValidateVueCode {
 
 	public void doValidate() {
 		try {
-			String code = FileAndString.IFileToString(file);
-			// 构建命令行
-			String[] command = { "node", "-e", "require('eslint').lintText('" + code + "')" };
+			String content = FileAndString.IFileToString(file);
 
-			// 执行命令行
-			ProcessBuilder processBuilder = new ProcessBuilder(command);
-			Process process = processBuilder.start();
-
-			// 读取命令行输出
-			BufferedReader reader = new BufferedReader(new InputStreamReader(process.getInputStream()));
-			String line;
-			StringBuilder output = new StringBuilder();
-			while ((line = reader.readLine()) != null) {
-				output.append(line).append("\n");
+			// 检查是否存在<template>标签
+			if (!content.contains("<template>")) {
+				System.err.println("Vue文件缺少<template>标签");
+				HTMLUtil.addMarker(file, IMarker.SEVERITY_ERROR, 1, "Vue文件缺少<template>标签");
 			}
 
-			// 等待命令行执行完成
-			int exitCode = process.waitFor();
-
-			// 输出验证结果
-			if (exitCode == 0) {
-				System.out.println("代码验证通过！");
-			} else {
-				System.err.println("代码验证失败：");
-				System.err.println(output.toString());
+			// 检查是否存在<script>标签
+			if (!content.contains("<script>")) {
+				System.err.println("Vue文件缺少<script>标签");
+				HTMLUtil.addMarker(file, IMarker.SEVERITY_WARNING, 2, "Vue文件缺少<script>标签");
 			}
+
+			// 使用正则表达式检查其他语法和规范
+			// 例如，检查是否存在特定的Vue指令或标签
+//			Pattern pattern = Pattern.compile("<[a-zA-Z]+");
+//			Matcher matcher = pattern.matcher(content);
+//			while (matcher.find()) {
+//				String tag = matcher.group();
+//				System.out.println("找到标签：" + tag);
+//			}
 		} catch (Exception e) {
 		}
 	}

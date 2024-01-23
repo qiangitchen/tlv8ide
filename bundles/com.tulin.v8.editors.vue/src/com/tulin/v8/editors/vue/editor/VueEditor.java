@@ -9,7 +9,10 @@ import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
+import org.eclipse.ui.IStorageEditorInput;
+import org.eclipse.ui.texteditor.IDocumentProvider;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 
 import com.tulin.v8.editors.vue.VuePlugin;
@@ -58,6 +61,17 @@ public class VueEditor extends HTMLSourceEditor {// ExtensionBasedTextEditor {
 				return Status.OK_STATUS;
 			}
 		}.schedule();
+	}
+
+	@Override
+	protected IDocumentProvider createDocumentProvider(IEditorInput input) {
+		if (input instanceof IFileEditorInput) {
+			return new VUETextDocumentProvider();
+		} else if (input instanceof IStorageEditorInput) {
+			return new VUEFileDocumentProvider();
+		} else {
+			return new VUETextDocumentProvider();
+		}
 	}
 
 	@Override

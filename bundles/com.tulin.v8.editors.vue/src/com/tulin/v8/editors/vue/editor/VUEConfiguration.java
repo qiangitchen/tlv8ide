@@ -2,8 +2,10 @@ package com.tulin.v8.editors.vue.editor;
 
 import org.eclipse.jface.text.presentation.IPresentationReconciler;
 import org.eclipse.jface.text.presentation.PresentationReconciler;
+import org.eclipse.jface.text.rules.RuleBasedScanner;
 import org.eclipse.jface.text.source.ISourceViewer;
 
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
 import com.tulin.v8.webtools.ide.assist.HTMLAssistProcessor;
 import com.tulin.v8.webtools.ide.color.ColorProvider;
 import com.tulin.v8.webtools.ide.html.editors.HTMLConfiguration;
@@ -37,5 +39,23 @@ public class VUEConfiguration extends HTMLConfiguration {
 		}
 		return reconciler;
 	}
+
+	@Override
+	protected RuleBasedScanner getJavaScriptScanner() {
+		if (javaScriptScanner == null) {
+			javaScriptScanner = new VueInnerJavaScriptScanner(colorProvider);
+			javaScriptScanner.setDefaultReturnToken(colorProvider.getToken(WebToolsPlugin.PREF_COLOR_FG));
+		}
+		return javaScriptScanner;
+	}
+
+//	@Override
+//	protected RuleBasedScanner getCSSScanner() {
+//		if (cssScanner == null) {
+//			cssScanner = new VueInnerCSSScanner(colorProvider);
+//			cssScanner.setDefaultReturnToken(colorProvider.getToken(WebToolsPlugin.PREF_COLOR_FG));
+//		}
+//		return cssScanner;
+//	}
 
 }
