@@ -361,6 +361,10 @@ version(s), and exceptions or additional permissions here}.&quot;
          id="com.tulin.v8.webtools.feature"
          version="0.0.0"/>
 
+   <includes
+         id="tern.tulin.v8.webtools.feature"
+         version="0.0.0"/>
+
    <plugin
          id="com.tulin.v8.core"
          version="0.0.0"/>
