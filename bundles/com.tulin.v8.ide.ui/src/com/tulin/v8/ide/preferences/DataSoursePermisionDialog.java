@@ -261,6 +261,7 @@ public class DataSoursePermisionDialog extends Dialog {
 				}
 				MessageDialog.openError(getShell(), Messages.getString("preferencePages.DataSousePermission.acde3"),
 						ermsg);
+				err.printStackTrace();
 				return;
 			}
 			if (sur) {

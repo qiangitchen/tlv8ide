@@ -7,6 +7,7 @@ import java.util.Properties;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.ResourcesPlugin;
+import org.eclipse.core.runtime.IPath;
 import org.springframework.beans.factory.config.YamlPropertiesFactoryBean;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -95,7 +96,10 @@ public class AppConfig {
 			if (dsource != null) {
 				return dsource.getLocation().toString();
 			}
-			return project.getLocation().toString();
+			IPath path = project.getLocation();
+			if (path != null) {
+				return path.toString();
+			}
 		}
 		return ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
 	}

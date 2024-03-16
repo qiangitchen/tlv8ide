@@ -194,6 +194,7 @@ public class DataSousePermissionPage extends FieldEditorPreferencePage implement
 					} catch (Exception es) {
 						MessageDialog.openError(getShell(),
 								Messages.getString("preferencePages.DataSousePermission.12"), es.toString());
+						es.printStackTrace();
 					}
 				}
 			}

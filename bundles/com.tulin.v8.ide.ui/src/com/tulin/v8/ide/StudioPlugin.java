@@ -104,8 +104,11 @@ public class StudioPlugin extends AbstractUIPlugin {
 
 	public String getConfigFile() {
 		AbstractUIPlugin plugin = (AbstractUIPlugin) Platform.getPlugin("com.tulin.v8.tomcat");
-		IPreferenceStore pref = plugin.getPreferenceStore();
-		return pref.getString(TOMCAT_PREF_CONFIGFILE_KEY);
+		if (plugin != null) {
+			IPreferenceStore pref = plugin.getPreferenceStore();
+			return pref.getString(TOMCAT_PREF_CONFIGFILE_KEY);
+		}
+		return null;
 	}
 
 	/*

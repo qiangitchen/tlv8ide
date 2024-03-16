@@ -14,13 +14,25 @@ import org.dom4j.io.XMLWriter;
 
 import com.tulin.v8.core.FileAndString;
 import com.tulin.v8.core.Dao.SqlMap.GetSqlMapByKey;
+import com.tulin.v8.core.config.AppConfig;
 import com.tulin.v8.ide.utils.DocServerData;
 import com.tulin.v8.ide.utils.GetTomcatconfig;
 import com.tulin.v8.ide.utils.StudioConfig;
 
 @SuppressWarnings({ "deprecation", "rawtypes" })
 public class DataSousePermission {
-	// 写入数据源配置
+
+	/**
+	 * 写入数据源配置
+	 * 
+	 * @param name
+	 * @param driverStr
+	 * @param url
+	 * @param userName
+	 * @param password
+	 * @return
+	 * @throws Exception
+	 */
 	public static boolean WritePer(String name, String driverStr, String url, String userName, String password)
 			throws Exception {
 		boolean suc = true;
@@ -54,7 +66,14 @@ public class DataSousePermission {
 		return suc;
 	}
 
-	// 写入文档服务数据源配置-TOMCAT
+	/**
+	 * 写入文档服务数据源配置-TOMCAT
+	 * 
+	 * @param driverStr
+	 * @param url
+	 * @param userName
+	 * @param password
+	 */
 	public static void WriteDocServerDatasourse(String driverStr, String url, String userName, String password) {
 		try {
 			File file = new File(GetTomcatconfig.getConfigFilePath());
@@ -101,7 +120,15 @@ public class DataSousePermission {
 		}
 	}
 
-	// 写入业务服务数据源配置-TOMCAT
+	/**
+	 * 写入业务服务数据源配置-TOMCAT
+	 * 
+	 * @param name
+	 * @param driverStr
+	 * @param url
+	 * @param userName
+	 * @param password
+	 */
 	public static void WriteBIZServerDatasourse(String name, String driverStr, String url, String userName,
 			String password) {
 		try {
@@ -166,10 +193,19 @@ public class DataSousePermission {
 			}
 			// Sys.printMsg(doc.asXML());
 		} catch (Exception e1) {
-			//e1.printStackTrace();
+			// e1.printStackTrace();
 		}
 	}
 
+	/**
+	 * 将配置信息写入sqlMap文件
+	 * 
+	 * @param name
+	 * @param driverStr
+	 * @param url
+	 * @param userName
+	 * @param password
+	 */
 	public static void WriteToSqlMap(String name, String driverStr, String url, String userName, String password) {
 		Map<String, Map<String, String>> rm = GetSqlMapByKey.getKeyDbDriverMap();
 		if (rm.get(name) == null) {
@@ -179,14 +215,31 @@ public class DataSousePermission {
 		}
 	}
 
+	/**
+	 * 将配置信息写入新的sqlMap文件
+	 * 
+	 * @param rm
+	 * @param name
+	 * @param driverStr
+	 * @param url
+	 * @param userName
+	 * @param password
+	 */
 	public static void WriteNewSqlMapFile(Map<String, Map<String, String>> rm, String name, String driverStr,
 			String url, String userName, String password) {
 		String vstr = "select 1";
 		if (driverStr.toLowerCase().contains("oracle")) {
 			vstr = "select 1 from dual";
 		}
-		String SqlMapfilePath = rm.get("system").get("filePath");
-		SqlMapfilePath = SqlMapfilePath.replace("system.mybatis.xml", name + ".mybatis.xml");
+		String SqlMapfilePath = "";
+		Map<String, String> system = rm.get("system");
+		if (system != null) {
+			SqlMapfilePath = system.get("filePath");
+			SqlMapfilePath = SqlMapfilePath.replace("system.mybatis.xml", name + ".mybatis.xml");
+		} else {
+			String filePathDir = AppConfig.getResourcesPath();
+			SqlMapfilePath = filePathDir + File.separator + name + ".mybatis.xml";
+		}
 		StringBuffer strb = new StringBuffer();
 		strb.append("<?xml version=\"1.0\" encoding=\"UTF-8\" ?>\n");
 		strb.append("\n");
@@ -242,6 +295,16 @@ public class DataSousePermission {
 		}
 	}
 
+	/**
+	 * 将配置信息写入已有的sqlMap文件
+	 * 
+	 * @param rm
+	 * @param name
+	 * @param driverStr
+	 * @param url
+	 * @param userName
+	 * @param password
+	 */
 	public static void WriteSqlMapFile(Map<String, Map<String, String>> rm, String name, String driverStr, String url,
 			String userName, String password) {
 		String SqlMapfilePath = rm.get(name).get("filePath");
@@ -306,59 +369,82 @@ public class DataSousePermission {
 		}
 	}
 
-	// 刪除配置文件
+	/**
+	 * 刪除配置文件
+	 * 
+	 * @param name
+	 * @throws Exception
+	 */
 	public static void deleteSqlMapFile(String name) throws Exception {
 		Map<String, Map<String, String>> rm = GetSqlMapByKey.getKeyDbDriverMap();
-		String SqlMapfilePath = rm.get(name).get("filePath");
+		Map<String, String> data = rm.get(name);
+		String SqlMapfilePath = "";
+		if (data != null) {
+			SqlMapfilePath = data.get("filePath");
+		} else {
+			String filePathDir = AppConfig.getResourcesPath();
+			SqlMapfilePath = filePathDir + File.separator + name + ".mybatis.xml";
+		}
 		File f = new File(SqlMapfilePath);
 		f.delete();
-		String srcFilePath = SqlMapfilePath.substring(0, SqlMapfilePath.indexOf(StudioConfig.PROJECT_WEB_FOLDER));
-		String[] sts = SqlMapfilePath.split("/");
-		srcFilePath += "src/" + sts[sts.length - 1];
-		File fs = new File(srcFilePath);
-		fs.delete();
+		if (SqlMapfilePath.indexOf(StudioConfig.PROJECT_WEB_FOLDER) > 0) {
+			String srcFilePath = SqlMapfilePath.substring(0, SqlMapfilePath.indexOf(StudioConfig.PROJECT_WEB_FOLDER));
+			String[] sts = SqlMapfilePath.split("/");
+			srcFilePath += "src/" + sts[sts.length - 1];
+			File fs = new File(srcFilePath);
+			fs.delete();
+		}
 	}
 
-	// 刪除业务服务数据源配置-TOMCAT
+	/**
+	 * 刪除业务服务数据源配置-TOMCAT
+	 * 
+	 * @param name
+	 */
 	public static void DeleteBIZServerDatasourse(String name) {
 		try {
-			File file = new File(GetTomcatconfig.getConfigFilePath());
-			String fileStr = FileAndString.FileToString(file);
-			// Sys.printMsg(fileStr);
-			Document doc = DocumentHelper.parseText(fileStr);
-			// Sys.packErrMsg(doc.asXML());
-			Element root = doc.getRootElement();
-			root = root.element("Service");
-			root = root.element("Engine");
-			root = root.element("Host");
-			List Itorate = root.elements();
-			for (int i = 0; i < Itorate.size(); i++) {
-				String Context = ((Element) Itorate.get(i)).getName();
-				Element transactionManager = (Element) Itorate.get(i);
-				if (Context.equals("Context")
-						&& transactionManager.attributeValue("docBase").endsWith(StudioConfig.PROJECT_PWEB_FOLDER)) {
-					List sourses = transactionManager.elements("Resource");
-					for (int j = 0; j < sourses.size(); j++) {
-						Element dataSource = (Element) sourses.get(j);
-						if (name.equals(dataSource.attributeValue("name"))) {
-							transactionManager.remove(dataSource);
+			String configFilePath = GetTomcatconfig.getConfigFilePath();
+			if (configFilePath != null) {
+				File file = new File(configFilePath);
+				if (file.exists()) {
+					String fileStr = FileAndString.FileToString(file);
+					// Sys.printMsg(fileStr);
+					Document doc = DocumentHelper.parseText(fileStr);
+					// Sys.packErrMsg(doc.asXML());
+					Element root = doc.getRootElement();
+					root = root.element("Service");
+					root = root.element("Engine");
+					root = root.element("Host");
+					List Itorate = root.elements();
+					for (int i = 0; i < Itorate.size(); i++) {
+						String Context = ((Element) Itorate.get(i)).getName();
+						Element transactionManager = (Element) Itorate.get(i);
+						if (Context.equals("Context") && transactionManager.attributeValue("docBase")
+								.endsWith(StudioConfig.PROJECT_PWEB_FOLDER)) {
+							List sourses = transactionManager.elements("Resource");
+							for (int j = 0; j < sourses.size(); j++) {
+								Element dataSource = (Element) sourses.get(j);
+								if (name.equals(dataSource.attributeValue("name"))) {
+									transactionManager.remove(dataSource);
+								}
+							}
 						}
 					}
+					OutputFormat format = OutputFormat.createPrettyPrint();
+					format.setEncoding("UTF-8");
+					format.setIndent(true);
+					format.setNewLineAfterNTags(1);
+					format.setNewlines(true);
+					try {
+						XMLWriter writer = new XMLWriter(new FileOutputStream(file), format);
+						writer.write(doc);
+						writer.close();
+					} catch (Exception errr) {
+						errr.printStackTrace();
+					}
+					// Sys.printMsg(doc.asXML());
 				}
 			}
-			OutputFormat format = OutputFormat.createPrettyPrint();
-			format.setEncoding("UTF-8");
-			format.setIndent(true);
-			format.setNewLineAfterNTags(1);
-			format.setNewlines(true);
-			try {
-				XMLWriter writer = new XMLWriter(new FileOutputStream(file), format);
-				writer.write(doc);
-				writer.close();
-			} catch (Exception errr) {
-				errr.printStackTrace();
-			}
-			// Sys.printMsg(doc.asXML());
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
