@@ -90,7 +90,7 @@ Mapper、Service、Controller代码一键生成
 - [Eclipse](https://www.eclipse.org/)
 - [zigen](http://www.ne.jp/asahi/zigen/home/plugin/dbviewer/about_en.html)
 - [Sysdeo Tomcat Launcher Plugin](http://www.eclipsetotale.com/tomcatPlugin.html)
-- [ureport](https://gitee.com/youseries/ureport)
+- [ureport](https://gitee.com/youseries_admin/ureport)
 
 
 
