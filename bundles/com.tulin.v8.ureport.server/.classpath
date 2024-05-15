@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
 	<classpathentry exported="true" kind="lib" path="lib/velocity-1.7.jar"/>
-	<classpathentry exported="true" kind="lib" path="lib/ureport2-console-2.3.1-tlv8.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/spring-aop-4.1.2.RELEASE.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/spring-context-4.1.2.RELEASE.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/spring-expression-4.1.2.RELEASE.jar"/>

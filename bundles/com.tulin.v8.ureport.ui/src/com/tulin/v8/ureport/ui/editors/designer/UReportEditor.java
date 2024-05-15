@@ -22,14 +22,12 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 
-import com.tulin.v8.core.Sys;
-import com.tulin.v8.core.utils.CommonUtil;
 import com.tulin.v8.core.utils.LocalBrowser;
 import com.tulin.v8.ureport.server.utils.UreportWebappManager;
 import com.tulin.v8.ureport.ui.Messages;
-import com.tulin.v8.ureport.ui.editors.designer.call.SWTImportExcelReportFile;
-import com.tulin.v8.ureport.ui.editors.designer.call.SWTLoadReport;
-import com.tulin.v8.ureport.ui.editors.designer.call.SWTSaveReportFile;
+import com.tulin.v8.ureport.ui.editors.designer.call.ImportExcelReportFile;
+import com.tulin.v8.ureport.ui.editors.designer.call.LoadReport;
+import com.tulin.v8.ureport.ui.editors.designer.call.SaveReportFile;
 import com.tulin.v8.webtools.ide.xml.editors.XMLEditor;
 
 /**
@@ -43,9 +41,6 @@ public class UReportEditor extends MultiPageEditorPart implements IResourceChang
 	private XMLEditor editor;
 	private Browser swtdesigner = null;
 	private Browser swtbrowser = null;
-	private UReportDesigner designer;
-	private UReportPreview preview;
-	private String url;
 
 	public UReportEditor() {
 		super();
@@ -68,60 +63,38 @@ public class UReportEditor extends MultiPageEditorPart implements IResourceChang
 	}
 
 	void createPage1() {
-		if (CommonUtil.isWin64()) {
-			try {
-				designer = new UReportDesigner(this, Messages.getString("UReportEditor.pageEditor.3"));
-				int index = addPage(designer, getEditorInput());
-				setPageText(index, Messages.getString("UReportEditor.pageEditor.3"));
-			} catch (Exception e) {
-				Sys.printErrMsg(e);
-				e.printStackTrace();
+		Composite composite = new Composite(getContainer(), SWT.FILL);
+		composite.setLayout(new FillLayout());
+		swtdesigner = new Browser(composite, SWT.EDGE);
+		swtdesigner.setJavascriptEnabled(true);
+		new LoadReport(this, swtdesigner, "callLoadReport");
+		new BrowserFunction(swtdesigner, "callPreviewReport") {
+			@Override
+			public Object function(Object[] arguments) {
+				setActivePage(2);
+				return true;
 			}
-		} else {
-			Composite composite = new Composite(getContainer(), SWT.FILL);
-			composite.setLayout(new FillLayout());
-			swtdesigner = new Browser(composite, SWT.NONE);
-			swtdesigner.setJavascriptEnabled(true);
-			new SWTLoadReport(this, swtdesigner, "callLoadReport");
-			new BrowserFunction(swtdesigner, "callPreviewReport") {
-				@Override
-				public Object function(Object[] arguments) {
-					setActivePage(2);
-					return true;
-				}
-			};
-			new SWTSaveReportFile(this, swtdesigner, "callSaveReportFile");
-			new SWTImportExcelReportFile(this, swtdesigner, "importExcelReportFile");
-			int index = addPage(composite);
-			setPageText(index, Messages.getString("UReportEditor.pageEditor.3"));
-		}
+		};
+		new SaveReportFile(this, swtdesigner, "callSaveReportFile");
+		new ImportExcelReportFile(this, swtdesigner, "importExcelReportFile");
+		int index = addPage(composite);
+		setPageText(index, Messages.getString("UReportEditor.pageEditor.3"));
 	}
 
 	void createPage2() {
-		if (CommonUtil.isWin64()) {
-			try {
-				preview = new UReportPreview(this, Messages.getString("UReportEditor.pageEditor.3"));
-				int index = addPage(preview, getEditorInput());
-				setPageText(index, Messages.getString("UReportEditor.pageEditor.5"));
-			} catch (Exception e) {
-				Sys.printErrMsg(e);
-				e.printStackTrace();
+		Composite composite = new Composite(getContainer(), SWT.FILL);
+		composite.setLayout(new FillLayout());
+		swtbrowser = new Browser(composite, SWT.EDGE);
+		swtbrowser.setJavascriptEnabled(true);
+		new BrowserFunction(swtbrowser, "open") {
+			@Override
+			public Object function(Object[] arguments) {
+				String url = UreportWebappManager.getHost() + arguments[0];
+				return LocalBrowser.openUrl(url);
 			}
-		} else {
-			Composite composite = new Composite(getContainer(), SWT.FILL);
-			composite.setLayout(new FillLayout());
-			swtbrowser = new Browser(composite, SWT.NONE);
-			swtbrowser.setJavascriptEnabled(true);
-			new org.eclipse.swt.browser.BrowserFunction(swtbrowser, "open") {
-				@Override
-				public Object function(Object[] arguments) {
-					String url = UreportWebappManager.getHost() + arguments[0];
-					return LocalBrowser.openUrl(url);
-				}
-			};
-			int index = addPage(composite);
-			setPageText(index, Messages.getString("UReportEditor.pageEditor.5"));
-		}
+		};
+		int index = addPage(composite);
+		setPageText(index, Messages.getString("UReportEditor.pageEditor.5"));
 	}
 
 	protected void createPages() {
@@ -139,24 +112,14 @@ public class UReportEditor extends MultiPageEditorPart implements IResourceChang
 	protected void pageChange(int newPageIndex) {
 		super.pageChange(newPageIndex);
 		if (newPageIndex == 1) {
-			if (url == null) {
-				url = UreportWebappManager.getUreportDesignerURL();
-				url += "?_u=file:" + ((FileEditorInput) getEditorInput()).getPath().toString();
-			}
-			if (swtdesigner != null) {
-				swtdesigner.setUrl(url);
-			} else {
-				designer.setUrl(url);
-			}
+			String url = UreportWebappManager.getUreportDesignerURL();
+			url += "?_u=file:" + ((FileEditorInput) getEditorInput()).getPath().toString();
+			swtdesigner.setUrl(url);
 		} else if (newPageIndex == 2) {
 			String surl = UreportWebappManager.getUreportPreviewURL();
 			surl += "?_u=file:" + ((FileEditorInput) getEditorInput()).getPath().toString();
 			surl += "&_i=1";
-			if (swtbrowser != null) {
-				swtbrowser.setUrl(surl);
-			} else {
-				preview.setUrl(surl);
-			}
+			swtbrowser.setUrl(surl);
 		}
 	}
 

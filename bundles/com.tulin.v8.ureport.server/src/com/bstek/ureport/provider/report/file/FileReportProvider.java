@@ -38,7 +38,6 @@ import org.springframework.web.context.WebApplicationContext;
 import com.bstek.ureport.exception.ReportException;
 import com.bstek.ureport.provider.report.ReportFile;
 import com.bstek.ureport.provider.report.ReportProvider;
-import com.tulin.v8.core.TuLinPlugin;
 
 /**
  * @author Jacky.gao
@@ -119,7 +118,7 @@ public class FileReportProvider implements ReportProvider, ApplicationContextAwa
 			File dfile = new File(file);
 			if (dfile.exists() && dfile.isFile()) {
 				outStream = new FileOutputStream(dfile);
-			} else {
+			}else {
 				outStream = new FileOutputStream(new File(fullPath));
 			}
 			IOUtils.write(content, outStream, "utf-8");
@@ -148,9 +147,6 @@ public class FileReportProvider implements ReportProvider, ApplicationContextAwa
 
 	public void setFileStoreDir(String fileStoreDir) {
 		this.fileStoreDir = fileStoreDir;
-		if (!this.fileStoreDir.startsWith("file:")) {
-			this.fileStoreDir = TuLinPlugin.getCurrentProjectWebFolderPath() + fileStoreDir;
-		}
 	}
 
 	@Override

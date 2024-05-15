@@ -29,5 +29,4 @@ Bundle-ClassPath: .,
  lib/spring-jdbc-4.1.2.RELEASE.jar,
  lib/spring-tx-4.1.2.RELEASE.jar,
  lib/spring-web-4.1.2.RELEASE.jar,
- lib/velocity-1.7.jar,
- lib/ureport2-console-2.3.1-tlv8.jar
+ lib/velocity-1.7.jar

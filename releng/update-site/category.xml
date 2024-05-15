@@ -45,9 +45,6 @@
    <feature id="com.tulin.v8.core.feature">
       <category name="TLv8_IDE"/>
    </feature>
-   <feature id="com.tulin.v8.swt.chromium.feature">
-      <category name="TLv8 Chromium"/>
-   </feature>
    <feature id="com.tulin.v8.webtools.feature">
       <category name="TLv8_IDE"/>
    </feature>
@@ -59,5 +56,4 @@
    <category-def name="TLv8_Flow" label="TLv8 Flow Designer"/>
    <category-def name="TLv8_DBViewer" label="TLv8 DBViewer"/>
    <category-def name="TLv8_Report" label="TLv8 Report"/>
-   <category-def name="TLv8 Chromium" label="TLv8 Chromium"/>
 </site>

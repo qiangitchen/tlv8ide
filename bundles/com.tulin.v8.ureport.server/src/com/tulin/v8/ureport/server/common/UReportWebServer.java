@@ -1,11 +1,4 @@
 package com.tulin.v8.ureport.server.common;
-/*
- * Christopher Deckers (chrriis@nextencia.net)
- * http://www.nextencia.net
- *
- * See the file "readme.txt" for information on usage and redistribution of
- * this file, and for a DISCLAIMER OF ALL WARRANTIES.
- */
 
 import java.io.BufferedInputStream;
 import java.io.BufferedOutputStream;
@@ -21,6 +14,7 @@ import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.net.URI;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.Date;
@@ -208,9 +202,9 @@ public class UReportWebServer {
 		}
 
 		public String getHeader(String name) {
-			Map<String,String> map = getHeaderMap();
-			for(String k : map.keySet()) {
-				if(k.equalsIgnoreCase(name)) {
+			Map<String, String> map = getHeaderMap();
+			for (String k : map.keySet()) {
+				if (k.equalsIgnoreCase(name)) {
 					return map.get(k);
 				}
 			}
@@ -551,7 +545,7 @@ public class UReportWebServer {
 							webServerContent = new ExportExcelServletAction(httpRequest).execute();
 						} else if (httpRequest.getURLPath().startsWith("/ureport/excel97")) {
 							webServerContent = new ExportExcel97ServletAction(httpRequest).execute();
-						}else if (httpRequest.getURLPath().startsWith("/ureport/chart")) {
+						} else if (httpRequest.getURLPath().startsWith("/ureport/chart")) {
 							webServerContent = new ChartServletAction(httpRequest).execute();
 						}
 					} else {
@@ -615,7 +609,7 @@ public class UReportWebServer {
 					socket.close();
 				}
 			} catch (Exception e) {
-				// e.printStackTrace();
+				e.printStackTrace();
 			} finally {
 				semaphore.release();
 			}
@@ -765,7 +759,7 @@ public class UReportWebServer {
 
 	public WebServerContent getURLContent(String resourceURL) {
 		try {
-			HTTPRequest httpRequest = new HTTPRequest(new URL(resourceURL).getPath(), null);
+			HTTPRequest httpRequest = new HTTPRequest(new URI(resourceURL).getPath(), null);
 			return getWebServerContent(httpRequest);
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -913,7 +907,7 @@ public class UReportWebServer {
 				parameter = Utils.decodeURL(removeHTMLAnchor(parameter.substring(index + 1)));
 				String resourceURL;
 				try {
-					URL url = new URL(codeBase);
+					URL url = new URI(codeBase).toURL();
 					int port = url.getPort();
 					resourceURL = url.getProtocol() + "://" + url.getHost() + (port != -1 ? ":" + port : "");
 					if (parameter.startsWith("/")) {
@@ -953,7 +947,7 @@ public class UReportWebServer {
 					@Override
 					public InputStream getInputStream() {
 						try {
-							return new URL(resourceURL_).openStream();
+							return new URI(resourceURL_).toURL().openStream();
 						} catch (Exception e) {
 						}
 						try {
@@ -982,7 +976,7 @@ public class UReportWebServer {
 				parameter = Utils.decodeURL(parameter.substring(index + 1));
 				String resourceURL;
 				try {
-					URL url = new URL(codeBase);
+					URL url = new URI(codeBase).toURL();
 					int port = url.getPort();
 					resourceURL = url.getProtocol() + "://" + url.getHost() + (port != -1 ? ":" + port : "");
 					if (parameter.startsWith("/")) {
@@ -1020,7 +1014,7 @@ public class UReportWebServer {
 					@Override
 					public InputStream getInputStream() {
 						try {
-							return new URL(resourceURL_).openStream();
+							return new URI(resourceURL_).toURL().openStream();
 						} catch (Exception e) {
 						}
 						try {

@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.widgets.FileDialog;
 
 import com.bstek.ureport.console.designer.ReportDefinitionWrapper;
@@ -17,7 +18,6 @@ import com.bstek.ureport.console.importexcel.ExcelParser;
 import com.bstek.ureport.console.importexcel.HSSFExcelParser;
 import com.bstek.ureport.console.importexcel.XSSFExcelParser;
 import com.bstek.ureport.definition.ReportDefinition;
-import com.tulin.v8.swt.chromium.Browser;
 import com.tulin.v8.ureport.ui.editors.designer.UReportEditor;
 
 public class ImportExcelReportFile extends LoadReport {

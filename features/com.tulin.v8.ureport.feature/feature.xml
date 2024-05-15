@@ -298,14 +298,6 @@ version(s), and exceptions or additional permissions here}.&quot;
          id="com.tulin.v8.core.feature"
          version="0.0.0"/>
 
-   <includes
-         id="com.tulin.v8.swt.chromium.feature"
-         version="0.0.0"/>
-
-   <plugin
-         id="com.tulin.v8.core"
-         version="0.0.0"/>
-
    <plugin
          id="com.tulin.v8.ureport.core"
          version="0.0.0"/>
