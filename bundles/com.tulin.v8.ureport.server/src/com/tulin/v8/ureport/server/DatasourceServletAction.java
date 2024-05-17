@@ -52,10 +52,17 @@ import com.bstek.ureport.expression.model.Expression;
 import com.bstek.ureport.expression.model.data.ExpressionData;
 import com.bstek.ureport.expression.model.data.ObjectExpressionData;
 import com.bstek.ureport.utils.ProcedureUtils;
+import com.tulin.v8.core.DBUtils;
+import com.tulin.v8.core.config.AppConfig;
+import com.tulin.v8.core.entity.SpringDatasource;
 import com.tulin.v8.ureport.server.common.UReportWebServer.HTTPRequest;
 
 import chrriis.common.WebServerContent;
 
+/**
+ * @author 陈乾
+ * @update 2024-05-17
+ */
 public class DatasourceServletAction extends RenderPageServletAction {
 	ApplicationContext applicationContext;
 
@@ -84,6 +91,10 @@ public class DatasourceServletAction extends RenderPageServletAction {
 		Set<String> keys = com.tlv8.datasource.Utils.getPermitionDatasourceKeys();
 		for (String k : keys) {
 			datasources.add(k);
+		}
+		SpringDatasource spdb = AppConfig.getSpringDatasource();
+		if (spdb != null) {
+			datasources.add("spring");
 		}
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		try {
@@ -355,7 +366,7 @@ public class DatasourceServletAction extends RenderPageServletAction {
 			return conn;
 		} else {
 			String name = httpRequest.getParameter("name");
-			Connection conn = com.tlv8.datasource.Utils.getAppConn(name);
+			Connection conn = DBUtils.getAppConn(name);
 			if (conn == null) {
 				throw new ReportDesignException("Buildin datasource [" + name + "] not exist.");
 			}

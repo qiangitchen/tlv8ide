@@ -41,104 +41,115 @@ import com.bstek.ureport.provider.report.ReportProvider;
 /**
  * @author Jacky.gao
  * @since 2016年12月4日
+ * @author 陈乾
+ * @update 2024-05-17
  */
-public class ReportRender implements ApplicationContextAware{
+public class ReportRender implements ApplicationContextAware {
 	private ReportParser reportParser;
 	private ReportBuilder reportBuilder;
 	private Collection<ReportProvider> reportProviders;
-	private DownCellbuilder downCellParentbuilder=new DownCellbuilder();
-	private RightCellbuilder rightCellParentbuilder=new RightCellbuilder();
-	public Report render(String file,Map<String,Object> parameters){
-		ReportDefinition reportDefinition=getReportDefinition(file);
-		return reportBuilder.buildReport(reportDefinition,parameters);
+	private DownCellbuilder downCellParentbuilder = new DownCellbuilder();
+	private RightCellbuilder rightCellParentbuilder = new RightCellbuilder();
+
+	public Report render(String file, Map<String, Object> parameters) {
+		ReportDefinition reportDefinition = getReportDefinition(file);
+		return reportBuilder.buildReport(reportDefinition, parameters);
 	}
-	
-	public Report render(ReportDefinition reportDefinition,Map<String,Object> parameters){
-		return reportBuilder.buildReport(reportDefinition,parameters);
+
+	public Report render(ReportDefinition reportDefinition, Map<String, Object> parameters) {
+		return reportBuilder.buildReport(reportDefinition, parameters);
 	}
-	
-	public ReportDefinition getReportDefinition(String file){
-		ReportDefinition reportDefinition=CacheUtils.getReportDefinition(file);
-		if(reportDefinition==null){
-			reportDefinition=parseReport(file);
-			rebuildReportDefinition(reportDefinition);
-			CacheUtils.cacheReportDefinition(file, reportDefinition);
-		}
+
+	public ReportDefinition getReportDefinition(String file) {
+//		ReportDefinition reportDefinition=CacheUtils.getReportDefinition(file);
+//		if(reportDefinition==null){
+//			reportDefinition=parseReport(file);
+//			rebuildReportDefinition(reportDefinition);
+//			CacheUtils.cacheReportDefinition(file, reportDefinition);
+//		}
+		// 编辑器设计和预览不适用缓存
+		ReportDefinition reportDefinition = parseReport(file);
+		rebuildReportDefinition(reportDefinition);
+		CacheUtils.cacheReportDefinition(file, reportDefinition);
 		return reportDefinition;
 	}
-	
-	public void rebuildReportDefinition(ReportDefinition reportDefinition){
-		List<CellDefinition> cells=reportDefinition.getCells();
-		for(CellDefinition cell:cells){
-			addRowChildCell(cell,cell);
-			addColumnChildCell(cell,cell);
+
+	public void rebuildReportDefinition(ReportDefinition reportDefinition) {
+		List<CellDefinition> cells = reportDefinition.getCells();
+		for (CellDefinition cell : cells) {
+			addRowChildCell(cell, cell);
+			addColumnChildCell(cell, cell);
 		}
-		for(CellDefinition cell:cells){
-			Expand expand=cell.getExpand();
-			if(expand.equals(Expand.Down)){
-				downCellParentbuilder.buildParentCell(cell,cells);
-			}else if(expand.equals(Expand.Right)){
-				rightCellParentbuilder.buildParentCell(cell,cells);
+		for (CellDefinition cell : cells) {
+			Expand expand = cell.getExpand();
+			if (expand.equals(Expand.Down)) {
+				downCellParentbuilder.buildParentCell(cell, cells);
+			} else if (expand.equals(Expand.Right)) {
+				rightCellParentbuilder.buildParentCell(cell, cells);
 			}
 		}
 	}
-	
-	public ReportDefinition parseReport(String file){
-		InputStream inputStream=null;
+
+	public ReportDefinition parseReport(String file) {
+		InputStream inputStream = null;
 		try {
-			inputStream=buildReportFile(file);
-			ReportDefinition reportDefinition=reportParser.parse(inputStream,file);
+			inputStream = buildReportFile(file);
+			ReportDefinition reportDefinition = reportParser.parse(inputStream, file);
 			return reportDefinition;
-		}finally{
+		} finally {
 			try {
-				if(inputStream!=null){
-					inputStream.close();					
+				if (inputStream != null) {
+					inputStream.close();
 				}
 			} catch (IOException e) {
 				throw new ReportParseException(e);
 			}
 		}
 	}
-	
-	private InputStream buildReportFile(String file){
-		InputStream inputStream=null;
-		for(ReportProvider provider:reportProviders){
-			if(file.startsWith(provider.getPrefix())){
-				inputStream=provider.loadReport(file);
+
+	private InputStream buildReportFile(String file) {
+		InputStream inputStream = null;
+		for (ReportProvider provider : reportProviders) {
+			if (file.startsWith(provider.getPrefix())) {
+				inputStream = provider.loadReport(file);
 			}
 		}
-		if(inputStream==null){
-			throw new ReportException("Report ["+file+"] not support.");
+		if (inputStream == null) {
+			throw new ReportException("Report [" + file + "] not support.");
 		}
 		return inputStream;
 	}
-	
-	private void addRowChildCell(CellDefinition cell,CellDefinition childCell){
-		CellDefinition leftCell=cell.getLeftParentCell();
-		if(leftCell==null){
+
+	private void addRowChildCell(CellDefinition cell, CellDefinition childCell) {
+		CellDefinition leftCell = cell.getLeftParentCell();
+		if (leftCell == null) {
 			return;
 		}
-		List<CellDefinition> childrenCells=leftCell.getRowChildrenCells();
+		List<CellDefinition> childrenCells = leftCell.getRowChildrenCells();
 		childrenCells.add(childCell);
-		addRowChildCell(leftCell,childCell);
+		addRowChildCell(leftCell, childCell);
 	}
-	private void addColumnChildCell(CellDefinition cell,CellDefinition childCell){
-		CellDefinition topCell=cell.getTopParentCell();
-		if(topCell==null){
+
+	private void addColumnChildCell(CellDefinition cell, CellDefinition childCell) {
+		CellDefinition topCell = cell.getTopParentCell();
+		if (topCell == null) {
 			return;
 		}
-		List<CellDefinition> childrenCells=topCell.getColumnChildrenCells();
+		List<CellDefinition> childrenCells = topCell.getColumnChildrenCells();
 		childrenCells.add(childCell);
-		addColumnChildCell(topCell,childCell);
+		addColumnChildCell(topCell, childCell);
 	}
+
 	public void setReportParser(ReportParser reportParser) {
 		this.reportParser = reportParser;
 	}
+
 	public void setReportBuilder(ReportBuilder reportBuilder) {
 		this.reportBuilder = reportBuilder;
 	}
+
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		reportProviders=applicationContext.getBeansOfType(ReportProvider.class).values();
+		reportProviders = applicationContext.getBeansOfType(ReportProvider.class).values();
 	}
 }

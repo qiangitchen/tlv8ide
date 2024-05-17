@@ -17,6 +17,7 @@ package com.bstek.ureport;
 
 import java.math.BigDecimal;
 import java.sql.Connection;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -24,6 +25,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+
+import javax.naming.NamingException;
 
 import org.apache.commons.beanutils.PropertyUtils;
 import org.springframework.beans.BeansException;
@@ -37,10 +40,15 @@ import com.bstek.ureport.exception.ReportComputeException;
 import com.bstek.ureport.model.Cell;
 import com.bstek.ureport.model.Report;
 import com.bstek.ureport.provider.image.ImageProvider;
+import com.tulin.v8.core.DBUtils;
+import com.tulin.v8.core.config.AppConfig;
+import com.tulin.v8.core.entity.SpringDatasource;
 
 /**
  * @author Jacky.gao
  * @since 2016年11月12日
+ * @author 陈乾
+ * @update 2024-05-17
  */
 public class Utils implements ApplicationContextAware {
 	private static ApplicationContext applicationContext;
@@ -235,6 +243,28 @@ public class Utils implements ApplicationContextAware {
 					@Override
 					public Connection getConnection() {
 						return com.tlv8.datasource.Utils.getAppConn(k);
+					}
+
+				});
+			}
+			SpringDatasource spdb = AppConfig.getSpringDatasource();
+			if (spdb != null) {
+				buildinDatasources.add(new BuildinDatasource() {
+					@Override
+					public String name() {
+						return "spring";
+					}
+
+					@Override
+					public Connection getConnection() {
+						try {
+							return DBUtils.getAppConn("spring");
+						} catch (SQLException e) {
+							e.printStackTrace();
+						} catch (NamingException e) {
+							e.printStackTrace();
+						}
+						return null;
 					}
 
 				});
