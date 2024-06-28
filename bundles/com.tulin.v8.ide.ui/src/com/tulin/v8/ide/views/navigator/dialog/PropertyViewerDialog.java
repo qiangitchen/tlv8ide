@@ -2,6 +2,7 @@ package com.tulin.v8.ide.views.navigator.dialog;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.util.Date;
 
@@ -141,13 +142,20 @@ public class PropertyViewerDialog extends Dialog {
 				sizelabel.setText(Messages.getString("View.Action.PropertyViewer.9"));
 				Text sizetext = new Text(child, SWT.MULTI | SWT.WRAP | SWT.LEFT);
 				sizetext.setLayoutData(new GridData(GridData.FILL_HORIZONTAL));
-				FileInputStream fis;
+				FileInputStream fis = null;
 				try {
 					fis = new FileInputStream(file);
 					sizetext.setText(
 							String.valueOf(fis.available()) + Messages.getString("View.Action.PropertyViewer.11"));
 				} catch (Exception e1) {
 					e1.printStackTrace();
+				} finally {
+					if (fis != null) {
+						try {
+							fis.close();
+						} catch (IOException e) {
+						}
+					}
 				}
 				sizetext.setEditable(false);
 			}
