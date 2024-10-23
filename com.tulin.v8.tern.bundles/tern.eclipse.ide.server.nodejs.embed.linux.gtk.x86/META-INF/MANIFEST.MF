@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: tern.eclipse.ide.server.nodejs.embed.linux.gtk.x86;singleton:=true
+Bundle-Version: 2.20.10.qualifier
+Bundle-Name: %pluginName
+Bundle-ManifestVersion: 2
+Bundle-Vendor: %providerName
+Automatic-Module-Name: tern.eclipse.ide.server.nodejs.embed.linux.gtk.x866
+Require-Bundle: tern.eclipse.ide.server.nodejs.core,
+ tern.server.nodejs
+Bundle-ActivationPolicy: lazy
+Bundle-Localization: plugin
+Eclipse-BundleShape: dir
+Eclipse-PlatformFilter: (& (osgi.ws=gtk) (osgi.os=linux) (osgi.arch=x86))

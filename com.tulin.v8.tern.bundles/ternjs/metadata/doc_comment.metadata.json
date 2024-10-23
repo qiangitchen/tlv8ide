@@ -1,0 +1,22 @@
+{
+ "name": "doc_comment",
+ "label": "JSDoc",
+ "icon": "ecma.png",
+ "homepage": "http://usejsdoc.org/",
+ "author": "Marijn Haverbeke <marijnh@gmail.com>",
+ "description": "This plugin, which is enabled by default in the cm/tern server, parses comments before function declarations, variable declarations, and object properties. It will look for JSDoc-style type declarations, and try to parse them and add them to the inferred types, and it will treat the first sentence of comment text as the docstring for the defined variable or property.",
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/marijnh/tern.git"
+ },
+ "bugs": {
+  "url": "https://github.com/marijnh/tern/issues"
+ },
+ "options": [
+  {
+   "name": "strong",
+   "description": "Can be set to true to assign a higher-than-default weight to the types it finds in comments, and thus overrides inferred types.",
+   "type": "boolean"
+  }
+ ]
+}

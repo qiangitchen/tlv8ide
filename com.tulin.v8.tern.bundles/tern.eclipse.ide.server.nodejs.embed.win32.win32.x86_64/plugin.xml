@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!--
+###############################################################################
+# Copyright (c) 2013-2016 Angelo Zerr and others.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+###############################################################################
+ -->
+<plugin>
+
+	<extension point="tern.eclipse.ide.server.nodejs.core.nodeJSInstalls" >
+		<install 
+			id="node-v20.10.0-win-x64"
+			name="%nodeJSInstall_v20.10.0.name"
+			path="/node-v20.10.0-win-x64/node.exe" 
+			zip="/node-v20.10.0-win-x64.zip" />
+	 </extension>
+	  
+</plugin>        

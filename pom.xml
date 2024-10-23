@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.tulin.v8.ide</groupId>
 	<artifactId>com.tulin.v8.ide.root</artifactId>
-	<version>3.2.0-SNAPSHOT</version>
+	<version>3.3.0-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<properties>
@@ -116,9 +116,12 @@
 	</build>
 
 	<modules>
-		<module>bundles</module>
-		<module>features</module>
-		<module>releng</module>
+		<module>com.tulin.v8.tern.bundles</module>
+		<module>com.tulin.v8.tern.features</module>
+		<module>com.tulin.v8.tern.releng</module>
+		<module>com.tulin.v8.ide.bundles</module>
+		<module>com.tulin.v8.ide.features</module>
+		<module>com.tulin.v8.ide.releng</module>
 	</modules>
 
 </project>

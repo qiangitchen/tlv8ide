@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<site>
+   <feature id="tern.eclipse.ide.server.nodejs.embed">
+      <category name="Tern_Embed_node"/>
+   </feature>
+   <feature id="tern.feature">
+      <category name="Tern_IDE"/>
+   </feature>
+   <feature id="tern.jsdt.feature">
+      <category name="Tern_IDE"/>
+   </feature>
+   <feature id="tern.linters.feature">
+      <category name="Tern_IDE"/>
+   </feature>
+   <feature id="tern.server.nodejs.feature">
+      <category name="Tern_IDE"/>
+   </feature>
+   <feature id="tern.eclipse.ide.tools.feature">
+      <category name="Tern_Tooling"/>
+   </feature>
+   <feature id="tern.genericeditor.feature">
+      <category name="Tern_IDE"/>
+   </feature>
+   <feature id="com.tulin.v8.tern.feature">
+      <category name="TLv8_Tern_IDE"/>
+   </feature>
+   <feature id="tern.tulin.v8.webtools.feature">
+      <category name="TLv8_Tern_IDE"/>
+   </feature>
+   <category-def name="Tern_Embed_node" label="Tern Embed Node.js"/>
+   <category-def name="Tern_IDE" label="Tern IDE"/>
+   <category-def name="Tern_Tooling" label="Tern Tooling"/>
+   <category-def name="TLv8_Tern_IDE" label="TLv8 Tern IDE"/>
+</site>

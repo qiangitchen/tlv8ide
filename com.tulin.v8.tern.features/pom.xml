@@ -1,0 +1,25 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <artifactId>com.tulin.v8.tern.features</artifactId>
+    <packaging>pom</packaging>
+
+    <parent>
+        <groupId>com.tulin.v8.ide</groupId>
+		<artifactId>com.tulin.v8.ide.root</artifactId>
+		<version>3.3.0-SNAPSHOT</version>
+    </parent>
+
+    <modules>
+        <module>com.tulin.v8.tern.feature</module>
+        <module>tern.eclipse.ide.server.nodejs.embed</module>
+		<module>tern.eclipse.ide.tools.feature</module>
+        <module>tern.feature</module>
+        <module>tern.genericeditor.feature</module>
+		<module>tern.jsdt.feature</module>
+        <module>tern.linters.feature</module>
+        <module>tern.server.nodejs.feature</module>
+        <module>tern.tulin.v8.webtools.feature</module>
+    </modules>
+	
+</project>

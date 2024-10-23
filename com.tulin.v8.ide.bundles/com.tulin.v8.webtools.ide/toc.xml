@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?NLS TYPE="org.eclipse.help.toc"?>
+<toc label="Eclipse HTML Editor" topic="docs/index.html">
+	<topic label="Installing" href="docs/install/index.html"/>
+	<topic label="Features">
+		<topic label="Wizards"  href="docs/wizards/index.html" /> 
+		<topic label="Editors"  href="docs/editors/index.html" /> 
+		<topic label="Views"  href="docs/views/index.html" /> 
+		<topic label="Configuration"  href="docs/config/index.html" /> 
+	</topic>
+</toc>

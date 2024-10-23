@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: tern.eclipse.ide.server.nodejs.embed.macosx.cocoa.x86_64;singleton:=true
+Require-Bundle: tern.eclipse.ide.server.nodejs.core
+Bundle-ManifestVersion: 2
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName
+Bundle-Name: %pluginName
+Bundle-Version: 2.20.10.qualifier
+Bundle-Localization: plugin
+Automatic-Module-Name: tern.eclipse.ide.server.nodejs.embed.macosx.cocoa.x86.64
+Eclipse-BundleShape: dir
+Eclipse-PlatformFilter: (& (osgi.os=macosx) (osgi.arch=x86_64))

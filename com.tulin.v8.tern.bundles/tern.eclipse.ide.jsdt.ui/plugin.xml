@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!--
+###############################################################################
+# Copyright (c) 2013 Angelo Zerr and others.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+###############################################################################
+ -->
+<plugin>
+
+	<!-- Completion Proposal for JavaScript (inside JavaScript file) -->
+	
+	<extension point="org.eclipse.wst.jsdt.ui.javaCompletionProposalComputer"
+	   id="TernCompletionProposalCategory"
+	   name="%TernCompletionProposalCategory.name">
+	   <proposalCategory icon="icons/full/obj16/logo.png" />
+	 </extension>
+
+	<extension point="org.eclipse.wst.jsdt.ui.javaCompletionProposalComputer"
+	   id="TernCompletionProposalComputer">
+	   <javaCompletionProposalComputer
+	      class="tern.eclipse.ide.jsdt.internal.ui.contentassist.TernCompletionProposalComputer"
+	      categoryId="tern.eclipse.ide.jsdt.ui.TernCompletionProposalCategory">
+	   </javaCompletionProposalComputer>
+	 </extension>
+
+	<!-- Completion Proposal for JavaScript (inside HTML) -->
+	 
+	 <extension point="org.eclipse.wst.sse.ui.completionProposal">
+	  <proposalCategory
+	      id="tern.eclipse.ide.jsdt.ui.contentassist.TernContentAssistProcessor"
+	      name="%TernCompletionProposalCategory.name"
+	      icon="icons/full/obj16/logo.png">
+	  </proposalCategory>
+	  <proposalComputer
+	      activate="true"
+	      categoryId="tern.eclipse.ide.jsdt.ui.contentassist.TernContentAssistProcessor"
+	      class="tern.eclipse.ide.jsdt.internal.ui.contentassist.TernCompletionProposalComputer"
+	      id="tern.eclipse.ide.jsdt.ui.contentassist.TernContentAssistProcessor">
+	     <contentType
+	        id="org.eclipse.wst.html.core.htmlsource">
+	      <partitionType
+	            autoActivationDelegate="org.eclipse.wst.jsdt.web.ui.contentassist.JSDTAutoActivationDelegate"
+	            id="org.eclipse.wst.html.SCRIPT">
+	      </partitionType>
+          <partitionType
+              autoActivationDelegate="org.eclipse.wst.jsdt.web.ui.contentassist.JSDTAutoActivationDelegate"
+              id="org.eclipse.wst.html.SCRIPT.EVENTHANDLER">
+	      </partitionType>
+	    </contentType>
+	    
+	    <contentType
+	        id="org.eclipse.php.core.phpsource">
+	      <partitionType
+	            autoActivationDelegate="org.eclipse.wst.jsdt.web.ui.contentassist.JSDTAutoActivationDelegate"
+	            id="org.eclipse.wst.html.SCRIPT">
+	      </partitionType>
+              <partitionType
+                    autoActivationDelegate="org.eclipse.wst.jsdt.web.ui.contentassist.JSDTAutoActivationDelegate"
+                    id="org.eclipse.wst.html.SCRIPT.EVENTHANDLER">
+	      </partitionType>
+	    </contentType>
+	  </proposalComputer>
+	</extension>
+	 
+	<extension
+			point="org.eclipse.wst.sse.ui.completionProposal">
+		<proposalComputerExtendedActivation
+				id="tern.eclipse.ide.jsdt.ui.contentassist.TernContentAssistProcessor">
+			<contentType
+					id="org.eclipse.jst.jsp.core.jspsource">
+				<partitionType
+						autoActivationDelegate="org.eclipse.wst.jsdt.web.ui.contentassist.JSDTAutoActivationDelegate"
+						id="org.eclipse.wst.html.SCRIPT">
+				</partitionType>
+	            <partitionType
+						autoActivationDelegate="org.eclipse.wst.jsdt.web.ui.contentassist.JSDTAutoActivationDelegate"
+						id="org.eclipse.wst.html.SCRIPT.EVENTHANDLER">
+				</partitionType>
+			</contentType>
+		</proposalComputerExtendedActivation>
+	</extension>
+		 
+	<!-- Text Hover for JavaScript (inside JavaScript file) -->
+			 
+	<extension
+         point="org.eclipse.wst.jsdt.ui.javaEditorTextHovers">
+      <hover
+            label="%problemTernHover"
+            description="%problemTernHoverDescription"
+            class="tern.eclipse.ide.jsdt.internal.ui.hover.JSDTProblemTernHover"
+            id="tern.eclipse.ide.jsdt.ui.hover.JSDTProblemTernHover">
+      </hover>         
+      <hover
+            label="%ternHover"
+            description="%ternHoverDescription"
+            class="tern.eclipse.ide.jsdt.internal.ui.hover.JSDTTernHover"
+            id="tern.eclipse.ide.jsdt.ui.hover.TernHover">
+      </hover>
+	</extension>
+	      		 
+	<!-- Text Hover for JavaScript (inside HTML file) -->
+		      		 
+	<extension point="org.eclipse.wst.sse.ui.editorConfiguration">
+  		<documentationTextHover
+        	class="tern.eclipse.ide.jsdt.internal.ui.hover.JSDTTernHover"
+        	target="org.eclipse.wst.html.SCRIPT,org.eclipse.wst.html.SCRIPT.EVENTHANDLER">
+  		</documentationTextHover>
+    </extension>			          		
+        
+	<!-- Hyperlink for JavaScript (inside JavaScript file) -->
+        
+   <extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
+      <hyperlinkDetector
+            class="tern.eclipse.ide.ui.hyperlink.TernHyperLinkDetector"
+            id="tern.eclipse.ide.ui.hyperlink.TernHyperLinkDetector"
+            name="%ternHyperLinkDetector"
+            activate="true"
+            targetId="org.eclipse.wst.jsdt.ui.javaCode">
+      </hyperlinkDetector>
+   </extension>
+           
+	<!-- Hyperlink for JavaScript (inside HTML file) -->
+	        
+    <extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
+      <hyperlinkDetector 
+            class="tern.eclipse.ide.ui.hyperlink.TernHyperLinkDetector"
+            id="tern.eclipse.ide.ui.hyperlink.TernHyperlinkDetector.SCRIPT"
+            name="%ternHyperLinkDetector"
+            targetId="org.eclipse.wst.html.SCRIPT"/>
+      <hyperlinkDetector
+            class="tern.eclipse.ide.ui.hyperlink.TernHyperLinkDetector"
+            id="tern.eclipse.ide.ui.hyperlink.TernHyperlinkDetector.SCRIPT.events"
+            name="%ternHyperLinkDetector"
+            targetId="org.eclipse.wst.html.SCRIPT.EVENTHANDLER"/>  
+      <hyperlinkDetector
+			class="tern.eclipse.ide.ui.hyperlink.TernHyperLinkDetector"
+			id="tern.eclipse.ide.ui.hyperlink.TernHyperlinkDetector.HTML"
+			name="%ternHyperLinkDetector"
+			targetId="org.eclipse.wst.html.core.htmlsource"/>
+   	</extension>
+           		 
+	
+	<!-- JavaScript search references (Ctrl+Shift+G --> 
+	
+	<extension
+         point="org.eclipse.wst.jsdt.ui.queryParticipants">
+      <queryParticipant
+	      name="Tern Query Participant"
+            nature="org.eclipse.wst.jsdt.core.jsNature"
+            class="tern.eclipse.ide.jsdt.internal.ui.search.TernQueryParticipant"
+            id="tern.eclipse.ide.jsdt.ui.search.TernQueryParticipant">
+      </queryParticipant>
+   </extension>
+              		 
+	 <!-- I don't know why, but startup should be done, otherwise TernCompletionProposalComputer is not registered? -->
+	 <extension
+	       point="org.eclipse.ui.startup">	
+	       <startup class="tern.eclipse.ide.jsdt.internal.ui.JSDTTernStartup" />       
+	 </extension>
+      
+     <extension
+         point="org.eclipse.ui.navigator.linkHelper">
+      <linkHelper
+            class="tern.eclipse.ide.jsdt.internal.ui.JSDTTernLinkHelper"
+            id="tern.eclipse.ide.jsdt.ui.linkHelper">
+         <editorInputEnablement>
+            <instanceof
+                  value="java.lang.Object">
+            </instanceof></editorInputEnablement>
+         <selectionEnablement>
+            <instanceof
+                  value="java.lang.Object">
+            </instanceof>
+         </selectionEnablement>
+      </linkHelper>
+   </extension>
+   <extension
+       point="org.eclipse.ui.navigator.navigatorContent">
+      <commonFilter
+          activeByDefault="true"
+          class="tern.eclipse.ide.jsdt.internal.ui.JSDTElementsFilter"
+          description="%jsdtElementFilter_desc"
+          id="tern.eclipse.ide.jsdt.ui.JSDTElementFilter"
+          name="%jsdtElementFilter"
+          visibleInUI="true">
+      </commonFilter>
+    </extension>
+    <extension
+           point="org.eclipse.core.runtime.adapters">
+        <factory
+              adaptableType="org.eclipse.wst.jsdt.core.IJavaScriptUnit"
+              class="tern.eclipse.ide.jsdt.internal.ui.JsdtUiToTernUiAdapter">
+           <adapter
+                 type="tern.eclipse.ide.core.resources.TernDocumentFile">
+           </adapter>
+        </factory>
+     </extension>
+	 
+	<extension
+         point="org.eclipse.ui.navigator.viewer">
+      <viewerContentBinding
+            viewerId="org.eclipse.wst.jsdt.ui.outline">
+         <includes>
+            <contentExtension
+                  pattern="tern.eclipse.ide.ui.navigatorContent"/>
+            <contentExtension
+                  pattern="tern.eclipse.ide.jsdt.ui.linkHelper"/>
+            <contentExtension
+                  pattern="tern.eclipse.ide.jsdt.ui.JSDTElementFilter"/>
+         </includes>
+      </viewerContentBinding>
+   </extension>
+   
+	<!-- Quick Fix -->
+	<extension
+         point="org.eclipse.wst.jsdt.ui.quickFixProcessors">
+      <quickFixProcessor
+            name="Tern Quick Fix Processor"
+            class="tern.eclipse.ide.jsdt.internal.ui.text.correction.TernLintQuickFixProcessor"
+            id="tern.eclipse.ide.jsdt.ui.text.correction.TernLintQuickFixProcessor">
+            <handledMarkerTypes>
+               <markerType
+                     id="org.eclipse.wst.sse.ui.temp.error">
+               </markerType>
+            </handledMarkerTypes>
+      </quickFixProcessor>
+   </extension>
+   
+</plugin>

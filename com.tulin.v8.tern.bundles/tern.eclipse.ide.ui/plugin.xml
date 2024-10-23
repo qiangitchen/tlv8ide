@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<!--
+###############################################################################
+# Copyright (c) 2013-2016 Angelo Zerr and others.
+# All rights reserved. This program and the accompanying materials
+# are made available under the terms of the Eclipse Public License v1.0
+# which accompanies this distribution, and is available at
+# http://www.eclipse.org/legal/epl-v10.html
+###############################################################################
+ -->
+<plugin>
+	
+	<extension-point id="ternModuleDescriptors" name="%ternModuleDescriptors.name"
+		schema="schema/ternModuleDescriptors.exsd" />
+			
+    <extension point="org.eclipse.ui.startup">
+        <startup
+            class="tern.eclipse.ide.internal.ui.TernIDEStartup">
+        </startup>
+    </extension> 
+    
+	<extension point="org.eclipse.core.expressions.propertyTesters">
+		<propertyTester
+			id="tern.eclipse.ide.ui.TernNatureTester"
+			type="org.eclipse.core.resources.IResource"
+			namespace="tern.eclipse.ide.ui"
+			properties="isTernProject"
+			class="tern.eclipse.ide.internal.ui.TernNatureTester">
+		</propertyTester>
+	</extension>
+	    
+	<!--Commands:-->
+	
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			id="tern.eclipse.ide.ui.convertProjectToTern"
+			name="%convertProjectToTernCommandName"
+			categoryId="org.eclipse.ui.category.file">
+		</command>
+	</extension>
+			
+	<!--Handlers:-->
+
+	<extension
+		point="org.eclipse.ui.handlers">
+
+		<handler
+			commandId="tern.eclipse.ide.ui.convertProjectToTern"
+			class="tern.eclipse.ide.internal.ui.handlers.ConvertProjectToTernCommandHandler">		
+			<activeWhen>
+				<with variable="selection">
+					<count value="1"/>
+					<iterate>
+						<adapt type="org.eclipse.core.resources.IProject">
+							<and>
+								<not>
+									<test property="tern.eclipse.ide.ui.isTernProject" />
+								</not>
+							</and>
+						</adapt>
+					</iterate>
+				</with>
+			</activeWhen>
+		</handler>
+		
+	</extension>		
+				
+	<!--Menus:-->
+ 	<extension
+		point="org.eclipse.ui.menus">
+ 
+		<!-- contributions to the project configure menu -->
+		<menuContribution locationURI="popup:org.eclipse.ui.projectConfigure?after=additions">
+			<command commandId="tern.eclipse.ide.ui.convertProjectToTern">
+				<visibleWhen
+          			checkEnabled="true">
+				</visibleWhen>
+			</command>
+		</menuContribution>
+		
+	</extension>
+		 
+	<!-- Preferences initialization -->
+	<extension
+		point="org.eclipse.core.runtime.preferences">
+		<initializer
+			class="tern.eclipse.ide.internal.ui.preferences.TernUIPreferenceInitializer" />
+	</extension>
+			 
+    <!--Preferences:-->
+    <extension
+       point="org.eclipse.ui.preferencePages">  
+       <!-- Tern Global preferences page -->  
+       <page
+              name="%TernPreferencePage.name"
+              class="tern.eclipse.ide.internal.ui.preferences.TernGlobalPreferencesPage"
+              id="tern.eclipse.ide.preferences"
+              category="com.tulin.v8.ide.preferences.StudioPreferencePage" />
+       <page  name="%TernContentAssistPropertyPage.name"
+              category="tern.eclipse.ide.preferences"
+              class="tern.eclipse.ide.internal.ui.preferences.TernContentAssistPreferencesPage"
+              id="tern.eclipse.ide.ui.preferences.contentassist" />                        
+       <page  name="%TernDevelopmentPropertyPage.name"
+              category="tern.eclipse.ide.preferences"
+              class="tern.eclipse.ide.internal.ui.preferences.TernDevelopmentPreferencesPage"
+              id="tern.eclipse.ide.ui.preferences.development" />
+       <page  name="%TernRepositoryPropertyPage.name"
+              category="tern.eclipse.ide.ui.preferences.development"
+              class="tern.eclipse.ide.internal.ui.preferences.TernRepositoryPreferencesPage"
+              id="tern.eclipse.ide.ui.preferences.repository" />
+       <page  name="%TernServerPropertyPage.name"
+              category="tern.eclipse.ide.preferences"
+              class="tern.eclipse.ide.internal.ui.preferences.TernServerPreferencesPage"
+              id="tern.eclipse.ide.ui.preferences.server" />              
+       <page  name="%TernValidationPropertyPage.name"
+              category="tern.eclipse.ide.preferences"
+              class="tern.eclipse.ide.internal.ui.preferences.TernValidationPreferencesPage"
+              id="tern.eclipse.ide.ui.preferences.validation" />
+    </extension>
+
+    <extension
+         point="org.eclipse.ui.propertyPages">
+      <page
+            name="%TernMainPropertyPage.name"        
+            class="tern.eclipse.ide.ui.properties.TernMainPropertyPage"
+            id="tern.eclipse.ide.ui.properties">
+            <!--
+            category="org.eclipse.wst.jsdt.internal.ui.preferences.JavaScriptMainPage" >
+            -->
+         <enabledWhen>
+             <adapt type="org.eclipse.core.resources.IProject">
+                  <test property="tern.eclipse.ide.ui.isTernProject" />
+             </adapt>         
+         </enabledWhen>
+      </page>
+      <page
+            name="%TernContentAssistPropertyPage.name"
+            category="tern.eclipse.ide.ui.properties"        
+            class="tern.eclipse.ide.internal.ui.preferences.TernContentAssistPreferencesPage"
+            id="tern.eclipse.ide.ui.properties.contentassist">
+         <enabledWhen>
+             <adapt type="org.eclipse.core.resources.IProject">
+                  <test property="tern.eclipse.ide.ui.isTernProject" />
+             </adapt>         
+         </enabledWhen>
+      </page>          
+      <page
+            name="%TernModulesPropertyPage.name"
+            category="tern.eclipse.ide.ui.properties"        
+            class="tern.eclipse.ide.ui.properties.TernModulesPropertyPage"
+            id="tern.eclipse.ide.ui.properties.modules">
+         <enabledWhen>
+             <adapt type="org.eclipse.core.resources.IProject">
+                  <test property="tern.eclipse.ide.ui.isTernProject" />
+             </adapt>         
+         </enabledWhen>
+      </page>     
+      <page
+            name="%TernScriptPathsPropertyPage.name"
+            category="tern.eclipse.ide.ui.properties"        
+            class="tern.eclipse.ide.internal.ui.properties.TernScriptPathsPropertyPage"
+            id="tern.eclipse.ide.ui.properties.scriptpaths">
+         <enabledWhen>
+             <adapt type="org.eclipse.core.resources.IProject">
+                  <test property="tern.eclipse.ide.ui.isTernProject" />
+             </adapt>         
+         </enabledWhen>
+      </page>
+      <page
+            name="%TernDevelopmentPropertyPage.name"
+            category="tern.eclipse.ide.ui.properties"        
+            class="tern.eclipse.ide.internal.ui.preferences.TernDevelopmentPreferencesPage"
+            id="tern.eclipse.ide.ui.properties.development">
+         <enabledWhen>
+             <adapt type="org.eclipse.core.resources.IProject">
+                  <test property="tern.eclipse.ide.ui.isTernProject" />
+             </adapt>         
+         </enabledWhen>
+      </page>
+      <page
+            name="%TernRepositoryPropertyPage.name"
+            category="tern.eclipse.ide.ui.properties.development"        
+            class="tern.eclipse.ide.internal.ui.preferences.TernRepositoryPreferencesPage"
+            id="tern.eclipse.ide.ui.properties.repository">
+         <enabledWhen>
+             <adapt type="org.eclipse.core.resources.IProject">
+                  <test property="tern.eclipse.ide.ui.isTernProject" />
+             </adapt>         
+         </enabledWhen>
+      </page>      
+      <page
+            name="%TernValidationPropertyPage.name"
+            category="tern.eclipse.ide.ui.properties"        
+            class="tern.eclipse.ide.internal.ui.preferences.TernValidationPreferencesPage"
+            id="tern.eclipse.ide.ui.properties.validation">
+         <enabledWhen>
+             <adapt type="org.eclipse.core.resources.IProject">
+                  <test property="tern.eclipse.ide.ui.isTernProject" />
+             </adapt>         
+         </enabledWhen>
+      </page>
+    </extension>
+     
+    <!-- Tern Console -->
+ 	<extension
+       point="org.eclipse.ui.console.consolePageParticipants">
+	    <consolePageParticipant
+	          class="tern.eclipse.ide.internal.ui.console.TernConsolePageParticipant"
+	          id="tern.eclipse.ide.internal.ui.console.TernConsolePageParticipant">
+	       <enablement>
+	          <instanceof
+	                value="tern.eclipse.ide.internal.ui.console.TernConsole">
+	          </instanceof></enablement>
+	    </consolePageParticipant>
+	 </extension>
+      
+   <!-- Tern Defs + Plugins descriptor -->
+   <extension
+         point="tern.eclipse.ide.ui.ternModuleDescriptors">      
+      <!-- Options -->
+      <optionFactory
+         id="string"
+         class="tern.eclipse.ide.internal.ui.descriptors.options.StringTernModuleOptionFactory" >
+      </optionFactory>      
+      <optionFactory
+         id="boolean"
+         class="tern.eclipse.ide.internal.ui.descriptors.options.BooleanTernModuleOptionFactory" >
+      </optionFactory>  
+      <optionFactory
+         id="path"
+         class="tern.eclipse.ide.internal.ui.descriptors.options.PathTernModuleOptionFactory" >         
+      </optionFactory>  
+      <optionFactory
+         id="path[]"
+         class="tern.eclipse.ide.internal.ui.descriptors.options.PathArrayTernModuleOptionFactory" >         
+      </optionFactory>      
+      <optionFactory
+         id="finder"
+         class="tern.eclipse.ide.internal.ui.descriptors.options.FinderTernModuleOptionFactory" >         
+      </optionFactory>  
+      <optionFactory
+         id="lintRules"
+         class="tern.eclipse.ide.internal.ui.descriptors.options.LintRulesTernModuleOptionFactory" >         
+      </optionFactory>
+   </extension>   
+
+	<!--======================================================================================-->
+	<!-- tern Outline View                                      						             -->
+	<!--======================================================================================-->
+	
+   <extension
+         point="org.eclipse.ui.views">
+      <view
+            name="%TernOutlineView.name"
+            icon="$nl$/icons/full/eview16/tern-outline.png"
+            class="tern.eclipse.ide.internal.ui.views.TernOutlineView"
+            id="tern.eclipse.ide.ui.views.TernOutlineView">
+            <!--
+            category="org.eclipse.wst.jsdt.ui.java">
+            -->
+      </view>
+  </extension>
+   <extension
+         point="org.eclipse.ui.navigator.navigatorContent">
+      <navigatorContent
+            contentProvider="tern.eclipse.ide.ui.views.TernOutlineContentProvider"
+            icon="icons/full/obj16/logo.png"
+            id="tern.eclipse.ide.ui.navigatorContent"
+            labelProvider="tern.eclipse.ide.internal.ui.views.TernOutlineLabelProvider"
+            name="%testNavigatorContent_name">
+         <triggerPoints>
+         </triggerPoints>
+      </navigatorContent>
+   </extension>
+   <extension
+         point="org.eclipse.ui.navigator.viewer">
+      <viewerContentBinding
+            viewerId="tern.eclipse.ide.ui.outline">
+         <includes>
+            <contentExtension
+                  pattern="tern.eclipse.ide.ui.navigatorContent">
+            </contentExtension>
+         </includes>
+      </viewerContentBinding>
+   </extension>
+
+	<!--======================================================================================-->
+	<!-- .tern-project editor						             -->
+	<!--======================================================================================-->
+        
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            default="true"
+            name="%editors.ternProject.name"
+            icon="icons/full/obj16/logo.png"
+            class="tern.eclipse.ide.internal.ui.editors.TernProjectEditor"
+            contributorClass="tern.eclipse.ide.internal.ui.editors.TernProjectEditorContributor"
+            id="tern.eclipse.ide.ui.editors.TernProjectEditor">
+            <contentTypeBinding contentTypeId="tern.eclipse.ide.core.ternProject"/>            
+      </editor>
+   </extension>
+   
+</plugin>

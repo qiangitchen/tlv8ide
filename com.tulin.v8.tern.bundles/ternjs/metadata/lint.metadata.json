@@ -1,0 +1,55 @@
+{
+ "name": "lint",
+ "label": "Lint",
+ "icon": "lint.png",
+ "homepage": "https://github.com/angelozerr/tern-lint",
+ "author": "Angelo ZERR <angelo.zerr@gmail.com>",
+ "description": "This plugin validate JS files (but not syntax errors).",
+ "linter": true,
+ "repository": {
+  "type": "git",
+  "url": "https://github.com/angelozerr/tern-lint.git"
+ },
+ "bugs": {
+  "url": "https://github.com/angelozerr/tern-lint/issues"
+ },
+ "options": [
+  {
+   "name": "rules",
+   "description": "Defines rules level",
+   "type": "lintRules",
+   "values": [
+    {
+     "UnknownProperty": {
+      "label": "Unknown property",
+      "severity": "warning"
+     }
+    },
+    {
+     "UnknownIdentifier": {
+      "label": "Unknown identifier",
+      "severity": "warning"
+     }
+    },
+    {
+     "NotAFunction": {
+      "label": "Not a function",
+      "severity": "error"
+     }
+    },
+    {
+     "InvalidArgument": {
+      "label": "Invalid argument",
+      "severity": "error"
+     }
+    },
+    {
+     "UnusedVariable": {
+      "label": "Unused variable",
+      "severity": "warning"
+     }
+    }
+   ]
+  }
+ ]
+}

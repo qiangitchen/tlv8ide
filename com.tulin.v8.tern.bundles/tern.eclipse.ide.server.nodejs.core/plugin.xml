@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+		
+	<extension-point id="nodeJSInstalls" name="%nodeJSInstallsContribution.name"
+		schema="schema/nodeJSInstalls.exsd" />
+	<extension-point id="nodeJSDebuggers" name="NodeJS Debuggers" 
+ 		schema="schema/nodeJSDebuggers.exsd"/>		
+	
+	<!-- Tern Nodejs server type -->
+	<extension
+		      point="tern.eclipse.ide.core.ternServerTypes">
+     <serverType
+           id="tern.eclipse.ide.server.nodejs"
+           name="%TernNodeJS.name"
+           factory="tern.eclipse.ide.server.nodejs.internal.core.TernNodejsServerFactory">
+     </serverType>
+	</extension>
+	
+	<!-- Native node.js-->
+	<extension point="tern.eclipse.ide.server.nodejs.core.nodeJSInstalls" >
+		<install id="node-native"
+				 name="%nodeJSInstall.name" 
+				 path="" />
+	 </extension>
+	 	
+	<!-- Preferences initialization -->
+	<extension
+		point="org.eclipse.core.runtime.preferences">
+		<initializer
+			class="tern.eclipse.ide.server.nodejs.internal.core.preferences.TernNodejsCorePreferenceInitializer" />
+	</extension>
+	
+	<!-- Simple Program Run debugger -->	 	
+   <extension
+         point="tern.eclipse.ide.server.nodejs.core.nodeJSDebuggers">
+      <debugger
+            class="tern.eclipse.ide.server.nodejs.internal.core.debugger.ProgramNodejsDebugger"
+            id="ProgramNodejs"
+            name="Start node.js in only run mode">
+      </debugger>
+   </extension>
+   		 	
+</plugin>

@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin
+   id="tern.eclipse.ide.server.nodejs.embed.linux.gtk.aarch64"
+>
+
+	<extension point="tern.eclipse.ide.server.nodejs.core.nodeJSInstalls" >
+		<install
+        id="node-v20.10.0-linux-arm64"
+        name="%nodeJSInstall.name"
+        path="/node-v20.10.0-linux-arm64/bin/node"
+        zip="/node-v20.10.0-linux-arm64.zip"/>
+	 </extension>
+	  
+</plugin>        

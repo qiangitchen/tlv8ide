@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+
+	<extension
+         point="org.eclipse.core.contenttype.contentTypes">
+      <content-type
+            id="tern.eclipse.ide.contenttype.js"
+            name="Java Script"
+            base-type="org.eclipse.core.runtime.text"
+            file-extensions="js">
+      </content-type>
+      <content-type
+            id="tern.eclipse.ide.contenttype.html"
+            name="HTML"
+            base-type="org.eclipse.core.runtime.text"
+            file-extensions="html,htm,xhtml,htpl,wml,shtml,shtm">
+      </content-type>
+      <content-type
+            id="tern.eclipse.ide.contenttype.jsp"
+            name="JSP"
+            base-type="org.eclipse.core.runtime.text"
+            file-extensions="jsp,jsf,jspf,jspx,tag,tagx,tagf">
+      </content-type>
+      <content-type
+            id="tern.eclipse.ide.contenttype.vue"
+            name="VUE"
+            base-type="org.eclipse.core.runtime.text"
+            file-extensions="vue">
+      </content-type>
+   </extension>   
+	
+   <extension
+         point="com.tulin.v8.webtools.ide.hoverProviders">
+      <hoverProvider
+            class="tern.tulin.v8.webtools.hover.TernGenericeditorHover"
+            contentType="tern.eclipse.ide.contenttype.js">
+      </hoverProvider>
+      <hoverProvider
+            class="tern.tulin.v8.webtools.hover.TernGenericeditorHover"
+            contentType="tern.eclipse.ide.contenttype.html">
+      </hoverProvider>
+      <hoverProvider
+            class="tern.tulin.v8.webtools.hover.TernGenericeditorHover"
+            contentType="tern.eclipse.ide.contenttype.jsp">
+      </hoverProvider>
+      <hoverProvider
+            class="tern.tulin.v8.webtools.hover.TernGenericeditorHover"
+            contentType="tern.eclipse.ide.contenttype.vue">
+      </hoverProvider>
+   </extension>
+	
+   <extension
+         point="com.tulin.v8.webtools.ide.contentAssistProcessors">
+      <contentAssistProcessor
+            class="tern.tulin.v8.webtools.contentassist.TernContentAssistProcessor"
+            contentType="tern.eclipse.ide.contenttype.js">
+      </contentAssistProcessor>
+      <contentAssistProcessor
+            class="tern.tulin.v8.webtools.contentassist.TernContentAssistProcessor"
+            contentType="tern.eclipse.ide.contenttype.html">
+      </contentAssistProcessor>
+      <contentAssistProcessor
+            class="tern.tulin.v8.webtools.contentassist.TernContentAssistProcessor"
+            contentType="tern.eclipse.ide.contenttype.jsp">
+      </contentAssistProcessor>
+      <contentAssistProcessor
+            class="tern.tulin.v8.webtools.contentassist.TernContentAssistProcessor"
+            contentType="tern.eclipse.ide.contenttype.vue">
+      </contentAssistProcessor>
+   </extension>
+   
+</plugin>
