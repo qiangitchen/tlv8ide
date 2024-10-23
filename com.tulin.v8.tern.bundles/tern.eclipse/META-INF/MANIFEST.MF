@@ -13,7 +13,7 @@ Export-Package: tern.eclipse.jface.contentassist,tern.eclipse.jface.fi
  eldassist,tern.eclipse.jface.images,tern.eclipse.jface.text,tern.ecli
  pse.jface.viewers,tern.eclipse.swt
 Bundle-Name: %pluginName
-Bundle-Version: 2.20.10.qualifier
+Bundle-Version: 3.3.0.qualifier
 Bundle-Localization: plugin
 Bundle-Activator: tern.eclipse.internal.Activator
 Automatic-Module-Name: tern.eclipse

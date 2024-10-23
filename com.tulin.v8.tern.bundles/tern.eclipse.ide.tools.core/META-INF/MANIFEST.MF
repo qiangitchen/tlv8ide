@@ -10,7 +10,7 @@ Export-Package: tern.eclipse.ide.tools.core.generator,tern.eclipse.ide
  n.eclipse.ide.tools.core.webbrowser.codemirror,tern.eclipse.ide.tools
  .core.webbrowser.orion
 Bundle-Name: %pluginName
-Bundle-Version: 2.20.10.qualifier
+Bundle-Version: 3.3.0.qualifier
 Bundle-Localization: plugin
 Bundle-Activator: tern.eclipse.ide.tools.internal.core.TernToolsCorePlugin
 Automatic-Module-Name: tern.eclipse.ide.tools.core

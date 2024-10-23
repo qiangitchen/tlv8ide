@@ -2,7 +2,7 @@
 <feature
       id="tern.linters.feature"
       label="%featureName"
-      version="2.20.10.qualifier"
+      version="3.3.0.qualifier"
       provider-name="%featureProvider">
 
    <description>

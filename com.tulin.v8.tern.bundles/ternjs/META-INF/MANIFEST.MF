@@ -6,7 +6,7 @@ Bundle-Vendor: %providerName
 Import-Package: org.osgi.framework
 Export-Package: ternjs
 Bundle-Name: %pluginName
-Bundle-Version: 2.20.10.qualifier
+Bundle-Version: 3.3.0.qualifier
 Bundle-Localization: plugin
 Bundle-Activator: ternjs.Activator
 Automatic-Module-Name: ternjs

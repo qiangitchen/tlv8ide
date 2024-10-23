@@ -11,7 +11,7 @@ Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Export-Package: tern.eclipse.ide.server.nodejs.ui.debugger.launchConfigurations,tern.eclipse.ide.server.nodejs.ui.debugger.preferences
 Bundle-Name: %pluginName
-Bundle-Version: 2.20.10.qualifier
+Bundle-Version: 3.3.0.qualifier
 Bundle-Localization: plugin
 Bundle-Activator: tern.eclipse.ide.server.nodejs.internal.ui.TernNodejsUIPlugin
 Automatic-Module-Name: tern.eclipse.ide.server.nodejs.ui

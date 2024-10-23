@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: tern.eclipse.ide.linter.eslint.core;singleton:=true
-Bundle-Version: 2.20.10.qualifier
+Bundle-Version: 3.3.0.qualifier
 Require-Bundle: org.eclipse.core.runtime,tern.eclipse.ide.core,tern.co
  re,tern.eclipse.ide.linter.core
 Bundle-ManifestVersion: 2

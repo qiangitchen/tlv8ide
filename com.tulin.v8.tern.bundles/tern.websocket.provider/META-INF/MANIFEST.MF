@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: tern.websocket.provider
-Bundle-Version: 2.20.10.qualifier
+Bundle-Version: 3.3.0.qualifier
 Bundle-Name: %bundleName
 Archiver-Version: Plexus Archiver
 Bundle-Localization: OSGI-INF/l10n/bundle-src

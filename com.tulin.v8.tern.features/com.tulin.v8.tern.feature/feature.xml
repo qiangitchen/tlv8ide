@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.tern.feature"
       label="Tern"
-      version="2.20.10.qualifier"
+      version="3.3.0.qualifier"
       provider-name="TuLin">
 
    <description>

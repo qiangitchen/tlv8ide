@@ -6,7 +6,7 @@ Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: %providerName
 Bundle-Name: %pluginName
-Bundle-Version: 2.20.10.qualifier
+Bundle-Version: 3.3.0.qualifier
 Bundle-Localization: plugin
 Bundle-Activator: tern.eclipse.ide.linter.lint.internal.ui.TernLintUIPlugin
 Automatic-Module-Name: tern.eclipse.ide.linter.lint.ui
