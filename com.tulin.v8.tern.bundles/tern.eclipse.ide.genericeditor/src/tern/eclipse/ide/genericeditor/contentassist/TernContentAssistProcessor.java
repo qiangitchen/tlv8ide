@@ -1,5 +1,6 @@
 package tern.eclipse.ide.genericeditor.contentassist;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -35,7 +36,11 @@ public class TernContentAssistProcessor implements IContentAssistProcessor {
 		IFile file = EditorUtils.getFile(document);
 		if (file != null) {
 			IProject project = file.getProject();
-			ternProject = TernResourcesManager.getTernProject(project);
+			try {
+				ternProject = TernResourcesManager.getTernProject(project, true);
+			} catch (IOException e) {
+				// ignore error
+			}
 			if (ternProject != null) {
 				ITernFile tf = new TernDocumentFile(file, document);
 				ternContext = new TernContext(ternProject, tf, offset);
