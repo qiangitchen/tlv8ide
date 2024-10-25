@@ -7,7 +7,7 @@
 <p align="center">  
   <a href="#"><img src='https://img.shields.io/badge/jdk-1.8+-redviolet.svg'/></a>
   <a href='LICENSE'><img src='https://img.shields.io/badge/License-EPL2.0-blue.svg'></img></a>
-  <a href='../../releases'><img src='https://img.shields.io/badge/gitee--release-3.0-blueviolet.svg'></a>
+  <a href='../../releases'><img src='https://img.shields.io/badge/gitee--release-3.3-blueviolet.svg'></a>
 </p>
 
 #### 介绍
