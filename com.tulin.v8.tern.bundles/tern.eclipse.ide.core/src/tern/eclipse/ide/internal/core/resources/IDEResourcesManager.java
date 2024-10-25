@@ -39,8 +39,7 @@ public class IDEResourcesManager implements ITernResourcesManagerDelegate {
 	}
 
 	@Override
-	public ITernProject getTernProject(Object obj, boolean force)
-			throws IOException {
+	public ITernProject getTernProject(Object obj, boolean force) throws IOException {
 		if (obj instanceof IProject) {
 			IProject project = (IProject) obj;
 			try {
@@ -49,28 +48,25 @@ public class IDEResourcesManager implements ITernResourcesManagerDelegate {
 				}
 				if (force) {
 					// Dispose tern project if exists
-					IDETernProject ternProject = IDETernProject
-							.getTernProject(project);
+					IDETernProject ternProject = IDETernProject.getTernProject(project);
 					if (ternProject != null) {
 						ternProject.dispose();
 					}
 				}
-				IDETernProject ternProject = IDETernProject
-						.getTernProject(project);
+				IDETernProject ternProject = IDETernProject.getTernProject(project);
 				if (ternProject == null) {
 					ternProject = new IDETernProject(project);
+					ternProject.addLib("browser"); // default browser
 					try {
 						ternProject.load();
 					} catch (IOException e) {
-						Trace.trace(Trace.SEVERE,
-								"Error while loading tern project", e);
+						Trace.trace(Trace.SEVERE, "Error while loading tern project", e);
 						throw e;
 					}
 				}
 				return ternProject;
 			} catch (CoreException ex) {
-				Trace.trace(Trace.SEVERE, "Error creating " + project.getName()
-						+ ": " + ex.getMessage(), ex);
+				Trace.trace(Trace.SEVERE, "Error creating " + project.getName() + ": " + ex.getMessage(), ex);
 			}
 		}
 		return null;
@@ -80,15 +76,10 @@ public class IDEResourcesManager implements ITernResourcesManagerDelegate {
 	public ITernFile getTernFile(ITernProject project, String name) {
 		Object file;
 		if (name.startsWith(ITernFile.EXTERNAL_PROTOCOL)) {
-			file = new File(
-					name.substring(ITernFile.EXTERNAL_PROTOCOL.length() + 1));
+			file = new File(name.substring(ITernFile.EXTERNAL_PROTOCOL.length() + 1));
 		} else if (name.startsWith(ITernFile.PROJECT_PROTOCOL)) {
-			file = ResourcesPlugin
-					.getWorkspace()
-					.getRoot()
-					.getFile(
-							new Path(name.substring(ITernFile.PROJECT_PROTOCOL
-									.length() + 1)));
+			file = ResourcesPlugin.getWorkspace().getRoot()
+					.getFile(new Path(name.substring(ITernFile.PROJECT_PROTOCOL.length() + 1)));
 		} else {
 			IProject ip = (IProject) project.getAdapter(IProject.class);
 			file = ip.getFile(name);
@@ -101,8 +92,7 @@ public class IDEResourcesManager implements ITernResourcesManagerDelegate {
 		if (fileObject instanceof File) {
 			File file = (File) fileObject;
 			// it is possible that this file maps to a file in the workspace
-			IFile[] files = ResourcesPlugin.getWorkspace().getRoot()
-					.findFilesForLocationURI(file.toURI());
+			IFile[] files = ResourcesPlugin.getWorkspace().getRoot().findFilesForLocationURI(file.toURI());
 			if (files.length == 0) {
 				return new FilesystemTernFile(file);
 			}
@@ -126,8 +116,7 @@ public class IDEResourcesManager implements ITernResourcesManagerDelegate {
 		} else if (fileObject instanceof ITernFile) {
 			return ((ITernFile) fileObject).getFileExtension();
 		} else if (fileObject instanceof File) {
-			return ExtensionUtils.getFileExtension(((File) fileObject)
-					.getName());
+			return ExtensionUtils.getFileExtension(((File) fileObject).getName());
 		} else if (fileObject instanceof String) {
 			return ExtensionUtils.getFileExtension((String) fileObject);
 		}
@@ -137,14 +126,12 @@ public class IDEResourcesManager implements ITernResourcesManagerDelegate {
 	@Override
 	public boolean isHTMLFile(Object fileObject) {
 		String ext = getExtension(fileObject);
-		return ext != null
-				&& ExtensionUtils.HTML_EXTENSIONS.contains(ext.toLowerCase());
+		return ext != null && ExtensionUtils.HTML_EXTENSIONS.contains(ext.toLowerCase());
 	}
 
 	@Override
 	public boolean isJSFile(Object fileObject) {
 		String ext = getExtension(fileObject);
-		return ext != null
-				&& ExtensionUtils.JS_EXTENSION.equals(ext.toLowerCase());
+		return ext != null && ExtensionUtils.JS_EXTENSION.equals(ext.toLowerCase());
 	}
 }
