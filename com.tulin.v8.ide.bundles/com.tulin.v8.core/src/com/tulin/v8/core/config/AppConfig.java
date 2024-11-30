@@ -29,14 +29,11 @@ import com.tulin.v8.core.entity.SpringDatasource;
  *
  */
 public class AppConfig {
-	private static AppConfig a = null;
-
-	public static AppConfig getConfig() {
-		if (a == null)
-			a = new AppConfig();
-		return a;
-	}
-
+	/**
+	 * 获取studio所在位置
+	 * 
+	 * @return 文件夹路径
+	 */
 	public static String getStudioPath() {
 		if (isMacOS())
 			return new File(System.getProperty("user.dir")).getParentFile().getParentFile().getParent();
@@ -44,14 +41,29 @@ public class AppConfig {
 			return new File(System.getProperty("user.dir")).getAbsolutePath();
 	}
 
+	/**
+	 * 获取操作系统名称
+	 * 
+	 * @return 系统名称小写
+	 */
 	public static String getOSName() {
 		return System.getProperty("os.name").toLowerCase();
 	}
 
+	/**
+	 * 判断是否问苹果操作系统
+	 * 
+	 * @return boolean
+	 */
 	public static boolean isMacOS() {
 		return getOSName().contains("mac");
 	}
 
+	/**
+	 * 获取工作空间位置
+	 * 
+	 * @return 文件夹路径
+	 */
 	public static String getWorkspacesPath() {
 		return ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
 	}
@@ -59,14 +71,10 @@ public class AppConfig {
 	/**
 	 * 获取当前项目的classes位置
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public static String getClassesPath() {
-		IProject project = TuLinPlugin.getProject("tlv8");
-		// 优先获取tlv8项目没有则获取当前项目
-		if (project == null || !project.exists()) {
-			project = TuLinPlugin.getCurrentProject();
-		}
+		IProject project = TuLinPlugin.getCurrentProject();
 		IResource resource = TuLinPlugin.getProjectWebFolder(project);
 		if (resource == null || !resource.exists()) {
 			resource = project.findMember("src/main/resources");
@@ -80,7 +88,7 @@ public class AppConfig {
 	/**
 	 * 获取资源位置
 	 * 
-	 * @return
+	 * @return String
 	 */
 	public static String getResourcesPath() {
 		IProject project = TuLinPlugin.getProject("tlv8");
@@ -110,11 +118,33 @@ public class AppConfig {
 	 * @return SpringDatasource
 	 */
 	public static SpringDatasource getSpringDatasource() {
-		IProject project = TuLinPlugin.getProject("tlv8-main");
-		// 优先获取tlv8-main项目没有则获取当前项目
-		if (project == null || !project.exists()) {
-			project = TuLinPlugin.getCurrentProject();
+		IProject project = TuLinPlugin.getCurrentProject();
+		SpringDatasource dataSource = getSpringDatasource(project);
+		if (dataSource == null) {
+			project = TuLinPlugin.getProject("tlv8");
+			if (project == null || !project.exists()) {
+				project = TuLinPlugin.getProject("tlv8-main");
+			}
+			if (project == null || !project.exists()) {
+				project = TuLinPlugin.getProject("tlv8-v3-main");
+			}
+			if (project == null || !project.exists()) {
+				project = TuLinPlugin.getProject("tlv8-admin");
+			}
+			if (project != null) {
+				dataSource = getSpringDatasource(project);
+			}
 		}
+		return dataSource;
+	}
+
+	/**
+	 * 获取spring boot 数据源配置
+	 * 
+	 * @param project 项目
+	 * @return SpringDatasource
+	 */
+	public static SpringDatasource getSpringDatasource(IProject project) {
 		if (project != null) {
 			IResource resource = project.findMember("src/main/resources/application-druid.yml");
 			if (resource != null && resource.exists()) {
@@ -147,7 +177,7 @@ public class AppConfig {
 	/**
 	 * 加载指定配置文件的数据源配置
 	 * 
-	 * @param file
+	 * @param file spring配置文件
 	 * @return com.tulin.v8.core.entity.SpringDatasource
 	 */
 	public static SpringDatasource loadSpringDatasource(File file) {
@@ -166,7 +196,7 @@ public class AppConfig {
 	/**
 	 * 加载properties文件里的数据源配置
 	 * 
-	 * @param file
+	 * @param file 配置文件
 	 * @return com.tulin.v8.core.entity.SpringDatasource
 	 */
 	public static SpringDatasource readProperties(File file) {
@@ -188,7 +218,7 @@ public class AppConfig {
 	 * 加载jdbc数据源
 	 * 
 	 * @param file
-	 * @return
+	 * @return JdbcDatasource
 	 */
 	public static JdbcDatasource readJdbcProperties(File file) {
 		JdbcDatasource jdbcDatasource = null;

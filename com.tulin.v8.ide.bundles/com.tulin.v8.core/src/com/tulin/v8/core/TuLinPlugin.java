@@ -179,6 +179,12 @@ public class TuLinPlugin extends AbstractUIPlugin {
 			project = getProject("tlv8-main");
 		}
 		if (project == null || !project.exists()) {
+			project = getProject("tlv8-v3-main");
+		}
+		if (project == null || !project.exists()) {
+			project = getProject("tlv8-admin");
+		}
+		if (project == null || !project.exists()) {
 			project = getProject("tlv8-common");
 		}
 		if (project == null || !project.exists()) {
