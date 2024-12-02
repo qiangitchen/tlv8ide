@@ -108,7 +108,7 @@ public class TuLinPlugin extends AbstractUIPlugin {
 		return selection;
 	}
 
-	static IProject project = null;
+	private static IProject project = null;
 
 	/**
 	 * 获取当前项目
@@ -116,6 +116,10 @@ public class TuLinPlugin extends AbstractUIPlugin {
 	 * @return IProject
 	 */
 	public static IProject getCurrentProject() {
+		project = ResourcesPlugin.getWorkspace().getRoot().getProject();
+		if (project != null) {
+			return project;
+		}
 		PlatformUI.getWorkbench().getDisplay().syncExec(new Runnable() {
 			public void run() {
 				ISelection selection = getSelection();
@@ -160,9 +164,9 @@ public class TuLinPlugin extends AbstractUIPlugin {
 					// 1.根据当前编辑器获取工程
 					IEditorPart part = getActiveEditor();
 					if (part != null) {
-						Object object = part.getEditorInput().getAdapter(IFile.class);
-						if (object != null) {
-							project = ((IFile) object).getProject();
+						IFile ifile = part.getEditorInput().getAdapter(IFile.class);
+						if (ifile != null) {
+							project = ifile.getProject();
 						} else {
 							project = null;
 						}
@@ -306,5 +310,24 @@ public class TuLinPlugin extends AbstractUIPlugin {
 	 */
 	public static String getCurrentProjectCharset() {
 		return getProjectCharset(getCurrentProject());
+	}
+
+	/**
+	 * 查找指定（模糊）名称的项目-返回查找到的第一个项目，没有则返回null
+	 */
+	public static IProject findProject(String... names) {
+		IProject[] projects = ResourcesPlugin.getWorkspace().getRoot().getProjects();
+		for (IProject project : projects) {
+			boolean ishv = true;
+			for (String name : names) {
+				if (!project.getName().contains(name)) {
+					ishv = false;
+				}
+			}
+			if (ishv) {
+				return project;
+			}
+		}
+		return null;
 	}
 }

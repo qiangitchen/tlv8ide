@@ -126,7 +126,10 @@ public class SpringDatasource extends AbsDataSource {
 	private String findProperties(Properties properties, String name, String pname) {
 		for (String key : properties.stringPropertyNames()) {
 			if (key.contains(name) && key.contains(pname)) {
-				return properties.getProperty(key);
+				String value = properties.getProperty(key);
+				if(!StringUtils.isEmpty(value)) {
+					return value;
+				}
 			}
 		}
 		return "";

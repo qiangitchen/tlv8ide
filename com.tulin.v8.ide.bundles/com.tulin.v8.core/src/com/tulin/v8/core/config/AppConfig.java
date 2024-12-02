@@ -122,14 +122,20 @@ public class AppConfig {
 		SpringDatasource dataSource = getSpringDatasource(project);
 		if (dataSource == null) {
 			project = TuLinPlugin.getProject("tlv8");
+//			if (project == null || !project.exists()) {
+//				project = TuLinPlugin.getProject("tlv8-main");
+//			}
+//			if (project == null || !project.exists()) {
+//				project = TuLinPlugin.getProject("tlv8-v3-main");
+//			}
+//			if (project == null || !project.exists()) {
+//				project = TuLinPlugin.getProject("tlv8-admin");
+//			}
 			if (project == null || !project.exists()) {
-				project = TuLinPlugin.getProject("tlv8-main");
+				project = TuLinPlugin.findProject("main");
 			}
 			if (project == null || !project.exists()) {
-				project = TuLinPlugin.getProject("tlv8-v3-main");
-			}
-			if (project == null || !project.exists()) {
-				project = TuLinPlugin.getProject("tlv8-admin");
+				project = TuLinPlugin.findProject("admin");
 			}
 			if (project != null) {
 				dataSource = getSpringDatasource(project);
