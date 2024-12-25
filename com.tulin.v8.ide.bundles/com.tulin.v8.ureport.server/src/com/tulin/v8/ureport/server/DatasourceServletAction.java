@@ -54,6 +54,7 @@ import com.bstek.ureport.expression.model.data.ObjectExpressionData;
 import com.bstek.ureport.utils.ProcedureUtils;
 import com.tulin.v8.core.DBUtils;
 import com.tulin.v8.core.config.AppConfig;
+import com.tulin.v8.core.entity.DynamicDatasource;
 import com.tulin.v8.core.entity.SpringDatasource;
 import com.tulin.v8.ureport.server.common.UReportWebServer.HTTPRequest;
 
@@ -92,9 +93,16 @@ public class DatasourceServletAction extends RenderPageServletAction {
 		for (String k : keys) {
 			datasources.add(k);
 		}
-		SpringDatasource spdb = AppConfig.getSpringDatasource();
-		if (spdb != null) {
-			datasources.add("spring");
+		Map<String, DynamicDatasource> dynamicDatasources = AppConfig.getDynamicDatasources();
+		if (dynamicDatasources != null && !dynamicDatasources.isEmpty()) {
+			for (String name : dynamicDatasources.keySet()) {
+				datasources.add(name);
+			}
+		} else {
+			SpringDatasource spdb = AppConfig.getSpringDatasource();
+			if (spdb != null) {
+				datasources.add("spring");
+			}
 		}
 		ByteArrayOutputStream out = new ByteArrayOutputStream();
 		try {

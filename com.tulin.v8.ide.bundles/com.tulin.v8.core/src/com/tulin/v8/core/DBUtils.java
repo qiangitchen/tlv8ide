@@ -19,6 +19,8 @@ import java.util.Map;
 import javax.naming.NamingException;
 
 import com.tulin.v8.core.config.AppConfig;
+import com.tulin.v8.core.entity.AbsDataSource;
+import com.tulin.v8.core.entity.DynamicDatasource;
 import com.tulin.v8.core.entity.SpringDatasource;
 
 @SuppressWarnings({ "unchecked", "rawtypes" })
@@ -46,8 +48,12 @@ public class DBUtils {
 			String url = (String) m.get("url");
 			return url.toUpperCase().indexOf((":postgresql:").toUpperCase()) > 0 ? true : false;
 		} else {
-			return IsPostgreSQL(AppConfig.getSpringDatasource());
+			Map<String, DynamicDatasource> datasources = AppConfig.getDynamicDatasources();
+			if (datasources != null && !datasources.isEmpty() && datasources.containsKey(key)) {
+				return IsPostgreSQL(datasources.get(key));
+			}
 		}
+		return IsPostgreSQL(AppConfig.getSpringDatasource());
 	}
 
 	/**
@@ -56,7 +62,7 @@ public class DBUtils {
 	 * @param springData
 	 * @return
 	 */
-	public static boolean IsPostgreSQL(SpringDatasource springData) {
+	public static boolean IsPostgreSQL(AbsDataSource springData) {
 		String url = springData.getUrl();
 		return url.toUpperCase().indexOf((":postgresql:").toUpperCase()) > 0 ? true : false;
 	}
@@ -74,12 +80,16 @@ public class DBUtils {
 			String url = (String) m.get("url");
 			return url.toUpperCase().indexOf((":dm:").toUpperCase()) > 0 ? true : false;
 		} else {
-			return IsDMDB(AppConfig.getSpringDatasource());
+			Map<String, DynamicDatasource> datasources = AppConfig.getDynamicDatasources();
+			if (datasources != null && !datasources.isEmpty() && datasources.containsKey(key)) {
+				return IsDMDB(datasources.get(key));
+			}
 		}
+		return IsDMDB(AppConfig.getSpringDatasource());
 	}
 
 	// 判断数据库类型达梦数据库
-	public static boolean IsDMDB(SpringDatasource springData) {
+	public static boolean IsDMDB(AbsDataSource springData) {
 		String url = springData.getUrl();
 		return url.toUpperCase().indexOf((":dm:").toUpperCase()) > 0 ? true : false;
 	}
@@ -92,8 +102,12 @@ public class DBUtils {
 			String url = (String) m.get("url");
 			return url.toUpperCase().indexOf(("kingbase").toUpperCase()) > 0 ? true : false;
 		} else {
-			return IsKingDB(AppConfig.getSpringDatasource());
+			Map<String, DynamicDatasource> datasources = AppConfig.getDynamicDatasources();
+			if (datasources != null && !datasources.isEmpty() && datasources.containsKey(key)) {
+				return IsKingDB(datasources.get(key));
+			}
 		}
+		return IsKingDB(AppConfig.getSpringDatasource());
 	}
 
 	/**
@@ -102,7 +116,7 @@ public class DBUtils {
 	 * @param springData
 	 * @return
 	 */
-	public static boolean IsKingDB(SpringDatasource springData) {
+	public static boolean IsKingDB(AbsDataSource springData) {
 		String url = springData.getUrl();
 		return url.toUpperCase().indexOf(("kingbase").toUpperCase()) > 0 ? true : false;
 	}
@@ -120,8 +134,12 @@ public class DBUtils {
 			String url = (String) m.get("url");
 			return url.toUpperCase().indexOf(("oracle").toUpperCase()) > 0 ? true : false;
 		} else {
-			return IsOracleDB(AppConfig.getSpringDatasource());
+			Map<String, DynamicDatasource> datasources = AppConfig.getDynamicDatasources();
+			if (datasources != null && !datasources.isEmpty() && datasources.containsKey(key)) {
+				return IsOracleDB(datasources.get(key));
+			}
 		}
+		return IsOracleDB(AppConfig.getSpringDatasource());
 	}
 
 	/**
@@ -130,7 +148,7 @@ public class DBUtils {
 	 * @param springData
 	 * @return
 	 */
-	public static boolean IsOracleDB(SpringDatasource springData) {
+	public static boolean IsOracleDB(AbsDataSource springData) {
 		String url = springData.getUrl();
 		return url.toUpperCase().indexOf(("oracle").toUpperCase()) > 0 ? true : false;
 	}
@@ -148,8 +166,12 @@ public class DBUtils {
 			String url = (String) m.get("url");
 			return url.toUpperCase().indexOf(("mysql").toUpperCase()) > 0 ? true : false;
 		} else {
-			return IsMySQLDB(AppConfig.getSpringDatasource());
+			Map<String, DynamicDatasource> datasources = AppConfig.getDynamicDatasources();
+			if (datasources != null && !datasources.isEmpty() && datasources.containsKey(key)) {
+				return IsMySQLDB(datasources.get(key));
+			}
 		}
+		return IsMySQLDB(AppConfig.getSpringDatasource());
 	}
 
 	/**
@@ -158,7 +180,7 @@ public class DBUtils {
 	 * @param springData
 	 * @return
 	 */
-	public static boolean IsMySQLDB(SpringDatasource springData) {
+	public static boolean IsMySQLDB(AbsDataSource springData) {
 		String url = springData.getUrl();
 		return url.toUpperCase().indexOf(("mysql").toUpperCase()) > 0 ? true : false;
 	}
@@ -176,8 +198,12 @@ public class DBUtils {
 			String url = (String) m.get("url");
 			return url.toUpperCase().indexOf(("jtds").toUpperCase()) > 0 ? true : false;
 		} else {
-			return IsMSSQLDB(AppConfig.getSpringDatasource());
+			Map<String, DynamicDatasource> datasources = AppConfig.getDynamicDatasources();
+			if (datasources != null && !datasources.isEmpty() && datasources.containsKey(key)) {
+				return IsMSSQLDB(datasources.get(key));
+			}
 		}
+		return IsMSSQLDB(AppConfig.getSpringDatasource());
 	}
 
 	/**
@@ -186,7 +212,7 @@ public class DBUtils {
 	 * @param key
 	 * @return
 	 */
-	public static boolean IsMSSQLDB(SpringDatasource springData) {
+	public static boolean IsMSSQLDB(AbsDataSource springData) {
 		String url = springData.getUrl();
 		return url.toUpperCase().indexOf(("jtds").toUpperCase()) > 0 ? true : false;
 	}
@@ -224,9 +250,13 @@ public class DBUtils {
 				throw new SQLException(eJ.toString());
 			}
 		} else {
-			SpringDatasource datasource = AppConfig.getSpringDatasource();
-			cn = getAppConn(datasource);
+			Map<String, DynamicDatasource> datasources = AppConfig.getDynamicDatasources();
+			if (datasources != null && !datasources.isEmpty() && datasources.containsKey(key)) {
+				return getAppConn(datasources.get(key));
+			}
 		}
+		SpringDatasource datasource = AppConfig.getSpringDatasource();
+		cn = getAppConn(datasource);
 		return cn;
 	}
 
@@ -237,10 +267,10 @@ public class DBUtils {
 	 * @throws SQLException
 	 * @throws NamingException
 	 */
-	public static Connection getAppConn() throws SQLException, NamingException {
-		SpringDatasource datasource = AppConfig.getSpringDatasource();
-		return getAppConn(datasource);
-	}
+//	public static Connection getAppConn() throws SQLException, NamingException {
+//		SpringDatasource datasource = AppConfig.getSpringDatasource();
+//		return getAppConn(datasource);
+//	}
 
 	/**
 	 * 获取连接
@@ -250,10 +280,10 @@ public class DBUtils {
 	 * @throws SQLException
 	 * @throws NamingException
 	 */
-	public static Connection getAppConn(SpringDatasource springData) throws SQLException, NamingException {
+	public static Connection getAppConn(AbsDataSource springData) throws SQLException, NamingException {
 		Connection cn = null;
 		if (cn == null) {
-			String driverStr = springData.getDriverClassName();
+			String driverStr = springData.getDriver();
 			String url = springData.getUrl();
 			String userName = springData.getUsername();
 			String password = springData.getPassword();
@@ -327,7 +357,7 @@ public class DBUtils {
 	 * @param springData
 	 * @return
 	 */
-	public static String getDataName(SpringDatasource springData) {
+	public static String getDataName(AbsDataSource springData) {
 		String result = "";
 		String url = springData.getUrl();
 		if (IsOracleDB(springData)) {
@@ -561,84 +591,84 @@ public class DBUtils {
 	 * @return {@link java.util.List}
 	 * @throws SQLException
 	 */
-	public static List execQueryforList(String sql) throws SQLException {
-		ResultSet rs = null;
-		ResultSetMetaData rsmd = null;
-		List li = new ArrayList();
-		Connection aConn = null;
-		try {
-			aConn = getAppConn();
-		} catch (NamingException e1) {
-			e1 = new NamingException(e1.toString() + ">>SQL:" + sql);
-		}
-		Statement qry = aConn.createStatement(1004, 1007);
-		try {
-			rs = qry.executeQuery(sql);
-			rsmd = rs.getMetaData();
-			int size = rsmd.getColumnCount();
-			while (rs.next()) {
-				Map sm = new HashMap();
-				for (int i = 1; i <= size; i++) {
-					String cellType = rsmd.getColumnTypeName(i);
-					String cellName = rsmd.getColumnLabel(i).toUpperCase();
-					if ("DATE".equals(cellType) || "DATETIME".equals(cellType)) {
-						try {
-							try {
-								SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-								String v_l = format.format(format.parse(rs.getString(i)));
-								sm.put(cellName, v_l);
-							} catch (Exception e) {
-								try {
-									SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
-									SimpleDateFormat nformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-									String v_l = nformat.format(format.parse(rs.getString(i)));
-									sm.put(cellName, v_l);
-								} catch (Exception er) {
-									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-									String v_l = format.format(format.parse(rs.getString(i)));
-									sm.put(cellName, v_l);
-								}
-							}
-						} catch (Exception e) {
-							sm.put(cellName, "");
-						}
-					} else if ("BLOB".equals(cellType)) {
-						try {
-							sm.put(cellName, rs.getBlob(i));
-						} catch (Exception e) {
-							sm.put(cellName, null);
-						}
-					} else if ("CLOB".equals(cellType)) {
-						Clob clob = rs.getClob(i);
-						String content = "";
-						if (clob != null) {
-							BufferedReader in = new BufferedReader(clob.getCharacterStream());
-							StringWriter out = new StringWriter();
-							int c;
-							try {
-								while ((c = in.read()) != -1) {
-									out.write(c);
-								}
-							} catch (IOException e) {
-								e.printStackTrace();
-							}
-							content = out.toString();
-						}
-						sm.put(cellName, content);
-					} else {
-						sm.put(cellName, (rs.getString(i) == null) ? "" : String.valueOf(rs.getString(i)));
-					}
-				}
-
-				li.add(sm);
-			}
-		} catch (SQLException e) {
-			throw new SQLException(e.toString() + ">>\n sql:" + sql);
-		} finally {
-			CloseConn(aConn, qry, rs);
-		}
-		return li;
-	}
+//	public static List execQueryforList(String sql) throws SQLException {
+//		ResultSet rs = null;
+//		ResultSetMetaData rsmd = null;
+//		List li = new ArrayList();
+//		Connection aConn = null;
+//		try {
+//			aConn = getAppConn();
+//		} catch (NamingException e1) {
+//			e1 = new NamingException(e1.toString() + ">>SQL:" + sql);
+//		}
+//		Statement qry = aConn.createStatement(1004, 1007);
+//		try {
+//			rs = qry.executeQuery(sql);
+//			rsmd = rs.getMetaData();
+//			int size = rsmd.getColumnCount();
+//			while (rs.next()) {
+//				Map sm = new HashMap();
+//				for (int i = 1; i <= size; i++) {
+//					String cellType = rsmd.getColumnTypeName(i);
+//					String cellName = rsmd.getColumnLabel(i).toUpperCase();
+//					if ("DATE".equals(cellType) || "DATETIME".equals(cellType)) {
+//						try {
+//							try {
+//								SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//								String v_l = format.format(format.parse(rs.getString(i)));
+//								sm.put(cellName, v_l);
+//							} catch (Exception e) {
+//								try {
+//									SimpleDateFormat format = new SimpleDateFormat("MM/dd/yyyy HH:mm:ss");
+//									SimpleDateFormat nformat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+//									String v_l = nformat.format(format.parse(rs.getString(i)));
+//									sm.put(cellName, v_l);
+//								} catch (Exception er) {
+//									SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+//									String v_l = format.format(format.parse(rs.getString(i)));
+//									sm.put(cellName, v_l);
+//								}
+//							}
+//						} catch (Exception e) {
+//							sm.put(cellName, "");
+//						}
+//					} else if ("BLOB".equals(cellType)) {
+//						try {
+//							sm.put(cellName, rs.getBlob(i));
+//						} catch (Exception e) {
+//							sm.put(cellName, null);
+//						}
+//					} else if ("CLOB".equals(cellType)) {
+//						Clob clob = rs.getClob(i);
+//						String content = "";
+//						if (clob != null) {
+//							BufferedReader in = new BufferedReader(clob.getCharacterStream());
+//							StringWriter out = new StringWriter();
+//							int c;
+//							try {
+//								while ((c = in.read()) != -1) {
+//									out.write(c);
+//								}
+//							} catch (IOException e) {
+//								e.printStackTrace();
+//							}
+//							content = out.toString();
+//						}
+//						sm.put(cellName, content);
+//					} else {
+//						sm.put(cellName, (rs.getString(i) == null) ? "" : String.valueOf(rs.getString(i)));
+//					}
+//				}
+//
+//				li.add(sm);
+//			}
+//		} catch (SQLException e) {
+//			throw new SQLException(e.toString() + ">>\n sql:" + sql);
+//		} finally {
+//			CloseConn(aConn, qry, rs);
+//		}
+//		return li;
+//	}
 
 	/**
 	 * 查詢操作[为了兼容老版本]不推荐使用

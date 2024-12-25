@@ -1,10 +1,19 @@
 package com.tulin.v8.core.entity;
 
 public abstract class AbsDataSource {
+	protected String name;
 	protected String url = "";
 	protected String username;
 	protected String password;
-	
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
 	public abstract String getDriver();
 
 	public String getUrl() {

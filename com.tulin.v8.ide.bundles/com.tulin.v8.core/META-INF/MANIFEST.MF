@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.tulin.v8.core
-Bundle-Version: 3.3.0.qualifier
+Bundle-Version: 3.3.1.qualifier
 Bundle-Vendor: TuLin
 Bundle-ClassPath: .,
  lib/jtds-1.3.1.jar,
@@ -20,7 +20,8 @@ Bundle-ClassPath: .,
  lib/spring-core-4.1.2.RELEASE.jar,
  lib/spring-beans-4.1.2.RELEASE.jar,
  lib/commons-logging-1.1.1.jar,
- lib/snakeyaml-1.30.jar
+ lib/snakeyaml-1.30.jar,
+ lib/snakeyaml-2.3.jar
 Export-Package: chrriis.common,
  chrriis.dj.nativeswing,
  com.kingbase8,
@@ -338,6 +339,8 @@ Export-Package: chrriis.common,
  org.yaml.snakeyaml.extensions.compactnotation,
  org.yaml.snakeyaml.external.biz.base64Coder,
  org.yaml.snakeyaml.external.com.google.gdata.util.common.base,
+ org.yaml.snakeyaml.inspector,
+ org.yaml.snakeyaml.internal,
  org.yaml.snakeyaml.introspector,
  org.yaml.snakeyaml.nodes,
  org.yaml.snakeyaml.parser,

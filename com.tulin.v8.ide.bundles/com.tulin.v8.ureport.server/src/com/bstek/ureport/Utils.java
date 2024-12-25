@@ -42,6 +42,7 @@ import com.bstek.ureport.model.Report;
 import com.bstek.ureport.provider.image.ImageProvider;
 import com.tulin.v8.core.DBUtils;
 import com.tulin.v8.core.config.AppConfig;
+import com.tulin.v8.core.entity.DynamicDatasource;
 import com.tulin.v8.core.entity.SpringDatasource;
 
 /**
@@ -247,27 +248,52 @@ public class Utils implements ApplicationContextAware {
 
 				});
 			}
-			SpringDatasource spdb = AppConfig.getSpringDatasource();
-			if (spdb != null) {
-				buildinDatasources.add(new BuildinDatasource() {
-					@Override
-					public String name() {
-						return "spring";
-					}
-
-					@Override
-					public Connection getConnection() {
-						try {
-							return DBUtils.getAppConn("spring");
-						} catch (SQLException e) {
-							e.printStackTrace();
-						} catch (NamingException e) {
-							e.printStackTrace();
+			Map<String, DynamicDatasource> dynamicDatasources = AppConfig.getDynamicDatasources();
+			if (dynamicDatasources != null && !dynamicDatasources.isEmpty()) {
+				for (String name : dynamicDatasources.keySet()) {
+					buildinDatasources.add(new BuildinDatasource() {
+						@Override
+						public String name() {
+							return name;
 						}
-						return null;
-					}
 
-				});
+						@Override
+						public Connection getConnection() {
+							try {
+								return DBUtils.getAppConn(name);
+							} catch (SQLException e) {
+								e.printStackTrace();
+							} catch (NamingException e) {
+								e.printStackTrace();
+							}
+							return null;
+						}
+
+					});
+				}
+			} else {
+				SpringDatasource spdb = AppConfig.getSpringDatasource();
+				if (spdb != null) {
+					buildinDatasources.add(new BuildinDatasource() {
+						@Override
+						public String name() {
+							return "spring";
+						}
+
+						@Override
+						public Connection getConnection() {
+							try {
+								return DBUtils.getAppConn("spring");
+							} catch (SQLException e) {
+								e.printStackTrace();
+							} catch (NamingException e) {
+								e.printStackTrace();
+							}
+							return null;
+						}
+
+					});
+				}
 			}
 		} catch (Exception e) {
 		}

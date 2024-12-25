@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/snakeyaml-2.3.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/snakeyaml-1.30.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/commons-logging-1.1.1.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/spring-beans-4.1.2.RELEASE.jar"/>

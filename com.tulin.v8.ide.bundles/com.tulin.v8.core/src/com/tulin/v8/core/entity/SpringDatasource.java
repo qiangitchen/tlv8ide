@@ -30,9 +30,11 @@ public class SpringDatasource extends AbsDataSource {
 	private Map<String, Map<String, Object>> filter;
 
 	public SpringDatasource() {
+		this.name = "spring";
 	}
 
 	public SpringDatasource(Properties properties) {
+		this.name = "spring";
 		this.type = properties.getProperty("spring.datasource.type");
 		this.driverClassName = properties.getProperty("spring.datasource.driverClassName");
 		this.url = properties.getProperty("spring.datasource.url");
@@ -69,17 +71,17 @@ public class SpringDatasource extends AbsDataSource {
 				this.driverClassName = properties.getProperty("spring.datasource.datasource.master.driver-class-name");
 			}
 		}
-		if (StringUtils.isEmpty(this.url) || StringUtils.isEmpty(this.driverClassName)) {
-			this.driverClassName = properties
-					.getProperty("spring.datasource.dynamic.datasource.master.driverClassName");
-			this.url = properties.getProperty("spring.datasource.dynamic.datasource.master.url");
-			this.username = properties.getProperty("spring.datasource.dynamic.datasource.master.username");
-			this.password = properties.getProperty("spring.datasource.dynamic.datasource.master.password");
-			if (!StringUtils.isEmpty(this.url) && StringUtils.isEmpty(this.driverClassName)) {
-				this.driverClassName = properties
-						.getProperty("spring.datasource.dynamic.datasource.master.driver-class-name");
-			}
-		}
+//		if (StringUtils.isEmpty(this.url) || StringUtils.isEmpty(this.driverClassName)) {
+//			this.driverClassName = properties
+//					.getProperty("spring.datasource.dynamic.datasource.master.driverClassName");
+//			this.url = properties.getProperty("spring.datasource.dynamic.datasource.master.url");
+//			this.username = properties.getProperty("spring.datasource.dynamic.datasource.master.username");
+//			this.password = properties.getProperty("spring.datasource.dynamic.datasource.master.password");
+//			if (!StringUtils.isEmpty(this.url) && StringUtils.isEmpty(this.driverClassName)) {
+//				this.driverClassName = properties
+//						.getProperty("spring.datasource.dynamic.datasource.master.driver-class-name");
+//			}
+//		}
 		if (StringUtils.isEmpty(this.driverClassName)) {
 			this.driverClassName = findDriverClassName(properties);
 		}
@@ -127,7 +129,7 @@ public class SpringDatasource extends AbsDataSource {
 		for (String key : properties.stringPropertyNames()) {
 			if (key.contains(name) && key.contains(pname)) {
 				String value = properties.getProperty(key);
-				if(!StringUtils.isEmpty(value)) {
+				if (!StringUtils.isEmpty(value)) {
 					return value;
 				}
 			}

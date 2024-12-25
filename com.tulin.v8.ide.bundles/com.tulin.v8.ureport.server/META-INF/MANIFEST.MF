@@ -3,7 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: TuLin Ureport Server
 Bundle-Vendor: TuLin
 Bundle-SymbolicName: com.tulin.v8.ureport.server;singleton:=true
-Bundle-Version: 2.3.1.qualifier
+Bundle-Version: 2.3.2.qualifier
 Bundle-Activator: com.tulin.v8.ureport.server.Activator
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin

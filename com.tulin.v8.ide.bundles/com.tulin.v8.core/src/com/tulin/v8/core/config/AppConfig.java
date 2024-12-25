@@ -2,6 +2,8 @@ package com.tulin.v8.core.config;
 
 import java.io.File;
 import java.io.FileInputStream;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Properties;
 
 import org.eclipse.core.resources.IProject;
@@ -18,6 +20,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 import com.tulin.v8.core.TuLinPlugin;
+import com.tulin.v8.core.entity.DynamicDatasource;
 import com.tulin.v8.core.entity.JdbcDatasource;
 import com.tulin.v8.core.entity.Spring;
 import com.tulin.v8.core.entity.SpringDatasource;
@@ -110,6 +113,65 @@ public class AppConfig {
 			}
 		}
 		return ResourcesPlugin.getWorkspace().getRoot().getLocation().toString();
+	}
+
+	public static Map<String, DynamicDatasource> getDynamicDatasources() {
+		IProject project = TuLinPlugin.getCurrentProject();
+		Map<String, DynamicDatasource> map = getDynamicDatasources(project);
+		if (map.isEmpty()) {
+			if (project == null || !project.exists()) {
+				project = TuLinPlugin.findProject("main");
+			}
+			if (project == null || !project.exists()) {
+				project = TuLinPlugin.findProject("admin");
+			}
+			if (project != null) {
+				map = getDynamicDatasources(project);
+			}
+		}
+		return map;
+	}
+
+	@SuppressWarnings("unchecked")
+	public static Map<String, DynamicDatasource> getDynamicDatasources(IProject project) {
+		Map<String, DynamicDatasource> map = new HashMap<>();
+		try {
+			IResource resource = project.findMember("src/main/resources/application.yml");
+			if (resource != null && resource.exists()) {
+				Yaml yaml = new Yaml();
+				FileInputStream in = new FileInputStream(resource.getLocation().toFile());
+				Map<String, Object> loadedMap = yaml.load(in);
+				Map<String, Object> spring = (Map<String, Object>) loadedMap.get("spring");
+				Map<String, Object> datasource = (Map<String, Object>) spring.get("datasource");
+				if (datasource != null) {
+					Map<String, Object> dynamic = (Map<String, Object>) datasource.get("dynamic");
+					Map<String, Object> dynamicDatasource = (Map<String, Object>) dynamic.get("datasource");
+					for (String name : dynamicDatasource.keySet()) {
+						map.put(name, new DynamicDatasource(name, (Map<String, Object>) dynamicDatasource.get(name)));
+					}
+				} else {
+					Map<String, Object> profiles = (Map<String, Object>) spring.get("profiles");
+					String active = (String) profiles.get("active");
+					IResource aresource = project.findMember("src/main/resources/application-" + active + ".yml");
+					if (aresource != null && aresource.exists()) {
+						Yaml ayaml = new Yaml();
+						FileInputStream ain = new FileInputStream(aresource.getLocation().toFile());
+						Map<String, Object> aloadedMap = ayaml.load(ain);
+						Map<String, Object> aspring = (Map<String, Object>) aloadedMap.get("spring");
+						Map<String, Object> adatasource = (Map<String, Object>) aspring.get("datasource");
+						Map<String, Object> adynamic = (Map<String, Object>) adatasource.get("dynamic");
+						Map<String, Object> dynamicDatasource = (Map<String, Object>) adynamic.get("datasource");
+						for (String name : dynamicDatasource.keySet()) {
+							map.put(name,
+									new DynamicDatasource(name, (Map<String, Object>) dynamicDatasource.get(name)));
+						}
+					}
+				}
+			}
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+		}
+		return map;
 	}
 
 	/**

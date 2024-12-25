@@ -17,9 +17,11 @@ public class JdbcDatasource extends AbsDataSource {
 	private int maxWait = 60000;
 
 	public JdbcDatasource() {
+		this.name = "jdbc";
 	}
 
 	public JdbcDatasource(Properties properties) {
+		this.name = "jdbc";
 		this.driver = properties.getProperty("driver");
 		this.url = properties.getProperty("url");
 		this.setUsername(properties.getProperty("username"));
