@@ -55,7 +55,7 @@ public class EasyLookAction implements IObjectActionDelegate {
 
 	public void openLinuxExplorer(String path) throws Exception {
 		// Unix or Linux的打开方式
-		String[] explorers = { "dde-file-manager", "peony", "nautilus" };
+		String[] explorers = { "dde-file-manager", "peony", "nautilus", "nemo" };
 		String explorer = null;
 		for (int count = 0; count < explorers.length && explorer == null; count++)
 			// 执行代码，在brower有值后跳出，

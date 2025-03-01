@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.easylook.feature"
       label="TuLin Switch to Explorer"
-      version="2.2.0.qualifier"
+      version="3.0.0.qualifier"
       provider-name="TuLin"
       plugin="com.tulin.v8.easylook">
 
@@ -296,9 +296,6 @@ version(s), and exceptions or additional permissions here}.&quot;
 
    <plugin
          id="com.tulin.v8.easylook"
-         download-size="0"
-         install-size="0"
-         version="0.0.0"
-         unpack="false"/>
+         version="0.0.0"/>
 
 </feature>
