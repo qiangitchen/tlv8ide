@@ -1,11 +1,11 @@
 package com.tulin.v8.editors.page.design.listener;
 
-import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.ProgressEvent;
 import org.eclipse.swt.browser.ProgressListener;
 
 import com.tulin.v8.editors.page.PageEditorInterface;
 import com.tulin.v8.editors.page.design.WEBDesignEditorInterface;
+import com.tulin.v8.swt.chromium.Browser;
 
 public class DProgressListener implements ProgressListener {
 

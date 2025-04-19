@@ -7,8 +7,6 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.dialogs.ErrorDialog;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.browser.Browser;
-import org.eclipse.swt.browser.BrowserFunction;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -23,6 +21,8 @@ import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.part.MultiPageEditorPart;
 
 import com.tulin.v8.core.utils.LocalBrowser;
+import com.tulin.v8.swt.chromium.Browser;
+import com.tulin.v8.swt.chromium.BrowserFunction;
 import com.tulin.v8.ureport.server.utils.UreportWebappManager;
 import com.tulin.v8.ureport.ui.Messages;
 import com.tulin.v8.ureport.ui.editors.designer.call.ImportExcelReportFile;

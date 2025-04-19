@@ -1,10 +1,10 @@
 package com.tulin.v8.flowdesigner.ui.editors.process.listener;
 
-import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.StatusTextEvent;
 import org.eclipse.swt.browser.StatusTextListener;
 
 import com.tulin.v8.flowdesigner.ui.editors.process.FlowDesignEditor;
+import com.tulin.v8.swt.chromium.Browser;
 
 public class BrowserStatusTextListener implements StatusTextListener {
 	FlowDesignEditor editor;

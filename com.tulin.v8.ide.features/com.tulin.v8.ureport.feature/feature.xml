@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.ureport.feature"
       label="TuLin UReport"
-      version="3.2.1.qualifier"
+      version="3.3.0.qualifier"
       provider-name="TuLin"
       plugin="com.tulin.v8.ureport.ui">
 

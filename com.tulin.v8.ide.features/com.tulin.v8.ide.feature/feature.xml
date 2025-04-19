@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.ide.feature"
       label="TuLin IDE"
-      version="3.3.1.qualifier"
+      version="3.4.0.qualifier"
       provider-name="TuLin"
       plugin="com.tulin.v8.ide.ui">
 
@@ -363,6 +363,10 @@ version(s), and exceptions or additional permissions here}.&quot;
 
    <includes
          id="tern.tulin.v8.webtools.feature"
+         version="0.0.0"/>
+
+   <includes
+         id="com.tulin.v8.swt.chromium.feature"
          version="0.0.0"/>
 
    <plugin

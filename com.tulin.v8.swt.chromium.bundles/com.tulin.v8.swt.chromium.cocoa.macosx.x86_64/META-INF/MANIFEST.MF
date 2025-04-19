@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TuLin Chromium SWT Mac OS x x86_64
+Bundle-SymbolicName: com.tulin.v8.swt.chromium.cocoa.macosx.x86_64
+Bundle-Version: 3.3.0.qualifier
+Bundle-Vendor: TuLin
+Fragment-Host: com.tulin.v8.swt.chromium
+Automatic-Module-Name: com.tulin.v8.swt.chromium.cocoa.macosx.x86_64
+Bundle-ClassPath: lib/jcefmaven-95.7.14.jar,
+ .
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Eclipse-PlatformFilter: (& (osgi.ws=cocoa) (osgi.os=macosx) (osgi.arch=x86_64))

@@ -3,7 +3,6 @@ package com.tulin.v8.editors.page.design;
 import java.io.File;
 
 import org.eclipse.jface.action.IMenuManager;
-import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.widgets.TableItem;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.swt.widgets.Tree;
@@ -13,6 +12,7 @@ import org.jsoup.nodes.Document;
 
 import com.tulin.v8.editors.html.HTMLEditor;
 import com.tulin.v8.editors.page.PageEditorInterface;
+import com.tulin.v8.swt.chromium.Browser;
 
 public interface WEBDesignEditorInterface {
 

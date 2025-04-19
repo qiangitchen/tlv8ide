@@ -1,10 +1,9 @@
 package com.tulin.v8.editors.page.design.listener;
 
-import org.eclipse.swt.browser.OpenWindowListener;
-import org.eclipse.swt.browser.WindowEvent;
-
 import com.tulin.v8.editors.page.PageEditorInterface;
 import com.tulin.v8.editors.page.design.WEBDesignEditorInterface;
+import com.tulin.v8.swt.chromium.OpenWindowListener;
+import com.tulin.v8.swt.chromium.WindowEvent;
 
 public class DOpenWindowListener implements OpenWindowListener {
 	PageEditorInterface pageeditor;

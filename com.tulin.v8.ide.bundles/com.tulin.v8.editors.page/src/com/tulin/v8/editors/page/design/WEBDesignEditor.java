@@ -20,7 +20,6 @@ import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.swt.SWT;
-import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.custom.TableEditor;
 import org.eclipse.swt.events.MouseEvent;
@@ -81,6 +80,7 @@ import com.tulin.v8.editors.page.design.listener.DStatusTextListener;
 import com.tulin.v8.editors.page.design.listener.DTitleListener;
 import com.tulin.v8.editors.page.server.common.PageWebServer;
 import com.tulin.v8.editors.page.server.utils.WebappManager;
+import com.tulin.v8.swt.chromium.Browser;
 
 /**
  * @Des 网页设计器(预览效果)

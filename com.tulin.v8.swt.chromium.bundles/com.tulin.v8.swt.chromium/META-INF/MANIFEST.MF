@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: TuLin Chromium SWT Browser
+Bundle-SymbolicName: com.tulin.v8.swt.chromium
+Bundle-Version: 3.3.0.qualifier
+Export-Package: com.tulin.v8.swt.chromium
+Bundle-Vendor: TuLin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.swt
+Automatic-Module-Name: com.tulin.v8.swt.chromium
+Bundle-ClassPath: lib/commons-compress-1.21.jar,
+ lib/fastjson-2.0.53.jar,
+ lib/fastjson2-2.0.53.jar,
+ lib/fastjson2-extension-2.0.53.jar,
+ lib/gson-2.10.jar,
+ lib/jogl-all-v2.4.0-rc-20210111.jar,
+ lib/json-simple-1.1.1.jar,
+ lib/jcef-api-jcef-ae6912a+cef-95.7.14+g9f72f35+chromium-95.0.4638.69.jar,
+ .

@@ -50,6 +50,11 @@
 						<environment>
 							<os>win32</os>
 							<ws>win32</ws>
+							<arch>aarch64</arch>
+						</environment>
+						<environment>
+							<os>win32</os>
+							<ws>win32</ws>
 							<arch>x86</arch>
 						</environment>
 						<environment>
@@ -119,6 +124,7 @@
 		<module>com.tulin.v8.tern.bundles</module>
 		<module>com.tulin.v8.tern.features</module>
 		<module>com.tulin.v8.tern.releng</module>
+		<module>com.tulin.v8.swt.chromium.bundles</module>
 		<module>com.tulin.v8.ide.bundles</module>
 		<module>com.tulin.v8.ide.features</module>
 		<module>com.tulin.v8.ide.releng</module>

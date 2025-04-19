@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: %Bundle-Name
 Bundle-SymbolicName: com.tulin.v8.flowdesigner.ui;singleton:=true
-Bundle-Version: 3.2.0.qualifier
+Bundle-Version: 3.3.0.qualifier
 Bundle-Activator: com.tulin.v8.flowdesigner.ui.Activator
 Bundle-Encoding: UTF-8
 Bundle-Localization: plugin
@@ -15,7 +15,8 @@ Require-Bundle: org.eclipse.jface.text,
  org.eclipse.ui.editors,
  com.tulin.v8.core,
  com.tulin.v8.flowdesigner.server,
- com.tulin.v8.webtools.ide
+ com.tulin.v8.webtools.ide,
+ com.tulin.v8.swt.chromium;bundle-version="3.3.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: com.tulin.v8.flowdesigner.ui
 Bundle-ActivationPolicy: lazy

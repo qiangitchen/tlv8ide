@@ -141,7 +141,9 @@ public class OrgTreeComposite extends Composite {
 
 	public void select(String id) {
 		TreeItem item = orgItem.get(id);
-		Orgview.select(item);
+		if (item != null) {
+			Orgview.select(item);
+		}
 		if (orgtreeselectionadapter != null) {
 			orgtreeselectionadapter.widgetSelected(Orgview);
 		}

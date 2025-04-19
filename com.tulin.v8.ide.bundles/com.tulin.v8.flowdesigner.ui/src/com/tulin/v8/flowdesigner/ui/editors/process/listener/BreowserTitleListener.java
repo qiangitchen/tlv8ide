@@ -1,6 +1,5 @@
 package com.tulin.v8.flowdesigner.ui.editors.process.listener;
 
-import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.browser.TitleEvent;
 import org.eclipse.swt.browser.TitleListener;
 import org.eclipse.swt.widgets.TreeItem;
@@ -10,6 +9,7 @@ import org.json.JSONObject;
 import com.tulin.v8.flowdesigner.ui.editors.process.FlowDesignEditor;
 import com.tulin.v8.flowdesigner.ui.editors.process.call.JSONToItem;
 import com.tulin.v8.flowdesigner.ui.editors.process.element.ConditionPropertySet;
+import com.tulin.v8.swt.chromium.Browser;
 
 /**
  * 监听title进行JS与Java交互操作
