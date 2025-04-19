@@ -8,7 +8,7 @@
 	<parent>
 		<groupId>com.tulin.v8.ide</groupId>
 		<artifactId>com.tulin.v8.swt.chromium.bundles</artifactId>
-		<version>3.3.0-SNAPSHOT</version>
+		<version>3.4.0-SNAPSHOT</version>
 	</parent>
 
 	<build>
