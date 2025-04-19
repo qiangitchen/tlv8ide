@@ -7,6 +7,7 @@ Bundle-Vendor: TuLin
 Fragment-Host: com.tulin.v8.swt.chromium
 Automatic-Module-Name: com.tulin.v8.swt.chromium.gtk.linux.x86_64
 Bundle-ClassPath: lib/jcefmaven-95.7.14.jar,
+ lib/jcef-natives-linux-arm64-jcef-ae6912a+cef-95.7.14+g9f72f35+chromium-95.0.4638.69.jar,
  .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Eclipse-PlatformFilter: (& (osgi.ws=gtk) (osgi.os=linux) (osgi.arch=aarch64))
