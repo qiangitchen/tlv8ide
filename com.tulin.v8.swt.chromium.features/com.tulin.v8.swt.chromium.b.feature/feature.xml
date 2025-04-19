@@ -1,13 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="com.tulin.v8.ide.feature"
-      label="TuLin IDE"
+      id="com.tulin.v8.swt.chromium.b.feature"
+      label="TuLin Chromium SWT Browser Embed  Feature"
       version="3.4.0.qualifier"
-      provider-name="TuLin"
-      plugin="com.tulin.v8.ide.ui">
+      provider-name="TuLin">
 
    <description>
-      TuLinv8 IDE
+      CEF binaries for Chromium SWT Browser
    </description>
 
    <copyright url="https://www.tlv8.com">
@@ -294,103 +293,46 @@ version(s), and exceptions or additional permissions here}.&quot;
   You may add additional accurate notices of copyright ownership.
    </license>
 
-   <includes
-         id="com.tulin.v8.echarts.ui.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.editors.fn.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.editors.function.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.editors.page.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.flowdesigner.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.ureport.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.dbviewer.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.easylook.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.markdown.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.tomcat.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.editors.vue.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.vue.ui.feature"
-         version="0.0.0"
-         optional="true"/>
-
-   <includes
-         id="com.tulin.v8.editors.ini.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.core.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.webtools.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="tern.tulin.v8.webtools.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.swt.chromium.feature"
-         version="0.0.0"/>
-
-   <includes
-         id="com.tulin.v8.swt.chromium.b.feature"
+   <plugin
+         id="com.tulin.v8.swt.chromium.cocoa.macosx.aarch64"
+         os="macosx"
+         ws="cocoa"
+         arch="aarch64"
          version="0.0.0"/>
 
    <plugin
-         id="com.tulin.v8.core"
+         id="com.tulin.v8.swt.chromium.cocoa.macosx.x86_64"
+         os="macosx"
+         ws="cocoa"
+         arch="x86_64"
          version="0.0.0"/>
 
    <plugin
-         id="com.tulin.v8.imageviewer"
+         id="com.tulin.v8.swt.chromium.gtk.linux.aarch64"
+         os="linux"
+         ws="gtk"
+         arch="aarch64"
          version="0.0.0"/>
 
    <plugin
-         id="com.tulin.v8.platform"
+         id="com.tulin.v8.swt.chromium.gtk.linux.x86_64"
+         os="linux"
+         ws="gtk"
+         arch="x86_64"
          version="0.0.0"/>
 
    <plugin
-         id="com.tulin.v8.ide.ui"
+         id="com.tulin.v8.swt.chromium.win32.win32.aarch64"
+         os="win32"
+         ws="win32"
+         arch="aarch64"
          version="0.0.0"/>
 
    <plugin
-         id="com.tulin.v8.generator"
+         id="com.tulin.v8.swt.chromium.win32.win32.x86_64"
+         os="win32"
+         ws="win32"
+         arch="x86_64"
          version="0.0.0"/>
 
 </feature>

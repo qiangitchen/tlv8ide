@@ -12,6 +12,7 @@
 	
 	<modules>
         <module>com.tulin.v8.swt.chromium.feature</module>
+        <module>com.tulin.v8.swt.chromium.b.feature</module>
     </modules>
 	
 </project>
