@@ -31,6 +31,8 @@ public class Browser extends Composite {
 	boolean isClosing;
 
 	static int DefaultType = SWT.DEFAULT;
+	
+	static final String NO_INPUT_METHOD = "org.eclipse.swt.internal.gtk.noInputMethod"; //$NON-NLS-1$
 
 	public Browser(Composite parent, int style) {
 		this(parent, style, "about:blank");
@@ -43,6 +45,12 @@ public class Browser extends Composite {
 	public Browser(Composite parent, int style, String startUrl) {
 		super(parent, style);
 		userStyle = style;
+		
+		String platform = SWT.getPlatform ();
+		if ("gtk".equals (platform)) { //$NON-NLS-1$
+			parent.getDisplay ().setData (NO_INPUT_METHOD, null);
+		}
+		
 		webBrowser = new Chromiu(startUrl);
 		webBrowser.create(this, style);
 		webBrowser.setBrowser(this);
