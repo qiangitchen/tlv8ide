@@ -81,6 +81,7 @@ public class Chromiu extends WebBrowser {
 			cefbrowser.close(true);
 		}
 		this.cefbrowser = CefBrowserManager.createCefBrowser(url, false, false);
+		this.cefbrowser.createImmediately();// 立即创建浏览器实例并完成底层资源初始化
 		this.client = cefbrowser.getClient();
 		this.browerUI = cefbrowser.getUIComponent();
 		client.removeLoadHandler();
