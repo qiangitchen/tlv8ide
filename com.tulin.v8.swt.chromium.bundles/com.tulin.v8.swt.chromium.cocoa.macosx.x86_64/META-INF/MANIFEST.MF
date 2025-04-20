@@ -3,6 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: TuLin Chromium SWT Mac OS x x86_64
 Bundle-SymbolicName: com.tulin.v8.swt.chromium.cocoa.macosx.x86_64
 Bundle-Version: 3.4.0.qualifier
+Eclipse-BundleShape: dir
 Bundle-Vendor: TuLin
 Fragment-Host: com.tulin.v8.swt.chromium
 Automatic-Module-Name: com.tulin.v8.swt.chromium.cocoa.macosx.x86_64

@@ -3,6 +3,7 @@ Bundle-ManifestVersion: 2
 Bundle-Name: TuLin Chromium SWT Windows aarch64
 Bundle-SymbolicName: com.tulin.v8.swt.chromium.win32.win32.aarch64
 Bundle-Version: 3.4.0.qualifier
+Eclipse-BundleShape: dir
 Bundle-Vendor: TuLin
 Fragment-Host: com.tulin.v8.swt.chromium
 Export-Package: com.tulin.v8.cef
