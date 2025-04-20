@@ -83,10 +83,10 @@
 	ELSE ${value} END</template>
 
 <template 
-	name="case"
-	description="%case2.desc)" 
+	name="case2"
+	description="%case2.desc" 
 	context="zigen.plugin.db.template.sql" 
-	id="zigen.plugin.db.template.sql.case">CASE
+	id="zigen.plugin.db.template.sql.case2">CASE
 	WHEN ${columnName} = ${value} THEN ${value} 
 	ELSE ${value} END</template>
 	
