@@ -49,13 +49,6 @@ public class CefBrowserManager {
 	 * @return
 	 */
 	public static CefBrowser createCefBrowser(String startURL, boolean useOSR, boolean isTransparent) {
-		if (cefApp == null) {
-			try {
-				init();
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
 		CefClient client = cefApp.createClient();
 		// 处理键盘事件
 		client.addKeyboardHandler(new KeyboardHandler());
