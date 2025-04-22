@@ -31,7 +31,7 @@ public class Browser extends Composite {
 	boolean isClosing;
 
 	static int DefaultType = SWT.DEFAULT;
-	
+
 	static final String NO_INPUT_METHOD = "org.eclipse.swt.internal.gtk.noInputMethod"; //$NON-NLS-1$
 
 	public Browser(Composite parent, int style) {
@@ -45,15 +45,18 @@ public class Browser extends Composite {
 	public Browser(Composite parent, int style, String startUrl) {
 		super(parent, style);
 		userStyle = style;
-		
-		String platform = SWT.getPlatform ();
-		if ("gtk".equals (platform)) { //$NON-NLS-1$
-			parent.getDisplay ().setData (NO_INPUT_METHOD, null);
+
+		String platform = SWT.getPlatform();
+		if ("gtk".equals(platform)) { //$NON-NLS-1$
+			parent.getDisplay().setData(NO_INPUT_METHOD, null);
 		}
-		
-		webBrowser = new Chromiu(startUrl);
-		webBrowser.create(this, style);
-		webBrowser.setBrowser(this);
+		try {
+			webBrowser = new Chromiu(startUrl);
+			webBrowser.setBrowser(this);
+			webBrowser.create(this, style);
+		} catch (Exception | Error e) {
+			e.printStackTrace();
+		}
 	}
 
 	public CefClient getCefClient() {
@@ -374,20 +377,23 @@ public class Browser extends Composite {
 	@Override
 	public void setMenu(Menu menu) {
 		super.setMenu(menu);
-		webBrowser.getCefClient().removeContextMenuHandler();
-		webBrowser.getCefClient().addContextMenuHandler(new CefContextMenuHandlerAdapter() {
-			@Override
-			public void onBeforeContextMenu(CefBrowser browser, CefFrame frame, CefContextMenuParams params,
-					CefMenuModel model) {
-				// 清除菜单项
-				model.clear();
-				if (getMenu() != null) {
-					getDisplay().asyncExec(() -> {
-						getMenu().setVisible(true);
-					});
+		try {
+			webBrowser.getCefClient().removeContextMenuHandler();
+			webBrowser.getCefClient().addContextMenuHandler(new CefContextMenuHandlerAdapter() {
+				@Override
+				public void onBeforeContextMenu(CefBrowser browser, CefFrame frame, CefContextMenuParams params,
+						CefMenuModel model) {
+					// 清除菜单项
+					model.clear();
+					if (getMenu() != null) {
+						getDisplay().asyncExec(() -> {
+							getMenu().setVisible(true);
+						});
+					}
 				}
-			}
-		});
+			});
+		} catch (Exception e) {
+		}
 	}
 
 	public void stop() {

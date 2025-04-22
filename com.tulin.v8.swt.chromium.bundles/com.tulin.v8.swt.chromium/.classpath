@@ -1,5 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
+	<classpathentry exported="true" kind="lib" path="lib/gluegen-rt-v2.4.0-rc-20210111.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/hamcrest-core-1.1.jar"/>
+	<classpathentry exported="true" kind="lib" path="lib/junit-4.10.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/jcef-api-jcef-ae6912a+cef-95.7.14+g9f72f35+chromium-95.0.4638.69.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/commons-compress-1.21.jar"/>
 	<classpathentry exported="true" kind="lib" path="lib/fastjson-2.0.53.jar"/>

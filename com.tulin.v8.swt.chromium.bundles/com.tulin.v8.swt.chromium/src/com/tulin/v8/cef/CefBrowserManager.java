@@ -35,9 +35,15 @@ public class CefBrowserManager {
 	}
 
 	public static void init() throws Exception {
-		Class clazz = Class.forName(className);
-		Method method = clazz.getMethod("getCefApp");
-		cefApp = (CefApp) method.invoke(className);
+		if (cefApp == null) {
+			try {
+				Class clazz = Class.forName(className);
+				Method method = clazz.getMethod("getCefApp");
+				cefApp = (CefApp) method.invoke(className);
+			} catch (Exception | Error e) {
+				throw new Exception(e);
+			}
+		}
 	}
 
 	/**
@@ -48,7 +54,10 @@ public class CefBrowserManager {
 	 * @param isTransparent
 	 * @return
 	 */
-	public static CefBrowser createCefBrowser(String startURL, boolean useOSR, boolean isTransparent) {
+	public static CefBrowser createCefBrowser(String startURL, boolean useOSR, boolean isTransparent) throws Exception {
+		if (cefApp == null) {
+			init();
+		}
 		CefClient client = cefApp.createClient();
 		// 处理键盘事件
 		client.addKeyboardHandler(new KeyboardHandler());

@@ -76,7 +76,7 @@ public class Chromiu extends WebBrowser {
 		this.startUrl = startUrl;
 	}
 
-	private void createCefbrowser(String url) {
+	private void createCefbrowser(String url) throws Exception {
 		if (cefbrowser != null) {
 			cefbrowser.close(true);
 		}
@@ -407,7 +407,7 @@ public class Chromiu extends WebBrowser {
 	}
 
 	@Override
-	public void create(Composite parent, int style) {
+	public void create(Composite parent, int style) throws Exception {
 		this.parent = parent;
 		GridLayout mlay = new GridLayout();
 		mlay.horizontalSpacing = 0;
@@ -427,10 +427,12 @@ public class Chromiu extends WebBrowser {
 		Composite composite = new Composite(parent, SWT.EMBEDDED);
 		composite.setLayoutData(new GridData(GridData.FILL_BOTH));
 		composite.setLayout(new FillLayout());
-		createCefbrowser(startUrl);
 		awtframe = SWT_AWT.new_Frame(composite);
 		awtframe.setLayout(new BorderLayout());
-		awtframe.add(browerUI, BorderLayout.CENTER);
+		if (startUrl != null) {
+			createCefbrowser(startUrl);
+			awtframe.add(browerUI, BorderLayout.CENTER);
+		}
 	}
 
 	public void showProgressBar(boolean isShow) {
@@ -576,12 +578,16 @@ public class Chromiu extends WebBrowser {
 	 */
 	public synchronized boolean setUrl(String url) {
 		SwingUtilities.invokeLater(() -> {
-			if (url != null) {
-				if (!url.equals(startUrl)) {
-					createCefbrowser(url);
-				} else if (cefbrowser != null) {
-					cefbrowser.loadURL(url);
+			try {
+				if (url != null) {
+					if (!url.equals(startUrl)) {
+						createCefbrowser(url);
+					} else if (cefbrowser != null) {
+						cefbrowser.loadURL(url);
+					}
 				}
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
 		});
 		return true;

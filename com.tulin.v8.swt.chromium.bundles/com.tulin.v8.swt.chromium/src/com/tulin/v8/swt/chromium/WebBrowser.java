@@ -208,7 +208,7 @@ abstract class WebBrowser {
 		}
 	}
 
-	public abstract void create(Composite parent, int style);
+	public abstract void create(Composite parent, int style) throws Exception;
 
 	static String CreateErrorString(String error) {
 		return ERROR_ID + error;
