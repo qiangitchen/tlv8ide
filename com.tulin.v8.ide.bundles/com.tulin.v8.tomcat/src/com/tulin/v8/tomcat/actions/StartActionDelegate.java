@@ -38,10 +38,8 @@ public class StartActionDelegate implements IWorkbenchWindowActionDelegate {
 			try {
 				TomcatLauncherPlugin.getDefault().getTomcatBootstrap().start();
 			} catch (Exception ex) {
-				String msg = TomcatLauncherPlugin
-						.getResourceString("msg.start.failed");
-				MessageDialog.openWarning(TomcatLauncherPlugin.getShell(),
-						"Tomcat", msg);
+				String msg = TomcatLauncherPlugin.getResourceString("msg.start.failed");
+				MessageDialog.openWarning(TomcatLauncherPlugin.getShell(), "Tomcat", msg + "\n" + ex.getMessage());
 				TomcatLauncherPlugin.log(msg + "/n");
 				TomcatLauncherPlugin.logException(ex);
 			}

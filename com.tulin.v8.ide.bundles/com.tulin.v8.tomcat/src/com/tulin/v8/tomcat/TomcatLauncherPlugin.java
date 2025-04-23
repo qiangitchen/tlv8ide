@@ -8,6 +8,7 @@ import java.util.ResourceBundle;
 import java.util.StringTokenizer;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
@@ -18,7 +19,6 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Status;
-import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.launching.JavaRuntime;
@@ -38,9 +38,9 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 	public static final String PLUGIN_ID = "com.tulin.v8.tomcat";
 
 	private static TomcatLauncherPlugin plugin;
-	
+
 	private ResourceBundle resourceBundle;
-	
+
 	public static String NATURE_ID = PLUGIN_ID + ".tomcatnature";
 
 	public static final String TOMCAT_PREF_HOME_KEY = "tomcatDir";
@@ -177,9 +177,11 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 			IProject project = allProjects[i];
 			try {
 				if ((project.isOpen()) && project.hasNature(JavaCore.NATURE_ID)) {
-					IJavaProject javaProject = (IJavaProject) project.getNature(JavaCore.NATURE_ID);
+					IProjectNature javaNature = project.getNature(JavaCore.NATURE_ID);
+					// IJavaProject javaProject = (IJavaProject)
+					// project.getNature(JavaCore.NATURE_ID);
 					if (!alreadyAdded.contains(project)) {
-						tempList.add(new ProjectListElement(javaProject.getProject()));
+						tempList.add(new ProjectListElement(javaNature.getProject()));
 						alreadyAdded.add(project);
 					}
 				}
@@ -220,7 +222,7 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 		}
 		pref.setValue(keyInPreferenceStore, buf.toString());
 	}
-	
+
 	public Object getTomcatJRE() {
 		IPreferenceStore pref = getDefault().getPreferenceStore();
 		String result = pref.getString(TOMCAT_PREF_JRE_KEY);
@@ -228,7 +230,7 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 			result = JavaRuntime.getDefaultVMInstall().getId();
 		return result;
 	}
-	
+
 	public String getTomcatBase() {
 		IPreferenceStore pref = getDefault().getPreferenceStore();
 		return pref.getString(TOMCAT_PREF_BASE_KEY);
@@ -238,12 +240,12 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 		IPreferenceStore pref = getDefault().getPreferenceStore();
 		return pref.getString(TOMCAT_PREF_HOME_KEY);
 	}
-	
+
 	public String getConfigMode() {
 		IPreferenceStore pref = getDefault().getPreferenceStore();
 		return pref.getString(TOMCAT_PREF_CONFMODE_KEY);
 	}
-	
+
 	public String getConfigFile() {
 		IPreferenceStore pref = getDefault().getPreferenceStore();
 		return pref.getString(TOMCAT_PREF_CONFIGFILE_KEY);
@@ -271,7 +273,7 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 		}
 		return tomcatPath;
 	}
-	
+
 	public void initTomcatClasspathVariable() {
 		try {
 			JavaCore.setClasspathVariable(TOMCAT_HOME_CLASSPATH_VARIABLE, new Path(getDefault().getTomcatDir()), null);
@@ -299,7 +301,7 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 		IPreferenceStore pref = getDefault().getPreferenceStore();
 		return pref.getString(TOMCAT_PREF_JVM_BOOTCLASSPATH_KEY);
 	}
-	
+
 	public static String getResourceString(String key) {
 		ResourceBundle bundle = getDefault().getResourceBundle();
 		try {
@@ -308,11 +310,11 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 			return key;
 		}
 	}
-	
+
 	public static Shell getShell() {
 		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getShell();
 	}
-	
+
 	static public boolean checkTomcatSettingsAndWarn() {
 		if (!isTomcatConfigured()) {
 			String msg = getResourceString("msg.noconfiguration");
@@ -321,11 +323,11 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 		}
 		return true;
 	}
-	
+
 	static public boolean isTomcatConfigured() {
 		return !(getDefault().getTomcatDir().equals(""));
 	}
-	
+
 	public String getManagerAppUrl() {
 		IPreferenceStore pref = getDefault().getPreferenceStore();
 		return pref.getString(TOMCAT_PREF_MANAGER_URL);
@@ -349,11 +351,11 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 	private ResourceBundle getResourceBundle() {
 		return resourceBundle;
 	}
-	
+
 	public static ImageDescriptor getImageDescriptor(String path) {
 		return imageDescriptorFromPlugin(PLUGIN_ID, path);
 	}
-	
+
 	/*
 	 * 写测试日志
 	 */
@@ -386,11 +388,11 @@ public class TomcatLauncherPlugin extends AbstractUIPlugin {
 		log.log(status);
 		ex.printStackTrace();
 	}
-	
+
 	static public void log(String msg) {
 		logDebug(msg);
 	}
-	
+
 	static public void log(Exception ex) {
 		logException(ex);
 	}
