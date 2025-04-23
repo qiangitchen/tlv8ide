@@ -36,7 +36,8 @@ public class CefBrowserManager {
 	}
 
 	public static void init() throws Exception {
-		if (OSSelect.isLinux() && OSSelect.isARM() && OSSelect.osVersion() <= 4.19) {
+		// && OSSelect.isARM() && OSSelect.getGCCVersion() < 9.0
+		if (OSSelect.isLinux() && OSSelect.osVersion() <= 5.19) {
 			throw new Exception("系统不支持~");
 		}
 		if (cefApp == null) {

@@ -528,7 +528,7 @@ public class Browser extends Composite {
 	@Override
 	public void dispose() {
 		try {
-			webBrowser.stop();
+//			webBrowser.stop();
 			webBrowser.getCefClient().dispose();
 		} catch (Exception e) {
 		}

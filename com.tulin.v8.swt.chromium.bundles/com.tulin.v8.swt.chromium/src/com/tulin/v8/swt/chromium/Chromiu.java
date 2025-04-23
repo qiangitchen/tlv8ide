@@ -240,11 +240,14 @@ public class Chromiu extends WebBrowser {
 			public void onTitleChange(CefBrowser browser, String title) {
 				TitleEvent tevent = new TitleEvent(parent);
 				tevent.title = title;
-				Chromiu.this.browser.getDisplay().asyncExec(() -> {
-					for (TitleListener titleListener : titleListeners) {
-						titleListener.changed(tevent);
-					}
-				});
+				try {
+					Chromiu.this.browser.getDisplay().asyncExec(() -> {
+						for (TitleListener titleListener : titleListeners) {
+							titleListener.changed(tevent);
+						}
+					});
+				} catch (Exception e) {
+				}
 				for (CefDisplayHandler cefDisplayHandlers : cefDisplayHandlers) {
 					cefDisplayHandlers.onTitleChange(browser, title);
 				}
@@ -254,12 +257,15 @@ public class Chromiu extends WebBrowser {
 			public void onAddressChange(CefBrowser browser, CefFrame frame, String url) {
 				LocationEvent levent = new LocationEvent(parent);
 				levent.location = url;
-				Chromiu.this.browser.getDisplay().asyncExec(() -> {
-					for (LocationListener locationListener : locationListeners) {
-						locationListener.changing(levent);
-						locationListener.changed(levent);
-					}
-				});
+				try {
+					Chromiu.this.browser.getDisplay().asyncExec(() -> {
+						for (LocationListener locationListener : locationListeners) {
+							locationListener.changing(levent);
+							locationListener.changed(levent);
+						}
+					});
+				} catch (Exception e) {
+				}
 				for (CefDisplayHandler cefDisplayHandlers : cefDisplayHandlers) {
 					cefDisplayHandlers.onAddressChange(browser, frame, url);
 				}
@@ -280,11 +286,14 @@ public class Chromiu extends WebBrowser {
 			public void onStatusMessage(CefBrowser browser, String value) {
 				StatusTextEvent sevent = new StatusTextEvent(parent);
 				sevent.text = value;
-				Chromiu.this.browser.getDisplay().asyncExec(() -> {
-					for (StatusTextListener statusTextListener : statusTextListeners) {
-						statusTextListener.changed(sevent);
-					}
-				});
+				try {
+					Chromiu.this.browser.getDisplay().asyncExec(() -> {
+						for (StatusTextListener statusTextListener : statusTextListeners) {
+							statusTextListener.changed(sevent);
+						}
+					});
+				} catch (Exception e) {
+				}
 				for (CefDisplayHandler cefDisplayHandlers : cefDisplayHandlers) {
 					cefDisplayHandlers.onStatusMessage(browser, value);
 				}
@@ -348,25 +357,28 @@ public class Chromiu extends WebBrowser {
 			public boolean onJSDialog(CefBrowser browser, String origin_url, JSDialogType dialog_type,
 					String message_text, String default_prompt_text, CefJSDialogCallback callback,
 					BoolRef suppress_message) {
-				if (dialog_type == JSDialogType.JSDIALOGTYPE_ALERT) {
-					parent.getDisplay().asyncExec(() -> {
-						MessageBox alerts = new MessageBox(parent.getShell(), SWT.ICON_INFORMATION);
-						alerts.setText("提示");
-						alerts.setMessage(message_text);
-						alerts.open();
-						callback.Continue(true, null);
-					});
-				} else if (dialog_type == JSDialogType.JSDIALOGTYPE_CONFIRM) {
-					parent.getDisplay().asyncExec(() -> {
-						MessageBox confirms = new MessageBox(parent.getShell(),
-								SWT.ICON_QUESTION | SWT.OK | SWT.CANCEL);
-						confirms.setText("确认");
-						confirms.setMessage(message_text);
-						int c = confirms.open();
-						callback.Continue(c == SWT.OK, null);
-					});
-				} else {
-					return false;
+				try {
+					if (dialog_type == JSDialogType.JSDIALOGTYPE_ALERT) {
+						parent.getDisplay().asyncExec(() -> {
+							MessageBox alerts = new MessageBox(parent.getShell(), SWT.ICON_INFORMATION);
+							alerts.setText("提示");
+							alerts.setMessage(message_text);
+							alerts.open();
+							callback.Continue(true, null);
+						});
+					} else if (dialog_type == JSDialogType.JSDIALOGTYPE_CONFIRM) {
+						parent.getDisplay().asyncExec(() -> {
+							MessageBox confirms = new MessageBox(parent.getShell(),
+									SWT.ICON_QUESTION | SWT.OK | SWT.CANCEL);
+							confirms.setText("确认");
+							confirms.setMessage(message_text);
+							int c = confirms.open();
+							callback.Continue(c == SWT.OK, null);
+						});
+					} else {
+						return false;
+					}
+				} catch (Exception e) {
 				}
 				return true;
 			}
@@ -385,10 +397,12 @@ public class Chromiu extends WebBrowser {
 			}
 		}, true);
 		client.addMessageRouter(msgRouter);
+		if (startUrl == null || "about:blank".equals(startUrl)) {
+			startUrl = url;
+		}
 		if (awtframe != null) {
 			awtframe.removeAll();
 			awtframe.add(browerUI, BorderLayout.CENTER);
-			startUrl = url;
 		}
 		if (browser != null) {// 如果浏览器对象已经存在，需要重新注册右键菜单.
 			browser.setMenu(browser.getMenu());
@@ -436,9 +450,12 @@ public class Chromiu extends WebBrowser {
 	}
 
 	public void showProgressBar(boolean isShow) {
-		parent.getDisplay().asyncExec(() -> {
-			progressBar.setVisible(isShow);
-		});
+		try {
+			parent.getDisplay().asyncExec(() -> {
+				progressBar.setVisible(isShow);
+			});
+		} catch (Exception e) {
+		}
 	}
 
 	protected CefClient getCefClient() {
