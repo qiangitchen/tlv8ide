@@ -23,6 +23,7 @@ public class BrowserFunction {
 	String functionString;
 	boolean isEvaluate, top;
 	String token;
+	Object re;
 
 	public BrowserFunction(Browser browser, String name) {
 		this(browser, name, true, null, true, false);
@@ -41,6 +42,34 @@ public class BrowserFunction {
 		this.browser = browser;
 		this.name = name;
 		this.top = top;
+		if (browser.getSWTBrowser() != null) {
+			new org.eclipse.swt.browser.BrowserFunction(browser.getSWTBrowser(), name, top, frameNames) {
+				public Object function(Object[] arguments) {
+					if (request) {
+						// 参数处理
+					}
+					re = BrowserFunction.this.function(arguments);
+					if (re == null) {
+						BrowserFunction.this.function(arguments, new CefQueryCallback() {
+							@Override
+							public void success(String arg0) {
+								re = arg0;
+							}
+
+							@Override
+							public void failure(int arg0, String arg1) {
+								re = null;
+							}
+						});
+					}
+					if (request) {
+						// JS回调处理
+					}
+					return re;
+				}
+			};
+			return;
+		}
 		if (request) {
 			CefMessageRouter.CefMessageRouterConfig config = new CefMessageRouter.CefMessageRouterConfig();
 			config.jsQueryFunction = name;
@@ -148,7 +177,7 @@ public class BrowserFunction {
 	public boolean isDisposed() {
 		return true;
 	}
-	
+
 	protected void alert(String message) {
 		getBrowser().getDisplay().asyncExec(() -> {
 			MessageBox alerts = new MessageBox(getBrowser().getShell(), SWT.ICON_INFORMATION);

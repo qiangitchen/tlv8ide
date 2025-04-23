@@ -38,8 +38,10 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.awt.SWT_AWT;
 import org.eclipse.swt.browser.AuthenticationEvent;
 import org.eclipse.swt.browser.AuthenticationListener;
+import org.eclipse.swt.browser.CloseWindowListener;
 import org.eclipse.swt.browser.LocationEvent;
 import org.eclipse.swt.browser.LocationListener;
+import org.eclipse.swt.browser.OpenWindowListener;
 import org.eclipse.swt.browser.ProgressEvent;
 import org.eclipse.swt.browser.ProgressListener;
 import org.eclipse.swt.browser.StatusTextEvent;
@@ -409,6 +411,7 @@ public class Chromiu extends WebBrowser {
 	@Override
 	public void create(Composite parent, int style) throws Exception {
 		this.parent = parent;
+		createCefbrowser(startUrl);
 		GridLayout mlay = new GridLayout();
 		mlay.horizontalSpacing = 0;
 		mlay.verticalSpacing = 0;
@@ -429,10 +432,7 @@ public class Chromiu extends WebBrowser {
 		composite.setLayout(new FillLayout());
 		awtframe = SWT_AWT.new_Frame(composite);
 		awtframe.setLayout(new BorderLayout());
-		if (startUrl != null) {
-			createCefbrowser(startUrl);
-			awtframe.add(browerUI, BorderLayout.CENTER);
-		}
+		awtframe.add(browerUI, BorderLayout.CENTER);
 	}
 
 	public void showProgressBar(boolean isShow) {

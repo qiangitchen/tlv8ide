@@ -2,11 +2,10 @@ package com.tulin.v8.swt.chromium;
 
 import org.cef.browser.CefBrowser;
 import org.cef.browser.CefFrame;
-import org.eclipse.swt.events.*;
 import org.eclipse.swt.graphics.*;
 import org.eclipse.swt.widgets.*;
 
-public class WindowEvent extends TypedEvent {
+public class WindowEvent extends org.eclipse.swt.browser.WindowEvent {
 	private static final long serialVersionUID = 3699087430791947715L;
 
 	/**

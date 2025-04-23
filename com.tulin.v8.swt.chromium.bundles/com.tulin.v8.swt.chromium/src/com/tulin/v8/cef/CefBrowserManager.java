@@ -17,6 +17,7 @@ import org.cef.handler.CefJSDialogHandlerAdapter;
 import org.cef.handler.CefLoadHandlerAdapter;
 import org.cef.misc.BoolRef;
 
+import com.tulin.v8.OSSelect;
 import com.tulin.v8.cef.handler.KeyboardHandler;
 
 /**
@@ -35,6 +36,9 @@ public class CefBrowserManager {
 	}
 
 	public static void init() throws Exception {
+		if (OSSelect.isLinux() && OSSelect.isARM() && OSSelect.osVersion() <= 4.19) {
+			throw new Exception("系统不支持~");
+		}
 		if (cefApp == null) {
 			try {
 				Class clazz = Class.forName(className);
