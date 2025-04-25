@@ -9,7 +9,7 @@ Fragment-Host: com.tulin.v8.swt.chromium
 Export-Package: com.tulin.v8.cef
 Automatic-Module-Name: com.tulin.v8.swt.chromium.win32.win32.x86
 Bundle-ClassPath: lib/jcefmaven-95.7.14.jar,
- lib/jcef-natives-windows-i386-jcef-0cdd84c+cef-105.3.36+g88e0038+chromium-105.0.5195.102.jar,
+ lib/jcef-natives-windows-i386-jcef-ae6912a+cef-95.7.14+g9f72f35+chromium-95.0.4638.69.jar,
  .
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Eclipse-PlatformFilter: (& (osgi.ws=win32) (osgi.os=win32) (osgi.arch=x86))
