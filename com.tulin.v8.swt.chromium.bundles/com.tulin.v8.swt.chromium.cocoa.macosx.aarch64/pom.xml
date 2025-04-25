@@ -10,6 +10,11 @@
 		<artifactId>com.tulin.v8.swt.chromium.bundles</artifactId>
 		<version>3.4.0-SNAPSHOT</version>
 	</parent>
+	
+	<!-- 
+		jcef-natives-macosx-arm64-jcef-ae6912a+cef-95.7.14+g9f72f35+chromium-95.0.4638.69.jar
+		下载地址：https://dl.tlv8.com/jcef/95.7.14/jcef-natives-macosx-arm64-jcef-ae6912a+cef-95.7.14+g9f72f35+chromium-95.0.4638.69.jar
+	-->
 
 	<build>
 		<plugins>
