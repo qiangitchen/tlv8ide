@@ -37,7 +37,6 @@ Require-Bundle: org.eclipse.ui,
  org.eclipse.ui.forms,
  com.tulin.v8.core,
  com.tulin.v8.editors.page.server,
- org.eclipse.ui.genericeditor,
  com.tulin.v8.webtools.ide,
  com.tulin.v8.swt.chromium;bundle-version="3.3.0"
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8

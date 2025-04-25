@@ -50,7 +50,6 @@ import com.tulin.v8.editors.page.design.WEBDesignEditorInterface;
 
 import org.eclipse.ui.ide.FileStoreEditorInput;
 import org.eclipse.ui.ide.IDE;
-import org.eclipse.ui.internal.genericeditor.ExtensionBasedTextEditor;
 
 /**
  * An example showing how to create a multi-page editor. This example has 3
