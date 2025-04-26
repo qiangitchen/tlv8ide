@@ -126,6 +126,7 @@
 		<module>com.tulin.v8.tern.releng</module>
 		<module>com.tulin.v8.swt.chromium.bundles</module>
 		<module>com.tulin.v8.swt.chromium.features</module>
+		<module>com.tulin.v8.swt.chromium.releng</module>
 		<module>com.tulin.v8.ide.bundles</module>
 		<module>com.tulin.v8.ide.features</module>
 		<module>com.tulin.v8.ide.releng</module>
