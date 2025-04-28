@@ -29,25 +29,32 @@ import com.tulin.v8.cef.handler.KeyboardHandler;
 public class CefBrowserManager {
 	static String className = "com.tulin.v8.cef.JCefAppBuilder";
 
+	private static boolean initting = false;
 	private static CefApp cefApp;
 
 	public static CefApp getCefApp() {
 		return cefApp;
 	}
 
-	public static void init() throws Exception {
-		// && OSSelect.isARM() && OSSelect.osVersion() <= 5.19
+	public static synchronized void init() throws Exception {
+		if (cefApp != null || initting) {
+			return;
+		}
+//		 && OSSelect.isARM() && OSSelect.osVersion() <= 5.19
 //		if (OSSelect.isLinux() && OSSelect.getGCCVersion() < 9.0) {
 		if (!OSSelect.isWindows()) {
 			throw new Exception("系统不支持~");
 		}
 		if (cefApp == null) {
+			initting = true;
 			try {
 				Class clazz = Class.forName(className);
 				Method method = clazz.getMethod("getCefApp");
 				cefApp = (CefApp) method.invoke(className);
 			} catch (Exception | Error e) {
 				throw new Exception(e);
+			} finally {
+				initting = false;
 			}
 		}
 	}
@@ -61,9 +68,6 @@ public class CefBrowserManager {
 	 * @return
 	 */
 	public static CefBrowser createCefBrowser(String startURL, boolean useOSR, boolean isTransparent) throws Exception {
-		if (cefApp == null) {
-			init();
-		}
 		CefClient client = cefApp.createClient();
 		// 处理键盘事件
 		client.addKeyboardHandler(new KeyboardHandler());
