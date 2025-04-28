@@ -130,6 +130,8 @@ public class CefBrowserManager {
 			Method method = clazz.getMethod("release");
 			method.invoke(className);
 		} catch (Exception e) {
+		} finally {
+			cefApp = null;
 		}
 	}
 

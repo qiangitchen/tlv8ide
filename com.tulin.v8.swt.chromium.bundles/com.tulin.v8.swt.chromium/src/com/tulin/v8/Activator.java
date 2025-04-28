@@ -27,7 +27,7 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		Display.getCurrent().asyncExec(() -> {
+		Display.getDefault().asyncExec(() -> {
 			try {
 				CefBrowserManager.init();
 			} catch (Exception | Error e) {
