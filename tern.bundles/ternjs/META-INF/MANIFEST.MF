@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: ternjs;singleton:=true
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-Vendor: %providerName
+Import-Package: org.osgi.framework
+Export-Package: ternjs
+Bundle-Name: %pluginName
+Bundle-Version: 3.4.0.qualifier
+Bundle-Localization: plugin
+Bundle-Activator: ternjs.Activator
+Automatic-Module-Name: ternjs
+Eclipse-BundleShape: dir

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="tern.server.nodejs.feature"
+      label="%featureName"
+      version="3.4.0.qualifier"
+      provider-name="%featureProvider">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <plugin
+         id="tern.eclipse.ide.server.nodejs.core"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.server.nodejs.ui"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.server.nodejs"
+         version="0.0.0"/>
+
+</feature>

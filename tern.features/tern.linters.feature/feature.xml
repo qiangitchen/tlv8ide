@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="tern.linters.feature"
+      label="%featureName"
+      version="3.4.0.qualifier"
+      provider-name="%featureProvider">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <plugin
+         id="tern.eclipse.ide.linter.core"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.linter.ui"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.linter.eslint.core"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.linter.eslint.ui"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.linter.jscs.core"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.linter.jscs.ui"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.linter.jshint.core"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.linter.jshint.ui"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.linter.lint.core"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.linter.lint.ui"
+         version="0.0.0"/>
+
+</feature>

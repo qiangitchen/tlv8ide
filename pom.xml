@@ -121,15 +121,15 @@
 	</build>
 
 	<modules>
-		<module>com.tulin.v8.tern.bundles</module>
-		<module>com.tulin.v8.tern.features</module>
-		<module>com.tulin.v8.tern.releng</module>
-		<module>com.tulin.v8.swt.chromium.bundles</module>
-		<module>com.tulin.v8.swt.chromium.features</module>
-		<module>com.tulin.v8.swt.chromium.releng</module>
-		<module>com.tulin.v8.ide.bundles</module>
-		<module>com.tulin.v8.ide.features</module>
-		<module>com.tulin.v8.ide.releng</module>
+		<module>tern.bundles</module>
+		<module>tern.features</module>
+		<module>tern.releng</module>
+		<module>swt.chromium.bundles</module>
+		<module>swt.chromium.features</module>
+		<module>swt.chromium.releng</module>
+		<module>ide.bundles</module>
+		<module>ide.features</module>
+		<module>ide.releng</module>
 	</modules>
 
 </project>

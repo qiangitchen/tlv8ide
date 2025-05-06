@@ -1,0 +1,24 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: tern.eclipse.ide.core;singleton:=true
+Bundle-Version: 3.4.0.qualifier
+Bundle-Name: %bundleName
+Bundle-Localization: plugin
+Bundle-Activator: tern.eclipse.ide.core.TernCorePlugin
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-ManifestVersion: 2
+Bundle-Vendor: %bundleVendor
+Automatic-Module-Name: tern.eclipse.ide.core
+Require-Bundle: org.eclipse.core.resources,
+ org.eclipse.core.runtime,
+ org.eclipse.core.filebuffers,
+ org.eclipse.text,
+ tern.core,
+ tern.server.nodejs,
+ tern.websocket.provider,
+ ternjs
+Export-Package: tern.eclipse.ide.core,
+ tern.eclipse.ide.core.preferences,
+ tern.eclipse.ide.core.resources,
+ tern.eclipse.ide.core.utils
+

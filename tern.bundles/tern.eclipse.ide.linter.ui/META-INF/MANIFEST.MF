@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: tern.eclipse.ide.linter.ui;singleton:=true
+Bundle-Version: 3.4.0.qualifier
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,tern.eclipse.ide.core,tern.core,tern.eclipse.ide.ui,org.eclipse.core.resources,tern.eclipse.ide.linter.core,org.eclipse.wst.validation,org.eclipse.wst.sse.ui,org.eclipse.jface.text,org.eclipse.ui.ide
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName
+Automatic-Module-Name: tern.eclipse.ide.linter.ui
+Export-Package: tern.eclipse.ide.linter.ui.properties
+Bundle-Name: %pluginName
+Bundle-Localization: plugin
+Bundle-Activator: tern.eclipse.ide.linter.internal.ui.TernLinterUIPlugin

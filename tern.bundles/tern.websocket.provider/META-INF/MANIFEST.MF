@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: tern.websocket.provider
+Bundle-Version: 3.4.0.qualifier
+Bundle-Name: %bundleName
+Archiver-Version: Plexus Archiver
+Bundle-Localization: OSGI-INF/l10n/bundle-src
+Built-By: jenkins
+Bundle-ManifestVersion: 2
+Bundle-Vendor: %bundleVendor
+Require-Bundle: org.eclipse.osgi,
+ tern.core
+Automatic-Module-Name: tern.websocket.provider
+Export-Package: tern.websocket.provider
+Bundle-ClassPath: lib/javax-websocket-client-impl-9.2.9.v20150224.jar,
+ lib/jetty-io-9.2.9.v20150224.jar,
+ lib/jetty-util-9.2.9.v20150224.jar,
+ lib/websocket-api-9.2.9.v20150224.jar,
+ lib/websocket-client-9.2.9.v20150224.jar,
+ lib/websocket-common-9.2.9.v20150224.jar,
+ .
+

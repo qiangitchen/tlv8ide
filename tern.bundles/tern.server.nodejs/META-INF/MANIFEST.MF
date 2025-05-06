@@ -1,0 +1,19 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: tern.server.nodejs
+Bundle-Version: 3.4.0.qualifier
+Bundle-Name: %pluginName
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName
+Require-Bundle: org.eclipse.osgi,
+ org.apache.httpcomponents.httpcore,
+ org.apache.httpcomponents.httpclient,
+ tern.core
+Automatic-Module-Name: tern.server.nodejs
+Export-Package: tern.server.nodejs,
+ tern.server.nodejs.npm,
+ tern.server.nodejs.process
+Bundle-Localization: plugin
+Bundle-Activator: tern.server.nodejs.Activator
+

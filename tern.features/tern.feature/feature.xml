@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="tern.feature"
+      label="%featureName"
+      version="3.4.0.qualifier"
+      provider-name="%featureProvider">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <plugin
+         id="ternjs"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.ui"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.core"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.websocket.provider"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.core"
+         version="0.0.0"/>
+
+</feature>

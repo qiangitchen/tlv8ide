@@ -1,0 +1,17 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: tern.eclipse.ide.tools.core;singleton:=true
+Require-Bundle: org.eclipse.core.runtime,tern.core,tern.eclipse.ide.core,org.eclipse.core.resources
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName
+Export-Package: tern.eclipse.ide.tools.core.generator,tern.eclipse.ide
+ .tools.core.webbrowser,tern.eclipse.ide.tools.core.webbrowser.ace,ter
+ n.eclipse.ide.tools.core.webbrowser.codemirror,tern.eclipse.ide.tools
+ .core.webbrowser.orion
+Bundle-Name: %pluginName
+Bundle-Version: 3.4.0.qualifier
+Bundle-Localization: plugin
+Bundle-Activator: tern.eclipse.ide.tools.internal.core.TernToolsCorePlugin
+Automatic-Module-Name: tern.eclipse.ide.tools.core
+

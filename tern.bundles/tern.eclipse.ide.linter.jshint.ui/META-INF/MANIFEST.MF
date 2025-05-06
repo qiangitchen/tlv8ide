@@ -1,0 +1,16 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: tern.eclipse.ide.linter.jshint.ui;singleton:=true
+Require-Bundle: org.eclipse.ui,org.eclipse.core.runtime,tern.eclipse.i
+ de.core,tern.core,tern.eclipse.ide.ui,org.eclipse.core.resources,tern
+ .eclipse.ide.linter.ui,tern.eclipse.ide.linter.core,tern.eclipse.ide.
+ linter.jshint.core
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName
+Bundle-Name: %pluginName
+Bundle-Version: 3.4.0.qualifier
+Bundle-Localization: plugin
+Bundle-Activator: tern.eclipse.ide.linter.jshint.internal.ui.TernJSHintUIPlugin
+Automatic-Module-Name: tern.eclipse.ide.linter.jshint.ui
+

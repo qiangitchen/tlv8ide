@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<feature
+      id="tern.jsdt.feature"
+      label="%featureName"
+      version="3.4.0.qualifier"
+      provider-name="%featureProvider">
+
+   <description>
+      %description
+   </description>
+
+   <copyright>
+      %copyright
+   </copyright>
+
+   <license url="%licenseURL">
+      %license
+   </license>
+
+   <plugin
+         id="tern.eclipse.ide.jsdt.core"
+         version="0.0.0"/>
+
+   <plugin
+         id="tern.eclipse.ide.jsdt.ui"
+         version="0.0.0"/>
+
+</feature>

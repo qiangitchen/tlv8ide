@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-SymbolicName: tern.eclipse.ide.linter.eslint.core;singleton:=true
+Bundle-Version: 3.4.0.qualifier
+Require-Bundle: org.eclipse.core.runtime,tern.eclipse.ide.core,tern.co
+ re,tern.eclipse.ide.linter.core
+Bundle-ManifestVersion: 2
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Automatic-Module-Name: tern.eclipse.ide.linter.eslint.core
+Bundle-ActivationPolicy: lazy
+Bundle-Vendor: %providerName
+Bundle-Name: %pluginName
+Bundle-Localization: plugin
+Bundle-Activator: tern.eclipse.ide.linter.eslint.internal.core.TernESLintCorePlugin
