@@ -349,6 +349,7 @@ public class Browser extends Composite {
 		checkWidget();
 		if (swtBrowser != null) {
 			swtBrowser.refresh();
+			return;
 		}
 		webBrowser.refresh();
 	}
