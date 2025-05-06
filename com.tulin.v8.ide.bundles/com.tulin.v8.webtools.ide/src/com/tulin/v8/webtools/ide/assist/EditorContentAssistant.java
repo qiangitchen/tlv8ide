@@ -61,7 +61,7 @@ public class EditorContentAssistant extends ContentAssistant {
 	public EditorContentAssistant(
 			ContentTypeRelatedExtensionTracker<IContentAssistProcessor> contentAssistProcessorTracker,
 			List<IContentAssistProcessor> processors, Set<IContentType> types, IPreferenceStore preferenceStore) {
-		super(true);
+		super();
 		this.contentAssistProcessorTracker = contentAssistProcessorTracker;
 		this.processors = processors;
 		this.types = types;
@@ -71,7 +71,7 @@ public class EditorContentAssistant extends ContentAssistant {
 		enableColoredLabels(true);
 		enableAutoActivation(true);
 		setAutoActivationDelay(10);
-		enableAutoActivateCompletionOnType(true);
+//		enableAutoActivateCompletionOnType(true);
 		setInformationControlCreator(new AbstractReusableInformationControlCreator() {
 			@Override
 			protected IInformationControl doCreateInformationControl(Shell parent) {
@@ -103,18 +103,19 @@ public class EditorContentAssistant extends ContentAssistant {
 	}
 
 	private void updateProcessorToken(IContentAssistProcessor processor, IDocument document) {
-		removeContentAssistProcessor(processor);
+//		removeContentAssistProcessor(processor);
 		try {
-			addContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
+			setContentAssistProcessor(processor, IDocument.DEFAULT_CONTENT_TYPE);
 		} catch (Exception e) {
 		}
 		if (document != null) {
 			for (String contentType : document.getLegalContentTypes()) {
-				addContentAssistProcessor(processor, contentType);
+				setContentAssistProcessor(processor, contentType);
 			}
 		}
 		if (processor != DEFAULT_CONTENT_ASSIST_PROCESSOR) {
-			removeContentAssistProcessor(DEFAULT_CONTENT_ASSIST_PROCESSOR);
+//			removeContentAssistProcessor(DEFAULT_CONTENT_ASSIST_PROCESSOR);
+			setContentAssistProcessor(null, IDocument.DEFAULT_CONTENT_TYPE);
 		}
 	}
 
@@ -138,7 +139,8 @@ public class EditorContentAssistant extends ContentAssistant {
 		});
 		contentAssistProcessorTracker.onRemove(removed -> {
 			if (removed.isPresent()) {
-				removeContentAssistProcessor(removed.get());
+//				removeContentAssistProcessor(removed.get());
+				setContentAssistProcessor(null, removed.getContentType().getId());
 			}
 		});
 		contentAssistProcessorTracker.startTracking();

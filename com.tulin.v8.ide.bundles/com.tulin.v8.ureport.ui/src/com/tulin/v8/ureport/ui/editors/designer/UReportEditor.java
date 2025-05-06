@@ -65,7 +65,7 @@ public class UReportEditor extends MultiPageEditorPart implements IResourceChang
 	void createPage1() {
 		Composite composite = new Composite(getContainer(), SWT.FILL);
 		composite.setLayout(new FillLayout());
-		swtdesigner = new Browser(composite, SWT.EDGE);
+		swtdesigner = new Browser(composite, SWT.NONE);
 		swtdesigner.setJavascriptEnabled(true);
 		new LoadReport(this, swtdesigner, "callLoadReport");
 		new BrowserFunction(swtdesigner, "callPreviewReport") {
@@ -84,7 +84,7 @@ public class UReportEditor extends MultiPageEditorPart implements IResourceChang
 	void createPage2() {
 		Composite composite = new Composite(getContainer(), SWT.FILL);
 		composite.setLayout(new FillLayout());
-		swtbrowser = new Browser(composite, SWT.EDGE);
+		swtbrowser = new Browser(composite, SWT.NONE);
 		swtbrowser.setJavascriptEnabled(true);
 		new BrowserFunction(swtbrowser, "open") {
 			@Override
