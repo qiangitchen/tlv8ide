@@ -6,7 +6,7 @@
 	<packaging>eclipse-plugin</packaging>
 
 	<parent>
-		<groupId>com.tulin.v8.tern</groupId>
+		<groupId>com.tulin.v8.ide</groupId>
 		<artifactId>com.tulin.v8.tern.bundles</artifactId>
 		<version>3.4.0-SNAPSHOT</version>
 	</parent>
