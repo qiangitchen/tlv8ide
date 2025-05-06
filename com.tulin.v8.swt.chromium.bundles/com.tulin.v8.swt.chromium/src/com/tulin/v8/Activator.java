@@ -1,6 +1,7 @@
 package com.tulin.v8;
 
-import org.eclipse.swt.widgets.Display;
+import javax.swing.SwingUtilities;
+
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -27,7 +28,14 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
-		Display.getDefault().asyncExec(() -> {
+//		Display.getDefault().asyncExec(() -> {
+//			try {
+//				CefBrowserManager.init();
+//			} catch (Exception | Error e) {
+//				e.printStackTrace();
+//			}
+//		});
+		SwingUtilities.invokeLater(()->{
 			try {
 				CefBrowserManager.init();
 			} catch (Exception | Error e) {
