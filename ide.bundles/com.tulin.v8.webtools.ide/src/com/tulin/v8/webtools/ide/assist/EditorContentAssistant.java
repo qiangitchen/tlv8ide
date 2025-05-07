@@ -26,17 +26,17 @@ public class EditorContentAssistant extends ContentAssistant {
 	private List<IContentAssistProcessor> processors;
 
 	/**
-	 * Creates a new EditorContentAssistant instance for the given content types
-	 * and contentAssistProcessorTracker
+	 * Creates a new EditorContentAssistant instance for the given content types and
+	 * contentAssistProcessorTracker
 	 * 
-	 * @param contentAssistProcessorTracker
-	 *            the tracker to use for tracking additional
-	 *            {@link IContentAssistProcessor}s in the OSGi service factory
-	 * @param processors
-	 *            the static processor list
-	 * @param types
-	 *            the {@link IContentType} that are used to filter appropriate
-	 *            candidates from the registry
+	 * @param contentAssistProcessorTracker the tracker to use for tracking
+	 *                                      additional
+	 *                                      {@link IContentAssistProcessor}s in the
+	 *                                      OSGi service factory
+	 * @param processors                    the static processor list
+	 * @param types                         the {@link IContentType} that are used
+	 *                                      to filter appropriate candidates from
+	 *                                      the registry
 	 */
 	public EditorContentAssistant(
 			ContentTypeRelatedExtensionTracker<IContentAssistProcessor> contentAssistProcessorTracker,
@@ -45,20 +45,19 @@ public class EditorContentAssistant extends ContentAssistant {
 	}
 
 	/**
-	 * Creates a new EditorContentAssistant instance for the given content types
-	 * and contentAssistProcessorTracker
+	 * Creates a new EditorContentAssistant instance for the given content types and
+	 * contentAssistProcessorTracker
 	 * 
-	 * @param contentAssistProcessorTracker
-	 *            the tracker to use for tracking additional
-	 *            {@link IContentAssistProcessor}s in the OSGi service factory
-	 * @param processors
-	 *            the static processor list
-	 * @param types
-	 *            the {@link IContentType} that are used to filter appropriate
-	 *            candidates from the registry
-	 * @param preferenceStore
-	 *            the {@link IPreferenceStore} containing the content assistant
-	 *            preferences
+	 * @param contentAssistProcessorTracker the tracker to use for tracking
+	 *                                      additional
+	 *                                      {@link IContentAssistProcessor}s in the
+	 *                                      OSGi service factory
+	 * @param processors                    the static processor list
+	 * @param types                         the {@link IContentType} that are used
+	 *                                      to filter appropriate candidates from
+	 *                                      the registry
+	 * @param preferenceStore               the {@link IPreferenceStore} containing
+	 *                                      the content assistant preferences
 	 */
 	public EditorContentAssistant(
 			ContentTypeRelatedExtensionTracker<IContentAssistProcessor> contentAssistProcessorTracker,
@@ -73,14 +72,7 @@ public class EditorContentAssistant extends ContentAssistant {
 		enableColoredLabels(true);
 		enableAutoActivation(true);
 		setAutoActivationDelay(10);
-		// enableAutoActivateCompletionOnType(true);
-		try {
-			Method m = this.getClass().getMethod("enableAutoActivateCompletionOnType");
-			if (m != null) {
-				m.invoke(this, true);
-			}
-		} catch (Exception e) {
-		}
+//		enableAutoActivateCompletionOnType(true);
 		setInformationControlCreator(new AbstractReusableInformationControlCreator() {
 			@Override
 			protected IInformationControl doCreateInformationControl(Shell parent) {
@@ -90,11 +82,10 @@ public class EditorContentAssistant extends ContentAssistant {
 	}
 
 	/**
-	 * Updates the {@link IContentAssistProcessor} registrations according to
-	 * the documents content-type tokens
+	 * Updates the {@link IContentAssistProcessor} registrations according to the
+	 * documents content-type tokens
 	 * 
-	 * @param document
-	 *            the document to use for updating the tokens
+	 * @param document the document to use for updating the tokens
 	 */
 	public void updateTokens(IDocument document) {
 		updateProcessors(document);
@@ -115,7 +106,7 @@ public class EditorContentAssistant extends ContentAssistant {
 	private void updateProcessorToken(IContentAssistProcessor processor, IDocument document) {
 		// removeContentAssistProcessor(processor);
 		try {
-			Method m = this.getClass().getMethod("removeContentAssistProcessor");
+			Method m = this.getClass().getMethod("removeContentAssistProcessor", IContentAssistProcessor.class);
 			if (m != null) {
 				m.invoke(this, processor);
 			}
@@ -124,7 +115,8 @@ public class EditorContentAssistant extends ContentAssistant {
 		try {
 			// addContentAssistProcessor(processor,
 			// IDocument.DEFAULT_CONTENT_TYPE);
-			Method m = this.getClass().getMethod("addContentAssistProcessor");
+			Method m = this.getClass().getMethod("addContentAssistProcessor", IContentAssistProcessor.class,
+					String.class);
 			if (m != null) {
 				m.invoke(this, processor, IDocument.DEFAULT_CONTENT_TYPE);
 			}
@@ -135,7 +127,8 @@ public class EditorContentAssistant extends ContentAssistant {
 			for (String contentType : document.getLegalContentTypes()) {
 				// addContentAssistProcessor(processor, contentType);
 				try {
-					Method m = this.getClass().getMethod("addContentAssistProcessor");
+					Method m = this.getClass().getMethod("addContentAssistProcessor", IContentAssistProcessor.class,
+							String.class);
 					if (m != null) {
 						m.invoke(this, processor, contentType);
 					}
@@ -147,11 +140,12 @@ public class EditorContentAssistant extends ContentAssistant {
 		if (processor != DEFAULT_CONTENT_ASSIST_PROCESSOR) {
 			// removeContentAssistProcessor(DEFAULT_CONTENT_ASSIST_PROCESSOR);
 			try {
-				Method m = this.getClass().getMethod("removeContentAssistProcessor");
+				Method m = this.getClass().getMethod("removeContentAssistProcessor", IContentAssistProcessor.class);
 				if (m != null) {
 					m.invoke(this, DEFAULT_CONTENT_ASSIST_PROCESSOR);
 				}
 			} catch (Exception e) {
+				setContentAssistProcessor(null, null);
 			}
 		}
 	}
@@ -178,7 +172,7 @@ public class EditorContentAssistant extends ContentAssistant {
 			if (removed.isPresent()) {
 				// removeContentAssistProcessor(removed.get());
 				try {
-					Method m = this.getClass().getMethod("removeContentAssistProcessor");
+					Method m = this.getClass().getMethod("removeContentAssistProcessor", IContentAssistProcessor.class);
 					if (m != null) {
 						m.invoke(this, removed.get());
 					}
