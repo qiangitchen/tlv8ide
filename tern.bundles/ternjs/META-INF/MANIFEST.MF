@@ -4,10 +4,13 @@ Bundle-ManifestVersion: 2
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Bundle-Vendor: %providerName
 Import-Package: org.osgi.framework
+Require-Bundle: org.eclipse.core.runtime,
+ tern.core
 Export-Package: ternjs
 Bundle-Name: %pluginName
 Bundle-Version: 3.4.0.qualifier
 Bundle-Localization: plugin
 Bundle-Activator: ternjs.Activator
 Automatic-Module-Name: ternjs
+Bundle-ActivationPolicy: lazy
 Eclipse-BundleShape: dir

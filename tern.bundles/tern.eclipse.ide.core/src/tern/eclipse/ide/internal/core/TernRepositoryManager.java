@@ -40,7 +40,7 @@ import tern.utils.TernModuleHelper;
  * Manager of tern repository.
  *
  */
-@SuppressWarnings("deprecation")
+@SuppressWarnings({"deprecation", "restriction"})
 public class TernRepositoryManager implements ITernRepositoryManager, IResourceChangeListener, IResourceDeltaVisitor {
 
 	private static final TernRepositoryManager INSTANCE = new TernRepositoryManager();

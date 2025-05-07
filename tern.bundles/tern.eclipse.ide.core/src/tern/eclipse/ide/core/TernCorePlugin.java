@@ -5,9 +5,7 @@ import java.io.IOException;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Platform;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.core.runtime.Status;
 import org.osgi.framework.BundleContext;
@@ -71,10 +69,10 @@ public class TernCorePlugin extends Plugin {
 	 * @return the ternjs repository base directory.
 	 * @throws IOException
 	 */
-	@SuppressWarnings("deprecation")
 	public static File getTernRepositoryBaseDir() throws IOException {
-		return FileLocator.getBundleFile(Platform
-				.getBundle(ternjs.Activator.PLUGIN_ID));
+//		return FileLocator.getBundleFile(Platform
+//				.getBundle(ternjs.Activator.PLUGIN_ID));
+		return ternjs.Activator.getTernRepositoryBaseDir();
 	}
 
 	@Override

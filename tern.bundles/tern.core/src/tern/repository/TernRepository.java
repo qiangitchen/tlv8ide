@@ -151,6 +151,7 @@ public class TernRepository implements ITernRepository {
 	
 	@Override
 	public void setBaseDir(File baseDir) {
+		System.out.println("baseDir: "+baseDir);
 		this.baseDir = baseDir;
 		this.nodeModulesDir = new File(baseDir, "node_modules");
 		this.ternBaseDir = new File(nodeModulesDir, "tern");
