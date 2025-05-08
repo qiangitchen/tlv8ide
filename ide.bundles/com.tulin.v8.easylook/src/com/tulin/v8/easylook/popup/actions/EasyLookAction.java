@@ -55,7 +55,17 @@ public class EasyLookAction implements IObjectActionDelegate {
 
 	public void openLinuxExplorer(String path) throws Exception {
 		// Unix or Linux的打开方式
-		String[] explorers = { "dde-file-manager", "peony", "nautilus", "nemo" };
+		// dde-file-manager: UOS
+		// peony: kylin
+		// nautilus: GNOME
+		// nemo: Cinnamon
+		// dolphin: KDE
+		// thunar: XFCE
+		// pcmanfm: LXDE
+		// caja: MATE
+		// 使用通用命令: xdg-open 在一些情况下，你可以使用一个更通用的命令来尝试打开默认的文件管理器
+		String[] explorers = { "dde-file-manager", "peony", "nautilus", "nemo", "dolphin", "thunar", "pcmanfm", "caja",
+				"xdg-open" };
 		String explorer = null;
 		for (int count = 0; count < explorers.length && explorer == null; count++)
 			// 执行代码，在brower有值后跳出，
