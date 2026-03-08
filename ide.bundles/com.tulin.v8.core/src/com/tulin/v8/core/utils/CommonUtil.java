@@ -7,8 +7,10 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.apache.ibatis.jdbc.SQL;
 import org.eclipse.core.runtime.Platform;
@@ -656,14 +658,17 @@ public class CommonUtil {
 			if (DBUtils.IsMySQLDB(dbkey)) {
 				schemaPattern = conn.getCatalog();
 			}
-			if (schemaPattern != null) {
-				rs = objMet.getColumns(catalog, schemaPattern, tableName, null);
-			} else {
-				rs = objMet.getColumns(catalog, null, tableName, null);
-			}
+			rs = objMet.getColumns(catalog, schemaPattern, tableName, null);
+			// 用于去重：key=字段名，避免重复
+			Set<String> fieldNameSet = new HashSet<>();
 			while (rs.next()) {
+				String columnName = rs.getString("COLUMN_NAME");
+				// 去重：如果字段名已存在，跳过
+				if (fieldNameSet.contains(columnName)) {
+					continue;
+				}
 				String[] item = new String[6];
-				item[0] = rs.getString("COLUMN_NAME");
+				item[0] = columnName;
 				item[1] = rs.getString("TYPE_NAME");
 				item[2] = rs.getString("REMARKS");
 				if (StringUtils.isEmpty(item[2])) {
@@ -691,6 +696,7 @@ public class CommonUtil {
 					item[5] = getColumnDefault(dbkey, conn, tableName, item[0]);
 				}
 				rlist.add(item);
+				fieldNameSet.add(columnName); // 记录已添加的字段名
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -713,8 +719,8 @@ public class CommonUtil {
 		String res = "";
 		Statement stm = null;
 		ResultSet rs = null;
+		SQL sql = new SQL();
 		try {
-			SQL sql = new SQL();
 			sql.SELECT(
 					"t1.TABLE_NAME,t1.COLUMN_NAME,t1.DATA_TYPE,t2.COMMENTS,t1.CHAR_LENGTH,t1.DATA_DEFAULT AS COLUMN_DEF");
 			sql.FROM("user_tab_columns t1");
@@ -757,6 +763,7 @@ public class CommonUtil {
 				res = rs.getString("COLUMN_DEF");
 			}
 		} catch (Exception e) {
+			System.err.println(sql);
 			e.printStackTrace();
 		} finally {
 			DBUtils.closeConn(null, stm, rs);
@@ -798,6 +805,7 @@ public class CommonUtil {
 				result = rs.getString(1);
 			}
 		} catch (Exception e) {
+			System.err.println(sql);
 			e.printStackTrace();
 		} finally {
 			DBUtils.CloseConn(null, ps, rs);
@@ -852,6 +860,7 @@ public class CommonUtil {
 				}
 			}
 		} catch (Exception e) {
+			System.err.println(sql);
 			e.printStackTrace();
 		} finally {
 			DBUtils.closeConn(conn, ps, rs);
