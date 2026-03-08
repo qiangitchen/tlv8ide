@@ -255,8 +255,10 @@ public class DBUtils {
 				return getAppConn(datasources.get(key));
 			}
 		}
-		SpringDatasource datasource = AppConfig.getSpringDatasource();
-		cn = getAppConn(datasource);
+		if(cn == null) {
+			SpringDatasource datasource = AppConfig.getSpringDatasource();
+			cn = getAppConn(datasource);
+		}
 		return cn;
 	}
 
