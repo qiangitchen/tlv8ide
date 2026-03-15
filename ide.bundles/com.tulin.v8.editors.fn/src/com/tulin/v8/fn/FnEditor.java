@@ -235,10 +235,10 @@ public class FnEditor extends FormEditor implements IResourceChangeListener {
 			// tablelay.heightHint = 240;
 			paramtable.setLayoutData(tablelay);
 			TableColumn cplumn1 = new TableColumn(paramtable, SWT.NONE);
-			cplumn1.setWidth(120);
+			cplumn1.setWidth(140);
 			cplumn1.setText(Messages.getString("editors.FnEditor.17"));
 			TableColumn cplumn2 = new TableColumn(paramtable, SWT.NONE);
-			cplumn2.setWidth(120);
+			cplumn2.setWidth(260);
 			cplumn2.setText(Messages.getString("editors.FnEditor.18"));
 			section3.setClient(paramgp);
 			section3.setLayoutData(new GridData(GridData.FILL_BOTH));
