@@ -370,16 +370,16 @@ public class FlowDesignEditor extends EditorPart {
 		propertree.setLayoutData(new GridData(GridData.FILL_BOTH));
 		TreeColumn name = new TreeColumn(propertree, SWT.NONE);
 		name.setText(Messages.getString("TLEditor.WEBDesign.3"));
-		name.setWidth(110);
+		name.setWidth(120);
 		TreeColumn value = new TreeColumn(propertree, SWT.NONE);
-		value.setWidth(150);
+		value.setWidth(220);
 		value.setText(Messages.getString("TLEditor.WEBDesign.4"));
 		tabItemAr.setControl(propertree);
 
 		// 设置属性表格行高
 		propertree.addListener(SWT.MeasureItem, new Listener() {
 			public void handleEvent(Event event) {
-				event.height = 26;
+				event.height = 28;
 			}
 		});
 
