@@ -280,7 +280,7 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 		name.setText(Messages.getString("TLEditor.WEBDesign.3"));
 		name.setWidth(100);
 		TableColumn value = new TableColumn(table, SWT.NONE);
-		value.setWidth(100);
+		value.setWidth(180);
 		value.setText(Messages.getString("TLEditor.WEBDesign.4"));
 		tabItemAr.setControl(propotype);
 
@@ -354,9 +354,9 @@ public class WEBDesignEditor extends FormPage implements WEBDesignEditorInterfac
 		etable.setLinesVisible(true);
 		TableColumn Evname = new TableColumn(etable, SWT.NONE);
 		Evname.setText(Messages.getString("TLEditor.WEBDesign.6"));
-		Evname.setWidth(100);
+		Evname.setWidth(120);
 		TableColumn Evvalue = new TableColumn(etable, SWT.NONE);
-		Evvalue.setWidth(100);
+		Evvalue.setWidth(160);
 		Evvalue.setText(Messages.getString("TLEditor.WEBDesign.7"));
 		tabItemEv.setControl(etable);
 
