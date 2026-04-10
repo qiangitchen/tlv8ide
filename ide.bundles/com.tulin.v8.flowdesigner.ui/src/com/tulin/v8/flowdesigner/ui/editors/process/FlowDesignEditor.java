@@ -21,6 +21,7 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
@@ -84,7 +85,6 @@ import com.tulin.v8.flowdesigner.ui.editors.process.listener.LSelectAdpater;
 import com.tulin.v8.flowdesigner.ui.editors.process.listener.LSetLockkAdpater;
 import com.tulin.v8.flowdesigner.ui.editors.process.listener.LStartAdpater;
 import com.tulin.v8.flowdesigner.ui.editors.process.listener.LbusActivityAdpater;
-import com.tulin.v8.swt.chromium.Browser;
 
 /**
  * 流程设计器

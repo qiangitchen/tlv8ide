@@ -4,11 +4,11 @@ import java.util.List;
 
 import org.dom4j.Document;
 import org.dom4j.Element;
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.BrowserFunction;
 
 import com.tulin.v8.echarts.ui.editors.echt.EchartsDesignPage;
 import com.tulin.v8.echarts.ui.editors.echt.ModleParse;
-import com.tulin.v8.swt.chromium.Browser;
-import com.tulin.v8.swt.chromium.BrowserFunction;
 
 public class GetScriptCallJava extends BrowserFunction {
 

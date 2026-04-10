@@ -2,10 +2,10 @@ package com.tulin.v8.echarts.ui.editors.echt.action;
 
 import org.eclipse.jface.action.Action;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.swt.browser.Browser;
 
 import com.tulin.v8.echarts.ui.Activator;
 import com.tulin.v8.echarts.ui.editors.echt.Messages;
-import com.tulin.v8.swt.chromium.Browser;
 
 public class RefreshAction extends Action {
 	Browser browser;

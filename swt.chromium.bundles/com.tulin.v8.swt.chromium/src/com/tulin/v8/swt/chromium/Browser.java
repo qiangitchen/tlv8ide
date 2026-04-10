@@ -56,11 +56,19 @@ public class Browser extends Composite {
 			parent.getDisplay().setData(NO_INPUT_METHOD, null);
 		}
 
-		try {
-			webBrowser = new Chromiu(startUrl);
-			webBrowser.setBrowser(this);
-			webBrowser.create(this, style);
-		} catch (Exception | Error e) {
+		webBrowser = new Chromiu(startUrl);
+		webBrowser.setBrowser(this);
+
+		boolean isc = false;
+
+		if ("win32".equals(platform)) {
+			try {
+				webBrowser.create(this, style);
+			} catch (Exception | Error e) {
+				isc = true;
+			}
+		}
+		if (isc) {
 			setLayout(new FillLayout());
 			swtBrowser = new org.eclipse.swt.browser.Browser(this, SWT.NONE);
 		}
@@ -529,7 +537,6 @@ public class Browser extends Composite {
 	@Override
 	public void dispose() {
 		try {
-//			webBrowser.stop();
 			webBrowser.getCefClient().dispose();
 		} catch (Exception e) {
 		}

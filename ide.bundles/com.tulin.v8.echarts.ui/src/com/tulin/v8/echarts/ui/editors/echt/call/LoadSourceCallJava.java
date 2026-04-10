@@ -1,9 +1,10 @@
 package com.tulin.v8.echarts.ui.editors.echt.call;
 
+import org.eclipse.swt.browser.Browser;
+import org.eclipse.swt.browser.BrowserFunction;
+
 import com.tulin.v8.echarts.ui.editors.echt.EchartsDesignPage;
 import com.tulin.v8.echarts.ui.editors.echt.ModleParse;
-import com.tulin.v8.swt.chromium.Browser;
-import com.tulin.v8.swt.chromium.BrowserFunction;
 
 public class LoadSourceCallJava extends BrowserFunction {
 	EchartsDesignPage design;

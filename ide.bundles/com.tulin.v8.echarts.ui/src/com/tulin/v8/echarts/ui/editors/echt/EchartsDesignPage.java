@@ -11,6 +11,7 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.browser.Browser;
 import org.eclipse.swt.custom.SashForm;
 import org.eclipse.swt.events.MouseEvent;
 import org.eclipse.swt.events.MouseListener;
@@ -39,7 +40,6 @@ import com.tulin.v8.echarts.ui.editors.echt.call.GetScriptCallJava;
 import com.tulin.v8.echarts.ui.editors.echt.call.GetThemeCallJava;
 import com.tulin.v8.echarts.ui.editors.echt.call.LoadSourceCallJava;
 import com.tulin.v8.echarts.ui.utils.WebappManager;
-import com.tulin.v8.swt.chromium.Browser;
 
 public class EchartsDesignPage extends FormPage {
 	EchartsEditor editor;
