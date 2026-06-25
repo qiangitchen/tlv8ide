@@ -20,6 +20,7 @@ import org.yaml.snakeyaml.Yaml;
 import org.yaml.snakeyaml.constructor.Constructor;
 
 import com.tulin.v8.core.TuLinPlugin;
+import com.tulin.v8.core.entity.DruidDatasource;
 import com.tulin.v8.core.entity.DynamicDatasource;
 import com.tulin.v8.core.entity.JdbcDatasource;
 import com.tulin.v8.core.entity.Spring;
@@ -119,6 +120,7 @@ public class AppConfig {
 		IProject project = TuLinPlugin.getCurrentProject();
 		Map<String, DynamicDatasource> map = getDynamicDatasources(project);
 		if (map.isEmpty()) {
+			project = TuLinPlugin.getProject("tlv8-main");
 			if (project == null || !project.exists()) {
 				project = TuLinPlugin.findProject("main");
 			}
@@ -144,10 +146,33 @@ public class AppConfig {
 				Map<String, Object> spring = (Map<String, Object>) loadedMap.get("spring");
 				Map<String, Object> datasource = (Map<String, Object>) spring.get("datasource");
 				if (datasource != null) {
-					Map<String, Object> dynamic = (Map<String, Object>) datasource.get("dynamic");
-					Map<String, Object> dynamicDatasource = (Map<String, Object>) dynamic.get("datasource");
-					for (String name : dynamicDatasource.keySet()) {
-						map.put(name, new DynamicDatasource(name, (Map<String, Object>) dynamicDatasource.get(name)));
+					String driverClassName = (String) datasource.get("driverClassName");
+					if (datasource.containsKey("dynamic")) {
+						Map<String, Object> dynamic = (Map<String, Object>) datasource.get("dynamic");
+						Map<String, Object> dynamicDatasource = (Map<String, Object>) dynamic.get("datasource");
+						for (String name : dynamicDatasource.keySet()) {
+							DynamicDatasource dynamicSource = new DynamicDatasource(name,
+									(Map<String, Object>) dynamicDatasource.get(name));
+							if (driverClassName != null && dynamicSource.getDriver() == null) {
+								dynamicSource.setDriverClassName(driverClassName);
+							}
+							map.put(name, dynamicSource);
+						}
+					} else if (datasource.containsKey("druid")) {
+						Map<String, Object> druidDatasource = (Map<String, Object>) datasource.get("druid");
+						for (String name : druidDatasource.keySet()) {
+							try {
+								DruidDatasource druidSource = new DruidDatasource(name,
+										(Map<String, Object>) druidDatasource.get(name));
+								if (druidSource.isEnabled()) {
+									if (driverClassName != null && druidSource.getDriver() == null) {
+										druidSource.setDriverClassName(driverClassName);
+									}
+									map.put(name, druidSource);
+								}
+							} catch (Exception e) {
+							}
+						}
 					}
 				} else {
 					Map<String, Object> profiles = (Map<String, Object>) spring.get("profiles");
@@ -159,11 +184,36 @@ public class AppConfig {
 						Map<String, Object> aloadedMap = ayaml.load(ain);
 						Map<String, Object> aspring = (Map<String, Object>) aloadedMap.get("spring");
 						Map<String, Object> adatasource = (Map<String, Object>) aspring.get("datasource");
-						Map<String, Object> adynamic = (Map<String, Object>) adatasource.get("dynamic");
-						Map<String, Object> dynamicDatasource = (Map<String, Object>) adynamic.get("datasource");
-						for (String name : dynamicDatasource.keySet()) {
-							map.put(name,
-									new DynamicDatasource(name, (Map<String, Object>) dynamicDatasource.get(name)));
+						if (adatasource != null) {
+							String driverClassName = (String) adatasource.get("driverClassName");
+							if (adatasource.containsKey("dynamic")) {
+								Map<String, Object> adynamic = (Map<String, Object>) adatasource.get("dynamic");
+								Map<String, Object> dynamicDatasource = (Map<String, Object>) adynamic
+										.get("datasource");
+								for (String name : dynamicDatasource.keySet()) {
+									DynamicDatasource dynamicSource = new DynamicDatasource(name,
+											(Map<String, Object>) dynamicDatasource.get(name));
+									if (driverClassName != null && dynamicSource.getDriver() == null) {
+										dynamicSource.setDriverClassName(driverClassName);
+									}
+									map.put(name, dynamicSource);
+								}
+							} else if (adatasource.containsKey("druid")) {
+								Map<String, Object> druidDatasource = (Map<String, Object>) adatasource.get("druid");
+								for (String name : druidDatasource.keySet()) {
+									try {
+										DruidDatasource druidSource = new DruidDatasource(name,
+												(Map<String, Object>) druidDatasource.get(name));
+										if (druidSource.isEnabled()) {
+											if (driverClassName != null && druidSource.getDriver() == null) {
+												druidSource.setDriverClassName(driverClassName);
+											}
+											map.put(name, druidSource);
+										}
+									} catch (Exception e) {
+									}
+								}
+							}
 						}
 					}
 				}
@@ -184,15 +234,6 @@ public class AppConfig {
 		SpringDatasource dataSource = getSpringDatasource(project);
 		if (dataSource == null) {
 			project = TuLinPlugin.getProject("tlv8");
-//			if (project == null || !project.exists()) {
-//				project = TuLinPlugin.getProject("tlv8-main");
-//			}
-//			if (project == null || !project.exists()) {
-//				project = TuLinPlugin.getProject("tlv8-v3-main");
-//			}
-//			if (project == null || !project.exists()) {
-//				project = TuLinPlugin.getProject("tlv8-admin");
-//			}
 			if (project == null || !project.exists()) {
 				project = TuLinPlugin.findProject("main");
 			}

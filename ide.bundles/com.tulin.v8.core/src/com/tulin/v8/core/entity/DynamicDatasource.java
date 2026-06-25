@@ -17,7 +17,7 @@ public class DynamicDatasource extends AbsDataSource {
 		this.password = (String) dynamicMap.get("password");
 		if (dynamicMap.containsKey("driverClassName")) {
 			driverClassName = (String) dynamicMap.get("driverClassName");
-		} else {
+		} else if (dynamicMap.containsKey("driver-class-name")) {
 			driverClassName = (String) dynamicMap.get("driver-class-name");
 		}
 	}

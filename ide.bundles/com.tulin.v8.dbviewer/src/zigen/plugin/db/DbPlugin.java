@@ -20,6 +20,7 @@ import java.util.List;
 import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
+import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Path;
@@ -764,11 +765,10 @@ public class DbPlugin extends AbstractUIPlugin {
 
 	}
 
-	@SuppressWarnings("deprecation")
 	private void registerImage(ImageRegistry registry, String fileName) {
 		try {
 			IPath path = new Path("icons/" + fileName); //$NON-NLS-1$
-			URL url = find(path);
+			URL url = FileLocator.find(getBundle(), path);
 			if (url != null) {
 				ImageDescriptor desc = ImageDescriptor.createFromURL(url);
 				registry.put(fileName, desc);
