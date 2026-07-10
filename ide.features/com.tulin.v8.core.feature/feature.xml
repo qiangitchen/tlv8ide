@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.core.feature"
       label="TuLin core package"
-      version="3.4.0.qualifier"
+      version="3.4.3.qualifier"
       provider-name="TuLin"
       plugin="com.tulin.v8.core">
 
