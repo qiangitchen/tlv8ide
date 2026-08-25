@@ -21,7 +21,7 @@ public class Startup implements IStartup {
 			try {
 				CefBrowserManager.init();
 			} catch (Exception | Error e) {
-				e.printStackTrace();
+				//e.printStackTrace();
 			}
 		});
 	}
