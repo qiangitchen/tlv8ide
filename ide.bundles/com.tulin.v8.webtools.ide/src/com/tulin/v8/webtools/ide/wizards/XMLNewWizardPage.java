@@ -13,6 +13,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.dialogs.WizardNewFileCreationPage;
 
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
 import com.tulin.v8.webtools.ide.html.HTMLUtil;
 import com.tulin.v8.webtools.ide.xml.DTDResolver;
 import com.tulin.v8.webtools.ide.xml.IDTDResolver;
@@ -114,6 +115,7 @@ public class XMLNewWizardPage extends WizardNewFileCreationPage {
 				return grammer.getTargetNamespace();
 			}
 		} catch (Exception ex) {
+			WebToolsPlugin.logException(ex);
 		}
 		return null;
 	}

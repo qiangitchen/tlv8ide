@@ -5,6 +5,8 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextDoubleClickStrategy;
 import org.eclipse.jface.text.ITextViewer;
 
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
+
 public class HTMLDoubleClickStrategy implements ITextDoubleClickStrategy {
 	protected ITextViewer fText;
 
@@ -65,6 +67,7 @@ public class HTMLDoubleClickStrategy implements ITextDoubleClickStrategy {
 			fText.setSelectedRange(offset, len);
 			return true;
 		} catch (BadLocationException x) {
+			WebToolsPlugin.logException(x);
 		}
 
 		return false;
@@ -106,6 +109,7 @@ public class HTMLDoubleClickStrategy implements ITextDoubleClickStrategy {
 			return true;
 
 		} catch (BadLocationException x) {
+			WebToolsPlugin.logException(x);
 		}
 
 		return false;

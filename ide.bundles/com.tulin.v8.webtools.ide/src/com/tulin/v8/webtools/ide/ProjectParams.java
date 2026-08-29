@@ -540,23 +540,28 @@ public class ProjectParams {
 		try {
 			this.javaScriptIndentSize = Integer.parseInt(indentSize);
 		} catch (Exception e) {
+		WebToolsPlugin.logException(e);
 		}
 		this.javaScriptIndentChar = indentChar.length() > 0 ? indentChar.charAt(0) : ' ';
 		try {
 			this.javaScriptPreserveNewlines = Boolean.parseBoolean(preserveNewlines);
 		} catch (Exception e) {
+		WebToolsPlugin.logException(e);
 		}
 		try {
 			this.javaScriptInitIndentLevel = Integer.parseInt(initIndentLevel);
 		} catch (Exception e) {
+		WebToolsPlugin.logException(e);
 		}
 		try {
 			this.javaScriptSpaceAfterAnonFunc = Boolean.parseBoolean(spaceAfterAnonFunc);
 		} catch (Exception e) {
+		WebToolsPlugin.logException(e);
 		}
 		try {
 			this.javaScriptBracesOnOwnLine = Boolean.parseBoolean(bracesOnOwnLine);
 		} catch (Exception e) {
+		WebToolsPlugin.logException(e);
 		}
 	}
 

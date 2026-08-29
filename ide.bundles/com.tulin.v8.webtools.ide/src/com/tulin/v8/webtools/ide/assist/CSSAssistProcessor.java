@@ -26,6 +26,7 @@ import com.tulin.v8.fuzzyxml.FuzzyXMLDocument;
 import com.tulin.v8.fuzzyxml.FuzzyXMLElement;
 import com.tulin.v8.fuzzyxml.FuzzyXMLNode;
 import com.tulin.v8.fuzzyxml.FuzzyXMLParser;
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
 import com.tulin.v8.webtools.ide.html.HTMLUtil;
 import com.tulin.v8.webtools.ide.utils.IOUtil;
 
@@ -90,6 +91,7 @@ public class CSSAssistProcessor {
 						processStylesheet(text);
 					}
 				} catch (Exception ex) {
+					WebToolsPlugin.logException(ex);
 				}
 			}
 		} else if (element.getName().equalsIgnoreCase("style")) {
@@ -209,6 +211,7 @@ public class CSSAssistProcessor {
 			}
 			return info;
 		} catch (Exception ex) {
+			WebToolsPlugin.logException(ex);
 		}
 		return new AssistInfo[0];
 	}

@@ -123,7 +123,7 @@ public class JavaScriptConfiguration extends AbsTextSourceViewerConfiguration {
 					this.resolvedContentTypes.add(contentType);
 				}
 			} catch (CoreException ex) {
-				ex.printStackTrace();
+				WebToolsPlugin.logException(ex);
 			}
 		}
 		String fileName = getCurrentFileName(document);

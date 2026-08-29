@@ -211,7 +211,7 @@ public class HTMLConfiguration extends AbsTextSourceViewerConfiguration {
 					this.resolvedContentTypes.add(contentType);
 				}
 			} catch (CoreException ex) {
-				ex.printStackTrace();
+				WebToolsPlugin.logException(ex);
 			}
 		}
 		String fileName = getCurrentFileName(document);
@@ -288,6 +288,7 @@ public class HTMLConfiguration extends AbsTextSourceViewerConfiguration {
 			}
 			watchDocument(sourceViewer.getDocument());
 		} catch (Exception e) {
+		WebToolsPlugin.logException(e);
 		}
 		if (assistant == null) {
 			assistant = new ContentAssistant();

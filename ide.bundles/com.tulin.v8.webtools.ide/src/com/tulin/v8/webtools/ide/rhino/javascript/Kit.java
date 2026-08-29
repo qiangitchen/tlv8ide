@@ -96,7 +96,6 @@ public class Kit {
 		return null;
 	}
 
-	@SuppressWarnings("deprecation")
 	static Object newInstanceOrNull(Class<?> cl) {
 		try {
 			return cl.newInstance();

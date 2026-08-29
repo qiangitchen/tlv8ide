@@ -129,6 +129,7 @@ public class JavaScriptOutlinePage extends ContentOutlinePage {
 				setSelection(new StructuredSelection(context));
 				getTreeViewer().addSelectionChangedListener(selectionChangedListener);
 			} catch (Exception ex) {
+			WebToolsPlugin.logException(ex);
 			}
 		}
 	}
@@ -139,7 +140,7 @@ public class JavaScriptOutlinePage extends ContentOutlinePage {
 				model.update(editor.getDocumentProvider().getDocument(editor.getEditorInput()).get());
 				getTreeViewer().refresh();
 			} catch (Throwable t) {
-				t.printStackTrace();
+				WebToolsPlugin.logException(t);
 			}
 		}
 	}

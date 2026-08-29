@@ -176,6 +176,16 @@ public class WebToolsPlugin extends AbstractUIPlugin {
 
 //		innerDTD.put("http://java.sun.com/xml/ns/j2ee","/XSD/web-app_2_4.xsd");
 		innerDTD.put("http://java.sun.com/xml/ns/j2ee", "/XSD/web-app_3_0.xsd");
+		// Servlet 3.0 / Java EE 6 namespace used by web-app_3_0.xsd + web-common_3_0.xsd.
+		// Without this namespace -> file mapping, xerces XSDHandler cannot resolve the
+		// <xsd:include schemaLocation="javaee_6.xsd"> / "...jsp_2_2.xsd" / "...web-common_3_0.xsd"
+		// include chain and falls back to a synthetic empty source which triggers:
+		//     [Fatal Error] Premature end of file at XMLVersionDetector.determineDocVersion
+		//     schema_reference.4: Failed to read schema document 'web-common_3_0.xsd'
+		//     src-resolve: Cannot resolve the name 'javaee:web-appType'
+		innerDTD.put("http://java.sun.com/xml/ns/javaee", "/XSD/web-app_3_0.xsd");
+		// Servlet 3.1 / 4.0 and Java EE 7 / 8 share the xmlns.jcp.org namespace.
+		innerDTD.put("http://xmlns.jcp.org/xml/ns/javaee", "/XSD/web-app_4_0.xsd");
 		innerDTD.put("j2ee_1_4.xsd", "/XSD/j2ee_1_4.xsd");
 		innerDTD.put("j2ee_web_services_1_1.xsd", "/XSD/j2ee_web_services_1_1.xsd");
 		innerDTD.put("j2ee_web_services_client_1_1.xsd", "/XSD/j2ee_web_services_client_1_1.xsd");
@@ -187,6 +197,15 @@ public class WebToolsPlugin extends AbstractUIPlugin {
 		innerDTD.put("web-app_4_0.xsd", "/XSD/web-app_4_0.xsd");
 		innerDTD.put("web-jsptaglibrary_2_0.xsd", "/XSD/web-jsptaglibrary_2_0.xsd");
 		innerDTD.put("xml.xsd", "/XSD/xml.xsd");
+		// Additional XSDs required by the include-chains of the above schemas.
+		// Files are provided as lightweight compatibility stubs (so the xerces
+		// loader never parses an empty document) unless a user later drops the
+		// full reference schemas into the /XSD/ folder to override them.
+		innerDTD.put("web-common_3_0.xsd", "/XSD/web-common_3_0.xsd");
+		innerDTD.put("web-common_3_1.xsd", "/XSD/web-common_3_1.xsd");
+		innerDTD.put("web-common_4_0.xsd", "/XSD/web-common_4_0.xsd");
+		innerDTD.put("javaee_6.xsd", "/XSD/javaee_6.xsd");
+		innerDTD.put("jsp_2_2.xsd", "/XSD/jsp_2_2.xsd");
 	}
 
 	private static Map<String, String> innerTLD = new LinkedHashMap<String, String>();
@@ -440,8 +459,10 @@ public class WebToolsPlugin extends AbstractUIPlugin {
 		}
 		log.log(status);
 
-		// TODO debug
-		ex.printStackTrace();
+		// 仅调试模式下输出栈轨迹，避免生产环境 stderr 污染
+		if (Platform.inDebugMode()) {
+			ex.printStackTrace();
+		}
 	}
 
 	private String[] noValidationNatureIds;

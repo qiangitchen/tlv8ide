@@ -16,6 +16,7 @@ import org.eclipse.jdt.ui.text.java.IJavaCompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.swt.graphics.Image;
 
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
 import com.tulin.v8.webtools.ide.assist.AssistInfo;
 import com.tulin.v8.webtools.ide.html.HTMLUtil;
 
@@ -65,7 +66,7 @@ public class ClassNameAssistProcessor {
 			return result.toArray(new AssistInfo[result.size()]);
 
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			WebToolsPlugin.logException(ex);
 		}
 
 		return new AssistInfo[0];

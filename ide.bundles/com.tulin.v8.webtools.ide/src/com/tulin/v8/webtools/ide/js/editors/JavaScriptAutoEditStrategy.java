@@ -182,6 +182,7 @@ public class JavaScriptAutoEditStrategy extends DefaultIndentLineAutoEditStrateg
 						append(command, indent + "* ", indent.length() + 4);
 					}
 				} catch (BadLocationException ex) {
+				WebToolsPlugin.logException(ex);
 				}
 			}
 		}

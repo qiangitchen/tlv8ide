@@ -69,11 +69,16 @@ public class MultilineCommentHandler extends AbstractHandler implements IHandler
 		if ("".equals(text)) {
 			return;
 		}
+		int offset = sel.getOffset();
+		int oldLen = sel.getLength();
 		try {
 			if (text.startsWith("/*") && text.indexOf("*/") > 3) {
-			} else {
-				doc.replace(sel.getOffset(), sel.getLength(), "/*" + sel.getText() + "*/");
+				// 已经是注释，不做改动
+				return;
 			}
+			String newText = "/*" + sel.getText() + "*/";
+			doc.replace(offset, oldLen, newText);
+			ToggleCommentHandler.afterDocChanged(editor.getViewer(), doc, offset, oldLen, newText.length());
 		} catch (BadLocationException e) {
 			WebToolsPlugin.logException(e);
 		}
@@ -86,11 +91,16 @@ public class MultilineCommentHandler extends AbstractHandler implements IHandler
 		if ("".equals(text)) {
 			return;
 		}
+		int offset = sel.getOffset();
+		int oldLen = sel.getLength();
 		try {
 			if (text.startsWith("/*") && text.indexOf("*/") > 3) {
-			} else {
-				doc.replace(sel.getOffset(), sel.getLength(), "/*" + sel.getText() + "*/");
+				// 已经是注释，不做改动
+				return;
 			}
+			String newText = "/*" + sel.getText() + "*/";
+			doc.replace(offset, oldLen, newText);
+			ToggleCommentHandler.afterDocChanged(editor.getViewer(), doc, offset, oldLen, newText.length());
 		} catch (BadLocationException e) {
 			WebToolsPlugin.logException(e);
 		}

@@ -16,6 +16,7 @@ import org.eclipse.jface.text.contentassist.IContentAssistProcessor;
 import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.swt.widgets.Shell;
 
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
 import com.tulin.v8.webtools.ide.content.ContentTypeRelatedExtensionTracker;
 import com.tulin.v8.webtools.ide.js.JavaScriptAssistProcessor;
 
@@ -111,6 +112,7 @@ public class EditorContentAssistant extends ContentAssistant {
 				m.invoke(this, processor);
 			}
 		} catch (Exception e) {
+			WebToolsPlugin.logException(e);
 		}
 		try {
 			// addContentAssistProcessor(processor,

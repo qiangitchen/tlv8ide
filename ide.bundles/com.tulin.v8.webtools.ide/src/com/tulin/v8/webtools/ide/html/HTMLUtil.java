@@ -628,7 +628,7 @@ public class HTMLUtil {
 
 				buffer = unit.getBuffer();
 			} catch (JavaModelException e) {
-				e.printStackTrace();
+				WebToolsPlugin.logException(e);
 				buffer = null;
 			}
 

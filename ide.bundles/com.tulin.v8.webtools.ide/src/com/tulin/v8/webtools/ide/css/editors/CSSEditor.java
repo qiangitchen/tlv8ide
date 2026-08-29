@@ -26,6 +26,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import com.tulin.v8.webtools.ide.WebToolsPlugin;
 import com.tulin.v8.webtools.ide.css.ChooseColorAction;
 import com.tulin.v8.webtools.ide.formatter.Formater;
+import com.tulin.v8.webtools.ide.handlers.ToggleCommentHandler;
 import com.tulin.v8.webtools.ide.text.WebSourceEditor;
 
 /**
@@ -150,7 +151,7 @@ public class CSSEditor extends WebSourceEditor {
 			int length = doc.getLineLength(startline);
 			return doc.get(offset, length);
 		} catch (Exception e) {
-			e.printStackTrace();
+			WebToolsPlugin.logException(e);
 		}
 		return null;
 	}
@@ -171,14 +172,19 @@ public class CSSEditor extends WebSourceEditor {
 			if ("".equals(text)) {
 				return;
 			}
+			int offset = sel.getOffset();
+			int oldLen = sel.getLength();
 			try {
+				String newText;
 				if (text.startsWith("/*") && text.indexOf("*/") > 3) {
-					text = text.replaceFirst("/\\*", "");
-					text = text.replaceFirst("\\*/", "");
-					doc.replace(sel.getOffset(), sel.getLength(), text);
+					newText = text.replaceFirst("/\\*", "");
+					newText = newText.replaceFirst("\\*/", "");
+					doc.replace(offset, oldLen, newText);
 				} else {
-					doc.replace(sel.getOffset(), sel.getLength(), "/*" + sel.getText() + "*/");
+					newText = "/*" + sel.getText() + "*/";
+					doc.replace(offset, oldLen, newText);
 				}
+				ToggleCommentHandler.afterDocChanged(getViewer(), doc, offset, oldLen, newText.length());
 			} catch (BadLocationException e) {
 				WebToolsPlugin.logException(e);
 			}
@@ -197,7 +203,7 @@ public class CSSEditor extends WebSourceEditor {
 			try {
 				formater.format(CSSEditor.this);
 			} catch (ExecutionException e) {
-				e.printStackTrace();
+				WebToolsPlugin.logException(e);
 			}
 		}
 	}

@@ -15,6 +15,8 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
+
 public class IOUtil {
 
 	/**
@@ -71,6 +73,7 @@ public class IOUtil {
 			try {
 				closeable.close();
 			} catch (Exception ex) {
+				WebToolsPlugin.logException(ex);
 			}
 		}
 	}

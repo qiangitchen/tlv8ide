@@ -9,6 +9,7 @@ import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
 import com.tulin.v8.webtools.ide.html.HTMLUtil;
 import com.tulin.v8.webtools.ide.js.model.JavaScriptContext;
 import com.tulin.v8.webtools.ide.js.model.JavaScriptFunction;
@@ -160,6 +161,7 @@ public class JavaScriptAutoEditStrategy extends DefaultIndentLineAutoEditStrateg
 					append(command, indent + "* ", indent.length() + 4);
 				}
 			} catch (BadLocationException ex) {
+				WebToolsPlugin.logException(ex);
 			}
 		}
 		super.customizeDocumentCommand(document, command);

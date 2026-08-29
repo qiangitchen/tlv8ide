@@ -4,6 +4,8 @@ import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
+
 public class FileUtils {
 	public static String FileToString(String path) {
 		String fileStr = "";
@@ -17,7 +19,7 @@ public class FileUtils {
 			fileiptstream.close();
 			fileStr = fileText.toString().trim();
 		} catch (Exception e1) {
-			e1.printStackTrace();
+			WebToolsPlugin.logException(e1);
 		}
 		return fileStr;
 	}

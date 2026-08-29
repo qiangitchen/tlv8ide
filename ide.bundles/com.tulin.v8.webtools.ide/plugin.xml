@@ -345,7 +345,7 @@
 			commandId="tulin.command.UnMultilineComment"
 			contextId="com.tulin.v8.webtools.ide.sourceEditorScope"
 			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-			sequence="M1+M2+\" />
+			sequence="M1+M2+&#92;" />
 		<key
 			commandId="tulin.command.format"
 			contextId="com.tulin.v8.webtools.ide.sourceEditorScope"

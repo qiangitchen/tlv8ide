@@ -121,6 +121,7 @@ public class HTMLAssistProcessor extends HTMLTemplateAssistProcessor { /* implem
 							list.add(new AssistInfo(fileName + "#" + anchors[i], "#" + anchors[i]));
 						}
 					} catch (Exception ex) {
+					WebToolsPlugin.logException(ex);
 					}
 				}
 			}
@@ -381,7 +382,7 @@ public class HTMLAssistProcessor extends HTMLTemplateAssistProcessor { /* implem
 								word.length() - 1, position, tagImage, tagInfo.getDisplayString(), null,
 								tagInfo.getDescription()));
 					} catch (Exception ex) {
-						ex.printStackTrace();
+						WebToolsPlugin.logException(ex);
 					}
 				}
 			}

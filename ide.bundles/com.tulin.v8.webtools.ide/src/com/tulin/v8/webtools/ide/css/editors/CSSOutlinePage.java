@@ -76,6 +76,7 @@ public class CSSOutlinePage extends ContentOutlinePage {
 				}
 			}
 		} catch (Throwable t) {
+		WebToolsPlugin.logException(t);
 		}
 		TreeViewer viewer = getTreeViewer();
 		if (viewer != null && !viewer.isBusy()) {
@@ -212,6 +213,7 @@ public class CSSOutlinePage extends ContentOutlinePage {
 			}
 			getTreeViewer().addSelectionChangedListener(selectionChangedListener);
 		} catch (Exception ex) {
+		WebToolsPlugin.logException(ex);
 		}
 	}
 

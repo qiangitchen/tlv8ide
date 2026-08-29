@@ -26,6 +26,18 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
-	<classpathentry kind="src" path="src"/>
+	<!-- IMPORTANT: exclude 3rd-party source trees from this src entry.
+	     Bundled source under src/org/apache/xerces mirrors lib/xercesImpl.jar
+	     exactly – the jar is the runtime authority (JDK1.1 class version),
+	     the sources are there only for IDE step-through / patching reference.
+	     If we let javac/Eclipse compile these sources into bin/, OSGi will
+	     pick the bin/ copy FIRST (Bundle-ClassPath ordering) and the resulting
+	     .class files will match the workspace JDK level instead of the jar's
+	     safe 45.3 version.  On JDK<25 this immediately causes:
+	       UnsupportedClassVersionError: class file version 69.0
+	     because findLocalClass is consulted BEFORE lib/*.jar.
+	     Adding/removing a bundled patch in src/? Update the list below so it
+	     actually compiles only the patched tree.                               -->
+	<classpathentry excluding="org/apache/xerces/**|net/sf/saxon/**|nu/xom/**|com/sun/**|org/w3c/dom/**|org/xml/sax/**|javax/xml/**|javax/parsers/**" kind="src" path="src"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>
