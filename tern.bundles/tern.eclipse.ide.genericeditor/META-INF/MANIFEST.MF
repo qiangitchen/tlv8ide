@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-SymbolicName: tern.eclipse.ide.genericeditor;singleton:=true
-Bundle-Version: 3.4.0.qualifier
+Bundle-Version: 3.4.1.qualifier
 Bundle-Name: %pluginName
 Bundle-ManifestVersion: 2
 Bundle-Vendor: %providerName
@@ -18,9 +18,12 @@ Require-Bundle: org.eclipse.core.runtime,
  tern.core,
  tern.eclipse,
  tern.eclipse.ide.core,
- tern.eclipse.ide.ui
+ tern.eclipse.ide.ui,
+ org.eclipse.ui.editors
 Bundle-RequiredExecutionEnvironment: JavaSE-1.8
 Automatic-Module-Name: tern.eclipse.ide.genericeditor
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: tern.eclipse.ide.genericeditor.GenericeditorTernUIPlugin
+Bundle-ClassPath: lib/jsoup-1.11.3.jar,
+ .
 Bundle-Localization: plugin

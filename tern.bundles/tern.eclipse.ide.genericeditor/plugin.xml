@@ -40,7 +40,7 @@
       </editorContentTypeBinding>
    </extension>
    
-   <extension
+   <!--<extension
          point="org.eclipse.ui.genericeditor.hoverProviders">
       <hoverProvider
             class="tern.eclipse.ide.genericeditor.hover.TernGenericeditorHover"
@@ -54,7 +54,7 @@
             class="tern.eclipse.ide.genericeditor.hover.TernGenericeditorHover"
             contentType="tern.eclipse.ide.contenttype.vue">
       </hoverProvider>
-   </extension>
+   </extension>-->
 	
 	<extension
          point="org.eclipse.ui.genericeditor.contentAssistProcessors">
