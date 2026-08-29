@@ -15,7 +15,8 @@ public class MyHoverInstaller implements IPartListener2 {
 	@Override
 	public void partOpened(IWorkbenchPartReference partRef) {
 		IWorkbenchPart part = partRef.getPart(false);
-		if (part instanceof ITextEditor editor) {
+		if (part instanceof ITextEditor) {
+			ITextEditor editor = (ITextEditor) part;
 			Object adapter = editor.getAdapter(ITextViewer.class);
 			if (adapter instanceof ISourceViewer) {
 				ISourceViewer viewer = (ISourceViewer) adapter;
