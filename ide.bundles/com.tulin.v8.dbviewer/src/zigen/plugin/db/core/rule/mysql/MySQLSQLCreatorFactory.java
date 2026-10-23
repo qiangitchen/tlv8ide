@@ -7,6 +7,7 @@ package zigen.plugin.db.core.rule.mysql;
 
 import zigen.plugin.db.core.SQLFormatter;
 import zigen.plugin.db.core.SQLUtil;
+import zigen.plugin.db.core.TableColumn;
 import zigen.plugin.db.core.TablePKColumn;
 import zigen.plugin.db.core.rule.DefaultSQLCreatorFactory;
 import zigen.plugin.db.ui.internal.Column;
@@ -20,7 +21,9 @@ public class MySQLSQLCreatorFactory extends DefaultSQLCreatorFactory {
 	}
 
 	public String VisibleColumnSizePattern() {
-		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|^DOUBLE|^REAL|^TIMESTAMP|^TIME|.*VARYING"; //$NON-NLS-1$
+		// TIMESTAMP/TIME excluded: the JDBC driver reports the render length
+		// (e.g. 19) which is not a valid MySQL precision (max 6)
+		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|^DOUBLE|^REAL|.*VARYING"; //$NON-NLS-1$
 		// return "^VARCHAR";
 	}
 
@@ -82,6 +85,68 @@ public class MySQLSQLCreatorFactory extends DefaultSQLCreatorFactory {
 		}
 		sb.append(")"); //$NON-NLS-1$
 		return sb.toString();
+	}
+
+	/**
+	 * MySQL inline column comments (COMMENT 'xxx' after the column
+	 * definition), because MySQL does not support "COMMENT ON" statements.
+	 */
+	protected String getColumnDefine() {
+		StringBuffer sb = new StringBuffer();
+		for (int i = 0; i < cols.length; i++) {
+			Column col = cols[i];
+			TableColumn column = col.getColumn();
+
+			sb.append(getColumnLabel(column));
+
+			// inline column comment
+			String remarks = column.getRemarks();
+			if (remarks != null && !"".equals(remarks)) { //$NON-NLS-1$
+				sb.append(" COMMENT '").append(escapeLiteral(remarks)).append("'"); //$NON-NLS-1$ //$NON-NLS-2$
+			}
+
+			if (column.isNotNull()) {
+				sb.append(" NOT NULL");
+			}
+
+			if (i < cols.length - 1) {
+				sb.append(",");
+			} else if (hasPrimaryKey() || hasForeginKey() || hasUniqueIndexKey() || hasConstraintOther()) {
+				sb.append(",");
+			}
+
+			sb.append(zigen.plugin.db.DbPluginConstant.LINE_SEP);
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * MySQL table comment via ALTER TABLE ... COMMENT (executed after CREATE
+	 * TABLE).
+	 */
+	public String getTableComment() {
+		if (table.getRemarks() != null && !"".equals(table.getRemarks())) { //$NON-NLS-1$
+			StringBuffer sb = new StringBuffer();
+			sb.append("ALTER TABLE "); //$NON-NLS-1$
+			sb.append(getTableNameWithSchemaForSQL(table, isVisibleSchemaName));
+			sb.append(" COMMENT = '"); //$NON-NLS-1$
+			sb.append(escapeLiteral(table.getRemarks()));
+			sb.append("'"); //$NON-NLS-1$
+			setDemiliter(sb);
+			return sb.toString();
+		}
+		return ""; //$NON-NLS-1$
+	}
+
+	/**
+	 * Column comments are already inlined in the CREATE TABLE statement.
+	 */
+	public String getColumnComment() {
+		return ""; //$NON-NLS-1$
+	}
+
+	private String escapeLiteral(String s) {
+		return s.replace("'", "''"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	public String createSelect(String _condition, int limit) {
@@ -418,6 +483,12 @@ public class MySQLSQLCreatorFactory extends DefaultSQLCreatorFactory {
 		} else {
 			sb.append(super.getCreateTableStr());
 		}
+
+		// table comment (ALTER TABLE ... COMMENT = '...')
+		sb.append(getTableComment());
+
+		// column comments are inlined in getColumnDefine(), returns ""
+		sb.append(getColumnComment());
 
 		return sb.toString();
 	}

@@ -31,6 +31,7 @@ import zigen.plugin.db.core.TableIDXColumn;
 import zigen.plugin.db.core.TableInfo;
 import zigen.plugin.db.core.TablePKColumn;
 import zigen.plugin.db.core.TableSearcher;
+import zigen.plugin.db.core.SQLUtil;
 import zigen.plugin.db.core.rule.AbstractSQLCreatorFactory;
 import zigen.plugin.db.core.rule.DefaultColumnSearcherFactory;
 import zigen.plugin.db.core.rule.DefaultConstraintSearcherFactory;
@@ -170,11 +171,86 @@ public class ExportSQLUtil {
 	 */
 	public static void ensureLoaded(Connection con, ITable table) throws Exception {
 		if (table.isExpanded() && !(hasLoadingChild(table))) {
+			ensureTableComment(con, table);
 			return;
 		}
 		table.removeChild(table.getChild(DbPluginConstant.TREE_LEAF_LOADING));
 		table.setExpanded(true);
 		loadColumn(con, table);
+		ensureTableComment(con, table);
+	}
+
+	/**
+	 * Best-effort fallback: if the table node has no remarks (some drivers do
+	 * not return table level REMARKS from DatabaseMetaData.getTables), query
+	 * the database specific catalog views to fetch the table comment.
+	 */
+	private static void ensureTableComment(Connection con, ITable table) {
+		if (table.getRemarks() != null && !"".equals(table.getRemarks())) { //$NON-NLS-1$
+			return;
+		}
+		Statement st = null;
+		ResultSet rs = null;
+		try {
+			int dbType = DBType.getType(con.getMetaData());
+			String tableName = table.getName();
+			String schemaName = table.getSchemaName();
+			boolean schemaSupport = table.getDataBase() != null && table.getDataBase().isSchemaSupport();
+			String sql = null;
+
+			switch (dbType) {
+			case DBType.DB_TYPE_ORACLE:
+			case DBType.DB_TYPE_DM:
+			case DBType.DB_TYPE_KINGBASEES:
+				sql = "SELECT COMMENTS FROM USER_TAB_COMMENTS WHERE TABLE_NAME = '" //$NON-NLS-1$
+						+ SQLUtil.encodeQuotation(tableName.toUpperCase()) + "'"; //$NON-NLS-1$
+				break;
+			case DBType.DB_TYPE_MYSQL:
+				// use DATABASE() instead of getCatalog(): Connector/J 8 may
+				// return null for getCatalog() (nullCatalogMeansCurrent=false)
+				sql = "SELECT TABLE_COMMENT FROM information_schema.TABLES WHERE TABLE_SCHEMA = DATABASE() AND TABLE_NAME = '" //$NON-NLS-1$
+						+ SQLUtil.encodeQuotation(tableName) + "'"; //$NON-NLS-1$
+				break;
+			case DBType.DB_TYPE_POSTGRESQL:
+				String qualified = (schemaSupport && schemaName != null && schemaName.length() > 0)
+						? schemaName + "." + tableName : tableName; //$NON-NLS-1$
+				sql = "SELECT obj_description('" + SQLUtil.encodeQuotation(qualified) + "'::regclass) AS COMMENTS"; //$NON-NLS-1$ //$NON-NLS-2$
+				break;
+			case DBType.DB_TYPE_SQLSERVER:
+				String objName = (schemaSupport && schemaName != null && schemaName.length() > 0)
+						? schemaName + "." + tableName : tableName; //$NON-NLS-1$
+				sql = "SELECT CAST(ep.value AS nvarchar(4000)) AS COMMENTS FROM sys.extended_properties ep WHERE ep.class = 1 AND ep.minor_id = 0 AND ep.name = 'MS_Description' AND ep.major_id = OBJECT_ID('" //$NON-NLS-1$
+						+ SQLUtil.encodeQuotation(objName) + "')"; //$NON-NLS-1$
+				break;
+			case DBType.DB_TYPE_H2:
+				sql = "SELECT REMARKS FROM information_schema.TABLES WHERE TABLE_NAME = '" //$NON-NLS-1$
+						+ SQLUtil.encodeQuotation(tableName.toUpperCase()) + "'"; //$NON-NLS-1$
+				break;
+			default:
+				return;
+			}
+
+			st = con.createStatement();
+			rs = st.executeQuery(sql);
+			if (rs.next()) {
+				String comments = rs.getString(1);
+				if (comments != null && !"".equals(comments.trim())) { //$NON-NLS-1$
+					table.setRemarks(comments.trim());
+				}
+			}
+		} catch (Exception e) {
+			// best effort only, ignore failures
+			DbPlugin.log(e);
+		} finally {
+			try {
+				if (rs != null) rs.close();
+			} catch (Exception e) {
+			}
+			try {
+				if (st != null) st.close();
+			} catch (Exception e) {
+			}
+		}
 	}
 
 	private static boolean hasLoadingChild(ITable table) {
@@ -294,10 +370,83 @@ public class ExportSQLUtil {
 					sb.append(";"); //$NON-NLS-1$
 				}
 				sb.append(DbPluginConstant.LINE_SEP);
+				// non-unique indexes (unique indexes are already inlined as
+				// UNIQUE constraints in the CREATE TABLE statement)
+				String idxSQL = buildIndexStatements(table);
+				if (idxSQL.length() > 0) {
+					sb.append(idxSQL);
+				}
 			} catch (Exception e) {
 				sb.append("-- [ERROR] failed to generate DDL: ").append(e.getMessage()).append(DbPluginConstant.LINE_SEP);
 				DbPlugin.log(e);
 			}
+		}
+		return sb.toString();
+	}
+
+	/**
+	 * Generate CREATE INDEX statements for the non-unique indexes of the
+	 * table. Unique indexes are skipped because they are already inlined in
+	 * the CREATE TABLE statement as UNIQUE constraints (or the PRIMARY KEY).
+	 *
+	 * @return SQL text, empty when the table has no non-unique index.
+	 */
+	public static String buildIndexStatements(ITable table) {
+		TableIDXColumn[] nonuidxs = table.getTableNonUIDXColumns();
+		if (nonuidxs == null || nonuidxs.length == 0) {
+			return ""; //$NON-NLS-1$
+		}
+
+		// PK-named indexes are skipped (already defined as PRIMARY KEY)
+		java.util.Set pkNames = new java.util.HashSet();
+		TablePKColumn[] pks = table.getTablePKColumns();
+		if (pks != null) {
+			for (int i = 0; i < pks.length; i++) {
+				if (pks[i].getName() != null) {
+					pkNames.add(pks[i].getName());
+				}
+			}
+		}
+
+		// group columns by index name
+		java.util.LinkedHashMap groups = new java.util.LinkedHashMap();
+		for (int i = 0; i < nonuidxs.length; i++) {
+			TableIDXColumn idx = nonuidxs[i];
+			String indexName = idx.getName();
+			if (indexName == null || "".equals(indexName) || pkNames.contains(indexName)) { //$NON-NLS-1$
+				continue;
+			}
+			List cols = (List) groups.get(indexName);
+			if (cols == null) {
+				cols = new ArrayList();
+				groups.put(indexName, cols);
+			}
+			cols.add(idx);
+		}
+
+		StringBuffer sb = new StringBuffer();
+		for (java.util.Iterator iter = groups.entrySet().iterator(); iter.hasNext();) {
+			java.util.Map.Entry entry = (java.util.Map.Entry) iter.next();
+			String indexName = (String) entry.getKey();
+			List cols = (List) entry.getValue();
+
+			// order columns by ordinal position
+			java.util.Collections.sort(cols, new java.util.Comparator() {
+				public int compare(Object a, Object b) {
+					return ((TableIDXColumn) a).getOrdinal_position() - ((TableIDXColumn) b).getOrdinal_position();
+				}
+			});
+
+			StringBuffer colList = new StringBuffer();
+			for (int i = 0; i < cols.size(); i++) {
+				if (i > 0) {
+					colList.append(", "); //$NON-NLS-1$
+				}
+				colList.append(((TableIDXColumn) cols.get(i)).getColumnName());
+			}
+
+			sb.append("CREATE INDEX ").append(indexName).append(" ON ").append(table.getSqlTableName()).append(" (") //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+					.append(colList).append(");").append(DbPluginConstant.LINE_SEP); //$NON-NLS-1$
 		}
 		return sb.toString();
 	}

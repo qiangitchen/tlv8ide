@@ -119,7 +119,9 @@ public class HSQLDBSQLCreatorFactory extends DefaultSQLCreatorFactory {
 	}
 
 	public String VisibleColumnSizePattern() {
-		return "^CHAR|^VARCHAR.*|DOUBLE|NUMERIC|DECIMAL|TIMESTAMP";
+		// TIMESTAMP excluded: the JDBC driver reports the render length
+		// which is not a valid HSQLDB precision
+		return "^CHAR|^VARCHAR.*|DOUBLE|NUMERIC|DECIMAL";
 	}
 
 	public boolean supportsModifyColumnSize(String columnType) {

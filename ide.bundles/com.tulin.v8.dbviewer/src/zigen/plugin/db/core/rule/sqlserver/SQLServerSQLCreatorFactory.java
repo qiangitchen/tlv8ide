@@ -17,6 +17,13 @@ public class SQLServerSQLCreatorFactory extends DefaultSQLCreatorFactory {
 		super(table);
 	}
 
+	// DATETIME/DATETIME2/TIME excluded: the JDBC driver reports the internal
+	// render size (e.g. DATETIME -> 23,3) which is not valid DDL precision;
+	// SQL Server defaults apply instead
+	public String VisibleColumnSizePattern() {
+		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|^DOUBLE|^REAL|.*VARYING"; //$NON-NLS-1$
+	}
+
 	public String createSelect(String _condition, int limit) {
 		StringBuffer sb = new StringBuffer();
 

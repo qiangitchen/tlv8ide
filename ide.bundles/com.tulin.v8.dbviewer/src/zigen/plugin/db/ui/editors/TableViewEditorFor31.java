@@ -96,6 +96,7 @@ import org.eclipse.ui.part.MultiPageEditorPart;
 
 import zigen.plugin.db.DbPlugin;
 import zigen.plugin.db.DbPluginConstant;
+import zigen.plugin.db.export.ExportSQLUtil;
 import zigen.plugin.db.IStatusChangeListener;
 import zigen.plugin.db.ImageCacher;
 import zigen.plugin.db.core.Condition;
@@ -1166,7 +1167,19 @@ public class TableViewEditorFor31 extends MultiPageEditorPart implements ITableV
 	protected void setDDLString() {
 		try {
 			ISQLCreatorFactory factory = AbstractSQLCreatorFactory.getFactory(config, tableNode);
-			ddlViewer.getDocument().set(factory.createDDL());
+			StringBuffer sb = new StringBuffer(factory.createDDL());
+			if (!"VIEW".equals(tableNode.getFolderName())) { //$NON-NLS-1$
+				// append non-unique index definitions (unique indexes are
+				// already inlined as UNIQUE constraints)
+				String idxSQL = ExportSQLUtil.buildIndexStatements(tableNode);
+				if (idxSQL.length() > 0) {
+					if (sb.length() > 0 && !sb.toString().endsWith("\n")) { //$NON-NLS-1$
+						sb.append(DbPluginConstant.LINE_SEP);
+					}
+					sb.append(idxSQL);
+				}
+			}
+			ddlViewer.getDocument().set(sb.toString());
 		} catch (Exception e) {
 			DbPlugin.log(e);
 		}

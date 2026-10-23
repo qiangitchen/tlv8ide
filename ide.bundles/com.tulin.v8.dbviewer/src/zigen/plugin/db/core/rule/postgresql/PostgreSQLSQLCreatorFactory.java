@@ -169,7 +169,7 @@ public class PostgreSQLSQLCreatorFactory extends DefaultSQLCreatorFactory {
 		sb.append(SQLUtil.enclose(column.getName(), encloseChar));
 		sb.append(" "); //$NON-NLS-1$
 		sb.append(column.getTypeName());
-		if (isVisibleColumnSize(column.getTypeName())) {
+		if (isVisibleColumnSize(column.getTypeName()) && !isDateTimeType(column.getTypeName().toUpperCase())) {
 			sb.append("("); //$NON-NLS-1$
 			sb.append(column.getSize());
 			sb.append(")"); //$NON-NLS-1$
@@ -199,7 +199,7 @@ public class PostgreSQLSQLCreatorFactory extends DefaultSQLCreatorFactory {
 			sb.append(SQLUtil.enclose(to.getName(), encloseChar));
 			sb.append(" TYPE "); //$NON-NLS-1$
 			sb.append(to.getTypeName());
-			if (isVisibleColumnSize(to.getTypeName())) {
+			if (isVisibleColumnSize(to.getTypeName()) && !isDateTimeType(to.getTypeName().toUpperCase())) {
 				sb.append("("); //$NON-NLS-1$
 				sb.append(to.getSize());
 				sb.append(")"); //$NON-NLS-1$
@@ -418,7 +418,11 @@ public class PostgreSQLSQLCreatorFactory extends DefaultSQLCreatorFactory {
 			sb.append(typeName);
 		}
 
-		if (isVisibleColumnSize(typeName)) {
+		// PostgreSQL JDBC reports COLUMN_SIZE=29/DECIMAL_DIGITS=6 for
+		// TIMESTAMP/TIME, which is not a valid DDL precision
+		// (max precision of PG time types is 6). Omit the size so the
+		// default precision is used.
+		if (isVisibleColumnSize(typeName) && !isDateTimeType(typeName)) {
 			if (column.getDecimalDigits() == 0) {
 				sb.append("(" + column.getColumnSize() + ")");
 			} else {
@@ -427,6 +431,10 @@ public class PostgreSQLSQLCreatorFactory extends DefaultSQLCreatorFactory {
 		}
 
 		return sb.toString();
+	}
+
+	private boolean isDateTimeType(String typeName) {
+		return typeName.startsWith("TIMESTAMP") || typeName.startsWith("TIME"); //$NON-NLS-1$ //$NON-NLS-2$
 	}
 
 	protected String getViewDDL_SQL(String dbName, String owner, String view) {
