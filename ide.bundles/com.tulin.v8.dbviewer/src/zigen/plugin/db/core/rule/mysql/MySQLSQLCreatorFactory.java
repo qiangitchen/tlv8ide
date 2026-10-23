@@ -23,7 +23,9 @@ public class MySQLSQLCreatorFactory extends DefaultSQLCreatorFactory {
 	public String VisibleColumnSizePattern() {
 		// TIMESTAMP/TIME excluded: the JDBC driver reports the render length
 		// (e.g. 19) which is not a valid MySQL precision (max 6)
-		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|^DOUBLE|^REAL|.*VARYING"; //$NON-NLS-1$
+		// DOUBLE/REAL excluded: MySQL only accepts DOUBLE or DOUBLE(M,D);
+		// a single (M) such as DOUBLE(22) is a syntax error
+		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|.*VARYING"; //$NON-NLS-1$
 		// return "^VARCHAR";
 	}
 

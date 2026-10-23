@@ -75,7 +75,7 @@ public class PostgreSQLSQLCreatorFactory extends DefaultSQLCreatorFactory {
 
 
 	public String VisibleColumnSizePattern() {
-		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|^DOUBLE|^REAL|^TIMESTAMP|^TIME|.*VARYING"; //$NON-NLS-1$
+		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|.*VARYING"; //$NON-NLS-1$
 		// return "^VARCHAR";
 	}
 

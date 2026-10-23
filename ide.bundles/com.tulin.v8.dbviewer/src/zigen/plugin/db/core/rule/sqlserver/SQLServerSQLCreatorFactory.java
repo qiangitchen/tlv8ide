@@ -21,7 +21,7 @@ public class SQLServerSQLCreatorFactory extends DefaultSQLCreatorFactory {
 	// render size (e.g. DATETIME -> 23,3) which is not valid DDL precision;
 	// SQL Server defaults apply instead
 	public String VisibleColumnSizePattern() {
-		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|^DOUBLE|^REAL|.*VARYING"; //$NON-NLS-1$
+		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|.*VARYING"; //$NON-NLS-1$
 	}
 
 	public String createSelect(String _condition, int limit) {

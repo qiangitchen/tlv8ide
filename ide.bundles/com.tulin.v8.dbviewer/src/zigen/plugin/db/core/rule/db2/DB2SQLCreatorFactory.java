@@ -20,7 +20,7 @@ public class DB2SQLCreatorFactory extends DefaultSQLCreatorFactory {
 	// TIMESTAMP/TIME excluded: the JDBC driver reports the internal render
 	// size (e.g. 29) which is not a valid DB2 precision (max 12)
 	public String VisibleColumnSizePattern() {
-		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|^DOUBLE|^REAL|.*VARYING"; //$NON-NLS-1$
+		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|.*VARYING"; //$NON-NLS-1$
 	}
 
 	// select * from table fetch first 10 rows only

@@ -79,7 +79,7 @@ public class H2SQLCreatorFactory extends DefaultSQLCreatorFactory {
 	public String VisibleColumnSizePattern() {
 		// TIMESTAMP/TIME excluded: the JDBC driver reports the render length
 		// which is not a valid H2 precision
-		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|^DOUBLE|^REAL|.*VARYING"; //$NON-NLS-1$
+		return ".*CHAR|^VARCHAR.*|^DECIMAL|^FLOAT|.*VARYING"; //$NON-NLS-1$
 		// return "^VARCHAR";
 	}
 

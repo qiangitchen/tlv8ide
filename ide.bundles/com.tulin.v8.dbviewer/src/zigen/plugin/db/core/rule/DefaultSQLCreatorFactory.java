@@ -272,11 +272,18 @@ public class DefaultSQLCreatorFactory extends AbstractSQLCreatorFactory implemen
 
 		sb.append(typeName);
 
-		if (isVisibleColumnSize(typeName)) {
+		if (typeName.equals("DOUBLE") || typeName.equals("REAL")) { //$NON-NLS-1$ //$NON-NLS-2$
+			// DOUBLE/REAL only accept no-args or (M,D): a single (M) is a
+			// syntax error. The reported COLUMN_SIZE is the binary precision
+			// (render length), only use it together with the decimal scale.
+			if (column.getDecimalDigits() > 0) {
+				sb.append("(" + column.getColumnSize() + "," + column.getDecimalDigits() + ")"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
+			}
+		} else if (isVisibleColumnSize(typeName)) {
 			if (column.getDecimalDigits() == 0) {
-				sb.append("(" + column.getColumnSize() + ")");
+				sb.append("(" + column.getColumnSize() + ")"); //$NON-NLS-1$ //$NON-NLS-2$
 			} else {
-				sb.append("(" + column.getColumnSize() + "," + column.getDecimalDigits() + ")");
+				sb.append("(" + column.getColumnSize() + "," + column.getDecimalDigits() + ")"); //$NON-NLS-1$ //$NON-NLS-2$ //$NON-NLS-3$
 			}
 		}
 
@@ -589,7 +596,7 @@ public class DefaultSQLCreatorFactory extends AbstractSQLCreatorFactory implemen
 	}
 
 	public String VisibleColumnSizePattern() {
-		return ".*CHAR|^VARCHAR.*|^NUMBER|^DECIMAL|.*INT.*|^FLOAT|^DOUBLE|^REAL|^TIMESTAMP|^TIME|.*VARYING";
+		return ".*CHAR|^VARCHAR.*|^NUMBER|^DECIMAL|.*INT.*|^FLOAT|.*VARYING";
 	}
 
 	public boolean isVisibleColumnSize(String typeName) {

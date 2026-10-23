@@ -145,8 +145,17 @@ public class TableViewerContributor extends MultiPageEditorActionBarContributor 
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 
-	public void fillContextMenuForDDL(IMenuManager manager) {
+	public void fillContextMenuForDDL(IMenuManager manager, org.eclipse.jface.text.TextViewer ddlViewer) {
 		reflesh();
+		if (ddlViewer != null) {
+			// the DDL viewer is read-only: only copy / select all make sense
+			zigen.plugin.db.ui.actions.GlobalAction copyAction = new zigen.plugin.db.ui.actions.GlobalAction(ddlViewer,
+					org.eclipse.jface.text.ITextOperationTarget.COPY);
+			copyAction.setEnabled(ddlViewer.canDoOperation(org.eclipse.jface.text.ITextOperationTarget.COPY));
+			manager.add(copyAction);
+			manager.add(new zigen.plugin.db.ui.actions.GlobalAction(ddlViewer,
+					org.eclipse.jface.text.ITextOperationTarget.SELECT_ALL));
+		}
 		manager.add(new Separator(IWorkbenchActionConstants.MB_ADDITIONS));
 	}
 

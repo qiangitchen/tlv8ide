@@ -787,7 +787,7 @@ public class TableViewEditorFor31 extends MultiPageEditorPart implements ITableV
 					}
 					break;
 				case SHEET_DDL:
-					getContributor().fillContextMenuForDDL(manager);
+					getContributor().fillContextMenuForDDL(manager, ddlViewer);
 					break;
 				case SHEET_DATA:
 					getContributor().fillContextMenu(manager);
@@ -803,21 +803,21 @@ public class TableViewEditorFor31 extends MultiPageEditorPart implements ITableV
 		});
 		Menu menu = menuMgr.createContextMenu(viewer.getControl());
 		viewer.getControl().setMenu(menu);
-		getSite().registerContextMenu(menuMgr, viewer);
+		// do NOT call getSite().registerContextMenu(...) here: registering the
+		// menu lets Eclipse inject foreign objectContributions (registered for
+		// IResource / IJavaElement adaptable types by other plugins) into the
+		// table editor's popup menu, which pollutes the context menu.
 
 		if (tableDefineEditor != null) {
 			Menu menu2 = menuMgr.createContextMenu(tableDefineEditor.getDefineViewer().getControl());
 			tableDefineEditor.getDefineViewer().getControl().setMenu(menu2);
-			getSite().registerContextMenu(menuMgr, tableDefineEditor.getDefineViewer());
 			Menu menu3 = menuMgr.createContextMenu(tableDefineEditor.getConstraintViewer().getControl());
 			tableDefineEditor.getConstraintViewer().getControl().setMenu(menu3);
-			getSite().registerContextMenu(menuMgr, tableDefineEditor.getConstraintViewer());
 
 		}
 		if (ddlViewer != null) {
 			Menu menu4 = menuMgr.createContextMenu(ddlViewer.getTextWidget());
 			ddlViewer.getTextWidget().setMenu(menu4);
-			getSite().registerContextMenu(menuMgr, ddlViewer);
 		}
 	}
 
