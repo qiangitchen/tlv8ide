@@ -69,11 +69,14 @@ public class UnMultilineCommentHandler extends AbstractHandler implements IHandl
 		if ("".equals(text)) {
 			return;
 		}
+		int offset = sel.getOffset();
+		int oldLen = sel.getLength();
 		try {
 			if (text.startsWith("/*") && text.indexOf("*/") > 3) {
-				text = sel.getText().replaceFirst("/\\*", "");
-				text = text.replaceFirst("\\*/", "");
-				doc.replace(sel.getOffset(), sel.getLength(), text);
+				String newText = sel.getText().replaceFirst("/\\*", "");
+				newText = newText.replaceFirst("\\*/", "");
+				doc.replace(offset, oldLen, newText);
+				ToggleCommentHandler.afterDocChanged(editor.getViewer(), doc, offset, oldLen, newText.length());
 			}
 		} catch (BadLocationException e) {
 			WebToolsPlugin.logException(e);
@@ -87,11 +90,14 @@ public class UnMultilineCommentHandler extends AbstractHandler implements IHandl
 		if ("".equals(text)) {
 			return;
 		}
+		int offset = sel.getOffset();
+		int oldLen = sel.getLength();
 		try {
 			if (text.startsWith("/*") && text.indexOf("*/") > 3) {
-				text = sel.getText().replaceFirst("/\\*", "");
-				text = text.replaceFirst("\\*/", "");
-				doc.replace(sel.getOffset(), sel.getLength(), text);
+				String newText = sel.getText().replaceFirst("/\\*", "");
+				newText = newText.replaceFirst("\\*/", "");
+				doc.replace(offset, oldLen, newText);
+				ToggleCommentHandler.afterDocChanged(editor.getViewer(), doc, offset, oldLen, newText.length());
 			}
 		} catch (BadLocationException e) {
 			WebToolsPlugin.logException(e);

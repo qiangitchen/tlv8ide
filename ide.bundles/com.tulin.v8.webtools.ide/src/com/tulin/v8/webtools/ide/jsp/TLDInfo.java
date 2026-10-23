@@ -14,6 +14,7 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.jdt.core.JavaCore;
 
 import com.tulin.v8.webtools.ide.ProjectParams;
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
 import com.tulin.v8.webtools.ide.assist.TagInfo;
 import com.tulin.v8.webtools.ide.jsp.editors.Function;
 
@@ -45,6 +46,7 @@ public class TLDInfo {
 				return new TLDInfo(folder, prefix, tagdir);
 			}
 		} catch (Exception ex) {
+			WebToolsPlugin.logException(ex);
 		}
 		return null;
 	}
@@ -85,6 +87,7 @@ public class TLDInfo {
 				try {
 					tagInfoList.add(TagFileParser.parseTagFile(prefix, files[i]));
 				} catch (Exception ex) {
+					WebToolsPlugin.logException(ex);
 				}
 			}
 		}

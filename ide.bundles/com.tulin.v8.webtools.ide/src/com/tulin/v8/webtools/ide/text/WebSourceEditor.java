@@ -3,6 +3,7 @@ package com.tulin.v8.webtools.ide.text;
 import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.preference.IPreferenceStore;
+import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.contexts.IContextService;
 import org.eclipse.ui.editors.text.TextEditor;
@@ -48,5 +49,17 @@ public class WebSourceEditor extends TextEditor {
 				WebToolsPlugin.getResourceString("SourceEditor.Menu.Source"), WebToolsPlugin.GROUP_SOURCE));
 		addAction(menu, WebToolsPlugin.GROUP_SOURCE, ACTION_COMMENT);
 		addAction(menu, WebToolsPlugin.GROUP_SOURCE, ACTION_FORMAT);
+	}
+
+	/**
+	 * Handlers/action 层访问编辑器的 ISourceViewer（用于在文档程序式修改后
+	 * invalidate 文本外观与分区缓存，从而立即刷新语法高亮）。
+	 * TextEditor 中同名方法为 protected，这里向上暴露为 public 以便
+	 * ToggleCommentHandler / CSSEditor / JavaScriptEditor 内联注释动作共享。
+	 *
+	 * @return 当前编辑器的源查看器，未创建时返回 null
+	 */
+	public ISourceViewer getViewer() {
+		return getSourceViewer();
 	}
 }

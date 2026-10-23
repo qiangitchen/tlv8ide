@@ -3,6 +3,7 @@ package com.tulin.v8.webtools.ide.js.model;
 import java.io.Writer;
 import java.util.Set;
 
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
 import com.tulin.v8.webtools.ide.rhino.javascript.Node;
 import com.tulin.v8.webtools.ide.rhino.javascript.Token;
 
@@ -53,6 +54,7 @@ public class JavaScriptModelUtil {
 				print(writer, next, source, depth);
 			}
 		} catch (Exception e) {
+			WebToolsPlugin.logException(e);
 		}
 	}
 
@@ -78,6 +80,7 @@ public class JavaScriptModelUtil {
 				}
 			}
 		} catch (Exception e) {
+			WebToolsPlugin.logException(e);
 		}
 	}
 }

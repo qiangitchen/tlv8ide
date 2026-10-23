@@ -1,5 +1,6 @@
 package tern.eclipse.ide.genericeditor;
 
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
@@ -26,6 +27,7 @@ public class GenericeditorTernUIPlugin extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		plugin = this;
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getPartService().addPartListener(new MyHoverInstaller());
 	}
 
 	/*

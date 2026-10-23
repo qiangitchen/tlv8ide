@@ -5,6 +5,7 @@ import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.ui.editors.text.TextEditor;
 
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
 import com.tulin.v8.webtools.ide.css.editors.CSSEditor;
 import com.tulin.v8.webtools.ide.html.editors.HTMLSourceEditor;
 import com.tulin.v8.webtools.ide.js.editors.JavaScriptEditor;
@@ -35,7 +36,7 @@ public class Formater {
 				IDocument doc = editor.getDocumentProvider().getDocument(editor.getEditorInput());
 				doc.replace(sel.getOffset(), sel.getLength(), text);
 			} catch (Exception e) {
-				e.printStackTrace();
+				WebToolsPlugin.logException(e);
 			}
 		} else if (editor instanceof JavaScriptEditor) {
 			try {
@@ -51,7 +52,7 @@ public class Formater {
 				IDocument doc = editor.getDocumentProvider().getDocument(editor.getEditorInput());
 				doc.replace(sel.getOffset(), sel.getLength(), text);
 			} catch (Exception e) {
-				e.printStackTrace();
+				WebToolsPlugin.logException(e);
 			}
 		} else if (editor instanceof CSSEditor) {
 			try {
@@ -67,7 +68,7 @@ public class Formater {
 				IDocument doc = editor.getDocumentProvider().getDocument(editor.getEditorInput());
 				doc.replace(sel.getOffset(), sel.getLength(), text);
 			} catch (Exception e) {
-				e.printStackTrace();
+				WebToolsPlugin.logException(e);
 			}
 		}
 	}

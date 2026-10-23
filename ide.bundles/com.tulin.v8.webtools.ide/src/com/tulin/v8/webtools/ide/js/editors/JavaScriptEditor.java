@@ -53,6 +53,7 @@ import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import com.tulin.v8.webtools.ide.ProjectParams;
 import com.tulin.v8.webtools.ide.WebToolsPlugin;
 import com.tulin.v8.webtools.ide.formatter.Formater;
+import com.tulin.v8.webtools.ide.handlers.ToggleCommentHandler;
 import com.tulin.v8.webtools.ide.html.editors.SoftTabVerifyListener;
 import com.tulin.v8.webtools.ide.js.launch.JavaScriptLaunchUtil;
 import com.tulin.v8.webtools.ide.text.WebSourceEditor;
@@ -214,12 +215,22 @@ public class JavaScriptEditor extends WebSourceEditor {
 						IFileEditorInput input = (IFileEditorInput) getEditorInput();
 						new JavaScriptValidator(input.getFile()).doValidate();
 					} catch (Exception ex) {
+					WebToolsPlugin.logException(ex);
 					}
 				}
 			}, null);
 		} catch (Exception ex) {
 			WebToolsPlugin.logException(ex);
 		}
+	}
+
+	// Null-safe dispose for the pair matcher: createPartControl can throw partway
+	// through initialization (before line 164's "pairMatcher = new JSCharacterPairMatcher()"),
+	// and Eclipse's CompatibilityPart wraps creation in a try-finally that calls
+	// dispose() regardless.  An unguarded pairMatcher.dispose() would replace
+	// the real diagnostic exception with an NPE, hiding the true root cause.
+	private static void disposeIfNonNull(JavaScriptCharacterPairMatcher m) {
+		if (m != null) m.dispose();
 	}
 
 	public void dispose() {
@@ -239,14 +250,17 @@ public class JavaScriptEditor extends WebSourceEditor {
 								input.getFile().deleteMarkers(IMarker.PROBLEM, false, 0);
 							}
 						} catch (Exception ex) {
+						WebToolsPlugin.logException(ex);
 						}
 					}
 				}, null);
 			} catch (Exception ex) {
+			WebToolsPlugin.logException(ex);
 			}
 		}
 
-		pairMatcher.dispose();
+		disposeIfNonNull(pairMatcher);
+		pairMatcher = null;
 		super.dispose();
 	}
 
@@ -353,14 +367,19 @@ public class JavaScriptEditor extends WebSourceEditor {
 			if ("".equals(text)) {
 				return;
 			}
+			int offset = sel.getOffset();
+			int oldLen = sel.getLength();
 			try {
+				String newText;
 				if (text.startsWith("/*") && text.indexOf("*/") > 3) {
-					text = text.replaceFirst("/\\*", "");
-					text = text.replaceFirst("\\*/", "");
-					doc.replace(sel.getOffset(), sel.getLength(), text);
+					newText = text.replaceFirst("/\\*", "");
+					newText = newText.replaceFirst("\\*/", "");
+					doc.replace(offset, oldLen, newText);
 				} else {
-					doc.replace(sel.getOffset(), sel.getLength(), "/*" + sel.getText() + "*/");
+					newText = "/*" + sel.getText() + "*/";
+					doc.replace(offset, oldLen, newText);
 				}
+				ToggleCommentHandler.afterDocChanged(getViewer(), doc, offset, oldLen, newText.length());
 			} catch (BadLocationException e) {
 				WebToolsPlugin.logException(e);
 			}

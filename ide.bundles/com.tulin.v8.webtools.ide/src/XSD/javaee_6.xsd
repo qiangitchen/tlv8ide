@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Stub schema file: javaee_6.xsd
+
+  This is a MINIMAL compatibility placeholder, NOT the full Java EE 6 schema
+  (~ 600 KB of real schema content from jcp.org).  Purpose:
+
+    web-common_3_0.xsd contains:
+        <xsd:include schemaLocation="javaee_6.xsd"/>
+        <xsd:include schemaLocation="jsp_2_2.xsd"/>
+
+  If these files are absent, the XMLSchemaLoader tries to parse a synthetic
+  empty document, which triggers:
+      [Fatal Error] :-1:-1: Premature end of file.
+      [Warning] schema_reference.4: Failed to read schema document 'javaee_6.xsd'
+      [Error] src-resolve: Cannot resolve the name 'javaee:web-appType'...
+
+  A stub schema with <xsd:schema> root element prevents the Premature-EOF
+  parse.  Type definitions that the plugin actually needs for XML code assist
+  are bundled in web-common_3_0.xsd itself (javaee:web-appType is defined
+  there via <xsd:complexType name="web-appType">).  This stub exists only to
+  keep the include from exploding in the parser.
+
+  Users who want full completion against all Java EE 6 global types can drop
+  the official javaee_6.xsd / jsp_2_2.xsd (from GlassFish / jcp.org / jboss
+  schema bundles) onto the innerDTD classpath location /XSD/ at any time; it
+  will be preferred over this stub because both share the same resource path.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://java.sun.com/xml/ns/javaee"
+            xmlns:javaee="http://java.sun.com/xml/ns/javaee"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified"
+            version="6 stub for code-assist parser">
+
+  <!-- No global type declarations needed for assist in web.xml files;
+       the real javaee_6.xsd defines 100+ generic Java EE types.  web-app*
+       types are supplied by the sibling web-common_*.xsd schemas. -->
+
+</xsd:schema>

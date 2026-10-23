@@ -37,10 +37,12 @@ public abstract class AbstractCompleter implements IAdditionalJavaScriptComplete
 			try {
 				in.close();
 			} catch (Exception e) {
+			WebToolsPlugin.logException(e);
 			}
 			try {
 				out.close();
 			} catch (Exception e) {
+			WebToolsPlugin.logException(e);
 			}
 		}
 	}

@@ -15,6 +15,8 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
 
+import com.tulin.v8.webtools.ide.WebToolsPlugin;
+
 public class NewWebProjectWizard extends BasicNewResourceWizard {
 	WebProjectWizardPage page;
 
@@ -36,7 +38,7 @@ public class NewWebProjectWizard extends BasicNewResourceWizard {
 		try {
 			createProject(page.getName());
 		} catch (Exception e) {
-			e.printStackTrace();
+			WebToolsPlugin.logException(e);
 			return false;
 		}
 		return true;

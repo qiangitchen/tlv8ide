@@ -52,7 +52,6 @@ import com.tulin.v8.webtools.ide.rhino.javascript.Kit;
 import com.tulin.v8.webtools.ide.rhino.javascript.Scriptable;
 import com.tulin.v8.webtools.ide.rhino.javascript.VMBridge;
 
-@SuppressWarnings("deprecation")
 public class VMBridge_jdk13 extends VMBridge {
 	private ThreadLocal<Object[]> contextLocal = new ThreadLocal<Object[]>();
 

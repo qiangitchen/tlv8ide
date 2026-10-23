@@ -119,6 +119,7 @@ public class DTDResolver implements EntityResolver2 {
 		try {
 			return getStreamFromURL(url);
 		} catch (Exception ex) {
+		WebToolsPlugin.logException(ex);
 		}
 
 		return null;
@@ -150,6 +151,7 @@ public class DTDResolver implements EntityResolver2 {
 			try {
 				return new URL(url).openStream();
 			} catch (Exception ex) {
+			WebToolsPlugin.logException(ex);
 			}
 			return null;
 		}
@@ -184,6 +186,7 @@ public class DTDResolver implements EntityResolver2 {
 			return new ByteArrayInputStream(buf);
 
 		} catch (Exception ex) {
+		WebToolsPlugin.logException(ex);
 		}
 		return null;
 	}

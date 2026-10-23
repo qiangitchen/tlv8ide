@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Minimal stub schema for jsp_2_2.xsd (see javaee_6.xsd for rationale).
+  Prevents the Xerces Premature-end-of-file fatal error when web-common_3_0.xsd
+  does <xsd:include schemaLocation="jsp_2_2.xsd"/> and the real JSP 2.2 schema
+  file is not bundled.  If a downstream user wants JSP tag completion via XML
+  they can drop the full jsp_2_2.xsd into /XSD/ to override this stub.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://java.sun.com/xml/ns/javaee"
+            xmlns:javaee="http://java.sun.com/xml/ns/javaee"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified"
+            version="2.2 stub for code-assist parser">
+</xsd:schema>

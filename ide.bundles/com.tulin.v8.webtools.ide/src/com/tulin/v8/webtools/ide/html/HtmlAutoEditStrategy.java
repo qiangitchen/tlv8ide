@@ -35,6 +35,7 @@ public class HtmlAutoEditStrategy extends DefaultIndentLineAutoEditStrategy {
 				return;
 			}
 		} catch (Exception ex) {
+		WebToolsPlugin.logException(ex);
 		}
 
 		if (enable) {

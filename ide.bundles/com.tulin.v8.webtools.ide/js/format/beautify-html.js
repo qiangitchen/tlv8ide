@@ -72,7 +72,8 @@ function style_html(html_source, options) {
       indent_character,
       max_char,
       brace_style,
-      unformatted;
+      unformatted,
+      preserve_newlines;
 
   options = options || {};
   indent_size = options.indent_size || 4;
@@ -80,6 +81,7 @@ function style_html(html_source, options) {
   brace_style = options.brace_style || 'collapse';
   max_char = options.max_char === 0 ? Infinity : options.max_char || 250;
   unformatted = options.unformatted || ['a', 'span', 'bdo', 'em', 'strong', 'dfn', 'code', 'samp', 'kbd', 'var', 'cite', 'abbr', 'acronym', 'q', 'sub', 'sup', 'tt', 'i', 'b', 'big', 'small', 'u', 's', 'strike', 'font', 'ins', 'del', 'pre', 'address', 'dt', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6'];
+  preserve_newlines = (options.preserve_newlines === false) ? false : true;
 
   function Parser() {
 
@@ -292,13 +294,20 @@ function style_html(html_source, options) {
       else if (this.is_unformatted(tag_check, unformatted)) { // do not reformat the "unformatted" tags
         comment = this.get_unformatted('</'+tag_check+'>', tag_complete); //...delegate to get_unformatted function
         content.push(comment);
-        // Preserve collapsed whitespace either before or after this tag.
-        if (tag_start > 0 && this.Utils.in_array(this.input.charAt(tag_start - 1), this.Utils.whitespace)){
-            content.splice(0, 0, this.input.charAt(tag_start - 1));
-        }
-        tag_end = this.pos - 1;
-        if (this.Utils.in_array(this.input.charAt(tag_end + 1), this.Utils.whitespace)){
-            content.push(this.input.charAt(tag_end + 1));
+        // 原始换行/行首缩进拼接在 token 文本里会破坏 formatter 本身维护的换行/indent 状态：
+        //   - print_newline 输出了格式化的换行+indent 后，token_text 开头又自带 \n → indent 归零(少1 tab)
+        //   - token_text 开头自带原始同行 space 残留 → 相对兄弟多1个space 视觉 0.1 tab 偏差
+        // 处理原则：
+        //   preserve_newlines=false（项目默认） → 完全不信任原始 whitespace，格式化结果统一由 TK_* 分支驱动；
+        //   preserve_newlines=true → 保持原行为，token 前后的单个 whitespace 原样保留。
+        if (preserve_newlines !== false) {
+            if (tag_start > 0 && this.Utils.in_array(this.input.charAt(tag_start - 1), this.Utils.whitespace)) {
+                content.splice(0, 0, this.input.charAt(tag_start - 1));
+            }
+            tag_end = this.pos - 1;
+            if (this.Utils.in_array(this.input.charAt(tag_end + 1), this.Utils.whitespace)) {
+                content.push(this.input.charAt(tag_end + 1));
+            }
         }
         this.tag_type = 'SINGLE';
       }
@@ -546,8 +555,24 @@ function style_html(html_source, options) {
         break;
       case 'TK_TAG_SINGLE':
         // Don't add a newline before elements that should remain unformatted.
+        // 但如果前一个 token 显示"紧邻块级闭合"(TK_TAG_END/TK_SCRIPT/TK_STYLE/TK_TAG_STYLE/TK_TAG_SCRIPT/TK_TAG_SINGLE)
+        // 或前一个 token 是空内容 TK_CONTENT(通常发生在 TK_TAG_END 后紧跟一个空 content 的过渡状态)
+        // 就强制换行，避免 unformatted inline tag (如 <span>/<img>) 挤在 </script>/</style> 同一行造成"缩进不一致"。
         var tag_check = multi_parser.token_text.match(/^\s*<([a-z]+)/i);
-        if (!tag_check || !multi_parser.Utils.in_array(tag_check[1], unformatted)){
+        var isUnformatted = tag_check && multi_parser.Utils.in_array(tag_check[1], unformatted);
+        var forceNewline = false;
+        if (isUnformatted) {
+            var prev = multi_parser.last_token;
+            var prevEmpty = (prev === 'TK_CONTENT' && multi_parser.last_text === '');
+            if (prevEmpty
+                    || prev === 'TK_TAG_END' || prev === 'TK_SCRIPT' || prev === 'TK_STYLE'
+                    || prev === 'TK_TAG_STYLE' || prev === 'TK_TAG_SCRIPT' || prev === 'TK_TAG_SINGLE') {
+                if (tag_check && tag_check[1] !== 'script' && tag_check[1] !== 'style') {
+                    forceNewline = true;
+                }
+            }
+        }
+        if (!tag_check || !isUnformatted || forceNewline) {
             multi_parser.print_newline(false, multi_parser.output);
         }
         multi_parser.print_token(multi_parser.token_text);

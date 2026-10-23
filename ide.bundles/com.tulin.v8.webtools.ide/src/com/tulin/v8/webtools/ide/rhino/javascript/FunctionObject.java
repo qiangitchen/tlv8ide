@@ -472,7 +472,6 @@ public class FunctionObject extends BaseFunction {
 	 * class of the underlying Java method. Return null to indicate that the call
 	 * method should be used to create new objects.
 	 */
-	@SuppressWarnings("deprecation")
 	@Override
 	public Scriptable createObject(Context cx, Scriptable scope) {
 		if (member.isCtor() || parmsLength == VARARGS_CTOR) {

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  Minimal compatibility stub for web-common_4_0.xsd.
+  web-app_4_0.xsd declares:
+      <xsd:include schemaLocation="web-common_4_0.xsd"/>
+  Without this file the parser hits "Premature end of file" while trying to
+  resolve the include.  Users who need the full Java EE 8 servlet 4.0 schema
+  should replace this stub with the official schema.
+-->
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+            targetNamespace="http://xmlns.jcp.org/xml/ns/javaee"
+            xmlns:javaee="http://xmlns.jcp.org/xml/ns/javaee"
+            elementFormDefault="qualified"
+            attributeFormDefault="unqualified"
+            version="4.0 stub">
+
+  <xsd:complexType name="web-appType">
+    <xsd:choice minOccurs="0" maxOccurs="unbounded">
+      <xsd:any processContents="lax" minOccurs="0" maxOccurs="unbounded"/>
+    </xsd:choice>
+    <xsd:attributeGroup ref="javaee:web-common-attributes"/>
+  </xsd:complexType>
+
+  <xsd:attributeGroup name="web-common-attributes">
+    <xsd:attribute name="version" use="required">
+      <xsd:simpleType>
+        <xsd:restriction base="xsd:token">
+          <xsd:enumeration value="4.0"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+    </xsd:attribute>
+    <xsd:attribute name="id" type="xsd:ID"/>
+    <xsd:attribute name="metadata-complete" type="xsd:boolean"/>
+  </xsd:attributeGroup>
+</xsd:schema>

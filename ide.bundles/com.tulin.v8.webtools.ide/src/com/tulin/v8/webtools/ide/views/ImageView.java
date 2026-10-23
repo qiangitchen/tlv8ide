@@ -108,6 +108,7 @@ public class ImageView extends ViewPart implements ISelectionListener {
 				}
 			}
 		} catch (Exception ex) {
+		WebToolsPlugin.logException(ex);
 		}
 	}
 
@@ -128,7 +129,7 @@ public class ImageView extends ViewPart implements ISelectionListener {
 			imageList.add(image);
 			iconList.add(i);
 		} catch (Exception ex) {
-			ex.printStackTrace();
+			WebToolsPlugin.logException(ex);
 		}
 	}
 

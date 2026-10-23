@@ -141,6 +141,7 @@ public class HTMLValidator implements FuzzyXMLErrorListener {
 				return false;
 			}
 		} catch (Exception ex) {
+		WebToolsPlugin.logException(ex);
 		}
 
 		return true;

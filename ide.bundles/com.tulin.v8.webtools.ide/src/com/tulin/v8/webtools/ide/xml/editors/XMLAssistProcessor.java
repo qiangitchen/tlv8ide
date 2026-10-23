@@ -1,6 +1,11 @@
 package com.tulin.v8.webtools.ide.xml.editors;
 
+import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.Reader;
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -9,7 +14,10 @@ import java.util.Map;
 
 import org.apache.xerces.impl.xs.SchemaGrammar;
 import org.apache.xerces.impl.xs.XMLSchemaLoader;
+import org.apache.xerces.xni.XNIException;
+import org.apache.xerces.xni.parser.XMLEntityResolver;
 import org.apache.xerces.xni.parser.XMLInputSource;
+import org.apache.xerces.xni.XMLResourceIdentifier;
 import org.apache.xerces.xs.XSAttributeDeclaration;
 import org.apache.xerces.xs.XSAttributeUse;
 import org.apache.xerces.xs.XSComplexTypeDefinition;
@@ -166,8 +174,43 @@ public class XMLAssistProcessor extends HTMLAssistProcessor {
 	 */
 	public void updateXSDInfo(String uri, Reader in) {
 		try {
-			SchemaGrammar grammer = (SchemaGrammar) new XMLSchemaLoader()
-					.loadGrammar(new XMLInputSource(null, null, null, in, null));
+			XMLSchemaLoader loader = new XMLSchemaLoader();
+
+			// --- Bug fix (Premature end of file + schema_reference.4):
+			// The original code constructed:
+			//     new XMLInputSource(null, null, null, reader, null)
+			// i.e. NO publicId / systemId / baseSystemId.  When xerces parses an
+			// XSD that contains <xsd:include schemaLocation="web-common_3_0.xsd"/>
+			// (or any relative include/import), XSDHandler.getSchemaDocument
+			// tries to resolve the included schema without any base URI and
+			// without an LSResourceResolver.  It ends up passing a NULL / EMPTY
+			// InputStream to SchemaParsingConfig.parse which triggers
+			// XMLVersionDetector.determineDocVersion -> "Premature end of file"
+			// (exactly the stack-trace the user reported).  A by-product warning
+			// is "schema_reference.4: Failed to read schema document ..." followed
+			// by "src-resolve: Cannot resolve the name 'javaee:web-appType'".
+			//
+			// The fix has three pieces:
+			//   (1) Derive a synthetic systemId from the user-supplied URI so the
+			//       input source has a base to resolve relative include paths
+			//       against.
+			//   (2) Plug an XNI XMLEntityResolver on the loader that first checks
+			//       the plugin's bundled innerDTD map (namespace URIs, bare
+			//       filenames like "web-common_3_0.xsd") and then falls back to
+			//       the plugin classpath / basedir / filesystem so DTDResolver
+			//       semantics are preserved.
+			//   (3) Defensive: if the resolved resource still cannot be found
+			//       (e.g. real javaee_6.xsd / jsp_2_2.xsd files are missing) we
+			//       return null instead of an empty InputStream.  That way xerces
+			//       only logs the well-understood schema_reference.4 warning and
+			//       does NOT attempt to parse zero bytes (which is what produces
+			//       the Premature-end-of-file FATAL in the user's log).
+			String systemId = toSystemId(uri);
+			String baseSystemId = toBaseSystemId(systemId);
+			loader.setEntityResolver(new BundledXSDResolver());
+			XMLInputSource input = new XMLInputSource(null, systemId, baseSystemId, in, null);
+
+			SchemaGrammar grammer = (SchemaGrammar) loader.loadGrammar(input);
 
 			// clear at first
 			String targetNS = grammer.getTargetNamespace();
@@ -181,6 +224,204 @@ public class XMLAssistProcessor extends HTMLAssistProcessor {
 			}
 		} catch (Exception ex) {
 
+		WebToolsPlugin.logException(ex);
+
+		}
+	}
+
+	/**
+	 * Convert a schema URI (which might be a plain filename like "web-app_3_0.xsd",
+	 * a file: path, a namespace URL like "http://java.sun.com/xml/ns/j2ee", or a
+	 * preference-mapped URL) into a value safe to assign as XMLInputSource
+	 * systemId.  The only hard guarantee we need is that the id is NOT null so
+	 * Xerces won't build a synthetic null-base XMLResourceIdentifier for
+	 * include-resolution.
+	 */
+	private static String toSystemId(String uri) {
+		if (uri == null) return "x-schema://local/default.xsd";
+		String u = uri.trim();
+		if (u.isEmpty()) return "x-schema://local/default.xsd";
+		if (u.startsWith("file:") || u.startsWith("http:") || u.startsWith("https:")
+				|| u.startsWith("jar:") || u.startsWith("bundleentry:")
+				|| u.startsWith("platform:")) {
+			return u;
+		}
+		// Plain filename.  Prepend a "classpath://" authority (not resolved by
+		// any real URL stream handler — purely a base URI for Xerces to compute
+		// relative include paths off of).  The actual stream comes from the
+		// reader already passed in / via BundledXSDResolver for includes.
+		if (u.indexOf('/') < 0 && u.indexOf('\\') < 0) {
+			return "classpath:///XSD/" + u;
+		}
+		File f = new File(u);
+		if (f.isAbsolute()) return f.toURI().toString();
+		return "classpath:///XSD/" + u;
+	}
+
+	private static String toBaseSystemId(String systemId) {
+		if (systemId == null) return null;
+		int slash = systemId.lastIndexOf('/');
+		if (slash < 0) return systemId + "/";
+		return systemId.substring(0, slash + 1);
+	}
+
+	/**
+	 * XNI {@link XMLEntityResolver} that resolves XSD include / import references
+	 * to the plugin's bundled innerDTD/XSD/ directories.  If we can't find the
+	 * schema we deliberately return {@code null} so xerces logs a single
+	 * schema_reference.4 warning instead of trying to parse an empty source and
+	 * crashing with the infamous "Premature end of file" fatal error.
+	 */
+	private static final class BundledXSDResolver implements XMLEntityResolver {
+		@Override
+		public XMLInputSource resolveEntity(XMLResourceIdentifier identifier)
+				throws XNIException, IOException {
+			if (identifier == null) return null;
+
+			InputStream resolved = null;
+			String publicId = identifier.getPublicId();
+			String literalSystemId = identifier.getLiteralSystemId();
+			String expandedSystemId = identifier.getExpandedSystemId();
+			String namespace = identifier.getNamespace();
+
+			// Resolution order matters a lot when several bundled XSDs share the
+			// same targetNamespace (e.g. web-app_3_0.xsd + web-common_3_0.xsd +
+			// javaee_6.xsd + jsp_2_2.xsd ALL declare
+			//     targetNamespace="http://java.sun.com/xml/ns/javaee"
+			// and the top-level web-app_3_0.xsd does
+			//     <xsd:include schemaLocation="web-common_3_0.xsd"/>
+			//     <xsd:include schemaLocation="javaee_6.xsd"/> (transitively)
+			// In that situation a naive "namespace first" lookup would map the
+			// namespace "http://java.sun.com/xml/ns/javaee" to the top-level
+			// /XSD/web-app_3_0.xsd for EVERY include, which makes xerces parse
+			// the root schema again inside an include -> every global component
+			// collides:
+			//     sch-props-correct.2: A schema cannot contain two global
+			//         components with the same name; ... {ns,web-app}
+			// followed by the classic src-resolve: javaee:web-appType unresolved.
+			//
+			// So the order is:
+			//   (1) literal / exact filename match first — include/import always
+			//       give us the explicit schemaLocation here.
+			//   (2) expanded (absolute) system id, as a file:// / classpath-URL.
+			//   (3) classpath fallback by basename.
+			//   (4) ONLY finally, namespace -> "synthetic top-level default"
+			//       mapping, used purely for <import namespace="..." schemaLocation="">
+			//       where Xerces asks for a resource with no location.
+			//   (5) publicId last gasp.
+
+			// (1) innerDTD lookup by literal filename / URL.  xsd:include gives
+			//     us the raw schemaLocation here ("web-common_3_0.xsd").
+			if (resolved == null && literalSystemId != null && !literalSystemId.isEmpty()) {
+				resolved = resolveFromInnerDTD(literalSystemId);
+				if (resolved == null) {
+					String justName = stripToFileName(literalSystemId);
+					if (!justName.equals(literalSystemId)) {
+						resolved = resolveFromInnerDTD(justName);
+					}
+				}
+			}
+
+			// (2) Try the expanded (absolute-ised) system id as file or jar URL.
+			if (resolved == null && expandedSystemId != null && !expandedSystemId.isEmpty()) {
+				resolved = resolveUrl(expandedSystemId);
+				if (resolved == null) {
+					String justName = stripToFileName(expandedSystemId);
+					resolved = resolveClasspath("/XSD/" + justName);
+				}
+			}
+
+			// (3) Try classpath resource relative to this class using the
+			//     /XSD/{filename} form (matches innerDTD paths).
+			if (resolved == null && literalSystemId != null && !literalSystemId.isEmpty()) {
+				resolved = resolveClasspath("/XSD/" + stripToFileName(literalSystemId));
+			}
+
+			// (4) innerDTD lookup by namespace key (e.g. "http://java.sun.com/xml/ns/javaee").
+			//     Do NOT apply this step when we already had a concrete filename to
+			//     resolve (literal or expanded basename ends in .xsd/.dtd) — in that
+			//     case the include/import named a specific file we failed to find,
+			//     and substituting a sibling schema under the same namespace would
+			//     cause "duplicate global component" errors (see doc above).
+			boolean hasConcreteLocation = false;
+			if (literalSystemId != null && (literalSystemId.endsWith(".xsd") || literalSystemId.endsWith(".dtd"))) {
+				hasConcreteLocation = true;
+			}
+			if (expandedSystemId != null && (expandedSystemId.endsWith(".xsd") || expandedSystemId.endsWith(".dtd"))) {
+				hasConcreteLocation = true;
+			}
+			if (resolved == null && !hasConcreteLocation
+					&& namespace != null && !namespace.isEmpty()) {
+				resolved = resolveFromInnerDTD(namespace);
+			}
+
+			// (5) Last gasp: if publicId alone is a known innerDTD key, use it.
+			if (resolved == null) {
+				if (publicId != null && !publicId.isEmpty()) {
+					resolved = resolveFromInnerDTD(publicId);
+				}
+			}
+
+			if (resolved == null) {
+				// DO NOT manufacture an empty InputStream.  That is exactly what
+				// triggers Xerces' "Premature end of file" fatal error in
+				// XMLVersionDetector.determineDocVersion.  Returning null makes
+				// Xerces emit the schema_reference.4 warning and continue with
+				// whatever partial grammar it has — a strictly better outcome.
+				return null;
+			}
+
+			String sysId = literalSystemId != null ? literalSystemId : expandedSystemId;
+			String baseId = toBaseSystemId(sysId);
+			return new XMLInputSource(publicId, sysId, baseId, resolved, null);
+		}
+
+		private static InputStream resolveFromInnerDTD(String key) {
+			try {
+				Map<String, String> innerDTD = WebToolsPlugin.getInnerDTD();
+				String path = innerDTD == null ? null : innerDTD.get(key);
+				if (path != null) {
+					InputStream in = XMLAssistProcessor.class.getResourceAsStream(path);
+					if (in != null) return in;
+				}
+			} catch (Throwable ignore) {
+				// If WebToolsPlugin innerDTD static init somehow fails (unit
+				// tests without OSGi) do not propagate; fall through.
+			}
+			return null;
+		}
+
+		private static InputStream resolveClasspath(String path) {
+			if (path == null) return null;
+			try {
+				return XMLAssistProcessor.class.getResourceAsStream(path);
+			} catch (Throwable ignore) {
+				return null;
+			}
+		}
+
+		private static InputStream resolveUrl(String url) {
+			if (url == null) return null;
+			try {
+				if (url.startsWith("file:")) {
+					File f = new File(new URL(url).toURI());
+					if (f.isFile()) return new java.io.FileInputStream(f);
+				}
+				if (url.indexOf(':') < 0) {
+					File f = new File(url);
+					if (f.isFile()) return new java.io.FileInputStream(f);
+				}
+			} catch (Throwable ignore) {
+				// Keep silent for these fallback probes.  The caller will also
+				// silently ignore null returns (see doc above).
+			}
+			return null;
+		}
+
+		private static String stripToFileName(String location) {
+			if (location == null) return "";
+			int slash = Math.max(location.lastIndexOf('/'), location.lastIndexOf('\\'));
+			return slash < 0 ? location : location.substring(slash + 1);
 		}
 	}
 

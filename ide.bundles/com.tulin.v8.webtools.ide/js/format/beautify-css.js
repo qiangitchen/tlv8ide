@@ -171,6 +171,9 @@ function css_beautify(source_text, options) {
     if (indentString) {
         output.push(indentString);
     }
+    // insideBlock > 0 表示处于 {...} 属性段：此时的冒号是属性名/值分隔，必须加空格；
+    // insideBlock == 0 表示处于选择器段：此时的冒号是伪类/伪元素冒号，不能加空格（例如 :root, :hover, ::before）。
+    var insideBlock = 0;
     /*_____________________--------------------_____________________*/
 
     while(true) {
@@ -182,9 +185,11 @@ function css_beautify(source_text, options) {
 
 
         if (ch === '{') {
+            insideBlock++;
             indent();
             print["{"](ch);
         } else if (ch === '}') {
+            if (insideBlock > 0) insideBlock--;
             outdent();
             print["}"](ch);
         } else if (ch === '"' || ch === '\'') {
@@ -218,6 +223,16 @@ function css_beautify(source_text, options) {
             eatWhitespace();
             output.push(ch);
             print.singleSpace();
+        } else if (ch === ':') { // 属性名与属性值之间统一加空格（伪类/伪元素冒号除外）
+            eatWhitespace();
+            output.push(ch);
+            // insideBlock>0 = 属性声明上下文（如 margin:0）必须加空格；
+            // insideBlock==0 且前一个非空白是选择器字符 → 伪类/伪元素冒号（如 :root, :hover, ::before）不加空格
+            // 额外安全：若后面紧跟 ':'（如 ::before 双冒号），也不加
+            var nextCh = peek();
+            if (insideBlock > 0 && nextCh !== ':') {
+                print.singleSpace();
+            }
         } else if (ch === ']') {
             output.push(ch);
         }  else if (ch === '[' || ch === '=') { // no whitespace before or after

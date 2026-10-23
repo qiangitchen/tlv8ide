@@ -340,6 +340,19 @@ public class HTMLSourceEditor extends WebSourceEditor {
 		}.schedule();
 	}
 
+	// Null-safe helper: Eclipse's CompatibilityPart.createPartControl wraps part
+	// creation in a try-finally that ALWAYS calls dispose() even when
+	// createPartControl itself THREW before fProjectionSupport / pairMatcher /
+	// selectionChangeListener were assigned.  If we call .dispose() on a null
+	// field here, we get the exact NPE the user reported at L369 — swallowing
+	// the original createPartControl exception and losing the real root cause.
+	private static void disposeIfNonNull(org.eclipse.jface.text.source.projection.ProjectionSupport s) {
+		if (s != null) s.dispose();
+	}
+	private static void disposeIfNonNull(HTMLCharacterPairMatcher m) {
+		if (m != null) m.dispose();
+	}
+
 	public void dispose() {
 		if (selectionChangeListener != null) {
 			selectionChangeListener.uninstall(getSelectionProvider());
@@ -357,15 +370,25 @@ public class HTMLSourceEditor extends WebSourceEditor {
 								input.getFile().deleteMarkers(IMarker.PROBLEM, false, 0);
 							}
 						} catch (Exception ex) {
+						WebToolsPlugin.logException(ex);
 						}
 					}
 				}, null);
 			} catch (Exception ex) {
+			WebToolsPlugin.logException(ex);
 			}
 		}
 
-		fProjectionSupport.dispose();
-		pairMatcher.dispose();
+		// Guard fields that are only assigned inside initializeEditor()'s happy
+		// path.  Half-initialized editors (createPartControl exception, e4
+		// CompatibilityPart re-entrant dispose) leave them null; the try/finally
+		// in Eclipse's CompatibilityPart will call us regardless, so we must
+		// NEVER crash here — doing so masks the ORIGINAL exception that
+		// actually prevented the editor from initializing.
+		disposeIfNonNull(fProjectionSupport);
+		fProjectionSupport = null;
+		disposeIfNonNull(pairMatcher);
+		pairMatcher = null;
 		super.dispose();
 	}
 
@@ -602,7 +625,7 @@ public class HTMLSourceEditor extends WebSourceEditor {
 			try {
 				formater.format(HTMLSourceEditor.this);
 			} catch (ExecutionException e) {
-				e.printStackTrace();
+				WebToolsPlugin.logException(e);
 			}
 		}
 	}

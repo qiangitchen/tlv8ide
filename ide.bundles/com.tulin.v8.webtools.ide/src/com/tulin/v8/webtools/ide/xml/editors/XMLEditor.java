@@ -189,6 +189,7 @@ public class XMLEditor extends HTMLSourceEditor {
 					saxParser.parse(new InputSource(new StringReader(xml)));
 
 				} catch (Exception ex) {
+				WebToolsPlugin.logException(ex);
 				}
 				return Status.OK_STATUS;
 			}
@@ -257,22 +258,55 @@ public class XMLEditor extends HTMLSourceEditor {
 		Matcher matcher = patternNsXSD.matcher(xml);
 		if (matcher.find()) {
 			String matched = matcher.group(1).trim();
-			matched.replaceAll("\r\n", "\n");
-			matched.replaceAll("\r", "\n");
-			String[] xsd = matched.split("\n| |\t");
+			// Fix: String is immutable; reassign result of replaceAll so subsequent
+			// splits on "\n" actually see the normalized newlines.  Otherwise the
+			// raw \r characters stay in the string and split creates empty tokens
+			// which later reach DTDResolver.getInputStream("") returning null and
+			// the null-Reader / null-systemId feeds updateXSDInfo incorrectly.
+			matched = matched.replaceAll("\r\n", "\n");
+			matched = matched.replaceAll("\r", "\n");
+			String[] xsd = matched.split("[\n \t]+");
+			List<String> cleaned = new ArrayList<String>(xsd.length);
 			for (int i = 0; i < xsd.length; i++) {
-				xsd[i] = xsd[i].trim();
+				String token = xsd[i] == null ? "" : xsd[i].trim();
+				if (!token.isEmpty()) {
+					cleaned.add(token);
+				}
 			}
-			return xsd;
+			// schemaLocation="ns1 uri1 ns2 uri2 ..." always produces an even-length
+			// alternating list.  We only keep every *second* item (the URI/location)
+			// when length is even and > 2.  This avoids injecting namespace URIs
+			// (which never map to a file) into updateXSDInfo as Reader.  If we can't
+			// detect pairs we fall back to the cleaned tokens.
+			if (cleaned.size() >= 2 && (cleaned.size() % 2 == 0)) {
+				List<String> locations = new ArrayList<String>(cleaned.size() / 2);
+				for (int i = 1; i < cleaned.size(); i += 2) {
+					locations.add(cleaned.get(i));
+				}
+				return locations.toArray(new String[locations.size()]);
+			}
+			return cleaned.toArray(new String[cleaned.size()]);
 		}
 		matcher = patternNoNsXSD.matcher(xml);
 		if (matcher.find()) {
-			return new String[] { matcher.group(1).trim() };
+			String val = matcher.group(1);
+			if (val != null) {
+				val = val.trim();
+				if (!val.isEmpty()) {
+					return new String[] { val };
+				}
+			}
 		}
 
 		matcher = patternXmlns.matcher(xml);
 		if (matcher.find()) {
-			return new String[] { matcher.group(1).trim() };
+			String val = matcher.group(1);
+			if (val != null) {
+				val = val.trim();
+				if (!val.isEmpty()) {
+					return new String[] { val };
+				}
+			}
 		}
 
 		// Root element mappings
@@ -445,7 +479,7 @@ public class XMLEditor extends HTMLSourceEditor {
 			try {
 				formater.format(XMLEditor.this);
 			} catch (ExecutionException e) {
-				e.printStackTrace();
+				WebToolsPlugin.logException(e);
 			}
 		}
 	}

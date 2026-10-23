@@ -2,7 +2,7 @@
 <feature
       id="com.tulin.v8.webtools.feature"
       label="Web Tools feature"
-      version="3.4.0.qualifier"
+      version="3.4.1.qualifier"
       provider-name="TuLin"
       plugin="com.tulin.v8.webtools.ide">
 

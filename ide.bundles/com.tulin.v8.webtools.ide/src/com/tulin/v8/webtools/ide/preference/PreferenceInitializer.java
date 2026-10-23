@@ -54,7 +54,7 @@ public class PreferenceInitializer extends AbstractPreferenceInitializer {
 		store.setDefault(WebToolsPlugin.PREF_COLOR_JSDOC, StringConverter.asString(IColorConstants.JSDOC));
 		store.setDefault(WebToolsPlugin.PREF_CUSTOM_ATTRS, "");
 		store.setDefault(WebToolsPlugin.PREF_CUSTOM_ELEMENTS, "");
-		store.setDefault(WebToolsPlugin.PREF_TASK_TAGS, "FIXME\t2\nTODO\t1\nXXXX\t1\n");
+		store.setDefault(WebToolsPlugin.PREF_TASK_TAGS, "FIXME\t2\nTODO\t1\nXXX\t1\n");
 		store.setDefault(WebToolsPlugin.PREF_ENABLE_CLASSNAME, false);
 		store.setDefault(WebToolsPlugin.PREF_CLASSNAME_ATTRS, "type class classname className bean component");
 		store.setDefault(WebToolsPlugin.PREF_SCHEMA_MAPPINGS, "");
