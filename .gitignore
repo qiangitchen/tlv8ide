@@ -25,3 +25,4 @@ target/
 bin/
 .polyglot.build.properties
 .DS_Store
+.workbuddy
