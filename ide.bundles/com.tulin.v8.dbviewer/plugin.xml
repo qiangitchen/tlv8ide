@@ -417,6 +417,51 @@
 	  	</action>
       </objectContribution>
 
+     <!-- Export SQL (table / view) -->
+     <objectContribution id="zigen.plugin.db.popupMenus.exportTableSQL"
+      	objectClass="zigen.plugin.db.ui.internal.ITable">
+      		  	<action
+                 class="zigen.plugin.db.export.ExportTableSQLAction"
+                 id="zigen.plugin.db.export.ExportTableSQLAction"
+                 label="%Export.TableSQL"
+                 menubarPath="additions"
+                 >
+	  	</action>
+      </objectContribution>
+
+     <!-- Export SQL (database / schema / folder) -->
+     <objectContribution id="zigen.plugin.db.popupMenus.exportDataBaseSQL"
+      	objectClass="zigen.plugin.db.ui.internal.DataBase">
+      		  	<action
+                 class="zigen.plugin.db.export.ExportDataBaseSQLAction"
+                 id="zigen.plugin.db.export.ExportDataBaseSQLAction"
+                 label="%Export.DataBaseSQL"
+                 menubarPath="additions"
+                 >
+	  	</action>
+      </objectContribution>
+
+     <objectContribution id="zigen.plugin.db.popupMenus.exportSchemaSQL"
+      	objectClass="zigen.plugin.db.ui.internal.Schema">
+      		  	<action
+                 class="zigen.plugin.db.export.ExportDataBaseSQLAction"
+                 id="zigen.plugin.db.export.ExportSchemaSQLAction"
+                 label="%Export.DataBaseSQL"
+                 menubarPath="additions"
+                 >
+	  	</action>
+      </objectContribution>
+
+     <objectContribution id="zigen.plugin.db.popupMenus.exportFolderSQL"
+      	objectClass="zigen.plugin.db.ui.internal.Folder">
+      		  	<action
+                 class="zigen.plugin.db.export.ExportDataBaseSQLAction"
+                 id="zigen.plugin.db.export.ExportFolderSQLAction"
+                 label="%Export.DataBaseSQL"
+                 menubarPath="additions"
+                 >
+	  	</action>
+      </objectContribution>
 
    </extension>
 
