@@ -7,18 +7,18 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
 import org.apache.http.client.ClientProtocolException;
-import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpGet;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.JsonObject.Member;
 
 import tern.TernException;
+import tern.server.HttpClientFactory;
 import tern.server.ITernModule;
 import tern.utils.IOUtils;
 import tern.utils.StringUtils;
@@ -27,7 +27,6 @@ import tern.utils.StringUtils;
  * Helper for tern repository.
  *
  */
-@SuppressWarnings("deprecation")
 public class TernRepositoryHelper {
 
 	/**
@@ -50,32 +49,35 @@ public class TernRepositoryHelper {
 	 */
 	@SuppressWarnings("resource")
 	public static List<ITernModule> loadModules(String repositoryURL) throws IOException, TernException {
-		// load repository.json with HTTP client.
-		HttpClient httpClient = new DefaultHttpClient();
+		// load repository.json with the shared pooled HTTP client.
 		HttpGet httpGet = new HttpGet(repositoryURL);
-		HttpResponse httpResponse = httpClient.execute(httpGet);
-		HttpEntity entity = httpResponse.getEntity();
-		InputStream in = entity.getContent();
-		// Check the status
-		StatusLine statusLine = httpResponse.getStatusLine();
-		int statusCode = statusLine.getStatusCode();
-		if (statusCode != HttpStatus.SC_OK) {
-			String message = IOUtils.toString(in);
-			if (StringUtils.isEmpty(message)) {
-				throw new TernException(statusLine.toString());
+		CloseableHttpResponse httpResponse = HttpClientFactory.getHttpClient().execute(httpGet);
+		try {
+			HttpEntity entity = httpResponse.getEntity();
+			InputStream in = entity.getContent();
+			// Check the status
+			StatusLine statusLine = httpResponse.getStatusLine();
+			int statusCode = statusLine.getStatusCode();
+			if (statusCode != HttpStatus.SC_OK) {
+				String message = IOUtils.toString(in);
+				if (StringUtils.isEmpty(message)) {
+					throw new TernException(statusLine.toString());
+				}
+				throw new TernException(message);
 			}
-			throw new TernException(message);
-		}
 
-		// read JSON and create tern modules list
-		JsonObject repository = JsonObject.readFrom(new InputStreamReader(in));
-		ITernModule module = null;
-		List<ITernModule> modules = new ArrayList<ITernModule>();
-		for (Member member : repository) {
-			module = new TernModuleToDownload(member.getName(), (JsonObject) member.getValue());
-			modules.add(module);
+			// read JSON and create tern modules list
+			JsonObject repository = JsonObject.readFrom(new InputStreamReader(in));
+			ITernModule module = null;
+			List<ITernModule> modules = new ArrayList<ITernModule>();
+			for (Member member : repository) {
+				module = new TernModuleToDownload(member.getName(), (JsonObject) member.getValue());
+				modules.add(module);
+			}
+			return modules;
+		} finally {
+			httpResponse.close();
 		}
-		return modules;
 	}
 
 }

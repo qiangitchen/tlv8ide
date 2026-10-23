@@ -7,19 +7,20 @@ import java.io.UnsupportedEncodingException;
 import java.util.List;
 
 import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
 import org.apache.http.HttpStatus;
 import org.apache.http.StatusLine;
-import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.CloseableHttpResponse;
 import org.apache.http.client.methods.HttpPost;
 import org.apache.http.entity.StringEntity;
-import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.impl.client.CloseableHttpClient;
+import org.apache.http.util.EntityUtils;
 
 import com.eclipsesource.json.Json;
 import com.eclipsesource.json.JsonObject;
 import com.eclipsesource.json.ParseException;
 
 import tern.TernException;
+import tern.server.HttpClientFactory;
 import tern.server.IInterceptor;
 import tern.server.ITernServer;
 import tern.server.TernExceptionFactory;
@@ -32,7 +33,6 @@ import tern.utils.StringUtils;
  * Nodejs Tern helper.
  * 
  */
-@SuppressWarnings("deprecation")
 public class NodejsTernHelper {
 
 	// properties for remote access
@@ -55,7 +55,7 @@ public class NodejsTernHelper {
 	}
 
 	@SuppressWarnings("resource")
-	public static JsonObject makeRequest(String baseURL, TernDoc doc, 
+	public static JsonObject makeRequest(String baseURL, TernDoc doc,
 			boolean silent, List<IInterceptor> interceptors, ITernServer server)
 			throws IOException, TernException {
 		TernQuery query = doc.getQuery();
@@ -67,36 +67,44 @@ public class NodejsTernHelper {
 				interceptor.handleRequest(doc, server, methodName);
 			}
 		}
-		HttpClient httpClient = new DefaultHttpClient();
+		// shared pooled client, no per-request creation/shutdown
+		CloseableHttpClient httpClient = HttpClientFactory.getHttpClient();
 		try {
 			// Post JSON Tern doc
 			HttpPost httpPost = createHttpPost(baseURL, doc);
-			HttpResponse httpResponse = httpClient.execute(httpPost);
-			HttpEntity entity = httpResponse.getEntity();
-			InputStream in = entity.getContent();
-			// Check the status
-			StatusLine statusLine = httpResponse.getStatusLine();
-			int statusCode = statusLine.getStatusCode();
-			if (statusCode != HttpStatus.SC_OK) {
-				// node.js server throws error
-				String message = IOUtils.toString(in);
-				if (StringUtils.isEmpty(message)) {
-					throw new TernException(statusLine.toString());
-				}
-				throw TernExceptionFactory.create(message);
-			}
-
+			CloseableHttpResponse httpResponse = httpClient.execute(httpPost);
 			try {
-				JsonObject response = (JsonObject) Json.parse(new InputStreamReader(in, UTF_8));
-				if (interceptors != null) {
-					for (IInterceptor interceptor : interceptors) {
-						interceptor.handleResponse(response, server,
-								methodName, getElapsedTimeInMs(startTime));
+				HttpEntity entity = httpResponse.getEntity();
+				InputStream in = entity.getContent();
+				// Check the status
+				StatusLine statusLine = httpResponse.getStatusLine();
+				int statusCode = statusLine.getStatusCode();
+				if (statusCode != HttpStatus.SC_OK) {
+					// node.js server throws error
+					String message = IOUtils.toString(in);
+					if (StringUtils.isEmpty(message)) {
+						throw new TernException(statusLine.toString());
 					}
+					throw TernExceptionFactory.create(message);
 				}
-				return response;
-			} catch (ParseException e) {
-				throw new IOException(e);
+
+				try {
+					JsonObject response = (JsonObject) Json.parse(new InputStreamReader(in, UTF_8));
+					if (interceptors != null) {
+						for (IInterceptor interceptor : interceptors) {
+							interceptor.handleResponse(response, server,
+									methodName, getElapsedTimeInMs(startTime));
+						}
+					}
+					return response;
+				} catch (ParseException e) {
+					throw new IOException(e);
+				} finally {
+					// drain remaining content to keep the pooled connection reusable
+					EntityUtils.consume(entity);
+				}
+			} finally {
+				httpResponse.close();
 			}
 		} catch (Exception e) {
 			if (interceptors != null) {
@@ -112,8 +120,6 @@ public class NodejsTernHelper {
 				throw (TernException) e;
 			}
 			throw new TernException(e);
-		} finally {
-			httpClient.getConnectionManager().shutdown();
 		}
 	}
 
